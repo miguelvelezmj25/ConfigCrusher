@@ -47,7 +47,8 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
 
       Map<String, String> subtracesToValues = this.getSubtracesToValues(trace);
 
-      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config, subtracesToValues);
+      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config,
+          subtracesToValues);
       configSubtraceValues.add(configSubtraceValue);
     }
 
@@ -72,9 +73,10 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
 
       String subtraces = trace.get(index + 1);
 
-      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
-        subtracesToValues.put(subtrace, subtraces);
-      }
+      throw new UnsupportedOperationException("Implement");
+//      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
+//        subtracesToValues.put(subtrace, subtraces);
+//      }
 
     }
 

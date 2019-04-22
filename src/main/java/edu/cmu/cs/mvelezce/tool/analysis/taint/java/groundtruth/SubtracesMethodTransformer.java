@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.Meas
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
@@ -22,7 +21,6 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -66,13 +64,6 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
-      if (this.isMainClass(classNode)) {
-        MethodNode mainMethod = this.getMainMethod(classNode);
-        methodsToInstrument.add(mainMethod);
-
-        continue;
-      }
-
       // TODO handle these methods
       if (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
           .equals("addToMainCache")) {
@@ -456,7 +447,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     return loggingInsnList;
   }
 
-  private InsnList getNewIPDLoggingInsnList(LabelNode labelNode, String labelPrefix,
+  private InsnList getNewIPDLoggingInsnList(LabelNode labelNode, String decision,
       int decisionCount) {
     InsnList loggingInsnList = new InsnList();
 
@@ -464,8 +455,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     loggingInsnList.add(labelNode);
-    loggingInsnList.add(new LdcInsnNode(labelPrefix));
-    loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
+    loggingInsnList.add(new LdcInsnNode(this.getDecisionLabelPrefix(decision, decisionCount)));
     loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
         methodName, methodDescriptor, false));
 
@@ -516,19 +506,22 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
   }
 
-  private InsnList getCFDLoggingInsnList(String labelPrefix, int decisionCount) {
+  private InsnList getCFDLoggingInsnList(String decision, int decisionCount) {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "enterDecision";
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
-    loggingInsnList.add(new LdcInsnNode(labelPrefix));
-    loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
+    loggingInsnList.add(new LdcInsnNode(this.getDecisionLabelPrefix(decision, decisionCount)));
     loggingInsnList.add(
         new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME, methodName,
             methodDescriptor, false));
 
     return loggingInsnList;
+  }
+
+  private String getDecisionLabelPrefix(String decision, int decisionCount) {
+    return decision + "." + decisionCount;
   }
 
   public static class Builder {

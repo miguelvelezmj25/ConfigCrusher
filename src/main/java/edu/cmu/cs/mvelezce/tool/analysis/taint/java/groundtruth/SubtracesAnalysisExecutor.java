@@ -51,6 +51,8 @@ import org.jboss.util.file.Files;
  */
 public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
+  private final static String PHOSPHOR_CLASS_PATH = "../phosphor/Phosphor/target/Phosphor-0.0.4-SNAPSHOT.jar";
+
   private final Map<Set<String>, List<String>> configsToTraces = new HashMap<>();
 
   public SubtracesAnalysisExecutor(String programName, Set<String> options) {
@@ -152,162 +154,111 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     commandList.add("-cp");
 
     String programName = this.getProgramName();
-    String ccClasspath = "./target/classes";
 //        + BaseAdapter.PATH_SEPARATOR
 //        + APACHE_COMMONS_PATH;
     Adapter adapter;
 
     switch (programName) {
       case DynamicRunningExampleAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + DynamicRunningExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(DynamicRunningExampleAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new DynamicRunningExampleAdapter();
         break;
       case SimpleExample1Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleExample1Adapter();
         break;
       case Example1Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Example1Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Example1Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Example1Adapter();
         break;
       case PhosphorExample2Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new PhosphorExample2Adapter();
         break;
       case OrContextAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + OrContextAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(OrContextAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new OrContextAdapter();
         break;
       case MultiFacetsAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + MultiFacetsAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(MultiFacetsAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new MultiFacetsAdapter();
         break;
       case SimpleForExampleAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleForExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleForExampleAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleForExampleAdapter();
         break;
       case SimpleForExample2Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleForExample2Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleForExample2Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleForExample2Adapter();
         break;
       case SimpleForExample3Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleForExample3Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleForExample3Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleForExample3Adapter();
         break;
       case SimpleForExample4Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleForExample4Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleForExample4Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleForExample4Adapter();
         break;
       case SimpleForExample5Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleForExample5Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SimpleForExample5Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SimpleForExample5Adapter();
         break;
       case ReturnExampleAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + ReturnExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(ReturnExampleAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new ReturnExampleAdapter();
         break;
       case ReturnExample2Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + ReturnExample2Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(ReturnExample2Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new ReturnExample2Adapter();
         break;
       case Return2ExampleAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Return2ExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Return2ExampleAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Return2ExampleAdapter();
         break;
       case SubtracesAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + SubtracesAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(SubtracesAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new SubtracesAdapter();
         break;
       case Subtraces2Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Subtraces2Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Subtraces2Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Subtraces2Adapter();
         break;
       case Subtraces3Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Subtraces3Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Subtraces3Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Subtraces3Adapter();
         break;
       case Subtraces4Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Subtraces4Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Subtraces4Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Subtraces4Adapter();
         break;
       case NestingAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + NestingAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(NestingAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new NestingAdapter();
         break;
       case ImplicitAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + ImplicitAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(ImplicitAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new ImplicitAdapter();
         break;
       case Implicit2Adapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + Implicit2Adapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(Implicit2Adapter.INSTRUMENTED_CLASS_PATH));
         adapter = new Implicit2Adapter();
         break;
       case AndContextAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + AndContextAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(AndContextAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new AndContextAdapter();
         break;
       case TrivialAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + TrivialAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(TrivialAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new TrivialAdapter();
         break;
       case PrevaylerAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + PrevaylerAdapter.INSTRUMENTED_CLASS_PATH
+        commandList.add(this.getClassPath(PrevaylerAdapter.INSTRUMENTED_CLASS_PATH)
             + BaseAdapter.PATH_SEPARATOR
             + PrevaylerAdapter.CLASS_PATH);
         adapter = new PrevaylerAdapter();
         break;
       case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
-        commandList.add(ccClasspath
-            + BaseAdapter.PATH_SEPARATOR
-            + MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH);
+        commandList.add(this.getClassPath(MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH));
         adapter = new MeasureDiskOrderedScanAdapter();
         ((MeasureDiskOrderedScanAdapter) adapter).preProcess();
         break;
@@ -330,6 +281,11 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     commandList.addAll(configList);
 
     return commandList;
+  }
+
+  private String getClassPath(String instrumentedClassPath) {
+    return BaseAdapter.CONFIGCRUSHER_CLASS_PATH + BaseAdapter.PATH_SEPARATOR
+        + instrumentedClassPath + BaseAdapter.PATH_SEPARATOR + PHOSPHOR_CLASS_PATH;
   }
 
 }

@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.LoggedSubtrace;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceLabel;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -12,14 +14,16 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class SubtracesLogger {
 
+  private static final int EXIT_AT_RETURN_FLAG_COUNT = -1;
+
   // TODO hash the label when not debugging?
   private static final String ENTER_DECISION = " Enter ";
   private static final String EXIT_DECISION = " Exit ";
   private static final String FALSE = "FALSE";
   private static final String TRUE = "TRUE";
-  private static final List<String> TRACE = new ArrayList<>(200);
+  private static final List<String> TRACE = new ArrayList<>(1_000_000);
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<SubtraceLabel, Integer> LABELS_TO_COUNT = new HashMap<>();
+  private static final Map<String, Integer> LABELS_PREFIX_TO_COUNTS = new HashMap<>();
 
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
@@ -56,33 +60,30 @@ public class SubtracesLogger {
     }
   }
 
-  // TODO DO NOT DO STRING CONCATENATION
-  public static void enterDecision(String labelPrefix, int decisionCount) {
-    throw new UnsupportedOperationException("Add count");
-//    String labelID = getLabelID(labelPrefix, decisionCount);
-//    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, labelID);
-//    TRACE.add(subtraceLabel.toString());
+  // TODO synchornize
+  public static void enterDecision(String labelPrefix) {
+    int execCount = LABELS_PREFIX_TO_COUNTS.getOrDefault(labelPrefix, 0);
+    execCount++;
+    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, subtraceLabel);
+    TRACE.add(loggedSubtrace.toString());
+
+    LABELS_PREFIX_TO_COUNTS.put(labelPrefix, execCount);
   }
 
-  // TODO DO NOT DO STRING CONCATENATION
-  public static void exitDecision(String labelPrefix, int decisionCount) {
-    String exitingLabel = getLabelID(labelPrefix, decisionCount);
-    exiting(exitingLabel);
+  // TODO synchornize
+  public static void exitDecision(String labelPrefix) {
+    int execCount = LABELS_PREFIX_TO_COUNTS.get(labelPrefix);
+    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
+    TRACE.add(loggedSubtrace.toString());
   }
 
+  // TODO synchornize
   public static void exitAtReturn(String labelPrefix) {
-    exiting(labelPrefix);
-  }
-
-  // TODO change name to not collide with public exit decision
-  private static void exiting(String exitingLabel) {
-    throw new UnsupportedOperationException("Add count");
-//    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingLabel);
-//    TRACE.add(subtraceLabel.toString());
-  }
-
-  private static String getLabelID(String labelPrefix, int decisionCount) {
-    return labelPrefix + "." + decisionCount;
+    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, EXIT_AT_RETURN_FLAG_COUNT);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
+    TRACE.add(loggedSubtrace.toString());
   }
 
   public static void logIFEQEval(int value) {

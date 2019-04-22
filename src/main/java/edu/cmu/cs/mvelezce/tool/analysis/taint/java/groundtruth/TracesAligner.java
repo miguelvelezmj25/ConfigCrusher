@@ -129,9 +129,10 @@ public class TracesAligner implements Analysis<List<String>> {
     List<String> updatedTrace = new ArrayList<>();
 
     for (String subtrace : trace) {
-      if (subtrace.startsWith(SubtraceLabel.LABEL)) {
-        updatedTrace.add(subtrace);
-      }
+      throw new UnsupportedOperationException("Implement");
+//      if (subtrace.startsWith(SubtraceLabel.LABEL)) {
+//        updatedTrace.add(subtrace);
+//      }
     }
 
     return updatedTrace;

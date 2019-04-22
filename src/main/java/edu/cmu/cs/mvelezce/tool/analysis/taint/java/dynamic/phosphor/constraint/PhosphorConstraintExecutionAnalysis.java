@@ -36,9 +36,7 @@ public class PhosphorConstraintExecutionAnalysis {
       throw new RuntimeException("The directory " + dir + " must have 1 file.");
     }
 
-    List<DecisionTaints> taintResults = this.readResults(serializedFiles.iterator().next());
-
-    return new HashSet<>(taintResults);
+    return this.readResults(serializedFiles.iterator().next());
   }
 
   private Collection<File> getSerializedFiles(String dir) {
@@ -47,12 +45,12 @@ public class PhosphorConstraintExecutionAnalysis {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
-  private List<DecisionTaints> readResults(File serializedFile) throws IOException {
+  private Set<DecisionTaints> readResults(File serializedFile) throws IOException {
     return this.deserialize(serializedFile);
   }
 
-  private List<DecisionTaints> deserialize(File file) throws IOException {
-    List<DecisionTaints> results = new ArrayList<>();
+  private Set<DecisionTaints> deserialize(File file) throws IOException {
+    Set<DecisionTaints> results = new HashSet<>();
 
     BufferedReader reader = new BufferedReader(new FileReader(file));
     String line;

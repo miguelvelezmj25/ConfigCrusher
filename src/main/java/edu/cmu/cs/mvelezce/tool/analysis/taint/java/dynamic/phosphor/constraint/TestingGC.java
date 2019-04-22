@@ -10,8 +10,8 @@ public class TestingGC {
     PhosphorConstraintExecutionAnalysis analysis = new PhosphorConstraintExecutionAnalysis(
         "MeasureDiskOrderedScan");
 
-    Set<DecisionTaints> x = analysis.getResults();
-    System.out.println();
+    Set<DecisionTaints> results = analysis.getResults();
+    System.out.println(results.size());
   }
 
 }

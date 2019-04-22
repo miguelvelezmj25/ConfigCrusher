@@ -115,6 +115,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
 
       this.runPhosphorAnalysis(config);
       Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
+//      System.out.println(results.size());
 
       this.phosphorTaintAnalysis.recordTaints(results);
 

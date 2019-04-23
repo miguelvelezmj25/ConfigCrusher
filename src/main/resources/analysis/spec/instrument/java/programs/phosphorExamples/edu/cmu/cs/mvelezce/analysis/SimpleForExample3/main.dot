@@ -1,0 +1,22 @@
+digraph main {
+node [shape=record];
+221634215 [label="L3\lLINENUMBER 13 L3\lICONST_4\lISTORE 2\lL4\lGOTO L5\l"];
+1583159071 [label="L5\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample3.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\l"];
+2003891312 [label="L2\lLINENUMBER 15 L2\lFRAME APPEND [I]\lICONST_2\lISTORE 2\l"];
+2012330741 [label="L7\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample3.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL9\lLINENUMBER 22 L9\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL10\lLINENUMBER 23 L10\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL11\l"];
+612097453 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 12 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample3.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
+607207372 [label="L6\lLINENUMBER 18 L6\lFRAME SAME\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample3.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLEEval (I)V\lIFLE L7\l"];
+131206411 [label="L8\lLINENUMBER 19 L8\lIINC 2 -1\lGOTO L6\l"];
+entry;
+exit;
+entry -> 612097453;
+221634215 -> 1583159071;
+1583159071 -> 607207372;
+2003891312 -> 1583159071;
+2012330741 -> exit;
+612097453 -> 221634215;
+612097453 -> 2003891312;
+607207372 -> 2012330741;
+607207372 -> 131206411;
+131206411 -> 607207372;
+}

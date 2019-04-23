@@ -1,0 +1,30 @@
+digraph main {
+node [shape=record];
+1811942924 [label="ILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L16\l"];
+495051009 [label="L0\lLINENUMBER 20 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 21 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 26 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
+828610686 [label="L15\lLINENUMBER 43 L15\lFRAME APPEND [edu/cmu/cs/mvelezce/implicit/Exceptions]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+200744172 [label="L4\lLINENUMBER 27 L4\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 3\lL5\lGOTO L6\l"];
+247795540 [label="L3\lLINENUMBER 29 L3\lFRAME APPEND [I I]\lBIPUSH 50\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 3\l"];
+1596144422 [label="L16\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL17\lLINENUMBER 45 L17\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL18\l"];
+374646930 [label="L9\lLINENUMBER 33 L9\lICONST_0\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 4\lL10\lGOTO L11\l"];
+628610760 [label="L11\lFRAME APPEND [java/lang/Integer]\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL12\lLINENUMBER 38 L12\lNEW edu/cmu/cs/mvelezce/implicit/Exceptions\lDUP\lALOAD 4\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lI2L\lALOAD 3\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Exceptions.\<init\> (JI)V\lASTORE 5\lL13\lLINENUMBER 39 L13\lALOAD 5\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Exceptions.counter (J)V\lL14\lLINENUMBER 42 L14\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L15\l"];
+584501954 [label="L6\lFRAME APPEND [java/lang/Integer]\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL7\lLINENUMBER 32 L7\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Exceptions.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L8\l"];
+818785904 [label="L8\lLINENUMBER 35 L8\lFRAME SAME\lLDC 1000000\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 4\l"];
+entry;
+exit;
+1811942924 -> 828610686;
+1811942924 -> 1596144422;
+495051009 -> 200744172;
+495051009 -> 247795540;
+828610686 -> 1596144422;
+374646930 -> 628610760;
+628610760 -> 1811942924;
+628610760 -> 828610686;
+584501954 -> 374646930;
+584501954 -> 818785904;
+entry -> 495051009;
+200744172 -> 584501954;
+247795540 -> 584501954;
+1596144422 -> exit;
+818785904 -> 628610760;
+}

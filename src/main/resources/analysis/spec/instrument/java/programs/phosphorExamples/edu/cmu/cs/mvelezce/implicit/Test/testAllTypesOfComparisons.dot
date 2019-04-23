@@ -1,0 +1,28 @@
+digraph testAllTypesOfComparisons {
+node [shape=record];
+1516579066 [label="L16\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL18\lLINENUMBER 62 L18\lRETURN\lL19\l"];
+1327162171 [label="L14\lLINENUMBER 56 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1139694977 [label="L10\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL12\lLINENUMBER 55 L12\lALOAD 2\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPNEEval (Ljava/lang/Object;Ljava/lang/Object;)V\lIF_ACMPNE L13\l"];
+1714317466 [label="L11\lLINENUMBER 52 L11\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+505344183 [label="L7\lLINENUMBER 47 L7\lSIPUSH 1000\lISTORE 3\lL8\lLINENUMBER 48 L8\lLDC \"example1\"\lASTORE 2\l"];
+193317890 [label="L0\lLINENUMBER 39 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestAllTypesOfComparisons\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 40 L1\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 41 L2\lLDC \"example1\"\lASTORE 1\lL3\lLINENUMBER 43 L3\lACONST_NULL\lASTORE 2\lL4\lLINENUMBER 44 L4\lBIPUSH 100\lISTORE 3\lL5\lLINENUMBER 46 L5\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L6\l"];
+644363273 [label="L13\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL15\lLINENUMBER 59 L15\lILOAD 3\lSIPUSH 500\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L16\l"];
+1680882295 [label="L6\lFRAME FULL [I java/lang/String java/lang/String I] []\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL9\lLINENUMBER 51 L9\lALOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons()V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L10\l"];
+1800823906 [label="L17\lLINENUMBER 60 L17\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 193317890;
+1516579066 -> exit;
+1327162171 -> 644363273;
+1139694977 -> 1327162171;
+1139694977 -> 644363273;
+1714317466 -> 1139694977;
+505344183 -> 1680882295;
+193317890 -> 505344183;
+193317890 -> 1680882295;
+644363273 -> 1516579066;
+644363273 -> 1800823906;
+1680882295 -> 1139694977;
+1680882295 -> 1714317466;
+1800823906 -> 1516579066;
+}

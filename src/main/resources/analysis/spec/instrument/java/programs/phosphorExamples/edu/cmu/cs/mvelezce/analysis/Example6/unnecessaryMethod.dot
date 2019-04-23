@@ -1,0 +1,13 @@
+digraph unnecessaryMethod {
+node [shape=record];
+401194142 [label="L0\lLINENUMBER 27 L0\lILOAD 0\lISTORE 1\lL1\lLINENUMBER 29 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+1093703004 [label="L3\lLINENUMBER 30 L3\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lIRETURN\l"];
+918145945 [label="L2\lLINENUMBER 33 L2\lFRAME APPEND [I]\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+entry;
+exit;
+entry -> 401194142;
+401194142 -> 1093703004;
+401194142 -> 918145945;
+1093703004 -> exit;
+918145945 -> exit;
+}

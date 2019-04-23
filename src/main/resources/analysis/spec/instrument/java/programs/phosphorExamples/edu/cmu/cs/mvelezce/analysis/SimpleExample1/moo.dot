@@ -1,0 +1,13 @@
+digraph moo {
+node [shape=record];
+1615979304 [label="L2\lLINENUMBER 92 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+1219011224 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL3\lLINENUMBER 94 L3\lRETURN\lL4\l"];
+2133672993 [label="L0\lLINENUMBER 91 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 2133672993;
+1615979304 -> 1219011224;
+1219011224 -> exit;
+2133672993 -> 1615979304;
+2133672993 -> 1219011224;
+}

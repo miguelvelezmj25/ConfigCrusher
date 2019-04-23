@@ -1,0 +1,34 @@
+digraph main {
+node [shape=record];
+1386362229 [label="L12\lLINENUMBER 22 L12\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L13\l"];
+1118346479 [label="L9\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL17\lLINENUMBER 27 L17\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL18\l"];
+2134093088 [label="L10\lLINENUMBER 21 L10\lILOAD 4\lICONST_2\lIREM\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L11\l"];
+1944759838 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lICONST_0\lISTORE 3\lL3\lLINENUMBER 13 L3\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L4\l"];
+1061633455 [label="L11\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL15\lLINENUMBER 25 L15\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/SimpleForExample6.foo (Z)V\lL16\lLINENUMBER 20 L16\lIINC 4 1\lGOTO L8\l"];
+1538679264 [label="L13\lFRAME SAME\lICONST_0\l"];
+419233406 [label="L14\lFRAME SAME1 I\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lISTORE 2\l"];
+1704289773 [label="L4\lLINENUMBER 17 L4\lFRAME APPEND [I I I]\lICONST_2\lISTORE 3\l"];
+207366788 [label="L8\lFRAME APPEND [I]\lILOAD 4\lILOAD 3\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGTEval (II)V\lIF_ICMPGT L9\l"];
+1209972485 [label="L5\lLINENUMBER 14 L5\lICONST_4\lISTORE 3\lGOTO L6\l"];
+719383448 [label="L6\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL7\lLINENUMBER 20 L7\lICONST_0\lISTORE 4\l"];
+957251916 [label="ICONST_1\lGOTO L14\l"];
+entry;
+exit;
+1944759838 -> 1704289773;
+1944759838 -> 1209972485;
+1704289773 -> 719383448;
+1209972485 -> 719383448;
+719383448 -> 207366788;
+957251916 -> 419233406;
+1386362229 -> 1538679264;
+1386362229 -> 957251916;
+entry -> 1944759838;
+1118346479 -> exit;
+2134093088 -> 1386362229;
+2134093088 -> 1061633455;
+1061633455 -> 207366788;
+1538679264 -> 419233406;
+419233406 -> 1061633455;
+207366788 -> 1118346479;
+207366788 -> 2134093088;
+}

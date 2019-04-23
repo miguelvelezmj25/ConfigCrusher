@@ -5,6 +5,10 @@ public class SubtraceLabel {
   private final String decisionLabel;
   private final int execCount;
 
+  public SubtraceLabel(String decisionLabel) {
+    this(decisionLabel, -1);
+  }
+
   public SubtraceLabel(String decisionLabel, int execCount) {
     this.decisionLabel = decisionLabel;
     this.execCount = execCount;
@@ -45,6 +49,10 @@ public class SubtraceLabel {
 
   @Override
   public String toString() {
-    return decisionLabel + ":" + execCount;
+    if (execCount >= 0) {
+      return decisionLabel + ":" + execCount;
+    }
+
+    return decisionLabel;
   }
 }

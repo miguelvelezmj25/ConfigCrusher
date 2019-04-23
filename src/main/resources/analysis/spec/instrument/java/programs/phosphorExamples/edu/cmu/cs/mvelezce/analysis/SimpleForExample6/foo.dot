@@ -1,0 +1,13 @@
+digraph foo {
+node [shape=record];
+2047811485 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.foo(Z)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL3\lLINENUMBER 33 L3\lRETURN\lL4\l"];
+1734615070 [label="L0\lLINENUMBER 30 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample6.foo(Z)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1513968288 [label="L2\lLINENUMBER 31 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+entry -> 1734615070;
+2047811485 -> exit;
+1734615070 -> 2047811485;
+1734615070 -> 1513968288;
+1513968288 -> 2047811485;
+}

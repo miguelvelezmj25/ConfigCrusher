@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,13 @@ public class SubtracesLogger {
   // TODO hash the label when not debugging?
   private static final String ENTER_DECISION = " Enter ";
   private static final String EXIT_DECISION = " Exit ";
+  private static final String EXIT_DECISION_AT_RETURN = " ExitReturn ";
   private static final String FALSE = "FALSE";
   private static final String TRUE = "TRUE";
-  private static final List<String> TRACE = new ArrayList<>(1_000_000);
+  private static final List<String> TRACE = Collections
+      .synchronizedList(new ArrayList<>(2_000_000));
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<String, Integer> LABELS_PREFIX_TO_COUNTS = new HashMap<>();
+//  private static final Map<String, Integer> LABELS_PREFIX_TO_COUNTS = new HashMap<>();
 
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
@@ -60,40 +63,22 @@ public class SubtracesLogger {
     }
   }
 
-  // TODO synchornize
   public synchronized static void enterDecision(String labelPrefix) {
-    int execCount = LABELS_PREFIX_TO_COUNTS.getOrDefault(labelPrefix, 0);
-    execCount++;
-    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
+    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix);
     LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, subtraceLabel);
-    TRACE.add(loggedSubtrace.toString());
-
-    LABELS_PREFIX_TO_COUNTS.put(labelPrefix, execCount);
+    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
-  // TODO synchornize
   public synchronized static void exitDecision(String labelPrefix) {
-    try {
-      int execCount
-          = LABELS_PREFIX_TO_COUNTS
-          .getOrDefault(
-              labelPrefix, -1);
-      SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
-      LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
-      TRACE.add(loggedSubtrace.toString());
-    }
-    catch (NullPointerException npe) {
-      System.out.println(labelPrefix);
-      System.out.println(LABELS_PREFIX_TO_COUNTS.get(labelPrefix));
-      throw npe;
-    }
+    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
+    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
-  // TODO synchornize
   public synchronized static void exitAtReturn(String labelPrefix) {
     SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, EXIT_AT_RETURN_FLAG_COUNT);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
-    TRACE.add(loggedSubtrace.toString());
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION_AT_RETURN, subtraceLabel);
+    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
   public static void logIFEQEval(int value) {

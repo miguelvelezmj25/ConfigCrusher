@@ -70,6 +70,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     for (Set<String> config : configs) {
       this.runProgram(config);
       this.processResults(config);
+      throw new UnsupportedOperationException("Save each trace in a separate file");
     }
 
     Files.delete(SubtracesLogger.RESULTS_FILE);

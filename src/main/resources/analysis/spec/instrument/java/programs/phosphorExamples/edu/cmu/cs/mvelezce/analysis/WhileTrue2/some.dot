@@ -1,0 +1,14 @@
+digraph some {
+node [shape=record];
+1984060610 [label="L0\lLINENUMBER 11 L0\lFRAME SAME\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue2.some(I)I.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+463975028 [label="L1\lLINENUMBER 15 L1\lFRAME SAME\lIINC 1 -1\lGOTO L0\l"];
+310751736 [label="LDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue2.some(I)I.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL2\lLINENUMBER 12 L2\lICONST_0\lIRETURN\l"];
+1174972529 [label="L3\l"];
+entry;
+exit;
+entry -> 1984060610;
+1984060610 -> 463975028;
+1984060610 -> 310751736;
+463975028 -> 1984060610;
+310751736 -> exit;
+}

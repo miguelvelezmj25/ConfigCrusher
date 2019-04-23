@@ -1,0 +1,13 @@
+digraph practice {
+node [shape=record];
+205387584 [label="L0\lLINENUMBER 33 L0\lILOAD 1\lILOAD 2\lLDC \"lang/Test.practice(II)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L1\l"];
+1009062488 [label="L1\lFRAME SAME\lLDC \"lang/Test.practice(II)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL3\lLINENUMBER 36 L3\lRETURN\lL4\l"];
+695993105 [label="L2\lLINENUMBER 34 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+205387584 -> 1009062488;
+205387584 -> 695993105;
+entry -> 205387584;
+1009062488 -> exit;
+695993105 -> 1009062488;
+}

@@ -1,0 +1,20 @@
+digraph main {
+node [shape=record];
+118394766 [label="L6\lFRAME APPEND [I]\lILOAD 3\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample2.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGTEval (II)V\lIF_ICMPGT L7\l"];
+776700275 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample2.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL5\lLINENUMBER 16 L5\lICONST_0\lISTORE 3\l"];
+386163331 [label="L7\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample2.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL10\lLINENUMBER 19 L10\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL11\l"];
+1540374340 [label="L8\lLINENUMBER 17 L8\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\"\lINVOKEVIRTUAL java/io/PrintStream.print (Ljava/lang/String;)V\lL9\lLINENUMBER 16 L9\lIINC 3 1\lGOTO L6\l"];
+23211803 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 12 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleForExample2.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
+1923598304 [label="L4\lLINENUMBER 13 L4\lICONST_4\lISTORE 2\l"];
+entry;
+exit;
+entry -> 23211803;
+118394766 -> 386163331;
+118394766 -> 1540374340;
+776700275 -> 118394766;
+386163331 -> exit;
+1540374340 -> 118394766;
+23211803 -> 776700275;
+23211803 -> 1923598304;
+1923598304 -> 776700275;
+}

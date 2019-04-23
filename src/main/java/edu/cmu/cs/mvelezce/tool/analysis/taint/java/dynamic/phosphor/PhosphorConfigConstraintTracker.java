@@ -38,8 +38,6 @@ public class PhosphorConfigConstraintTracker {
       }
 
       Map<Set<String>, List<Set<String>>> x = analysisEntry.getValue();
-
-      System.out.println();
     }
 
   }

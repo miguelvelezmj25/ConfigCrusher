@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -50,9 +51,9 @@ public class SubtracesInstrumenterTest {
   @Test
   public void instrumentMeasureDiskOrderedScan()
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    String programName = "measureDiskOrderedScan";
-    String srcDir = "../performance-mapper-evaluation/instrumented/berkeley-db";
-    String classDir = "../performance-mapper-evaluation/instrumented/berkeley-db/target/classes";
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    String srcDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
 
     String[] args = new String[2];
     args[0] = "-delres";

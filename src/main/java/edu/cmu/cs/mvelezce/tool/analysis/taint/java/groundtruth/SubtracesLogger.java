@@ -61,7 +61,7 @@ public class SubtracesLogger {
   }
 
   // TODO synchornize
-  public static void enterDecision(String labelPrefix) {
+  public synchronized static void enterDecision(String labelPrefix) {
     int execCount = LABELS_PREFIX_TO_COUNTS.getOrDefault(labelPrefix, 0);
     execCount++;
     SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
@@ -72,15 +72,25 @@ public class SubtracesLogger {
   }
 
   // TODO synchornize
-  public static void exitDecision(String labelPrefix) {
-    int execCount = LABELS_PREFIX_TO_COUNTS.get(labelPrefix);
-    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
-    TRACE.add(loggedSubtrace.toString());
+  public synchronized static void exitDecision(String labelPrefix) {
+    try {
+      int execCount
+          = LABELS_PREFIX_TO_COUNTS
+          .getOrDefault(
+              labelPrefix, -1);
+      SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, execCount);
+      LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
+      TRACE.add(loggedSubtrace.toString());
+    }
+    catch (NullPointerException npe) {
+      System.out.println(labelPrefix);
+      System.out.println(LABELS_PREFIX_TO_COUNTS.get(labelPrefix));
+      throw npe;
+    }
   }
 
   // TODO synchornize
-  public static void exitAtReturn(String labelPrefix) {
+  public synchronized static void exitAtReturn(String labelPrefix) {
     SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, EXIT_AT_RETURN_FLAG_COUNT);
     LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
     TRACE.add(loggedSubtrace.toString());

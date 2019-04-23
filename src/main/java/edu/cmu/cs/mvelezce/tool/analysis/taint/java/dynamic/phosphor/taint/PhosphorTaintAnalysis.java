@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Options;
@@ -8,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorCon
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.TaintHelper;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,10 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
     super(programName, new HashSet<>(options), new HashSet<>());
 
     this.options = options;
+  }
+
+  PhosphorTaintAnalysis(String programName) {
+    this(programName, new ArrayList<>());
   }
 
   @Override
@@ -294,7 +300,11 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 
   @Override
   public Set<PhosphorControlFlowInfo> readFromFile(File file) throws IOException {
-    throw new UnsupportedOperationException("Implement");
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper
+        .readValue(file, new TypeReference<Set<PhosphorControlFlowInfo>>() {
+        });
   }
 
   @Override

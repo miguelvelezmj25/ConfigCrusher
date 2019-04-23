@@ -27,6 +27,6 @@ public class ConstraintComparatorTest {
     Set<ConfigConstraint> mediumConstraints = getMediumConstraints(programName);
     Set<ConfigConstraint> smallConstraints = getSmallConstraints(programName);
 
-    Assert.assertTrue(mediumConstraints.equals(smallConstraints));
+    Assert.assertEquals(mediumConstraints, smallConstraints);
   }
 }

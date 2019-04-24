@@ -42,7 +42,7 @@ public class SubtracesInstrumenter extends BaseInstrumenter {
   public void instrument()
       throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
     MethodTransformer transformer = new SubtracesMethodTransformer.Builder(this.getProgramName(),
-        this.getClassDir()).setDebug(true)
+        this.getClassDir()).setDebug(false)
         .build();
     transformer.transformMethods();
   }

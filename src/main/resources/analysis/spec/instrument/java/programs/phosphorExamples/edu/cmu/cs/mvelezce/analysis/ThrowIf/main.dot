@@ -1,17 +1,17 @@
 digraph main {
 node [shape=record];
-1981418429 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL5\lLINENUMBER 15 L5\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L6\l"];
-1872941234 [label="L6\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL8\lLINENUMBER 18 L8\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL9\l"];
-1922662433 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
-2054033212 [label="L4\lLINENUMBER 12 L4\lNEW java/lang/RuntimeException\lDUP\lLDC \"A is enabled\"\lINVOKESPECIAL java/lang/RuntimeException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-1367661099 [label="L7\lLINENUMBER 16 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1095290435 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL5\lLINENUMBER 15 L5\lILOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L6\l"];
+1712597146 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+1190892929 [label="L4\lLINENUMBER 12 L4\lNEW java/lang/RuntimeException\lDUP\lLDC \"A is enabled\"\lINVOKESPECIAL java/lang/RuntimeException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1097558044 [label="L6\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL8\lLINENUMBER 18 L8\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL9\l"];
+117227681 [label="L7\lLINENUMBER 16 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
 entry;
 exit;
-entry -> 1922662433;
-1981418429 -> 1872941234;
-1981418429 -> 1367661099;
-1872941234 -> exit;
-1922662433 -> 1981418429;
-1922662433 -> 2054033212;
-1367661099 -> 1872941234;
+entry -> 1712597146;
+1095290435 -> 1097558044;
+1095290435 -> 117227681;
+1712597146 -> 1095290435;
+1712597146 -> 1190892929;
+1097558044 -> exit;
+117227681 -> 1097558044;
 }

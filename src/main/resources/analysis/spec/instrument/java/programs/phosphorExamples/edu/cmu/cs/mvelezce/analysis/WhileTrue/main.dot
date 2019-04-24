@@ -1,19 +1,19 @@
 digraph main {
 node [shape=record];
-1969845464 [label="L0\lLINENUMBER 10 L0\lFRAME APPEND [I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"miguel\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 15 L1\lGOTO L0\l"];
-1136186114 [label="L2\lLINENUMBER 11 L2\lFRAME SAME1 java/lang/Exception\lASTORE 2\lL4\lLINENUMBER 12 L4\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGEEval (I)V\lIFGE L5\l"];
-1315550845 [label="L5\lLINENUMBER 15 L5\lFRAME APPEND [java/lang/Exception]\lGOTO L0\l"];
-1916400826 [label="LDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL6\lLINENUMBER 13 L6\lGOTO L7\l"];
-848416685 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 6 L3\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Integer.valueOf (Ljava/lang/String;)Ljava/lang/Integer;\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 1\l"];
-1279824273 [label="L7\lLINENUMBER 17 L7\lFRAME SAME\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL8\l"];
+492705449 [label="L7\lLINENUMBER 17 L7\lFRAME SAME\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL8\l"];
+194339475 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 6 L3\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Integer.valueOf (Ljava/lang/String;)Ljava/lang/Integer;\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 1\l"];
+496878208 [label="L0\lLINENUMBER 10 L0\lFRAME APPEND [I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"miguel\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 15 L1\lGOTO L0\l"];
+1856258111 [label="LDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL6\lLINENUMBER 13 L6\lGOTO L7\l"];
+1317352070 [label="L5\lLINENUMBER 15 L5\lFRAME APPEND [java/lang/Exception]\lGOTO L0\l"];
+1451546120 [label="L2\lLINENUMBER 11 L2\lFRAME SAME1 java/lang/Exception\lASTORE 2\lL4\lLINENUMBER 12 L4\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGEEval (ILjava/lang/String;)V\lIFGE L5\l"];
 entry;
 exit;
-entry -> 848416685;
-1969845464 -> 1969845464;
-1136186114 -> 1315550845;
-1136186114 -> 1916400826;
-1315550845 -> 1969845464;
-1916400826 -> 1279824273;
-848416685 -> 1969845464;
-1279824273 -> exit;
+entry -> 194339475;
+492705449 -> exit;
+194339475 -> 496878208;
+496878208 -> 496878208;
+1856258111 -> 492705449;
+1317352070 -> 496878208;
+1451546120 -> 1856258111;
+1451546120 -> 1317352070;
 }

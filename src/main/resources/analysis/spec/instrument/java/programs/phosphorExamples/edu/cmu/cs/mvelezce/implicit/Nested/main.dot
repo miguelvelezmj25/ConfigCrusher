@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-1675308210 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
-381390837 [label="L5\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\l"];
-750751532 [label="L6\lLINENUMBER 13 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Some\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1512860263 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL7\lLINENUMBER 16 L7\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL8\l"];
-1206413764 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L5\l"];
+1467876194 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L5\l"];
+1479426296 [label="L5\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\l"];
+1705150695 [label="L6\lLINENUMBER 13 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Some\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+203825912 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+2016187005 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL7\lLINENUMBER 16 L7\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL8\l"];
 entry;
 exit;
-entry -> 1675308210;
-1675308210 -> 1512860263;
-1675308210 -> 1206413764;
-381390837 -> 1512860263;
-750751532 -> 381390837;
-1512860263 -> exit;
-1206413764 -> 381390837;
-1206413764 -> 750751532;
+entry -> 203825912;
+1467876194 -> 1479426296;
+1467876194 -> 1705150695;
+1479426296 -> 2016187005;
+1705150695 -> 1479426296;
+203825912 -> 1467876194;
+203825912 -> 2016187005;
+2016187005 -> exit;
 }

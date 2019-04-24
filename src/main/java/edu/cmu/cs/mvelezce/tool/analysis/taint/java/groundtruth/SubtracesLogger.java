@@ -63,7 +63,7 @@ public class SubtracesLogger {
     }
   }
 
-  public synchronized static void enterDecision(String labelPrefix) {
+  private synchronized static void enterDecision(String labelPrefix) {
     SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix);
     LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, subtraceLabel);
     TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
@@ -81,7 +81,9 @@ public class SubtracesLogger {
     TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
-  public static void logIFEQEval(int value) {
+  public synchronized static void logIFEQEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value == 0) {
       TRACE.add(FALSE);
     }
@@ -90,7 +92,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFNEEval(int value) {
+  public synchronized static void logIFNEEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value != 0) {
       TRACE.add(FALSE);
     }
@@ -99,7 +103,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFLTEval(int value) {
+  public synchronized static void logIFLTEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value < 0) {
       TRACE.add(FALSE);
     }
@@ -108,7 +114,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFGEEval(int value) {
+  public synchronized static void logIFGEEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value >= 0) {
       TRACE.add(FALSE);
     }
@@ -117,7 +125,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFGTEval(int value) {
+  public synchronized static void logIFGTEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value > 0) {
       TRACE.add(FALSE);
     }
@@ -126,7 +136,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFLEEval(int value) {
+  public synchronized static void logIFLEEval(int value, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (value <= 0) {
       TRACE.add(FALSE);
     }
@@ -135,7 +147,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPEQEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPEQEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 == v2) {
       TRACE.add(FALSE);
     }
@@ -144,7 +158,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPNEEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPNEEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 != v2) {
       TRACE.add(FALSE);
     }
@@ -153,7 +169,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPLTEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPLTEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 < v2) {
       TRACE.add(FALSE);
     }
@@ -162,7 +180,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPGEEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPGEEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 >= v2) {
       TRACE.add(FALSE);
     }
@@ -171,7 +191,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPGTEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPGTEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 > v2) {
       TRACE.add(FALSE);
     }
@@ -180,7 +202,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ICMPLEEval(int v1, int v2) {
+  public synchronized static void logIF_ICMPLEEval(int v1, int v2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (v1 <= v2) {
       TRACE.add(FALSE);
     }
@@ -189,7 +213,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ACMPEQEval(Object o1, Object o2) {
+  public synchronized static void logIF_ACMPEQEval(Object o1, Object o2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (o1 == o2) {
       TRACE.add(FALSE);
     }
@@ -198,7 +224,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIF_ACMPNEEval(Object o1, Object o2) {
+  public synchronized static void logIF_ACMPNEEval(Object o1, Object o2, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (o1 != o2) {
       TRACE.add(FALSE);
     }
@@ -207,7 +235,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFNULLEval(Object object) {
+  public synchronized static void logIFNULLEval(Object object, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (object == null) {
       TRACE.add(FALSE);
     }
@@ -216,7 +246,9 @@ public class SubtracesLogger {
     }
   }
 
-  public static void logIFNONNULLEval(Object object) {
+  public synchronized static void logIFNONNULLEval(Object object, String labelPrefix) {
+    enterDecision(labelPrefix);
+
     if (object != null) {
       TRACE.add(FALSE);
     }

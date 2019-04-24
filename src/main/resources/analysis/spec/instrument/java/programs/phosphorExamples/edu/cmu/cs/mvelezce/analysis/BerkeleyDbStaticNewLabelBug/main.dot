@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-1583686310 [label="ICONST_1\lGOTO L4\l"];
-728451196 [label="ILOAD 2\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
-2099044017 [label="L4\lFRAME SAME1 I\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lISTORE 3\lL5\lLINENUMBER 11 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (Z)V\lL6\lLINENUMBER 30 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL7\l"];
-196414950 [label="L0\lLINENUMBER 6 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.getInt1 ()I\lISTORE 1\lL1\lLINENUMBER 7 L1\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.getInt2 ()I\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
-762541694 [label="L3\lFRAME APPEND [I I]\lICONST_0\l"];
+800450310 [label="L3\lFRAME APPEND [I I]\lICONST_0\l"];
+1125906288 [label="L0\lLINENUMBER 6 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.getInt1 ()I\lISTORE 1\lL1\lLINENUMBER 7 L1\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.getInt2 ()I\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+1245032150 [label="ILOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+1422355491 [label="ICONST_1\lGOTO L4\l"];
+1224454588 [label="L4\lFRAME SAME1 I\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lLDC \"edu/cmu/cs/mvelezce/analysis/BerkeleyDbStaticNewLabelBug.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lISTORE 3\lL5\lLINENUMBER 11 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (Z)V\lL6\lLINENUMBER 30 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL7\l"];
 entry;
 exit;
-1583686310 -> 2099044017;
-entry -> 196414950;
-728451196 -> 1583686310;
-728451196 -> 762541694;
-2099044017 -> exit;
-196414950 -> 728451196;
-196414950 -> 762541694;
-762541694 -> 2099044017;
+entry -> 1125906288;
+800450310 -> 1224454588;
+1125906288 -> 800450310;
+1125906288 -> 1245032150;
+1245032150 -> 800450310;
+1245032150 -> 1422355491;
+1422355491 -> 1224454588;
+1224454588 -> exit;
 }

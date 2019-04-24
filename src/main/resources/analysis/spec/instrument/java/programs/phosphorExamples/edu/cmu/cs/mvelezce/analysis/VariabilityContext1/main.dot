@@ -1,13 +1,13 @@
 digraph main {
 node [shape=record];
-545090584 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL6\lLINENUMBER 15 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL7\l"];
-726851688 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\lL5\lLINENUMBER 13 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\l"];
-1355478616 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
+754329241 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL6\lLINENUMBER 15 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL7\l"];
+628345868 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+155636929 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\lL5\lLINENUMBER 13 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\l"];
 entry;
 exit;
-entry -> 1355478616;
-545090584 -> exit;
-726851688 -> 545090584;
-1355478616 -> 545090584;
-1355478616 -> 726851688;
+entry -> 628345868;
+754329241 -> exit;
+628345868 -> 754329241;
+628345868 -> 155636929;
+155636929 -> 754329241;
 }

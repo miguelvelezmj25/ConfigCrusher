@@ -2,19 +2,19 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace;
 
 public class LoggedSubtrace {
 
-  private static final String LABEL = "LABEL";
+//  private static final String LABEL = "LABEL";
 
   // TODO should these be strings?
   private final String action;
-  private final SubtraceLabel subtraceLabel;
+  private final DecisionLabel decisionLabel;
 
-  public LoggedSubtrace(String action, SubtraceLabel subtraceLabel) {
+  public LoggedSubtrace(String action, DecisionLabel decisionLabel) {
     this.action = action;
-    this.subtraceLabel = subtraceLabel;
+    this.decisionLabel = decisionLabel;
   }
 
   @Override
   public String toString() {
-    return LABEL + action + subtraceLabel;
+    return /*LABEL + " " +*/ action + " " + decisionLabel;
   }
 }

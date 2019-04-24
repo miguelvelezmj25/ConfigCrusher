@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.DecisionLabel;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.LoggedSubtrace;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceLabel;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -17,17 +17,16 @@ public class SubtracesLogger {
 
   private static final int EXIT_AT_RETURN_FLAG_COUNT = -1;
 
-  // TODO hash the label when not debugging?
-  private static final String ENTER_DECISION = " Enter ";
-  private static final String EXIT_DECISION = " Exit ";
-  private static final String EXIT_DECISION_AT_RETURN = " ExitReturn ";
-  private static final String FALSE = "FALSE";
-  private static final String TRUE = "TRUE";
-  private static final List<String> TRACE = Collections
-      .synchronizedList(new ArrayList<>(2_000_000));
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-//  private static final Map<String, Integer> LABELS_PREFIX_TO_COUNTS = new HashMap<>();
+  private static final List<String> TRACE = Collections
+      .synchronizedList(new ArrayList<>(1_000_000));
 
+  // TODO hash the label when not debugging?
+  static final String ENTER_DECISION = "Enter";
+  static final String EXIT_DECISION = "Exit";
+  static final String EXIT_DECISION_AT_RETURN = "ExitReturn";
+  static final String FALSE = "FALSE";
+  static final String TRUE = "TRUE";
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
 
@@ -64,20 +63,20 @@ public class SubtracesLogger {
   }
 
   private synchronized static void enterDecision(String labelPrefix) {
-    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, subtraceLabel);
+    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, decisionLabel);
     TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
   public synchronized static void exitDecision(String labelPrefix) {
-    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, subtraceLabel);
+    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, decisionLabel);
     TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 
   public synchronized static void exitAtReturn(String labelPrefix) {
-    SubtraceLabel subtraceLabel = new SubtraceLabel(labelPrefix, EXIT_AT_RETURN_FLAG_COUNT);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION_AT_RETURN, subtraceLabel);
+    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
+    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION_AT_RETURN, decisionLabel);
     TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
   }
 

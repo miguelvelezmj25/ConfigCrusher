@@ -92,6 +92,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     }
   }
 
+  // TODO abstract since it is repeated with SubtraceLabeler
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();

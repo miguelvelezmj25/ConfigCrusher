@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
@@ -21,6 +22,10 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   private final Map<Set<String>, List<String>> configsToTraces;
 
   private SubtraceManager subtraceManager = new SubtraceManager();
+
+  SubtraceLabeler(String programName) {
+    this(programName, new HashMap<>());
+  }
 
   SubtraceLabeler(String programName, Map<Set<String>, List<String>> configsToTraces) {
     super(programName, new HashSet<>(), new HashSet<>());
@@ -128,9 +133,21 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     mapper.writeValue(file, infos);
   }
 
+  // TODO abstract since it is repeated with SubtracesAnalysisExecutor
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
-    throw new UnsupportedOperationException("Implement");
+    ObjectMapper mapper = new ObjectMapper();
+    List<ConfigToTraceInfo> configToTraceInfoList = mapper
+        .readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {
+        });
+
+    Map<Set<String>, List<String>> configsToLabeledTraces = new HashMap<>();
+
+    for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
+      configsToLabeledTraces.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
+    }
+
+    return configsToLabeledTraces;
   }
 
   @Override

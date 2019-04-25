@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SubtraceLabelerTest {
@@ -23,7 +24,14 @@ public class SubtraceLabelerTest {
     args[1] = "-saveres";
 
     SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName, configsToTraces);
-    subtraceLabeler.analyze(args);
+    Map<Set<String>, List<String>> write = subtraceLabeler.analyze(args);
+
+    args = new String[0];
+
+    subtraceLabeler = new SubtraceLabeler(programName);
+    Map<Set<String>, List<String>> read = subtraceLabeler.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test

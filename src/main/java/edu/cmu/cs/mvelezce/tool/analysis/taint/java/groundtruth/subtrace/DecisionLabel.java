@@ -24,7 +24,6 @@ public class DecisionLabel {
     DecisionLabel that = (DecisionLabel) o;
 
     return decision.equals(that.decision);
-
   }
 
   @Override

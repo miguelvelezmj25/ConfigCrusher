@@ -1,22 +1,21 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace;
 
 import com.beust.jcommander.internal.Nullable;
+import java.util.Objects;
 import java.util.UUID;
 
-public class SubtraceLabel extends DecisionLabelWithContext {
+public class DecisionLabelWithContext extends DecisionLabel {
 
-  private final UUID uuid;
-  private final int execCount;
+  private final UUID context;
 
-  public SubtraceLabel(@Nullable UUID context, String decision, int execCount) {
-    super(context, decision);
+  DecisionLabelWithContext(@Nullable UUID context, String decision) {
+    super(decision);
 
-    this.execCount = execCount;
-    this.uuid = UUID.randomUUID();
+    this.context = context;
   }
 
-  UUID getUUID() {
-    return uuid;
+  public UUID getContext() {
+    return context;
   }
 
   @Override
@@ -31,15 +30,15 @@ public class SubtraceLabel extends DecisionLabelWithContext {
       return false;
     }
 
-    SubtraceLabel that = (SubtraceLabel) o;
+    DecisionLabelWithContext that = (DecisionLabelWithContext) o;
 
-    return execCount == that.execCount;
+    return Objects.equals(context, that.context);
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + execCount;
+    result = 31 * result + (context != null ? context.hashCode() : 0);
     return result;
   }
 }

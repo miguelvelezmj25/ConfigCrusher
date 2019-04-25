@@ -70,7 +70,6 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     for (Set<String> config : configs) {
       this.runProgram(config);
       this.processResults(config);
-      break;
     }
 
     Files.delete(SubtracesLogger.RESULTS_FILE);
@@ -107,6 +106,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     return configsToTraces;
   }
 
+  // TODO abstract since it is repeated with SubtraceLabeler
   @Override
   public void writeToFile(Map<Set<String>, List<String>> analysisResults) throws IOException {
     String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;

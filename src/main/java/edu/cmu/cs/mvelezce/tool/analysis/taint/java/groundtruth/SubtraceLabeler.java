@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceLabel;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceManager;
 import java.io.File;
 import java.io.IOException;
@@ -98,13 +99,54 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
         labeledTrace.add(this.enterDecision(decision, stack));
         break;
       case SubtracesLogger.EXIT_DECISION:
-        stack.removeFirst();
+        this.exitDecision(decision, stack);
         // TODO check that the decision exited is the one that we expected
         break;
       case SubtracesLogger.EXIT_DECISION_AT_RETURN:
-        throw new UnsupportedOperationException("Implement");
+        this.exitDecisionAtReturn(decision, stack);
+        break;
       default:
         throw new RuntimeException("Unexpected entry: " + entry);
+    }
+  }
+
+  private void exitDecisionAtReturn(String decision, Deque<UUID> stack) {
+    while (!stack.isEmpty() && this.isDecisionAtTopOfStack(decision, stack)) {
+      stack.removeFirst();
+    }
+  }
+
+  private boolean isDecisionAtTopOfStack(String decision, Deque<UUID> stack) {
+    UUID uuidTop = stack.peekFirst();
+    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
+    SubtraceLabel subtraceLabel = labelsToSubtraceLabels.get(uuidTop);
+
+    if (subtraceLabel == null) {
+      throw new RuntimeException(
+          "Could not find a subtraceLabel object corresponding to the uuid " + uuidTop);
+    }
+
+    String decisionInStack = subtraceLabel.getDecision();
+
+    return decisionInStack.substring(0, decisionInStack.length() - 2).equals(decision);
+  }
+
+  private void exitDecision(String decision, Deque<UUID> stack) {
+    UUID uuidTop = stack.removeFirst();
+
+    // Consistency checks
+    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
+    SubtraceLabel subtraceLabel = labelsToSubtraceLabels.get(uuidTop);
+
+    if (subtraceLabel == null) {
+      throw new RuntimeException(
+          "Could not find a subtraceLabel object corresponding to the uuid " + uuidTop);
+    }
+
+    if (!subtraceLabel.getDecision().equals(decision)) {
+      throw new RuntimeException(
+          "The decision that were are exiting " + decision
+              + " is not the decision that was popped off the stack " + uuidTop);
     }
   }
 

@@ -46,8 +46,16 @@ public class SubtracesAnalysisExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
-    analysis.analyze(args);
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(
+        programName, options);
+    Map<Set<String>, List<String>> write = analysis.analyze(args);
+
+    args = new String[0];
+
+    analysis = new SubtracesAnalysisExecutor(programName, options);
+    Map<Set<String>, List<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -102,8 +110,16 @@ public class SubtracesAnalysisExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
-    analysis.analyze(args);
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(
+        programName, options);
+    Map<Set<String>, List<String>> write = analysis.analyze(args);
+
+    args = new String[0];
+
+    analysis = new SubtracesAnalysisExecutor(programName, options);
+    Map<Set<String>, List<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test

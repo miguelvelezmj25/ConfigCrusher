@@ -8,6 +8,7 @@ import java.util.UUID;
 public class SubtraceManager {
 
   private static final Map<SubtraceLabel, UUID> SUBTRACE_LABELS_TO_LABELS = new HashMap<>();
+  private static final Map<UUID, SubtraceLabel> LABELS_TO_SUBTRACE_LABELS = new HashMap<>();
 
   private final Map<DecisionLabelWithContext, Integer> DECISION_LABELS_WITH_CONTEXT_TO_COUNTS = new HashMap<>();
 
@@ -35,8 +36,12 @@ public class SubtraceManager {
     }
 
     SUBTRACE_LABELS_TO_LABELS.put(subtraceLabel, subtraceLabel.getUUID());
+    LABELS_TO_SUBTRACE_LABELS.put(subtraceLabel.getUUID(), subtraceLabel);
 
     return subtraceLabel.getUUID();
   }
 
+  public static Map<UUID, SubtraceLabel> getLabelsToSubtraceLabels() {
+    return LABELS_TO_SUBTRACE_LABELS;
+  }
 }

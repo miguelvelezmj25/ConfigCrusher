@@ -322,6 +322,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   private void instrumentIPDs(MethodNode methodNode, ClassNode classNode, String labelPrefix) {
     MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
+    MethodBlock exitBlock = cfg.getExitBlock();
     InsnList insnList = methodNode.instructions;
     ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
     int decisionCount = 0;
@@ -344,8 +345,6 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
                 + "Possibly, the control-flow decision has an empty body");
       }
 
-      MethodBlock exitBlock = cfg.getExitBlock();
-
       if (succs.contains(exitBlock)) {
         throw new UnsupportedOperationException("How can the successor be the exit node?");
       }
@@ -354,6 +353,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
       if (ipd.equals(exitBlock)) {
         if (instrumentedIpdExitBlock) {
+          decisionCount++;
           continue;
         }
 

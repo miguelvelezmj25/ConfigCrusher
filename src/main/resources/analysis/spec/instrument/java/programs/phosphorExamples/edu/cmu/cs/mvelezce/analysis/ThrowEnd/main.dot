@@ -1,8 +1,0 @@
-digraph main {
-node [shape=record];
-728553590 [label="L0\lLINENUMBER 10 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL1\l"];
-entry;
-exit;
-entry -> 728553590;
-728553590 -> exit;
-}

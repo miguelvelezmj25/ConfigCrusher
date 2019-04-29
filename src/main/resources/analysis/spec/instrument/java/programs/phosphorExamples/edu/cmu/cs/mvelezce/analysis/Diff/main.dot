@@ -1,8 +1,0 @@
-digraph main {
-node [shape=record];
-541846360 [label="L0\lLINENUMBER 12 L0\lICONST_2\lISTORE 1\lL1\lLINENUMBER 14 L1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 1\lICONST_0\lIOR\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL2\lLINENUMBER 29 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL3\l"];
-entry;
-exit;
-entry -> 541846360;
-541846360 -> exit;
-}

@@ -43,7 +43,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
-//      if(!classNode.name.contains("MeasureDiskOrderedScan")) {
+//      if(!classNode.name.contains("BerkeleyDBIPDIndexBug")) {
 //        continue;
 //      }
 

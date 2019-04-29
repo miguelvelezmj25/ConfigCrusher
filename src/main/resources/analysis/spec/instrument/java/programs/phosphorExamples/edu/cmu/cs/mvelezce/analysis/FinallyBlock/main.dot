@@ -1,0 +1,11 @@
+digraph main {
+node [shape=record];
+1042244376 [label="TRYCATCHBLOCK L0 L1 L2 null\lL0\lLINENUMBER 12 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"miguel\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 15 L1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Finally\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL3\lLINENUMBER 16 L3\lGOTO L4\l"];
+583688161 [label="L2\lLINENUMBER 15 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Finally\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL5\lLINENUMBER 16 L5\lALOAD 1\lATHROW\l"];
+588787021 [label="L4\lLINENUMBER 17 L4\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/FinallyBlock.main([Ljava/lang/String;)V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL6\l"];
+entry;
+exit;
+entry -> 1042244376;
+1042244376 -> 588787021;
+588787021 -> exit;
+}

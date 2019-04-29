@@ -1,0 +1,27 @@
+digraph foo {
+node [shape=record];
+610730453 [label="L4\lFRAME CHOP 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL12\lLINENUMBER 23 L12\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lARETURN\lL13\l"];
+1157129747 [label="L3\lFRAME APPEND [[J I I]\lILOAD 3\lILOAD 0\lDUP2\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (IILjava/lang/String;)V\lIF_ICMPGE L4\l"];
+487053096 [label="L8\lLINENUMBER 16 L8\lILOAD 2\lALOAD 1\lARRAYLENGTH\lDUP2\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPLTEval (IILjava/lang/String;)V\lIF_ICMPLT L9\l"];
+971046435 [label="L0\lLINENUMBER 10 L0\lILOAD 0\lNEWARRAY T_LONG\lASTORE 1\lL1\lLINENUMBER 11 L1\lICONST_0\lISTORE 2\lL2\lLINENUMBER 14 L2\lICONST_0\lISTORE 3\l"];
+449376924 [label="L6\lFRAME APPEND [I]\lILOAD 4\lILOAD 0\lDUP2\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces.foo(I)[J.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (IILjava/lang/String;)V\lIF_ICMPGE L7\l"];
+1838736903 [label="L7\lLINENUMBER 14 L7\lFRAME SAME\lIINC 3 1\lGOTO L3\l"];
+1577442626 [label="L5\lLINENUMBER 15 L5\lICONST_0\lISTORE 4\l"];
+1911372744 [label="L9\lLINENUMBER 19 L9\lFRAME SAME\lIINC 2 1\lL11\lLINENUMBER 15 L11\lIINC 4 1\lGOTO L6\l"];
+745302907 [label="L10\lLINENUMBER 17 L10\lGOTO L4\l"];
+entry;
+exit;
+610730453 -> exit;
+entry -> 971046435;
+1157129747 -> 610730453;
+1157129747 -> 1577442626;
+487053096 -> 1911372744;
+487053096 -> 745302907;
+971046435 -> 1157129747;
+449376924 -> 487053096;
+449376924 -> 1838736903;
+1838736903 -> 1157129747;
+1577442626 -> 449376924;
+1911372744 -> 449376924;
+745302907 -> 610730453;
+}

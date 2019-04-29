@@ -1,0 +1,28 @@
+digraph testBranchNotTaken {
+node [shape=record];
+747199999 [label="L7\lLINENUMBER 73 L7\lSIPUSH 1000\lISTORE 3\lL8\lLINENUMBER 74 L8\lLDC \"example2\"\lASTORE 2\l"];
+772310098 [label="L10\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL12\lLINENUMBER 81 L12\lALOAD 2\lALOAD 1\lDUP2\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPNEEval (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V\lIF_ACMPNE L13\l"];
+172499664 [label="L11\lLINENUMBER 78 L11\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+276195836 [label="L16\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL18\lLINENUMBER 88 L18\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lRETURN\lL19\l"];
+1618514840 [label="L0\lLINENUMBER 65 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestBranchNotTaken\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 66 L1\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 67 L2\lLDC \"example2\"\lASTORE 1\lL3\lLINENUMBER 69 L3\lACONST_NULL\lASTORE 2\lL4\lLINENUMBER 70 L4\lBIPUSH 100\lISTORE 3\lL5\lLINENUMBER 72 L5\lILOAD 0\lDUP\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L6\l"];
+1541639922 [label="L14\lLINENUMBER 82 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+928286087 [label="L6\lFRAME FULL [I java/lang/String java/lang/String I] []\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL9\lLINENUMBER 77 L9\lALOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;Ljava/lang/String;)V\lIFNULL L10\l"];
+2050381236 [label="L17\lLINENUMBER 86 L17\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1208500937 [label="L13\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL15\lLINENUMBER 85 L15\lILOAD 3\lSIPUSH 500\lDUP2\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (IILjava/lang/String;)V\lIF_ICMPGE L16\l"];
+entry;
+exit;
+entry -> 1618514840;
+747199999 -> 928286087;
+772310098 -> 1541639922;
+772310098 -> 1208500937;
+172499664 -> 772310098;
+276195836 -> exit;
+1618514840 -> 747199999;
+1618514840 -> 928286087;
+1541639922 -> 1208500937;
+928286087 -> 772310098;
+928286087 -> 172499664;
+2050381236 -> 276195836;
+1208500937 -> 276195836;
+1208500937 -> 2050381236;
+}

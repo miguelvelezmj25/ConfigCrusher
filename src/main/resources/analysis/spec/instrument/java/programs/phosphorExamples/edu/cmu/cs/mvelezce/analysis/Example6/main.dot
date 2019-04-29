@@ -1,0 +1,18 @@
+digraph main {
+node [shape=record];
+1008138273 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 12 L2\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L3\l"];
+1856892202 [label="L8\lLINENUMBER 19 L8\lIINC 2 1\l"];
+1181107395 [label="L4\lLINENUMBER 13 L4\lBIPUSH 10\lISTORE 2\l"];
+1010223604 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL5\lLINENUMBER 16 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod (I)I\lISTORE 2\lL6\lLINENUMBER 18 L6\lILOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLEEval (ILjava/lang/String;)V\lIFLE L7\l"];
+1701955374 [label="L7\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL9\lLINENUMBER 22 L9\lBIPUSH 42\lILOAD 2\lIDIV\lISTORE 2\lL10\lLINENUMBER 23 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL11\lLINENUMBER 24 L11\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL12\l"];
+entry;
+exit;
+1008138273 -> 1181107395;
+1008138273 -> 1010223604;
+entry -> 1008138273;
+1856892202 -> 1701955374;
+1181107395 -> 1010223604;
+1010223604 -> 1856892202;
+1010223604 -> 1701955374;
+1701955374 -> exit;
+}

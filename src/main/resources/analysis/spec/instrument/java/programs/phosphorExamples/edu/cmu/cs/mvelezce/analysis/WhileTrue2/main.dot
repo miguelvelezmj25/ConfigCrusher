@@ -1,0 +1,8 @@
+digraph main {
+node [shape=record];
+1872878604 [label="L0\lLINENUMBER 7 L0\lLDC \"edu/cmu/cs/mvelezce/analysis/WhileTrue2.main([Ljava/lang/String;)V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL1\l"];
+entry;
+exit;
+entry -> 1872878604;
+1872878604 -> exit;
+}

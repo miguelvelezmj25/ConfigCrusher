@@ -90,11 +90,18 @@ public class SubtraceLabelerTest {
     SubtracesAnalysisExecutor analysis = new SubtracesAnalysisExecutor(programName);
     Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
 
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
     SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName, configsToTraces);
-    subtraceLabeler.analyze();
+    Map<Set<String>, List<String>> write = subtraceLabeler.analyze(args);
+
+    args = new String[0];
+
+    subtraceLabeler = new SubtraceLabeler(programName);
+    Map<Set<String>, List<String>> read = subtraceLabeler.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 }

@@ -38,11 +38,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import org.apache.commons.io.FileUtils;
 import org.jboss.util.file.Files;
 
 /**
@@ -61,6 +65,29 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
   public SubtracesAnalysisExecutor(String programName) {
     this(programName, new HashSet<>());
+  }
+
+  @Override
+  public Map<Set<String>, List<String>> analyze(String[] args)
+      throws IOException, InterruptedException {
+    Options.getCommandLine(args);
+
+    String outputFile = this.outputDir();
+    File file = new File(outputFile);
+
+    Options.checkIfDeleteResult(file);
+
+    if (file.exists()) {
+      return this.readFromFile(file);
+    }
+
+    Map<Set<String>, List<String>> analysisResults = this.analyze();
+
+    if (Options.checkIfSave()) {
+      this.writeToFile(analysisResults);
+    }
+
+    return analysisResults;
   }
 
   @Override
@@ -95,13 +122,17 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   // TODO abstract since it is repeated with SubtraceLabeler
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    List<ConfigToTraceInfo> configToTraceInfoList = mapper
-        .readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {
-        });
+    Collection<File> files = FileUtils.listFiles(file, null, true);
 
-    for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
-      configsToTraces.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
+    for (File resultFile : files) {
+      ObjectMapper mapper = new ObjectMapper();
+      List<ConfigToTraceInfo> configToTraceInfoList = mapper
+          .readValue(resultFile, new TypeReference<List<ConfigToTraceInfo>>() {
+          });
+
+      for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
+        configsToTraces.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
+      }
     }
 
     return configsToTraces;
@@ -110,19 +141,22 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   // TODO abstract since it is repeated with SubtraceLabeler
   @Override
   public void writeToFile(Map<Set<String>, List<String>> analysisResults) throws IOException {
-    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
-    File file = new File(outputFile);
-    file.getParentFile().mkdirs();
+    File file = new File(this.outputDir());
+    file.mkdirs();
 
-    List<ConfigToTraceInfo> infos = new ArrayList<>();
+    Iterator<Entry<Set<String>, List<String>>> iter = analysisResults.entrySet().iterator();
 
-    for (Map.Entry<Set<String>, List<String>> entry : analysisResults.entrySet()) {
+    for (int i = 0; iter.hasNext(); i++) {
+      Entry<Set<String>, List<String>> entry = iter.next();
       ConfigToTraceInfo configToTraceInfo = new ConfigToTraceInfo(entry.getKey(), entry.getValue());
-      infos.add(configToTraceInfo);
-    }
 
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(file, infos);
+      List<ConfigToTraceInfo> infos = new ArrayList<>();
+      infos.add(configToTraceInfo);
+
+      ObjectMapper mapper = new ObjectMapper();
+      File outputFile = new File(file, i + Options.DOT_JSON);
+      mapper.writeValue(outputFile, infos);
+    }
   }
 
   @Override

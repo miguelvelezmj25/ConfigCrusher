@@ -1,1 +1,125 @@
-[{"config":[],"trace":["597f7346-795f-45c1-aeb1-b805266b8b46","TRUE","92e48d7c-86fd-4808-8965-c08fb96565c2","TRUE","932bb66d-ef16-4c3e-a5d6-179f6132b1cd","FALSE","fcc7de21-9e1a-4097-98b9-c09a6fd043ca","TRUE","aeb0d02b-ddc5-4feb-a0e5-1ba108422d53","FALSE","c5e22b0d-daaf-40f8-9142-7c826a8d9bbc","FALSE","abb0383b-8b37-4025-87a8-e1402bfcea1c","TRUE","3bc7b211-c53e-4bf7-9098-223f856492db","TRUE","bcf78703-af5d-4662-a689-80dc87ab5cbb","TRUE"]}]
+[
+  {
+    "config": [],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "TRUE",
+      "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  },
+  {
+    "config": [
+      "B"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "TRUE",
+      "8fa215fa-320b-4b33-98f2-d43741784226",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  },
+  {
+    "config": [
+      "C"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A",
+      "B"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "TRUE",
+      "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "TRUE",
+      "8fa215fa-320b-4b33-98f2-d43741784226",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  },
+  {
+    "config": [
+      "A",
+      "C"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "TRUE",
+      "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+      "TRUE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "FALSE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  },
+  {
+    "config": [
+      "B",
+      "C"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "FALSE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "TRUE",
+      "8fa215fa-320b-4b33-98f2-d43741784226",
+      "TRUE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  },
+  {
+    "config": [
+      "A",
+      "B",
+      "C"
+    ],
+    "trace": [
+      "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+      "TRUE",
+      "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+      "TRUE",
+      "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+      "TRUE",
+      "8fa215fa-320b-4b33-98f2-d43741784226",
+      "TRUE",
+      "20411f52-e669-4417-bf6d-5b4258b42173",
+      "TRUE"
+    ]
+  }
+]

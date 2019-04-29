@@ -1,8 +1,0 @@
-digraph main {
-node [shape=record];
-1610426856 [label="L0\lLINENUMBER 9 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons ()V\lL1\lLINENUMBER 10 L1\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken ()V\lL2\lLINENUMBER 11 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testImplicitFlows ()V\lL3\lLINENUMBER 12 L3\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields1 ()V\lL4\lLINENUMBER 13 L4\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields2 ()V\lL5\lLINENUMBER 14 L5\lLDC \"edu/cmu/cs/mvelezce/implicit/Test.main([Ljava/lang/String;)V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL6\l"];
-entry;
-exit;
-entry -> 1610426856;
-1610426856 -> exit;
-}

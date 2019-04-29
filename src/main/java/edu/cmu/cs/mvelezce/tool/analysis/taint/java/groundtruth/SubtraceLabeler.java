@@ -65,6 +65,11 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
       }
     }
 
+    if (!stack.isEmpty()) {
+      this.printStack(stack);
+      throw new RuntimeException("The stack is not empty");
+    }
+
     return labeledTrace;
   }
 
@@ -117,6 +122,26 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   }
 
   private boolean isDecisionAtTopOfStack(String decision, Deque<UUID> stack) {
+    String decisionInStack = this.getTopDecisionInStack(stack);
+
+    String[] decisionEntries = decision.split("\\.");
+    String[] decisionInStackEntries = decisionInStack.split("\\.");
+
+    return decisionEntries[0].equals(decisionInStackEntries[0]) && decisionEntries[1]
+        .equals(decisionInStackEntries[1]);
+  }
+
+  private void printStack(Deque<UUID> stack) {
+    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
+
+    for (UUID uuid : stack) {
+      System.out.println(labelsToSubtraceLabels.get(uuid));
+    }
+
+    System.out.println();
+  }
+
+  private String getTopDecisionInStack(Deque<UUID> stack) {
     UUID uuidTop = stack.peekFirst();
     Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
     SubtraceLabel subtraceLabel = labelsToSubtraceLabels.get(uuidTop);
@@ -126,27 +151,18 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
           "Could not find a subtraceLabel object corresponding to the uuid " + uuidTop);
     }
 
-    String decisionInStack = subtraceLabel.getDecision();
+    return subtraceLabel.getDecision();
+  }
 
-    return decisionInStack.substring(0, decisionInStack.length() - 2).equals(decision);
+  private boolean isSameDecisionAtTopOfStack(String decision, Deque<UUID> stack) {
+    String decisionInStack = getTopDecisionInStack(stack);
+
+    return decisionInStack.equals(decision);
   }
 
   private void exitDecision(String decision, Deque<UUID> stack) {
-    UUID uuidTop = stack.removeFirst();
-
-    // Consistency checks
-    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
-    SubtraceLabel subtraceLabel = labelsToSubtraceLabels.get(uuidTop);
-
-    if (subtraceLabel == null) {
-      throw new RuntimeException(
-          "Could not find a subtraceLabel object corresponding to the uuid " + uuidTop);
-    }
-
-    if (!subtraceLabel.getDecision().equals(decision)) {
-      throw new RuntimeException(
-          "The decision that were are exiting " + decision
-              + " is not the decision that was popped off the stack " + uuidTop);
+    while (!stack.isEmpty() && this.isSameDecisionAtTopOfStack(decision, stack)) {
+      stack.removeFirst();
     }
   }
 

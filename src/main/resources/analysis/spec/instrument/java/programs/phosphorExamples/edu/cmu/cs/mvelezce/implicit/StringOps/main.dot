@@ -1,8 +1,0 @@
-digraph main {
-node [shape=record];
-1965184014 [label="L0\lLINENUMBER 11 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/StringOps.carOps ()V\lL1\lLINENUMBER 12 L1\lLDC \"edu/cmu/cs/mvelezce/implicit/StringOps.main([Ljava/lang/String;)V\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.saveTrace ()V\lRETURN\lL2\l"];
-entry;
-exit;
-entry -> 1965184014;
-1965184014 -> exit;
-}

@@ -6,10 +6,10 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,66 +22,101 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
 
   private final String programName;
   private final Map<Set<String>, List<String>> configsToTraces;
-  private final List<String> alignedTrace;
 
   public SubtracesValueAnalysis(String programName) {
-    this.programName = programName;
-    this.configsToTraces = new HashMap<>();
-    this.alignedTrace = new ArrayList<>();
+    this(programName, new HashMap<>());
   }
 
-  public SubtracesValueAnalysis(String programName, Map<Set<String>, List<String>> configsToTraces,
-      List<String> alignedTrace) {
+  public SubtracesValueAnalysis(String programName,
+      Map<Set<String>, List<String>> configsToTraces) {
     this.programName = programName;
     this.configsToTraces = configsToTraces;
-    this.alignedTrace = alignedTrace;
   }
 
   @Override
   public Set<ConfigSubtraceValueInfo> analyze() {
-    Set<ConfigSubtraceValueInfo> configSubtraceValues = new HashSet<>();
+    Set<String> subtraces = new HashSet<>();
 
-    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
-      Set<String> config = entry.getKey();
-      List<String> trace = entry.getValue();
+    for (List<String> trace : this.configsToTraces.values()) {
+      for(String entry : trace) {
+        if(entry.equals(SubtracesLogger.TRUE) || entry.equals(SubtracesLogger.FALSE)) {
+          continue;
+        }
 
-      Map<String, String> subtracesToValues = this.getSubtracesToValues(trace);
-
-      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config,
-          subtracesToValues);
-      configSubtraceValues.add(configSubtraceValue);
+        subtraces.add(entry);
+      }
     }
 
-    return configSubtraceValues;
+
+
+
+    Map<String, Set<String>> subtracesToValues = new HashMap<>();
+
+    for(String subtrace : subtraces) {
+      subtracesToValues.put(subtrace, new HashSet<>());
+    }
+
+
+    for (List<String> trace : this.configsToTraces.values()) {
+      Iterator<String> iter = trace.iterator();
+
+      while(iter.hasNext()) {
+        String subtrace = iter.next();
+        Set<String> values = subtracesToValues.get(subtrace);
+
+        String value = iter.next();
+        values.add(value);
+      }
+    }
+
+
+
+
+
+//    Set<ConfigSubtraceValueInfo> configSubtraceValues = new HashSet<>();
+//
+//    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
+//      Set<String> config = entry.getKey();
+//      List<String> trace = entry.getValue();
+//
+//      Map<String, String> subtracesToValues = this.getSubtracesToValues(trace);
+//
+//      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config,
+//          subtracesToValues);
+//      configSubtraceValues.add(configSubtraceValue);
+//    }
+//
+//    return configSubtraceValues;
+    throw new UnsupportedOperationException("Implement");
   }
 
   private Map<String, String> getSubtracesToValues(List<String> trace) {
-    Map<String, String> subtracesToValues = new HashMap<>();
-
-    for (String subtrace : this.alignedTrace) {
-      subtracesToValues.put(subtrace, "");
-    }
-
-    Map<String, Integer> subtracesToIndexes = this.getSubtracesToIndexes(trace);
-
-    for (String subtrace : this.alignedTrace) {
-      int index = subtracesToIndexes.getOrDefault(subtrace, -1);
-
-      if (index < 0 || index == (trace.size() - 1)) {
-        continue;
-      }
-
-      String subtraces = trace.get(index + 1);
-
-      throw new UnsupportedOperationException("Implement");
-//      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
-//        subtracesToValues.put(subtrace, subtraces);
+//    Map<String, String> subtracesToValues = new HashMap<>();
+//
+//    for (String subtrace : this.alignedTrace) {
+//      subtracesToValues.put(subtrace, "");
+//    }
+//
+//    Map<String, Integer> subtracesToIndexes = this.getSubtracesToIndexes(trace);
+//
+//    for (String subtrace : this.alignedTrace) {
+//      int index = subtracesToIndexes.getOrDefault(subtrace, -1);
+//
+//      if (index < 0 || index == (trace.size() - 1)) {
+//        continue;
 //      }
-
-    }
-
-    return subtracesToValues;
-
+//
+//      String subtraces = trace.get(index + 1);
+//
+//      throw new UnsupportedOperationException("Implement");
+////      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
+////        subtracesToValues.put(subtrace, subtraces);
+////      }
+//
+//    }
+//
+//    return subtracesToValues;
+    throw new UnsupportedOperationException("Implement");
   }
 
   private Map<String, Integer> getSubtracesToIndexes(List<String> trace) {

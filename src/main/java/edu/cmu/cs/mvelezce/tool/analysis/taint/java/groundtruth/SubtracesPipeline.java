@@ -39,10 +39,11 @@ public class SubtracesPipeline {
   private Set<ConfigSubtraceValueInfo> getValuesForSubtraceForConfigs(String[] args,
       Map<Set<String>, List<String>> configsToTraces, List<String> alignedTrace)
       throws IOException {
-    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(this.programName,
-        configsToTraces, alignedTrace);
-
-    return subtracesValueAnalysis.analyze(args);
+//    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(this.programName,
+//        configsToTraces, alignedTrace);
+//
+//    return subtracesValueAnalysis.analyze(args);
+    throw new UnsupportedOperationException("Implement");
   }
 
   private List<String> alignTraces(String[] args, Map<Set<String>, List<String>> configsToTraces)

@@ -45,19 +45,26 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     super.transformMethods(classNodes);
 
-    this.setBlocksToDecisions(classNodes);
+    this.setBlocksToRegions(classNodes);
 
-    // TODO propgate in methods, propagate up, repeat
-    boolean updatedMethods = this.expandRegionsInMethods(classNodes);
-    this.propagateRegionsUpClasses();
+    boolean updatedMethods = true;
+
+    while (updatedMethods) {
+      updatedMethods = this.expandRegionsInMethods(classNodes);
+      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
+    }
+
+    // TODO instrument methods
   }
 
-  private void propagateRegionsUpClasses() {
-    Set<SootMethod> methods = this.getApplicationSootMethods();
-    List<SootMethod> worklist = new ArrayList<>(methods);
+  private boolean propagateRegionsUpClasses() {
+    boolean propagated = false;
+    Set<SootMethod> methodsInWorklist = this.getApplicationSootMethods();
+    List<SootMethod> worklist = new ArrayList<>(methodsInWorklist);
 
     while (!worklist.isEmpty()) {
       SootMethod method = worklist.remove(0);
+      methodsInWorklist.remove(method);
 
       if (method.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
         continue;
@@ -76,27 +83,112 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
         continue;
       }
 
-//      List<SootMethod> methodsToAnalyze = this.propagateUpRegionInter(method);
+      List<SootMethod> methodsToAnalyze = this.propagateInfluencingTaintsToCaller(method);
 
-//      if (methodsToAnalyze.isEmpty()) {
-//        continue;
-//      }
-//
-//      worklist.addAll(0, methodsToAnalyze);
+      if (methodsToAnalyze.isEmpty()) {
+        continue;
+      }
+
+      for (SootMethod sootMethod : methodsToAnalyze) {
+        if (!methodsInWorklist.contains(sootMethod)) {
+          worklist.add(0, sootMethod);
+          propagated = true;
+        }
+      }
     }
+
+    return propagated;
+  }
+
+  private List<SootMethod> propagateInfluencingTaintsToCaller(SootMethod method) {
+    MethodNode methodNode = this.getMethodNode(method);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
+        .get(methodNode);
+
+    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
+    if (blocksToRegions == null) {
+      return new ArrayList<>();
+    }
+
+    Set<SootMethod> modifiedMethods = new HashSet<>();
+    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
+    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
+
+    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
+      throw new RuntimeException(
+          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
+    }
+
+    List<Edge> edges = this.getCallerEdges(method);
+
+    for (Edge edge : edges) {
+      SootMethod callerSootMethod = edge.src();
+      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
+      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+          .getMethodsToRegionsInBlocks()
+          .get(callerMethodNode);
+
+      MethodBlock callerBlock = this.getCallerBlock(edge);
+      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
+
+      if (!shouldPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
+        continue;
+      }
+
+      JavaRegion callerNewRegion = this
+          .addNewCallerRegionToMappingOfBlocksToRegions(callerBlock, callerRegion,
+              callerBlocksToRegions);
+      this.addNewCallerRegionToMappingOfRegionsToData(callerNewRegion, callerInfluencingTaints,
+          influencingTaints);
+
+      modifiedMethods.add(callerSootMethod);
+    }
+
+    return new ArrayList<>(modifiedMethods);
+  }
+
+  private JavaRegion addNewCallerRegionToMappingOfBlocksToRegions(MethodBlock callerBlock,
+      JavaRegion callerRegion, LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions) {
+    JavaRegion callerNewRegion;
+
+    if (callerRegion == null) {
+      throw new UnsupportedOperationException("Implement");
+//          String classPackage = callerSootMethod.getDeclaringClass().getPackageName();
+//          String className = callerSootMethod.getDeclaringClass().getShortName();
+//          String methodName = callerSootMethod.getBytecodeSignature();
+//          methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
+//          index = callerMethodNode.instructions.indexOf(callerBlock.getInstructions().get(0));
+//
+//          newRegion = new JavaRegion.Builder(classPackage, className, methodName)
+//              .startBytecodeIndex(index).build();
+//          this.methodsWithUpdatedIndexes.add(callerMethodNode);
+    }
+    else {
+      int index = callerRegion.getStartRegionIndex();
+
+      callerNewRegion = new JavaRegion.Builder(callerRegion.getRegionPackage(),
+          callerRegion.getRegionClass(), callerRegion.getRegionMethod()).startBytecodeIndex(index)
+          .build();
+      this.getRegionsToData().remove(callerRegion);
+    }
+
+    callerBlocksToRegions.put(callerBlock, callerNewRegion);
+
+    return callerNewRegion;
   }
 
   private boolean canPropagateFirstRegionToAllCallers(SootMethod method) {
     MethodNode methodNode = this.getMethodNode(method);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToDecisions = this.getMethodsToDecisionsInBlocks()
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
         .get(methodNode);
 
-// TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
-    if (blocksToDecisions == null) {
+    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
+    if (blocksToRegions == null) {
       return false;
     }
 
-    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToDecisions);
+    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
     InfluencingTaints influencingTaints = this.getDecision(firstRegion);
 
     if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
@@ -112,42 +204,84 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       SootMethod callerSootMethod = edge.src();
       MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
       LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
-          .getMethodsToDecisionsInBlocks()
+          .getMethodsToRegionsInBlocks()
           .get(callerMethodNode);
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
       JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
       InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
 
-      Set<String> thisContextTaints = influencingTaints.getContext();
-      Set<String> thisConditionTaints = influencingTaints.getCondition();
-
-      Set<String> contextTaintsCaller = callerInfluencingTaints.getContext();
-      Set<String> conditionTaintsCaller = callerInfluencingTaints.getCondition();
-
-      if (!(contextTaintsCaller.containsAll(thisContextTaints) || conditionTaintsCaller
-          .equals(thisContextTaints)) &&
-          !callerInfluencingTaints.equals(influencingTaints)) {
-        throw new UnsupportedOperationException("Handle case");
-
-//      if (!contextTaintsCaller.containsAll(thisContextTaints) && !conditionTaintsCaller
-//          .containsAll(thisConditionTaints)) {
-//        canPropagate = false;
-//        break;
-
-// OLD //      if (!influencingTaints.containsAll(callerInfluencingTaints) && !influencingTaints
-// OLD //          .equals(callerInfluencingTaints)
-// OLD //          && !callerInfluencingTaints.containsAll(influencingTaints)) {
-//                this.debugBlockDecisions(callerMethodNode);
+      if (!canPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
+        canPropagate = false;
+        break;
       }
+
     }
 
     return canPropagate;
   }
 
+  private boolean shouldPropagateTaintsToCaller(InfluencingTaints influencingTaints,
+      InfluencingTaints callerInfluencingTaints) {
+    // TODO Check when are the cases that we should propagate influence to the caller and when we should not
+    if (influencingTaints.equals(callerInfluencingTaints)) {
+      return false;
+    }
+
+    Set<String> thisContextTaints = influencingTaints.getContext();
+    Set<String> thisConditionTaints = influencingTaints.getCondition();
+
+    Set<String> contextTaintsCaller = callerInfluencingTaints.getContext();
+    Set<String> conditionTaintsCaller = callerInfluencingTaints.getCondition();
+
+    if (!conditionTaintsCaller.equals(thisContextTaints)) {
+      return false;
+    }
+
+    return true;
+    // TODO Check when are the cases that we should propagate influence to the caller and when we should not
+  }
+
+  private boolean canPropagateTaintsToCaller(InfluencingTaints influencingTaints,
+      InfluencingTaints callerInfluencingTaints) {
+    // TODO Check when are the cases that we can propagate influence to the caller and when we cannot
+    if (influencingTaints.equals(callerInfluencingTaints)) {
+      return false;
+    }
+
+    Set<String> thisContextTaints = influencingTaints.getContext();
+    Set<String> thisConditionTaints = influencingTaints.getCondition();
+
+    Set<String> contextTaintsCaller = callerInfluencingTaints.getContext();
+    Set<String> conditionTaintsCaller = callerInfluencingTaints.getCondition();
+
+    if (!(contextTaintsCaller.containsAll(thisContextTaints)
+        || conditionTaintsCaller.containsAll(thisContextTaints))) {
+      return false;
+    }
+
+//    if (!(contextTaintsCaller.containsAll(thisContextTaints) || conditionTaintsCaller
+//        .equals(thisContextTaints))) {
+//      throw new UnsupportedOperationException("Handle case");
+//
+////      if (!contextTaintsCaller.containsAll(thisContextTaints) && !conditionTaintsCaller
+////          .containsAll(thisConditionTaints)) {
+////        canPropagate = false;
+////        break;
+//
+//// OLD //      if (!influencingTaints.containsAll(callerInfluencingTaints) && !influencingTaints
+//// OLD //          .equals(callerInfluencingTaints)
+//// OLD //          && !callerInfluencingTaints.containsAll(influencingTaints)) {
+////                this.debugBlockDecisions(callerMethodNode);
+//    }
+
+    return true;
+    // TODO Check when are the cases that we can propagate influence to the caller and when we cannot
+  }
+
   private JavaRegion getFirstRegionInMethod(
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToDecisions) {
-    Collection<JavaRegion> methodRegions = blocksToDecisions.values();
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    Collection<JavaRegion> methodRegions = blocksToRegions.values();
     Iterator<JavaRegion> methodRegionsIter = methodRegions.iterator();
     JavaRegion firstRegion = methodRegionsIter.next();
 
@@ -173,10 +307,10 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 
         while (updatedRegions) {
           LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
-              .getMethodsToDecisionsInBlocks().get(methodNode);
+              .getMethodsToRegionsInBlocks().get(methodNode);
           updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
-          updatedRegions = updatedRegions | this
-              .expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
+          updatedRegions = updatedRegions |
+              this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
 //          this.debugBlockDecisions(methodNode, classNode);
 //          System.out.println();
 
@@ -349,7 +483,6 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 
   private List<MethodBlock> expandUpRegionInMethod(MethodNode methodNode, ClassNode classNode,
       MethodBlock block, Map<MethodBlock, JavaRegion> blocksToRegions) {
-//    this.debugBlockDecisions(methodNode, classNode);
 
     List<MethodBlock> updatedBlocks = new ArrayList<>();
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
@@ -410,6 +543,17 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
     }
 
     return updatedBlocks;
+  }
+
+  private void addNewCallerRegionToMappingOfRegionsToData(JavaRegion newCallerRegion,
+      InfluencingTaints callerInfluencingTaints, InfluencingTaints blockInfluencingTaints) {
+    Set<String> newConditionTaints = new HashSet<>();
+    newConditionTaints.addAll(blockInfluencingTaints.getCondition());
+    newConditionTaints.addAll(callerInfluencingTaints.getCondition());
+
+    InfluencingTaints newInfluencingTaints = new InfluencingTaints(
+        callerInfluencingTaints.getContext(), newConditionTaints);
+    this.getRegionsToData().put(newCallerRegion, newInfluencingTaints);
   }
 
   private void addNewRegionToMappingOfRegionsToData(JavaRegion newRegion,

@@ -46,7 +46,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final CallGraph callGraph;
   private final Set<SootMethod> applicationSootMethods;
   private final Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
-  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
+  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToRegionsInBlocks = new HashMap<>();
   private final Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
   private final Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
@@ -149,7 +149,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
     AbstractInsnNode instInCaller = this.asmBytecodeOffsetFinder
         .getASMInstFromCaller(edge, callerSootMethod, callerMethodNode);
-    Set<MethodBlock> blocks = this.getMethodsToDecisionsInBlocks().get(callerMethodNode).keySet();
+    Set<MethodBlock> blocks = this.getMethodsToRegionsInBlocks().get(callerMethodNode).keySet();
 
     for (MethodBlock block : blocks) {
       if (!block.getInstructions().contains(instInCaller)) {
@@ -199,7 +199,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   // TODO takes sometime to execute
-  protected void setBlocksToDecisions(Set<ClassNode> classNodes) {
+  protected void setBlocksToRegions(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
       for (MethodNode methodNode : classNode.methods) {
         if (!this.analyzeMethod(methodNode, classNode)) {
@@ -219,7 +219,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
           // TODO is there a better way to implement this logic without ignoring the exception?
         }
 
-        this.getMethodsToDecisionsInBlocks().put(methodNode, blocksToRegionSet);
+        this.getMethodsToRegionsInBlocks().put(methodNode, blocksToRegionSet);
       }
     }
   }
@@ -289,7 +289,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   protected void debugBlockDecisions(MethodNode methodNode, ClassNode classNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
         .get(methodNode);
 
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
@@ -467,8 +467,8 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return entryPoint;
   }
 
-  protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {
-    return methodsToDecisionsInBlocks;
+  protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToRegionsInBlocks() {
+    return methodsToRegionsInBlocks;
   }
 
   protected String getRootPackage() {

@@ -50,6 +50,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
   private final Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
+  private final Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
   private final ASMBytecodeOffsetFinder asmBytecodeOffsetFinder;
 
   public RegionTransformer(String programName, String entryPoint, String rootPackage,
@@ -485,6 +486,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   protected Map<MethodNode, SootMethod> getMethodNodeToSootMethod() {
     return methodNodeToSootMethod;
+  }
+
+  protected Set<MethodBlock> getEndRegionBlocksWithReturn() {
+    return endRegionBlocksWithReturn;
   }
 
   protected Set<SootMethod> getApplicationSootMethods() {

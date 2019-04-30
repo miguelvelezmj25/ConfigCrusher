@@ -48,7 +48,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
   private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
-  private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
   private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
   private Map<JavaRegion, Set<Set<String>>> cachedRegionsToOptionSet = new HashMap<>();
@@ -933,11 +932,11 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         ends.add(block);
 
         if (graph.getExitBlock() == end) {
-          this.endRegionBlocksWithReturn.add(block);
+          this.getEndRegionBlocksWithReturn().add(block);
         }
       }
       else if (graph.getExitBlock() == end) {
-        this.endRegionBlocksWithReturn.addAll(end.getPredecessors());
+        this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
         ends.addAll(end.getPredecessors());
       }
       else {
@@ -1478,7 +1477,4 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     return javaRegions;
   }
 
-  public Set<MethodBlock> getEndRegionBlocksWithReturn() {
-    return this.endRegionBlocksWithReturn;
-  }
 }

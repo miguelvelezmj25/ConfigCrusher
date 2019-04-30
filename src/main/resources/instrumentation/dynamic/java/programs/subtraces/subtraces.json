@@ -1,1 +1,55 @@
-[{"region":{"regionID":"6712e599-6882-4a54-91c8-9a5913bd3d21","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":3,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"fda8f263-b97c-4c7e-a162-b0bdeda73c8d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"foo(Z)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":["A","B"],"condition":["C"]}},{"region":{"regionID":"a6da9c60-7c5e-450b-ba79-62f30dfac82d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"foo(Z)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":["A","B"],"condition":["C"]}},{"region":{"regionID":"36d088c0-6fbe-4a7a-a487-1e08ddc61156","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"251ca8a2-d4a3-47de-8946-1e455fedb978","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"1cc22e72-1eda-4d8d-a6f2-a604b8fe43fe","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"cf645f48-b21d-4668-abec-337841a7b076","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"1d0864e6-6796-4a46-b57f-ec160019957a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"foo(Z)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":["A","B"],"condition":["C"]}},{"region":{"regionID":"b4045d5e-3fb5-4b07-8115-56927b4fe8b4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":-1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}},{"region":{"regionID":"b33a086d-208d-40cf-9ea2-7081d62941b2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Subtraces","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[],"condition":["A","B","C"]}}]
+[
+  {
+    "region": {
+      "regionID": "1d0864e6-6796-4a46-b57f-ec160019957a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "643565394",
+      "endBlocksIDs": [
+        "2102080209"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        "A",
+        "B"
+      ],
+      "condition": [
+        "C"
+      ]
+    }
+  },
+  {
+    "region": {
+      "regionID": "3257e5e7-151b-4566-a747-58ba1b34864c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "118186765",
+      "endBlocksIDs": [
+        "926498219"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [],
+      "condition": [
+        "A",
+        "B",
+        "C"
+      ]
+    }
+  }
+]

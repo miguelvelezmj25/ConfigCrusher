@@ -54,8 +54,201 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
     }
 
-    // TODO instrument methods
+    this.setStartAndEndBlocks(classNodes);
   }
+
+  // TODO can be pushed up
+  private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+      if (methodsToInstrument.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodToInstrument : methodsToInstrument) {
+        this.setStartAndEndBlocks(methodToInstrument);
+      }
+    }
+  }
+
+  private void setStartAndEndBlocks(MethodNode methodNode) {
+    // TODO handle special cases
+//    // Special cases
+//    this.ignoreRegionsWithoutConnectionToExit(methodNode);
+//    this.ignoreCatchWithImplicitThrow(methodNode);
+
+    ClassNode classNode = this.getMethodNodeToClassNode().get(methodNode);
+    MethodGraph graph = this.getMethodGraph(methodNode, classNode);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
+        .get(methodNode);
+
+    for (Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
+      MethodBlock block = blockToRegion.getKey();
+
+      // The entry block should be skipped
+      if (graph.getEntryBlock() == block) {
+        continue;
+      }
+
+      JavaRegion region = blockToRegion.getValue();
+
+      // Optimization
+      if (region == null) {
+        continue;
+      }
+
+      Set<MethodBlock> ends = this.setStartAndEndBlocks(graph, block, region, blocksToRegions);
+      this.removeNestedRegions(graph, block, region, ends, blocksToRegions);
+    }
+  }
+
+  // TODO can pull out
+  private void removeNestedRegions(MethodGraph graph, MethodBlock block, JavaRegion region,
+      Set<MethodBlock> ends, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    Set<MethodBlock> reachables = new HashSet<>();
+
+    for (MethodBlock end : ends) {
+      reachables.addAll(graph.getReachableBlocks(block, end));
+    }
+
+    reachables.removeAll(ends);
+    reachables.add(block);
+
+    // If the ends are connected to the exit node, we want to analyze them since we will be removing regions called within the blocks
+    Set<MethodBlock> endRegionBlocksWithReturn = this.getEndRegionBlocksWithReturn();
+
+    for (MethodBlock end : ends) {
+      if (endRegionBlocksWithReturn.contains(end)) {
+        reachables.add(end);
+      }
+    }
+
+//      this.removeRegionsInCallees(methodNode, blockDecision, reachables);
+    reachables.remove(block);
+    this.removeRegionsInMethod(this.getDecision(region), reachables, blocksToRegions);
+  }
+
+  private void removeRegionsInMethod(InfluencingTaints blockDecision, Set<MethodBlock> reachables,
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+
+    for (MethodBlock block : reachables) {
+      JavaRegion region = blocksToRegions.get(block);
+
+      // Optimization
+      if (region == null) {
+        continue;
+      }
+
+      InfluencingTaints decision = this.getDecision(region);
+
+      // TODO check when to remove a region based on influencing taints
+      if (!decision.equals(blockDecision)) {
+        continue;
+      }
+
+//      if (!(decision.equals(blockDecision) || decision.containsAll(blockDecision))) {
+//        continue;
+//      }
+
+      blocksToRegions.put(block, null);
+      this.getRegionsToData().remove(region);
+    }
+  }
+
+  private Set<MethodBlock> setStartAndEndBlocks(MethodGraph graph, MethodBlock block,
+      JavaRegion region, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    region.setStartMethodBlock(block);
+    InfluencingTaints blockDecision = this.getDecision(region);
+
+    MethodBlock ipd = graph.getImmediatePostDominator(block);
+    JavaRegion ipdRegion = blocksToRegions.get(ipd);
+    InfluencingTaints ipdDecision = this.getDecision(ipdRegion);
+
+    MethodBlock beta = graph.getExitBlock();
+
+    // TODO check when to finish looking for the next ipd
+    while (ipd != beta && blockDecision.equals(ipdDecision)) {
+      MethodBlock tmp = graph.getImmediatePostDominator(ipd);
+
+////                // Optimization
+////                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+////                    break;
+////                }
+//
+      ipd = tmp;
+      ipdRegion = blocksToRegions.get(ipd);
+      ipdDecision = this.getDecision(ipdRegion);
+    }
+
+    MethodBlock end = ipd;
+    Set<MethodBlock> ends = new HashSet<>();
+
+    if (block == end) {
+      throw new RuntimeException("Start and end equal");
+    }
+    else if (block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next()
+        .equals(end)) {
+//        ends.add(block);
+//
+//        if (graph.getExitBlock() == end) {
+//          this.endRegionBlocksWithReturn.add(block);
+//        }
+      throw new UnsupportedOperationException("What is this case?");
+    }
+    else if (beta == end) {
+      Set<MethodBlock> preds = end.getPredecessors();
+      ends.addAll(preds);
+      this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
+    }
+    else {
+      ends.add(end);
+    }
+
+    region.setEndMethodBlocks(ends);
+
+    return ends;
+  }
+
+//  private void instrument(Set<ClassNode> classNodes) throws IOException {
+//
+////
+////    for (ClassNode classNode : classNodes) {
+////      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+////
+////      if (methodsToInstrument.isEmpty()) {
+////        continue;
+////      }
+////
+//////            System.out.println("Instrumenting class " + classNode.name);
+////
+////      for (MethodNode methodToInstrument : methodsToInstrument) {
+//////                System.out.println("Instrumenting method " + methodToInstrument.name);
+////        this.transformMethod(methodToInstrument, classNode);
+////      }
+////
+////      this.getClassTransformer().writeClass(classNode);
+////
+////      // Debugging
+////      TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+////      MethodTracer tracer = classInspector.visitClass();
+////
+////      // TODO there is a bug in the pretty print since it is not showing the instructions that were added
+////      for (MethodNode methodNode : methodsToInstrument) {
+////        Printer printer = tracer
+////            .getPrinterForMethodSignature(RegionTransformer.getMethodName(methodNode));
+////        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+////        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
+////        prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
+////
+////        try {
+////          prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+////        }
+////        catch (InterruptedException e) {
+////          e.printStackTrace();
+////        }
+////      }
+//    }
+//  }
 
   private boolean propagateRegionsUpClasses() {
     boolean propagated = false;

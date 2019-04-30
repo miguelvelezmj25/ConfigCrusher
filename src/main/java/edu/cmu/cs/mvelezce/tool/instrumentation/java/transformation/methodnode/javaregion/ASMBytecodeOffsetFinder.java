@@ -13,7 +13,6 @@ import java.util.Map;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.apache.commons.lang.StringUtils;
 import soot.SootMethod;
@@ -67,17 +66,13 @@ public class ASMBytecodeOffsetFinder {
     while (instructions.hasNext()) {
       AbstractInsnNode instruction = instructions.next();
 
-      if (instruction.getOpcode() <= 0) {
+      if (instruction.getOpcode() < 0) {
         continue;
       }
 
       instructionCounter++;
 
       if (instructionCounter == instructionNumberInJavap) {
-        if (!(instruction instanceof MethodInsnNode)) {
-          throw new RuntimeException("The instruction has to be a method call");
-        }
-
         return instruction;
       }
     }

@@ -1090,7 +1090,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         }
 
         // Get caller unit
-        Unit unit = this.getUnit(inst, sootMethod);
+        Unit unit = this.getUnit(inst, this.getSootMethodToMethodNode().get(sootMethod));
 
         if (unit == null) {
           continue;
@@ -1212,58 +1212,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     }
 
     return true;
-  }
-
-  /**
-   * TODO
-   */
-  private Unit getUnit(AbstractInsnNode inst, SootMethod sootMethod) {
-    Unit match = null;
-
-    for (Unit unit : sootMethod.getActiveBody().getUnits()) {
-      List<Integer> bytecodeIndexes = new ArrayList<>();
-
-      for (Tag tag : unit.getTags()) {
-        if (tag instanceof BytecodeOffsetTag) {
-          int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
-          bytecodeIndexes.add(bytecodeIndex);
-        }
-      }
-
-      if (bytecodeIndexes.isEmpty()) {
-        continue;
-      }
-
-      int bytecodeIndex;
-
-      if (bytecodeIndexes.size() == 1) {
-        bytecodeIndex = bytecodeIndexes.get(0);
-      }
-      else {
-        int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
-        bytecodeIndex = bytecodeIndexes.get(index);
-      }
-
-      AbstractInsnNode asmInst = this.getAsmBytecodeOffsetFinder()
-          .getASMInstruction(this.getMethodNode(sootMethod), sootMethod, bytecodeIndex);
-
-      if (inst != asmInst) {
-        continue;
-      }
-
-      match = unit;
-      break;
-    }
-
-    if (match == null && inst instanceof MethodInsnNode) {
-      throw new RuntimeException("There has to be a instruction that calls a method");
-    }
-
-//        if(match == null) {
-//            throw new RuntimeException("Could not find the instruction in this method");
-//        }
-
-    return match;
   }
 
   public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph,

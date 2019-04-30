@@ -22,6 +22,7 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootMethod;
+import soot.Unit;
 import soot.jimple.toolkits.callgraph.Edge;
 
 // TODO have an method expander class and a method propagator class
@@ -99,13 +100,14 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       }
 
       Set<MethodBlock> ends = this.setStartAndEndBlocks(graph, block, region, blocksToRegions);
-      this.removeNestedRegions(graph, block, region, ends, blocksToRegions);
+      this.removeNestedRegions(graph, block, region, ends, blocksToRegions, methodNode);
     }
   }
 
   // TODO can pull out
   private void removeNestedRegions(MethodGraph graph, MethodBlock block, JavaRegion region,
-      Set<MethodBlock> ends, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+      Set<MethodBlock> ends, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
+      MethodNode methodNode) {
     Set<MethodBlock> reachables = new HashSet<>();
 
     for (MethodBlock end : ends) {
@@ -126,7 +128,7 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 
     InfluencingTaints blockDecision = this.getDecision(region);
 
-    this.removeRegionsInCallees(blockDecision, reachables);
+    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
     reachables.remove(block);
     this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
   }
@@ -134,7 +136,8 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
   /**
    * TODO ignore specia blocks like catch with implicit throw
    */
-  private void removeRegionsInCallees(InfluencingTaints decision, Set<MethodBlock> reachables) {
+  private void removeRegionsInCallees(InfluencingTaints decision, Set<MethodBlock> reachables,
+      MethodNode methodNode) {
 //    Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
 //    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
 //
@@ -152,13 +155,18 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 //      sootMethod = blocksToMethods.get(reach);
 //      analyzedCallees.add(sootMethod);
 
-      Set<AbstractInsnNode> insns = this.getInsnThatCallMethods(reach);
+      Set<AbstractInsnNode> insnNodes = this.getInsnThatCallMethods(reach);
 
-      if(insns.isEmpty()) {
+      if (insnNodes.isEmpty()) {
         continue;
       }
 
-      System.out.println();
+      Set<Unit> callingUnits = this.getCallingUnits(insnNodes, methodNode);
+
+      if (callingUnits.isEmpty() || insnNodes.size() != callingUnits.size()) {
+        throw new RuntimeException("Could not find all calling units");
+      }
+
 //
 //      for (AbstractInsnNode inst : reach.getInstructions()) {
 ////

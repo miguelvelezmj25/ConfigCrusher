@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseM
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,8 +32,11 @@ import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.MethodOrMethodContext;
 import soot.SootMethod;
+import soot.Unit;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
+import soot.tagkit.BytecodeOffsetTag;
+import soot.tagkit.Tag;
 import soot.util.queue.QueueReader;
 
 public abstract class RegionTransformer<T> extends BaseMethodTransformer {
@@ -547,5 +551,66 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
 
     return insnNodes;
+  }
+
+  protected Set<Unit> getCallingUnits(Set<AbstractInsnNode> insnNodes, MethodNode methodNode) {
+    Set<Unit> callingUnits = new HashSet<>();
+
+    for (AbstractInsnNode insnNode : insnNodes) {
+      callingUnits.add(this.getUnit(insnNode, methodNode));
+    }
+
+    return callingUnits;
+  }
+
+  // TODO probably it should not be protected since we want to abstract behavior
+  protected Unit getUnit(AbstractInsnNode inst, MethodNode methodNode) {
+    Unit match = null;
+    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
+
+    for (Unit unit : sootMethod.getActiveBody().getUnits()) {
+      List<Integer> bytecodeIndexes = new ArrayList<>();
+
+      for (Tag tag : unit.getTags()) {
+        if (tag instanceof BytecodeOffsetTag) {
+          int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
+          bytecodeIndexes.add(bytecodeIndex);
+        }
+      }
+
+      if (bytecodeIndexes.isEmpty()) {
+        continue;
+      }
+
+      int bytecodeIndex;
+
+      if (bytecodeIndexes.size() == 1) {
+        bytecodeIndex = bytecodeIndexes.get(0);
+      }
+      else {
+        int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
+        bytecodeIndex = bytecodeIndexes.get(index);
+      }
+
+      AbstractInsnNode asmInst = this.getAsmBytecodeOffsetFinder()
+          .getASMInstruction(methodNode, sootMethod, bytecodeIndex);
+
+      if (inst != asmInst) {
+        continue;
+      }
+
+      match = unit;
+      break;
+    }
+
+//    if (match == null && inst instanceof MethodInsnNode) {
+//      throw new RuntimeException("There has to be a instruction that calls a method");
+//    }
+
+    if(match == null) {
+      throw new RuntimeException("There was no match");
+    }
+
+    return match;
   }
 }

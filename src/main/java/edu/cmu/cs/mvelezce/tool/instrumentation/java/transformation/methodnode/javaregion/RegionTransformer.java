@@ -25,6 +25,7 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.InvokeDynamicInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -519,5 +520,32 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
 
     return regionsInClass;
+  }
+
+  protected Set<AbstractInsnNode> getInsnThatCallMethods(MethodBlock reach) {
+    Set<AbstractInsnNode> insnNodes = new HashSet<>();
+
+    for (AbstractInsnNode inst : reach.getInstructions()) {
+      // Optimization
+      int opcode = inst.getOpcode();
+
+      if (opcode < 0) {
+        continue;
+      }
+
+      if (opcode < Opcodes.INVOKEVIRTUAL || opcode > Opcodes.INVOKEDYNAMIC) {
+        if (inst instanceof InvokeDynamicInsnNode || inst instanceof MethodInsnNode) {
+          throw new RuntimeException(
+              "We want to find instructions that are calling methods. The instruction " + opcode
+                  + " is of type " + inst.getClass());
+        }
+
+        continue;
+      }
+
+      insnNodes.add(inst);
+    }
+
+    return insnNodes;
   }
 }

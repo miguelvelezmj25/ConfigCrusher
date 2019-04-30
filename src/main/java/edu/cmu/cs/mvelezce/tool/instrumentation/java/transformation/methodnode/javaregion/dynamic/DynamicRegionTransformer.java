@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootMethod;
@@ -123,9 +124,132 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       }
     }
 
-//      this.removeRegionsInCallees(methodNode, blockDecision, reachables);
+    InfluencingTaints blockDecision = this.getDecision(region);
+
+    this.removeRegionsInCallees(blockDecision, reachables);
     reachables.remove(block);
-    this.removeRegionsInMethod(this.getDecision(region), reachables, blocksToRegions);
+    this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
+  }
+
+  /**
+   * TODO ignore specia blocks like catch with implicit throw
+   */
+  private void removeRegionsInCallees(InfluencingTaints decision, Set<MethodBlock> reachables) {
+//    Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
+//    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
+//
+//    for (MethodBlock block : reachables) {
+//      blocksToMethods.put(block, sootMethod);
+//    }
+//
+//    Set<SootMethod> analyzedCallees = new HashSet<>();
+    List<MethodBlock> worklist = new ArrayList<>();
+    worklist.addAll(reachables);
+    // TODO maybe do not add methods that have already been analyzed or a re already in the worklist
+
+    while (!worklist.isEmpty()) {
+      MethodBlock reach = worklist.remove(0);
+//      sootMethod = blocksToMethods.get(reach);
+//      analyzedCallees.add(sootMethod);
+
+      Set<AbstractInsnNode> insns = this.getInsnThatCallMethods(reach);
+
+      if(insns.isEmpty()) {
+        continue;
+      }
+
+      System.out.println();
+//
+//      for (AbstractInsnNode inst : reach.getInstructions()) {
+////
+////        // Get caller unit
+////        Unit unit = this.getUnit(inst, sootMethod);
+////
+////        if (unit == null) {
+////          continue;
+////        }
+////
+////        List<Edge> calleeEdges = this.getCalleeEdges(unit);
+////
+////        for (Edge edge : calleeEdges) {
+////          SootMethod calleeSootMethod = edge.tgt();
+////
+////          if (analyzedCallees.contains(calleeSootMethod)) {
+////            continue;
+////          }
+////
+////          if (calleeSootMethod.getDeclaringClass().getName().contains("Turn")) {
+//////                        this.debugBlockDecisions(ca);
+////            System.out.println();
+////          }
+////
+////          List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+////
+//////                    if(callerEdges.size() > 1) {
+////          boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
+////
+////          if (!canRemove) {
+////            continue;
+////          }
+//////                    }
+////
+////          MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
+////
+////          LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
+////              .getMethodsToRegionsInBlocks()
+////              .get(calleeMethodNode);
+////
+////          if (calleeBlocksToRegions == null) {
+////            // TODO fix this by changing the package name
+////            continue;
+////          }
+////
+////          Set<MethodBlock> skip = new HashSet<>();
+////
+////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+////            if (skip.contains(entry.getKey())) {
+////              continue;
+////            }
+////
+////            JavaRegion calleeRegion = entry.getValue();
+////
+////            // Optimization
+////            if (calleeRegion == null) {
+////              continue;
+////            }
+////
+////            Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
+////
+////            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
+////              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
+////              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
+////              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
+////              rs.remove(ipd);
+////              skip.addAll(rs);
+////              continue;
+////            }
+////
+////            this.debugBlocksAndRegions(calleeMethodNode);
+////            this.debugBlockDecisions(calleeMethodNode);
+////
+////            this.getRegionsToData().remove(calleeRegion);
+////            calleeBlocksToRegions.put(entry.getKey(), null);
+////
+////            this.debugBlocksAndRegions(calleeMethodNode);
+////            this.debugBlockDecisions(calleeMethodNode);
+////          }
+////
+////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+////            if (skip.contains(entry.getKey())) {
+////              continue;
+////            }
+////
+////            worklist.add(0, entry.getKey());
+////            blocksToMethods.put(entry.getKey(), calleeSootMethod);
+////          }
+////        }
+//      }
+    }
   }
 
   private void removeRegionsInMethod(InfluencingTaints blockDecision, Set<MethodBlock> reachables,
@@ -145,10 +269,6 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       if (!decision.equals(blockDecision)) {
         continue;
       }
-
-//      if (!(decision.equals(blockDecision) || decision.containsAll(blockDecision))) {
-//        continue;
-//      }
 
       blocksToRegions.put(block, null);
       this.getRegionsToData().remove(region);

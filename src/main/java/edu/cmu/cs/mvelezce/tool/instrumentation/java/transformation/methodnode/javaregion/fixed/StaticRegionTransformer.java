@@ -1330,91 +1330,46 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private List<Edge> getCalleeEdges(SootMethod method) {
-    Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(method);
-    Set<SootMethod> analyzedMethods = new HashSet<>();
-    List<Edge> worklist = new ArrayList<>();
-
-    while (outEdges.hasNext()) {
-      worklist.add(outEdges.next());
-    }
-
-    List<Edge> callerEdges = new ArrayList<>();
-
-    while (!worklist.isEmpty()) {
-      Edge edge = worklist.remove(0);
-      SootMethod tgt = edge.tgt();
-      SootMethod src = edge.src();
-      analyzedMethods.add(src);
-
-      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
-        Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
-        List<Edge> moreEdges = new ArrayList<>();
-
-        while (edges.hasNext()) {
-          Edge nextEdge = edges.next();
-
-          if (analyzedMethods.contains(nextEdge.tgt())) {
-            continue;
-          }
-
-          moreEdges.add(nextEdge);
-        }
-
-        int index = Math.max(0, worklist.size() - 1);
-        worklist.addAll(index, moreEdges);
-      }
-      else {
-        callerEdges.add(edge);
-      }
-    }
-
-    return callerEdges;
-  }
-
-
-  /**
-   * TODO
-   */
-  private List<Edge> getCalleeEdges(Unit unit) {
-    Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(unit);
-    Set<SootMethod> analyzedMethods = new HashSet<>();
-    List<Edge> worklist = new ArrayList<>();
-
-    while (outEdges.hasNext()) {
-      worklist.add(outEdges.next());
-    }
-
-    List<Edge> callerEdges = new ArrayList<>();
-
-    while (!worklist.isEmpty()) {
-      Edge edge = worklist.remove(0);
-      SootMethod tgt = edge.tgt();
-      SootMethod src = edge.src();
-      analyzedMethods.add(src);
-
-      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
-        Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
-        List<Edge> moreEdges = new ArrayList<>();
-
-        while (edges.hasNext()) {
-          Edge nextEdge = edges.next();
-
-          if (analyzedMethods.contains(nextEdge.tgt())) {
-            continue;
-          }
-
-          moreEdges.add(nextEdge);
-        }
-
-        int index = Math.max(0, worklist.size() - 1);
-        worklist.addAll(index, moreEdges);
-      }
-      else {
-        callerEdges.add(edge);
-      }
-    }
-
-    return callerEdges;
+    throw new UnsupportedOperationException("Should not be called");
+//    Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(method);
+//    Set<SootMethod> analyzedMethods = new HashSet<>();
+//    List<Edge> worklist = new ArrayList<>();
+//
+//    while (outEdges.hasNext()) {
+//      worklist.add(outEdges.next());
+//    }
+//
+//    List<Edge> callerEdges = new ArrayList<>();
+//
+//    while (!worklist.isEmpty()) {
+//      Edge edge = worklist.remove(0);
+//      SootMethod tgt = edge.tgt();
+//      SootMethod src = edge.src();
+//      analyzedMethods.add(src);
+//
+//      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
+//        Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
+//        List<Edge> moreEdges = new ArrayList<>();
+//
+//        while (edges.hasNext()) {
+//          Edge nextEdge = edges.next();
+//
+//          if (analyzedMethods.contains(nextEdge.tgt())) {
+//            continue;
+//          }
+//
+//          moreEdges.add(nextEdge);
+//        }
+//
+//        int index = Math.max(0, worklist.size() - 1);
+//        worklist.addAll(index, moreEdges);
+//      }
+//      else {
+//        callerEdges.add(edge);
+//      }
+//    }
+//
+//    return callerEdges;
   }
 
   protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {

@@ -167,96 +167,89 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
         throw new RuntimeException("Could not find all calling units");
       }
 
+      Set<Edge> calleeEdges = this.getCalleeEdges(callingUnits);
+
+      if (calleeEdges.isEmpty()) {
+        continue;
+      }
+
+//        for (Edge edge : calleeEdges) {
+//          SootMethod calleeSootMethod = edge.tgt();
 //
-//      for (AbstractInsnNode inst : reach.getInstructions()) {
-////
-////        // Get caller unit
-////        Unit unit = this.getUnit(inst, sootMethod);
-////
-////        if (unit == null) {
-////          continue;
-////        }
-////
-////        List<Edge> calleeEdges = this.getCalleeEdges(unit);
-////
-////        for (Edge edge : calleeEdges) {
-////          SootMethod calleeSootMethod = edge.tgt();
-////
-////          if (analyzedCallees.contains(calleeSootMethod)) {
-////            continue;
-////          }
-////
-////          if (calleeSootMethod.getDeclaringClass().getName().contains("Turn")) {
-//////                        this.debugBlockDecisions(ca);
-////            System.out.println();
-////          }
-////
-////          List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
-////
-//////                    if(callerEdges.size() > 1) {
-////          boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
-////
-////          if (!canRemove) {
-////            continue;
-////          }
-//////                    }
-////
-////          MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
-////
-////          LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
-////              .getMethodsToRegionsInBlocks()
-////              .get(calleeMethodNode);
-////
-////          if (calleeBlocksToRegions == null) {
-////            // TODO fix this by changing the package name
-////            continue;
-////          }
-////
-////          Set<MethodBlock> skip = new HashSet<>();
-////
-////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-////            if (skip.contains(entry.getKey())) {
-////              continue;
-////            }
-////
-////            JavaRegion calleeRegion = entry.getValue();
-////
-////            // Optimization
-////            if (calleeRegion == null) {
-////              continue;
-////            }
-////
-////            Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
-////
-////            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
-////              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
-////              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
-////              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
-////              rs.remove(ipd);
-////              skip.addAll(rs);
-////              continue;
-////            }
-////
-////            this.debugBlocksAndRegions(calleeMethodNode);
-////            this.debugBlockDecisions(calleeMethodNode);
-////
-////            this.getRegionsToData().remove(calleeRegion);
-////            calleeBlocksToRegions.put(entry.getKey(), null);
-////
-////            this.debugBlocksAndRegions(calleeMethodNode);
-////            this.debugBlockDecisions(calleeMethodNode);
-////          }
-////
-////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-////            if (skip.contains(entry.getKey())) {
-////              continue;
-////            }
-////
-////            worklist.add(0, entry.getKey());
-////            blocksToMethods.put(entry.getKey(), calleeSootMethod);
-////          }
-////        }
-//      }
+//          if (analyzedCallees.contains(calleeSootMethod)) {
+//            continue;
+//          }
+//
+//          if (calleeSootMethod.getDeclaringClass().getName().contains("Turn")) {
+////                        this.debugBlockDecisions(ca);
+//            System.out.println();
+//          }
+//
+//          List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+//
+////                    if(callerEdges.size() > 1) {
+//          boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
+//
+//          if (!canRemove) {
+//            continue;
+//          }
+////                    }
+//
+//          MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
+//
+//          LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
+//              .getMethodsToRegionsInBlocks()
+//              .get(calleeMethodNode);
+//
+//          if (calleeBlocksToRegions == null) {
+//            // TODO fix this by changing the package name
+//            continue;
+//          }
+//
+//          Set<MethodBlock> skip = new HashSet<>();
+//
+//          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+//            if (skip.contains(entry.getKey())) {
+//              continue;
+//            }
+//
+//            JavaRegion calleeRegion = entry.getValue();
+//
+//            // Optimization
+//            if (calleeRegion == null) {
+//              continue;
+//            }
+//
+//            Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
+//
+//            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
+//              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
+//              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
+//              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
+//              rs.remove(ipd);
+//              skip.addAll(rs);
+//              continue;
+//            }
+//
+//            this.debugBlocksAndRegions(calleeMethodNode);
+//            this.debugBlockDecisions(calleeMethodNode);
+//
+//            this.getRegionsToData().remove(calleeRegion);
+//            calleeBlocksToRegions.put(entry.getKey(), null);
+//
+//            this.debugBlocksAndRegions(calleeMethodNode);
+//            this.debugBlockDecisions(calleeMethodNode);
+//          }
+//
+//          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+//            if (skip.contains(entry.getKey())) {
+//              continue;
+//            }
+//
+//            worklist.add(0, entry.getKey());
+//            blocksToMethods.put(entry.getKey(), calleeSootMethod);
+//          }
+//        }
     }
   }
 

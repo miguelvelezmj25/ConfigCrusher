@@ -607,10 +607,64 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 //      throw new RuntimeException("There has to be a instruction that calls a method");
 //    }
 
-    if(match == null) {
+    if (match == null) {
       throw new RuntimeException("There was no match");
     }
 
     return match;
+  }
+
+  protected Set<Edge> getCalleeEdges(Set<Unit> callingUnits) {
+    Set<Edge> edges = new HashSet<>();
+
+    for (Unit unit : callingUnits) {
+      edges.addAll(this.getCalleeEdges(unit));
+    }
+
+    return edges;
+  }
+
+  // TODO probably it should not be protected since we want to abstract behavior
+  protected List<Edge> getCalleeEdges(Unit unit) {
+    Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(unit);
+    Set<SootMethod> methodsAnalyzed = new HashSet<>();
+    List<Edge> worklist = new ArrayList<>();
+
+    while (outEdges.hasNext()) {
+      worklist.add(outEdges.next());
+    }
+
+    List<Edge> calleeEdges = new ArrayList<>();
+
+    while (!worklist.isEmpty()) {
+      Edge edge = worklist.remove(0);
+      SootMethod tgt = edge.tgt();
+      SootMethod src = edge.src();
+
+      methodsAnalyzed.add(src);
+
+      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
+        Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
+        List<Edge> moreEdges = new ArrayList<>();
+
+        while (edges.hasNext()) {
+          Edge nextEdge = edges.next();
+
+          if (methodsAnalyzed.contains(nextEdge.tgt())) {
+            continue;
+          }
+
+          moreEdges.add(nextEdge);
+        }
+
+        int index = Math.max(0, worklist.size() - 1);
+        worklist.addAll(index, moreEdges);
+      }
+      else {
+        calleeEdges.add(edge);
+      }
+    }
+
+    return calleeEdges;
   }
 }

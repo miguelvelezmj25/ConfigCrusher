@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
@@ -32,17 +31,15 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.toolkits.callgraph.Edge;
-import soot.tagkit.BytecodeOffsetTag;
-import soot.tagkit.Tag;
 
-public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<String>>> {
+public abstract class StaticRegionTransformer extends
+    RegionTransformer<Set<Set<String>>, Set<String>> {
 
   private static final String CLINIT_SIGNATURE = "void <clinit>()";
 
@@ -1113,7 +1110,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
           List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
 
 //                    if(callerEdges.size() > 1) {
-          boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
+          boolean canRemove = this.canRemoveNestedRegions(decision, callerEdges);
 
           if (!canRemove) {
             continue;
@@ -1179,7 +1176,8 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     }
   }
 
-  private boolean checkIfCanRemove(Set<String> decision, List<Edge> callerEdges) {
+  @Override
+  protected boolean canRemoveNestedRegions(Set<String> decision, List<Edge> callerEdges) {
     Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
     Set<Edge> analyzed = new HashSet<>();
 

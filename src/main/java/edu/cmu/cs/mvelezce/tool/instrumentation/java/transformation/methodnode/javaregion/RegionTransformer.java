@@ -39,7 +39,7 @@ import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
 import soot.util.queue.QueueReader;
 
-public abstract class RegionTransformer<T> extends BaseMethodTransformer {
+public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
 
   public static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
 
@@ -77,6 +77,8 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   protected abstract T getDecision(@Nullable JavaRegion javaRegion);
+
+  protected abstract boolean canRemoveNestedRegions(S decision, List<Edge> callerEdges);
 
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
@@ -666,5 +668,25 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
 
     return calleeEdges;
+  }
+
+  protected void removeNestedRegions(Set<Edge> calleeEdges, S decision) {
+    for (Edge edge : calleeEdges) {
+      SootMethod calleeSootMethod = edge.tgt();
+//
+//          if (analyzedCallees.contains(calleeSootMethod)) {
+//            continue;
+//          }
+//
+
+      List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+      boolean canRemove = this.canRemoveNestedRegions(decision, callerEdges);
+
+      if (!canRemove) {
+        continue;
+      }
+
+      System.out.println();
+    }
   }
 }

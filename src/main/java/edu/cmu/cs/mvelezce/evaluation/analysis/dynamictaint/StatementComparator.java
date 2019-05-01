@@ -44,50 +44,106 @@ public class StatementComparator {
     Set<CFStatement> overlappingStatements = getOverlappingStatements(controlFlowInfos1,
         controlFlowInfos2);
 
-    Map<CFStatement, InfluencingTaints> statementsToInfluencingTaints1 = matchStatementsToInfluencingTaints(
+    Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints1 = matchStatementsToInfluencingTaints(
         overlappingStatements, controlFlowInfos1);
-    Map<CFStatement, InfluencingTaints> statementsToInfluencingTaints2 = matchStatementsToInfluencingTaints(
+    Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints2 = matchStatementsToInfluencingTaints(
         overlappingStatements, controlFlowInfos2);
 
-    for (Map.Entry<CFStatement, InfluencingTaints> entry : statementsToInfluencingTaints1
+    for (Map.Entry<CFStatement, Set<InfluencingTaints>> entry : statementsToInfluencingTaints1
         .entrySet()) {
       CFStatement statement = entry.getKey();
 
-      InfluencingTaints influencingTaints1 = entry.getValue();
-      InfluencingTaints influencingTaints2 = statementsToInfluencingTaints2.get(statement);
+      Set<InfluencingTaints> influencingTaints1 = entry.getValue();
+      Set<InfluencingTaints> influencingTaints2 = statementsToInfluencingTaints2.get(statement);
 
-      if (!influencingTaints1.equals(influencingTaints2)) {
-        System.out.println(influencingTaints1 + " --- " + influencingTaints2);
-      }
+      printInfo(statement, influencingTaints1, influencingTaints2);
     }
-
-    System.out.println(statementsToInfluencingTaints1.equals(statementsToInfluencingTaints2));
+//
+//    System.out.println(statementsToInfluencingTaints1.equals(statementsToInfluencingTaints2));
   }
 
-  private static Map<CFStatement, InfluencingTaints> matchStatementsToInfluencingTaints(
-      Set<CFStatement> statements,
+  private static void printInfo(CFStatement statement, Set<InfluencingTaints> influencingTaints1,
+      Set<InfluencingTaints> influencingTaints2) {
+    if (!influencingTaints1.equals(influencingTaints2)) {
+      System.out.println(statement);
+
+      printMissingTaintsInSmallerWorkload(influencingTaints1, influencingTaints2);
+      printMissingTaintsInLargerWorkload(influencingTaints1, influencingTaints2);
+
+      System.out.println();
+    }
+  }
+
+  private static void printMissingTaintsInLargerWorkload(Set<InfluencingTaints> influencingTaints1,
+      Set<InfluencingTaints> influencingTaints2) {
+    Set<InfluencingTaints> extraTaints = new HashSet<>(influencingTaints1);
+    extraTaints.removeAll(influencingTaints2);
+
+    if (extraTaints.isEmpty()) {
+      return;
+    }
+
+    System.out.println("Missing taints in larger workload");
+
+    for (InfluencingTaints influencingTaints : extraTaints) {
+      System.out.println(influencingTaints);
+    }
+  }
+
+  private static void printMissingTaintsInSmallerWorkload(Set<InfluencingTaints> influencingTaints1,
+      Set<InfluencingTaints> influencingTaints2) {
+    Set<InfluencingTaints> extraTaints = new HashSet<>(influencingTaints2);
+    extraTaints.removeAll(influencingTaints1);
+
+    if (extraTaints.isEmpty()) {
+      return;
+    }
+
+    System.out.println("Missing taints in smaller workload");
+
+    for (InfluencingTaints influencingTaints : extraTaints) {
+      System.out.println(influencingTaints);
+    }
+  }
+
+  private static Map<CFStatement, Set<InfluencingTaints>> matchStatementsToInfluencingTaints(
+      Set<CFStatement> overlappingStatements, Set<PhosphorControlFlowInfo> controlFlowInfos) {
+    Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints = new HashMap<>();
+    addCFGStatements(statementsToInfluencingTaints, controlFlowInfos, overlappingStatements);
+    addInfluencingTaints(statementsToInfluencingTaints, controlFlowInfos);
+
+    return statementsToInfluencingTaints;
+  }
+
+  private static void addInfluencingTaints(
+      Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints,
       Set<PhosphorControlFlowInfo> controlFlowInfos) {
-    Map<CFStatement, InfluencingTaints> statementsToInfluencingTaints = new HashMap<>();
+    for (PhosphorControlFlowInfo controlFlowInfo : controlFlowInfos) {
+      CFStatement cfgStatement = buildCFStatement(controlFlowInfo);
+
+      if (!statementsToInfluencingTaints.containsKey(cfgStatement)) {
+        continue;
+      }
+
+      statementsToInfluencingTaints.get(cfgStatement)
+          .addAll(controlFlowInfo.getInfluencingTaints());
+    }
+  }
+
+  private static void addCFGStatements(
+      Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints,
+      Set<PhosphorControlFlowInfo> controlFlowInfos,
+      Set<CFStatement> overlappingStatements) {
 
     for (PhosphorControlFlowInfo controlFlowInfo : controlFlowInfos) {
       CFStatement cfgStatement = buildCFStatement(controlFlowInfo);
 
-      if (!statements.contains(cfgStatement)) {
+      if (!overlappingStatements.contains(cfgStatement)) {
         continue;
       }
 
-      Set<String> context = new HashSet<>();
-      Set<String> condition = new HashSet<>();
-
-      for (InfluencingTaints influencingTaints : controlFlowInfo.getInfluencingTaints()) {
-        context.addAll(influencingTaints.getContext());
-        condition.addAll(influencingTaints.getCondition());
-      }
-
-      statementsToInfluencingTaints.put(cfgStatement, new InfluencingTaints(context, condition));
+      statementsToInfluencingTaints.put(cfgStatement, new HashSet<>());
     }
-
-    return statementsToInfluencingTaints;
   }
 
   private static Set<CFStatement> getOverlappingStatements(

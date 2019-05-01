@@ -46,4 +46,9 @@ public class CFStatement {
     result = 31 * result + index;
     return result;
   }
+
+  @Override
+  public String toString() {
+    return packageName + "." + className + "." + methodSignature + "." + index;
+  }
 }

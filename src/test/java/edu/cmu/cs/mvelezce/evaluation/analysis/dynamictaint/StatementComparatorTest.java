@@ -27,6 +27,12 @@ public class StatementComparatorTest {
     StatementComparator.compareOverlapping(controlFlowInfos1, controlFlowInfos2);
   }
 
+  // TODO explore missing statements
+//  private static void compareOverlappingStatements(Set<PhosphorControlFlowInfo> controlFlowInfos1,
+//      Set<PhosphorControlFlowInfo> controlFlowInfos2) {
+//    StatementComparator.compareOverlapping(controlFlowInfos1, controlFlowInfos2);
+//  }
+
   @Test
   public void measureDiskOrderedScan() throws IOException {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;

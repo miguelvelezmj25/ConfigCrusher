@@ -23,6 +23,8 @@ public class PhosphorConstraintCalculator {
       constraints.addAll(deriveConstraints(decisionTaints, config));
     }
 
+    constraints.removeIf(configConstraint -> configConstraint.getPartialConfig().isEmpty());
+
     return constraints;
   }
 

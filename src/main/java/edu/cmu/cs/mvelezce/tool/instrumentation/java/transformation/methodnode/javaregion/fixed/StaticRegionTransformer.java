@@ -49,6 +49,11 @@ public abstract class StaticRegionTransformer extends
   private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
   private Map<JavaRegion, Set<Set<String>>> cachedRegionsToOptionSet = new HashMap<>();
 
+  protected Set<MethodBlock> removeNestedRegions(Set<String> decision,
+      SootMethod calleeSootMethod) {
+    throw new UnsupportedOperationException("Do not call");
+  }
+
   // TODO delete programName
   public StaticRegionTransformer(String programName, String entryPoint,
       ClassTransformer classTransformer,

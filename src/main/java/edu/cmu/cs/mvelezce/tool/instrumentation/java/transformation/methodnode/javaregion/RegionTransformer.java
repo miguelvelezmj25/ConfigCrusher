@@ -80,6 +80,8 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
 
   protected abstract boolean canRemoveNestedRegions(S decision, List<Edge> callerEdges);
 
+  protected abstract Set<MethodBlock> removeNestedRegions(S decision, SootMethod calleeSootMethod);
+
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     this.matchMethodNodesToClassNodes(classNodes);
@@ -670,7 +672,9 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     return calleeEdges;
   }
 
-  protected void removeNestedRegions(Set<Edge> calleeEdges, S decision) {
+  protected Set<MethodBlock> removeNestedRegions(Set<Edge> calleeEdges, S decision) {
+    Set<MethodBlock> modifiedCalleeBlocks = new HashSet<>();
+
     for (Edge edge : calleeEdges) {
       SootMethod calleeSootMethod = edge.tgt();
 //
@@ -679,14 +683,19 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
 //          }
 //
 
-      List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
-      boolean canRemove = this.canRemoveNestedRegions(decision, callerEdges);
+      // TODO really needed ?
+//      List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+//      boolean canRemove = this.canRemoveNestedRegions(decision, callerEdges);
+//
+//      if (!canRemove) {
+//        continue;
+//      }
 
-      if (!canRemove) {
-        continue;
-      }
-
-      System.out.println();
+      Set<MethodBlock> modifiedMethodBlocks = this.removeNestedRegions(decision, calleeSootMethod);
+      modifiedCalleeBlocks.addAll(modifiedMethodBlocks);
     }
+
+    return modifiedCalleeBlocks;
   }
+
 }

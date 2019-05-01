@@ -42,19 +42,23 @@ public class ASMBytecodeOffsetFinder {
 
   public AbstractInsnNode getASMInstruction(MethodNode methodNode, SootMethod sootMethod,
       int bytecodeIndex) {
-    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-    String methodDeclaration = sootMethod.getDeclaration() + ";";
-    int javapStartIndexOfMethod = 0;
+    // TODO cannot find constructors. Look at how it was done previously
 
-    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
-      javapStartIndexOfMethod++;
-    }
-
-    javapStartIndexOfMethod += +3;
-    int instructionNumberInJavap = this
-        .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
-
-    return this.getInsnInMethodNode(methodNode, instructionNumberInJavap);
+    throw new UnsupportedOperationException(
+        "This implementation cannot find constructors. Find how it was done previously");
+//    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
+//    String methodDeclaration = sootMethod.getDeclaration() + ";";
+//    int javapStartIndexOfMethod = 0;
+//
+//    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
+//      javapStartIndexOfMethod++;
+//    }
+//
+//    javapStartIndexOfMethod += +3;
+//    int instructionNumberInJavap = this
+//        .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
+//
+//    return this.getInsnInMethodNode(methodNode, instructionNumberInJavap);
   }
 
   private AbstractInsnNode getInsnInMethodNode(MethodNode methodNode,

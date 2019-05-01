@@ -1,7 +1,8 @@
-package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint;
+package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.workload;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.Comparator;
 import edu.cmu.cs.mvelezce.tool.analysis.region.CFStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
@@ -65,7 +66,8 @@ public class StatementComparator {
       Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints)
       throws FileNotFoundException {
     File outputFile = new File(
-        Comparator.BASE_DIR + this.programName + MISSING_DIR + "missing-influences.txt");
+        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + MISSING_DIR
+            + "missing-influences.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -86,7 +88,8 @@ public class StatementComparator {
     Collections.sort(sortedAllStatementStrings);
 
     File outputFile = new File(
-        Comparator.BASE_DIR + this.programName + MISSING_DIR + "missing.txt");
+        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + MISSING_DIR
+            + "missing.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -157,7 +160,8 @@ public class StatementComparator {
       Map<CFStatement, Set<InfluencingTaints>> largeStatementsToInfluencingTaints)
       throws FileNotFoundException {
     File outputFile = new File(
-        Comparator.BASE_DIR + this.programName + OVERLAPPING_DIR + "overlapping.txt");
+        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + OVERLAPPING_DIR
+            + "overlapping.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -279,7 +283,8 @@ public class StatementComparator {
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    File file = new File(Comparator.BASE_DIR + this.programName + DATA_DIR + fileName);
+    File file = new File(
+        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + DATA_DIR + fileName);
 
     return mapper
         .readValue(file, new TypeReference<Set<PhosphorControlFlowInfo>>() {

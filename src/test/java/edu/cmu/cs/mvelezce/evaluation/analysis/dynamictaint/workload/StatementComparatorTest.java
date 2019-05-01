@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint;
+package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.workload;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;

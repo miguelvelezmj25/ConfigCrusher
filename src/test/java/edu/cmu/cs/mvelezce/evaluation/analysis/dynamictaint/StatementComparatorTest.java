@@ -22,16 +22,15 @@ public class StatementComparatorTest {
     return StatementComparator.readFromFile(programName, mediumFileName);
   }
 
-  private static void compareOverlappingStatements(Set<PhosphorControlFlowInfo> controlFlowInfos1,
-      Set<PhosphorControlFlowInfo> controlFlowInfos2) {
-    StatementComparator.compareOverlapping(controlFlowInfos1, controlFlowInfos2);
+  private static void compareOverlappingStatements(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
+      Set<PhosphorControlFlowInfo> largeControlFlowInfos) {
+    StatementComparator.compareOverlapping(smallControlFlowInfos, largeControlFlowInfos);
   }
 
-  // TODO explore missing statements
-//  private static void compareOverlappingStatements(Set<PhosphorControlFlowInfo> controlFlowInfos1,
-//      Set<PhosphorControlFlowInfo> controlFlowInfos2) {
-//    StatementComparator.compareOverlapping(controlFlowInfos1, controlFlowInfos2);
-//  }
+  private static void compareMissingStatements(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
+      Set<PhosphorControlFlowInfo> largeControlFlowInfos) {
+    StatementComparator.compareMissing(smallControlFlowInfos, largeControlFlowInfos);
+  }
 
   @Test
   public void measureDiskOrderedScan() throws IOException {
@@ -40,5 +39,7 @@ public class StatementComparatorTest {
     Set<PhosphorControlFlowInfo> smallControlFlowInfos = getSmallControlFlowInfos(programName);
 
     compareOverlappingStatements(smallControlFlowInfos, mediumControlFlowInfos);
+//    compareProcessedOverlappingStatements(smallControlFlowInfos, mediumControlFlowInfos);
+    compareMissingStatements(smallControlFlowInfos, mediumControlFlowInfos);
   }
 }

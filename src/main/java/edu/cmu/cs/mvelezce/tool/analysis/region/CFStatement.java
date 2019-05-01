@@ -14,6 +14,22 @@ public class CFStatement {
     this.index = index;
   }
 
+  public String getPackageName() {
+    return packageName;
+  }
+
+  public String getClassName() {
+    return className;
+  }
+
+  public String getMethodSignature() {
+    return methodSignature;
+  }
+
+  public int getIndex() {
+    return index;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

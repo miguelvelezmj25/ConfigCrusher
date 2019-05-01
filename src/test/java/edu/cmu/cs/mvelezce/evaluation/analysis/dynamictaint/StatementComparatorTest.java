@@ -2,44 +2,51 @@ package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
 import org.junit.Test;
 
 public class StatementComparatorTest {
 
-  private static Set<PhosphorControlFlowInfo> getMediumControlFlowInfos(String programName)
+  private static Set<PhosphorControlFlowInfo> getMediumControlFlowInfos(
+      StatementComparator comparator)
       throws IOException {
     String mediumFileName = "medium.json";
 
-    return StatementComparator.readFromFile(programName, mediumFileName);
+    return comparator.readFromFile(mediumFileName);
   }
 
-  private static Set<PhosphorControlFlowInfo> getSmallControlFlowInfos(String programName)
+  private static Set<PhosphorControlFlowInfo> getSmallControlFlowInfos(
+      StatementComparator comparator)
       throws IOException {
     String mediumFileName = "small.json";
 
-    return StatementComparator.readFromFile(programName, mediumFileName);
+    return comparator.readFromFile(mediumFileName);
   }
 
-  private static void compareOverlappingStatements(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
-      Set<PhosphorControlFlowInfo> largeControlFlowInfos) {
-    StatementComparator.compareOverlapping(smallControlFlowInfos, largeControlFlowInfos);
+  private static void compareOverlappingStatements(StatementComparator comparator,
+      Set<PhosphorControlFlowInfo> smallControlFlowInfos,
+      Set<PhosphorControlFlowInfo> largeControlFlowInfos) throws FileNotFoundException {
+    comparator.compareOverlapping(smallControlFlowInfos, largeControlFlowInfos);
   }
 
-  private static void compareMissingStatements(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
-      Set<PhosphorControlFlowInfo> largeControlFlowInfos) {
-    StatementComparator.compareMissing(smallControlFlowInfos, largeControlFlowInfos);
+  private static void compareMissingStatements(StatementComparator comparator,
+      Set<PhosphorControlFlowInfo> smallControlFlowInfos,
+      Set<PhosphorControlFlowInfo> largeControlFlowInfos) throws FileNotFoundException {
+    comparator.compareMissing(smallControlFlowInfos, largeControlFlowInfos);
   }
 
   @Test
   public void measureDiskOrderedScan() throws IOException {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Set<PhosphorControlFlowInfo> mediumControlFlowInfos = getMediumControlFlowInfos(programName);
-    Set<PhosphorControlFlowInfo> smallControlFlowInfos = getSmallControlFlowInfos(programName);
+    StatementComparator comparator = new StatementComparator(programName);
 
-    compareOverlappingStatements(smallControlFlowInfos, mediumControlFlowInfos);
+    Set<PhosphorControlFlowInfo> mediumControlFlowInfos = getMediumControlFlowInfos(comparator);
+    Set<PhosphorControlFlowInfo> smallControlFlowInfos = getSmallControlFlowInfos(comparator);
+
+    compareOverlappingStatements(comparator, smallControlFlowInfos, mediumControlFlowInfos);
 //    compareProcessedOverlappingStatements(smallControlFlowInfos, mediumControlFlowInfos);
-    compareMissingStatements(smallControlFlowInfos, mediumControlFlowInfos);
+    compareMissingStatements(comparator, smallControlFlowInfos, mediumControlFlowInfos);
   }
 }

@@ -34,15 +34,16 @@ public class DynamicTimerInstrumenterTest {
     String[] args = new String[0];
 
     TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        rootPackage, classDir, decisionsToInfluencingTaints);
-    instrumenter.instrument(args);
+    throw new UnsupportedOperationException("Implement");
+//    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
+//
+//    args = new String[2];
+//    args[0] = "-delres";
+//    args[1] = "-saveres";
+//
+//    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+//        rootPackage, classDir, decisionsToInfluencingTaints);
+//    instrumenter.instrument(args);
   }
 
   @Test
@@ -59,15 +60,16 @@ public class DynamicTimerInstrumenterTest {
     String[] args = new String[0];
 
     TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        rootPackage, classDir, decisionsToInfluencingTaints);
-    instrumenter.instrument(args);
+    throw new UnsupportedOperationException("Implement");
+//    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
+//
+//    args = new String[2];
+//    args[0] = "-delres";
+//    args[1] = "-saveres";
+//
+//    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+//        rootPackage, classDir, decisionsToInfluencingTaints);
+//    instrumenter.instrument(args);
   }
 
   @Test
@@ -84,15 +86,16 @@ public class DynamicTimerInstrumenterTest {
     String[] args = new String[0];
 
     TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        rootPackage, classDir, decisionsToInfluencingTaints);
-    instrumenter.instrument(args);
+    throw new UnsupportedOperationException("Implement");
+//    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
+//
+//    args = new String[2];
+//    args[0] = "-delres";
+//    args[1] = "-saveres";
+//
+//    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+//        rootPackage, classDir, decisionsToInfluencingTaints);
+//    instrumenter.instrument(args);
   }
 
   @Test
@@ -109,15 +112,16 @@ public class DynamicTimerInstrumenterTest {
     String[] args = new String[0];
 
     TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        rootPackage, classDir, decisionsToInfluencingTaints);
-    instrumenter.instrument(args);
+//    throw new UnsupportedOperationException("Implement");
+//    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
+//
+//    args = new String[2];
+//    args[0] = "-delres";
+//    args[1] = "-saveres";
+//
+//    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+//        rootPackage, classDir, decisionsToInfluencingTaints);
+//    instrumenter.instrument(args);
   }
 
 }

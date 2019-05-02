@@ -1,8 +1,7 @@
-package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.workload;
+package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.Comparator;
 import edu.cmu.cs.mvelezce.tool.analysis.region.CFStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
@@ -18,39 +17,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class StatementComparator {
+public abstract class StatementComparator extends BaseComparator {
 
   private static final String DATA_DIR = "/statements/data/";
-  private static final String OVERLAPPING_DIR = "/overlapping/";
-  private static final String MISSING_DIR = "/missing/";
 
-  private final String programName;
-
-  StatementComparator(String programName) {
-    this.programName = programName;
+  protected StatementComparator(String programName) {
+    super(programName);
   }
 
-  static CFStatement buildCFStatement(PhosphorControlFlowInfo phosphorControlFlowInfo) {
-    String packageName = phosphorControlFlowInfo.getPackageName();
-    String className = phosphorControlFlowInfo.getClassName();
-    String methodSignature = phosphorControlFlowInfo.getMethodSignature();
-    int index = phosphorControlFlowInfo.getDecisionIndex();
+  protected abstract String getDir();
 
-    return new CFStatement(packageName, className, methodSignature, index);
-  }
-
-  static Set<CFStatement> getCFStatements(Set<PhosphorControlFlowInfo> controlFlowInfos) {
-    Set<CFStatement> statements = new HashSet<>();
-
-    for (PhosphorControlFlowInfo phosphorControlFlowInfo : controlFlowInfos) {
-      CFStatement cfStatement = buildCFStatement(phosphorControlFlowInfo);
-      statements.add(cfStatement);
-    }
-
-    return statements;
-  }
-
-  void compareMissing(Set<PhosphorControlFlowInfo> controlFlowInfos1,
+  public void compareMissing(Set<PhosphorControlFlowInfo> controlFlowInfos1,
       Set<PhosphorControlFlowInfo> controlFlowInfos2) throws FileNotFoundException {
     Set<CFStatement> missingStatements = getMissingStatements(controlFlowInfos1, controlFlowInfos2);
     Set<CFStatement> allStatements = getCFStatements(controlFlowInfos2);
@@ -62,12 +39,25 @@ public class StatementComparator {
     this.writeMissingInfo(statementsToInfluencingTaints);
   }
 
+  public void compareOverlapping(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
+      Set<PhosphorControlFlowInfo> largeControlFlowInfos) throws FileNotFoundException {
+    Set<CFStatement> overlappingStatements = getOverlappingStatements(smallControlFlowInfos,
+        largeControlFlowInfos);
+
+    Map<CFStatement, Set<InfluencingTaints>> smallStatementsToInfluencingTaints = matchStatementsToInfluencingTaints(
+        overlappingStatements, smallControlFlowInfos);
+    Map<CFStatement, Set<InfluencingTaints>> largeStatementsToInfluencingTaints = matchStatementsToInfluencingTaints(
+        overlappingStatements, largeControlFlowInfos);
+
+    this.writeOverlappingInfo(smallStatementsToInfluencingTaints,
+        largeStatementsToInfluencingTaints);
+  }
+
   private void writeMissingInfo(
       Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints)
       throws FileNotFoundException {
-    File outputFile = new File(
-        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + MISSING_DIR
-            + "missing-influences.txt");
+    File outputFile = new File(BASE_DIR + this.getDir() + this.getProgramName() + MISSING_DIR
+        + "missing-influences.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -79,6 +69,17 @@ public class StatementComparator {
     writer.close();
   }
 
+  private void writeMissingInfo(PrintWriter writer, CFStatement statement,
+      Set<InfluencingTaints> influencingTaintsAtStatement) {
+    writer.println(statement);
+
+    for (InfluencingTaints influencingTaints : influencingTaintsAtStatement) {
+      writer.println(influencingTaints);
+    }
+
+    writer.println();
+  }
+
   private void writeMissingStatements(Set<CFStatement> missingStatements,
       Set<CFStatement> allStatements) throws FileNotFoundException {
     Set<String> missingStatementsStrings = getSortedStatementStrings(missingStatements);
@@ -87,9 +88,8 @@ public class StatementComparator {
     List<String> sortedAllStatementStrings = new ArrayList<>(allStatementStrings);
     Collections.sort(sortedAllStatementStrings);
 
-    File outputFile = new File(
-        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + MISSING_DIR
-            + "missing.txt");
+    File outputFile = new File(BASE_DIR + this.getDir() + this.getProgramName() + MISSING_DIR
+        + "missing.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -117,17 +117,6 @@ public class StatementComparator {
     return statementsStrings;
   }
 
-  private void writeMissingInfo(PrintWriter writer, CFStatement statement,
-      Set<InfluencingTaints> influencingTaintsAtStatement) {
-    writer.println(statement);
-
-    for (InfluencingTaints influencingTaints : influencingTaintsAtStatement) {
-      writer.println(influencingTaints);
-    }
-
-    writer.println();
-  }
-
   private static Set<CFStatement> getMissingStatements(
       Set<PhosphorControlFlowInfo> controlFlowInfos1,
       Set<PhosphorControlFlowInfo> controlFlowInfos2) {
@@ -140,28 +129,12 @@ public class StatementComparator {
     return missingStatements;
   }
 
-
-  void compareOverlapping(Set<PhosphorControlFlowInfo> smallControlFlowInfos,
-      Set<PhosphorControlFlowInfo> largeControlFlowInfos) throws FileNotFoundException {
-    Set<CFStatement> overlappingStatements = getOverlappingStatements(smallControlFlowInfos,
-        largeControlFlowInfos);
-
-    Map<CFStatement, Set<InfluencingTaints>> smallStatementsToInfluencingTaints = matchStatementsToInfluencingTaints(
-        overlappingStatements, smallControlFlowInfos);
-    Map<CFStatement, Set<InfluencingTaints>> largeStatementsToInfluencingTaints = matchStatementsToInfluencingTaints(
-        overlappingStatements, largeControlFlowInfos);
-
-    this.writeOverlappingInfo(smallStatementsToInfluencingTaints,
-        largeStatementsToInfluencingTaints);
-  }
-
   private void writeOverlappingInfo(
       Map<CFStatement, Set<InfluencingTaints>> smallStatementsToInfluencingTaints,
       Map<CFStatement, Set<InfluencingTaints>> largeStatementsToInfluencingTaints)
       throws FileNotFoundException {
-    File outputFile = new File(
-        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + OVERLAPPING_DIR
-            + "overlapping.txt");
+    File outputFile = new File(BASE_DIR + this.getDir() + this.getProgramName() + OVERLAPPING_DIR
+        + "overlapping.txt");
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);
 
@@ -189,13 +162,13 @@ public class StatementComparator {
     writer.println("Inconsistent statement");
     writer.println(statement);
 
-    printMissingTaintsInSmallerWorkload(writer, smallInfluencingTaints, largeInfluencingTaints);
-    printMissingTaintsInLargerWorkload(writer, smallInfluencingTaints, largeInfluencingTaints);
+    writeMissingTaintsInSmallerWorkload(writer, smallInfluencingTaints, largeInfluencingTaints);
+    writeMissingTaintsInLargerWorkload(writer, smallInfluencingTaints, largeInfluencingTaints);
 
     writer.println();
   }
 
-  private static void printMissingTaintsInLargerWorkload(PrintWriter writer,
+  private static void writeMissingTaintsInLargerWorkload(PrintWriter writer,
       Set<InfluencingTaints> influencingTaints1, Set<InfluencingTaints> influencingTaints2) {
     Set<InfluencingTaints> extraTaints = new HashSet<>(influencingTaints1);
     extraTaints.removeAll(influencingTaints2);
@@ -211,7 +184,7 @@ public class StatementComparator {
     }
   }
 
-  private static void printMissingTaintsInSmallerWorkload(PrintWriter writer,
+  private static void writeMissingTaintsInSmallerWorkload(PrintWriter writer,
       Set<InfluencingTaints> influencingTaints1, Set<InfluencingTaints> influencingTaints2) {
     Set<InfluencingTaints> extraTaints = new HashSet<>(influencingTaints2);
     extraTaints.removeAll(influencingTaints1);
@@ -236,21 +209,6 @@ public class StatementComparator {
     return statementsToInfluencingTaints;
   }
 
-  private static void addInfluencingTaints(
-      Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints,
-      Set<PhosphorControlFlowInfo> controlFlowInfos) {
-    for (PhosphorControlFlowInfo controlFlowInfo : controlFlowInfos) {
-      CFStatement cfgStatement = buildCFStatement(controlFlowInfo);
-
-      if (!statementsToInfluencingTaints.containsKey(cfgStatement)) {
-        continue;
-      }
-
-      statementsToInfluencingTaints.get(cfgStatement)
-          .addAll(controlFlowInfo.getInfluencingTaints());
-    }
-  }
-
   private static void addCFGStatements(
       Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints,
       Set<PhosphorControlFlowInfo> controlFlowInfos,
@@ -267,6 +225,21 @@ public class StatementComparator {
     }
   }
 
+  private static void addInfluencingTaints(
+      Map<CFStatement, Set<InfluencingTaints>> statementsToInfluencingTaints,
+      Set<PhosphorControlFlowInfo> controlFlowInfos) {
+    for (PhosphorControlFlowInfo controlFlowInfo : controlFlowInfos) {
+      CFStatement cfgStatement = buildCFStatement(controlFlowInfo);
+
+      if (!statementsToInfluencingTaints.containsKey(cfgStatement)) {
+        continue;
+      }
+
+      statementsToInfluencingTaints.get(cfgStatement)
+          .addAll(controlFlowInfo.getInfluencingTaints());
+    }
+  }
+
   private static Set<CFStatement> getOverlappingStatements(
       Set<PhosphorControlFlowInfo> smallControlFlowInfos,
       Set<PhosphorControlFlowInfo> largeControlFlowInfos) {
@@ -279,16 +252,35 @@ public class StatementComparator {
     return overlappingStatements;
   }
 
-  Set<PhosphorControlFlowInfo> readFromFile(String fileName)
+  private static Set<CFStatement> getCFStatements(Set<PhosphorControlFlowInfo> controlFlowInfos) {
+    Set<CFStatement> statements = new HashSet<>();
+
+    for (PhosphorControlFlowInfo phosphorControlFlowInfo : controlFlowInfos) {
+      CFStatement cfStatement = buildCFStatement(phosphorControlFlowInfo);
+      statements.add(cfStatement);
+    }
+
+    return statements;
+  }
+
+  private static CFStatement buildCFStatement(PhosphorControlFlowInfo phosphorControlFlowInfo) {
+    String packageName = phosphorControlFlowInfo.getPackageName();
+    String className = phosphorControlFlowInfo.getClassName();
+    String methodSignature = phosphorControlFlowInfo.getMethodSignature();
+    int index = phosphorControlFlowInfo.getDecisionIndex();
+
+    return new CFStatement(packageName, className, methodSignature, index);
+  }
+
+  public Set<PhosphorControlFlowInfo> readFromFile(String fileName)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     File file = new File(
-        Comparator.BASE_DIR + Comparator.WORKLOAD_DIR + this.programName + DATA_DIR + fileName);
+        BaseComparator.BASE_DIR + this.getDir() + this.getProgramName() + DATA_DIR + fileName);
 
     return mapper
         .readValue(file, new TypeReference<Set<PhosphorControlFlowInfo>>() {
         });
   }
-
 }

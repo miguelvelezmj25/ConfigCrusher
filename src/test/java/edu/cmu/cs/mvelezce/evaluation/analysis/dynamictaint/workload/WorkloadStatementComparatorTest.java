@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.workload;
 
+import edu.cmu.cs.mvelezce.evaluation.analysis.dynamictaint.StatementComparator;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import java.io.FileNotFoundException;
@@ -7,7 +8,7 @@ import java.io.IOException;
 import java.util.Set;
 import org.junit.Test;
 
-public class StatementComparatorTest {
+public class WorkloadStatementComparatorTest {
 
   private static Set<PhosphorControlFlowInfo> getMediumControlFlowInfos(
       StatementComparator comparator)
@@ -40,7 +41,7 @@ public class StatementComparatorTest {
   @Test
   public void measureDiskOrderedScan() throws IOException {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    StatementComparator comparator = new StatementComparator(programName);
+    StatementComparator comparator = new WorkloadStatementComparator(programName);
 
     Set<PhosphorControlFlowInfo> mediumControlFlowInfos = getMediumControlFlowInfos(comparator);
     Set<PhosphorControlFlowInfo> smallControlFlowInfos = getSmallControlFlowInfos(comparator);

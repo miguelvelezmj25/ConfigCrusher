@@ -1,13 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.DynamicBaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.dynamic.DynamicConfigCrusherTimerTransformer;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.Set;
 
 public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegionInstrumenter {
 
@@ -16,7 +16,7 @@ public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegi
 
   public DynamicConfigCrusherTimerRegionInstrumenter(String programName, String entryPoint,
       String rootPackage, String classDir,
-      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints) {
+      Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints) {
     super(programName, classDir, regionsToInfluencingTaints);
 
     this.entryPoint = entryPoint;

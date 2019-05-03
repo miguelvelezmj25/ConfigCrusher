@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region.TaintPhosphorAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample6.SimpleForExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
@@ -11,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.DynamicConfigC
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.Set;
 import org.junit.Test;
 
 public class DynamicTimerInstrumenterTest {
@@ -34,16 +34,15 @@ public class DynamicTimerInstrumenterTest {
     String[] args = new String[0];
 
     TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    throw new UnsupportedOperationException("Implement");
-//    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-//        rootPackage, classDir, decisionsToInfluencingTaints);
-//    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints = analysis.analyze(args);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+        rootPackage, classDir, regionsToInfluencingTaints);
+    instrumenter.instrument(args);
   }
 
   @Test

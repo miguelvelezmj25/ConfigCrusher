@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.dynamic;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
@@ -26,7 +25,7 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
 
   public DynamicConfigCrusherTimerTransformer(String programName, String entryPoint,
       String rootPackage, String directory,
-      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
+      Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints)
       throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
     super(programName, entryPoint, rootPackage, directory, regionsToInfluencingTaints);
   }

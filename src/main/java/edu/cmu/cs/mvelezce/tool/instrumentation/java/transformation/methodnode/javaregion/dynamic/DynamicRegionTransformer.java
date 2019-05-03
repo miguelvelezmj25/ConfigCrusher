@@ -10,10 +10,8 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.j
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -29,18 +27,18 @@ import soot.jimple.toolkits.callgraph.Edge;
 
 // TODO have an method expander class and a method propagator class
 public abstract class DynamicRegionTransformer extends
-    RegionTransformer<InfluencingTaints, InfluencingTaints> {
+    RegionTransformer<Set<Set<String>>, InfluencingTaints> {
 
   // TODO delete programName
   private DynamicRegionTransformer(String programName, String entryPoint, String rootPackage,
       ClassTransformer classTransformer,
-      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints) {
+      Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints) {
     super(programName, entryPoint, rootPackage, classTransformer, regionsToInfluencingTaints, true,
         new DynamicInstructionRegionMatcher());
   }
 
   DynamicRegionTransformer(String programName, String entryPoint, String rootPackage,
-      String directory, Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
+      String directory, Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     this(programName, entryPoint, rootPackage, new DefaultClassTransformer(directory),
         regionsToInfluencingTaints);
@@ -64,16 +62,19 @@ public abstract class DynamicRegionTransformer extends
 
   // TODO can be pushed up
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
-    for (ClassNode classNode : classNodes) {
-      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-      if (methodsToInstrument.isEmpty()) {
-        continue;
-      }
+//    for (ClassNode classNode : classNodes) {
+//      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+//
+//      if (methodsToInstrument.isEmpty()) {
+//        continue;
+//      }
+//
+//      for (MethodNode methodToInstrument : methodsToInstrument) {
+//        this.setStartAndEndBlocks(methodToInstrument);
+//      }
+//    }
 
-      for (MethodNode methodToInstrument : methodsToInstrument) {
-        this.setStartAndEndBlocks(methodToInstrument);
-      }
-    }
+    throw new UnsupportedOperationException("Implement");
   }
 
   private void setStartAndEndBlocks(MethodNode methodNode) {
@@ -111,29 +112,30 @@ public abstract class DynamicRegionTransformer extends
   private void removeNestedRegions(MethodGraph graph, MethodBlock block, JavaRegion region,
       Set<MethodBlock> ends, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
       MethodNode methodNode) {
-    Set<MethodBlock> reachables = new HashSet<>();
-
-    for (MethodBlock end : ends) {
-      reachables.addAll(graph.getReachableBlocks(block, end));
-    }
-
-    reachables.removeAll(ends);
-    reachables.add(block);
-
-    // If the ends are connected to the exit node, we want to analyze them since we will be removing regions called within the blocks
-    Set<MethodBlock> endRegionBlocksWithReturn = this.getEndRegionBlocksWithReturn();
-
-    for (MethodBlock end : ends) {
-      if (endRegionBlocksWithReturn.contains(end)) {
-        reachables.add(end);
-      }
-    }
-
-    InfluencingTaints blockDecision = this.getDecision(region);
-
-    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
-    reachables.remove(block);
-    this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
+//    Set<MethodBlock> reachables = new HashSet<>();
+//
+//    for (MethodBlock end : ends) {
+//      reachables.addAll(graph.getReachableBlocks(block, end));
+//    }
+//
+//    reachables.removeAll(ends);
+//    reachables.add(block);
+//
+//    // If the ends are connected to the exit node, we want to analyze them since we will be removing regions called within the blocks
+//    Set<MethodBlock> endRegionBlocksWithReturn = this.getEndRegionBlocksWithReturn();
+//
+//    for (MethodBlock end : ends) {
+//      if (endRegionBlocksWithReturn.contains(end)) {
+//        reachables.add(end);
+//      }
+//    }
+//
+//    InfluencingTaints blockDecision = this.getDecision(region);
+//
+//    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
+//    reachables.remove(block);
+//    this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
+    throw new UnsupportedOperationException("Implement");
   }
 
   /**
@@ -183,79 +185,81 @@ public abstract class DynamicRegionTransformer extends
 
   private void removeRegionsInMethod(InfluencingTaints blockDecision, Set<MethodBlock> reachables,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-
-    for (MethodBlock block : reachables) {
-      JavaRegion region = blocksToRegions.get(block);
-
-      // Optimization
-      if (region == null) {
-        continue;
-      }
-
-      InfluencingTaints decision = this.getDecision(region);
-
-      // TODO check when to remove a region based on influencing taints
-      if (!decision.equals(blockDecision)) {
-        continue;
-      }
-
-      blocksToRegions.put(block, null);
-      this.getRegionsToData().remove(region);
-    }
+//
+//    for (MethodBlock block : reachables) {
+//      JavaRegion region = blocksToRegions.get(block);
+//
+//      // Optimization
+//      if (region == null) {
+//        continue;
+//      }
+//
+//      InfluencingTaints decision = this.getDecision(region);
+//
+//      // TODO check when to remove a region based on influencing taints
+//      if (!decision.equals(blockDecision)) {
+//        continue;
+//      }
+//
+//      blocksToRegions.put(block, null);
+//      this.getRegionsToData().remove(region);
+//    }
+    throw new UnsupportedOperationException("Implement");
   }
 
   private Set<MethodBlock> setStartAndEndBlocks(MethodGraph graph, MethodBlock block,
       JavaRegion region, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    region.setStartMethodBlock(block);
-    InfluencingTaints blockDecision = this.getDecision(region);
-
-    MethodBlock ipd = graph.getImmediatePostDominator(block);
-    JavaRegion ipdRegion = blocksToRegions.get(ipd);
-    InfluencingTaints ipdDecision = this.getDecision(ipdRegion);
-
-    MethodBlock beta = graph.getExitBlock();
-
-    // TODO check when to finish looking for the next ipd
-    while (ipd != beta && blockDecision.equals(ipdDecision)) {
-      MethodBlock tmp = graph.getImmediatePostDominator(ipd);
-
-////                // Optimization
-////                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-////                    break;
-////                }
+//    region.setStartMethodBlock(block);
+//    InfluencingTaints blockDecision = this.getDecision(region);
 //
-      ipd = tmp;
-      ipdRegion = blocksToRegions.get(ipd);
-      ipdDecision = this.getDecision(ipdRegion);
-    }
-
-    MethodBlock end = ipd;
-    Set<MethodBlock> ends = new HashSet<>();
-
-    if (block == end) {
-      throw new RuntimeException("Start and end equal");
-    }
-    else if (block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next()
-        .equals(end)) {
-//        ends.add(block);
+//    MethodBlock ipd = graph.getImmediatePostDominator(block);
+//    JavaRegion ipdRegion = blocksToRegions.get(ipd);
+//    InfluencingTaints ipdDecision = this.getDecision(ipdRegion);
 //
-//        if (graph.getExitBlock() == end) {
-//          this.endRegionBlocksWithReturn.add(block);
-//        }
-      throw new UnsupportedOperationException("What is this case?");
-    }
-    else if (beta == end) {
-      Set<MethodBlock> preds = end.getPredecessors();
-      ends.addAll(preds);
-      this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
-    }
-    else {
-      ends.add(end);
-    }
-
-    region.setEndMethodBlocks(ends);
-
-    return ends;
+//    MethodBlock beta = graph.getExitBlock();
+//
+//    // TODO check when to finish looking for the next ipd
+//    while (ipd != beta && blockDecision.equals(ipdDecision)) {
+//      MethodBlock tmp = graph.getImmediatePostDominator(ipd);
+//
+//////                // Optimization
+//////                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+//////                    break;
+//////                }
+////
+//      ipd = tmp;
+//      ipdRegion = blocksToRegions.get(ipd);
+//      ipdDecision = this.getDecision(ipdRegion);
+//    }
+//
+//    MethodBlock end = ipd;
+//    Set<MethodBlock> ends = new HashSet<>();
+//
+//    if (block == end) {
+//      throw new RuntimeException("Start and end equal");
+//    }
+//    else if (block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next()
+//        .equals(end)) {
+////        ends.add(block);
+////
+////        if (graph.getExitBlock() == end) {
+////          this.endRegionBlocksWithReturn.add(block);
+////        }
+//      throw new UnsupportedOperationException("What is this case?");
+//    }
+//    else if (beta == end) {
+//      Set<MethodBlock> preds = end.getPredecessors();
+//      ends.addAll(preds);
+//      this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
+//    }
+//    else {
+//      ends.add(end);
+//    }
+//
+//    region.setEndMethodBlocks(ends);
+//
+//    return ends;
+    throw new UnsupportedOperationException("Implement");
   }
 
 //  private void instrument(Set<ClassNode> classNodes) throws IOException {
@@ -343,51 +347,52 @@ public abstract class DynamicRegionTransformer extends
   }
 
   private List<SootMethod> propagateInfluencingTaintsToCaller(SootMethod method) {
-    MethodNode methodNode = this.getMethodNode(method);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
-        .get(methodNode);
-
-    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
-    if (blocksToRegions == null) {
-      return new ArrayList<>();
-    }
-
-    Set<SootMethod> modifiedMethods = new HashSet<>();
-    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
-    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
-
-    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
-      throw new RuntimeException(
-          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
-    }
-
-    List<Edge> edges = this.getCallerEdges(method);
-
-    for (Edge edge : edges) {
-      SootMethod callerSootMethod = edge.src();
-      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
-      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
-          .getMethodsToRegionsInBlocks()
-          .get(callerMethodNode);
-
-      MethodBlock callerBlock = this.getCallerBlock(edge);
-      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
-      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
-
-      if (!shouldPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
-        continue;
-      }
-
-      JavaRegion callerNewRegion = this
-          .addNewCallerRegionToMappingOfBlocksToRegions(callerBlock, callerRegion,
-              callerBlocksToRegions);
-      this.addNewCallerRegionToMappingOfRegionsToData(callerNewRegion, callerInfluencingTaints,
-          influencingTaints);
-
-      modifiedMethods.add(callerSootMethod);
-    }
-
-    return new ArrayList<>(modifiedMethods);
+//    MethodNode methodNode = this.getMethodNode(method);
+//    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
+//        .get(methodNode);
+//
+//    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
+//    if (blocksToRegions == null) {
+//      return new ArrayList<>();
+//    }
+//
+//    Set<SootMethod> modifiedMethods = new HashSet<>();
+//    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
+//    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
+//
+//    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
+//      throw new RuntimeException(
+//          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
+//    }
+//
+//    List<Edge> edges = this.getCallerEdges(method);
+//
+//    for (Edge edge : edges) {
+//      SootMethod callerSootMethod = edge.src();
+//      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
+//      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+//          .getMethodsToRegionsInBlocks()
+//          .get(callerMethodNode);
+//
+//      MethodBlock callerBlock = this.getCallerBlock(edge);
+//      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+//      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
+//
+//      if (!shouldPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
+//        continue;
+//      }
+//
+//      JavaRegion callerNewRegion = this
+//          .addNewCallerRegionToMappingOfBlocksToRegions(callerBlock, callerRegion,
+//              callerBlocksToRegions);
+//      this.addNewCallerRegionToMappingOfRegionsToData(callerNewRegion, callerInfluencingTaints,
+//          influencingTaints);
+//
+//      modifiedMethods.add(callerSootMethod);
+//    }
+//
+//    return new ArrayList<>(modifiedMethods);
+    throw new UnsupportedOperationException("Implement");
   }
 
   private JavaRegion addNewCallerRegionToMappingOfBlocksToRegions(MethodBlock callerBlock,
@@ -421,46 +426,47 @@ public abstract class DynamicRegionTransformer extends
   }
 
   private boolean canPropagateFirstRegionToAllCallers(SootMethod method) {
-    MethodNode methodNode = this.getMethodNode(method);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
-        .get(methodNode);
-
-    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
-    if (blocksToRegions == null) {
-      return false;
-    }
-
-    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
-    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
-
-    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
-      throw new RuntimeException(
-          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
-    }
-
-    List<Edge> edges = this.getCallerEdges(method);
-
-    boolean canPropagate = true;
-
-    for (Edge edge : edges) {
-      SootMethod callerSootMethod = edge.src();
-      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
-      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
-          .getMethodsToRegionsInBlocks()
-          .get(callerMethodNode);
-
-      MethodBlock callerBlock = this.getCallerBlock(edge);
-      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
-      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
-
-      if (!canPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
-        canPropagate = false;
-        break;
-      }
-
-    }
-
-    return canPropagate;
+//    MethodNode methodNode = this.getMethodNode(method);
+//    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
+//        .get(methodNode);
+//
+//    // TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
+//    if (blocksToRegions == null) {
+//      return false;
+//    }
+//
+//    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToRegions);
+//    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
+//
+//    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
+//      throw new RuntimeException(
+//          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
+//    }
+//
+//    List<Edge> edges = this.getCallerEdges(method);
+//
+//    boolean canPropagate = true;
+//
+//    for (Edge edge : edges) {
+//      SootMethod callerSootMethod = edge.src();
+//      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
+//      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+//          .getMethodsToRegionsInBlocks()
+//          .get(callerMethodNode);
+//
+//      MethodBlock callerBlock = this.getCallerBlock(edge);
+//      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+//      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
+//
+//      if (!canPropagateTaintsToCaller(influencingTaints, callerInfluencingTaints)) {
+//        canPropagate = false;
+//        break;
+//      }
+//
+//    }
+//
+//    return canPropagate;
+    throw new UnsupportedOperationException("Implement");
   }
 
   private boolean shouldPropagateTaintsToCaller(InfluencingTaints influencingTaints,
@@ -551,13 +557,13 @@ public abstract class DynamicRegionTransformer extends
           LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
               .getMethodsToRegionsInBlocks().get(methodNode);
           updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
-          updatedRegions = updatedRegions |
-              this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
-//          this.debugBlockDecisions(methodNode, classNode);
-//          System.out.println();
-
+          updatedRegions = updatedRegions
+              | this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
           updatedMethods = updatedMethods | updatedRegions;
         }
+
+//        this.debugBlockDecisions(methodNode, classNode);
+//        System.out.println();
       }
     }
 
@@ -589,8 +595,8 @@ public abstract class DynamicRegionTransformer extends
         continue;
       }
 
-      updatedRegions = updatedRegions | this
-          .expandDownRegionInMethod(methodNode, classNode, block, blocksToRegions);
+      updatedRegions = updatedRegions
+          | this.expandDownRegionInMethod(methodNode, classNode, block, blocksToRegions);
     }
 
     return updatedRegions;
@@ -607,14 +613,15 @@ public abstract class DynamicRegionTransformer extends
     }
 
     JavaRegion blockRegion = blocksToRegions.get(block);
-    InfluencingTaints blockInfluencingTaints = this.getDecision(blockRegion);
+    Set<Set<String>> blockInfluencingTaints = this.getDecision(blockRegion);
 
     MethodBlock beta = graph.getExitBlock();
     MethodBlock ipd = graph.getImmediatePostDominator(block);
     JavaRegion ipdRegion = blocksToRegions.get(ipd);
-    InfluencingTaints ipdInfluencingTaints = this.getDecision(ipdRegion);
+    Set<Set<String>> ipdInfluencingTaints = this.getDecision(ipdRegion);
 
-    while (canExpandDownUpToIPD(ipd, beta, blockInfluencingTaints, ipdInfluencingTaints)) {
+    // We can expand up to the ipd. Checking if we can continue expanding down
+    while (canExpandDownToIPD(ipd, beta, blockInfluencingTaints, ipdInfluencingTaints)) {
       ipd = graph.getImmediatePostDominator(ipd);
       ipdRegion = blocksToRegions.get(ipd);
       ipdInfluencingTaints = this.getDecision(ipdRegion);
@@ -625,7 +632,7 @@ public abstract class DynamicRegionTransformer extends
   }
 
   private boolean expandDownInfluencingTaintsInMethod(MethodBlock block,
-      InfluencingTaints blockInfluencingTaints, MethodBlock ipd, MethodGraph graph,
+      Set<Set<String>> blockInfluencingTaints, MethodBlock ipd, MethodGraph graph,
       Map<MethodBlock, JavaRegion> blocksToRegions) {
     boolean updatedRegions = false;
     Set<MethodBlock> reachables = graph.getReachableBlocks(block, ipd);
@@ -655,21 +662,21 @@ public abstract class DynamicRegionTransformer extends
       }
 
       JavaRegion reachRegion = blocksToRegions.get(reach);
-      InfluencingTaints reachInfluencingTaints = this.getDecision(reachRegion);
+      Set<Set<String>> reachInfluencingTaints = this.getDecision(reachRegion);
 
-// TODO is this code really needed?
-//      Set<String> intersection = new HashSet<>();
-//      intersection.addAll(blockInfluencingTaints);
-//      intersection.retainAll(reachInfluencingTaints);
-//
-//      if (!(intersection.equals(blockInfluencingTaints) || intersection.equals(reachInfluencingTaints))
-//          && !blockInfluencingTaints.equals(reachInfluencingTaints)) {
-//        Set<MethodBlock> skipBlocks = graph.getReachableBlocks(reach, ipd);
-//        skipBlocks.remove(ipd);
-//        skip.addAll(skipBlocks);
-//        continue;
-//      }
-//
+//// TODO is this code really needed?
+////      Set<String> intersection = new HashSet<>();
+////      intersection.addAll(blockInfluencingTaints);
+////      intersection.retainAll(reachInfluencingTaints);
+////
+////      if (!(intersection.equals(blockInfluencingTaints) || intersection.equals(reachInfluencingTaints))
+////          && !blockInfluencingTaints.equals(reachInfluencingTaints)) {
+////        Set<MethodBlock> skipBlocks = graph.getReachableBlocks(reach, ipd);
+////        skipBlocks.remove(ipd);
+////        skip.addAll(skipBlocks);
+////        continue;
+////      }
+
       if (!canExpandDownToReach(blockInfluencingTaints, reachInfluencingTaints)) {
         continue;
       }
@@ -684,13 +691,17 @@ public abstract class DynamicRegionTransformer extends
     return updatedRegions;
   }
 
-  private boolean canExpandDownToReach(InfluencingTaints thisInfluencingTaints,
-      InfluencingTaints reachInfluencingTaints) {
-    if (thisInfluencingTaints.equals(reachInfluencingTaints)) {
+  private boolean canExpandDownToReach(Set<Set<String>> blockInfluencingTaints,
+      Set<Set<String>> reachInfluencingTaints) {
+    if (blockInfluencingTaints.equals(reachInfluencingTaints)) {
       return false;
     }
 
-    return thisInfluencingTaints.getCondition().containsAll(reachInfluencingTaints.getCondition());
+    if (blockInfluencingTaints.size() > 1 || reachInfluencingTaints.size() > 1) {
+      throw new UnsupportedOperationException("Implement");
+    }
+
+    return blockInfluencingTaints.containsAll(reachInfluencingTaints);
   }
 
   // TODO might be able to abstract this method and most callees to region transformer
@@ -725,7 +736,6 @@ public abstract class DynamicRegionTransformer extends
 
   private List<MethodBlock> expandUpRegionInMethod(MethodNode methodNode, ClassNode classNode,
       MethodBlock block, Map<MethodBlock, JavaRegion> blocksToRegions) {
-
     List<MethodBlock> updatedBlocks = new ArrayList<>();
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
     MethodBlock id = graph.getImmediateDominator(block);
@@ -735,74 +745,75 @@ public abstract class DynamicRegionTransformer extends
     }
 
     JavaRegion blockRegion = blocksToRegions.get(block);
-    InfluencingTaints blockInfluencingTaints = this.getDecision(blockRegion);
+    Set<Set<String>> blockInfluencingTaints = this.getDecision(blockRegion);
 
     JavaRegion idRegion = blocksToRegions.get(id);
-    InfluencingTaints idInfluencingTaints = this.getDecision(idRegion);
+    Set<Set<String>> idInfluencingTaints = this.getDecision(idRegion);
 
     if (!this.canExpandUp(blockInfluencingTaints, idInfluencingTaints)) {
       return updatedBlocks;
     }
 
-    return this.expandUpInfluencingTaintsInMethod(block, blockInfluencingTaints, blocksToRegions);
+//    return this.expandUpInfluencingTaintsInMethod(block, blockInfluencingTaints, blocksToRegions);
+    throw new UnsupportedOperationException("Implement");
   }
 
   private List<MethodBlock> expandUpInfluencingTaintsInMethod(MethodBlock block,
       InfluencingTaints blockInfluencingTaints, Map<MethodBlock, JavaRegion> blocksToRegions) {
-    List<MethodBlock> updatedBlocks = new ArrayList<>();
-    Set<MethodBlock> blockPreds = block.getPredecessors();
-
-    if (blockPreds.isEmpty()) {
-      throw new RuntimeException("The predecessors cannot be empty " + block.getID());
-    }
-
-    for (MethodBlock pred : blockPreds) {
-      // A block might jump to itself
-      if (block == pred) {
-        continue;
-      }
-
-      JavaRegion predRegion = blocksToRegions.get(pred);
-      InfluencingTaints predInfluencingTaints = this.getDecision(predRegion);
-
-      if (!canExpandUp(blockInfluencingTaints, predInfluencingTaints)) {
-        // TODO this logic is not similar to the static version. Why is the static version different?
-////        if (pred.isCatchWithImplicitThrow()) {
-////          continue;
-////        }
-////
+//    List<MethodBlock> updatedBlocks = new ArrayList<>();
+//    Set<MethodBlock> blockPreds = block.getPredecessors();
 //
-//        throw new RuntimeException(
-//            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
-        continue;
-      }
-
-      JavaRegion predNewRegion = this
-          .addNewPredRegionToMappingOfBlocksToRegions(block, pred, predRegion, blocksToRegions);
-      this.addNewRegionToMappingOfRegionsToData(predNewRegion, blockInfluencingTaints);
-
-      updatedBlocks.add(0, pred);
-    }
-
-    return updatedBlocks;
+//    if (blockPreds.isEmpty()) {
+//      throw new RuntimeException("The predecessors cannot be empty " + block.getID());
+//    }
+//
+//    for (MethodBlock pred : blockPreds) {
+//      // A block might jump to itself
+//      if (block == pred) {
+//        continue;
+//      }
+//
+//      JavaRegion predRegion = blocksToRegions.get(pred);
+//      InfluencingTaints predInfluencingTaints = this.getDecision(predRegion);
+//
+//      if (!canExpandUp(blockInfluencingTaints, predInfluencingTaints)) {
+//        // TODO this logic is not similar to the static version. Why is the static version different?
+//////        if (pred.isCatchWithImplicitThrow()) {
+//////          continue;
+//////        }
+//////
+////
+////        throw new RuntimeException(
+////            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
+//        continue;
+//      }
+//
+//      JavaRegion predNewRegion = this
+//          .addNewPredRegionToMappingOfBlocksToRegions(block, pred, predRegion, blocksToRegions);
+//      this.addNewRegionToMappingOfRegionsToData(predNewRegion, blockInfluencingTaints);
+//
+//      updatedBlocks.add(0, pred);
+//    }
+//
+//    return updatedBlocks;
+    throw new UnsupportedOperationException("Implement");
   }
 
   private void addNewCallerRegionToMappingOfRegionsToData(JavaRegion newCallerRegion,
       InfluencingTaints callerInfluencingTaints, InfluencingTaints blockInfluencingTaints) {
-    Set<String> newConditionTaints = new HashSet<>();
-    newConditionTaints.addAll(blockInfluencingTaints.getCondition());
-    newConditionTaints.addAll(callerInfluencingTaints.getCondition());
-
-    InfluencingTaints newInfluencingTaints = new InfluencingTaints(
-        callerInfluencingTaints.getContext(), newConditionTaints);
-    this.getRegionsToData().put(newCallerRegion, newInfluencingTaints);
+//    Set<String> newConditionTaints = new HashSet<>();
+//    newConditionTaints.addAll(blockInfluencingTaints.getCondition());
+//    newConditionTaints.addAll(callerInfluencingTaints.getCondition());
+//
+//    InfluencingTaints newInfluencingTaints = new InfluencingTaints(
+//        callerInfluencingTaints.getContext(), newConditionTaints);
+//    this.getRegionsToData().put(newCallerRegion, newInfluencingTaints);
+    throw new UnsupportedOperationException("Implement");
   }
 
   private void addNewRegionToMappingOfRegionsToData(JavaRegion newRegion,
-      InfluencingTaints blockInfluencingTaints) {
-    InfluencingTaints newInfluencingTaints = new InfluencingTaints(
-        blockInfluencingTaints.getContext(), blockInfluencingTaints.getCondition());
-    this.getRegionsToData().put(newRegion, newInfluencingTaints);
+      Set<Set<String>> blockInfluencingTaints) {
+    this.getRegionsToData().put(newRegion, blockInfluencingTaints);
   }
 
   // TODO might be able to have only one method
@@ -852,31 +863,38 @@ public abstract class DynamicRegionTransformer extends
     return newRegion;
   }
 
-  private boolean canExpandDownUpToIPD(MethodBlock ipd, MethodBlock beta,
-      InfluencingTaints thisInfluencingTaints,
-      InfluencingTaints ipdInfluencingTaints) {
+  private boolean canExpandDownToIPD(MethodBlock ipd, MethodBlock beta,
+      Set<Set<String>> blockInfluencingTaints,
+      Set<Set<String>> ipdInfluencingTaints) {
 
     if (ipd == beta) {
       return false;
     }
 
-    if (thisInfluencingTaints.equals(ipdInfluencingTaints)) {
+    if (blockInfluencingTaints.containsAll(ipdInfluencingTaints)) {
       return true;
     }
 
-//    Set<String> thisContextTaints = thisInfluencingTaints.getContext();
-//    Set<String> ipdContextTaints = ipdInfluencingTaints.getContext();
+////    Set<String> thisContextTaints = thisInfluencingTaints.getContext();
+////    Set<String> ipdContextTaints = ipdInfluencingTaints.getContext();
+////
+////    if (!thisContextTaints.equals(ipdContextTaints)) {
+////      throw new RuntimeException("The blockContextTaints do not equal the ipdContextTaints");
+////    }
 //
-//    if (!thisContextTaints.equals(ipdContextTaints)) {
-//      throw new RuntimeException("The blockContextTaints do not equal the ipdContextTaints");
-//    }
+//    return thisInfluencingTaints.getCondition().containsAll(ipdInfluencingTaints.getCondition());
 
-    return thisInfluencingTaints.getCondition().containsAll(ipdInfluencingTaints.getCondition());
+    if (blockInfluencingTaints.size() > 1 || ipdInfluencingTaints.size() > 1) {
+      throw new UnsupportedOperationException("Implement");
+    }
+
+    return false;
   }
 
-  private boolean canExpandUp(InfluencingTaints thisInfluencingTaints,
-      InfluencingTaints upInfluencingTaints) {
-    if (thisInfluencingTaints.equals(upInfluencingTaints)) {
+  private boolean canExpandUp(Set<Set<String>> blockInfluencingTaints,
+      Set<Set<String>> upInfluencingTaints) {
+    // If they are the same, we do want to expand up since the taints are the same.
+    if (blockInfluencingTaints.equals(upInfluencingTaints)) {
       return false;
     }
 
@@ -887,13 +905,27 @@ public abstract class DynamicRegionTransformer extends
 //      throw new RuntimeException("The blockContextTaints do not equal the idContextTaints");
 //    }
 
-    return thisInfluencingTaints.getCondition().containsAll(upInfluencingTaints.getCondition());
+//    !(blockDecision.containsAll(idDecision) && !blockDecision.equals(idDecision))
+
+    for (Set<String> blockInfluencingTaint : blockInfluencingTaints) {
+      for (Set<String> upInfluencingTaint : upInfluencingTaints) {
+        if (!blockInfluencingTaint.containsAll(upInfluencingTaint)
+            || blockInfluencingTaint.equals(upInfluencingTaint)) {
+          return false;
+        }
+      }
+    }
+
+//    return blockInfluencingTaints.getCondition().containsAll(upInfluencingTaints.getCondition());
+    // return true;
+    throw new UnsupportedOperationException("Implement");
+
   }
 
   @Override
-  protected InfluencingTaints getDecision(JavaRegion region) {
+  protected Set<Set<String>> getDecision(JavaRegion region) {
     if (region == null) {
-      return new InfluencingTaints(new HashSet<>(), new HashSet<>());
+      return new HashSet<>();
     }
 
     return this.getRegionsToData().get(region);
@@ -901,102 +933,104 @@ public abstract class DynamicRegionTransformer extends
 
   @Override
   protected boolean canRemoveNestedRegions(InfluencingTaints decision, List<Edge> callerEdges) {
-    Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
-//    Set<Edge> analyzed = new HashSet<>();
-
-    while (!worklist.isEmpty()) {
-      Edge edge = worklist.pop();
-//      analyzed.add(edge);
+//    Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
+////    Set<Edge> analyzed = new HashSet<>();
 //
-      SootMethod caller = edge.src();
-      MethodNode method = this.getSootMethodToMethodNode().get(caller);
-      LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.getMethodsToRegionsInBlocks()
-          .get(method);
-
-      MethodBlock callerBlock = this.getCallerBlock(edge);
-      JavaRegion callerRegion = blockDecisions.get(callerBlock);
-      InfluencingTaints callerDecision = this.getDecision(callerRegion);
-
-      // TODO decise when to remove nested decisions
-      if (callerDecision.getContext().isEmpty() && callerDecision.getCondition().isEmpty()) {
-        throw new UnsupportedOperationException("Handle case");
-//        List<Edge> callers = this.getCallerEdges(caller);
+//    while (!worklist.isEmpty()) {
+//      Edge edge = worklist.pop();
+////      analyzed.add(edge);
+////
+//      SootMethod caller = edge.src();
+//      MethodNode method = this.getSootMethodToMethodNode().get(caller);
+//      LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.getMethodsToRegionsInBlocks()
+//          .get(method);
 //
-//        for (Edge e : callers) {
-//          if (analyzed.contains(e)) {
-//            continue;
-//          }
+//      MethodBlock callerBlock = this.getCallerBlock(edge);
+//      JavaRegion callerRegion = blockDecisions.get(callerBlock);
+//      InfluencingTaints callerDecision = this.getDecision(callerRegion);
 //
-//          worklist.add(e);
-//        }
-      }
-//      else if (!(decision.equals(callerDecision) || decision.containsAll(callerDecision))) {
-      else if (!decision.equals(callerDecision)) {
-        return false;
-      }
-    }
-
-    return true;
+//      // TODO decise when to remove nested decisions
+//      if (callerDecision.getContext().isEmpty() && callerDecision.getCondition().isEmpty()) {
+//        throw new UnsupportedOperationException("Handle case");
+////        List<Edge> callers = this.getCallerEdges(caller);
+////
+////        for (Edge e : callers) {
+////          if (analyzed.contains(e)) {
+////            continue;
+////          }
+////
+////          worklist.add(e);
+////        }
+//      }
+////      else if (!(decision.equals(callerDecision) || decision.containsAll(callerDecision))) {
+//      else if (!decision.equals(callerDecision)) {
+//        return false;
+//      }
+//    }
+//
+//    return true;
+    throw new UnsupportedOperationException("Implement");
   }
 
   @Override
   protected Set<MethodBlock> removeNestedRegions(InfluencingTaints decision,
       SootMethod calleeSootMethod) {
-    Set<MethodBlock> calleeModifiedBlocks = new HashSet<>();
-    MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
-    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
-        .getMethodsToRegionsInBlocks().get(calleeMethodNode);
-
-//          if (calleeBlocksToRegions == null) {
-//            // TODO fix this by changing the package name
-//            continue;
-//          }
+//    Set<MethodBlock> calleeModifiedBlocks = new HashSet<>();
+//    MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
+//    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
+//        .getMethodsToRegionsInBlocks().get(calleeMethodNode);
 //
-//          Set<MethodBlock> skip = new HashSet<>();
+////          if (calleeBlocksToRegions == null) {
+////            // TODO fix this by changing the package name
+////            continue;
+////          }
+////
+////          Set<MethodBlock> skip = new HashSet<>();
+////
+//    for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+////            if (skip.contains(entry.getKey())) {
+////              continue;
+////            }
+////
+//      JavaRegion calleeRegion = entry.getValue();
 //
-    for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-//            if (skip.contains(entry.getKey())) {
-//              continue;
-//            }
+//      // Optimization
+//      if (calleeRegion == null) {
+//        continue;
+//      }
 //
-      JavaRegion calleeRegion = entry.getValue();
-
-      // Optimization
-      if (calleeRegion == null) {
-        continue;
-      }
-
-      InfluencingTaints calleeDecision = this.getDecision(calleeRegion);
-
-      // TODO decide when not to remove nested regions
-      if (!(decision.getCondition().containsAll(calleeDecision.getContext()) && decision
-          .getCondition().containsAll(calleeDecision.getCondition()))) {
-        continue;
-      }
-//            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
-//              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
-//              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
-//              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
-//              rs.remove(ipd);
-//              skip.addAll(rs);
-//              continue;
-//            }
+//      InfluencingTaints calleeDecision = this.getDecision(calleeRegion);
 //
-      this.getRegionsToData().remove(calleeRegion);
-      MethodBlock calleeModifiedBlock = entry.getKey();
-      calleeBlocksToRegions.put(calleeModifiedBlock, null);
-      calleeModifiedBlocks.add(calleeModifiedBlock);
-    }
+//      // TODO decide when not to remove nested regions
+//      if (!(decision.getCondition().containsAll(calleeDecision.getContext()) && decision
+//          .getCondition().containsAll(calleeDecision.getCondition()))) {
+//        continue;
+//      }
+////            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
+////              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
+////              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
+////              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
+////              rs.remove(ipd);
+////              skip.addAll(rs);
+////              continue;
+////            }
+////
+//      this.getRegionsToData().remove(calleeRegion);
+//      MethodBlock calleeModifiedBlock = entry.getKey();
+//      calleeBlocksToRegions.put(calleeModifiedBlock, null);
+//      calleeModifiedBlocks.add(calleeModifiedBlock);
+//    }
+////
+////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+////            if (skip.contains(entry.getKey())) {
+////              continue;
+////            }
+////
+////            worklist.add(0, entry.getKey());
+////            blocksToMethods.put(entry.getKey(), calleeSootMethod);
+////          }
 //
-//          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-//            if (skip.contains(entry.getKey())) {
-//              continue;
-//            }
-//
-//            worklist.add(0, entry.getKey());
-//            blocksToMethods.put(entry.getKey(), calleeSootMethod);
-//          }
-
-    return calleeModifiedBlocks;
+//    return calleeModifiedBlocks;
+    throw new UnsupportedOperationException("Implement");
   }
 }

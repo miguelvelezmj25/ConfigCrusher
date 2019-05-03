@@ -643,6 +643,7 @@ public abstract class StaticRegionTransformer extends
     JavaRegion ipdRegion = blocksToRegions.get(ipd);
     Set<String> ipdDecision = this.getSingleDecision(ipdRegion);
 
+    // TODO BUG THIS SHOULD BE BLOCKDECISION.CONSTAINSALL(IPDDECISION)
     while (ipd != beta && blockDecision.equals(ipdDecision)) {
 //            MethodBlock temp = graph.getImmediatePostDominator(ipd);
       ipd = graph.getImmediatePostDominator(ipd);

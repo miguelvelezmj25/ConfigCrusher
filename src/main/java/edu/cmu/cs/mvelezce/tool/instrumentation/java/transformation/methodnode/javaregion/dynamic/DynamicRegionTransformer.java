@@ -54,7 +54,7 @@ public abstract class DynamicRegionTransformer extends
 
     while (updatedMethods) {
       updatedMethods = this.expandRegionsInMethods(classNodes);
-      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
+//      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
     }
 
     this.setStartAndEndBlocks(classNodes);
@@ -557,8 +557,8 @@ public abstract class DynamicRegionTransformer extends
           LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
               .getMethodsToRegionsInBlocks().get(methodNode);
           updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
-//          updatedRegions = updatedRegions
-//              | this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
+          updatedRegions = updatedRegions
+              | this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
           updatedMethods = updatedMethods | updatedRegions;
         }
 
@@ -697,11 +697,15 @@ public abstract class DynamicRegionTransformer extends
       return false;
     }
 
+    if (blockInfluencingTaints.containsAll(reachInfluencingTaints)) {
+      return true;
+    }
+
     if (blockInfluencingTaints.size() > 1 || reachInfluencingTaints.size() > 1) {
       throw new UnsupportedOperationException("Implement");
     }
 
-    return blockInfluencingTaints.containsAll(reachInfluencingTaints);
+    return false;
   }
 
   // TODO might be able to abstract this method and most callees to region transformer
@@ -914,7 +918,7 @@ public abstract class DynamicRegionTransformer extends
       }
     }
 
-    if (upInfluencingTaints.isEmpty()) {
+    if (upInfluencingTaints.size() <= 1) {
       return true;
     }
     else {

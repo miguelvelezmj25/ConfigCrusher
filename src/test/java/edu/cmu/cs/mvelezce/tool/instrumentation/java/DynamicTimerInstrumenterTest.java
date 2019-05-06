@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region.TaintPhosphorAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.constructor.ConstructorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample6.SimpleForExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
@@ -30,6 +31,31 @@ public class DynamicTimerInstrumenterTest {
     String classDir = TrivialAdapter.INSTRUMENTED_CLASS_PATH;
 
     this.compile(srcDir, classDir);
+
+    String[] args = new String[0];
+
+    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
+    Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints = analysis.analyze(args);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+        rootPackage, classDir, regionsToInfluencingTaints);
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void constructor()
+      throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+    String programName = ConstructorAdapter.PROGRAM_NAME;
+    String entry = ConstructorAdapter.MAIN_CLASS;
+    String rootPackage = ConstructorAdapter.ROOT_PACKAGE;
+    String srcDir = ConstructorAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = ConstructorAdapter.INSTRUMENTED_CLASS_PATH;
+
+//    this.compile(srcDir, classDir);
 
     String[] args = new String[0];
 

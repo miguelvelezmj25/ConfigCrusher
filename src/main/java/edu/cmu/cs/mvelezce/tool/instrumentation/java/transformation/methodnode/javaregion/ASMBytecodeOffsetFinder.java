@@ -21,7 +21,10 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
 
+// TODO might be able to cache the start of a method in the javap result
 public class ASMBytecodeOffsetFinder {
+
+  private static final String INIT = "<init>";
 
   private final String pathToClasses;
   private final Map<MethodNode, ClassNode> methodNodeToClassNode;
@@ -42,23 +45,34 @@ public class ASMBytecodeOffsetFinder {
 
   public AbstractInsnNode getASMInstruction(MethodNode methodNode, SootMethod sootMethod,
       int bytecodeIndex) {
-    // TODO cannot find constructors. Look at how it was done previously
+    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
+    String methodDeclaration = sootMethod.getDeclaration() + ";";
 
-    throw new UnsupportedOperationException(
-        "This implementation cannot find constructors. Find how it was done previously");
-//    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-//    String methodDeclaration = sootMethod.getDeclaration() + ";";
-//    int javapStartIndexOfMethod = 0;
-//
-//    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
-//      javapStartIndexOfMethod++;
-//    }
-//
-//    javapStartIndexOfMethod += +3;
-//    int instructionNumberInJavap = this
-//        .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
-//
-//    return this.getInsnInMethodNode(methodNode, instructionNumberInJavap);
+    if (methodNode.name.equals(INIT)) {
+      String[] elements = methodDeclaration.split(" ");
+
+      if (elements.length != 3) {
+        throw new RuntimeException("Expected that there would be 3 elements when splitting");
+      }
+
+      elements[2] = elements[2].replace(INIT, "");
+
+      methodDeclaration = elements[0] + " ";
+      methodDeclaration += this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
+      methodDeclaration += elements[2];
+    }
+
+    int javapStartIndexOfMethod = 0;
+
+    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
+      javapStartIndexOfMethod++;
+    }
+
+    javapStartIndexOfMethod += +3;
+    int instructionNumberInJavap = this
+        .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
+
+    return this.getInsnInMethodNode(methodNode, instructionNumberInJavap);
   }
 
   private AbstractInsnNode getInsnInMethodNode(MethodNode methodNode,

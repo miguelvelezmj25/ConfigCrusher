@@ -63,11 +63,14 @@ public class ASMBytecodeOffsetFinder {
 
       methodDeclaration += this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
     }
-    else if (methodNode.name.equals(CLINIT)) {
-      throw new UnsupportedOperationException("Handle case");
+
+    if (methodNode.name.equals(CLINIT)) {
+      methodDeclaration = "static {};";
+    }
+    else {
+      methodDeclaration += "(";
     }
 
-    methodDeclaration += "(";
     int javapStartIndexOfMethod = 0;
 
     for (String entry : javapResult) {

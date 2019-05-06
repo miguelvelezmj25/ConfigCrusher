@@ -71,10 +71,9 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
     this.asmBytecodeOffsetFinder = new ASMBytecodeOffsetFinder(classTransformer.getPathToClasses(),
         this.methodNodeToClassNode);
-    this.callGraph = null;
-//        CallGraphBuilder.buildCallGraph(entryPoint, classTransformer.getPathToClasses());
-    this.applicationSootMethods = null;
-//        this.calculateApplicationSootMethods();
+    this.callGraph = CallGraphBuilder
+        .buildCallGraph(entryPoint, classTransformer.getPathToClasses());
+    this.applicationSootMethods = this.calculateApplicationSootMethods();
   }
 
   protected abstract T getDecision(@Nullable JavaRegion javaRegion);
@@ -86,9 +85,9 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     this.matchMethodNodesToClassNodes(classNodes);
-//    SootMethodsToMethodNodesMatcher
-//        .matchSootMethodsToMethodNodes(classNodes, this.applicationSootMethods,
-//            this.sootMethodToMethodNode, this.methodNodeToSootMethod);
+    SootMethodsToMethodNodesMatcher
+        .matchSootMethodsToMethodNodes(classNodes, this.applicationSootMethods,
+            this.sootMethodToMethodNode, this.methodNodeToSootMethod);
   }
 
   private void matchMethodNodesToClassNodes(Set<ClassNode> classNodes) {
@@ -155,19 +154,27 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     return javaRegions;
   }
 
+  @Nullable
   protected MethodBlock getCallerBlock(Edge edge) {
     SootMethod callerSootMethod = edge.src();
     MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
     AbstractInsnNode instInCaller = this.asmBytecodeOffsetFinder
         .getASMInstFromCaller(edge, callerSootMethod, callerMethodNode);
-    Set<MethodBlock> blocks = this.getMethodsToRegionsInBlocks().get(callerMethodNode).keySet();
 
-    for (MethodBlock block : blocks) {
-      if (!block.getInstructions().contains(instInCaller)) {
-        continue;
+    // TODO fix this hack once we can handle methods with special cases
+    try {
+      Set<MethodBlock> blocks = this.getMethodsToRegionsInBlocks().get(callerMethodNode).keySet();
+
+      for (MethodBlock block : blocks) {
+        if (!block.getInstructions().contains(instInCaller)) {
+          continue;
+        }
+
+        return block;
       }
-
-      return block;
+    }
+    catch (NullPointerException npe) {
+      return null;
     }
 
     throw new RuntimeException(
@@ -190,16 +197,15 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
       SootMethod src = edge.src();
 
       if (!src.method().getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
-//        Iterator<Edge> edges = callGraph.edgesInto(src);
-//        List<Edge> moreEdges = new ArrayList<>();
-//
-//        while (edges.hasNext()) {
-//          moreEdges.add(edges.next());
-//        }
-//
-//        int index = Math.max(0, worklist.size() - 1);
-//        worklist.addAll(index, moreEdges);
-        throw new UnsupportedOperationException("Handle this case");
+        Iterator<Edge> edges = callGraph.edgesInto(src);
+        List<Edge> moreEdges = new ArrayList<>();
+
+        while (edges.hasNext()) {
+          moreEdges.add(edges.next());
+        }
+
+        int index = Math.max(0, worklist.size() - 1);
+        worklist.addAll(index, moreEdges);
       }
       else {
         callerEdges.add(edge);
@@ -619,8 +625,8 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     return match;
   }
 
-  protected Set<Edge> getCalleeEdges(Set<Unit> callingUnits) {
-    Set<Edge> edges = new HashSet<>();
+  protected List<Edge> getCalleeEdges(Set<Unit> callingUnits) {
+    List<Edge> edges = new ArrayList<>();
 
     for (Unit unit : callingUnits) {
       edges.addAll(this.getCalleeEdges(unit));

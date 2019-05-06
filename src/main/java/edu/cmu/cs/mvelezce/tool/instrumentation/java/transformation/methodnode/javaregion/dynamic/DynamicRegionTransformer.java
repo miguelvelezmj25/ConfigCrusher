@@ -10,8 +10,10 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.j
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -27,7 +29,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 
 // TODO have an method expander class and a method propagator class
 public abstract class DynamicRegionTransformer extends
-    RegionTransformer<Set<Set<String>>, InfluencingTaints> {
+    RegionTransformer<Set<Set<String>>, Set<Set<String>>> {
 
   // TODO delete programName
   private DynamicRegionTransformer(String programName, String entryPoint, String rootPackage,
@@ -52,11 +54,13 @@ public abstract class DynamicRegionTransformer extends
 
     boolean updatedMethods = true;
 
+    System.out.println("Transforming methods");
     while (updatedMethods) {
       updatedMethods = this.expandRegionsInMethods(classNodes);
 //      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
     }
 
+    System.out.println("Setting start and end blocks");
     this.setStartAndEndBlocks(classNodes);
   }
 
@@ -70,6 +74,12 @@ public abstract class DynamicRegionTransformer extends
       }
 
       for (MethodNode methodToInstrument : methodsToInstrument) {
+        // TODO handle this case that is not being read by soot
+        if (classNode.name.equals("com/sleepycat/je/recovery/RecoveryInfo")
+            && methodToInstrument.name.equals("appendLsn")) {
+          continue;
+        }
+
         this.setStartAndEndBlocks(methodToInstrument);
       }
     }
@@ -130,7 +140,7 @@ public abstract class DynamicRegionTransformer extends
 
     Set<Set<String>> blockDecision = this.getDecision(region);
 
-//    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
+    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
     reachables.remove(block);
     this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
   }
@@ -138,7 +148,7 @@ public abstract class DynamicRegionTransformer extends
   /**
    * TODO ignore specia blocks like catch with implicit throw
    */
-  private void removeRegionsInCallees(InfluencingTaints decision, Set<MethodBlock> reachables,
+  private void removeRegionsInCallees(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,
       MethodNode methodNode) {
 //    Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
 //    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
@@ -150,7 +160,7 @@ public abstract class DynamicRegionTransformer extends
 //    Set<SootMethod> analyzedCallees = new HashSet<>();
     List<MethodBlock> worklist = new ArrayList<>();
     worklist.addAll(reachables);
-    // TODO maybe do not add methods that have already been analyzed or a re already in the worklist
+    // TODO maybe do not add methods that have already been analyzed or are already in the worklist
 
     while (!worklist.isEmpty()) {
       MethodBlock reach = worklist.remove(0);
@@ -169,15 +179,32 @@ public abstract class DynamicRegionTransformer extends
         throw new RuntimeException("Could not find all calling units");
       }
 
-      Set<Edge> calleeEdges = this.getCalleeEdges(callingUnits);
+      List<Edge> calleeEdges = this.getCalleeEdges(callingUnits);
 
       if (calleeEdges.isEmpty()) {
         continue;
       }
 
-      Set<MethodBlock> modifiedMethodBlocks = this.removeNestedRegions(calleeEdges, decision);
+      Set<MethodBlock> modifiedMethodBlocks = this.removeNestedRegions(calleeEdges, blockDecision);
       worklist.addAll(0, modifiedMethodBlocks);
     }
+  }
+
+  private Set<MethodBlock> removeNestedRegions(List<Edge> calleeEdges,
+      Set<Set<String>> blockDecision) {
+    for (Edge edge : calleeEdges) {
+      SootMethod caleeSootMethod = edge.tgt();
+      List<Edge> callerEdges = this.getCallerEdges(caleeSootMethod);
+      boolean canRemove = this.canRemoveNestedRegions(blockDecision, callerEdges);
+
+      System.out.println();
+
+    }
+
+    return new HashSet<>();
+
+//    throw new UnsupportedOperationException("Implement");
+
   }
 
   private void removeRegionsInMethod(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,
@@ -931,48 +958,47 @@ public abstract class DynamicRegionTransformer extends
   }
 
   @Override
-  protected boolean canRemoveNestedRegions(InfluencingTaints decision, List<Edge> callerEdges) {
-//    Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
-////    Set<Edge> analyzed = new HashSet<>();
-//
-//    while (!worklist.isEmpty()) {
-//      Edge edge = worklist.pop();
-////      analyzed.add(edge);
-////
-//      SootMethod caller = edge.src();
-//      MethodNode method = this.getSootMethodToMethodNode().get(caller);
-//      LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.getMethodsToRegionsInBlocks()
-//          .get(method);
-//
-//      MethodBlock callerBlock = this.getCallerBlock(edge);
-//      JavaRegion callerRegion = blockDecisions.get(callerBlock);
-//      InfluencingTaints callerDecision = this.getDecision(callerRegion);
-//
-//      // TODO decise when to remove nested decisions
-//      if (callerDecision.getContext().isEmpty() && callerDecision.getCondition().isEmpty()) {
-//        throw new UnsupportedOperationException("Handle case");
-////        List<Edge> callers = this.getCallerEdges(caller);
-////
-////        for (Edge e : callers) {
-////          if (analyzed.contains(e)) {
-////            continue;
-////          }
-////
-////          worklist.add(e);
-////        }
-//      }
-////      else if (!(decision.equals(callerDecision) || decision.containsAll(callerDecision))) {
-//      else if (!decision.equals(callerDecision)) {
-//        return false;
-//      }
-//    }
-//
-//    return true;
-    throw new UnsupportedOperationException("Implement");
+  protected boolean canRemoveNestedRegions(Set<Set<String>> blockDecision, List<Edge> callerEdges) {
+    Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
+    Set<Edge> analyzed = new HashSet<>();
+
+    while (!worklist.isEmpty()) {
+      Edge edge = worklist.pop();
+      analyzed.add(edge);
+
+      SootMethod caller = edge.src();
+      MethodNode callerMethod = this.getSootMethodToMethodNode().get(caller);
+      LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.getMethodsToRegionsInBlocks()
+          .getOrDefault(callerMethod, new LinkedHashMap<>());
+      // TODO fix this default hack when we can handle methods with special cases
+
+      MethodBlock callerBlock = this.getCallerBlock(edge);
+      JavaRegion callerRegion = blockDecisions.get(callerBlock);
+      Set<Set<String>> callerDecision = this.getDecision(callerRegion);
+
+      // TODO decide when to remove nested decisions
+      if (callerDecision.isEmpty()) {
+        List<Edge> callers = this.getCallerEdges(caller);
+
+        for (Edge callerEdge : callers) {
+          if (analyzed.contains(callerEdge)) {
+            continue;
+          }
+
+          worklist.add(callerEdge);
+        }
+      }
+      // TODO debating if it should be equals or contains
+      else if (!blockDecision.containsAll(callerDecision)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   @Override
-  protected Set<MethodBlock> removeNestedRegions(InfluencingTaints decision,
+  protected Set<MethodBlock> removeNestedRegions(Set<Set<String>> decision,
       SootMethod calleeSootMethod) {
 //    Set<MethodBlock> calleeModifiedBlocks = new HashSet<>();
 //    MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);

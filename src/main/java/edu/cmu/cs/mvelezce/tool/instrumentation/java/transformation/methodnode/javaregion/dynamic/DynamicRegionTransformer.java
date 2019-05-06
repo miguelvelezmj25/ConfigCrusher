@@ -557,8 +557,8 @@ public abstract class DynamicRegionTransformer extends
           LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
               .getMethodsToRegionsInBlocks().get(methodNode);
           updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
-          updatedRegions = updatedRegions
-              | this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
+//          updatedRegions = updatedRegions
+//              | this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
           updatedMethods = updatedMethods | updatedRegions;
         }
 
@@ -754,49 +754,47 @@ public abstract class DynamicRegionTransformer extends
       return updatedBlocks;
     }
 
-//    return this.expandUpInfluencingTaintsInMethod(block, blockInfluencingTaints, blocksToRegions);
-    throw new UnsupportedOperationException("Implement");
+    return this.expandUpInfluencingTaintsInMethod(block, blockInfluencingTaints, blocksToRegions);
   }
 
   private List<MethodBlock> expandUpInfluencingTaintsInMethod(MethodBlock block,
-      InfluencingTaints blockInfluencingTaints, Map<MethodBlock, JavaRegion> blocksToRegions) {
-//    List<MethodBlock> updatedBlocks = new ArrayList<>();
-//    Set<MethodBlock> blockPreds = block.getPredecessors();
-//
-//    if (blockPreds.isEmpty()) {
-//      throw new RuntimeException("The predecessors cannot be empty " + block.getID());
-//    }
-//
-//    for (MethodBlock pred : blockPreds) {
-//      // A block might jump to itself
-//      if (block == pred) {
-//        continue;
-//      }
-//
-//      JavaRegion predRegion = blocksToRegions.get(pred);
-//      InfluencingTaints predInfluencingTaints = this.getDecision(predRegion);
-//
-//      if (!canExpandUp(blockInfluencingTaints, predInfluencingTaints)) {
-//        // TODO this logic is not similar to the static version. Why is the static version different?
-//////        if (pred.isCatchWithImplicitThrow()) {
-//////          continue;
-//////        }
-//////
+      Set<Set<String>> blockInfluencingTaints, Map<MethodBlock, JavaRegion> blocksToRegions) {
+    List<MethodBlock> updatedBlocks = new ArrayList<>();
+    Set<MethodBlock> blockPreds = block.getPredecessors();
+
+    if (blockPreds.isEmpty()) {
+      throw new RuntimeException("The predecessors cannot be empty " + block.getID());
+    }
+
+    for (MethodBlock pred : blockPreds) {
+      // A block might jump to itself
+      if (block == pred) {
+        continue;
+      }
+
+      JavaRegion predRegion = blocksToRegions.get(pred);
+      Set<Set<String>> predInfluencingTaints = this.getDecision(predRegion);
+
+      if (!canExpandUp(blockInfluencingTaints, predInfluencingTaints)) {
+        // TODO this logic is not similar to the static version. Why is the static version different?
+////        if (pred.isCatchWithImplicitThrow()) {
+////          continue;
+////        }
 ////
-////        throw new RuntimeException(
-////            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
-//        continue;
-//      }
 //
-//      JavaRegion predNewRegion = this
-//          .addNewPredRegionToMappingOfBlocksToRegions(block, pred, predRegion, blocksToRegions);
-//      this.addNewRegionToMappingOfRegionsToData(predNewRegion, blockInfluencingTaints);
-//
-//      updatedBlocks.add(0, pred);
-//    }
-//
-//    return updatedBlocks;
-    throw new UnsupportedOperationException("Implement");
+//        throw new RuntimeException(
+//            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
+        continue;
+      }
+
+      JavaRegion predNewRegion = this
+          .addNewPredRegionToMappingOfBlocksToRegions(block, pred, predRegion, blocksToRegions);
+      this.addNewRegionToMappingOfRegionsToData(predNewRegion, blockInfluencingTaints);
+
+      updatedBlocks.add(0, pred);
+    }
+
+    return updatedBlocks;
   }
 
   private void addNewCallerRegionToMappingOfRegionsToData(JavaRegion newCallerRegion,
@@ -916,10 +914,12 @@ public abstract class DynamicRegionTransformer extends
       }
     }
 
-//    return blockInfluencingTaints.getCondition().containsAll(upInfluencingTaints.getCondition());
-    // return true;
-    throw new UnsupportedOperationException("Implement");
-
+    if (upInfluencingTaints.isEmpty()) {
+      return true;
+    }
+    else {
+      throw new UnsupportedOperationException("Imple");
+    }
   }
 
   @Override

@@ -71,9 +71,10 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
     this.asmBytecodeOffsetFinder = new ASMBytecodeOffsetFinder(classTransformer.getPathToClasses(),
         this.methodNodeToClassNode);
-    this.callGraph = CallGraphBuilder
-        .buildCallGraph(entryPoint, classTransformer.getPathToClasses());
-    this.applicationSootMethods = this.calculateApplicationSootMethods();
+    this.callGraph = null;
+//        CallGraphBuilder.buildCallGraph(entryPoint, classTransformer.getPathToClasses());
+    this.applicationSootMethods = null;
+//        this.calculateApplicationSootMethods();
   }
 
   protected abstract T getDecision(@Nullable JavaRegion javaRegion);
@@ -85,9 +86,9 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     this.matchMethodNodesToClassNodes(classNodes);
-    SootMethodsToMethodNodesMatcher
-        .matchSootMethodsToMethodNodes(classNodes, this.applicationSootMethods,
-            this.sootMethodToMethodNode, this.methodNodeToSootMethod);
+//    SootMethodsToMethodNodesMatcher
+//        .matchSootMethodsToMethodNodes(classNodes, this.applicationSootMethods,
+//            this.sootMethodToMethodNode, this.methodNodeToSootMethod);
   }
 
   private void matchMethodNodesToClassNodes(Set<ClassNode> classNodes) {

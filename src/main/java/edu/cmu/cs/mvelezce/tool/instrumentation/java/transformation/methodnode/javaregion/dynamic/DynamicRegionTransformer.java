@@ -62,19 +62,17 @@ public abstract class DynamicRegionTransformer extends
 
   // TODO can be pushed up
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
-//    for (ClassNode classNode : classNodes) {
-//      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-//
-//      if (methodsToInstrument.isEmpty()) {
-//        continue;
-//      }
-//
-//      for (MethodNode methodToInstrument : methodsToInstrument) {
-//        this.setStartAndEndBlocks(methodToInstrument);
-//      }
-//    }
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
-    throw new UnsupportedOperationException("Implement");
+      if (methodsToInstrument.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodToInstrument : methodsToInstrument) {
+        this.setStartAndEndBlocks(methodToInstrument);
+      }
+    }
   }
 
   private void setStartAndEndBlocks(MethodNode methodNode) {
@@ -112,30 +110,29 @@ public abstract class DynamicRegionTransformer extends
   private void removeNestedRegions(MethodGraph graph, MethodBlock block, JavaRegion region,
       Set<MethodBlock> ends, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
       MethodNode methodNode) {
-//    Set<MethodBlock> reachables = new HashSet<>();
-//
-//    for (MethodBlock end : ends) {
-//      reachables.addAll(graph.getReachableBlocks(block, end));
-//    }
-//
-//    reachables.removeAll(ends);
-//    reachables.add(block);
-//
-//    // If the ends are connected to the exit node, we want to analyze them since we will be removing regions called within the blocks
-//    Set<MethodBlock> endRegionBlocksWithReturn = this.getEndRegionBlocksWithReturn();
-//
-//    for (MethodBlock end : ends) {
-//      if (endRegionBlocksWithReturn.contains(end)) {
-//        reachables.add(end);
-//      }
-//    }
-//
-//    InfluencingTaints blockDecision = this.getDecision(region);
-//
+    Set<MethodBlock> reachables = new HashSet<>();
+
+    for (MethodBlock end : ends) {
+      reachables.addAll(graph.getReachableBlocks(block, end));
+    }
+
+    reachables.removeAll(ends);
+    reachables.add(block);
+
+    // If the ends are connected to the exit node, we want to analyze them since we will be removing regions called within the blocks
+    Set<MethodBlock> endRegionBlocksWithReturn = this.getEndRegionBlocksWithReturn();
+
+    for (MethodBlock end : ends) {
+      if (endRegionBlocksWithReturn.contains(end)) {
+        reachables.add(end);
+      }
+    }
+
+    Set<Set<String>> blockDecision = this.getDecision(region);
+
 //    this.removeRegionsInCallees(blockDecision, reachables, methodNode);
-//    reachables.remove(block);
-//    this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
-    throw new UnsupportedOperationException("Implement");
+    reachables.remove(block);
+    this.removeRegionsInMethod(blockDecision, reachables, blocksToRegions);
   }
 
   /**
@@ -183,83 +180,81 @@ public abstract class DynamicRegionTransformer extends
     }
   }
 
-  private void removeRegionsInMethod(InfluencingTaints blockDecision, Set<MethodBlock> reachables,
+  private void removeRegionsInMethod(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-//
-//    for (MethodBlock block : reachables) {
-//      JavaRegion region = blocksToRegions.get(block);
-//
-//      // Optimization
-//      if (region == null) {
-//        continue;
-//      }
-//
-//      InfluencingTaints decision = this.getDecision(region);
-//
-//      // TODO check when to remove a region based on influencing taints
-//      if (!decision.equals(blockDecision)) {
-//        continue;
-//      }
-//
-//      blocksToRegions.put(block, null);
-//      this.getRegionsToData().remove(region);
-//    }
-    throw new UnsupportedOperationException("Implement");
+
+    for (MethodBlock block : reachables) {
+      JavaRegion region = blocksToRegions.get(block);
+
+      // Optimization
+      if (region == null) {
+        continue;
+      }
+
+      Set<Set<String>> decision = this.getDecision(region);
+
+      // TODO check when to remove a region based on influencing taints
+      if (!decision.equals(blockDecision)) {
+        continue;
+      }
+
+      blocksToRegions.put(block, null);
+      this.getRegionsToData().remove(region);
+    }
   }
 
   private Set<MethodBlock> setStartAndEndBlocks(MethodGraph graph, MethodBlock block,
       JavaRegion region, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-//    region.setStartMethodBlock(block);
-//    InfluencingTaints blockDecision = this.getDecision(region);
+    region.setStartMethodBlock(block);
+    Set<Set<String>> blockDecision = this.getDecision(region);
+
+    MethodBlock ipd = graph.getImmediatePostDominator(block);
+    JavaRegion ipdRegion = blocksToRegions.get(ipd);
+    Set<Set<String>> ipdDecision = this.getDecision(ipdRegion);
+
+    MethodBlock beta = graph.getExitBlock();
+
+    // TODO check when to finish looking for the next ipd
+    while (ipd != beta && blockDecision.equals(ipdDecision)) {
+      MethodBlock tmp = graph.getImmediatePostDominator(ipd);
+
+////                // Optimization
+////                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+////                    break;
+////                }
 //
-//    MethodBlock ipd = graph.getImmediatePostDominator(block);
-//    JavaRegion ipdRegion = blocksToRegions.get(ipd);
-//    InfluencingTaints ipdDecision = this.getDecision(ipdRegion);
+      ipd = tmp;
+      ipdRegion = blocksToRegions.get(ipd);
+      ipdDecision = this.getDecision(ipdRegion);
+    }
+
+    MethodBlock end = ipd;
+    Set<MethodBlock> ends = new HashSet<>();
+
+    if (block == end) {
+      throw new RuntimeException("Start and end equal");
+    }
+    else if (block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next()
+        .equals(end)) {
+//        ends.add(block);
 //
-//    MethodBlock beta = graph.getExitBlock();
-//
-//    // TODO check when to finish looking for the next ipd
-//    while (ipd != beta && blockDecision.equals(ipdDecision)) {
-//      MethodBlock tmp = graph.getImmediatePostDominator(ipd);
-//
-//////                // Optimization
-//////                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-//////                    break;
-//////                }
-////
-//      ipd = tmp;
-//      ipdRegion = blocksToRegions.get(ipd);
-//      ipdDecision = this.getDecision(ipdRegion);
-//    }
-//
-//    MethodBlock end = ipd;
-//    Set<MethodBlock> ends = new HashSet<>();
-//
-//    if (block == end) {
-//      throw new RuntimeException("Start and end equal");
-//    }
-//    else if (block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next()
-//        .equals(end)) {
-////        ends.add(block);
-////
-////        if (graph.getExitBlock() == end) {
-////          this.endRegionBlocksWithReturn.add(block);
-////        }
-//      throw new UnsupportedOperationException("What is this case?");
-//    }
-//    else if (beta == end) {
-//      Set<MethodBlock> preds = end.getPredecessors();
-//      ends.addAll(preds);
-//      this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
-//    }
-//    else {
-//      ends.add(end);
-//    }
-//
-//    region.setEndMethodBlocks(ends);
-//
-//    return ends;
-    throw new UnsupportedOperationException("Implement");
+//        if (graph.getExitBlock() == end) {
+//          this.endRegionBlocksWithReturn.add(block);
+//        }
+      throw new UnsupportedOperationException("What is this case?");
+    }
+    else if (beta == end) {
+      Set<MethodBlock> preds = end.getPredecessors();
+      ends.addAll(preds);
+      this.getEndRegionBlocksWithReturn().addAll(end.getPredecessors());
+    }
+    else {
+      ends.add(end);
+    }
+
+    region.setEndMethodBlocks(ends);
+
+    return ends;
   }
 
 //  private void instrument(Set<ClassNode> classNodes) throws IOException {

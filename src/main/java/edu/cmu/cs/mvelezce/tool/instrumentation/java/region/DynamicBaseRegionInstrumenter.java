@@ -43,12 +43,18 @@ public abstract class DynamicBaseRegionInstrumenter extends
         endBlocksIDs.add(block.getID());
       }
 
-      JavaRegion newRegion = new JavaRegion.Builder(oldRegion.getRegionID(),
-          oldRegion.getRegionPackage(),
-          oldRegion.getRegionClass(), oldRegion.getRegionMethod())
-          .startBytecodeIndex(oldRegion.getStartRegionIndex())
-          .startBlockID(oldRegion.getStartMethodBlock().getID()).endBlocksIDs(endBlocksIDs)
-          .build();
+      // TODO this catch has to be removed when we can handle methods with special cases
+      JavaRegion newRegion;
+      try {
+        newRegion = new JavaRegion.Builder(oldRegion.getRegionID(),
+            oldRegion.getRegionPackage(),
+            oldRegion.getRegionClass(), oldRegion.getRegionMethod())
+            .startBytecodeIndex(oldRegion.getStartRegionIndex())
+            .startBlockID(oldRegion.getStartMethodBlock().getID()).endBlocksIDs(endBlocksIDs)
+            .build();
+      } catch (NullPointerException npe) {
+        continue;
+      }
 
       RegionToInfo<Set<Set<String>>> regionToInfo = new RegionToInfo<>(newRegion,
           entry.getValue());

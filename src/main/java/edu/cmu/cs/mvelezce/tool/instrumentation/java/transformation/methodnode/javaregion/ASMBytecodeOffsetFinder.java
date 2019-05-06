@@ -25,6 +25,7 @@ import soot.tagkit.Tag;
 public class ASMBytecodeOffsetFinder {
 
   private static final String INIT = "<init>";
+  private static final String CLINIT = "<clinit>";
 
   private final String pathToClasses;
   private final Map<MethodNode, ClassNode> methodNodeToClassNode;
@@ -60,6 +61,9 @@ public class ASMBytecodeOffsetFinder {
       methodDeclaration = elements[0] + " ";
       methodDeclaration += this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
       methodDeclaration += elements[2];
+    }
+    else if(methodNode.name.equals(CLINIT)) {
+      throw new UnsupportedOperationException("Handle case");
     }
 
     int javapStartIndexOfMethod = 0;

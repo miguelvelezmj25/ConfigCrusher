@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.constructor.ConstructorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
@@ -21,6 +22,20 @@ import java.util.Set;
 import org.junit.Test;
 
 public class PhosphorAnalysisTest {
+
+  @Test
+  public void Constructor() throws IOException, InterruptedException {
+    String programName = ConstructorAdapter.PROGRAM_NAME;
+    List<String> options = ConstructorAdapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
 
   @Test
   public void Trivial() throws IOException, InterruptedException {

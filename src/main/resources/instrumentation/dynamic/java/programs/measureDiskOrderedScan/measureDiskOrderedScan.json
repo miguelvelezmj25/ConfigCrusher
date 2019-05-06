@@ -1,17 +1,17 @@
 [
   {
     "region": {
-      "regionID": "78666953-bdd8-4e1f-9425-0a9d61466281",
+      "regionID": "9912bcf2-eca0-49ee-8e90-4326b79e7305",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "IN",
-      "regionMethod": "setLsn(IJZ)V",
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DatabaseImpl",
+      "regionMethod": "resetKeyComparator()V",
       "startRegionIndex": -1,
-      "startBlockID": "1761370986",
+      "startBlockID": "709301424",
       "endBlocksIDs": [
-        "1845548855"
+        "1160210786"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -20,35 +20,6 @@
       [
         "JECACHESIZE",
         "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "70b894d0-72bb-4ac7-b5bd-2fbf3ac99758",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "IN",
-      "regionMethod": "haveEmbeddedData(I)Z",
-      "startRegionIndex": 1,
-      "startBlockID": "476499202",
-      "endBlocksIDs": [
-        "2130883284"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ],
-      [
-        "JECACHESIZE",
-        "DUPLICATES",
-        "SEQUENTIAL"
       ]
     ]
   },
@@ -62,9 +33,9 @@
       "regionClass": "IN",
       "regionMethod": "isEmbeddedLN(I)Z",
       "startRegionIndex": 1,
-      "startBlockID": "1284634047",
+      "startBlockID": "2092925148",
       "endBlocksIDs": [
-        "1002690318"
+        "812420457"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -83,17 +54,245 @@
   },
   {
     "region": {
-      "regionID": "401f2bb8-e4b3-4f31-b774-b702f105ef31",
+      "regionID": "dd501b68-9dc6-4538-bea4-50b5224168aa",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.analysis",
+      "regionClass": "MeasureDiskOrderedScan",
+      "regionMethod": "populate()V",
+      "startRegionIndex": 3,
+      "startBlockID": "405024821",
+      "endBlocksIDs": [
+        "945468"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "eec1fe1d-7eff-47e0-a3c8-f4078a94fe44",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "IN",
+      "regionMethod": "setLsn(IJZ)V",
+      "startRegionIndex": -1,
+      "startBlockID": "1073978506",
+      "endBlocksIDs": [
+        "1734055541"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0a963b20-a2b3-4395-858a-4ad1911459a3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.log",
+      "regionClass": "LogEntryHeader",
+      "regionMethod": "writeToLog(Ljava/nio/ByteBuffer;)V",
+      "startRegionIndex": -1,
+      "startBlockID": "417020440",
+      "endBlocksIDs": [
+        "1699593921"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "08faa200-580e-45aa-acdd-11b7884d306e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.recovery",
+      "regionClass": "RecoveryInfo",
+      "regionMethod": "appendLsn(Ljava/lang/StringBuilder;Ljava/lang/String;J)V",
+      "startRegionIndex": 1,
+      "startBlockID": "563481492",
+      "endBlocksIDs": [
+        "209888027"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "74c4279f-0383-4168-a4d7-532cf0242e40",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "MemoryBudget",
-      "regionMethod": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DbConfigManager;)V",
+      "regionClass": "CursorImpl$LockStanding",
+      "regionMethod": "prepareForUpdate(Lcom/sleepycat/je/tree/BIN;I)Lcom/sleepycat/je/txn/WriteLockInfo;",
       "startRegionIndex": 1,
-      "startBlockID": "756998841",
+      "startBlockID": "1374044245",
       "endBlocksIDs": [
-        "1879440022"
+        "1986046501"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8affbc6e-f033-4c38-9753-982e2526e61a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "StorageSize",
+      "regionMethod": "getStorageSize(Lcom/sleepycat/je/tree/BIN;I)I",
+      "startRegionIndex": -1,
+      "startBlockID": "1503534765",
+      "endBlocksIDs": [
+        "836986132",
+        "1158257763",
+        "1771286954",
+        "1994813219"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "54e0a415-4645-450e-9906-852ec84537e4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DbTree",
+      "regionMethod": "checkReplicaWrite(Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/log/ReplicationContext;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "243800363",
+      "endBlocksIDs": [
+        "1034646887"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "70eafede-e474-489c-9030-c857f9c1fcca",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.evictor",
+      "regionClass": "Arbiter",
+      "regionMethod": "isOverBudget()Z",
+      "startRegionIndex": 1,
+      "startBlockID": "1141999274",
+      "endBlocksIDs": [
+        "1940409870"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE",
+        "DUPLICATES",
+        "SEQUENTIAL"
+      ],
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE"
+      ],
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9488adc6-eb90-4d75-bfa7-5768f796b5ff",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DatabaseImpl",
+      "regionMethod": "<init>(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/DatabaseConfig;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "200157908",
+      "endBlocksIDs": [
+        "694251009"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "99a75ea4-c6ab-47ee-91dd-5054aea0aff6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.evictor",
+      "regionClass": "Evictor",
+      "regionMethod": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+      "startRegionIndex": -1,
+      "startBlockID": "1833038083",
+      "endBlocksIDs": [
+        "183714934"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -107,17 +306,17 @@
   },
   {
     "region": {
-      "regionID": "2d57393e-45fc-4b4d-9856-15f60827e64b",
+      "regionID": "cf34f07e-abd1-408e-9d3e-146064bb3fad",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "MemoryBudget",
-      "regionMethod": "reset(JZLcom/sleepycat/je/dbi/DbConfigManager;)V",
+      "regionPackage": "com.sleepycat.je.evictor",
+      "regionClass": "Evictor",
+      "regionMethod": "doDaemonEviction(Z)V",
       "startRegionIndex": 1,
-      "startBlockID": "578549139",
+      "startBlockID": "306838523",
       "endBlocksIDs": [
-        "1551473337"
+        "530107497"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -139,9 +338,9 @@
       "regionClass": "EnvironmentImpl",
       "regionMethod": "requestShutdownDaemons()V",
       "startRegionIndex": 1,
-      "startBlockID": "2101272019",
+      "startBlockID": "1730574024",
       "endBlocksIDs": [
-        "1805688432"
+        "387314428"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -162,55 +361,7 @@
   },
   {
     "region": {
-      "regionID": "a3b91949-2ed8-4317-a8de-b5bfb4b3c670",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DatabaseImpl",
-      "regionMethod": "getSortedDuplicates()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "1154477694",
-      "endBlocksIDs": [
-        "1241220088"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "9fea5292-ea2e-4e06-969b-82220e0a9e2a",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DatabaseImpl",
-      "regionMethod": "isTemporary()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "1753394130",
-      "endBlocksIDs": [
-        "82818596"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "b7800478-df83-4549-ad9d-058e5da26d7a",
+      "regionID": "cfc0de2a-3cd2-4fd9-82dc-425aebb34eeb",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
@@ -218,9 +369,9 @@
       "regionClass": "MemoryBudget",
       "regionMethod": "refreshTreeAdminMemoryUsage(J)V",
       "startRegionIndex": -1,
-      "startBlockID": "2130538154",
+      "startBlockID": "545411919",
       "endBlocksIDs": [
-        "734715773"
+        "2077719327"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -245,17 +396,17 @@
   },
   {
     "region": {
-      "regionID": "ba6039b7-13d4-4ca8-bcca-7ecb77931f21",
+      "regionID": "521078eb-c720-42ee-9c92-8f3eb66562cd",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je",
-      "regionClass": "DatabaseConfig",
-      "regionMethod": "setSortedDuplicatesVoid(Z)V",
+      "regionClass": "Cursor",
+      "regionMethod": "checkUpdatesAllowed(Lcom/sleepycat/je/dbi/ExpirationInfo;)V",
       "startRegionIndex": 1,
-      "startBlockID": "54609809",
+      "startBlockID": "2075622990",
       "endBlocksIDs": [
-        "504370453"
+        "1965801196"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -269,17 +420,191 @@
   },
   {
     "region": {
-      "regionID": "bc742cec-8e57-4d72-aaa8-b75a05371ede",
+      "regionID": "b0d003f1-e470-4dca-b935-7e6f5362018c",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.txn",
-      "regionClass": "WriteLockInfo",
-      "regionMethod": "setAbortExpiration(IZ)V",
+      "regionPackage": "com.sleepycat.je.log",
+      "regionClass": "ReplicationContext",
+      "regionMethod": "mustGenerateVLSN()Z",
       "startRegionIndex": 1,
-      "startBlockID": "1996417928",
+      "startBlockID": "1454451038",
       "endBlocksIDs": [
-        "1606246181"
+        "384056554"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c2b49f71-da2a-4be8-a0f2-d5ef6fd30f1b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "BIN",
+      "regionMethod": "isLastLoggedSizeStored(I)Z",
+      "startRegionIndex": -1,
+      "startBlockID": "483347388",
+      "endBlocksIDs": [
+        "1054187632"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "70b894d0-72bb-4ac7-b5bd-2fbf3ac99758",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "IN",
+      "regionMethod": "haveEmbeddedData(I)Z",
+      "startRegionIndex": 1,
+      "startBlockID": "974790722",
+      "endBlocksIDs": [
+        "885638033"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ],
+      [
+        "JECACHESIZE",
+        "DUPLICATES",
+        "SEQUENTIAL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2d57393e-45fc-4b4d-9856-15f60827e64b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "MemoryBudget",
+      "regionMethod": "reset(JZLcom/sleepycat/je/dbi/DbConfigManager;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "884428202",
+      "endBlocksIDs": [
+        "800989510"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ba6039b7-13d4-4ca8-bcca-7ecb77931f21",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je",
+      "regionClass": "DatabaseConfig",
+      "regionMethod": "setSortedDuplicatesVoid(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "1996344939",
+      "endBlocksIDs": [
+        "59254016"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9fea5292-ea2e-4e06-969b-82220e0a9e2a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DatabaseImpl",
+      "regionMethod": "isTemporary()Z",
+      "startRegionIndex": 1,
+      "startBlockID": "1001107566",
+      "endBlocksIDs": [
+        "853732668"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bf302008-3be7-4af9-8883-fb5cefaf9ad2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DatabaseImpl",
+      "regionMethod": "replicatedBitSet()Z",
+      "startRegionIndex": 1,
+      "startBlockID": "1028239440",
+      "endBlocksIDs": [
+        "591767471"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b421dbcf-90f8-4641-829f-1e1bc8a717c6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "BIN",
+      "regionMethod": "getLastLoggedSize(I)I",
+      "startRegionIndex": 1,
+      "startBlockID": "456278962",
+      "endBlocksIDs": [
+        "376845698",
+        "192719667"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -301,9 +626,44 @@
       "regionClass": "MemoryBudget",
       "regionMethod": "refreshTreeMemoryUsage(J)V",
       "startRegionIndex": 1,
-      "startBlockID": "1063343373",
+      "startBlockID": "232037283",
       "endBlocksIDs": [
-        "717745380"
+        "74230311"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE",
+        "DUPLICATES",
+        "SEQUENTIAL"
+      ],
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE"
+      ],
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0b210293-ab49-45c2-b0ec-0d73a80a6e2a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "MemoryBudget$SharedTotals",
+      "regionMethod": "updateCacheUsage(J)Z",
+      "startRegionIndex": 1,
+      "startBlockID": "660288394",
+      "endBlocksIDs": [
+        "825923758"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -336,9 +696,9 @@
       "regionClass": "MemoryBudget$PrivateTotals",
       "regionMethod": "updateCacheUsage(J)Z",
       "startRegionIndex": 1,
-      "startBlockID": "538608865",
+      "startBlockID": "482879789",
       "endBlocksIDs": [
-        "179114608"
+        "446364279"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -357,220 +717,6 @@
       [
         "JECACHESIZE",
         "SHAREDCACHE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "a6e469f1-0c04-4216-8efe-c05783694be7",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.log",
-      "regionClass": "LogEntryHeader",
-      "regionMethod": "writeToLog(Ljava/nio/ByteBuffer;)V",
-      "startRegionIndex": -1,
-      "startBlockID": "1979462724",
-      "endBlocksIDs": [
-        "1315514135"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "70eafede-e474-489c-9030-c857f9c1fcca",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.evictor",
-      "regionClass": "Arbiter",
-      "regionMethod": "isOverBudget()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "1111575649",
-      "endBlocksIDs": [
-        "130930095"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE",
-        "DUPLICATES",
-        "SEQUENTIAL"
-      ],
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE"
-      ],
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "e18790b7-36b3-49c6-ae8a-ea095d634a99",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.evictor",
-      "regionClass": "Evictor",
-      "regionMethod": "doCriticalEviction(Z)V",
-      "startRegionIndex": 1,
-      "startBlockID": "778070714",
-      "endBlocksIDs": [
-        "1119346166"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE",
-        "DUPLICATES",
-        "SEQUENTIAL"
-      ],
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE"
-      ],
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "0ddb4cd4-a4ae-4f52-b608-598521dbd126",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.analysis",
-      "regionClass": "MeasureDiskOrderedScan",
-      "regionMethod": "populate()V",
-      "startRegionIndex": -1,
-      "startBlockID": "879746195",
-      "endBlocksIDs": [
-        "1688760910"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "SEQUENTIAL"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "b421dbcf-90f8-4641-829f-1e1bc8a717c6",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "BIN",
-      "regionMethod": "getLastLoggedSize(I)I",
-      "startRegionIndex": 1,
-      "startBlockID": "2059697799",
-      "endBlocksIDs": [
-        "1501033430",
-        "1846187858"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "8030af19-8552-407f-83ce-f430526d6994",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "IN",
-      "regionMethod": "isExpirationInHours()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "1657199513",
-      "endBlocksIDs": [
-        "142568117"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "74c4279f-0383-4168-a4d7-532cf0242e40",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "CursorImpl$LockStanding",
-      "regionMethod": "prepareForUpdate(Lcom/sleepycat/je/tree/BIN;I)Lcom/sleepycat/je/txn/WriteLockInfo;",
-      "startRegionIndex": 1,
-      "startBlockID": "333893302",
-      "endBlocksIDs": [
-        "1522852069"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "b0d003f1-e470-4dca-b935-7e6f5362018c",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.log",
-      "regionClass": "ReplicationContext",
-      "regionMethod": "mustGenerateVLSN()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "1362084582",
-      "endBlocksIDs": [
-        "1313543062"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
         "DUPLICATES"
       ]
     ]
@@ -585,10 +731,10 @@
       "regionClass": "LogEntryHeader",
       "regionMethod": "getSize()I",
       "startRegionIndex": 1,
-      "startBlockID": "575712148",
+      "startBlockID": "1183970596",
       "endBlocksIDs": [
-        "1298785325",
-        "1790719988"
+        "338519915",
+        "1712552838"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -602,40 +748,45 @@
   },
   {
     "region": {
-      "regionID": "dd501b68-9dc6-4538-bea4-50b5224168aa",
+      "regionID": "89c60819-c165-4168-a911-49bdd64c1d5b",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.analysis",
-      "regionClass": "MeasureDiskOrderedScan",
-      "regionMethod": "populate()V",
-      "startRegionIndex": 3,
-      "startBlockID": "1778784318",
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "DupKeyData$TwoPartKeyComparator",
+      "regionMethod": "compare([B[B)I",
+      "startRegionIndex": -1,
+      "startBlockID": "1911215792",
       "endBlocksIDs": [
-        "973282545"
+        "516583260",
+        "1566823574",
+        "993638207",
+        "145157816"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "info": [
       [
-        "DUPLICATES"
+        "JECACHESIZE",
+        "DUPLICATES",
+        "SEQUENTIAL"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "053776a5-0e92-49e1-954c-6609d4760f9b",
+      "regionID": "9edffbc4-b09f-4cb8-932e-471fd09d98ad",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je.dbi",
       "regionClass": "DatabaseImpl",
-      "regionMethod": "getUtilizationRepairDone()Z",
+      "regionMethod": "setConfigProperties(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
       "startRegionIndex": 1,
-      "startBlockID": "2117451853",
+      "startBlockID": "1023093833",
       "endBlocksIDs": [
-        "632469008"
+        "1922344303"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -649,17 +800,41 @@
   },
   {
     "region": {
-      "regionID": "0b210293-ab49-45c2-b0ec-0d73a80a6e2a",
+      "regionID": "401f2bb8-e4b3-4f31-b774-b702f105ef31",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "MemoryBudget$SharedTotals",
-      "regionMethod": "updateCacheUsage(J)Z",
+      "regionClass": "MemoryBudget",
+      "regionMethod": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DbConfigManager;)V",
       "startRegionIndex": 1,
-      "startBlockID": "1906635059",
+      "startBlockID": "1444014766",
       "endBlocksIDs": [
-        "1357184882"
+        "1579308058"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "SHAREDCACHE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e18790b7-36b3-49c6-ae8a-ea095d634a99",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.je.evictor",
+      "regionClass": "Evictor",
+      "regionMethod": "doCriticalEviction(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "1854114037",
+      "endBlocksIDs": [
+        "1940330634"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -684,68 +859,64 @@
   },
   {
     "region": {
-      "regionID": "20fb34b0-ff18-4b5e-a786-ec61a0014f71",
+      "regionID": "bc742cec-8e57-4d72-aaa8-b75a05371ede",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "StorageSize",
-      "regionMethod": "getStorageSize(Lcom/sleepycat/je/tree/BIN;I)I",
+      "regionPackage": "com.sleepycat.je.txn",
+      "regionClass": "WriteLockInfo",
+      "regionMethod": "setAbortExpiration(IZ)V",
+      "startRegionIndex": 1,
+      "startBlockID": "1355097175",
+      "endBlocksIDs": [
+        "5903457"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fed93642-4f96-4da4-acbf-6b457a1bcfe3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "com.sleepycat.analysis",
+      "regionClass": "MeasureDiskOrderedScan",
+      "regionMethod": "populate()V",
       "startRegionIndex": -1,
-      "startBlockID": "863307618",
+      "startBlockID": "1228887167",
       "endBlocksIDs": [
-        "262320654",
-        "886236149",
-        "1356598856",
-        "751579433"
+        "477714182"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "info": [
       [
-        "JECACHESIZE",
-        "DUPLICATES"
+        "SEQUENTIAL"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "2b270bfa-a409-4054-ab46-c07adccb0d9c",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.evictor",
-      "regionClass": "Evictor",
-      "regionMethod": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
-      "startRegionIndex": -1,
-      "startBlockID": "1240594825",
-      "endBlocksIDs": [
-        "1629766578"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "9edffbc4-b09f-4cb8-932e-471fd09d98ad",
+      "regionID": "a3b91949-2ed8-4317-a8de-b5bfb4b3c670",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je.dbi",
       "regionClass": "DatabaseImpl",
-      "regionMethod": "setConfigProperties(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+      "regionMethod": "getSortedDuplicates()Z",
       "startRegionIndex": 1,
-      "startBlockID": "1858834220",
+      "startBlockID": "1295526103",
       "endBlocksIDs": [
-        "257314480"
+        "1021233847"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -759,161 +930,17 @@
   },
   {
     "region": {
-      "regionID": "cf34f07e-abd1-408e-9d3e-146064bb3fad",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.evictor",
-      "regionClass": "Evictor",
-      "regionMethod": "doDaemonEviction(Z)V",
-      "startRegionIndex": 1,
-      "startBlockID": "31478359",
-      "endBlocksIDs": [
-        "1726102470"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "SHAREDCACHE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "54e0a415-4645-450e-9906-852ec84537e4",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DbTree",
-      "regionMethod": "checkReplicaWrite(Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/log/ReplicationContext;)V",
-      "startRegionIndex": 1,
-      "startBlockID": "1504393958",
-      "endBlocksIDs": [
-        "1276953634"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "521078eb-c720-42ee-9c92-8f3eb66562cd",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je",
-      "regionClass": "Cursor",
-      "regionMethod": "checkUpdatesAllowed(Lcom/sleepycat/je/dbi/ExpirationInfo;)V",
-      "startRegionIndex": 1,
-      "startBlockID": "1236764734",
-      "endBlocksIDs": [
-        "661718109"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "bf302008-3be7-4af9-8883-fb5cefaf9ad2",
+      "regionID": "053776a5-0e92-49e1-954c-6609d4760f9b",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "com.sleepycat.je.dbi",
       "regionClass": "DatabaseImpl",
-      "regionMethod": "replicatedBitSet()Z",
+      "regionMethod": "getUtilizationRepairDone()Z",
       "startRegionIndex": 1,
-      "startBlockID": "1656084726",
+      "startBlockID": "793801636",
       "endBlocksIDs": [
-        "1959756062"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "9488adc6-eb90-4d75-bfa7-5768f796b5ff",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DatabaseImpl",
-      "regionMethod": "<init>(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/DatabaseConfig;)V",
-      "startRegionIndex": 1,
-      "startBlockID": "28211905",
-      "endBlocksIDs": [
-        "1624295136"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "1eb03a7e-3897-4d35-99b6-82187889d5fd",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DatabaseImpl",
-      "regionMethod": "resetKeyComparator()V",
-      "startRegionIndex": -1,
-      "startBlockID": "432542831",
-      "endBlocksIDs": [
-        "1077007804"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE",
-        "DUPLICATES"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "c393b790-ed31-4d39-a073-46538b89ecc6",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "CursorImpl$LockStanding",
-      "regionMethod": "recordExists()Z",
-      "startRegionIndex": 1,
-      "startBlockID": "449724814",
-      "endBlocksIDs": [
-        "1316401586"
+        "1040166800"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -935,11 +962,11 @@
       "regionClass": "INKeyRep$Default",
       "regionMethod": "getKey(IZ)[B",
       "startRegionIndex": 1,
-      "startBlockID": "2136558736",
+      "startBlockID": "1597806537",
       "endBlocksIDs": [
-        "1528268264",
-        "346928104",
-        "1855946710"
+        "1674671388",
+        "1514017983",
+        "1627870601"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -958,20 +985,17 @@
   },
   {
     "region": {
-      "regionID": "9655984c-8bc7-4cfd-b193-2ec7e6b06968",
+      "regionID": "8030af19-8552-407f-83ce-f430526d6994",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.dbi",
-      "regionClass": "DupKeyData$TwoPartKeyComparator",
-      "regionMethod": "compare([B[B)I",
-      "startRegionIndex": -1,
-      "startBlockID": "1186781774",
+      "regionPackage": "com.sleepycat.je.tree",
+      "regionClass": "IN",
+      "regionMethod": "isExpirationInHours()Z",
+      "startRegionIndex": 1,
+      "startBlockID": "324386930",
       "endBlocksIDs": [
-        "190564479",
-        "1654147502",
-        "175077534",
-        "2052412020"
+        "404256657"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -979,47 +1003,23 @@
     "info": [
       [
         "JECACHESIZE",
-        "DUPLICATES",
-        "SEQUENTIAL"
+        "DUPLICATES"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "08faa200-580e-45aa-acdd-11b7884d306e",
+      "regionID": "c393b790-ed31-4d39-a073-46538b89ecc6",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "com.sleepycat.je.recovery",
-      "regionClass": "RecoveryInfo",
-      "regionMethod": "appendLsn(Ljava/lang/StringBuilder;Ljava/lang/String;J)V",
+      "regionPackage": "com.sleepycat.je.dbi",
+      "regionClass": "CursorImpl$LockStanding",
+      "regionMethod": "recordExists()Z",
       "startRegionIndex": 1,
-      "startBlockID": "1146698143",
+      "startBlockID": "1983023247",
       "endBlocksIDs": [
-        "1312879667"
-      ],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": [
-      [
-        "JECACHESIZE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "cd8aa845-9805-4fba-8c03-b53870dc90ac",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "com.sleepycat.je.tree",
-      "regionClass": "BIN",
-      "regionMethod": "isLastLoggedSizeStored(I)Z",
-      "startRegionIndex": -1,
-      "startBlockID": "1661592827",
-      "endBlocksIDs": [
-        "1204863712"
+        "2114629273"
       ],
       "startMethodBlock": null,
       "endMethodBlocks": []

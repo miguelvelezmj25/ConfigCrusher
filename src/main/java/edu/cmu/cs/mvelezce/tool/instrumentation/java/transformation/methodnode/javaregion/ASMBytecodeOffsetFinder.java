@@ -47,28 +47,39 @@ public class ASMBytecodeOffsetFinder {
   public AbstractInsnNode getASMInstruction(MethodNode methodNode, SootMethod sootMethod,
       int bytecodeIndex) {
     List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-    String methodDeclaration = sootMethod.getDeclaration() + ";";
+    String methodDeclaration = sootMethod.getDeclaration();
+    methodDeclaration = methodDeclaration.substring(0, methodDeclaration.indexOf("("));
 
     if (methodNode.name.equals(INIT)) {
       String[] elements = methodDeclaration.split(" ");
 
-      if (elements.length != 3) {
-        throw new RuntimeException("Expected that there would be 3 elements when splitting");
+      if (!elements[0].equals("void")) {
+        methodDeclaration = elements[0];
+        methodDeclaration += " ";
+      }
+      else {
+        methodDeclaration = "";
       }
 
-      elements[2] = elements[2].replace(INIT, "");
-
-      methodDeclaration = elements[0] + " ";
       methodDeclaration += this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
-      methodDeclaration += elements[2];
     }
-    else if(methodNode.name.equals(CLINIT)) {
+    else if (methodNode.name.equals(CLINIT)) {
       throw new UnsupportedOperationException("Handle case");
     }
 
+    methodDeclaration += "(";
     int javapStartIndexOfMethod = 0;
 
-    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
+    for (String entry : javapResult) {
+      if (entry.trim().startsWith(methodDeclaration)) {
+        String javapDescriptor = javapResult.get(javapStartIndexOfMethod + 1).trim();
+        javapDescriptor = javapDescriptor.substring(javapDescriptor.indexOf(" ")).trim();
+
+        if (javapDescriptor.equals(methodNode.desc)) {
+          break;
+        }
+      }
+
       javapStartIndexOfMethod++;
     }
 
@@ -258,7 +269,7 @@ public class ASMBytecodeOffsetFinder {
 
     while ((string = inputReader.readLine()) != null) {
       if (!string.isEmpty()) {
-        javapResult.add(string);
+        javapResult.add(string.trim());
       }
     }
 

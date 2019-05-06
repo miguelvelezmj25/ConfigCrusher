@@ -15,6 +15,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -312,5 +313,7 @@ public class TaintPhosphorAnalysisTest {
 
     analysis = new TaintPhosphorAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
+
+    assertEquals(write, read);
   }
 }

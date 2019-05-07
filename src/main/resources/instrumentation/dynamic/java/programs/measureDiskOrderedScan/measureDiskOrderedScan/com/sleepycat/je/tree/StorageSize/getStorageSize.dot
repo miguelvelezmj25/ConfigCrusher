@@ -1,0 +1,28 @@
+digraph getStorageSize {
+node [shape=record];
+1413888717 [label="L2\lLINENUMBER 190 L2\lFRAME APPEND [I]\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isEmbeddedLN (I)Z\lIFEQ L4\l"];
+1523029851 [label="L3\lLINENUMBER 175 L3\lILOAD 2\lICONST_1\lISUB\lBIPUSH 12\lIADD\lLDC \"e0ccaf3f-5085-4609-b928-7a641f20d420\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+2093174343 [label="L8\lLINENUMBER 208 L8\lICONST_0\lLDC \"e0ccaf3f-5085-4609-b928-7a641f20d420\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+442004427 [label="L7\lLINENUMBER 210 L7\lFRAME APPEND [I]\lILOAD 3\lILOAD 2\lIADD\lBIPUSH 14\lIADD\lLDC \"e0ccaf3f-5085-4609-b928-7a641f20d420\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL9\l"];
+957743566 [label="L0\lLINENUMBER 160 L0\lLDC \"e0ccaf3f-5085-4609-b928-7a641f20d420\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getStoredKeySize (I)I\lISTORE 2\lL1\lLINENUMBER 174 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L2\l"];
+271053909 [label="L5\lLINENUMBER 191 L5\lILOAD 2\lICONST_1\lISUB\lBIPUSH 20\lIADD\lLDC \"e0ccaf3f-5085-4609-b928-7a641f20d420\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+431398894 [label="L4\lLINENUMBER 205 L4\lFRAME SAME\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastLoggedSize (I)I\lISTORE 3\lL6\lLINENUMBER 206 L6\lILOAD 3\lIFNE L7\l"];
+entry;
+exit;
+entry -> 957743566;
+1413888717 -> 271053909;
+1413888717 -> 431398894;
+1523029851 -> exit;
+2093174343 -> exit;
+442004427 -> exit;
+957743566 -> 1413888717;
+957743566 -> 1523029851;
+271053909 -> exit;
+431398894 -> 2093174343;
+431398894 -> 442004427;
+1523029851[fontcolor="purple", penwidth=3, color="purple"];
+2093174343[fontcolor="purple", penwidth=3, color="purple"];
+442004427[fontcolor="purple", penwidth=3, color="purple"];
+957743566[fontcolor="purple", penwidth=3, color="purple"];
+271053909[fontcolor="purple", penwidth=3, color="purple"];
+}

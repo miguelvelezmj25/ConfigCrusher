@@ -106,7 +106,7 @@ public class DynamicTimerInstrumenterTest {
     String srcDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
 
-//    this.compile(srcDir, classDir);
+    this.compile(srcDir, classDir);
 
     String[] args = new String[0];
 

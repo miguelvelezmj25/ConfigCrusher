@@ -139,7 +139,7 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     return this.getRegionsWith(classPackage, className, methodName);
   }
 
-  protected List<JavaRegion> getRegionsWith(String classPackage, String className,
+  private List<JavaRegion> getRegionsWith(String classPackage, String className,
       String methodName) {
     List<JavaRegion> javaRegions = new ArrayList<>();
 
@@ -716,6 +716,29 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     }
 
     return modifiedCalleeBlocks;
+  }
+
+  protected void instrument(Set<ClassNode> classNodes) throws IOException {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+      if (methodsToInstrument.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodToInstrument : methodsToInstrument) {
+        // TODO handle this case that is not being read by soot
+        if (classNode.name.equals("com/sleepycat/je/recovery/RecoveryInfo")
+            && methodToInstrument.name.equals("appendLsn")) {
+          continue;
+        }
+
+        this.transformMethod(methodToInstrument, classNode);
+      }
+
+      this.getClassTransformer().writeClass(classNode);
+      this.debugMethods(classNode, methodsToInstrument);
+    }
   }
 
 }

@@ -1,0 +1,17 @@
+digraph isEmbeddedLN {
+node [shape=record];
+430489584 [label="L2\lFRAME SAME1 I\lLDC \"68f9a125-69ac-4048-88d2-92cdaaa086a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+1170265564 [label="L1\lFRAME SAME\lICONST_0\l"];
+362441080 [label="L0\lLINENUMBER 1178 L0\lLDC \"68f9a125-69ac-4048-88d2-92cdaaa086a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lBALOAD\lBIPUSH 16\lIAND\lIFEQ L1\l"];
+60580172 [label="ICONST_1\lGOTO L2\l"];
+entry;
+exit;
+entry -> 362441080;
+430489584 -> exit;
+1170265564 -> 430489584;
+362441080 -> 1170265564;
+362441080 -> 60580172;
+60580172 -> 430489584;
+430489584[fontcolor="purple", penwidth=3, color="purple"];
+362441080[fontcolor="purple", penwidth=3, color="purple"];
+}

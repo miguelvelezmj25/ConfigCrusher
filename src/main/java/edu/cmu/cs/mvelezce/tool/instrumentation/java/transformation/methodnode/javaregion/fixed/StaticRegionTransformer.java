@@ -1,13 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.fixed;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.DefaultMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.RegionTransformer;
@@ -32,7 +28,6 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Unit;
@@ -361,7 +356,7 @@ public abstract class StaticRegionTransformer extends
   /**
    * TODO
    */
-  private void instrument(Set<ClassNode> classNodes) throws IOException {
+  protected void instrument(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
       if (methodsToInstrument.isEmpty()) {
@@ -376,42 +371,7 @@ public abstract class StaticRegionTransformer extends
       }
     }
 
-    for (ClassNode classNode : classNodes) {
-      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-
-      if (methodsToInstrument.isEmpty()) {
-        continue;
-      }
-
-//            System.out.println("Instrumenting class " + classNode.name);
-
-      for (MethodNode methodToInstrument : methodsToInstrument) {
-//                System.out.println("Instrumenting method " + methodToInstrument.name);
-        this.transformMethod(methodToInstrument, classNode);
-      }
-
-      this.getClassTransformer().writeClass(classNode);
-
-      // Debugging
-      TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-      MethodTracer tracer = classInspector.visitClass();
-
-      // TODO there is a bug in the pretty print since it is not showing the instructions that were added
-      for (MethodNode methodNode : methodsToInstrument) {
-        Printer printer = tracer
-            .getPrinterForMethodSignature(RegionTransformer.getMethodName(methodNode));
-        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
-        prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-
-        try {
-          prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-        }
-        catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }
+    super.instrument(classNodes);
 
     this.debugRemovingRegions(classNodes);
   }

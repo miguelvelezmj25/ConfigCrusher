@@ -1,0 +1,20 @@
+digraph mustGenerateVLSN {
+node [shape=record];
+1283012354 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.clientVLSN : Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L1\l"];
+1002380906 [label="L1\lFRAME SAME\lICONST_0\l"];
+588630430 [label="L2\lFRAME SAME1 I\lLDC \"b0d003f1-e470-4dca-b935-7e6f5362018c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+1611090464 [label="L0\lLINENUMBER 120 L0\lLDC \"b0d003f1-e470-4dca-b935-7e6f5362018c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.inReplicationStream : Z\lIFEQ L1\l"];
+2040126151 [label="ICONST_1\lGOTO L2\l"];
+entry;
+exit;
+entry -> 1611090464;
+1283012354 -> 1002380906;
+1283012354 -> 2040126151;
+1002380906 -> 588630430;
+588630430 -> exit;
+1611090464 -> 1283012354;
+1611090464 -> 1002380906;
+2040126151 -> 588630430;
+588630430[fontcolor="purple", penwidth=3, color="purple"];
+1611090464[fontcolor="purple", penwidth=3, color="purple"];
+}

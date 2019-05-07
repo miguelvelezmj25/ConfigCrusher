@@ -61,8 +61,15 @@ public abstract class DynamicRegionTransformer extends
 //      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
     }
 
+    System.out.println();
+
     System.out.println("Setting start and end blocks");
     this.setStartAndEndBlocks(classNodes);
+    System.out.println();
+
+    System.out.println("Instrument methods");
+    this.instrument(classNodes);
+    System.out.println();
   }
 
   // TODO can be pushed up
@@ -349,47 +356,6 @@ public abstract class DynamicRegionTransformer extends
 
     return ends;
   }
-
-//  private void instrument(Set<ClassNode> classNodes) throws IOException {
-//
-////
-////    for (ClassNode classNode : classNodes) {
-////      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-////
-////      if (methodsToInstrument.isEmpty()) {
-////        continue;
-////      }
-////
-//////            System.out.println("Instrumenting class " + classNode.name);
-////
-////      for (MethodNode methodToInstrument : methodsToInstrument) {
-//////                System.out.println("Instrumenting method " + methodToInstrument.name);
-////        this.transformMethod(methodToInstrument, classNode);
-////      }
-////
-////      this.getClassTransformer().writeClass(classNode);
-////
-////      // Debugging
-////      TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-////      MethodTracer tracer = classInspector.visitClass();
-////
-////      // TODO there is a bug in the pretty print since it is not showing the instructions that were added
-////      for (MethodNode methodNode : methodsToInstrument) {
-////        Printer printer = tracer
-////            .getPrinterForMethodSignature(RegionTransformer.getMethodName(methodNode));
-////        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-////        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
-////        prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-////
-////        try {
-////          prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-////        }
-////        catch (InterruptedException e) {
-////          e.printStackTrace();
-////        }
-////      }
-//    }
-//  }
 
   private boolean propagateRegionsUpClasses() {
     boolean propagated = false;

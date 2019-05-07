@@ -192,19 +192,80 @@ public abstract class DynamicRegionTransformer extends
 
   private Set<MethodBlock> removeNestedRegions(List<Edge> calleeEdges,
       Set<Set<String>> blockDecision) {
+    Set<MethodBlock> modifiedBlocks = new HashSet<>();
+
     for (Edge edge : calleeEdges) {
-      SootMethod caleeSootMethod = edge.tgt();
-      List<Edge> callerEdges = this.getCallerEdges(caleeSootMethod);
+      SootMethod calleeSootMethod = edge.tgt();
+      List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
       boolean canRemove = this.canRemoveNestedRegions(blockDecision, callerEdges);
 
-      System.out.println();
+      if (!canRemove) {
+        continue;
+      }
 
+      Set<MethodBlock> blocks = this.removeNestedRegionsInCallee(blockDecision, calleeSootMethod);
+      modifiedBlocks.addAll(blocks);
     }
 
-    return new HashSet<>();
+    return modifiedBlocks;
+  }
 
-//    throw new UnsupportedOperationException("Implement");
+  private Set<MethodBlock> removeNestedRegionsInCallee(Set<Set<String>> blockDecision,
+      SootMethod calleeSootMethod) {
+    MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
+    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
+        .getMethodsToRegionsInBlocks().get(calleeMethodNode);
 
+//    if(calleeBlocksToRegions == null) {
+//      // TODO fix this by changing the package name
+//      continue;
+//    }
+
+    Set<MethodBlock> calleeBlocksThatWithDecisionsThatCannotBeRemoved = new HashSet<>();
+
+    for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+      MethodBlock calleeBlock = entry.getKey();
+
+      if (calleeBlocksThatWithDecisionsThatCannotBeRemoved.contains(calleeBlock)) {
+        continue;
+      }
+
+      JavaRegion calleeRegion = entry.getValue();
+
+      // Optimization
+      if (calleeRegion == null) {
+        continue;
+      }
+
+      Set<Set<String>> calleeDecision = this.getDecision(calleeRegion);
+
+      // TODO decide when not to remove nested regions
+      if (!blockDecision.containsAll(calleeDecision)) {
+        MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode,
+            this.getMethodNodeToClassNode().get(calleeMethodNode));
+        MethodBlock ipd = calleegraph.getImmediatePostDominator(calleeBlock);
+        Set<MethodBlock> reachables = calleegraph.getReachableBlocks(calleeBlock, ipd);
+        reachables.remove(ipd);
+        calleeBlocksThatWithDecisionsThatCannotBeRemoved.addAll(reachables);
+
+        continue;
+      }
+
+      this.getRegionsToData().remove(calleeRegion);
+      calleeBlocksToRegions.put(calleeBlock, null);
+    }
+
+    Set<MethodBlock> modifiedCalleeBlocks = new HashSet<>();
+
+    for (MethodBlock methodBlock : calleeBlocksToRegions.keySet()) {
+      if (calleeBlocksThatWithDecisionsThatCannotBeRemoved.contains(methodBlock)) {
+        continue;
+      }
+
+      modifiedCalleeBlocks.add(methodBlock);
+    }
+
+    return modifiedCalleeBlocks;
   }
 
   private void removeRegionsInMethod(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,
@@ -997,65 +1058,10 @@ public abstract class DynamicRegionTransformer extends
     return true;
   }
 
+  // TODO what should we do here
   @Override
   protected Set<MethodBlock> removeNestedRegions(Set<Set<String>> decision,
       SootMethod calleeSootMethod) {
-//    Set<MethodBlock> calleeModifiedBlocks = new HashSet<>();
-//    MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
-//    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
-//        .getMethodsToRegionsInBlocks().get(calleeMethodNode);
-//
-////          if (calleeBlocksToRegions == null) {
-////            // TODO fix this by changing the package name
-////            continue;
-////          }
-////
-////          Set<MethodBlock> skip = new HashSet<>();
-////
-//    for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-////            if (skip.contains(entry.getKey())) {
-////              continue;
-////            }
-////
-//      JavaRegion calleeRegion = entry.getValue();
-//
-//      // Optimization
-//      if (calleeRegion == null) {
-//        continue;
-//      }
-//
-//      InfluencingTaints calleeDecision = this.getDecision(calleeRegion);
-//
-//      // TODO decide when not to remove nested regions
-//      if (!(decision.getCondition().containsAll(calleeDecision.getContext()) && decision
-//          .getCondition().containsAll(calleeDecision.getCondition()))) {
-//        continue;
-//      }
-////            if (!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
-////              MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
-////              MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
-////              Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
-////              rs.remove(ipd);
-////              skip.addAll(rs);
-////              continue;
-////            }
-////
-//      this.getRegionsToData().remove(calleeRegion);
-//      MethodBlock calleeModifiedBlock = entry.getKey();
-//      calleeBlocksToRegions.put(calleeModifiedBlock, null);
-//      calleeModifiedBlocks.add(calleeModifiedBlock);
-//    }
-////
-////          for (Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
-////            if (skip.contains(entry.getKey())) {
-////              continue;
-////            }
-////
-////            worklist.add(0, entry.getKey());
-////            blocksToMethods.put(entry.getKey(), calleeSootMethod);
-////          }
-//
-//    return calleeModifiedBlocks;
     throw new UnsupportedOperationException("Implement");
   }
 }

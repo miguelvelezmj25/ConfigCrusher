@@ -1,0 +1,50 @@
+[
+  {
+    "region": {
+      "regionID": "a92ac779-e483-415b-8df0-0a7e68ffcec5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "877630567",
+      "endBlocksIDs": [
+        "1050196275"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "acd65ee2-8e10-44b3-bc57-a3ca24e46db5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "96527084",
+      "endBlocksIDs": [
+        "877630567"
+      ],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      [
+        "A",
+        "B",
+        "C"
+      ]
+    ]
+  }
+]

@@ -159,7 +159,7 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     SootMethod callerSootMethod = edge.src();
     MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
     AbstractInsnNode instInCaller = this.asmBytecodeOffsetFinder
-        .getASMInstFromCaller(edge, callerSootMethod, callerMethodNode);
+        .getASMInstFromCaller(edge, callerMethodNode);
 
     // TODO fix this hack once we can handle methods with special cases
     try {
@@ -568,6 +568,19 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
     Set<Unit> callingUnits = new HashSet<>();
 
     for (AbstractInsnNode insnNode : insnNodes) {
+      if (insnNode instanceof MethodInsnNode) {
+        if (!((MethodInsnNode) insnNode).owner.replace("/", ".").contains(this.rootPackage)) {
+          continue;
+        }
+      }
+      else if (insnNode instanceof InvokeDynamicInsnNode) {
+        throw new UnsupportedOperationException("Handle this case");
+      }
+      else {
+        throw new RuntimeException(
+            "Did not expect this type of node to call a method " + insnNode.getClass());
+      }
+
       callingUnits.add(this.getUnit(insnNode, methodNode));
     }
 
@@ -604,7 +617,7 @@ public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
       }
 
       AbstractInsnNode asmInst = this.getAsmBytecodeOffsetFinder()
-          .getASMInstruction(methodNode, sootMethod, bytecodeIndex);
+          .getASMInstruction(methodNode, bytecodeIndex);
 
       if (inst != asmInst) {
         continue;

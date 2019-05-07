@@ -14,6 +14,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -150,21 +151,19 @@ public abstract class DynamicRegionTransformer extends
    */
   private void removeRegionsInCallees(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,
       MethodNode methodNode) {
-//    Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
-//    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
-//
-//    for (MethodBlock block : reachables) {
-//      blocksToMethods.put(block, sootMethod);
-//    }
-//
+    Map<MethodBlock, MethodNode> blocksToMethods = new HashMap<>();
+
+    for (MethodBlock block : reachables) {
+      blocksToMethods.put(block, methodNode);
+    }
+
 //    Set<SootMethod> analyzedCallees = new HashSet<>();
-    List<MethodBlock> worklist = new ArrayList<>();
-    worklist.addAll(reachables);
+    List<MethodBlock> worklist = new ArrayList<>(reachables);
     // TODO maybe do not add methods that have already been analyzed or are already in the worklist
 
     while (!worklist.isEmpty()) {
       MethodBlock reach = worklist.remove(0);
-//      sootMethod = blocksToMethods.get(reach);
+      methodNode = blocksToMethods.get(reach);
 //      analyzedCallees.add(sootMethod);
 
       Set<AbstractInsnNode> insnNodes = this.getInsnThatCallMethods(reach);
@@ -175,8 +174,8 @@ public abstract class DynamicRegionTransformer extends
 
       Set<Unit> callingUnits = this.getCallingUnits(insnNodes, methodNode);
 
-      if (callingUnits.isEmpty() || insnNodes.size() != callingUnits.size()) {
-        throw new RuntimeException("Could not find all calling units");
+      if (callingUnits.isEmpty()) {
+        continue;
       }
 
       List<Edge> calleeEdges = this.getCalleeEdges(callingUnits);
@@ -185,14 +184,16 @@ public abstract class DynamicRegionTransformer extends
         continue;
       }
 
-      Set<MethodBlock> modifiedMethodBlocks = this.removeNestedRegions(calleeEdges, blockDecision);
-      worklist.addAll(0, modifiedMethodBlocks);
+      Map<MethodBlock, MethodNode> modifiedBlocksToMethodNodes = this
+          .removeNestedRegions(calleeEdges, blockDecision);
+      blocksToMethods.putAll(modifiedBlocksToMethodNodes);
+      worklist.addAll(0, modifiedBlocksToMethodNodes.keySet());
     }
   }
 
-  private Set<MethodBlock> removeNestedRegions(List<Edge> calleeEdges,
+  private Map<MethodBlock, MethodNode> removeNestedRegions(List<Edge> calleeEdges,
       Set<Set<String>> blockDecision) {
-    Set<MethodBlock> modifiedBlocks = new HashSet<>();
+    Map<MethodBlock, MethodNode> modifiedBlocksToMethodNodes = new HashMap<>();
 
     for (Edge edge : calleeEdges) {
       SootMethod calleeSootMethod = edge.tgt();
@@ -203,23 +204,27 @@ public abstract class DynamicRegionTransformer extends
         continue;
       }
 
-      Set<MethodBlock> blocks = this.removeNestedRegionsInCallee(blockDecision, calleeSootMethod);
-      modifiedBlocks.addAll(blocks);
+      Map<MethodBlock, MethodNode> blocksToMethodNodes = this
+          .removeNestedRegionsInCallee(blockDecision, calleeSootMethod);
+      modifiedBlocksToMethodNodes.putAll(blocksToMethodNodes);
     }
 
-    return modifiedBlocks;
+    return modifiedBlocksToMethodNodes;
   }
 
-  private Set<MethodBlock> removeNestedRegionsInCallee(Set<Set<String>> blockDecision,
+  private Map<MethodBlock, MethodNode> removeNestedRegionsInCallee(Set<Set<String>> blockDecision,
       SootMethod calleeSootMethod) {
     MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
     LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
         .getMethodsToRegionsInBlocks().get(calleeMethodNode);
 
-//    if(calleeBlocksToRegions == null) {
+    if (calleeBlocksToRegions == null) {
 //      // TODO fix this by changing the package name
 //      continue;
-//    }
+
+      // TODO fix this case since there are some methods that were not analyzed because they have special cases
+      return new HashMap<>();
+    }
 
     Set<MethodBlock> calleeBlocksThatWithDecisionsThatCannotBeRemoved = new HashSet<>();
 
@@ -255,17 +260,17 @@ public abstract class DynamicRegionTransformer extends
       calleeBlocksToRegions.put(calleeBlock, null);
     }
 
-    Set<MethodBlock> modifiedCalleeBlocks = new HashSet<>();
+    Map<MethodBlock, MethodNode> modifiedBlocksToMethodNodes = new HashMap<>();
 
     for (MethodBlock methodBlock : calleeBlocksToRegions.keySet()) {
       if (calleeBlocksThatWithDecisionsThatCannotBeRemoved.contains(methodBlock)) {
         continue;
       }
 
-      modifiedCalleeBlocks.add(methodBlock);
+      modifiedBlocksToMethodNodes.put(methodBlock, calleeMethodNode);
     }
 
-    return modifiedCalleeBlocks;
+    return modifiedBlocksToMethodNodes;
   }
 
   private void removeRegionsInMethod(Set<Set<String>> blockDecision, Set<MethodBlock> reachables,

@@ -15,7 +15,6 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.apache.commons.lang.StringUtils;
-import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
@@ -37,44 +36,33 @@ public class ASMBytecodeOffsetFinder {
     this.methodNodeToClassNode = methodNodeToClassNode;
   }
 
-  AbstractInsnNode getASMInstFromCaller(Edge edge, SootMethod sootMethod, MethodNode methodNode) {
+  AbstractInsnNode getASMInstFromCaller(Edge edge, MethodNode methodNode) {
     Unit srcUnit = edge.srcUnit();
     int bytecodeIndex = this.getBytecodeIndex(srcUnit);
 
-    return this.getASMInstruction(methodNode, sootMethod, bytecodeIndex);
+    return this.getASMInstruction(methodNode, bytecodeIndex);
   }
 
-  public AbstractInsnNode getASMInstruction(MethodNode methodNode, SootMethod sootMethod,
-      int bytecodeIndex) {
+  public AbstractInsnNode getASMInstruction(MethodNode methodNode, int bytecodeIndex) {
     List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-    String methodDeclaration = sootMethod.getDeclaration();
-    methodDeclaration = methodDeclaration.substring(0, methodDeclaration.indexOf("("));
+    String methodName = methodNode.name;
 
     if (methodNode.name.equals(INIT)) {
-      String[] elements = methodDeclaration.split(" ");
-
-      if (!elements[0].equals("void")) {
-        methodDeclaration = elements[0];
-        methodDeclaration += " ";
-      }
-      else {
-        methodDeclaration = "";
-      }
-
-      methodDeclaration += this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
+      methodName = this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
     }
 
     if (methodNode.name.equals(CLINIT)) {
-      methodDeclaration = "static {};";
+      methodName = "static {};";
     }
     else {
-      methodDeclaration += "(";
+      methodName = " " + methodName;
+      methodName += "(";
     }
 
     int javapStartIndexOfMethod = 0;
 
     for (String entry : javapResult) {
-      if (entry.trim().startsWith(methodDeclaration)) {
+      if (entry.contains(methodName)) {
         String javapDescriptor = javapResult.get(javapStartIndexOfMethod + 1).trim();
         javapDescriptor = javapDescriptor.substring(javapDescriptor.indexOf(" ")).trim();
 
@@ -87,6 +75,11 @@ public class ASMBytecodeOffsetFinder {
     }
 
     javapStartIndexOfMethod += +3;
+
+    if (javapStartIndexOfMethod >= javapResult.size()) {
+      throw new RuntimeException("Could not find the start of the method " + methodName);
+    }
+
     int instructionNumberInJavap = this
         .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
 
@@ -272,7 +265,7 @@ public class ASMBytecodeOffsetFinder {
 
     while ((string = inputReader.readLine()) != null) {
       if (!string.isEmpty()) {
-        javapResult.add(string.trim());
+        javapResult.add(string);
       }
     }
 

@@ -1,99 +1,39 @@
 [
   {
-    "subtrace": "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0-1] Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1-1] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ]
-      ],
-      "TRUE": [
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ]
-      ],
-      "FALSE": [
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2-1",
+    "subtrace": "8fa215fa-320b-4b33-98f2-d43741784226",
     "valuesToConfigs": {
       "TRUE": [
-        [],
         [
+          "B",
+          "C"
+        ],
+        [
+          "A",
+          "B",
           "C"
         ]
       ],
       "FALSE": [
         [
-          "A"
+          "B"
         ],
+        [
+          "A",
+          "B"
+        ]
+      ]
+    }
+  },
+  {
+    "subtrace": "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
+    "valuesToConfigs": {
+      "TRUE": [
         [
           "B"
         ],
         [
           "A",
           "B"
-        ],
-        [
-          "A",
-          "C"
         ],
         [
           "B",
@@ -104,21 +44,32 @@
           "B",
           "C"
         ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0-1",
-    "valuesToConfigs": {
-      "TRUE": [
+      ],
+      "FALSE": [
         [],
         [
-          "B"
+          "A"
         ],
         [
           "C"
         ],
         [
+          "A",
+          "C"
+        ]
+      ]
+    }
+  },
+  {
+    "subtrace": "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+    "valuesToConfigs": {
+      "TRUE": [
+        [
+          "A",
+          "C"
+        ],
+        [
+          "A",
           "B",
           "C"
         ]
@@ -130,207 +81,49 @@
         [
           "A",
           "B"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
         ]
       ]
     }
   },
   {
-    "subtrace": "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1-1] Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1-1",
+    "subtrace": "20411f52-e669-4417-bf6d-5b4258b42173",
     "valuesToConfigs": {
       "TRUE": [
-        [],
         [
           "A"
         ],
         [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "C"
+        ],
+        [
+          "B",
           "C"
         ],
         [
           "A",
+          "B",
           "C"
         ]
       ],
       "FALSE": [
+        [],
         [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
           "C"
         ]
       ]
     }
   },
   {
-    "subtrace": "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2-1",
+    "subtrace": "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
     "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "A"
-        ],
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "A",
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0-1] Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0-1",
-    "valuesToConfigs": {
-      "": [
-        [],
-        [
-          "B"
-        ],
-        [
-          "C"
-        ],
-        [
-          "B",
-          "C"
-        ]
-      ],
       "TRUE": [
         [
           "A"
@@ -338,15 +131,26 @@
         [
           "A",
           "B"
-        ]
-      ],
-      "FALSE": [
+        ],
         [
           "A",
           "C"
         ],
         [
           "A",
+          "B",
+          "C"
+        ]
+      ],
+      "FALSE": [
+        [],
+        [
+          "B"
+        ],
+        [
+          "C"
+        ],
+        [
           "B",
           "C"
         ]

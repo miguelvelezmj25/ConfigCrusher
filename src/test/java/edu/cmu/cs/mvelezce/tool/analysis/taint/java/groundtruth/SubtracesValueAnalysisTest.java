@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SubtracesValueAnalysisTest {
@@ -23,14 +24,14 @@ public class SubtracesValueAnalysisTest {
 
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
         configsToLabeledTraces);
-    Set<ConfigSubtraceValueInfo> write = subtracesValueAnalysis.analyze(args);
+    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
 
-//    args = new String[0];
-//
-//    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-//    Set<ConfigSubtraceValueInfo> read = subtracesValueAnalysis.analyze(args);
-//
-//    Assert.assertEquals(write, read);
+    args = new String[0];
+
+    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -52,12 +53,12 @@ public class SubtracesValueAnalysisTest {
 //    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
 //        configsToTraces,
 //        alignedTrace);
-//    Set<ConfigSubtraceValueInfo> write = subtracesValueAnalysis.analyze(args);
+//    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
 //
 //    args = new String[0];
 //
 //    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-//    Set<ConfigSubtraceValueInfo> read = subtracesValueAnalysis.analyze(args);
+//    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
 //
 //    Assert.assertEquals(write, read);
   }

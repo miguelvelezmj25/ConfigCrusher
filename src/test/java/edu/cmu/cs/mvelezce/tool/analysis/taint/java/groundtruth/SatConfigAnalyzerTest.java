@@ -18,10 +18,7 @@ public class SatConfigAnalyzerTest {
     String[] args = new String[0];
 
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<ConfigSubtraceValueInfo> configLabelValues = subtracesValueAnalysis.analyze(args);
-
-    SubtracesAnalysis subtracesAnalysis = new SubtracesAnalysis(programName, configLabelValues);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesAnalysis.analyze(args);
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
 
     Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
 
@@ -46,10 +43,7 @@ public class SatConfigAnalyzerTest {
     String[] args = new String[0];
 
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<ConfigSubtraceValueInfo> configLabelValues = subtracesValueAnalysis.analyze(args);
-
-    SubtracesAnalysis subtracesAnalysis = new SubtracesAnalysis(programName, configLabelValues);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesAnalysis.analyze(args);
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
 
     Set<String> options = new HashSet<>(AndContextAdapter.getListOfOptions());
 
@@ -74,10 +68,7 @@ public class SatConfigAnalyzerTest {
     String[] args = new String[0];
 
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<ConfigSubtraceValueInfo> configLabelValues = subtracesValueAnalysis.analyze(args);
-
-    SubtracesAnalysis subtracesAnalysis = new SubtracesAnalysis(programName, configLabelValues);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesAnalysis.analyze(args);
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
 
     Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
 
@@ -102,10 +93,7 @@ public class SatConfigAnalyzerTest {
     String[] args = new String[0];
 
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<ConfigSubtraceValueInfo> configLabelValues = subtracesValueAnalysis.analyze(args);
-
-    SubtracesAnalysis subtracesAnalysis = new SubtracesAnalysis(programName, configLabelValues);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesAnalysis.analyze(args);
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
 
     Set<String> options = new HashSet<>(Implicit2Adapter.getListOfOptions());
 

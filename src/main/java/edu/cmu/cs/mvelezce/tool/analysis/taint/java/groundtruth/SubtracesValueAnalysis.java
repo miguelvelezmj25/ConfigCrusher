@@ -9,16 +9,15 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Analyses what value each subtrace has.
+ * Analyzes what configs result in each possible value of a subtrace
  */
-public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueInfo>> {
+public class SubtracesValueAnalysis implements Analysis<Set<SubtraceAnalysisInfo>> {
 
   private final String programName;
   private final Map<Set<String>, List<String>> configsToTraces;
@@ -34,103 +33,93 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
   }
 
   @Override
-  public Set<ConfigSubtraceValueInfo> analyze() {
-    Set<String> subtraces = new HashSet<>();
+  public Set<SubtraceAnalysisInfo> analyze() {
+    Set<String> uniqueSubtraces = this.getUniqueSubtraces();
+    Map<String, Set<String>> subtracesToValues = this.getSubtracesToValues(uniqueSubtraces);
 
-    for (List<String> trace : this.configsToTraces.values()) {
-      for(String entry : trace) {
-        if(entry.equals(SubtracesLogger.TRUE) || entry.equals(SubtracesLogger.FALSE)) {
+    return this.some(subtracesToValues);
+  }
+
+  private Set<SubtraceAnalysisInfo> some(Map<String, Set<String>> subtracesToValues) {
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = new HashSet<>();
+
+    for (Map.Entry<String, Set<String>> entry : subtracesToValues.entrySet()) {
+      String subtrace = entry.getKey();
+      Set<String> values = entry.getValue();
+
+      Map<String, Set<Set<String>>> valuesToConfigs = new HashMap<>();
+
+      for (String value : values) {
+        Set<Set<String>> configsWithValue = this.getConfigsWithValue(subtrace, value);
+        valuesToConfigs.put(value, configsWithValue);
+      }
+
+      SubtraceAnalysisInfo subtraceAnalysisInfo = new SubtraceAnalysisInfo(subtrace,
+          valuesToConfigs);
+      subtraceAnalysisInfos.add(subtraceAnalysisInfo);
+    }
+
+    return subtraceAnalysisInfos;
+  }
+
+  private Set<Set<String>> getConfigsWithValue(String subtrace, String value) {
+    Set<Set<String>> configs = new HashSet<>();
+
+    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
+      List<String> trace = entry.getValue();
+
+      for (int i = 0; i < trace.size(); i++) {
+        String subtraceInEntry = trace.get(i);
+
+        if (!subtraceInEntry.equals(subtrace)) {
           continue;
         }
 
-        subtraces.add(entry);
+        String valueInSubtrace = trace.get(i + 1);
+
+        if (!valueInSubtrace.equals(value)) {
+          continue;
+        }
+
+        configs.add(entry.getKey());
       }
     }
 
+    return configs;
+  }
 
-
+  private Map<String, Set<String>> getSubtracesToValues(Set<String> uniqueSubtraces) {
+    Set<String> subtraceValues = new HashSet<>();
+    subtraceValues.add(SubtracesLogger.TRUE);
+    subtraceValues.add(SubtracesLogger.FALSE);
 
     Map<String, Set<String>> subtracesToValues = new HashMap<>();
 
-    for(String subtrace : subtraces) {
-      subtracesToValues.put(subtrace, new HashSet<>());
+    for (String subtrace : uniqueSubtraces) {
+      subtracesToValues.put(subtrace, subtraceValues);
     }
 
+    return subtracesToValues;
+  }
+
+  private Set<String> getUniqueSubtraces() {
+    Set<String> uniqueSubtraces = new HashSet<>();
 
     for (List<String> trace : this.configsToTraces.values()) {
-      Iterator<String> iter = trace.iterator();
+      for (String entry : trace) {
+        if (entry.equals(SubtracesLogger.TRUE) || entry.equals(SubtracesLogger.FALSE)) {
+          continue;
+        }
 
-      while(iter.hasNext()) {
-        String subtrace = iter.next();
-        Set<String> values = subtracesToValues.get(subtrace);
-
-        String value = iter.next();
-        values.add(value);
+        uniqueSubtraces.add(entry);
       }
     }
 
-
-
-
-
-//    Set<ConfigSubtraceValueInfo> configSubtraceValues = new HashSet<>();
-//
-//    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
-//      Set<String> config = entry.getKey();
-//      List<String> trace = entry.getValue();
-//
-//      Map<String, String> subtracesToValues = this.getSubtracesToValues(trace);
-//
-//      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config,
-//          subtracesToValues);
-//      configSubtraceValues.add(configSubtraceValue);
-//    }
-//
-//    return configSubtraceValues;
-    throw new UnsupportedOperationException("Implement");
-  }
-
-  private Map<String, String> getSubtracesToValues(List<String> trace) {
-//    Map<String, String> subtracesToValues = new HashMap<>();
-//
-//    for (String subtrace : this.alignedTrace) {
-//      subtracesToValues.put(subtrace, "");
-//    }
-//
-//    Map<String, Integer> subtracesToIndexes = this.getSubtracesToIndexes(trace);
-//
-//    for (String subtrace : this.alignedTrace) {
-//      int index = subtracesToIndexes.getOrDefault(subtrace, -1);
-//
-//      if (index < 0 || index == (trace.size() - 1)) {
-//        continue;
-//      }
-//
-//      String subtraces = trace.get(index + 1);
-//
-//      throw new UnsupportedOperationException("Implement");
-////      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
-////        subtracesToValues.put(subtrace, subtraces);
-////      }
-//
-//    }
-//
-//    return subtracesToValues;
-    throw new UnsupportedOperationException("Implement");
-  }
-
-  private Map<String, Integer> getSubtracesToIndexes(List<String> trace) {
-    Map<String, Integer> subtracesToIndexes = new HashMap<>();
-
-    for (int i = 0; i < trace.size(); i++) {
-      subtracesToIndexes.put(trace.get(i), i);
-    }
-
-    return subtracesToIndexes;
+    return uniqueSubtraces;
   }
 
   @Override
-  public Set<ConfigSubtraceValueInfo> analyze(String[] args) throws IOException {
+  public Set<SubtraceAnalysisInfo> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -150,7 +139,7 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
       return this.readFromFile(files.iterator().next());
     }
 
-    Set<ConfigSubtraceValueInfo> configSubtraceValues = this.analyze();
+    Set<SubtraceAnalysisInfo> configSubtraceValues = this.analyze();
 
     if (Options.checkIfSave()) {
       this.writeToFile(configSubtraceValues);
@@ -160,15 +149,15 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
   }
 
   @Override
-  public Set<ConfigSubtraceValueInfo> readFromFile(File file) throws IOException {
+  public Set<SubtraceAnalysisInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper.readValue(file, new TypeReference<Set<ConfigSubtraceValueInfo>>() {
+    return mapper.readValue(file, new TypeReference<Set<SubtraceAnalysisInfo>>() {
     });
   }
 
   @Override
-  public void writeToFile(Set<ConfigSubtraceValueInfo> configTraceValues) throws IOException {
+  public void writeToFile(Set<SubtraceAnalysisInfo> configTraceValues) throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -179,7 +168,7 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
 
   @Override
   public String outputDir() {
-    return Options.DIRECTORY + "/analysis/spec/subtracesvalues/java/programs/" + this.programName;
+    return Options.DIRECTORY + "/analysis/spec/analysisvalues/java/programs/" + this.programName;
   }
 
 }

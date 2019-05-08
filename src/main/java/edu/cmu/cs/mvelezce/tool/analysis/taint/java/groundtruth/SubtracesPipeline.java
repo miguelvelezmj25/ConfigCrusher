@@ -20,30 +20,9 @@ public class SubtracesPipeline {
       throws IOException, InterruptedException {
     Map<Set<String>, List<String>> configsToTraces = this.executeSubtraceInstrumentedProgram(args);
     List<String> alignedTrace = this.alignTraces(args, configsToTraces);
-    Set<ConfigSubtraceValueInfo> configSubtraceValues = this
-        .getValuesForSubtraceForConfigs(args, configsToTraces, alignedTrace);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = this
-        .getConfigsWithSubtraceValues(args, configSubtraceValues);
 
-    return this.getMinConfigsToExecute(args, subtraceAnalysisInfos);
-  }
-
-  private Set<SubtraceAnalysisInfo> getConfigsWithSubtraceValues(String[] args,
-      Set<ConfigSubtraceValueInfo> configSubtraceValues) throws IOException {
-    SubtracesAnalysis subtracesAnalysis = new SubtracesAnalysis(this.programName,
-        configSubtraceValues);
-
-    return subtracesAnalysis.analyze(args);
-  }
-
-  private Set<ConfigSubtraceValueInfo> getValuesForSubtraceForConfigs(String[] args,
-      Map<Set<String>, List<String>> configsToTraces, List<String> alignedTrace)
-      throws IOException {
-//    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(this.programName,
-//        configsToTraces, alignedTrace);
-//
-//    return subtracesValueAnalysis.analyze(args);
     throw new UnsupportedOperationException("Implement");
+//    return this.getMinConfigsToExecute(args, subtraceAnalysisInfos);
   }
 
   private List<String> alignTraces(String[] args, Map<Set<String>, List<String>> configsToTraces)

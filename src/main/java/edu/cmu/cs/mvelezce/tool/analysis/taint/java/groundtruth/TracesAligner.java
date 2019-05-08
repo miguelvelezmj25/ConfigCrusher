@@ -20,6 +20,7 @@ import org.apache.commons.text.diff.CommandVisitor;
 import org.apache.commons.text.diff.EditScript;
 import org.apache.commons.text.diff.StringsComparator;
 
+@Deprecated
 /**
  * Encodes traces to string and uses diff algo by Myers
  */

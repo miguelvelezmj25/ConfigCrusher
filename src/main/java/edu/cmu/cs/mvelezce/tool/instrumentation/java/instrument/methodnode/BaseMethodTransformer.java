@@ -67,7 +67,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     }
   }
 
-  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
+  protected void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
       throws IOException {
     ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
     ClassReader classReader = new ClassReader(classWriter.toByteArray());

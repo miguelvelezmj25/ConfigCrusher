@@ -13,16 +13,18 @@ import java.util.Map;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.apache.commons.lang.StringUtils;
-import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
 
+// TODO might be able to cache the start of a method in the javap result
 public class ASMBytecodeOffsetFinder {
+
+  private static final String INIT = "<init>";
+  private static final String CLINIT = "<clinit>";
 
   private final String pathToClasses;
   private final Map<MethodNode, ClassNode> methodNodeToClassNode;
@@ -34,24 +36,50 @@ public class ASMBytecodeOffsetFinder {
     this.methodNodeToClassNode = methodNodeToClassNode;
   }
 
-  AbstractInsnNode getASMInstFromCaller(Edge edge, SootMethod sootMethod, MethodNode methodNode) {
+  AbstractInsnNode getASMInstFromCaller(Edge edge, MethodNode methodNode) {
     Unit srcUnit = edge.srcUnit();
     int bytecodeIndex = this.getBytecodeIndex(srcUnit);
 
-    return this.getASMInstruction(methodNode, sootMethod, bytecodeIndex);
+    return this.getASMInstruction(methodNode, bytecodeIndex);
   }
 
-  public AbstractInsnNode getASMInstruction(MethodNode methodNode, SootMethod sootMethod,
-      int bytecodeIndex) {
+  public AbstractInsnNode getASMInstruction(MethodNode methodNode, int bytecodeIndex) {
     List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-    String methodDeclaration = sootMethod.getDeclaration() + ";";
+    String methodName = methodNode.name;
+
+    if (methodNode.name.equals(INIT)) {
+      methodName = this.methodNodeToClassNode.get(methodNode).name.replace("/", ".");
+    }
+
+    if (methodNode.name.equals(CLINIT)) {
+      methodName = "static {};";
+    }
+    else {
+      methodName = " " + methodName;
+      methodName += "(";
+    }
+
     int javapStartIndexOfMethod = 0;
 
-    while (!javapResult.get(javapStartIndexOfMethod).trim().equals(methodDeclaration)) {
+    for (String entry : javapResult) {
+      if (entry.contains(methodName)) {
+        String javapDescriptor = javapResult.get(javapStartIndexOfMethod + 1).trim();
+        javapDescriptor = javapDescriptor.substring(javapDescriptor.indexOf(" ")).trim();
+
+        if (javapDescriptor.equals(methodNode.desc)) {
+          break;
+        }
+      }
+
       javapStartIndexOfMethod++;
     }
 
     javapStartIndexOfMethod += +3;
+
+    if (javapStartIndexOfMethod >= javapResult.size()) {
+      throw new RuntimeException("Could not find the start of the method " + methodName);
+    }
+
     int instructionNumberInJavap = this
         .getInstructionNumberInJavap(javapResult, javapStartIndexOfMethod, bytecodeIndex);
 
@@ -67,17 +95,13 @@ public class ASMBytecodeOffsetFinder {
     while (instructions.hasNext()) {
       AbstractInsnNode instruction = instructions.next();
 
-      if (instruction.getOpcode() <= 0) {
+      if (instruction.getOpcode() < 0) {
         continue;
       }
 
       instructionCounter++;
 
       if (instructionCounter == instructionNumberInJavap) {
-        if (!(instruction instanceof MethodInsnNode)) {
-          throw new RuntimeException("The instruction has to be a method call");
-        }
-
         return instruction;
       }
     }

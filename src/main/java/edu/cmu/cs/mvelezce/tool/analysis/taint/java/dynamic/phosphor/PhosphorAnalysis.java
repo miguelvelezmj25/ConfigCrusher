@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintExecutionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.PhosphorTaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.constructor.ConstructorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
@@ -271,6 +272,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       case SoundAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new SoundAdapter();
+        break;
+      case ConstructorAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new ConstructorAdapter();
         break;
       case PrevaylerAdapter.PROGRAM_NAME:
         commandList.add("./prevayler.sh");

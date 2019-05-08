@@ -147,20 +147,6 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 //    }
 //  }
 
-  private void removeContextTaintsInConditionTaints() {
-    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
-      Set<InfluencingTaints> newSetOfInfluencingTaints = new HashSet<>();
-      Set<InfluencingTaints> setOfInfluencingTaints = entry.getValue();
-
-      for (InfluencingTaints influencingTaints : setOfInfluencingTaints) {
-        InfluencingTaints newInfluencingTaints = this.getNewInfluencingTaint(influencingTaints);
-        newSetOfInfluencingTaints.add(newInfluencingTaints);
-      }
-
-      this.statementsToOptionsSet.put(entry.getKey(), newSetOfInfluencingTaints);
-    }
-  }
-
   private void removeContextOptionsInConditionOptions() {
     for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
       InfluencingTaints influencingTaints = entry.getValue();

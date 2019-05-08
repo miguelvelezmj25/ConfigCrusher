@@ -1,18 +1,18 @@
 digraph checkReplicaWrite {
 node [shape=record];
-1909367224 [label="L1\lFRAME SAME\lLDC \"c677b458-f3c0-4cd4-8ae3-8df05cb42fdf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lL3\lLINENUMBER 880 L3\lRETURN\lL4\l"];
-1704927850 [label="L2\lLINENUMBER 878 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.disallowReplicaWrite ()V\l"];
-164052991 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L1\l"];
-1519890812 [label="L0\lLINENUMBER 877 L0\lALOAD 2\lLDC \"c677b458-f3c0-4cd4-8ae3-8df05cb42fdf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFNULL L1\l"];
+1828362963 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L1\l"];
+601468714 [label="L2\lLINENUMBER 878 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.disallowReplicaWrite ()V\l"];
+1385262965 [label="L1\lLINENUMBER 880 L1\lFRAME SAME\lLDC \"54e0a415-4645-450e-9906-852ec84537e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+624999904 [label="L0\lLINENUMBER 877 L0\lLDC \"54e0a415-4645-450e-9906-852ec84537e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 2\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 1519890812;
-1909367224 -> exit;
-1704927850 -> 1909367224;
-164052991 -> 1909367224;
-164052991 -> 1704927850;
-1519890812 -> 1909367224;
-1519890812 -> 164052991;
-1909367224[fontcolor="purple", penwidth=3, color="purple"];
-1519890812[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 624999904;
+1828362963 -> 601468714;
+1828362963 -> 1385262965;
+601468714 -> 1385262965;
+1385262965 -> exit;
+624999904 -> 1828362963;
+624999904 -> 1385262965;
+1385262965[fontcolor="purple", penwidth=3, color="purple"];
+624999904[fontcolor="purple", penwidth=3, color="purple"];
 }

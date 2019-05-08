@@ -1,0 +1,15 @@
+digraph refreshTreeMemoryUsage {
+node [shape=record];
+2067657734 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lLDC \"32dc2d7d-fa48-42dc-845c-a91a9411ced7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1118445216 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+682823333 [label="L0\lLINENUMBER 966 L0\lLDC \"32dc2d7d-fa48-42dc-845c-a91a9411ced7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 682823333;
+2067657734 -> exit;
+1118445216 -> 2067657734;
+682823333 -> 2067657734;
+682823333 -> 1118445216;
+2067657734[fontcolor="purple", penwidth=3, color="purple"];
+682823333[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseM
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,16 +26,20 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.InvokeDynamicInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.MethodOrMethodContext;
 import soot.SootMethod;
+import soot.Unit;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
+import soot.tagkit.BytecodeOffsetTag;
+import soot.tagkit.Tag;
 import soot.util.queue.QueueReader;
 
-public abstract class RegionTransformer<T> extends BaseMethodTransformer {
+public abstract class RegionTransformer<T, S> extends BaseMethodTransformer {
 
   public static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
 
@@ -46,10 +51,11 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final CallGraph callGraph;
   private final Set<SootMethod> applicationSootMethods;
   private final Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
-  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
+  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToRegionsInBlocks = new HashMap<>();
   private final Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
   private final Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
+  private final Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
   private final ASMBytecodeOffsetFinder asmBytecodeOffsetFinder;
 
   public RegionTransformer(String programName, String entryPoint, String rootPackage,
@@ -71,6 +77,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   protected abstract T getDecision(@Nullable JavaRegion javaRegion);
+
+  protected abstract boolean canRemoveNestedRegions(S decision, List<Edge> callerEdges);
+
+  protected abstract Set<MethodBlock> removeNestedRegions(S decision, SootMethod calleeSootMethod);
 
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
@@ -129,7 +139,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return this.getRegionsWith(classPackage, className, methodName);
   }
 
-  protected List<JavaRegion> getRegionsWith(String classPackage, String className,
+  private List<JavaRegion> getRegionsWith(String classPackage, String className,
       String methodName) {
     List<JavaRegion> javaRegions = new ArrayList<>();
 
@@ -144,19 +154,27 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return javaRegions;
   }
 
+  @Nullable
   protected MethodBlock getCallerBlock(Edge edge) {
     SootMethod callerSootMethod = edge.src();
     MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
     AbstractInsnNode instInCaller = this.asmBytecodeOffsetFinder
-        .getASMInstFromCaller(edge, callerSootMethod, callerMethodNode);
-    Set<MethodBlock> blocks = this.getMethodsToDecisionsInBlocks().get(callerMethodNode).keySet();
+        .getASMInstFromCaller(edge, callerMethodNode);
 
-    for (MethodBlock block : blocks) {
-      if (!block.getInstructions().contains(instInCaller)) {
-        continue;
+    // TODO fix this hack once we can handle methods with special cases
+    try {
+      Set<MethodBlock> blocks = this.getMethodsToRegionsInBlocks().get(callerMethodNode).keySet();
+
+      for (MethodBlock block : blocks) {
+        if (!block.getInstructions().contains(instInCaller)) {
+          continue;
+        }
+
+        return block;
       }
-
-      return block;
+    }
+    catch (NullPointerException npe) {
+      return null;
     }
 
     throw new RuntimeException(
@@ -179,16 +197,15 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
       SootMethod src = edge.src();
 
       if (!src.method().getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
-//        Iterator<Edge> edges = callGraph.edgesInto(src);
-//        List<Edge> moreEdges = new ArrayList<>();
-//
-//        while (edges.hasNext()) {
-//          moreEdges.add(edges.next());
-//        }
-//
-//        int index = Math.max(0, worklist.size() - 1);
-//        worklist.addAll(index, moreEdges);
-        throw new UnsupportedOperationException("Handle this case");
+        Iterator<Edge> edges = callGraph.edgesInto(src);
+        List<Edge> moreEdges = new ArrayList<>();
+
+        while (edges.hasNext()) {
+          moreEdges.add(edges.next());
+        }
+
+        int index = Math.max(0, worklist.size() - 1);
+        worklist.addAll(index, moreEdges);
       }
       else {
         callerEdges.add(edge);
@@ -199,7 +216,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   // TODO takes sometime to execute
-  protected void setBlocksToDecisions(Set<ClassNode> classNodes) {
+  protected void setBlocksToRegions(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
       for (MethodNode methodNode : classNode.methods) {
         if (!this.analyzeMethod(methodNode, classNode)) {
@@ -219,7 +236,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
           // TODO is there a better way to implement this logic without ignoring the exception?
         }
 
-        this.getMethodsToDecisionsInBlocks().put(methodNode, blocksToRegionSet);
+        this.getMethodsToRegionsInBlocks().put(methodNode, blocksToRegionSet);
       }
     }
   }
@@ -289,7 +306,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   protected void debugBlockDecisions(MethodNode methodNode, ClassNode classNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToRegionsInBlocks()
         .get(methodNode);
 
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
@@ -467,8 +484,8 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return entryPoint;
   }
 
-  protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {
-    return methodsToDecisionsInBlocks;
+  protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToRegionsInBlocks() {
+    return methodsToRegionsInBlocks;
   }
 
   protected String getRootPackage() {
@@ -485,6 +502,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   protected Map<MethodNode, SootMethod> getMethodNodeToSootMethod() {
     return methodNodeToSootMethod;
+  }
+
+  protected Set<MethodBlock> getEndRegionBlocksWithReturn() {
+    return endRegionBlocksWithReturn;
   }
 
   protected Set<SootMethod> getApplicationSootMethods() {
@@ -515,4 +536,209 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
     return regionsInClass;
   }
+
+  protected Set<AbstractInsnNode> getInsnThatCallMethods(MethodBlock reach) {
+    Set<AbstractInsnNode> insnNodes = new HashSet<>();
+
+    for (AbstractInsnNode inst : reach.getInstructions()) {
+      // Optimization
+      int opcode = inst.getOpcode();
+
+      if (opcode < 0) {
+        continue;
+      }
+
+      if (opcode < Opcodes.INVOKEVIRTUAL || opcode > Opcodes.INVOKEDYNAMIC) {
+        if (inst instanceof InvokeDynamicInsnNode || inst instanceof MethodInsnNode) {
+          throw new RuntimeException(
+              "We want to find instructions that are calling methods. The instruction " + opcode
+                  + " is of type " + inst.getClass());
+        }
+
+        continue;
+      }
+
+      insnNodes.add(inst);
+    }
+
+    return insnNodes;
+  }
+
+  protected Set<Unit> getCallingUnits(Set<AbstractInsnNode> insnNodes, MethodNode methodNode) {
+    Set<Unit> callingUnits = new HashSet<>();
+
+    for (AbstractInsnNode insnNode : insnNodes) {
+      if (insnNode instanceof MethodInsnNode) {
+        if (!((MethodInsnNode) insnNode).owner.replace("/", ".").contains(this.rootPackage)) {
+          continue;
+        }
+      }
+      else if (insnNode instanceof InvokeDynamicInsnNode) {
+        throw new UnsupportedOperationException("Handle this case");
+      }
+      else {
+        throw new RuntimeException(
+            "Did not expect this type of node to call a method " + insnNode.getClass());
+      }
+
+      callingUnits.add(this.getUnit(insnNode, methodNode));
+    }
+
+    return callingUnits;
+  }
+
+  // TODO probably it should not be protected since we want to abstract behavior
+  protected Unit getUnit(AbstractInsnNode inst, MethodNode methodNode) {
+    Unit match = null;
+    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
+
+    for (Unit unit : sootMethod.getActiveBody().getUnits()) {
+      List<Integer> bytecodeIndexes = new ArrayList<>();
+
+      for (Tag tag : unit.getTags()) {
+        if (tag instanceof BytecodeOffsetTag) {
+          int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
+          bytecodeIndexes.add(bytecodeIndex);
+        }
+      }
+
+      if (bytecodeIndexes.isEmpty()) {
+        continue;
+      }
+
+      int bytecodeIndex;
+
+      if (bytecodeIndexes.size() == 1) {
+        bytecodeIndex = bytecodeIndexes.get(0);
+      }
+      else {
+        int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
+        bytecodeIndex = bytecodeIndexes.get(index);
+      }
+
+      AbstractInsnNode asmInst = this.getAsmBytecodeOffsetFinder()
+          .getASMInstruction(methodNode, bytecodeIndex);
+
+      if (inst != asmInst) {
+        continue;
+      }
+
+      match = unit;
+      break;
+    }
+
+//    if (match == null && inst instanceof MethodInsnNode) {
+//      throw new RuntimeException("There has to be a instruction that calls a method");
+//    }
+
+    if (match == null) {
+      throw new RuntimeException("There was no match");
+    }
+
+    return match;
+  }
+
+  protected List<Edge> getCalleeEdges(Set<Unit> callingUnits) {
+    List<Edge> edges = new ArrayList<>();
+
+    for (Unit unit : callingUnits) {
+      edges.addAll(this.getCalleeEdges(unit));
+    }
+
+    return edges;
+  }
+
+  // TODO probably it should not be protected since we want to abstract behavior
+  protected List<Edge> getCalleeEdges(Unit unit) {
+    Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(unit);
+    Set<SootMethod> methodsAnalyzed = new HashSet<>();
+    List<Edge> worklist = new ArrayList<>();
+
+    while (outEdges.hasNext()) {
+      worklist.add(outEdges.next());
+    }
+
+    List<Edge> calleeEdges = new ArrayList<>();
+
+    while (!worklist.isEmpty()) {
+      Edge edge = worklist.remove(0);
+      SootMethod tgt = edge.tgt();
+      SootMethod src = edge.src();
+
+      methodsAnalyzed.add(src);
+
+      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
+        Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
+        List<Edge> moreEdges = new ArrayList<>();
+
+        while (edges.hasNext()) {
+          Edge nextEdge = edges.next();
+
+          if (methodsAnalyzed.contains(nextEdge.tgt())) {
+            continue;
+          }
+
+          moreEdges.add(nextEdge);
+        }
+
+        int index = Math.max(0, worklist.size() - 1);
+        worklist.addAll(index, moreEdges);
+      }
+      else {
+        calleeEdges.add(edge);
+      }
+    }
+
+    return calleeEdges;
+  }
+
+  protected Set<MethodBlock> removeNestedRegions(Set<Edge> calleeEdges, S decision) {
+    Set<MethodBlock> modifiedCalleeBlocks = new HashSet<>();
+
+    for (Edge edge : calleeEdges) {
+      SootMethod calleeSootMethod = edge.tgt();
+//
+//          if (analyzedCallees.contains(calleeSootMethod)) {
+//            continue;
+//          }
+//
+
+      // TODO really needed ?
+//      List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+//      boolean canRemove = this.canRemoveNestedRegions(decision, callerEdges);
+//
+//      if (!canRemove) {
+//        continue;
+//      }
+
+      Set<MethodBlock> modifiedMethodBlocks = this.removeNestedRegions(decision, calleeSootMethod);
+      modifiedCalleeBlocks.addAll(modifiedMethodBlocks);
+    }
+
+    return modifiedCalleeBlocks;
+  }
+
+  protected void instrument(Set<ClassNode> classNodes) throws IOException {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+      if (methodsToInstrument.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodToInstrument : methodsToInstrument) {
+        // TODO handle this case that is not being read by soot
+        if (classNode.name.equals("com/sleepycat/je/recovery/RecoveryInfo")
+            && methodToInstrument.name.equals("appendLsn")) {
+          continue;
+        }
+
+        this.transformMethod(methodToInstrument, classNode);
+      }
+
+      this.getClassTransformer().writeClass(classNode);
+      this.debugMethods(classNode, methodsToInstrument);
+    }
+  }
+
 }

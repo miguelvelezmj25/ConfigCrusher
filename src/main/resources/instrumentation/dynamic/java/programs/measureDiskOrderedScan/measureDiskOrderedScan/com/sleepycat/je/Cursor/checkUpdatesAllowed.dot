@@ -1,21 +1,21 @@
 digraph checkUpdatesAllowed {
 node [shape=record];
-1424439581 [label="L0\lLINENUMBER 5314 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lLDC \"eb80d0df-4810-48a2-8eb8-4552208d946e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFEQ L2\l"];
-1015799131 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
-1354280589 [label="L2\lFRAME SAME\lLDC \"eb80d0df-4810-48a2-8eb8-4552208d946e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lL4\lLINENUMBER 5322 L4\lRETURN\lL5\l"];
-1372137902 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
-626626764 [label="ALOAD 1\lIFNULL L2\l"];
+1167622939 [label="ALOAD 1\lIFNULL L2\l"];
+916456328 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
+917515614 [label="L0\lLINENUMBER 5314 L0\lLDC \"521078eb-c720-42ee-9c92-8f3eb66562cd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L2\l"];
+1908845117 [label="L2\lLINENUMBER 5322 L2\lFRAME SAME\lLDC \"521078eb-c720-42ee-9c92-8f3eb66562cd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
+21824223 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
 entry;
 exit;
-1424439581 -> 1354280589;
-1424439581 -> 626626764;
-entry -> 1424439581;
-1015799131 -> 1354280589;
-1354280589 -> exit;
-1372137902 -> 1015799131;
-1372137902 -> 1354280589;
-626626764 -> 1354280589;
-626626764 -> 1372137902;
-1424439581[fontcolor="purple", penwidth=3, color="purple"];
-1354280589[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 917515614;
+1167622939 -> 916456328;
+1167622939 -> 1908845117;
+916456328 -> 1908845117;
+916456328 -> 21824223;
+917515614 -> 1167622939;
+917515614 -> 1908845117;
+1908845117 -> exit;
+21824223 -> 1908845117;
+917515614[fontcolor="purple", penwidth=3, color="purple"];
+1908845117[fontcolor="purple", penwidth=3, color="purple"];
 }

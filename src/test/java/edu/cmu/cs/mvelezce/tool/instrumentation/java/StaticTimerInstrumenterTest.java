@@ -293,7 +293,7 @@ public class StaticTimerInstrumenterTest {
         StaticTimerInstrumenterTest.srcDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         StaticTimerInstrumenterTest.classDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
 
-        this.compile();
+//        this.compile();
 //        this.format();
 
         // Program arguments

@@ -1,0 +1,16 @@
+digraph getSize {
+node [shape=record];
+1767780513 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lLDC \"01881ace-5188-4e13-912e-30dcaa7392fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+848642385 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lLDC \"01881ace-5188-4e13-912e-30dcaa7392fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+699457162 [label="L0\lLINENUMBER 341 L0\lLDC \"01881ace-5188-4e13-912e-30dcaa7392fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 699457162;
+1767780513 -> exit;
+848642385 -> exit;
+699457162 -> 1767780513;
+699457162 -> 848642385;
+1767780513[fontcolor="purple", penwidth=3, color="purple"];
+848642385[fontcolor="purple", penwidth=3, color="purple"];
+699457162[fontcolor="purple", penwidth=3, color="purple"];
+}

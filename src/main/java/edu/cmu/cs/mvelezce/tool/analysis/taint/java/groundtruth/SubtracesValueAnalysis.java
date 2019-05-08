@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,12 +37,69 @@ public class SubtracesValueAnalysis implements Analysis<Set<SubtraceAnalysisInfo
   public Set<SubtraceAnalysisInfo> analyze() {
     Set<String> uniqueSubtraces = this.getUniqueSubtraces();
     Map<String, Set<String>> subtracesToValues = this.getSubtracesToValues(uniqueSubtraces);
+    Map<Set<String>, Map<String, String>> configsToSubtracesAnalysis = this
+        .getConfigsToSubtracesAnalysis();
 
-    return this.some(subtracesToValues);
+    return this.getSubtraceAnalysisInfos(subtracesToValues, configsToSubtracesAnalysis);
   }
 
-  private Set<SubtraceAnalysisInfo> some(Map<String, Set<String>> subtracesToValues) {
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = new HashSet<>();
+  private Map<Set<String>, Map<String, String>> getConfigsToSubtracesAnalysis() {
+    Map<Set<String>, Map<String, String>> configsToSubtracesAnalysis = new HashMap<>();
+
+    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
+      List<String> trace = entry.getValue();
+      Map<String, String> subtracesToValues = new HashMap<>(trace.size() >> 1);
+      Iterator<String> traceIter = trace.iterator();
+
+      while (traceIter.hasNext()) {
+        String label = traceIter.next();
+        String value = traceIter.next();
+
+        subtracesToValues.put(label, value);
+      }
+
+      configsToSubtracesAnalysis.put(entry.getKey(), subtracesToValues);
+    }
+
+    return configsToSubtracesAnalysis;
+  }
+
+  private Set<SubtraceAnalysisInfo> getSubtraceAnalysisInfos(
+      Map<String, Set<String>> subtracesToValues,
+      Map<Set<String>, Map<String, String>> configsToSubtracesAnalysis) {
+    Map<String, SubtraceAnalysisInfo> subtracesToAnalysisInfos = this
+        .getSubtracesToAnalysisInfos(subtracesToValues);
+    this.addConfigsToSubtracesValues(configsToSubtracesAnalysis, subtracesToAnalysisInfos);
+
+    return new HashSet<>(subtracesToAnalysisInfos.values());
+  }
+
+  private void addConfigsToSubtracesValues(
+      Map<Set<String>, Map<String, String>> configsToSubtracesAnalysis,
+      Map<String, SubtraceAnalysisInfo> subtracesToAnalysisInfos) {
+    for (Map.Entry<Set<String>, Map<String, String>> entry : configsToSubtracesAnalysis
+        .entrySet()) {
+      Set<String> config = entry.getKey();
+      Map<String, String> subtracesToValues = entry.getValue();
+      this.addConfigToSubtraceValue(config, subtracesToValues, subtracesToAnalysisInfos);
+    }
+  }
+
+  private void addConfigToSubtraceValue(Set<String> config, Map<String, String> subtracesToValues,
+      Map<String, SubtraceAnalysisInfo> subtracesToAnalysisInfos) {
+    for (Map.Entry<String, String> entry : subtracesToValues.entrySet()) {
+      String subtrace = entry.getKey();
+      String value = entry.getValue();
+
+      SubtraceAnalysisInfo subtracesAnalysisInfos = subtracesToAnalysisInfos.get(subtrace);
+      Set<Set<String>> configs = subtracesAnalysisInfos.getValuesToConfigs().get(value);
+      configs.add(config);
+    }
+  }
+
+  private Map<String, SubtraceAnalysisInfo> getSubtracesToAnalysisInfos(
+      Map<String, Set<String>> subtracesToValues) {
+    Map<String, SubtraceAnalysisInfo> subtracesToAnalysisInfos = new HashMap<>();
 
     for (Map.Entry<String, Set<String>> entry : subtracesToValues.entrySet()) {
       String subtrace = entry.getKey();
@@ -50,16 +108,15 @@ public class SubtracesValueAnalysis implements Analysis<Set<SubtraceAnalysisInfo
       Map<String, Set<Set<String>>> valuesToConfigs = new HashMap<>();
 
       for (String value : values) {
-        Set<Set<String>> configsWithValue = this.getConfigsWithValue(subtrace, value);
-        valuesToConfigs.put(value, configsWithValue);
+        valuesToConfigs.put(value, new HashSet<>());
       }
 
       SubtraceAnalysisInfo subtraceAnalysisInfo = new SubtraceAnalysisInfo(subtrace,
           valuesToConfigs);
-      subtraceAnalysisInfos.add(subtraceAnalysisInfo);
+      subtracesToAnalysisInfos.put(subtrace, subtraceAnalysisInfo);
     }
 
-    return subtraceAnalysisInfos;
+    return subtracesToAnalysisInfos;
   }
 
   private Set<Set<String>> getConfigsWithValue(String subtrace, String value) {

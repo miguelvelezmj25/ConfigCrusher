@@ -119,17 +119,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
       //      System.out.println(results.size());
 
-      this.phosphorTaintAnalysis.recordTaints(results);
-
       Collection<Set<ConfigConstraint>> constraintsSet =
           this.phosphorConstraintCalculator.deriveConstraints(results, config).values();
       Set<ConfigConstraint> analysisConstraints = new HashSet<>();
 
-      for (Set<ConfigConstraint> x : constraintsSet) {
-        analysisConstraints.addAll(x);
+      for (Set<ConfigConstraint> entry : constraintsSet) {
+        analysisConstraints.addAll(entry);
       }
 
       this.phosphorConstraintAnalysis.addConstraints(analysisConstraints);
+      this.phosphorTaintAnalysis.recordTaints(results);
 
       configConstraintsToSatisfy.addAll(analysisConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);

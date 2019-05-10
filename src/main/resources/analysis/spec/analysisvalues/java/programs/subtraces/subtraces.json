@@ -1,42 +1,17 @@
 [
   {
-    "subtrace": "8fa215fa-320b-4b33-98f2-d43741784226",
+    "subtrace": "75dd19e6-6d21-4ea7-9bff-c5397db10576",
     "valuesToConfigs": {
       "TRUE": [
         [
-          "B",
-          "C"
-        ],
-        [
-          "A",
-          "B",
-          "C"
-        ]
-      ],
-      "FALSE": [
-        [
-          "B"
-        ],
-        [
-          "A",
-          "B"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "b593bfcf-a095-461f-82ce-f5d0e16fec8e",
-    "valuesToConfigs": {
-      "TRUE": [
-        [
-          "B"
+          "A"
         ],
         [
           "A",
           "B"
         ],
         [
-          "B",
+          "A",
           "C"
         ],
         [
@@ -48,20 +23,20 @@
       "FALSE": [
         [],
         [
-          "A"
+          "B"
         ],
         [
           "C"
         ],
         [
-          "A",
+          "B",
           "C"
         ]
       ]
     }
   },
   {
-    "subtrace": "d2719db5-64d1-46bf-9b72-9dcd7c1bbb8d",
+    "subtrace": "5a9c94bf-4fcf-493c-9425-1117590becb2",
     "valuesToConfigs": {
       "TRUE": [
         [
@@ -86,7 +61,7 @@
     }
   },
   {
-    "subtrace": "20411f52-e669-4417-bf6d-5b4258b42173",
+    "subtrace": "1219753b-626e-46b8-aef7-3ed834a94c35",
     "valuesToConfigs": {
       "TRUE": [
         [
@@ -122,18 +97,43 @@
     }
   },
   {
-    "subtrace": "c32653ec-8fa8-46bf-b7f0-83cadd6ac5e3",
+    "subtrace": "1242d67d-5cd9-46a7-9fd0-2038241ebae3",
     "valuesToConfigs": {
       "TRUE": [
         [
-          "A"
+          "B",
+          "C"
+        ],
+        [
+          "A",
+          "B",
+          "C"
+        ]
+      ],
+      "FALSE": [
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ]
+    }
+  },
+  {
+    "subtrace": "122c3321-3fb8-4ed6-8320-e0de41b3f4b9",
+    "valuesToConfigs": {
+      "TRUE": [
+        [
+          "B"
         ],
         [
           "A",
           "B"
         ],
         [
-          "A",
+          "B",
           "C"
         ],
         [
@@ -145,13 +145,13 @@
       "FALSE": [
         [],
         [
-          "B"
+          "A"
         ],
         [
           "C"
         ],
         [
-          "B",
+          "A",
           "C"
         ]
       ]

@@ -22,9 +22,8 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
   private final Set<SubtraceAnalysisInfo> subtraceAnalysisInfos;
   private final Set<String> options;
 
-  // TODO pass program options?
-  public SatConfigAnalyzer(String programName, Set<SubtraceAnalysisInfo> subtraceAnalysisInfos,
-      Set<String> options) {
+  public SatConfigAnalyzer(
+      String programName, Set<SubtraceAnalysisInfo> subtraceAnalysisInfos, Set<String> options) {
     this.programName = programName;
     this.subtraceAnalysisInfos = subtraceAnalysisInfos;
     this.options = options;
@@ -46,6 +45,8 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
   private List<String> buildStringConstraints() {
     List<String> constraints = new ArrayList<>();
 
+    Set<Set<Set<String>>> processedConfigs = new HashSet<>();
+
     for (SubtraceAnalysisInfo subtraceAnalysisInfo : this.subtraceAnalysisInfos) {
       Map<String, Set<Set<String>>> valuesToConfigs = subtraceAnalysisInfo.getValuesToConfigs();
 
@@ -55,8 +56,19 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
 
       for (Map.Entry<String, Set<Set<String>>> entry : valuesToConfigs.entrySet()) {
         Set<Set<String>> configs = entry.getValue();
+
+        if (processedConfigs.contains(configs)) {
+          continue;
+        }
+
         String stringConstraints = toStringConstraints(configs);
+
+        if (stringConstraints.isEmpty()) {
+          continue;
+        }
+
         constraints.add(stringConstraints);
+        processedConfigs.add(configs);
       }
     }
 
@@ -119,8 +131,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
 
       if (files.size() != 1) {
         throw new RuntimeException(
-            "We expected to find 1 file in the directory, but that is not the case "
-                + outputFile);
+            "We expected to find 1 file in the directory, but that is not the case " + outputFile);
       }
 
       return this.readFromFile(files.iterator().next());
@@ -149,8 +160,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
   public Set<Set<String>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper.readValue(file, new TypeReference<Set<Set<String>>>() {
-    });
+    return mapper.readValue(file, new TypeReference<Set<Set<String>>>() {});
   }
 
   @Override

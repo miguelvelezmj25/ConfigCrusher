@@ -22,7 +22,8 @@ public class BFSubtracesExecutorCheckerTest {
     SatConfigAnalyzer configAnalyzer = new SatConfigAnalyzer(programName);
     Set<Set<String>> minConfigs = configAnalyzer.analyze(args);
 
-    SubtracesExecutorChecker explorer = new BFSubtracesExecutorChecker(subtraceAnalysisInfos, minConfigs);
+    SubtracesExecutorChecker explorer =
+        new BFSubtracesExecutorChecker(subtraceAnalysisInfos, minConfigs);
     explorer.analyze();
   }
 }

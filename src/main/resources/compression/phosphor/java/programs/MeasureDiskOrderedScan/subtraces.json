@@ -1,50 +1,54 @@
 [
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "SEQUENTIAL",
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "JECACHESIZE",
+    "SHAREDCACHE"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "JECACHESIZE",
+    "SHAREDCACHE"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "SHAREDCACHE"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "JECACHESIZE"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "SHAREDCACHE"
   ],
   [
-    "A",
-    "B"
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "JECACHESIZE"
+  ],
+
+  [
+    "JECACHESIZE",
+    "SHAREDCACHE"
   ],
   [
-    "A",
-    "B"
+
   ],
   [
-    "A",
-    "B"
+    "SHAREDCACHE",
+    "REPLICATED"
   ],
   [
-    "A",
-    "B"
-  ],
-  [
-    "A",
-    "B"
+    "JECACHESIZE",
+    "REPLICATED"
   ]
 ]

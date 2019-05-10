@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,14 +20,11 @@ public class PhosphorConstraintCalculatorTest {
 
   private static final List<String> OPTIONS = new ArrayList<>();
 
-  @Mock
-  private Taint execCtxTaints;
+  @Mock private Taint execCtxTaints;
 
-  @Mock
-  private Taint conditionTaints;
+  @Mock private Taint conditionTaints;
 
-  @Mock
-  private DecisionTaints decisionTaints;
+  @Mock private DecisionTaints decisionTaints;
 
   @BeforeClass
   public static void init() {
@@ -48,28 +46,39 @@ public class PhosphorConstraintCalculatorTest {
     Set<DecisionTaints> results = new HashSet<>();
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator = new PhosphorConstraintCalculator(
-        OPTIONS);
-    Set<ConfigConstraint> constraints = phosphorConstraintCalculator
-        .deriveConstraints(results, config);
+    PhosphorConstraintCalculator phosphorConstraintCalculator =
+        new PhosphorConstraintCalculator(OPTIONS);
+
+    Collection<Set<ConfigConstraint>> constraintsSet =
+        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+    Set<ConfigConstraint> constraints = new HashSet<>();
+
+    for(Set<ConfigConstraint> entry : constraintsSet) {
+      constraints.addAll(entry);
+    }
 
     Assert.assertTrue(constraints.isEmpty());
   }
 
   @Test
   public void deriveConstraints_forSimpleConditionNotContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[]{1});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[]{0});
+    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {1});
+    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {0});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
 
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator = new PhosphorConstraintCalculator(
-        OPTIONS);
-    Set<ConfigConstraint> constraints = phosphorConstraintCalculator
-        .deriveConstraints(results, config);
+    PhosphorConstraintCalculator phosphorConstraintCalculator =
+        new PhosphorConstraintCalculator(OPTIONS);
+    Collection<Set<ConfigConstraint>> constraintsSet =
+        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+    Set<ConfigConstraint> constraints = new HashSet<>();
+
+    for(Set<ConfigConstraint> entry : constraintsSet) {
+      constraints.addAll(entry);
+    }
 
     Assert.assertEquals(2, constraints.size());
     Assert.assertTrue(constraints.contains(getNotAConstraint()));
@@ -78,18 +87,23 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionNotContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[]{5});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[]{0});
+    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {5});
+    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {0});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
 
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator = new PhosphorConstraintCalculator(
-        OPTIONS);
-    Set<ConfigConstraint> constraints = phosphorConstraintCalculator
-        .deriveConstraints(results, config);
+    PhosphorConstraintCalculator phosphorConstraintCalculator =
+        new PhosphorConstraintCalculator(OPTIONS);
+    Collection<Set<ConfigConstraint>> constraintsSet =
+        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+    Set<ConfigConstraint> constraints = new HashSet<>();
+
+    for(Set<ConfigConstraint> entry : constraintsSet) {
+      constraints.addAll(entry);
+    }
 
     Assert.assertEquals(4, constraints.size());
     Assert.assertTrue(constraints.contains(getACConstraint()));
@@ -100,8 +114,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionSimpleContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[]{5});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[]{2});
+    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {5});
+    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {2});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
@@ -109,10 +123,15 @@ public class PhosphorConstraintCalculatorTest {
     Set<String> config = new HashSet<>();
     config.add("B");
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator = new PhosphorConstraintCalculator(
-        OPTIONS);
-    Set<ConfigConstraint> constraints = phosphorConstraintCalculator
-        .deriveConstraints(results, config);
+    PhosphorConstraintCalculator phosphorConstraintCalculator =
+        new PhosphorConstraintCalculator(OPTIONS);
+    Collection<Set<ConfigConstraint>> constraintsSet =
+        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+    Set<ConfigConstraint> constraints = new HashSet<>();
+
+    for(Set<ConfigConstraint> entry : constraintsSet) {
+      constraints.addAll(entry);
+    }
 
     Assert.assertEquals(4, constraints.size());
     Assert.assertTrue(constraints.contains(getABCConstraint()));
@@ -123,8 +142,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionMultiContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[]{3});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[]{2});
+    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {3});
+    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {2});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
@@ -132,10 +151,15 @@ public class PhosphorConstraintCalculatorTest {
     Set<String> config = new HashSet<>();
     config.add("B");
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator = new PhosphorConstraintCalculator(
-        OPTIONS);
-    Set<ConfigConstraint> constraints = phosphorConstraintCalculator
-        .deriveConstraints(results, config);
+    PhosphorConstraintCalculator phosphorConstraintCalculator =
+        new PhosphorConstraintCalculator(OPTIONS);
+    Collection<Set<ConfigConstraint>> constraintsSet =
+        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+    Set<ConfigConstraint> constraints = new HashSet<>();
+
+    for(Set<ConfigConstraint> entry : constraintsSet) {
+      constraints.addAll(entry);
+    }
 
     Assert.assertEquals(2, constraints.size());
     Assert.assertTrue(constraints.contains(getABConstraint()));

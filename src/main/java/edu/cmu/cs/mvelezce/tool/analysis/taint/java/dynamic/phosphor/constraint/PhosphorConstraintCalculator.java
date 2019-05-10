@@ -4,8 +4,10 @@ import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.TaintHelper;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class PhosphorConstraintCalculator {
@@ -16,20 +18,21 @@ public class PhosphorConstraintCalculator {
     this.options = options;
   }
 
-  public Set<ConfigConstraint> deriveConstraints(Set<DecisionTaints> results, Set<String> config) {
-    Set<ConfigConstraint> constraints = new HashSet<>();
+  public Map<DecisionTaints, Set<ConfigConstraint>> deriveConstraints(
+      Set<DecisionTaints> results, Set<String> config) {
+    Map<DecisionTaints, Set<ConfigConstraint>> taintsToConstraints = new HashMap<>();
 
     for (DecisionTaints decisionTaints : results) {
-      constraints.addAll(deriveConstraints(decisionTaints, config));
+      Set<ConfigConstraint> constraints = deriveConstraints(decisionTaints, config);
+      constraints.removeIf(constraint -> constraint.getPartialConfig().isEmpty());
+      taintsToConstraints.put(decisionTaints, constraints);
     }
 
-    constraints.removeIf(configConstraint -> configConstraint.getPartialConfig().isEmpty());
-
-    return constraints;
+    return taintsToConstraints;
   }
 
-  private Set<ConfigConstraint> deriveConstraints(DecisionTaints decisionTaints,
-      Set<String> config) {
+  private Set<ConfigConstraint> deriveConstraints(
+      DecisionTaints decisionTaints, Set<String> config) {
     Set<ConfigConstraint> constraints = new HashSet<>();
     Set<String> conditionTaints = TaintHelper.getConditionTaints(decisionTaints, this.options);
     Set<String> contextTaints = TaintHelper.getContextTaints(decisionTaints, this.options);
@@ -60,5 +63,4 @@ public class PhosphorConstraintCalculator {
 
     return constraints;
   }
-
 }

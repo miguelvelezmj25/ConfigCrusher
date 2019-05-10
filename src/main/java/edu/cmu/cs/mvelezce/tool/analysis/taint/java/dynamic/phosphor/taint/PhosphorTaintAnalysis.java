@@ -20,7 +20,7 @@ import java.util.Set;
 public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorControlFlowInfo>> {
 
   private final Map<String, Set<InfluencingTaints>> statementsToOptionsSet = new HashMap<>();
-  private final Map<String, InfluencingTaints> statementsToOptions = new HashMap<>();
+//  private final Map<String, InfluencingTaints> statementsToOptions = new HashMap<>();
   private final List<String> options;
 
   public PhosphorTaintAnalysis(String programName, List<String> options) {
@@ -83,39 +83,39 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
     return statementComponent.replaceAll("/", ".");
   }
 
-  private void mergeTaints() {
-    this.mergeInfluencingTaints();
-    this.addToMatchingTypeDataStructure();
-  }
-
-  private void addToMatchingTypeDataStructure() {
-    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
-      this.statementsToOptions.put(entry.getKey(), entry.getValue().iterator().next());
-    }
-  }
-
-  private void mergeInfluencingTaints() {
-    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
-      Set<String> mergedContextTaints = new HashSet<>();
-      Set<String> mergedConditionTaints = new HashSet<>();
-
-      for (InfluencingTaints influencingTaints : entry.getValue()) {
-        Set<String> contextTaints = influencingTaints.getContext();
-        mergedContextTaints.addAll(contextTaints);
-
-        Set<String> conditionTaints = influencingTaints.getCondition();
-        mergedConditionTaints.addAll(conditionTaints);
-      }
-
-      InfluencingTaints newInfluencingTaints = new InfluencingTaints(mergedContextTaints,
-          mergedConditionTaints);
-      Set<InfluencingTaints> setWithOnlyOneInfluencingTaint = new HashSet<>();
-      setWithOnlyOneInfluencingTaint.add(newInfluencingTaints);
-
-      this.statementsToOptionsSet.put(entry.getKey(), setWithOnlyOneInfluencingTaint);
-    }
-  }
-
+//  private void mergeTaints() {
+//    this.mergeInfluencingTaints();
+//    this.addToMatchingTypeDataStructure();
+//  }
+//
+//  private void addToMatchingTypeDataStructure() {
+//    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
+//      this.statementsToOptions.put(entry.getKey(), entry.getValue().iterator().next());
+//    }
+//  }
+//
+//  private void mergeInfluencingTaints() {
+//    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
+//      Set<String> mergedContextTaints = new HashSet<>();
+//      Set<String> mergedConditionTaints = new HashSet<>();
+//
+//      for (InfluencingTaints influencingTaints : entry.getValue()) {
+//        Set<String> contextTaints = influencingTaints.getContext();
+//        mergedContextTaints.addAll(contextTaints);
+//
+//        Set<String> conditionTaints = influencingTaints.getCondition();
+//        mergedConditionTaints.addAll(conditionTaints);
+//      }
+//
+//      InfluencingTaints newInfluencingTaints = new InfluencingTaints(mergedContextTaints,
+//          mergedConditionTaints);
+//      Set<InfluencingTaints> setWithOnlyOneInfluencingTaint = new HashSet<>();
+//      setWithOnlyOneInfluencingTaint.add(newInfluencingTaints);
+//
+//      this.statementsToOptionsSet.put(entry.getKey(), setWithOnlyOneInfluencingTaint);
+//    }
+//  }
+//
 //  private void updatedConditionTaintsIfremoveContextTaintsInConditionTaints() {
 //    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptions.entrySet()) {
 //      Set<InfluencingTaints> setOfInfluencingTaints = entry.getValue();
@@ -146,25 +146,25 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 //      }
 //    }
 //  }
-
-  private void removeContextOptionsInConditionOptions() {
-    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
-      InfluencingTaints influencingTaints = entry.getValue();
-      InfluencingTaints newInfluencingTaints = this.getNewInfluencingTaint(influencingTaints);
-      this.statementsToOptions.put(entry.getKey(), newInfluencingTaints);
-    }
-  }
-
-  private InfluencingTaints getNewInfluencingTaint(InfluencingTaints influencingTaints) {
-    Set<String> contextTaints = influencingTaints.getContext();
-    Set<String> conditionTaints = influencingTaints.getCondition();
-
-    Set<String> newConditionTaints = new HashSet<>(conditionTaints);
-    newConditionTaints.removeAll(contextTaints);
-
-    return new InfluencingTaints(contextTaints, newConditionTaints);
-  }
-
+//
+//  private void removeContextOptionsInConditionOptions() {
+//    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
+//      InfluencingTaints influencingTaints = entry.getValue();
+//      InfluencingTaints newInfluencingTaints = this.getNewInfluencingTaint(influencingTaints);
+//      this.statementsToOptions.put(entry.getKey(), newInfluencingTaints);
+//    }
+//  }
+//
+//  private InfluencingTaints getNewInfluencingTaint(InfluencingTaints influencingTaints) {
+//    Set<String> contextTaints = influencingTaints.getContext();
+//    Set<String> conditionTaints = influencingTaints.getCondition();
+//
+//    Set<String> newConditionTaints = new HashSet<>(conditionTaints);
+//    newConditionTaints.removeAll(contextTaints);
+//
+//    return new InfluencingTaints(contextTaints, newConditionTaints);
+//  }
+//
 //  private void checkContextTaintsNotEmpty() {
 //    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptions.entrySet()) {
 //      Set<InfluencingTaints> setOfInfluencingTaints = entry.getValue();
@@ -195,7 +195,7 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 //      }
 //    }
 //  }
-
+//
 //  // If the context is the same of all influencing taints, but the conditions are different and
 //  // we do not sample all combos of the conditions, we do not know what execution belongs to which options.
 //  private void checkIfProblematicEntry() {
@@ -214,41 +214,41 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 //      }
 //    }
 //  }
-
-  private void removeStatementsWithOnlyEmptyConditionTaints() {
-    Set<String> statementsToRemove = new HashSet<>();
-
-    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
-      Set<String> allConditionTaints = new HashSet<>();
-      Set<InfluencingTaints> setOfInfluencingTaints = entry.getValue();
-
-      for (InfluencingTaints influencingTaints : setOfInfluencingTaints) {
-        Set<String> conditionTaints = influencingTaints.getCondition();
-        allConditionTaints.addAll(conditionTaints);
-      }
-
-      if (allConditionTaints.isEmpty()) {
-        statementsToRemove.add(entry.getKey());
-      }
-    }
-
-    this.statementsToOptionsSet.keySet().removeAll(statementsToRemove);
-  }
-
-  private void removeStatementsWithOnlyEmptyConditionOptions() {
-    Set<String> statementsToRemove = new HashSet<>();
-
-    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
-      InfluencingTaints influencingTaints = entry.getValue();
-      Set<String> conditionTaints = influencingTaints.getCondition();
-
-      if (conditionTaints.isEmpty()) {
-        statementsToRemove.add(entry.getKey());
-      }
-    }
-
-    this.statementsToOptions.keySet().removeAll(statementsToRemove);
-  }
+//
+//  private void removeStatementsWithOnlyEmptyConditionTaints() {
+//    Set<String> statementsToRemove = new HashSet<>();
+//
+//    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
+//      Set<String> allConditionTaints = new HashSet<>();
+//      Set<InfluencingTaints> setOfInfluencingTaints = entry.getValue();
+//
+//      for (InfluencingTaints influencingTaints : setOfInfluencingTaints) {
+//        Set<String> conditionTaints = influencingTaints.getCondition();
+//        allConditionTaints.addAll(conditionTaints);
+//      }
+//
+//      if (allConditionTaints.isEmpty()) {
+//        statementsToRemove.add(entry.getKey());
+//      }
+//    }
+//
+//    this.statementsToOptionsSet.keySet().removeAll(statementsToRemove);
+//  }
+//
+//  private void removeStatementsWithOnlyEmptyConditionOptions() {
+//    Set<String> statementsToRemove = new HashSet<>();
+//
+//    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
+//      InfluencingTaints influencingTaints = entry.getValue();
+//      Set<String> conditionTaints = influencingTaints.getCondition();
+//
+//      if (conditionTaints.isEmpty()) {
+//        statementsToRemove.add(entry.getKey());
+//      }
+//    }
+//
+//    this.statementsToOptions.keySet().removeAll(statementsToRemove);
+//  }
 
   public void recordTaints(Set<DecisionTaints> results) {
     this.putStatements(results);

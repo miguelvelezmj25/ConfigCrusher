@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class TrivialAdapter extends BaseAdapter {
 
-  public static final String PROGRAM_NAME = "Trivial";
+  public static final String PROGRAM_NAME = "trivial";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Trivial";
   public static final String ROOT_PACKAGE = "edu.cmu.cs.mvelezce.analysis";
   public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";

@@ -62,8 +62,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forSimpleConditionNotContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {1});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {0});
+    Mockito.when(conditionTaints.getLabels()).thenReturn(new Object[] {1});
+    Mockito.when(execCtxTaints.getLabels()).thenReturn(new Object[] {0});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
@@ -87,8 +87,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionNotContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {5});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {0});
+    Mockito.when(conditionTaints.getLabels()).thenReturn(new Object[] {5});
+    Mockito.when(execCtxTaints.getLabels()).thenReturn(new Object[] {0});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
@@ -114,8 +114,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionSimpleContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {5});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {2});
+    Mockito.when(conditionTaints.getLabels()).thenReturn(new Object[] {5});
+    Mockito.when(execCtxTaints.getLabels()).thenReturn(new Object[] {2});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);
@@ -142,8 +142,8 @@ public class PhosphorConstraintCalculatorTest {
 
   @Test
   public void deriveConstraints_forMultiConditionMultiContext() {
-    Mockito.when(conditionTaints.getTags()).thenReturn(new int[] {3});
-    Mockito.when(execCtxTaints.getTags()).thenReturn(new int[] {2});
+    Mockito.when(conditionTaints.getLabels()).thenReturn(new Object[] {3});
+    Mockito.when(execCtxTaints.getLabels()).thenReturn(new Object[] {2});
 
     Set<DecisionTaints> results = new HashSet<>();
     results.add(decisionTaints);

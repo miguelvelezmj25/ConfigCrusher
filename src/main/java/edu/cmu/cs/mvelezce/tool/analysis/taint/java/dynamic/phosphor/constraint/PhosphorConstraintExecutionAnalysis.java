@@ -7,14 +7,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.ArrayUtils;
 
 public class PhosphorConstraintExecutionAnalysis {
 
@@ -74,21 +71,29 @@ public class PhosphorConstraintExecutionAnalysis {
     }
 
     int[] tags = this.getTags(data);
+    Taint taint = new Taint();
 
-    return Taint.getCCResultTaint(tags);
+    for (int tag : tags) {
+      Taint tmp = new Taint(tag);
+      taint.addDependency(tmp);
+    }
+
+    return taint;
   }
 
   private int[] getTags(String data) {
-//    if (data.length() != 1) {
-//      throw new RuntimeException("The entry should have only one character");
-//    }
-//
-    List<Integer> tags = new ArrayList<>();
-//    char characer = data.charAt(0);
-//    int tag = (int) characer;
-    tags.add(Integer.valueOf(data));
+    String[] stringTags = data.split(",");
 
-    return ArrayUtils.toPrimitive(tags.toArray(new Integer[0]));
+    if (stringTags.length == 0) {
+      throw new RuntimeException("The string tags array cannot be empty when parsing as a string");
+    }
+
+    int[] tags = new int[stringTags.length];
+
+    for (int i = 0; i < tags.length; i++) {
+      tags[i] = Integer.parseInt(stringTags[i]);
+    }
+
+    return tags;
   }
-
 }

@@ -80,6 +80,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
     Set<ConfigConstraint> constraints = this.phosphorConstraintAnalysis.analyze();
     this.phosphorConstraintAnalysis.writeToFile(constraints);
 
+    // TODO MIGUEL might want to save the constraints per decision, not the taints
     Set<PhosphorControlFlowInfo> phosphorControlFlowInfos = this.phosphorTaintAnalysis.analyze();
     this.phosphorTaintAnalysis.writeToFile(phosphorControlFlowInfos);
 

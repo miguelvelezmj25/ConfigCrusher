@@ -9,8 +9,7 @@ import javax.annotation.Nullable;
 
 public class TaintHelper {
 
-  private TaintHelper() {
-  }
+  private TaintHelper() {}
 
   public static Set<String> getContextTaints(DecisionTaints decisionTaints, List<String> options) {
     @Nullable Taint contextTaintObject = decisionTaints.getExecCtxTaints();
@@ -23,8 +22,8 @@ public class TaintHelper {
     return contextTaints;
   }
 
-  public static Set<String> getConditionTaints(DecisionTaints decisionTaints,
-      List<String> options) {
+  public static Set<String> getConditionTaints(
+      DecisionTaints decisionTaints, List<String> options) {
     @Nullable Taint conditionTaintObject = decisionTaints.getConditionTaints();
     Set<String> contextTaints = new HashSet<>();
 
@@ -37,28 +36,18 @@ public class TaintHelper {
 
   private static Set<String> getTaintingOptions(Taint taint, List<String> options) {
     Set<String> taintingOptions = new HashSet<>();
-    int[] tags = taint.getTags();
+    Object[] tags = taint.getLabels();
 
     if (tags == null) {
-      throw new RuntimeException("You need to use the tags array for tainting");
+      throw new RuntimeException("The tags array is null");
     }
 
-    if (tags.length > 1) {
-      throw new RuntimeException("Implement how to handle array tags with more than 1 entry");
-    }
-
-    int tag = tags[0];
-
-    for (int i = 0; tag != 0; i++) {
-      if (tag % 2 == 1) {
-        String taintingOption = options.get(i);
-        taintingOptions.add(taintingOption);
-      }
-
-      tag = tag >> 1;
+    for (Object o : tags) {
+      int tag = (int) o;
+      String taintingOption = options.get(tag);
+      taintingOptions.add(taintingOption);
     }
 
     return taintingOptions;
   }
-
 }

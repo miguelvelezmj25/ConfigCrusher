@@ -69,6 +69,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
 
   protected void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
       throws IOException {
+    // TODO MIGUEL delete existing files
     ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
     ClassReader classReader = new ClassReader(classWriter.toByteArray());
     classNode = new ClassNode();

@@ -53,15 +53,17 @@ public abstract class DynamicRegionTransformer extends
 
     this.setBlocksToRegions(classNodes);
 
-    boolean updatedMethods = true;
+    // TODO MIGUEL commented this step to simply instrument the program
+//    boolean updatedMethods = true;
 
     System.out.println("Transforming methods");
-    while (updatedMethods) {
-      updatedMethods = this.expandRegionsInMethods(classNodes);
-//      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
-    }
-
-    System.out.println();
+    // TODO MIGUEL commented this step to simply instrument the program
+//    while (updatedMethods) {
+//      updatedMethods = this.expandRegionsInMethods(classNodes);
+////      updatedMethods = updatedMethods | this.propagateRegionsUpClasses();
+//    }
+//
+//    System.out.println();
 
     System.out.println("Setting start and end blocks");
     this.setStartAndEndBlocks(classNodes);
@@ -120,7 +122,8 @@ public abstract class DynamicRegionTransformer extends
       }
 
       Set<MethodBlock> ends = this.setStartAndEndBlocks(graph, block, region, blocksToRegions);
-      this.removeNestedRegions(graph, block, region, ends, blocksToRegions, methodNode);
+      // TODO MIGUEL commented this step to simply instrument the program
+//      this.removeNestedRegions(graph, block, region, ends, blocksToRegions, methodNode);
     }
   }
 

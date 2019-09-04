@@ -116,12 +116,24 @@ public abstract class DynamicBaseRegionInstrumenter
 
   public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo<Set<Set<String>>>> results =
+    // Read as a list of lists of strings, but we want to change those lists to sets
+    List<RegionToInfo<List<List<String>>>> results =
         mapper.readValue(file, new TypeReference<List<RegionToInfo>>() {});
     Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 
-    for (RegionToInfo<Set<Set<String>>> result : results) {
-      regionsToOptionsSet.put(result.getRegion(), result.getInfo());
+    System.err.println(
+        "Make sure that you are reading back ALL sets of constraints for the statements");
+
+    for (RegionToInfo<List<List<String>>> result : results) {
+      // TODO MIGUEL maybe change to set of constraints objects?
+      Set<Set<String>> constraints = new HashSet<>();
+
+      for (List<String> info : result.getInfo()) {
+        Set<String> constraint = new HashSet<>(info);
+        constraints.add(constraint);
+      }
+
+      regionsToOptionsSet.put(result.getRegion(), constraints);
     }
 
     return regionsToOptionsSet;

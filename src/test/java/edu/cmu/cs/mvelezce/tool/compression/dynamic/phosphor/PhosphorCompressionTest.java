@@ -42,24 +42,21 @@ public class PhosphorCompressionTest {
   @Test
   public void Subtraces() throws IOException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
 
     String[] args = new String[0];
-
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
+    PhosphorCompression phosphorCompression = new PhosphorCompression(programName, options, constraints);
 
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
-    PhosphorCompression phosphorCompression = new PhosphorCompression(programName, options,
-        constraints);
     Set<Set<String>> write = phosphorCompression.compressConfigurations(args);
 
-    args = new String[0];
-
     phosphorCompression = new PhosphorCompression(programName);
+    args = new String[0];
     Set<Set<String>> read = phosphorCompression.compressConfigurations(args);
 
     Assert.assertEquals(write, read);

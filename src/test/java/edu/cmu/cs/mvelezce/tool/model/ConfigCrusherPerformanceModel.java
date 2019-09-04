@@ -3,9 +3,12 @@ package edu.cmu.cs.mvelezce.tool.model;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.DynamicConfigCrusherTimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
@@ -25,11 +28,11 @@ public class ConfigCrusherPerformanceModel {
     Map<Region, Set<Set<String>>> regionsToOptionSet =
         BaseDynamicRegionAnalysis.changToRegions(javaRegionsToOptionSet);
 
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
     System.out.println();
 
-    //    Executor executor = new ConfigCrusherExecutor(programName);
-    //    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
-    //
     //    Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
     //    Set<Set<String>> configurations = BruteForceExecutor
     //        .getBruteForceConfigurationsFromOptions(options);

@@ -27,6 +27,9 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
     this(programName, null, new HashMap<>());
   }
 
+  // TODO MIGUEL this method is targeted to instrumenting with static information. Either save
+  // all instrumentation in the same directory or make each instrumentator with static and dynamic
+  // info override this method.
   @Override
   public void instrument(String[] args)
       throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
@@ -65,5 +68,9 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
 
   public Map<JavaRegion, T> getRegionsToData() {
     return this.regionsToData;
+  }
+
+  void setRegionsToData(Map<JavaRegion, T> regionsToData) {
+    this.regionsToData = regionsToData;
   }
 }

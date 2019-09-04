@@ -140,6 +140,7 @@ public abstract class BaseAdapter implements Adapter {
     commandList.add("-Xms10G");
     commandList.add("-Xmx10G");
     commandList.add("-XX:+UseConcMarkSweepGC");
+//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
     //        commandList.add(this.directory + BaseAdapter.PATH_SEPARATOR + BaseAdapter.CLASS_CONTAINER + BaseAdapter.PATH_SEPARATOR +
     // BaseAdapter.JACKSON_PATH + BaseAdapter.PATH_SEPARATOR + cp.toString());

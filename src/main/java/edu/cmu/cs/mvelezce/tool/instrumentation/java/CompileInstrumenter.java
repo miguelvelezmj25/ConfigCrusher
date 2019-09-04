@@ -44,7 +44,8 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
     commands.add("mvn");
     commands.add("clean");
-    commands.add("compile");
+    commands.add("package");
+    commands.add("-DskipTests");
 
     return commands;
   }

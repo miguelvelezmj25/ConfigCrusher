@@ -18,9 +18,14 @@ public class TrivialAdapter extends BaseAdapter {
   private static final String[] OPTIONS = {"A", "B"};
 
   public TrivialAdapter() {
-    // TODO check that we are passing empty string
+    // TODO check why are we passing empty string. Empty string represents the directory of the
+    // class files to execute.
     super(TrivialAdapter.PROGRAM_NAME, TrivialAdapter.MAIN_CLASS, "",
         TrivialAdapter.getListOfOptions());
+  }
+
+  public TrivialAdapter(String programName, String entryPoint, String classDir) {
+    super(programName, entryPoint, classDir, TrivialAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {

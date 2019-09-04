@@ -23,6 +23,13 @@ public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegi
     this.rootPackage = rootPackage;
   }
 
+  public DynamicConfigCrusherTimerRegionInstrumenter(String programName) {
+    super(programName);
+
+    this.entryPoint = "";
+    this.rootPackage = "";
+  }
+
   @Override
   public void instrument()
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {

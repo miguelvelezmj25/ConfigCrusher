@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import java.util.HashSet;
 import java.util.Set;
@@ -586,5 +587,38 @@ public class ConfigCrusherExecutorTest {
     measuredPerformance.size();
   }
 
+  @Test
+  public void trivial() throws Exception {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    String classDirectory = TrivialAdapter.INSTRUMENTED_CLASS_PATH;
+    String entryPoint = TrivialAdapter.MAIN_CLASS;
+
+    // Program arguments
+    String[] args = new String[0];
+
+    // TODO MIGUEL use compression algo
+    //        Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
+    //        Set<Set<String>> configurations = compression.compressConfigurations(args);
+    Set<Set<String>> configurations = new HashSet<>();
+
+    Set<String> config = new HashSet<>();
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("A");
+    config.add("B");
+    configurations.add(config);
+
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i2";
+
+    Executor executor =
+        new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    System.out.println();
+    //    measuredPerformance.size();
+  }
 
 }

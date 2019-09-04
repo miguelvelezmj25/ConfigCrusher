@@ -84,8 +84,6 @@ public class PhosphorAnalysisTest {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     List<String> options = SubtracesAdapter.getListOfOptions();
     Set<String> initialConfig = new HashSet<>();
-    initialConfig.add("A");
-    initialConfig.add("B");
 
     String[] args = new String[2];
     args[0] = "-delres";

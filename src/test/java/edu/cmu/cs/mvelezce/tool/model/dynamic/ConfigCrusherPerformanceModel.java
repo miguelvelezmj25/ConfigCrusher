@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.model;
+package edu.cmu.cs.mvelezce.tool.model.dynamic;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
@@ -9,6 +9,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.DynamicConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
@@ -16,7 +19,7 @@ import org.junit.Test;
 public class ConfigCrusherPerformanceModel {
 
   @Test
-  public void runningExampleConfigCrusher() throws Exception {
+  public void buildTrivialPerformanceModel() throws Exception {
     String programName = TrivialAdapter.PROGRAM_NAME;
     String[] args = new String[0];
 
@@ -31,19 +34,14 @@ public class ConfigCrusherPerformanceModel {
     Executor executor = new ConfigCrusherExecutor(programName);
     Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-    System.out.println();
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    //    Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
-    //    Set<Set<String>> configurations = BruteForceExecutor
-    //        .getBruteForceConfigurationsFromOptions(options);
-    //
-    //    args = new String[2];
-    //    args[0] = "-delres";
-    //    args[1] = "-saveres";
-    //
-    //    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
-    //        measuredPerformance,
-    //        regionsToOptionSet);
-    //    PerformanceModel performanceModel = builder.createModel(args);
+    System.err.println("Might need to create a different PM builder based on the dynamic info");
+    PerformanceModelBuilder builder =
+        new ConfigCrusherPerformanceModelBuilder(
+            programName, measuredPerformance, regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
   }
 }

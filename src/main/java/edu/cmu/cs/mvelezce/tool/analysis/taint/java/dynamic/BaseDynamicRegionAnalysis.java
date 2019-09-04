@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -76,19 +77,22 @@ public abstract class BaseDynamicRegionAnalysis<S> extends BaseDynamicAnalysis<M
   }
 
   @Override
-  // TODO should this be static helper method?
   public Map<Region, Set<Set<String>>> transform(
       Map<? extends Region, Set<Set<String>>> regionsToOptionSet) {
-    throw new UnsupportedOperationException("Implement");
-//        Map<Region, Set<Set<String>>> result = new HashMap<>();
-//
-//        for(Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
-//            Region region = new Region(entry.getKey().getRegionID());
-//            result.put(region, entry.getValue());
-//        }
-//
-//        return result;
-//    return null;
+    throw new UnsupportedOperationException(
+        "This method is only used to change a subset of regions to regions. Consider changing it to an static method");
+  }
+
+  public static Map<Region, Set<Set<String>>> changToRegions(
+      Map<? extends Region, Set<Set<String>>> regionsToOptionSet) {
+    Map<Region, Set<Set<String>>> result = new HashMap<>();
+
+    for (Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
+      Region region = new Region.Builder(entry.getKey().getRegionID()).build();
+      result.put(region, entry.getValue());
+    }
+
+    return result;
   }
 
   protected int getDecisionOrder(String sink) {

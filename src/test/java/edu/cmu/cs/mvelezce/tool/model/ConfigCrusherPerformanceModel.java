@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.model;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.DynamicConfigCrusherTimerRegionInstrumenter;
@@ -18,14 +20,13 @@ public class ConfigCrusherPerformanceModel {
     BaseRegionInstrumenter<Set<Set<String>>> instrumenter =
         new DynamicConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> regionsToOptionSet = instrumenter.getRegionsToData();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
+
+    Map<Region, Set<Set<String>>> regionsToOptionSet =
+        BaseDynamicRegionAnalysis.changToRegions(javaRegionsToOptionSet);
 
     System.out.println();
 
-    //    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
-    //    Map<Region, Set<Set<String>>> regionsToOptionSet =
-    // analysis.transform(javaRegionsToOptionSet);
-    //
     //    Executor executor = new ConfigCrusherExecutor(programName);
     //    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     //

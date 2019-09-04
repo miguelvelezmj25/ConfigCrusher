@@ -15,6 +15,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regi
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions16.BFRegions16Adapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.sort.BFSortAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.trivial.BFTrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
@@ -27,6 +28,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import java.io.File;
 import java.io.IOException;
@@ -291,6 +293,9 @@ public class BruteForceExecutor extends BaseExecutor {
     else if (programName.equals(LuceneMain.PROGRAM_NAME)) {
       adapter = new BFLuceneAdapter(programName, this.getEntryPoint(), this.getClassDir());
     }
+    else if (programName.equals(TrivialAdapter.PROGRAM_NAME)) {
+      adapter = new BFTrivialAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
     else {
       throw new RuntimeException("Could not create an adapter for " + programName);
     }
@@ -309,8 +314,7 @@ public class BruteForceExecutor extends BaseExecutor {
       throw new RuntimeException("The output file could not be found " + outputDir);
     }
 
-    Set<DefaultPerformanceEntry> performanceEntries = this.aggregateExecutions(outputFile);
-    return performanceEntries;
+    return this.aggregateExecutions(outputFile);
 
     //        programName += "-bf";
     //        String[] args = new String[1];

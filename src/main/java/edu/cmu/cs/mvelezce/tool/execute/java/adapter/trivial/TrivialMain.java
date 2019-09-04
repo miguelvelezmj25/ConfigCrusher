@@ -20,7 +20,7 @@ public class TrivialMain extends BaseMain {
 
   static final String TRIVIAL_MAIN = TrivialMain.class.getCanonicalName();
 
-  private TrivialMain(String programName, String iteration, String[] args) {
+  protected TrivialMain(String programName, String iteration, String[] args) {
     super(programName, iteration, args);
   }
 

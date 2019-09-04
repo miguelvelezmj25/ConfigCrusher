@@ -74,6 +74,9 @@ public class PhosphorCompressionTest {
     PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
 
+    System.out.println(constraints.iterator().next());
+    System.out.println(constraints.size());
+
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";

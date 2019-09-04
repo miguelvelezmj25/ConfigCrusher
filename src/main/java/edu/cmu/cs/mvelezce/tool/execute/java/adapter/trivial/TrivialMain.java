@@ -28,10 +28,10 @@ public class TrivialMain extends BaseMain {
     String programName = args[0];
     String mainClass = args[1];
     String iteration = args[2];
-    String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
+    String[] trivialArgs = Arrays.copyOfRange(args, 3, args.length);
 
-    Main main = new TrivialMain(programName, iteration, sleepArgs);
-    main.execute(mainClass, sleepArgs);
+    Main main = new TrivialMain(programName, iteration, trivialArgs);
+    main.execute(mainClass, trivialArgs);
     main.logExecution();
   }
 

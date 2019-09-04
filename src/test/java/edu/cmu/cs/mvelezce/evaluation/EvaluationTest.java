@@ -3510,7 +3510,7 @@ public class EvaluationTest {
     Evaluation.prettyPrintTime(samplingTime);
   }
 
-  private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
+  protected void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
     // arguments
     String[] args = new String[0];
 

@@ -33,7 +33,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private final Adapter programAdapter;
 
   private SubtracesMethodTransformer(Builder builder)
-      throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+      throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
+          InvocationTargetException {
     super(new DefaultClassTransformer(builder.classDir), builder.debug);
     this.programName = builder.programName;
 
@@ -61,33 +62,34 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   @Override
   public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
+    System.err.println("Ignoring A LOT of cases where we do not instrument");
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
       // TODO handle these methods
-      if (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
-          .equals("addToMainCache")) {
+      if (classNode.name.equals("com/sleepycat/je/tree/IN")
+          && methodNode.name.equals("addToMainCache")) {
         continue;
       }
 
-      if (classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
-          .equals("getNextTarget")) {
+      if (classNode.name.equals("com/sleepycat/je/evictor/Evictor")
+          && methodNode.name.equals("getNextTarget")) {
         continue;
       }
 
       // TODO issues with subtraces labeling
-      if (classNode.name.equals("com/sleepycat/je/cleaner/OffsetList") && methodNode.name
-          .equals("toArray")) {
+      if (classNode.name.equals("com/sleepycat/je/cleaner/OffsetList")
+          && methodNode.name.equals("toArray")) {
         continue;
       }
 
-      if (classNode.name.equals("com/sleepycat/je/log/FileReader") && methodNode.name
-          .equals("readData")) {
+      if (classNode.name.equals("com/sleepycat/je/log/FileReader")
+          && methodNode.name.equals("readData")) {
         continue;
       }
 
-      if (classNode.name.equals("com/sleepycat/je/tree/INTargetRep$Sparse") && methodNode.name
-          .equals("copy")) {
+      if (classNode.name.equals("com/sleepycat/je/tree/INTargetRep$Sparse")
+          && methodNode.name.equals("copy")) {
         continue;
       }
 
@@ -143,10 +145,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         if (insnNode instanceof JumpInsnNode) {
           try {
             CFGBuilder.getCfg(methodNode, classNode);
-          }
-          catch (InvalidGraphException ige) {
-            System.err.println("Ignoring " + methodNode.name + " from " + classNode.name
-                + " since the graph is invalid");
+          } catch (InvalidGraphException ige) {
+            System.err.println(
+                "Ignoring "
+                    + methodNode.name
+                    + " from "
+                    + classNode.name
+                    + " since the graph is invalid");
             break;
           }
 
@@ -171,12 +176,10 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         getMainMethod(classNode);
 
         return true;
-      }
-      catch (RuntimeException re) {
+      } catch (RuntimeException re) {
         return false;
       }
-    }
-    else {
+    } else {
       String mainClass = programAdapter.getMainClass();
       mainClass = mainClass.replaceAll("\\.", "/");
 
@@ -197,7 +200,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     String labelPrefix = classNode.name + "." + methodNode.name + methodNode.desc;
-//    this.instrumentCFDs(methodNode, labelPrefix);
+    //    this.instrumentCFDs(methodNode, labelPrefix);
     this.instrumentCFDEval(methodNode, labelPrefix);
     methodNode.visitMaxs(200, 200);
     // TODO do we need to instrument the end?
@@ -217,8 +220,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         continue;
       }
 
-      InsnList loggingInsnList = this
-          .getCFDEvalLoggingInsnList(labelPrefix, decisionCount, insnNode.getOpcode());
+      InsnList loggingInsnList =
+          this.getCFDEvalLoggingInsnList(labelPrefix, decisionCount, insnNode.getOpcode());
       insnList.insertBefore(insnNode, loggingInsnList);
 
       decisionCount++;
@@ -230,67 +233,67 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
     switch (opcode) {
       case Opcodes.IFEQ:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFEQEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFEQEval");
         break;
       case Opcodes.IFNE:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFNEEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFNEEval");
         break;
       case Opcodes.IFLT:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFLTEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFLTEval");
         break;
       case Opcodes.IFGE:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFGEEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFGEEval");
         break;
       case Opcodes.IFGT:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFGTEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFGTEval");
         break;
       case Opcodes.IFLE:
-        loggingInsnList = this
-            .getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFLEEval");
+        loggingInsnList =
+            this.getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFLEEval");
         break;
       case Opcodes.IF_ICMPEQ:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPEQEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPEQEval");
         break;
       case Opcodes.IF_ICMPNE:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPNEEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPNEEval");
         break;
       case Opcodes.IF_ICMPLT:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPLTEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPLTEval");
         break;
       case Opcodes.IF_ICMPGE:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPGEEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPGEEval");
         break;
       case Opcodes.IF_ICMPGT:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPGTEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPGTEval");
         break;
       case Opcodes.IF_ICMPLE:
-        loggingInsnList = this
-            .getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPLEEval");
+        loggingInsnList =
+            this.getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ICMPLEEval");
         break;
       case Opcodes.IF_ACMPEQ:
-        loggingInsnList = getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount,
-            "logIF_ACMPEQEval");
+        loggingInsnList =
+            getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ACMPEQEval");
         break;
       case Opcodes.IF_ACMPNE:
-        loggingInsnList = getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount,
-            "logIF_ACMPNEEval");
+        loggingInsnList =
+            getIF_XXMP_COND_LoggingInsnList(labelPrefix, decisionCount, "logIF_ACMPNEEval");
         break;
       case Opcodes.IFNULL:
         loggingInsnList = getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFNULLEval");
         break;
       case Opcodes.IFNONNULL:
-        loggingInsnList = getIF_COND_LoggingInsnList(labelPrefix, decisionCount,
-            "logIFNONNULLEval");
+        loggingInsnList =
+            getIF_COND_LoggingInsnList(labelPrefix, decisionCount, "logIFNONNULLEval");
         break;
       default:
         throw new UnsupportedOperationException("Implement opcode: " + opcode);
@@ -299,18 +302,18 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     return loggingInsnList;
   }
 
-  private InsnList getIF_COND_LoggingInsnList(String labelPrefix, int decisionCount,
-      String methodName) {
+  private InsnList getIF_COND_LoggingInsnList(
+      String labelPrefix, int decisionCount, String methodName) {
     return getCFGEvalInsnList(labelPrefix, decisionCount, methodName, Opcodes.DUP);
   }
 
-  private InsnList getIF_XXMP_COND_LoggingInsnList(String labelPrefix, int decisionCount,
-      String methodName) {
+  private InsnList getIF_XXMP_COND_LoggingInsnList(
+      String labelPrefix, int decisionCount, String methodName) {
     return getCFGEvalInsnList(labelPrefix, decisionCount, methodName, Opcodes.DUP2);
   }
 
-  private InsnList getCFGEvalInsnList(String labelPrefix, int decisionCount, String methodName,
-      int dupOpcode) {
+  private InsnList getCFGEvalInsnList(
+      String labelPrefix, int decisionCount, String methodName, int dupOpcode) {
     InsnList loggingInsnList = new InsnList();
 
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
@@ -318,26 +321,30 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     loggingInsnList.add(new InsnNode(dupOpcode));
     loggingInsnList.add(new LdcInsnNode(this.getDecisionLabelPrefix(labelPrefix, decisionCount)));
     loggingInsnList.add(
-        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME, methodName,
-            methodDescriptor, false));
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            SubtracesLogger.INTERNAL_NAME,
+            methodName,
+            methodDescriptor,
+            false));
 
     return loggingInsnList;
   }
 
-//  // TODO do not instrumented exit at return multiple times
-//  private void instrumentEndOfMethod(MethodNode methodNode, ClassNode classNode,
-//      String labelPrefix) {
-//    MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
-//    MethodBlock exitBlock = cfg.getExitBlock();
-//    Set<MethodBlock> preds = exitBlock.getPredecessors();
-//
-//    for (MethodBlock pred : preds) {
-//      List<AbstractInsnNode> instructions = pred.getInstructions();
-//      AbstractInsnNode returnInsnNode = this.getReturnInsnNode(instructions);
-//      InsnList savingInstructions = this.getIPDExitNodeLoggingInsnList(labelPrefix);
-//      methodNode.instructions.insertBefore(returnInsnNode, savingInstructions);
-//    }
-//  }
+  //  // TODO do not instrumented exit at return multiple times
+  //  private void instrumentEndOfMethod(MethodNode methodNode, ClassNode classNode,
+  //      String labelPrefix) {
+  //    MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
+  //    MethodBlock exitBlock = cfg.getExitBlock();
+  //    Set<MethodBlock> preds = exitBlock.getPredecessors();
+  //
+  //    for (MethodBlock pred : preds) {
+  //      List<AbstractInsnNode> instructions = pred.getInstructions();
+  //      AbstractInsnNode returnInsnNode = this.getReturnInsnNode(instructions);
+  //      InsnList savingInstructions = this.getIPDExitNodeLoggingInsnList(labelPrefix);
+  //      methodNode.instructions.insertBefore(returnInsnNode, savingInstructions);
+  //    }
+  //  }
 
   private void instrumentEndMain(MethodNode methodNode, ClassNode classNode) {
     if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
@@ -356,18 +363,18 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
   }
 
-//  private InsnList getEndOfMethodLogginInsnList() {
-//    InsnList saveInsnList = new InsnList();
-//
-//    String methodName = "exitAtReturn";
-//    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
-//
-//    saveInsnList
-//        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
-//            methodName, methodDescriptor, false));
-//
-//    return saveInsnList;
-//  }
+  //  private InsnList getEndOfMethodLogginInsnList() {
+  //    InsnList saveInsnList = new InsnList();
+  //
+  //    String methodName = "exitAtReturn";
+  //    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
+  //
+  //    saveInsnList
+  //        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
+  //            methodName, methodDescriptor, false));
+  //
+  //    return saveInsnList;
+  //  }
 
   // TODO check that this logic works in methods with multiple returns
   private InsnList getEndMainLogginInsnList() {
@@ -376,9 +383,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     String methodName = "saveTrace";
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
-    saveInsnList
-        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
-            methodName, methodDescriptor, false));
+    saveInsnList.add(
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            SubtracesLogger.INTERNAL_NAME,
+            methodName,
+            methodDescriptor,
+            false));
 
     return saveInsnList;
   }
@@ -403,7 +414,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
       if (succs.size() < 2) {
         throw new UnsupportedOperationException(
-            "In " + methodNode.name
+            "In "
+                + methodNode.name
                 + ", the method block with the jump instruction does not have at least 2 successors. "
                 + "Possibly, the control-flow decision has an empty body");
       }
@@ -422,10 +434,9 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
         this.instrumentIPDExitNode(cfg, labelPrefix, insnList);
         instrumentedIpdExitBlock = true;
-      }
-      else {
-        this.instrumentNormalIPD(methodBlockWithJumpInsn, ipd, cfg, labelPrefix, decisionCount,
-            insnList);
+      } else {
+        this.instrumentNormalIPD(
+            methodBlockWithJumpInsn, ipd, cfg, labelPrefix, decisionCount, insnList);
       }
 
       decisionCount++;
@@ -433,21 +444,26 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
   }
 
-  private void instrumentNormalIPD(MethodBlock methodBlockWithJumpInsn, MethodBlock ipd,
-      MethodGraph cfg, String labelPrefix, int decisionCount, InsnList insnList) {
+  private void instrumentNormalIPD(
+      MethodBlock methodBlockWithJumpInsn,
+      MethodBlock ipd,
+      MethodGraph cfg,
+      String labelPrefix,
+      int decisionCount,
+      InsnList insnList) {
     AbstractInsnNode ipdLabelInsn = ipd.getInstructions().get(0);
     Set<MethodBlock> reachables = cfg.getReachableBlocks(methodBlockWithJumpInsn, ipd);
     reachables.remove(ipd);
 
     LabelNode newIPDLabelNode = this.getLabelNode();
-    InsnList newIPDLoggingInsnList = this
-        .getNewIPDLoggingInsnList(newIPDLabelNode, labelPrefix, decisionCount);
+    InsnList newIPDLoggingInsnList =
+        this.getNewIPDLoggingInsnList(newIPDLabelNode, labelPrefix, decisionCount);
     insnList.insertBefore(ipd.getInstructions().get(0), newIPDLoggingInsnList);
 
     for (MethodBlock reachable : reachables) {
       List<AbstractInsnNode> reachableInstructions = reachable.getInstructions();
-      AbstractInsnNode reachableLastInstruction = reachableInstructions
-          .get(reachableInstructions.size() - 1);
+      AbstractInsnNode reachableLastInstruction =
+          reachableInstructions.get(reachableInstructions.size() - 1);
 
       if (!(reachableLastInstruction instanceof JumpInsnNode)) {
         continue;
@@ -457,8 +473,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         continue;
       }
 
-      JumpInsnNode newJumpInstruction = new JumpInsnNode(reachableLastInstruction.getOpcode(),
-          newIPDLabelNode);
+      JumpInsnNode newJumpInstruction =
+          new JumpInsnNode(reachableLastInstruction.getOpcode(), newIPDLabelNode);
       insnList.insertBefore(reachableLastInstruction, newJumpInstruction);
       insnList.remove(reachableLastInstruction);
     }
@@ -491,7 +507,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   private boolean isCFD(int opcode) {
     // TODO add table switch, lookup switch
-    return (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) || opcode == Opcodes.IFNULL
+    return (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE)
+        || opcode == Opcodes.IFNULL
         || opcode == Opcodes.IFNONNULL;
   }
 
@@ -507,15 +524,19 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     loggingInsnList.add(new LdcInsnNode(labelPrefix));
-    loggingInsnList
-        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
-            methodName, methodDescriptor, false));
+    loggingInsnList.add(
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            SubtracesLogger.INTERNAL_NAME,
+            methodName,
+            methodDescriptor,
+            false));
 
     return loggingInsnList;
   }
 
-  private InsnList getNewIPDLoggingInsnList(LabelNode labelNode, String decision,
-      int decisionCount) {
+  private InsnList getNewIPDLoggingInsnList(
+      LabelNode labelNode, String decision, int decisionCount) {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "exitDecision";
@@ -523,8 +544,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
     loggingInsnList.add(labelNode);
     loggingInsnList.add(new LdcInsnNode(this.getDecisionLabelPrefix(decision, decisionCount)));
-    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
-        methodName, methodDescriptor, false));
+    loggingInsnList.add(
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            SubtracesLogger.INTERNAL_NAME,
+            methodName,
+            methodDescriptor,
+            false));
 
     return loggingInsnList;
   }
@@ -581,8 +607,12 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
     loggingInsnList.add(new LdcInsnNode(this.getDecisionLabelPrefix(decision, decisionCount)));
     loggingInsnList.add(
-        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME, methodName,
-            methodDescriptor, false));
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            SubtracesLogger.INTERNAL_NAME,
+            methodName,
+            methodDescriptor,
+            false));
 
     return loggingInsnList;
   }
@@ -609,7 +639,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
 
     public SubtracesMethodTransformer build()
-        throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        throws InvocationTargetException, NoSuchMethodException, MalformedURLException,
+            IllegalAccessException {
       return new SubtracesMethodTransformer(this);
     }
   }

@@ -49,12 +49,11 @@ public class SubtracesInstrumenterTest {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     String srcDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
+    Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
 
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-
-    Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
     instrumenter.instrument(args);
   }
 }

@@ -25,8 +25,8 @@ public class SubtracesValueAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
-        configsToLabeledTraces);
+    SubtracesValueAnalysis subtracesValueAnalysis =
+        new SubtracesValueAnalysis(programName, configsToLabeledTraces);
     Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
 
     args = new String[0];
@@ -49,32 +49,8 @@ public class SubtracesValueAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
-        configsToLabeledTraces);
-    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
-
-    args = new String[0];
-
-    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
-
-    Assert.assertEquals(write, read);
-  }
-
-  @Test
-  public void MeasureDiskOrderedScanAdapter() throws IOException, InterruptedException {
-    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    String[] args = new String[0];
-
-    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName);
-    Map<Set<String>, List<String>> configsToLabeledTraces = subtraceLabeler.analyze(args);
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
-        configsToLabeledTraces);
+    SubtracesValueAnalysis subtracesValueAnalysis =
+        new SubtracesValueAnalysis(programName, configsToLabeledTraces);
     Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
 
     args = new String[0];
@@ -92,7 +68,28 @@ public class SubtracesValueAnalysisTest {
 
     String[] args = new String[0];
     Map<Set<String>, List<String>> configsToLabeledTraces = subtraceLabeler.analyze(args);
+    SubtracesValueAnalysis subtracesValueAnalysis =
+        new SubtracesValueAnalysis(programName, configsToLabeledTraces);
 
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
+
+    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    args = new String[0];
+    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void MeasureDiskOrderedScanAdapter() throws IOException, InterruptedException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName);
+
+    String[] args = new String[0];
+    Map<Set<String>, List<String>> configsToLabeledTraces = subtraceLabeler.analyze(args);
     SubtracesValueAnalysis subtracesValueAnalysis =
         new SubtracesValueAnalysis(programName, configsToLabeledTraces);
 

@@ -584,6 +584,36 @@
     ]
   },
   {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogBufferPool",
+    "methodSignature": "getWriteBuffer(IZ)Lcom/sleepycat/je/log/LogBuffer;",
+    "decisionIndex": 4,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
     "packageName": "com.sleepycat.je.tree",
     "className": "BIN",
     "methodSignature": "createBloomFilter()[B",
@@ -661,24 +691,6 @@
         "condition": [
           "JECACHESIZE",
           "DUPLICATES"
-        ]
-      }
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
-    "decisionIndex": 2,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE",
-          "REPLICATED"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "REPLICATED"
         ]
       }
     ]
@@ -3009,6 +3021,36 @@
           "SHAREDCACHE",
           "DUPLICATES",
           "SEQUENTIAL"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogBufferPool",
+    "methodSignature": "getWriteBuffer(IZ)Lcom/sleepycat/je/log/LogBuffer;",
+    "decisionIndex": 5,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
         ]
       },
       {
@@ -7228,6 +7270,84 @@
     ]
   },
   {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogBuffer",
+    "methodSignature": "waitForZeroAndLatch()V",
+    "decisionIndex": 2,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
     "packageName": "com.sleepycat.je.cleaner",
     "className": "BaseUtilizationTracker",
     "methodSignature": "countNew(JLjava/lang/Object;Lcom/sleepycat/je/log/LogEntryType;I)V",
@@ -7366,7 +7486,8 @@
         "context": [
           "JECACHESIZE",
           "SHAREDCACHE",
-          "DUPLICATES"
+          "DUPLICATES",
+          "SEQUENTIAL"
         ],
         "condition": [
           "JECACHESIZE"
@@ -7376,8 +7497,7 @@
         "context": [
           "JECACHESIZE",
           "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
+          "DUPLICATES"
         ],
         "condition": [
           "JECACHESIZE"
@@ -8348,14 +8468,6 @@
         ]
       },
       {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
         "context": [],
         "condition": [
           "JECACHESIZE"
@@ -8363,6 +8475,14 @@
       },
       {
         "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
           "JECACHESIZE",
           "DUPLICATES",
           "SEQUENTIAL"
@@ -8394,6 +8514,84 @@
         "condition": [
           "JECACHESIZE",
           "DUPLICATES"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogBuffer",
+    "methodSignature": "waitForZeroAndLatch()V",
+    "decisionIndex": 4,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
         ]
       },
       {
@@ -8724,110 +8922,6 @@
         ],
         "condition": [
           "JECACHESIZE"
-        ]
-      }
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DatabaseId",
-    "methodSignature": "equals(Ljava/lang/Object;)Z",
-    "decisionIndex": 3,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "DUPLICATES"
         ]
       }
     ]
@@ -11765,6 +11859,24 @@
   },
   {
     "packageName": "com.sleepycat.je.tree",
+    "className": "INKeyRep$MaxKeySize",
+    "methodSignature": "compareSuffixes([BIIIZ)I",
+    "decisionIndex": 2,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
     "className": "IN",
     "methodSignature": "materialize(Ljava/nio/ByteBuffer;IZZ)V",
     "decisionIndex": 26,
@@ -14583,15 +14695,15 @@
         ]
       },
       {
-        "context": [],
+        "context": [
+          "JECACHESIZE"
+        ],
         "condition": [
           "JECACHESIZE"
         ]
       },
       {
-        "context": [
-          "JECACHESIZE"
-        ],
+        "context": [],
         "condition": [
           "JECACHESIZE"
         ]
@@ -19735,6 +19847,22 @@
     ]
   },
   {
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
+    "decisionIndex": 1,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      }
+    ]
+  },
+  {
     "packageName": "com.sleepycat.je.tree",
     "className": "BIN",
     "methodSignature": "compress(ZLcom/sleepycat/je/cleaner/LocalUtilizationTracker;)Z",
@@ -22233,62 +22361,6 @@
     ]
   },
   {
-    "packageName": "com.sleepycat.je.log",
-    "className": "LogBuffer",
-    "methodSignature": "waitForZeroAndLatch()V",
-    "decisionIndex": 2,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      }
-    ]
-  },
-  {
     "packageName": "com.sleepycat.je.dbi",
     "className": "StartupTracker",
     "methodSignature": "stop(Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V",
@@ -24125,62 +24197,6 @@
       {
         "context": [
           "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      }
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.log",
-    "className": "LogBuffer",
-    "methodSignature": "waitForZeroAndLatch()V",
-    "decisionIndex": 4,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
         ],
         "condition": [
           "JECACHESIZE"
@@ -26316,6 +26332,24 @@
         ],
         "condition": [
           "JECACHESIZE"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INKeyRep$MaxKeySize",
+    "methodSignature": "updateCacheStats(ZLcom/sleepycat/je/evictor/Evictor;)V",
+    "decisionIndex": 1,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
         ]
       }
     ]
@@ -30156,20 +30190,6 @@
     ]
   },
   {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget",
-    "methodSignature": "<clinit>()V",
-    "decisionIndex": 7,
-    "influencingTaints": [
-      {
-        "context": [],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      }
-    ]
-  },
-  {
     "packageName": "com.sleepycat.je.tree",
     "className": "IN",
     "methodSignature": "needsSplitting()Z",
@@ -33022,15 +33042,15 @@
         ]
       },
       {
-        "context": [
-          "JECACHESIZE"
-        ],
+        "context": [],
         "condition": [
           "JECACHESIZE"
         ]
       },
       {
-        "context": [],
+        "context": [
+          "JECACHESIZE"
+        ],
         "condition": [
           "JECACHESIZE"
         ]
@@ -34276,62 +34296,6 @@
         "condition": [
           "JECACHESIZE",
           "DUPLICATES"
-        ]
-      }
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.log",
-    "className": "LogBufferPool",
-    "methodSignature": "bumpCurrent(I)Z",
-    "decisionIndex": 4,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "SHAREDCACHE",
-          "DUPLICATES"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      },
-      {
-        "context": [
-          "JECACHESIZE",
-          "DUPLICATES",
-          "SEQUENTIAL"
-        ],
-        "condition": [
-          "JECACHESIZE"
         ]
       }
     ]
@@ -37990,23 +37954,6 @@
         "condition": [
           "JECACHESIZE",
           "DUPLICATES"
-        ]
-      }
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
-    "decisionIndex": 1,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE",
-          "REPLICATED"
         ]
       }
     ]
@@ -45658,6 +45605,62 @@
   },
   {
     "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseId",
+    "methodSignature": "equals(Ljava/lang/Object;)Z",
+    "decisionIndex": 3,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
     "className": "EnvironmentImpl",
     "methodSignature": "incUpdateOps(Lcom/sleepycat/je/dbi/DatabaseImpl;)V",
     "decisionIndex": 1,
@@ -48906,6 +48909,84 @@
     ]
   },
   {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogBufferPool",
+    "methodSignature": "bumpCurrent(I)Z",
+    "decisionIndex": 4,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "SHAREDCACHE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES",
+          "SEQUENTIAL"
+        ],
+        "condition": [
+          "JECACHESIZE"
+        ]
+      },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
     "packageName": "com.sleepycat.je.tree",
     "className": "IN",
     "methodSignature": "setTarget(ILcom/sleepycat/je/tree/Node;)V",
@@ -49283,15 +49364,15 @@
     "decisionIndex": 3,
     "influencingTaints": [
       {
-        "context": [
-          "JECACHESIZE"
-        ],
+        "context": [],
         "condition": [
           "JECACHESIZE"
         ]
       },
       {
-        "context": [],
+        "context": [
+          "JECACHESIZE"
+        ],
         "condition": [
           "JECACHESIZE"
         ]
@@ -49670,6 +49751,24 @@
           "SEQUENTIAL"
         ]
       },
+      {
+        "context": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INKeyRep$MaxKeySize",
+    "methodSignature": "getKey(IZ)[B",
+    "decisionIndex": 4,
+    "influencingTaints": [
       {
         "context": [
           "JECACHESIZE",

@@ -8,12 +8,6 @@
   },
   {
     "partialConfig": {
-      "JECACHESIZE": true,
-      "REPLICATED": true
-    }
-  },
-  {
-    "partialConfig": {
       "JECACHESIZE": false,
       "SHAREDCACHE": false,
       "DUPLICATES": true,
@@ -26,18 +20,6 @@
       "SHAREDCACHE": true,
       "DUPLICATES": true,
       "SEQUENTIAL": true
-    }
-  },
-  {
-    "partialConfig": {
-      "JECACHESIZE": true,
-      "REPLICATED": false
-    }
-  },
-  {
-    "partialConfig": {
-      "JECACHESIZE": false,
-      "REPLICATED": true
     }
   },
   {
@@ -67,12 +49,6 @@
       "JECACHESIZE": false,
       "SHAREDCACHE": false,
       "DUPLICATES": false
-    }
-  },
-  {
-    "partialConfig": {
-      "JECACHESIZE": false,
-      "REPLICATED": false
     }
   },
   {

@@ -84,31 +84,29 @@ public class SubtraceLabelerTest {
   }
 
   @Test
-  public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
-    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    String[] args = new String[0];
-
+  public void trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
     SubtracesAnalysisExecutor analysis = new SubtracesAnalysisExecutor(programName);
+
+    String[] args = new String[0];
     Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
 
+    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName, configsToTraces);
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-
-    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName, configsToTraces);
     Map<Set<String>, List<String>> write = subtraceLabeler.analyze(args);
 
-    args = new String[0];
-
     subtraceLabeler = new SubtraceLabeler(programName);
+    args = new String[0];
     Map<Set<String>, List<String>> read = subtraceLabeler.analyze(args);
 
     Assert.assertEquals(write, read);
   }
 
   @Test
-  public void trivial() throws IOException, InterruptedException {
-    String programName = TrivialAdapter.PROGRAM_NAME;
+  public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     SubtracesAnalysisExecutor analysis = new SubtracesAnalysisExecutor(programName);
 
     String[] args = new String[0];

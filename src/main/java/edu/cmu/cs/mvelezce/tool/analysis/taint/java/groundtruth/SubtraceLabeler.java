@@ -32,6 +32,8 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     super(programName, new HashSet<>(), new HashSet<>());
 
     this.configsToTraces = configsToTraces;
+    System.err.println(
+        "Check this labeler since there might be some cases (e.g., exceptions) that we are not handling correctly");
   }
 
   @Override
@@ -59,8 +61,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     for (String entry : trace) {
       if (entry.equals(SubtracesLogger.TRUE) || entry.equals(SubtracesLogger.FALSE)) {
         labeledTrace.add(entry);
-      }
-      else {
+      } else {
         this.processDecision(entry, stack, labeledTrace);
       }
     }
@@ -127,8 +128,8 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     String[] decisionEntries = decision.split("\\.");
     String[] decisionInStackEntries = decisionInStack.split("\\.");
 
-    return decisionEntries[0].equals(decisionInStackEntries[0]) && decisionEntries[1]
-        .equals(decisionInStackEntries[1]);
+    return decisionEntries[0].equals(decisionInStackEntries[0])
+        && decisionEntries[1].equals(decisionInStackEntries[1]);
   }
 
   private void printStack(Deque<UUID> stack) {
@@ -195,9 +196,8 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<ConfigToTraceInfo> configToTraceInfoList = mapper
-        .readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {
-        });
+    List<ConfigToTraceInfo> configToTraceInfoList =
+        mapper.readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {});
 
     Map<Set<String>, List<String>> configsToLabeledTraces = new HashMap<>();
 
@@ -210,7 +210,8 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
 
   @Override
   public String outputDir() {
-    return Options.DIRECTORY + "/analysis/spec/traces/labeled/java/programs/" + this
-        .getProgramName();
+    return Options.DIRECTORY
+        + "/analysis/spec/traces/labeled/java/programs/"
+        + this.getProgramName();
   }
 }

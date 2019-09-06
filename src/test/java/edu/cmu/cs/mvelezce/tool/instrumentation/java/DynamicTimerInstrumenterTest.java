@@ -126,24 +126,21 @@ public class DynamicTimerInstrumenterTest {
   public void subtraces()
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
-    String entry = SubtracesAdapter.MAIN_CLASS;
-    String rootPackage = SubtracesAdapter.ROOT_PACKAGE;
+    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
+    String[] args = new String[0];
+    Map<JavaRegion, Set<Set<String>>> regionsToInfluencingTaints = analysis.analyze(args);
+
     String srcDir = SubtracesAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = SubtracesAdapter.INSTRUMENTED_CLASS_PATH;
+    this.compile(srcDir, classDir);
 
-//    this.compile(srcDir, classDir);
-
-    String[] args = new String[0];
-
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
-    Map<JavaRegion, Set<Set<String>>> decisionsToInfluencingTaints = analysis.analyze(args);
-
+    String entry = SubtracesAdapter.MAIN_CLASS;
+    String rootPackage = SubtracesAdapter.ROOT_PACKAGE;
+    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+        rootPackage, classDir, regionsToInfluencingTaints);
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-
-    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        rootPackage, classDir, decisionsToInfluencingTaints);
     instrumenter.instrument(args);
   }
 

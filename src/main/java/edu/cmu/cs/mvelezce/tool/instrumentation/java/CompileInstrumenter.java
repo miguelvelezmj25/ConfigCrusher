@@ -26,6 +26,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
   @Override
   public void compile() throws IOException, InterruptedException {
+    System.err.println("Not only compiling project, but actually packaging");
     ProcessBuilder builder = new ProcessBuilder();
 
     List<String> commandList = this.buildCommandAsList();

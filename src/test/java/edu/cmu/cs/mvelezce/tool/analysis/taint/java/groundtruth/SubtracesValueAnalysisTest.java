@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,29 @@ public class SubtracesValueAnalysisTest {
     args = new String[0];
 
     subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName);
+
+    String[] args = new String[0];
+    Map<Set<String>, List<String>> configsToLabeledTraces = subtraceLabeler.analyze(args);
+
+    SubtracesValueAnalysis subtracesValueAnalysis =
+        new SubtracesValueAnalysis(programName, configsToLabeledTraces);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
+
+    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    args = new String[0];
     Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
 
     Assert.assertEquals(write, read);

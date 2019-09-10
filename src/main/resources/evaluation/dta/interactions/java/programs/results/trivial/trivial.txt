@@ -1,0 +1,5 @@
+Found phosphor interaction def(A)
+Found phosphor interaction def(B)
+Found phosphor interaction !def(B)
+Found phosphor interaction !def(A)
+

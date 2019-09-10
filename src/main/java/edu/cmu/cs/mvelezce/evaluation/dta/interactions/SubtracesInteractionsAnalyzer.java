@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.dta.interactions;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,6 +6,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,30 +18,30 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public class InteractionAnalyzer implements Analysis<List<FeatureExpr>> {
+public class SubtracesInteractionsAnalyzer implements Analysis<Set<FeatureExpr>> {
 
   private final String programName;
   private final Set<SubtraceAnalysisInfo> subtraceAnalysisInfos;
   private final Set<String> options;
 
-  InteractionAnalyzer(
+  SubtracesInteractionsAnalyzer(
       String programName, Set<SubtraceAnalysisInfo> subtraceAnalysisInfos, Set<String> options) {
     this.programName = programName;
     this.subtraceAnalysisInfos = subtraceAnalysisInfos;
     this.options = options;
   }
 
-  InteractionAnalyzer(String programName) {
+  SubtracesInteractionsAnalyzer(String programName) {
     this.programName = programName;
     this.subtraceAnalysisInfos = new HashSet<>();
     this.options = new HashSet<>();
   }
 
   @Override
-  public List<FeatureExpr> analyze() {
+  public Set<FeatureExpr> analyze() {
     List<String> constraints = this.buildStringConstraints();
 
-    return MinConfigsGenerator.getFeatureExprs(constraints);
+    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(constraints));
   }
 
   private List<String> buildStringConstraints() {
@@ -120,7 +121,7 @@ public class InteractionAnalyzer implements Analysis<List<FeatureExpr>> {
   }
 
   @Override
-  public List<FeatureExpr> analyze(String[] args) throws IOException {
+  public Set<FeatureExpr> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -139,7 +140,7 @@ public class InteractionAnalyzer implements Analysis<List<FeatureExpr>> {
       return this.readFromFile(files.iterator().next());
     }
 
-    List<FeatureExpr> interactions = this.analyze();
+    Set<FeatureExpr> interactions = this.analyze();
 
     if (Options.checkIfSave()) {
       this.writeToFile(interactions);
@@ -149,7 +150,8 @@ public class InteractionAnalyzer implements Analysis<List<FeatureExpr>> {
   }
 
   @Override
-  public void writeToFile(List<FeatureExpr> interactions) throws IOException {
+  public void writeToFile(Set<FeatureExpr> interactions) throws IOException {
+    System.err.println("This code was copied and pasted");
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -171,15 +173,18 @@ public class InteractionAnalyzer implements Analysis<List<FeatureExpr>> {
   }
 
   @Override
-  public List<FeatureExpr> readFromFile(File file) throws IOException {
+  public Set<FeatureExpr> readFromFile(File file) throws IOException {
+    System.err.println("This code was copied and pasted");
     ObjectMapper mapper = new ObjectMapper();
     List<String> stringConstraints = mapper.readValue(file, new TypeReference<List<String>>() {});
 
-    return MinConfigsGenerator.getFeatureExprs(stringConstraints);
+    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(stringConstraints));
   }
 
   @Override
   public String outputDir() {
-    return Options.DIRECTORY + "/analysis/spec/interactions/java/programs/" + this.programName;
+    return Options.DIRECTORY
+        + "/evaluation/dta/interactions/java/programs/subtraces/"
+        + this.programName;
   }
 }

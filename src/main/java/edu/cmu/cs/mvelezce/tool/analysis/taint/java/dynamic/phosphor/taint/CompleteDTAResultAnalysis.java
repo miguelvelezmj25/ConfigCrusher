@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowStatementInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.TaintHelper;
 import java.io.File;
 import java.io.IOException;
@@ -17,24 +17,25 @@ import java.util.Map;
 import java.util.Set;
 
 // TODO might need to know what configurations will be executed to know what can be removed from instrumentation
-public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorControlFlowInfo>> {
+public class CompleteDTAResultAnalysis extends BaseDynamicAnalysis<Set<PhosphorControlFlowStatementInfo>> {
 
   private final Map<String, Set<InfluencingTaints>> statementsToOptionsSet = new HashMap<>();
 //  private final Map<String, InfluencingTaints> statementsToOptions = new HashMap<>();
   private final List<String> options;
 
-  public PhosphorTaintAnalysis(String programName, List<String> options) {
+  public CompleteDTAResultAnalysis(String programName, List<String> options) {
     super(programName, new HashSet<>(options), new HashSet<>());
 
     this.options = options;
   }
 
-  PhosphorTaintAnalysis(String programName) {
+  CompleteDTAResultAnalysis(String programName) {
     this(programName, new ArrayList<>());
   }
 
   @Override
-  public Set<PhosphorControlFlowInfo> analyze() throws IOException, InterruptedException {
+  public Set<PhosphorControlFlowStatementInfo> analyze() throws IOException, InterruptedException {
+    System.err.println("Might want to save the constraints per decision, not the taints");
 //    this.removeContextTaintsInConditionTaints();
 //    this.removeStatementsWithOnlyEmptyConditionTaints();
 ////    this.updatedConditionTaintsIfremoveContextTaintsInConditionTaints();
@@ -50,8 +51,8 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
     return this.getPhosphorControlFlowDecisions();
   }
 
-  private Set<PhosphorControlFlowInfo> getPhosphorControlFlowDecisions() {
-    Set<PhosphorControlFlowInfo> phosphorControlFlowInfos = new HashSet<>();
+  private Set<PhosphorControlFlowStatementInfo> getPhosphorControlFlowDecisions() {
+    Set<PhosphorControlFlowStatementInfo> phosphorControlFlowStatementInfos = new HashSet<>();
 
 //    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
     for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
@@ -63,12 +64,12 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
       String methodSignature = statementComponents[1];
       int decisionIndex = Integer.parseInt(statementComponents[2]);
 
-      PhosphorControlFlowInfo phosphorControlFlowInfo = new PhosphorControlFlowInfo(packageName,
+      PhosphorControlFlowStatementInfo phosphorControlFlowStatementInfo = new PhosphorControlFlowStatementInfo(packageName,
           className, methodSignature, decisionIndex, entry.getValue());
-      phosphorControlFlowInfos.add(phosphorControlFlowInfo);
+      phosphorControlFlowStatementInfos.add(phosphorControlFlowStatementInfo);
     }
 
-    return phosphorControlFlowInfos;
+    return phosphorControlFlowStatementInfos;
   }
 
   private static String getClassName(String statementComponent) {
@@ -275,7 +276,7 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
   }
 
   @Override
-  public void writeToFile(Set<PhosphorControlFlowInfo> controlFlowInfos) throws IOException {
+  public void writeToFile(Set<PhosphorControlFlowStatementInfo> controlFlowInfos) throws IOException {
     String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -285,11 +286,11 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
   }
 
   @Override
-  public Set<PhosphorControlFlowInfo> readFromFile(File file) throws IOException {
+  public Set<PhosphorControlFlowStatementInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     return mapper
-        .readValue(file, new TypeReference<Set<PhosphorControlFlowInfo>>() {
+        .readValue(file, new TypeReference<Set<PhosphorControlFlowStatementInfo>>() {
         });
   }
 

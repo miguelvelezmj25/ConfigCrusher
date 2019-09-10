@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class PhosphorConstraintCalculator {
+public class DTAConstraintCalculator {
 
   private final List<String> options;
 
-  public PhosphorConstraintCalculator(List<String> options) {
+  public DTAConstraintCalculator(List<String> options) {
     this.options = options;
   }
 

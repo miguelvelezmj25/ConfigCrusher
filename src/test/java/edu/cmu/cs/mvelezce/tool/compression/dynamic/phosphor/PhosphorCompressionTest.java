@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.compression.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.DTAConstraintAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
@@ -16,7 +16,7 @@ public class PhosphorCompressionTest {
   @Test
   public void Trivial() throws IOException, InterruptedException {
     String programName = TrivialAdapter.PROGRAM_NAME;
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
 
     String[] args = new String[0];
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
@@ -40,12 +40,13 @@ public class PhosphorCompressionTest {
   @Test
   public void Subtraces() throws IOException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
 
     String[] args = new String[0];
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
-    PhosphorCompression phosphorCompression = new PhosphorCompression(programName, options, constraints);
+    PhosphorCompression phosphorCompression =
+        new PhosphorCompression(programName, options, constraints);
 
     args = new String[2];
     args[0] = "-delres";
@@ -66,7 +67,7 @@ public class PhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
 
     System.out.println(constraints.iterator().next());
@@ -77,8 +78,8 @@ public class PhosphorCompressionTest {
     args[1] = "-saveres";
 
     Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
-    PhosphorCompression phosphorCompression = new PhosphorCompression(programName, options,
-        constraints);
+    PhosphorCompression phosphorCompression =
+        new PhosphorCompression(programName, options, constraints);
     Set<Set<String>> write = phosphorCompression.compressConfigurations(args);
 
     args = new String[0];

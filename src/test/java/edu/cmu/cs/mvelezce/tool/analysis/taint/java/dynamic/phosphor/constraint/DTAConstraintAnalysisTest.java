@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorDTA;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
@@ -14,7 +14,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PhosphorConstraintAnalysisTest {
+public class DTAConstraintAnalysisTest {
 
   @Test
   public void Trivial() throws IOException, InterruptedException {
@@ -27,11 +27,11 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
     analysis.analyze(args);
 
     args = new String[0];
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
     Assert.assertFalse(read.isEmpty());
@@ -48,11 +48,11 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
     analysis.analyze(args);
 
     args = new String[0];
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
     Assert.assertFalse(read.isEmpty());
@@ -69,11 +69,11 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
     analysis.analyze(args);
 
     args = new String[0];
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
     Assert.assertFalse(read.isEmpty());
@@ -90,11 +90,11 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
     analysis.analyze(args);
 
     args = new String[0];
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
     Assert.assertFalse(read.isEmpty());
@@ -111,11 +111,11 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
     analysis.analyze(args);
 
     args = new String[0];
-    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
     Assert.assertFalse(read.isEmpty());

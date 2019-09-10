@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorControlFlowStatementInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.CompleteDTAResultAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.PhosphorTaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import java.io.File;
 import java.io.IOException;
@@ -17,22 +17,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TaintPhosphorAnalysis extends BaseDynamicRegionAnalysis<Set<Set<String>>> {
+/**
+ * Used for instrumentation
+ */
+public class PhosphorStaticResultAnalysis extends BaseDynamicRegionAnalysis<Set<Set<String>>> {
 
-  private final PhosphorTaintAnalysis phosphorTaintAnalysis;
+  private final CompleteDTAResultAnalysis completeDTAResultAnalysis;
 
-  public TaintPhosphorAnalysis(String programName) {
+  public PhosphorStaticResultAnalysis(String programName) {
     super(programName, new HashSet<>(), new HashSet<>());
 
-    this.phosphorTaintAnalysis = new PhosphorTaintAnalysis(programName, new ArrayList<>());
+    this.completeDTAResultAnalysis = new CompleteDTAResultAnalysis(programName, new ArrayList<>());
   }
 
   @Override
   public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
-    Set<PhosphorControlFlowInfo> results = this.readPhosphorTaintResults();
+    System.err.println("Might want to save the constraints per decision, not the taints");
+    Set<PhosphorControlFlowStatementInfo> results = this.readPhosphorTaintResults();
     Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 
-    for (PhosphorControlFlowInfo result : results) {
+    for (PhosphorControlFlowStatementInfo result : results) {
       Set<InfluencingTaints> influencingTaints = result.getInfluencingTaints();
       Set<InfluencingTaints> newInfluencingTaints = this
           .removeContextTaintsInConditionTaints(influencingTaints);
@@ -192,13 +196,13 @@ public class TaintPhosphorAnalysis extends BaseDynamicRegionAnalysis<Set<Set<Str
     return newInfluencingTaintsSet;
   }
 
-  private Set<PhosphorControlFlowInfo> readPhosphorTaintResults() throws IOException {
+  private Set<PhosphorControlFlowStatementInfo> readPhosphorTaintResults() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     File inputFile = new File(
-        this.phosphorTaintAnalysis.outputDir() + "/" + this.getProgramName() + ".json");
+        this.completeDTAResultAnalysis.outputDir() + "/" + this.getProgramName() + ".json");
 
     return mapper
-        .readValue(inputFile, new TypeReference<Set<PhosphorControlFlowInfo>>() {
+        .readValue(inputFile, new TypeReference<Set<PhosphorControlFlowStatementInfo>>() {
         });
   }
 

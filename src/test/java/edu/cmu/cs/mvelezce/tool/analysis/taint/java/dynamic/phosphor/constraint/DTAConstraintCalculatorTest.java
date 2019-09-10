@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-public class PhosphorConstraintCalculatorTest {
+public class DTAConstraintCalculatorTest {
 
   private static final List<String> OPTIONS = new ArrayList<>();
 
@@ -46,14 +46,13 @@ public class PhosphorConstraintCalculatorTest {
     Set<DecisionTaints> results = new HashSet<>();
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator =
-        new PhosphorConstraintCalculator(OPTIONS);
+    DTAConstraintCalculator DTAConstraintCalculator = new DTAConstraintCalculator(OPTIONS);
 
     Collection<Set<ConfigConstraint>> constraintsSet =
-        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+        DTAConstraintCalculator.deriveConstraints(results, config).values();
     Set<ConfigConstraint> constraints = new HashSet<>();
 
-    for(Set<ConfigConstraint> entry : constraintsSet) {
+    for (Set<ConfigConstraint> entry : constraintsSet) {
       constraints.addAll(entry);
     }
 
@@ -70,13 +69,12 @@ public class PhosphorConstraintCalculatorTest {
 
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator =
-        new PhosphorConstraintCalculator(OPTIONS);
+    DTAConstraintCalculator DTAConstraintCalculator = new DTAConstraintCalculator(OPTIONS);
     Collection<Set<ConfigConstraint>> constraintsSet =
-        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+        DTAConstraintCalculator.deriveConstraints(results, config).values();
     Set<ConfigConstraint> constraints = new HashSet<>();
 
-    for(Set<ConfigConstraint> entry : constraintsSet) {
+    for (Set<ConfigConstraint> entry : constraintsSet) {
       constraints.addAll(entry);
     }
 
@@ -95,13 +93,12 @@ public class PhosphorConstraintCalculatorTest {
 
     Set<String> config = new HashSet<>();
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator =
-        new PhosphorConstraintCalculator(OPTIONS);
+    DTAConstraintCalculator DTAConstraintCalculator = new DTAConstraintCalculator(OPTIONS);
     Collection<Set<ConfigConstraint>> constraintsSet =
-        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+        DTAConstraintCalculator.deriveConstraints(results, config).values();
     Set<ConfigConstraint> constraints = new HashSet<>();
 
-    for(Set<ConfigConstraint> entry : constraintsSet) {
+    for (Set<ConfigConstraint> entry : constraintsSet) {
       constraints.addAll(entry);
     }
 
@@ -123,13 +120,12 @@ public class PhosphorConstraintCalculatorTest {
     Set<String> config = new HashSet<>();
     config.add("B");
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator =
-        new PhosphorConstraintCalculator(OPTIONS);
+    DTAConstraintCalculator DTAConstraintCalculator = new DTAConstraintCalculator(OPTIONS);
     Collection<Set<ConfigConstraint>> constraintsSet =
-        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+        DTAConstraintCalculator.deriveConstraints(results, config).values();
     Set<ConfigConstraint> constraints = new HashSet<>();
 
-    for(Set<ConfigConstraint> entry : constraintsSet) {
+    for (Set<ConfigConstraint> entry : constraintsSet) {
       constraints.addAll(entry);
     }
 
@@ -151,13 +147,12 @@ public class PhosphorConstraintCalculatorTest {
     Set<String> config = new HashSet<>();
     config.add("B");
 
-    PhosphorConstraintCalculator phosphorConstraintCalculator =
-        new PhosphorConstraintCalculator(OPTIONS);
+    DTAConstraintCalculator DTAConstraintCalculator = new DTAConstraintCalculator(OPTIONS);
     Collection<Set<ConfigConstraint>> constraintsSet =
-        phosphorConstraintCalculator.deriveConstraints(results, config).values();
+        DTAConstraintCalculator.deriveConstraints(results, config).values();
     Set<ConfigConstraint> constraints = new HashSet<>();
 
-    for(Set<ConfigConstraint> entry : constraintsSet) {
+    for (Set<ConfigConstraint> entry : constraintsSet) {
       constraints.addAll(entry);
     }
 

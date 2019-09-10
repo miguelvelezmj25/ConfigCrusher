@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import java.util.Set;
 
-public class PhosphorControlFlowInfo {
+public class PhosphorControlFlowStatementInfo {
 
   private final String packageName;
   private final String className;
@@ -11,7 +11,7 @@ public class PhosphorControlFlowInfo {
   private final int decisionIndex;
   private final Set<InfluencingTaints> influencingTaints;
 
-  private PhosphorControlFlowInfo() {
+  private PhosphorControlFlowStatementInfo() {
     this.packageName = null;
     this.className = null;
     this.methodSignature = null;
@@ -19,8 +19,12 @@ public class PhosphorControlFlowInfo {
     this.influencingTaints = null;
   }
 
-  public PhosphorControlFlowInfo(String packageName, String className, String methodSignature,
-      int decisionIndex, Set<InfluencingTaints> influencingTaints) {
+  public PhosphorControlFlowStatementInfo(
+      String packageName,
+      String className,
+      String methodSignature,
+      int decisionIndex,
+      Set<InfluencingTaints> influencingTaints) {
     this.packageName = packageName;
     this.className = className;
     this.methodSignature = methodSignature;
@@ -57,7 +61,7 @@ public class PhosphorControlFlowInfo {
       return false;
     }
 
-    PhosphorControlFlowInfo that = (PhosphorControlFlowInfo) o;
+    PhosphorControlFlowStatementInfo that = (PhosphorControlFlowStatementInfo) o;
 
     if (decisionIndex != that.decisionIndex) {
       return false;

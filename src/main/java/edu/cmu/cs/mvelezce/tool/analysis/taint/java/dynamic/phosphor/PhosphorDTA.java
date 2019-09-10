@@ -3,10 +3,10 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintCalculator;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintExecutionAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.PhosphorTaintAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.DTAConstraintAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.DTAConstraintCalculator;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorExecutionResultAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.CompleteDTAResultAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.constructor.ConstructorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
@@ -47,29 +47,29 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
+public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
 
   private static final String PHOSPHOR_SCRIPTS_DIR =
       "../phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
   private final ConfigConstraintAnalyzer configConstraintAnalyzer;
-  private final PhosphorConstraintExecutionAnalysis phosphorConstraintExecutionAnalysis;
-  private final PhosphorConstraintCalculator phosphorConstraintCalculator;
-  private final PhosphorConstraintAnalysis phosphorConstraintAnalysis;
-  private final PhosphorTaintAnalysis phosphorTaintAnalysis;
+  private final PhosphorExecutionResultAnalysis phosphorExecutionResultAnalysis;
+  private final DTAConstraintCalculator DTAConstraintCalculator;
+  private final DTAConstraintAnalysis DTAConstraintAnalysis;
+  private final CompleteDTAResultAnalysis completeDTAResultAnalysis;
 
-  public PhosphorAnalysis(String programName) {
+  public PhosphorDTA(String programName) {
     this(programName, new ArrayList<>(), new HashSet<>());
   }
 
-  public PhosphorAnalysis(String programName, List<String> options, Set<String> initialConfig) {
+  public PhosphorDTA(String programName, List<String> options, Set<String> initialConfig) {
     super(programName, new HashSet<>(options), initialConfig);
 
     this.configConstraintAnalyzer = new ConfigConstraintAnalyzer(new HashSet<>(options));
-    this.phosphorConstraintExecutionAnalysis = new PhosphorConstraintExecutionAnalysis(programName);
-    this.phosphorConstraintCalculator = new PhosphorConstraintCalculator(options);
-    this.phosphorConstraintAnalysis = new PhosphorConstraintAnalysis(programName);
-    this.phosphorTaintAnalysis = new PhosphorTaintAnalysis(programName, options);
+    this.phosphorExecutionResultAnalysis = new PhosphorExecutionResultAnalysis(programName);
+    this.DTAConstraintCalculator = new DTAConstraintCalculator(options);
+    this.DTAConstraintAnalysis = new DTAConstraintAnalysis(programName);
+    this.completeDTAResultAnalysis = new CompleteDTAResultAnalysis(programName, options);
   }
 
   @Nullable
@@ -77,12 +77,13 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
   public Void analyze() throws IOException, InterruptedException {
     this.runDynamicAnalysis();
 
-    Set<ConfigConstraint> constraints = this.phosphorConstraintAnalysis.analyze();
-    this.phosphorConstraintAnalysis.writeToFile(constraints);
+    Set<ConfigConstraint> constraints = this.DTAConstraintAnalysis.analyze();
+    this.DTAConstraintAnalysis.writeToFile(constraints);
 
     System.err.println("Might want to save the constraints per decision, not the taints");
-    Set<PhosphorControlFlowInfo> phosphorControlFlowInfos = this.phosphorTaintAnalysis.analyze();
-    this.phosphorTaintAnalysis.writeToFile(phosphorControlFlowInfos);
+    Set<PhosphorControlFlowStatementInfo> phosphorControlFlowStatementInfos =
+        this.completeDTAResultAnalysis.analyze();
+    this.completeDTAResultAnalysis.writeToFile(phosphorControlFlowStatementInfos);
 
     return null;
   }
@@ -117,19 +118,19 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
       this.runPhosphorAnalysis(config);
-      Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
+      Set<DecisionTaints> results = this.phosphorExecutionResultAnalysis.getResults();
       //      System.out.println(results.size());
 
       Collection<Set<ConfigConstraint>> constraintsSet =
-          this.phosphorConstraintCalculator.deriveConstraints(results, config).values();
+          this.DTAConstraintCalculator.deriveConstraints(results, config).values();
       Set<ConfigConstraint> analysisConstraints = new HashSet<>();
 
       for (Set<ConfigConstraint> entry : constraintsSet) {
         analysisConstraints.addAll(entry);
       }
 
-      this.phosphorConstraintAnalysis.addConstraints(analysisConstraints);
-      this.phosphorTaintAnalysis.recordTaints(results);
+      this.DTAConstraintAnalysis.addConstraints(analysisConstraints);
+      this.completeDTAResultAnalysis.recordTaints(results);
 
       configConstraintsToSatisfy.addAll(analysisConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);

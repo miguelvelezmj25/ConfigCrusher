@@ -1,7 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
@@ -31,19 +29,20 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class BFPhosphorAnalysisTest {
 
   @Test
   public void dynamicAll() {
-    Collection<File> files = FileUtils.listFiles(new File(
-            "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/phosphor-examples/src/main/java/edu/cmu/cs/mvelezce/analysis"),
-        new String[]{"java"}, true);
+    Collection<File> files =
+        FileUtils.listFiles(
+            new File(
+                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/phosphor-examples/src/main/java/edu/cmu/cs/mvelezce/analysis"),
+            new String[] {"java"},
+            true);
 
     Set<String> programsWithErrors = new HashSet<>();
 
@@ -57,15 +56,13 @@ public class BFPhosphorAnalysisTest {
         List<String> options = AllDynamicAdapter.getListOfOptions();
 
         String[] args = new String[1];
-//        String[] args = new String[2];
+        //        String[] args = new String[2];
         args[0] = "-saveres";
-//        args[1] = "-delres";
+        //        args[1] = "-delres";
 
-        BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, mainClass,
-            options);
+        BFPhosphorDTA analysis = new BFPhosphorDTA(programName, mainClass, options);
         analysis.analyze(args);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         programsWithErrors.add(programName);
       }
     }
@@ -86,7 +83,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -100,7 +97,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -114,7 +111,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -128,7 +125,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -142,7 +139,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -156,19 +153,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readDynamicRunningExample() throws IOException, InterruptedException {
-//    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readDynamicRunningExample() throws IOException, InterruptedException {
+  //    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void simpleExample1() throws IOException, InterruptedException {
@@ -180,7 +177,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -194,7 +191,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -208,7 +205,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -222,19 +219,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readExample3() throws IOException, InterruptedException {
-//    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readExample3() throws IOException, InterruptedException {
+  //    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void ifOr2() throws IOException, InterruptedException {
@@ -246,19 +243,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readIfOr2() throws IOException, InterruptedException {
-//    String programName = IfOr2Adapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readIfOr2() throws IOException, InterruptedException {
+  //    String programName = IfOr2Adapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void orContext() throws IOException, InterruptedException {
@@ -270,19 +267,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readOrContext() throws IOException, InterruptedException {
-//    String programName = OrContextAdapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readOrContext() throws IOException, InterruptedException {
+  //    String programName = OrContextAdapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void orContext2() throws IOException, InterruptedException {
@@ -294,19 +291,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readOrContext2() throws IOException, InterruptedException {
-//    String programName = OrContext2Adapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readOrContext2() throws IOException, InterruptedException {
+  //    String programName = OrContext2Adapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void orContext3() throws IOException, InterruptedException {
@@ -318,19 +315,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readOrContext3() throws IOException, InterruptedException {
-//    String programName = OrContext3Adapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readOrContext3() throws IOException, InterruptedException {
+  //    String programName = OrContext3Adapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void multiFacet() throws IOException, InterruptedException {
@@ -342,7 +339,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -356,7 +353,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -370,7 +367,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -384,7 +381,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -398,7 +395,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -412,19 +409,19 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
-//  @Test
-//  public void readExample8() throws IOException, InterruptedException {
-//    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
-//
-//    String[] args = new String[0];
-//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
-//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-//    PhosphorAnalysis.printProgramConstraints(read);
-//  }
+  //  @Test
+  //  public void readExample8() throws IOException, InterruptedException {
+  //    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
+  //
+  //    String[] args = new String[0];
+  //    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+  //    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+  //    PhosphorAnalysis.printProgramConstraints(read);
+  //  }
 
   @Test
   public void orContext6() throws IOException, InterruptedException {
@@ -436,7 +433,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -450,7 +447,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
 
@@ -464,8 +461,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    BFPhosphorDTA analysis = new BFPhosphorDTA(programName, options);
     analysis.analyze(args);
   }
-
 }

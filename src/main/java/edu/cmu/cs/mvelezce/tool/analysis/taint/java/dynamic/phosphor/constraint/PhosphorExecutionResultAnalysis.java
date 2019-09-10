@@ -13,7 +13,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
-public class PhosphorConstraintExecutionAnalysis {
+public class PhosphorExecutionResultAnalysis {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
@@ -21,7 +21,7 @@ public class PhosphorConstraintExecutionAnalysis {
 
   private final String programName;
 
-  public PhosphorConstraintExecutionAnalysis(String programName) {
+  public PhosphorExecutionResultAnalysis(String programName) {
     this.programName = programName;
   }
 

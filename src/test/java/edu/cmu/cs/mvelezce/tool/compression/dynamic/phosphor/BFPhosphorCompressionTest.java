@@ -1,10 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.compression.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
-import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorDTA;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorDTA;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
@@ -12,11 +9,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class BFPhosphorCompressionTest {
@@ -28,24 +22,25 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -55,24 +50,25 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -82,24 +78,25 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -109,24 +106,25 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -136,24 +134,25 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -163,23 +162,24 @@ public class BFPhosphorCompressionTest {
 
     String[] args = new String[0];
 
-    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    PhosphorDTA analysis = new BFPhosphorDTA(programName);
     analysis.analyze(args);
-//    Collection<SinkData> constraints = sinkData.values();
-//
-//    args = new String[2];
-//    args[0] = "-delres";
-//    args[1] = "-saveres";
-//
-//    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
-//        constraints);
-//    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
-//
-//    args = new String[0];
-//
-//    compressor = new BFPhosphorCompression(programName);
-//    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
-//
-//    Assert.assertEquals(write, read);
+    //    Collection<SinkData> constraints = sinkData.values();
+    //
+    //    args = new String[2];
+    //    args[0] = "-delres";
+    //    args[1] = "-saveres";
+    //
+    //    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName,
+    // options,
+    //        constraints);
+    //    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+    //
+    //    args = new String[0];
+    //
+    //    compressor = new BFPhosphorCompression(programName);
+    //    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+    //
+    //    Assert.assertEquals(write, read);
   }
 }

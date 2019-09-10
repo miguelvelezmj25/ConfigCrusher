@@ -15,17 +15,15 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.junit.Assert;
 import org.junit.Test;
 
-public class TaintPhosphorAnalysisTest {
+public class PhosphorStaticResultAnalysisTest {
 
-  private static void assertEquals(Map<JavaRegion, Set<Set<String>>> write,
-      Map<JavaRegion, Set<Set<String>>> read) {
+  private static void assertEquals(
+      Map<JavaRegion, Set<Set<String>>> write, Map<JavaRegion, Set<Set<String>>> read) {
     if (write.size() != read.size()) {
       throw new AssertionError(
           "Expected the results to be the same size: " + write.size() + " vs " + read.size());
@@ -47,8 +45,10 @@ public class TaintPhosphorAnalysisTest {
         String readMethod = readRegion.getRegionMethod();
         int readIndex = readRegion.getStartRegionIndex();
 
-        if (!writePackage.equals(readPackage) || !writeClass.equals(readClass) ||
-            !writeMethod.equals(readMethod) || writeIndex != readIndex) {
+        if (!writePackage.equals(readPackage)
+            || !writeClass.equals(readClass)
+            || !writeMethod.equals(readMethod)
+            || writeIndex != readIndex) {
           continue;
         }
 
@@ -56,8 +56,12 @@ public class TaintPhosphorAnalysisTest {
 
         if (!writeEntry.getValue().equals(readEntry.getValue())) {
           throw new AssertionError(
-              "The taints for " + writeRegion + " are not the same: " + writeEntry.getValue()
-                  + " vs " + readEntry.getValue());
+              "The taints for "
+                  + writeRegion
+                  + " are not the same: "
+                  + writeEntry.getValue()
+                  + " vs "
+                  + readEntry.getValue());
         }
 
         break;
@@ -66,7 +70,6 @@ public class TaintPhosphorAnalysisTest {
       if (!found) {
         throw new AssertionError("Could not find region " + writeRegion);
       }
-
     }
   }
 
@@ -78,12 +81,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -97,12 +100,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -116,12 +119,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -135,12 +138,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -154,12 +157,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -173,12 +176,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -192,12 +195,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -211,12 +214,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -230,12 +233,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -249,12 +252,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -268,12 +271,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -287,12 +290,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);
@@ -306,12 +309,12 @@ public class TaintPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(systemName);
+    PhosphorStaticResultAnalysis analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new TaintPhosphorAnalysis(systemName);
+    analysis = new PhosphorStaticResultAnalysis(systemName);
     Map<JavaRegion, Set<Set<String>>> read = analysis.analyze(args);
 
     assertEquals(write, read);

@@ -43,6 +43,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
   }
 
   private List<String> buildStringConstraints() {
+    System.err.println("This is copied and pasted code");
     List<String> constraints = new ArrayList<>();
 
     Set<Set<Set<String>>> processedConfigs = new HashSet<>();

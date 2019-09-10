@@ -696,6 +696,24 @@
     ]
   },
   {
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
+    "decisionIndex": 2,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE",
+          "REPLICATED"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "REPLICATED"
+        ]
+      }
+    ]
+  },
+  {
     "packageName": "com.sleepycat.je.dbi",
     "className": "DatabaseImpl",
     "methodSignature": "getKeyPrefixing()Z",
@@ -19847,22 +19865,6 @@
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
-    "decisionIndex": 1,
-    "influencingTaints": [
-      {
-        "context": [
-          "JECACHESIZE"
-        ],
-        "condition": [
-          "JECACHESIZE"
-        ]
-      }
-    ]
-  },
-  {
     "packageName": "com.sleepycat.je.tree",
     "className": "BIN",
     "methodSignature": "compress(ZLcom/sleepycat/je/cleaner/LocalUtilizationTracker;)Z",
@@ -37954,6 +37956,23 @@
         "condition": [
           "JECACHESIZE",
           "DUPLICATES"
+        ]
+      }
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "setupDatabase(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V",
+    "decisionIndex": 1,
+    "influencingTaints": [
+      {
+        "context": [
+          "JECACHESIZE"
+        ],
+        "condition": [
+          "JECACHESIZE",
+          "REPLICATED"
         ]
       }
     ]

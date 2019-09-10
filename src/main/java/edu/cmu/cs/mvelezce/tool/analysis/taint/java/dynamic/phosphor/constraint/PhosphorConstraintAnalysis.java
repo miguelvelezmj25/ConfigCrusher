@@ -21,7 +21,11 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
 
   @Override
   public Set<ConfigConstraint> analyze() throws IOException, InterruptedException {
-    return this.getSimplifiedConstraints(this.constraints);
+    System.err.println("Possibly use the feature expr library");
+    System.err.println(
+        "Do we want to just return the constraints we found in the analysis? Or do some simplification");
+    //    return this.getSimplifiedConstraints(this.constraints);
+    return this.constraints;
   }
 
   public void addConstraints(Set<ConfigConstraint> constraints) {
@@ -66,14 +70,11 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
   public Set<ConfigConstraint> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper
-        .readValue(file, new TypeReference<Set<ConfigConstraint>>() {
-        });
+    return mapper.readValue(file, new TypeReference<Set<ConfigConstraint>>() {});
   }
 
   @Override
   public String outputDir() {
     return DIRECTORY + "/" + this.getProgramName() + "/cc/constraints";
   }
-
 }

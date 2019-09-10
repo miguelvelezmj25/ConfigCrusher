@@ -115,31 +115,6 @@ public class SatConfigAnalyzerTest {
   }
 
   @Test
-  public void MeasureDiskOrderedScan() throws IOException {
-    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    String[] args = new String[0];
-
-    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
-    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
-
-    Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
-
-    args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
-    Set<Set<String>> write = analysis.analyze(args);
-
-    args = new String[0];
-
-    analysis = new SatConfigAnalyzer(programName);
-    Set<Set<String>> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
-  }
-
-  @Test
   public void trivial() throws IOException {
     String programName = TrivialAdapter.PROGRAM_NAME;
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
@@ -148,6 +123,29 @@ public class SatConfigAnalyzerTest {
     Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
 
     Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+    SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<Set<String>> write = analysis.analyze(args);
+
+    analysis = new SatConfigAnalyzer(programName);
+    args = new String[0];
+    Set<Set<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void MeasureDiskOrderedScan() throws IOException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+
+    String[] args = new String[0];
+    Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
+
+    Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
 
     args = new String[2];

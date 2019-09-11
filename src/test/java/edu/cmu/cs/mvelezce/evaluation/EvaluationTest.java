@@ -36,7 +36,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziMain;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
@@ -3492,16 +3491,6 @@ public class EvaluationTest {
   @Test
   public void berkeleyGroundTruth() throws IOException, InterruptedException {
     this.analyzeGroundTruth(BerkeleyMain.PROGRAM_NAME);
-  }
-
-  @Test
-  public void luceneGroundTruth() throws IOException, InterruptedException {
-    this.analyzeGroundTruth(LuceneMain.PROGRAM_NAME);
-  }
-
-  @Test
-  public void luceneGroundTruthSamplingTime() throws IOException {
-    this.analyzeGroundTruthSamplingTime(LuceneMain.PROGRAM_NAME);
   }
 
   private void analyzeGroundTruthSamplingTime(String programName) throws IOException {

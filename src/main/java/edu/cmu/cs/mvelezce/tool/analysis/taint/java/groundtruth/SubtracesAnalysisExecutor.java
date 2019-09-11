@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
@@ -32,30 +33,23 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces3.Subtraces3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces4.Subtraces4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
+import org.apache.commons.io.FileUtils;
+import org.jboss.util.file.Files;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import org.apache.commons.io.FileUtils;
-import org.jboss.util.file.Files;
 
 /**
- * Class to execute the programs that have been instrumented with code to perform subtrace
- * analysis.
+ * Class to execute the programs that have been instrumented with code to perform subtrace analysis.
  */
 public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
-  private final static String PHOSPHOR_CLASS_PATH = "../phosphor/Phosphor/target/Phosphor-0.0.4-SNAPSHOT.jar";
+  private static final String PHOSPHOR_CLASS_PATH =
+      "../phosphor/Phosphor/target/Phosphor-0.0.4-SNAPSHOT.jar";
 
   private final Map<Set<String>, List<String>> configsToTraces = new HashMap<>();
 
@@ -113,8 +107,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     try (FileInputStream fis = new FileInputStream(SubtracesLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
       return (List<String>) ois.readObject();
-    }
-    catch (ClassNotFoundException cnfe) {
+    } catch (ClassNotFoundException cnfe) {
       throw new RuntimeException("There was an error when processing the results", cnfe);
     }
   }
@@ -126,9 +119,8 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
     for (File resultFile : files) {
       ObjectMapper mapper = new ObjectMapper();
-      List<ConfigToTraceInfo> configToTraceInfoList = mapper
-          .readValue(resultFile, new TypeReference<List<ConfigToTraceInfo>>() {
-          });
+      List<ConfigToTraceInfo> configToTraceInfoList =
+          mapper.readValue(resultFile, new TypeReference<List<ConfigToTraceInfo>>() {});
 
       for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
         configsToTraces.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
@@ -186,12 +178,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     commandList.add("-Xmx12g");
     commandList.add("-Xms12g");
     commandList.add("-XX:+UseConcMarkSweepGC");
-//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
+    //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 
     String programName = this.getProgramName();
-//        + BaseAdapter.PATH_SEPARATOR
-//        + APACHE_COMMONS_PATH;
+    //        + BaseAdapter.PATH_SEPARATOR
+    //        + APACHE_COMMONS_PATH;
     Adapter adapter;
 
     switch (programName) {
@@ -288,9 +280,10 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
         adapter = new TrivialAdapter();
         break;
       case PrevaylerAdapter.PROGRAM_NAME:
-        commandList.add(this.getClassPath(PrevaylerAdapter.INSTRUMENTED_CLASS_PATH)
-            + BaseAdapter.PATH_SEPARATOR
-            + PrevaylerAdapter.CLASS_PATH);
+        commandList.add(
+            this.getClassPath(PrevaylerAdapter.INSTRUMENTED_CLASS_PATH)
+                + BaseAdapter.PATH_SEPARATOR
+                + PrevaylerAdapter.CLASS_PATH);
         adapter = new PrevaylerAdapter();
         break;
       case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
@@ -298,17 +291,23 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
         adapter = new MeasureDiskOrderedScanAdapter();
         ((MeasureDiskOrderedScanAdapter) adapter).preProcess();
         break;
+      case IndexFilesAdapter.PROGRAM_NAME:
+        commandList.add(this.getClassPath(IndexFilesAdapter.INSTRUMENTED_CLASS_PATH));
+        adapter = new IndexFilesAdapter();
+        ((IndexFilesAdapter) adapter).preProcess();
+        break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);
-//        if (this.mainClass != null) {
-//          commandList.add(ccClasspath
-//              + BaseAdapter.PATH_SEPARATOR
-//              + AllDynamicAdapter.INSTRUMENTED_CLASS_PATH);
-//          adapter = new AllDynamicAdapter(programName, this.mainClass);
-//        }
-//        else {
-//          throw new RuntimeException("Could not find a phosphor script to run " + programName);
-//        }
+        //        if (this.mainClass != null) {
+        //          commandList.add(ccClasspath
+        //              + BaseAdapter.PATH_SEPARATOR
+        //              + AllDynamicAdapter.INSTRUMENTED_CLASS_PATH);
+        //          adapter = new AllDynamicAdapter(programName, this.mainClass);
+        //        }
+        //        else {
+        //          throw new RuntimeException("Could not find a phosphor script to run " +
+        // programName);
+        //        }
     }
 
     commandList.add(adapter.getMainClass());
@@ -320,8 +319,8 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   }
 
   private String getClassPath(String instrumentedClassPath) {
-    return BaseAdapter.CONFIGCRUSHER_CLASS_PATH + BaseAdapter.PATH_SEPARATOR
-        + instrumentedClassPath + BaseAdapter.PATH_SEPARATOR + PHOSPHOR_CLASS_PATH;
+    return BaseAdapter.CONFIGCRUSHER_CLASS_PATH
+        + BaseAdapter.PATH_SEPARATOR
+        + instrumentedClassPath; // + BaseAdapter.PATH_SEPARATOR + PHOSPHOR_CLASS_PATH;
   }
-
 }

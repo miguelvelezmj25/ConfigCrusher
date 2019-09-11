@@ -36,12 +36,11 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import org.apache.commons.io.FileUtils;
 import org.jboss.util.file.Files;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Class to execute the programs that have been instrumented with code to perform subtrace analysis.
@@ -53,11 +52,11 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
   private final Map<Set<String>, List<String>> configsToTraces = new HashMap<>();
 
-  public SubtracesAnalysisExecutor(String programName, Set<String> options) {
+  SubtracesAnalysisExecutor(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
   }
 
-  public SubtracesAnalysisExecutor(String programName) {
+  SubtracesAnalysisExecutor(String programName) {
     this(programName, new HashSet<>());
   }
 
@@ -87,10 +86,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   @Override
   public Map<Set<String>, List<String>> analyze() throws IOException, InterruptedException {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
+    Iterator<Set<String>> configsIter = configs.iterator();
 
-    for (Set<String> config : configs) {
+    for (int i = 0; configsIter.hasNext(); i++) {
+      Set<String> config = configsIter.next();
       this.runProgram(config);
-      this.processResults(config);
+      this.processResults(config, i);
     }
 
     Files.delete(SubtracesLogger.RESULTS_FILE);
@@ -98,18 +99,38 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
     return configsToTraces;
   }
 
-  private void processResults(Set<String> config) throws IOException {
+  private void processResults(Set<String> config, int i) throws IOException {
     List<String> trace = this.getTrace();
-    configsToTraces.put(config, trace);
+    this.writeToFile(config, trace, i);
+    //    configsToTraces.put(config, trace);
+  }
+
+  private void writeToFile(Set<String> config, List<String> trace, int i) throws IOException {
+    File file = new File(this.outputDir());
+    file.mkdirs();
+
+    ConfigToTraceInfo configToTraceInfo = new ConfigToTraceInfo(config, trace);
+
+    List<ConfigToTraceInfo> infos = new ArrayList<>();
+    infos.add(configToTraceInfo);
+
+    ObjectMapper mapper = new ObjectMapper();
+    File outputFile = new File(file, i + Options.DOT_JSON);
+    mapper.writeValue(outputFile, infos);
   }
 
   private List<String> getTrace() throws IOException {
-    try (FileInputStream fis = new FileInputStream(SubtracesLogger.RESULTS_FILE);
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
-      return (List<String>) ois.readObject();
-    } catch (ClassNotFoundException cnfe) {
-      throw new RuntimeException("There was an error when processing the results", cnfe);
+    List<String> trace = new ArrayList<>();
+    BufferedReader reader = new BufferedReader(new FileReader(SubtracesLogger.RESULTS_FILE));
+    String line;
+
+    while ((line = reader.readLine()) != null) {
+      trace.add(line);
     }
+
+    reader.close();
+
+    return trace;
   }
 
   // TODO abstract since it is repeated with SubtraceLabeler
@@ -133,22 +154,25 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   // TODO abstract since it is repeated with SubtraceLabeler
   @Override
   public void writeToFile(Map<Set<String>, List<String>> analysisResults) throws IOException {
-    File file = new File(this.outputDir());
-    file.mkdirs();
-
-    Iterator<Entry<Set<String>, List<String>>> iter = analysisResults.entrySet().iterator();
-
-    for (int i = 0; iter.hasNext(); i++) {
-      Entry<Set<String>, List<String>> entry = iter.next();
-      ConfigToTraceInfo configToTraceInfo = new ConfigToTraceInfo(entry.getKey(), entry.getValue());
-
-      List<ConfigToTraceInfo> infos = new ArrayList<>();
-      infos.add(configToTraceInfo);
-
-      ObjectMapper mapper = new ObjectMapper();
-      File outputFile = new File(file, i + Options.DOT_JSON);
-      mapper.writeValue(outputFile, infos);
-    }
+    System.err.println(
+        "Not writing anything since we already wrote the files after each execution");
+    //    File file = new File(this.outputDir());
+    //    file.mkdirs();
+    //
+    //    Iterator<Entry<Set<String>, List<String>>> iter = analysisResults.entrySet().iterator();
+    //
+    //    for (int i = 0; iter.hasNext(); i++) {
+    //      Entry<Set<String>, List<String>> entry = iter.next();
+    //      ConfigToTraceInfo configToTraceInfo = new ConfigToTraceInfo(entry.getKey(),
+    // entry.getValue());
+    //
+    //      List<ConfigToTraceInfo> infos = new ArrayList<>();
+    //      infos.add(configToTraceInfo);
+    //
+    //      ObjectMapper mapper = new ObjectMapper();
+    //      File outputFile = new File(file, i + Options.DOT_JSON);
+    //      mapper.writeValue(outputFile, infos);
+    //    }
   }
 
   @Override

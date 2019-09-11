@@ -1,11 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import org.junit.Test;
 
 // TODO MIGUEL maybe have a separate dir for projects instrumented for this evaluation?
 public class SubtracesInstrumenterTest {
@@ -49,6 +51,21 @@ public class SubtracesInstrumenterTest {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     String srcDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
+    Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void instrumentIndexFiles()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = IndexFilesAdapter.PROGRAM_NAME;
+    String srcDir = IndexFilesAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = IndexFilesAdapter.INSTRUMENTED_CLASS_PATH;
     Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
 
     String[] args = new String[2];

@@ -1,36 +1,46 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.DecisionLabel;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.LoggedSubtrace;
+import jdk.internal.org.objectweb.asm.Type;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import jdk.internal.org.objectweb.asm.Type;
 
 public class SubtracesLogger {
 
-  private static final int EXIT_AT_RETURN_FLAG_COUNT = -1;
-
-  private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final List<String> TRACE = Collections
-      .synchronizedList(new ArrayList<>(1_000_000));
-
-  // TODO hash the label when not debugging?
   static final String ENTER_DECISION = "Enter";
   static final String EXIT_DECISION = "Exit";
   static final String EXIT_DECISION_AT_RETURN = "ExitReturn";
   static final String FALSE = "FALSE";
   static final String TRUE = "TRUE";
-  static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
+  static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
+
+  private static final byte[] ENTER_DECISION_BYTES = ENTER_DECISION.getBytes();
+  private static final byte[] EXIT_DECISION_BYTES = EXIT_DECISION.getBytes();
+  private static final byte[] EXIT_DECISION_AT_RETURN_BYTES = EXIT_DECISION_AT_RETURN.getBytes();
+  private static final byte[] FALSE_BYTES = FALSE.getBytes();
+  private static final byte[] TRUE_BYTES = TRUE.getBytes();
+  private static final byte[] ARROW_BYTES = " --> ".getBytes();
+  private static final byte[] SPACE_BYTES = " ".getBytes();
+  private static final byte[] NEW_LINE_BYTES = "\n".getBytes();
+  private static final int EXIT_AT_RETURN_FLAG_COUNT = -1;
+  private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
+  private static final File OUTPUT_FILE = new File(RESULTS_FILE);
+  private static final FileOutputStream FOS;
 
   static {
+    try {
+      FOS = new FileOutputStream(OUTPUT_FILE);
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException("Could not initialize the file output stream", e);
+    }
+
     Method[] methods = SubtracesLogger.class.getDeclaredMethods();
 
     for (Method method : methods) {
@@ -51,209 +61,307 @@ public class SubtracesLogger {
 
   public static void saveTrace() {
     try {
-      FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
-      ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(TRACE);
-      oos.close();
-      fos.close();
-    }
-    catch (IOException ioe) {
+      FOS.flush();
+      FOS.close();
+    } catch (IOException ioe) {
       throw new RuntimeException("There was an error serializing the results", ioe);
     }
   }
 
-  private synchronized static void enterDecision(String labelPrefix) {
-    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(ENTER_DECISION, decisionLabel);
-    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
+  private static synchronized void enterDecision(String labelPrefix) {
+    writeAction(labelPrefix, ENTER_DECISION_BYTES);
   }
 
-  public synchronized static void exitDecision(String labelPrefix) {
-    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION, decisionLabel);
-    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
+  public static synchronized void exitDecision(String labelPrefix) {
+    writeAction(labelPrefix, EXIT_DECISION_BYTES);
   }
 
-  public synchronized static void exitAtReturn(String labelPrefix) {
-    DecisionLabel decisionLabel = new DecisionLabel(labelPrefix);
-    LoggedSubtrace loggedSubtrace = new LoggedSubtrace(EXIT_DECISION_AT_RETURN, decisionLabel);
-    TRACE.add(Thread.currentThread().getId() + " --> " + loggedSubtrace.toString());
+  public static synchronized void exitAtReturn(String labelPrefix) {
+    writeAction(labelPrefix, EXIT_DECISION_AT_RETURN_BYTES);
   }
 
-  public synchronized static void logIFEQEval(int value, String labelPrefix) {
+  private static void writeAction(String labelPrefix, byte[] action) {
+    try {
+      FOS.write(Long.toString(Thread.currentThread().getId()).getBytes());
+      FOS.write(ARROW_BYTES);
+      FOS.write(action);
+      FOS.write(SPACE_BYTES);
+      FOS.write(labelPrefix.getBytes());
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write to file when entering decision");
+    }
+  }
+
+  public static synchronized void logIFEQEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value == 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFNEEval(int value, String labelPrefix) {
+  public static synchronized void logIFNEEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value != 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFLTEval(int value, String labelPrefix) {
+  public static synchronized void logIFLTEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value < 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFGEEval(int value, String labelPrefix) {
+  public static synchronized void logIFGEEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value >= 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFGTEval(int value, String labelPrefix) {
+  public static synchronized void logIFGTEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value > 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFLEEval(int value, String labelPrefix) {
+  public static synchronized void logIFLEEval(int value, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (value <= 0) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPEQEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPEQEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 == v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPNEEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPNEEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 != v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPLTEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPLTEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 < v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPGEEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPGEEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 >= v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPGTEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPGTEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 > v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ICMPLEEval(int v1, int v2, String labelPrefix) {
+  public static synchronized void logIF_ICMPLEEval(int v1, int v2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (v1 <= v2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ACMPEQEval(Object o1, Object o2, String labelPrefix) {
+  public static synchronized void logIF_ACMPEQEval(Object o1, Object o2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (o1 == o2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIF_ACMPNEEval(Object o1, Object o2, String labelPrefix) {
+  public static synchronized void logIF_ACMPNEEval(Object o1, Object o2, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (o1 != o2) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFNULLEval(Object object, String labelPrefix) {
+  public static synchronized void logIFNULLEval(Object object, String labelPrefix) {
     enterDecision(labelPrefix);
+
+    byte[] res = TRUE_BYTES;
 
     if (object == null) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
 
-  public synchronized static void logIFNONNULLEval(Object object, String labelPrefix) {
+  public static synchronized void logIFNONNULLEval(Object object, String labelPrefix) {
     enterDecision(labelPrefix);
 
+    byte[] res = TRUE_BYTES;
+
     if (object != null) {
-      TRACE.add(FALSE);
+      res = FALSE_BYTES;
     }
-    else {
-      TRACE.add(TRUE);
+
+    try {
+      FOS.write(res);
+      FOS.write(NEW_LINE_BYTES);
+    } catch (IOException ioe) {
+      throw new RuntimeException("Could not write res to file: " + Arrays.toString(res));
     }
   }
-
 }

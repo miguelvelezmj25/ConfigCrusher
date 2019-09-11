@@ -9,23 +9,16 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
+import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.Opcodes;
+import jdk.internal.org.objectweb.asm.tree.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
-import jdk.internal.org.objectweb.asm.Label;
-import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnNode;
-import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LabelNode;
-import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
@@ -62,39 +55,53 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   @Override
   public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
-    System.err.println("Ignoring A LOT of cases where we do not instrument");
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
-      // TODO handle these methods
+      if (classNode.name.equals("org/apache/lucene/core/store/LockStressTest")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
+      if (classNode.name.equals("org/apache/lucene/core/store/LockVerifyServer")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
       if (classNode.name.equals("com/sleepycat/je/tree/IN")
           && methodNode.name.equals("addToMainCache")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
       if (classNode.name.equals("com/sleepycat/je/evictor/Evictor")
           && methodNode.name.equals("getNextTarget")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
       // TODO issues with subtraces labeling
       if (classNode.name.equals("com/sleepycat/je/cleaner/OffsetList")
           && methodNode.name.equals("toArray")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
       if (classNode.name.equals("com/sleepycat/je/log/FileReader")
           && methodNode.name.equals("readData")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
       if (classNode.name.equals("com/sleepycat/je/tree/INTargetRep$Sparse")
           && methodNode.name.equals("copy")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
       // TODO handle methods with try catch blocks
       if (!methodNode.tryCatchBlocks.isEmpty()) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
@@ -113,6 +120,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       }
 
       if (hasThrow) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
@@ -132,6 +140,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       }
 
       if (hasSwitch) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;
       }
 
@@ -162,8 +171,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
 
     if (this.isMainClass(classNode)) {
-      MethodNode mainMethod = this.getMainMethod(classNode);
-      methodsToInstrument.add(mainMethod);
+      System.err.println("This code to find the main class of the program is not correct");
+
+      if (!classNode.name.equals("org/apache/lucene/core/store/LockVerifyServer")
+          && !classNode.name.equals("org/apache/lucene/core/store/LockStressTest")) {
+        MethodNode mainMethod = this.getMainMethod(classNode);
+        methodsToInstrument.add(mainMethod);
+      }
     }
 
     return methodsToInstrument;
@@ -347,6 +361,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   //  }
 
   private void instrumentEndMain(MethodNode methodNode, ClassNode classNode) {
+    System.err.println("pass the main method to add this logic, or add the method manually");
     if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
       return;
     }

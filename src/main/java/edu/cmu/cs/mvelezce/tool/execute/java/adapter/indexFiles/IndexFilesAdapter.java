@@ -17,8 +17,8 @@ public class IndexFilesAdapter extends BaseAdapter {
   //  public static final String ROOT_PACKAGE = "org.apache.lucene";
   //  public static final String ORIGINAL_CLASS_PATH =
   // "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
-  //  public static final String INSTRUMENTED_DIR_PATH =
-  // "../performance-mapper-evaluation/instrumented/phosphor-examples";
+  public static final String INSTRUMENTED_DIR_PATH =
+      "../performance-mapper-evaluation/instrumented/lucene/lucene";
   public static final String INSTRUMENTED_CLASS_PATH =
       "../performance-mapper-evaluation/instrumented/lucene/lucene/target/classes";
 

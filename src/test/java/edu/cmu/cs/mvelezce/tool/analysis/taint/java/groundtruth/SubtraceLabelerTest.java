@@ -1,16 +1,18 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.return2Example.Return2ExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Assert;
-import org.junit.Test;
 
 public class SubtraceLabelerTest {
 
@@ -123,5 +125,20 @@ public class SubtraceLabelerTest {
     Map<Set<String>, List<String>> read = subtraceLabeler.analyze(args);
 
     Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void indexFiles() throws IOException, InterruptedException {
+    String programName = IndexFilesAdapter.PROGRAM_NAME;
+    SubtracesAnalysisExecutor analysis = new SubtracesAnalysisExecutor(programName);
+
+    String[] args = new String[0];
+    Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
+
+    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName, configsToTraces);
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    subtraceLabeler.analyze(args);
   }
 }

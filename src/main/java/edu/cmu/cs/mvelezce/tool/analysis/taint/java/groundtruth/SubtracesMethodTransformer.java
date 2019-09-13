@@ -58,6 +58,37 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
+      if (classNode.name.equals("org/apache/lucene/core/util/packed/PackedInts")
+          && methodNode.name.equals("fastestFormatAndBits")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
+      if (classNode.name.equals(
+              "org/apache/lucene/core/codecs/blocktree/BlockTreeTermsWriter$TermsWriter")
+          && methodNode.name.equals("pushTerm")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
+      if (classNode.name.equals("org/apache/lucene/core/index/DefaultIndexingChain")
+          && methodNode.name.equals("getOrAddField")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
+      if (classNode.name.equals("org/apache/lucene/core/util/ByteBlockPool")
+          && methodNode.name.equals("append")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
+      if (classNode.name.equals("org/apache/lucene/core/analysis/CharArrayMap")
+          && methodNode.name.equals("getSlot")) {
+        System.err.println("Ignoring A LOT of cases where we do not instrument");
+        continue;
+      }
+
       if (classNode.name.equals("org/apache/lucene/core/store/LockStressTest")) {
         System.err.println("Ignoring A LOT of cases where we do not instrument");
         continue;

@@ -6,17 +6,10 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceLabel;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceManager;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
@@ -40,11 +33,18 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   public Map<Set<String>, List<String>> analyze() {
     Map<Set<String>, List<String>> configsToLabeledTraces = new HashMap<>();
 
-    for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
+    Iterator<Map.Entry<Set<String>, List<String>>> configsToTracesIter =
+        this.configsToTraces.entrySet().iterator();
+    System.err.println("Why am I creating a subtrace manager every time a new trace is analyzed?");
+    for (int i = 0; configsToTracesIter.hasNext(); i++) {
       this.subtraceManager = new SubtraceManager();
+
+      Map.Entry<Set<String>, List<String>> entry = configsToTracesIter.next();
       List<String> trace = entry.getValue();
       List<String> labeledTrace = this.getLabeledTrace(trace);
       configsToLabeledTraces.put(entry.getKey(), labeledTrace);
+
+      System.out.println("Processed trace " + i);
     }
 
     return configsToLabeledTraces;

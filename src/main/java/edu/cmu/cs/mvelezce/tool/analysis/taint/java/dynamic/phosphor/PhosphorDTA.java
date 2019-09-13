@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
@@ -37,15 +38,11 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
+import java.util.*;
 
 public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
 
@@ -294,6 +291,11 @@ public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
         commandList.add("./measureDiskOrderedScan.sh");
         adapter = new MeasureDiskOrderedScanAdapter();
         ((MeasureDiskOrderedScanAdapter) adapter).preProcess();
+        break;
+      case IndexFilesAdapter.PROGRAM_NAME:
+        commandList.add("./indexFiles.sh");
+        adapter = new IndexFilesAdapter();
+        ((IndexFilesAdapter) adapter).preProcess();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

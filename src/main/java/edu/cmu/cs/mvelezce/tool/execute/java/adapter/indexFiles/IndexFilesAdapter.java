@@ -24,7 +24,8 @@ public class IndexFilesAdapter extends BaseAdapter {
 
   private static final String INDEX_DIR = "index";
   private static final String[] OPTIONS = {
-    "MAX_BUFFERED_DOCS", "MERGE_SCHEDULER", "MERGE_POLICY", "COMMIT_ON_CLOSE"
+    //    "MAX_BUFFERED_DOCS", "MERGE_SCHEDULER", "MERGE_POLICY", "COMMIT_ON_CLOSE"
+    "CHECK_PENDING_FLUSH_UPDATE", "MERGE_SCHEDULER", "READER_POOLING", "COMMIT_ON_CLOSE"
   };
 
   public IndexFilesAdapter() {

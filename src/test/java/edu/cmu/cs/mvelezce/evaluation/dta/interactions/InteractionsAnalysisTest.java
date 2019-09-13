@@ -1,10 +1,12 @@
 package edu.cmu.cs.mvelezce.evaluation.dta.interactions;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
-import java.util.Set;
 import org.junit.Test;
+
+import java.util.Set;
 
 public class InteractionsAnalysisTest {
 
@@ -31,6 +33,12 @@ public class InteractionsAnalysisTest {
   @Test
   public void measureDiskOrderedScan() throws Exception {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    analyze(programName);
+  }
+
+  @Test
+  public void indexFiles() throws Exception {
+    String programName = IndexFilesAdapter.PROGRAM_NAME;
     analyze(programName);
   }
 }

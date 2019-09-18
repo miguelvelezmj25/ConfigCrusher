@@ -2,22 +2,25 @@ package edu.cmu.cs.mvelezce.evaluation.dta.interactions;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.tool.Options;
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.commons.io.FileUtils;
 
 class InteractionsAnalysis {
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
   private final String programName;
+  private final Set<String> options;
 
-  InteractionsAnalysis(String programName) {
+  InteractionsAnalysis(String programName, Set<String> options) {
     this.programName = programName;
+    this.options = options;
   }
 
   void analyze(Set<FeatureExpr> phosphorInteractions, Set<FeatureExpr> subtracesInteractions)
@@ -36,7 +39,6 @@ class InteractionsAnalysis {
     removeAllImplyingPhosphorInteractions(subtracesInteractions, foundImplyingPhosphorInteractions);
 
     printExtraPhosphorInteractions(phosphorInteractions, results);
-
     printMissingSubtraceInteractions(subtracesInteractions, results);
 
     this.writeToFile(results);
@@ -69,7 +71,7 @@ class InteractionsAnalysis {
     System.err.println(result);
 
     for (FeatureExpr subtraceInteraction : subtracesInteractions) {
-      result = "\t" + subtraceInteraction;
+      result = "\t" + this.prettyPrintFeatureExpr(subtraceInteraction);
       results.append(result);
       results.append(LINE_SEPARATOR);
       System.err.println(result);
@@ -88,7 +90,7 @@ class InteractionsAnalysis {
     System.out.println(result);
 
     for (FeatureExpr phosphorInteraction : phosphorInteractions) {
-      result = "\t" + phosphorInteraction;
+      result = "\t" + this.prettyPrintFeatureExpr(phosphorInteraction);
       results.append(result);
       results.append(LINE_SEPARATOR);
       System.out.println(result);
@@ -127,13 +129,16 @@ class InteractionsAnalysis {
     Set<FeatureExpr> foundPhosphorInteractions = new HashSet<>();
 
     for (FeatureExpr phosphorInteraction : phosphorInteractions) {
-      if (subtracesInteractions.contains(phosphorInteraction)) {
-        String result = "Found phosphor interaction " + phosphorInteraction;
-        results.append(result);
-        results.append(LINE_SEPARATOR);
-        System.out.println(result);
-        foundPhosphorInteractions.add(phosphorInteraction);
+      if (!subtracesInteractions.contains(phosphorInteraction)) {
+        continue;
       }
+
+      String result =
+          "Found phosphor interaction " + this.prettyPrintFeatureExpr(phosphorInteraction);
+      results.append(result);
+      results.append(LINE_SEPARATOR);
+      System.out.println(result);
+      foundPhosphorInteractions.add(phosphorInteraction);
     }
 
     return foundPhosphorInteractions;
@@ -160,7 +165,10 @@ class InteractionsAnalysis {
         continue;
       }
 
-      String result = "Subtrace interaction " + subtracesInteraction + " implied by ";
+      String result =
+          "Subtrace interaction "
+              + this.prettyPrintFeatureExpr(subtracesInteraction)
+              + " implied by ";
       results.append(result);
       results.append(LINE_SEPARATOR);
       System.out.println(result);
@@ -168,7 +176,7 @@ class InteractionsAnalysis {
       foundImplyingPhosphorInteractions.addAll(implyingPhosphorInteractions);
 
       for (FeatureExpr phosphorInteraction : implyingPhosphorInteractions) {
-        result = "\t" + phosphorInteraction;
+        result = "\t" + this.prettyPrintFeatureExpr(phosphorInteraction);
         results.append(result);
         results.append(LINE_SEPARATOR);
         System.out.println(result);
@@ -185,5 +193,15 @@ class InteractionsAnalysis {
     return Options.DIRECTORY
         + "/evaluation/dta/interactions/java/programs/results/"
         + this.programName;
+  }
+
+  private String prettyPrintFeatureExpr(FeatureExpr featureExpr) {
+    String stringInteraction = featureExpr.toTextExpr().replaceAll("definedEx\\(", "");
+
+    for (String option : this.options) {
+      stringInteraction = stringInteraction.replaceAll(option + "\\)", option);
+    }
+
+    return stringInteraction;
   }
 }

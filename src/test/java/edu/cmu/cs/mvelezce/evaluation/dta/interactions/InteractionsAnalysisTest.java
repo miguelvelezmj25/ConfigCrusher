@@ -6,11 +6,12 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.Meas
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class InteractionsAnalysisTest {
 
-  private void analyze(String programName) throws Exception {
+  private void analyze(String programName, Set<String> options) throws Exception {
     String[] args = new String[0];
     PhosphorInteractionsAnalyzer phosphorInteractionsAnalyzer =
         new PhosphorInteractionsAnalyzer(programName);
@@ -20,25 +21,28 @@ public class InteractionsAnalysisTest {
         new SubtracesInteractionsAnalyzer(programName);
     Set<FeatureExpr> subtracesInteractions = subtracesInteractionsAnalyzer.analyze(args);
 
-    InteractionsAnalysis analysis = new InteractionsAnalysis(programName);
+    InteractionsAnalysis analysis = new InteractionsAnalysis(programName, options);
     analysis.analyze(phosphorInteractions, subtracesInteractions);
   }
 
   @Test
   public void trivial() throws Exception {
     String programName = TrivialAdapter.PROGRAM_NAME;
-    analyze(programName);
+    Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+    analyze(programName, options);
   }
 
   @Test
   public void measureDiskOrderedScan() throws Exception {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    analyze(programName);
+    Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
+    analyze(programName, options);
   }
 
   @Test
   public void indexFiles() throws Exception {
     String programName = IndexFilesAdapter.PROGRAM_NAME;
-    analyze(programName);
+    Set<String> options = new HashSet<>(IndexFilesAdapter.getListOfOptions());
+    analyze(programName, options);
   }
 }

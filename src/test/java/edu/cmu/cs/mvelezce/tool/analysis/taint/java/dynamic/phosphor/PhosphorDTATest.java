@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
@@ -43,6 +44,20 @@ public class PhosphorDTATest {
   public void Trivial() throws IOException, InterruptedException {
     String programName = TrivialAdapter.PROGRAM_NAME;
     List<String> options = TrivialAdapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorDTA analysis = new PhosphorDTA(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void Nesting() throws IOException, InterruptedException {
+    String programName = NestingAdapter.PROGRAM_NAME;
+    List<String> options = NestingAdapter.getListOfOptions();
     Set<String> initialConfig = new HashSet<>();
 
     String[] args = new String[2];

@@ -17,6 +17,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
@@ -55,7 +56,7 @@ public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
   private final DTAConstraintAnalysis DTAConstraintAnalysis;
   private final CompleteDTAResultAnalysis completeDTAResultAnalysis;
 
-  public PhosphorDTA(String programName) {
+  PhosphorDTA(String programName) {
     this(programName, new ArrayList<>(), new HashSet<>());
   }
 
@@ -101,6 +102,7 @@ public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
   }
 
   void runDynamicAnalysis() throws IOException, InterruptedException {
+    System.err.println("Maybe use the FeatureExprLib for constraints");
     Set<String> options = this.getOptions();
     Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
     Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
@@ -296,6 +298,10 @@ public class PhosphorDTA extends BaseDynamicAnalysis<Void> {
         commandList.add("./indexFiles.sh");
         adapter = new IndexFilesAdapter();
         ((IndexFilesAdapter) adapter).preProcess();
+        break;
+      case NestingAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new NestingAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

@@ -1,0 +1,24 @@
+[
+  {
+    "partialConfig": {
+      "A": false
+    }
+  },
+  {
+    "partialConfig": {
+      "A": true,
+      "B": false
+    }
+  },
+  {
+    "partialConfig": {
+      "A": true,
+      "B": true
+    }
+  },
+  {
+    "partialConfig": {
+      "A": true
+    }
+  }
+]

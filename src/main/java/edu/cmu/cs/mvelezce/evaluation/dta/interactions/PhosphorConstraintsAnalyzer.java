@@ -6,7 +6,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,102 +15,65 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public class SubtracesInteractionsAnalyzer implements Analysis<Set<FeatureExpr>> {
+public class PhosphorConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> {
 
   private final String programName;
-  private final Set<SubtraceAnalysisInfo> subtraceAnalysisInfos;
+  private final Set<ConfigConstraint> configConstraints;
   private final Set<String> options;
 
-  SubtracesInteractionsAnalyzer(
-      String programName, Set<SubtraceAnalysisInfo> subtraceAnalysisInfos, Set<String> options) {
+  PhosphorConstraintsAnalyzer(
+      String programName, Set<ConfigConstraint> configConstraints, Set<String> options) {
     this.programName = programName;
-    this.subtraceAnalysisInfos = subtraceAnalysisInfos;
+    this.configConstraints = configConstraints;
     this.options = options;
   }
 
-  SubtracesInteractionsAnalyzer(String programName) {
+  PhosphorConstraintsAnalyzer(String programName) {
     this.programName = programName;
-    this.subtraceAnalysisInfos = new HashSet<>();
+    this.configConstraints = new HashSet<>();
     this.options = new HashSet<>();
   }
 
   @Override
   public Set<FeatureExpr> analyze() {
-    List<String> constraints = this.buildStringConstraints();
+    List<String> stringConstraints = this.getStringConstraints();
 
-    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(constraints));
+    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(stringConstraints));
   }
 
-  private List<String> buildStringConstraints() {
-    System.err.println("This is copied and pasted code");
-    List<String> constraints = new ArrayList<>();
+  private List<String> getStringConstraints() {
+    System.err.println("This code was copied and pasted");
+    List<String> stringConstraints = new ArrayList<>();
 
-    Set<Set<Set<String>>> processedConfigs = new HashSet<>();
-
-    for (SubtraceAnalysisInfo subtraceAnalysisInfo : this.subtraceAnalysisInfos) {
-      Map<String, Set<Set<String>>> valuesToConfigs = subtraceAnalysisInfo.getValuesToConfigs();
-
-      if (valuesToConfigs.size() == 1) {
-        continue;
-      }
-
-      for (Map.Entry<String, Set<Set<String>>> entry : valuesToConfigs.entrySet()) {
-        Set<Set<String>> configs = entry.getValue();
-
-        if (processedConfigs.contains(configs)) {
-          continue;
-        }
-
-        String stringConstraints = toStringConstraints(configs);
-
-        if (stringConstraints.isEmpty()) {
-          continue;
-        }
-
-        constraints.add(stringConstraints);
-        processedConfigs.add(configs);
-      }
+    for (ConfigConstraint configConstraint : this.configConstraints) {
+      String constraint = this.getConstraint(configConstraint);
+      stringConstraints.add(constraint);
     }
 
-    return constraints;
+    return stringConstraints;
   }
 
-  private String toStringConstraints(Set<Set<String>> configs) {
-    StringBuilder orConstraints = new StringBuilder();
+  private String getConstraint(ConfigConstraint configConstraint) {
+    StringBuilder stringBuilder = new StringBuilder();
+    Map<String, Boolean> partialConfig = configConstraint.getPartialConfig();
+    stringBuilder.append("(");
 
-    Iterator<Set<String>> configsIter = configs.iterator();
+    Iterator<Entry<String, Boolean>> partialConfigIter = partialConfig.entrySet().iterator();
 
-    while (configsIter.hasNext()) {
-      Set<String> config = configsIter.next();
-      String andConstraint = this.getAndConstraints(config);
-      orConstraints.append(andConstraint);
+    while (partialConfigIter.hasNext()) {
+      Entry<String, Boolean> entry = partialConfigIter.next();
 
-      if (configsIter.hasNext()) {
-        orConstraints.append(" || ");
-      }
-    }
-
-    return orConstraints.toString();
-  }
-
-  private String getAndConstraints(Set<String> config) {
-    StringBuilder stringBuilder = new StringBuilder("(");
-
-    Iterator<String> optionsIter = this.options.iterator();
-
-    while (optionsIter.hasNext()) {
-      String option = optionsIter.next();
-
-      if (!config.contains(option)) {
+      if (!entry.getValue()) {
         stringBuilder.append("!");
       }
 
-      stringBuilder.append(option);
+      stringBuilder.append(entry.getKey());
 
-      if (optionsIter.hasNext()) {
+      if (partialConfigIter.hasNext()) {
         stringBuilder.append(" && ");
       }
     }
@@ -184,7 +147,7 @@ public class SubtracesInteractionsAnalyzer implements Analysis<Set<FeatureExpr>>
   @Override
   public String outputDir() {
     return Options.DIRECTORY
-        + "/evaluation/dta/interactions/java/programs/subtraces/"
+        + "/evaluation/dta/constraints/java/programs/phosphor/"
         + this.programName;
   }
 }

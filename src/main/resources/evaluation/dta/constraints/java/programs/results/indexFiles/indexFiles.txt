@@ -1,15 +1,15 @@
-Found phosphor interaction MERGE_SCHEDULER
-Found phosphor interaction !COMMIT_ON_CLOSE
-Found phosphor interaction !CHECK_PENDING_FLUSH_UPDATE
-Found phosphor interaction CHECK_PENDING_FLUSH_UPDATE
-Found phosphor interaction !MERGE_SCHEDULER
-Found phosphor interaction COMMIT_ON_CLOSE
+Constraints found by Phosphor MERGE_SCHEDULER
+Constraints found by Phosphor !COMMIT_ON_CLOSE
+Constraints found by Phosphor !CHECK_PENDING_FLUSH_UPDATE
+Constraints found by Phosphor CHECK_PENDING_FLUSH_UPDATE
+Constraints found by Phosphor !MERGE_SCHEDULER
+Constraints found by Phosphor COMMIT_ON_CLOSE
 
-Extra phosphor interactions
+Extra constraints derived from Phosphor
 	!READER_POOLING
 	READER_POOLING
 
-Missing subtrace interactions
+Missing subtrace constraints
 	((READER_POOLING && ((COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && MERGE_SCHEDULER) || (COMMIT_ON_CLOSE && CHECK_PENDING_FLUSH_UPDATE && !MERGE_SCHEDULER))) || (MERGE_SCHEDULER && CHECK_PENDING_FLUSH_UPDATE && !READER_POOLING))
 	((READER_POOLING && ((COMMIT_ON_CLOSE && CHECK_PENDING_FLUSH_UPDATE && MERGE_SCHEDULER) || (COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && !MERGE_SCHEDULER))) || (!READER_POOLING && COMMIT_ON_CLOSE))
 	((COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && MERGE_SCHEDULER && READER_POOLING) || (COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && !READER_POOLING))

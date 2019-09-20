@@ -9,19 +9,19 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InteractionsAnalysisTest {
+public class ConstraintsEvaluationAnalysisTest {
 
   private void analyze(String programName, Set<String> options) throws Exception {
     String[] args = new String[0];
-    PhosphorInteractionsAnalyzer phosphorInteractionsAnalyzer =
-        new PhosphorInteractionsAnalyzer(programName);
-    Set<FeatureExpr> phosphorInteractions = phosphorInteractionsAnalyzer.analyze(args);
+    PhosphorConstraintsAnalyzer phosphorConstraintsAnalyzer =
+        new PhosphorConstraintsAnalyzer(programName);
+    Set<FeatureExpr> phosphorInteractions = phosphorConstraintsAnalyzer.analyze(args);
 
-    SubtracesInteractionsAnalyzer subtracesInteractionsAnalyzer =
-        new SubtracesInteractionsAnalyzer(programName);
-    Set<FeatureExpr> subtracesInteractions = subtracesInteractionsAnalyzer.analyze(args);
+    SubtracesConstraintsAnalyzer subtracesConstraintsAnalyzer =
+        new SubtracesConstraintsAnalyzer(programName);
+    Set<FeatureExpr> subtracesInteractions = subtracesConstraintsAnalyzer.analyze(args);
 
-    InteractionsAnalysis analysis = new InteractionsAnalysis(programName, options);
+    ConstraintsEvaluationAnalysis analysis = new ConstraintsEvaluationAnalysis(programName, options);
     analysis.analyze(phosphorInteractions, subtracesInteractions);
   }
 

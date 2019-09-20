@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-class InteractionsAnalysis {
+class ConstraintsEvaluationAnalysis {
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
   private final String programName;
   private final Set<String> options;
 
-  InteractionsAnalysis(String programName, Set<String> options) {
+  ConstraintsEvaluationAnalysis(String programName, Set<String> options) {
     this.programName = programName;
     this.options = options;
   }
@@ -65,7 +65,7 @@ class InteractionsAnalysis {
       return;
     }
 
-    String result = "Missing subtrace interactions";
+    String result = "Missing subtrace constraints";
     results.append(result);
     results.append(LINE_SEPARATOR);
     System.err.println(result);
@@ -84,7 +84,7 @@ class InteractionsAnalysis {
       return;
     }
 
-    String result = "Extra phosphor interactions";
+    String result = "Extra constraints derived from Phosphor";
     results.append(result);
     results.append(LINE_SEPARATOR);
     System.out.println(result);
@@ -134,7 +134,7 @@ class InteractionsAnalysis {
       }
 
       String result =
-          "Found phosphor interaction " + this.prettyPrintFeatureExpr(phosphorInteraction);
+          "Constraints found by Phosphor " + this.prettyPrintFeatureExpr(phosphorInteraction);
       results.append(result);
       results.append(LINE_SEPARATOR);
       System.out.println(result);
@@ -166,7 +166,7 @@ class InteractionsAnalysis {
       }
 
       String result =
-          "Subtrace interaction "
+          "Subtrace constraint "
               + this.prettyPrintFeatureExpr(subtracesInteraction)
               + " implied by ";
       results.append(result);
@@ -191,7 +191,7 @@ class InteractionsAnalysis {
 
   private String getOutputDir() {
     return Options.DIRECTORY
-        + "/evaluation/dta/interactions/java/programs/results/"
+        + "/evaluation/dta/constraints/java/programs/results/"
         + this.programName;
   }
 

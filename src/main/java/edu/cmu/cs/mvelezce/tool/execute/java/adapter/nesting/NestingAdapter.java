@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -10,15 +11,25 @@ public class NestingAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "nesting";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Nesting";
-  public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
-  public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
+  public static final String ORIGINAL_CLASS_PATH =
+      "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+  public static final String INSTRUMENTED_CLASS_PATH =
+      "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
 
   private static final String[] OPTIONS = {"A", "B"};
 
   public NestingAdapter() {
-    // TODO check that we are passing empty string
-    super(NestingAdapter.PROGRAM_NAME, NestingAdapter.MAIN_CLASS, "",
+    // TODO check why are we passing empty string. Empty string represents the directory of the
+    // class files to execute.
+    super(
+        NestingAdapter.PROGRAM_NAME,
+        NestingAdapter.MAIN_CLASS,
+        "",
         NestingAdapter.getListOfOptions());
+  }
+
+  public NestingAdapter(String programName, String entryPoint, String classDir) {
+    super(programName, entryPoint, classDir, NestingAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {

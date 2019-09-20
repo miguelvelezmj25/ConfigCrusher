@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.dta.interactions;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import org.junit.Test;
 
@@ -21,7 +22,8 @@ public class ConstraintsEvaluationAnalysisTest {
         new SubtracesConstraintsAnalyzer(programName);
     Set<FeatureExpr> subtracesInteractions = subtracesConstraintsAnalyzer.analyze(args);
 
-    ConstraintsEvaluationAnalysis analysis = new ConstraintsEvaluationAnalysis(programName, options);
+    ConstraintsEvaluationAnalysis analysis =
+        new ConstraintsEvaluationAnalysis(programName, options);
     analysis.analyze(phosphorInteractions, subtracesInteractions);
   }
 
@@ -43,6 +45,13 @@ public class ConstraintsEvaluationAnalysisTest {
   public void indexFiles() throws Exception {
     String programName = IndexFilesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(IndexFilesAdapter.getListOfOptions());
+    analyze(programName, options);
+  }
+
+  @Test
+  public void nesting() throws Exception {
+    String programName = NestingAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(NestingAdapter.getListOfOptions());
     analyze(programName, options);
   }
 }

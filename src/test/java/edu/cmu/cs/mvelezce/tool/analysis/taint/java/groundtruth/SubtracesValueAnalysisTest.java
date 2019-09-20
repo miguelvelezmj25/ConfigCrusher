@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
@@ -121,5 +122,27 @@ public class SubtracesValueAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
     subtracesValueAnalysis.analyze(args);
+  }
+
+  @Test
+  public void nesting() throws IOException, InterruptedException {
+    String programName = NestingAdapter.PROGRAM_NAME;
+    SubtraceLabeler subtraceLabeler = new SubtraceLabeler(programName);
+
+    String[] args = new String[0];
+    Map<Set<String>, List<String>> configsToLabeledTraces = subtraceLabeler.analyze(args);
+    SubtracesValueAnalysis subtracesValueAnalysis =
+        new SubtracesValueAnalysis(programName, configsToLabeledTraces);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<SubtraceAnalysisInfo> write = subtracesValueAnalysis.analyze(args);
+
+    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    args = new String[0];
+    Set<SubtraceAnalysisInfo> read = subtracesValueAnalysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 }

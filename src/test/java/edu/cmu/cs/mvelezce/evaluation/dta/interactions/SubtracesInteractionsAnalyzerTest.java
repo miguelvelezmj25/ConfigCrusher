@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysis
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtracesValueAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,6 +52,13 @@ public class SubtracesInteractionsAnalyzerTest {
   public void indexFiles() throws Exception {
     String programName = IndexFilesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(IndexFilesAdapter.getListOfOptions());
+    analyzeInteractions(programName, options);
+  }
+
+  @Test
+  public void nesting() throws Exception {
+    String programName = NestingAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(NestingAdapter.getListOfOptions());
     analyzeInteractions(programName, options);
   }
 }

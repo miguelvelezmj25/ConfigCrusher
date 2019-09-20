@@ -1,0 +1,41 @@
+[
+  {
+    "config": [],
+    "trace": [
+      "6c60c483-3c78-448c-bd3c-fdb8b028359c",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A"
+    ],
+    "trace": [
+      "6c60c483-3c78-448c-bd3c-fdb8b028359c",
+      "TRUE",
+      "deba908b-94c6-4a7e-9739-1a70af31b469",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "B"
+    ],
+    "trace": [
+      "6c60c483-3c78-448c-bd3c-fdb8b028359c",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A",
+      "B"
+    ],
+    "trace": [
+      "6c60c483-3c78-448c-bd3c-fdb8b028359c",
+      "TRUE",
+      "deba908b-94c6-4a7e-9739-1a70af31b469",
+      "TRUE"
+    ]
+  }
+]

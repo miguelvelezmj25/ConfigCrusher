@@ -1,78 +1,36 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class SubtraceManager {
 
-//  private static final Set<String> PROBLEMATIC_DECISIONS = new HashSet<>();
   private static final Map<SubtraceLabel, UUID> SUBTRACE_LABELS_TO_LABELS = new HashMap<>();
   private static final Map<UUID, SubtraceLabel> LABELS_TO_SUBTRACE_LABELS = new HashMap<>();
 
-  private final Map<DecisionLabelWithContext, Integer> DECISION_LABELS_WITH_CONTEXT_TO_COUNTS = new HashMap<>();
+  private final Map<ControlFlowDecision, Integer> decisionsToCounts = new HashMap<>();
 
-//  static {
-//    PROBLEMATIC_DECISIONS.add("com/sleepycat/je/utilint/JVMSystemUtils.<clinit>()V");
-//    PROBLEMATIC_DECISIONS
-//        .add("com/sleepycat/je/log/FSyncManager.<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V");
-//    PROBLEMATIC_DECISIONS
-//        .add("com/sleepycat/je/log/FileManager$3.accept(Ljava/io/File;Ljava/lang/String;)Z");
-//  }
-//
-//  public static boolean isProblematicDecision(String decision, String topDecision) {
-////    boolean isProblematicDecision = isProblematicDecision(decision);
-////
-////    if (!isProblematicDecision) {
-////      return false;
-////    }
-//
-//    return isExitingEarlierDecisionInSameMethod(decision, topDecision);
-//  }
-
-//  private static boolean isExitingEarlierDecisionInSameMethod(String decision,
-//      String topDecision) {
-//    String[] decisionEntries = decision.split("\\.");
-//    String[] topSubtraceDecisionEntries = topDecision.split("\\.");
-//
-//    if (decisionEntries.length != 3 | topSubtraceDecisionEntries.length != 3) {
-//      throw new RuntimeException("Expected to split the decision into 3 elements");
-//    }
-//
-//    return decisionEntries[0].equals(topSubtraceDecisionEntries[0]) && decisionEntries[1]
-//        .equals(topSubtraceDecisionEntries[1]) && Integer.valueOf(decisionEntries[2]) > Integer
-//        .valueOf(topSubtraceDecisionEntries[2]);
-//  }
-//
-//  private static boolean isProblematicDecision(String decision) {
-//    for (String problematicDecision : PROBLEMATIC_DECISIONS) {
-//      if (decision.startsWith(problematicDecision)) {
-//        return true;
-//      }
-//    }
-//
-//    return false;
-//  }
-
-  private int getExecutionCount(DecisionLabelWithContext decisionLabelWithContext) {
-    return DECISION_LABELS_WITH_CONTEXT_TO_COUNTS.getOrDefault(decisionLabelWithContext, 0);
+  public static Map<UUID, SubtraceLabel> getLabelsToSubtraceLabels() {
+    return LABELS_TO_SUBTRACE_LABELS;
   }
 
-  private void setExecutionCount(DecisionLabelWithContext decisionLabelWithContext,
-      int execCount) {
-    DECISION_LABELS_WITH_CONTEXT_TO_COUNTS.put(decisionLabelWithContext, execCount);
+  private int getDecisionExecutionCount(ControlFlowDecision decisionLabelWithContext) {
+    return decisionsToCounts.getOrDefault(decisionLabelWithContext, 0);
+  }
+
+  private void setExecutionCount(ControlFlowDecision decisionLabelWithContext, int execCount) {
+    decisionsToCounts.put(decisionLabelWithContext, execCount);
   }
 
   public UUID getLabel(String decision, Deque<UUID> stack) {
     UUID stackTop = stack.peekFirst();
-    DecisionLabelWithContext decisionLabelWithContext = new DecisionLabelWithContext(stackTop,
-        decision);
-    int execCount = this.getExecutionCount(decisionLabelWithContext);
+    ControlFlowDecision controlFlowDecision = new ControlFlowDecision(stackTop, decision);
+    int execCount = this.getDecisionExecutionCount(controlFlowDecision);
     execCount++;
-    this.setExecutionCount(decisionLabelWithContext, execCount);
+    this.setExecutionCount(controlFlowDecision, execCount);
 
-    SubtraceLabel subtraceLabel = new SubtraceLabel(stackTop, decision, execCount);
+    ControlFlowStatement controlFlowStatement = new ControlFlowStatement(decision);
+    SubtraceLabel subtraceLabel = new SubtraceLabel(stackTop, controlFlowStatement, execCount);
 
     if (SUBTRACE_LABELS_TO_LABELS.containsKey(subtraceLabel)) {
       return SUBTRACE_LABELS_TO_LABELS.get(subtraceLabel);
@@ -84,7 +42,44 @@ public class SubtraceManager {
     return subtraceLabel.getUUID();
   }
 
-  public static Map<UUID, SubtraceLabel> getLabelsToSubtraceLabels() {
-    return LABELS_TO_SUBTRACE_LABELS;
+  // Use to track how many times a control flow decision has been executed
+  // A control flow decision is an execution of a control flow statement under a specific context
+  private static class ControlFlowDecision extends ControlFlowStatement {
+
+    private final UUID context;
+
+    ControlFlowDecision(@Nullable UUID context, String decision) {
+      super(decision);
+
+      this.context = context;
+    }
+
+    public UUID getContext() {
+      return context;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+      if (!super.equals(o)) {
+        return false;
+      }
+
+      ControlFlowDecision that = (ControlFlowDecision) o;
+
+      return Objects.equals(context, that.context);
+    }
+
+    @Override
+    public int hashCode() {
+      int result = super.hashCode();
+      result = 31 * result + (context != null ? context.hashCode() : 0);
+      return result;
+    }
   }
 }

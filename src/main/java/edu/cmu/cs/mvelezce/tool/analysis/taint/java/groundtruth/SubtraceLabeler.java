@@ -15,7 +15,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
 
   private final Map<Set<String>, List<String>> configsToTraces;
 
-  private SubtraceManager subtraceManager = new SubtraceManager();
+  private SubtraceManager subtraceManager;
 
   SubtraceLabeler(String programName) {
     this(programName, new HashMap<>());
@@ -31,14 +31,12 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
 
   @Override
   public Map<Set<String>, List<String>> analyze() {
+    System.err.println("Check that the decision exited is the one that we expected");
     Map<Set<String>, List<String>> configsToLabeledTraces = new HashMap<>();
 
     Iterator<Map.Entry<Set<String>, List<String>>> configsToTracesIter =
         this.configsToTraces.entrySet().iterator();
-    System.err.println("Why am I creating a subtrace manager every time a new trace is analyzed?");
     for (int i = 0; configsToTracesIter.hasNext(); i++) {
-      this.subtraceManager = new SubtraceManager();
-
       Map.Entry<Set<String>, List<String>> entry = configsToTracesIter.next();
       List<String> trace = entry.getValue();
       List<String> labeledTrace = this.getLabeledTrace(trace);
@@ -55,6 +53,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
       throw new RuntimeException("We expected the program to be single threaded");
     }
 
+    this.subtraceManager = new SubtraceManager();
     List<String> labeledTrace = new ArrayList<>();
     Deque<UUID> stack = new ArrayDeque<>();
 
@@ -106,7 +105,6 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
         break;
       case SubtracesLogger.EXIT_DECISION:
         this.exitDecision(decision, stack);
-        // TODO check that the decision exited is the one that we expected
         break;
       case SubtracesLogger.EXIT_DECISION_AT_RETURN:
         this.exitDecisionAtReturn(decision, stack);
@@ -136,7 +134,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
 
     for (UUID uuid : stack) {
-      System.out.println(labelsToSubtraceLabels.get(uuid));
+      System.err.println(labelsToSubtraceLabels.get(uuid));
     }
 
     System.out.println();
@@ -152,7 +150,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
           "Could not find a subtraceLabel object corresponding to the uuid " + uuidTop);
     }
 
-    return subtraceLabel.getDecision();
+    return subtraceLabel.getControlFlowStatement().getStatement();
   }
 
   private boolean isSameDecisionAtTopOfStack(String decision, Deque<UUID> stack) {

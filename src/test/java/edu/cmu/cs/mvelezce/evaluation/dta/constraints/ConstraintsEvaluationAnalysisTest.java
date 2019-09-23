@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.evaluation.dta.interactions;
+package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;

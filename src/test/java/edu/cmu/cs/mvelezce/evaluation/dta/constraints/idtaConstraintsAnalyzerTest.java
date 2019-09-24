@@ -13,21 +13,21 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PhosphorConstraintsAnalyzerTest {
+public class idtaConstraintsAnalyzerTest {
 
   private void analyzeInteractions(String programName, Set<String> options) throws Exception {
     DTAConstraintAnalysis constraintAnalysis = new DTAConstraintAnalysis(programName);
     String[] args = new String[0];
     Set<ConfigConstraint> constraints = constraintAnalysis.analyze(args);
-    PhosphorConstraintsAnalyzer analysis =
-        new PhosphorConstraintsAnalyzer(programName, constraints, options);
+    idtaConstraintsAnalyzer analysis =
+        new idtaConstraintsAnalyzer(programName, constraints, options);
 
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
     Set<FeatureExpr> write = analysis.analyze(args);
 
-    analysis = new PhosphorConstraintsAnalyzer(programName);
+    analysis = new idtaConstraintsAnalyzer(programName);
     args = new String[0];
     Set<FeatureExpr> read = analysis.analyze(args);
 

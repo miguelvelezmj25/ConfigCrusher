@@ -7,32 +7,27 @@ import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public class PhosphorConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> {
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
+
+public class idtaConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> {
 
   private final String programName;
   private final Set<ConfigConstraint> configConstraints;
   private final Set<String> options;
 
-  PhosphorConstraintsAnalyzer(
+  idtaConstraintsAnalyzer(
       String programName, Set<ConfigConstraint> configConstraints, Set<String> options) {
     this.programName = programName;
     this.configConstraints = configConstraints;
     this.options = options;
   }
 
-  PhosphorConstraintsAnalyzer(String programName) {
+  idtaConstraintsAnalyzer(String programName) {
     this.programName = programName;
     this.configConstraints = new HashSet<>();
     this.options = new HashSet<>();
@@ -146,6 +141,7 @@ public class PhosphorConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> {
 
   @Override
   public String outputDir() {
+    System.err.println("Change phosphor to another name");
     return Options.DIRECTORY
         + "/evaluation/dta/constraints/java/programs/phosphor/"
         + this.programName;

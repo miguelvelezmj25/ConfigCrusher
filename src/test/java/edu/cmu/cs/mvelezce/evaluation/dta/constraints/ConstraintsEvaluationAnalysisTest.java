@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
@@ -8,27 +9,57 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ConstraintsEvaluationAnalysisTest {
 
   private void analyze(String programName, Set<String> options) throws Exception {
-    String[] args = new String[0];
-    PhosphorConstraintsAnalyzer phosphorConstraintsAnalyzer =
-        new PhosphorConstraintsAnalyzer(programName);
-    Set<FeatureExpr> phosphorInteractions = phosphorConstraintsAnalyzer.analyze(args);
+    Set<FeatureExpr> idtaConstraints = getIDTAConstraints(programName);
+    Set<FeatureExpr> subtraceConstraints = getSubtraceConstraints(programName);
 
+    ConstraintsEvaluationAnalysis analysis =
+        new ConstraintsEvaluationAnalysis(programName, options);
+    analysis.analyze(idtaConstraints, subtraceConstraints);
+  }
+
+  private Set<FeatureExpr> getSubtraceConstraints(String programName) throws IOException {
     SubtracesConstraintsAnalyzer subtracesConstraintsAnalyzer =
         new SubtracesConstraintsAnalyzer(programName);
+    String[] args = new String[0];
     Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint =
         subtracesConstraintsAnalyzer.analyze(args);
 
-    throw new UnsupportedOperationException("Implement API change");
+    Set<FeatureExpr> subtraceConstraints = new HashSet<>();
 
-    //    ConstraintsEvaluationAnalysis analysis =
-    //        new ConstraintsEvaluationAnalysis(programName, options);
-    //    analysis.analyze(phosphorInteractions, subtracesInteractions);
+    FeatureExpr True = SATFeatureExprFactory.True();
+    FeatureExpr False = SATFeatureExprFactory.False();
+
+    for (SubtraceOutcomeConstraint subtraceOutcomeConstraint : subtracesOutcomeConstraint) {
+      Collection<FeatureExpr> constraints =
+          subtraceOutcomeConstraint.getOutcomesToConstraints().values();
+
+      for (FeatureExpr constraint : constraints) {
+        if (constraint.equals(True) || constraint.equals(False)) {
+          continue;
+        }
+
+        subtraceConstraints.add(constraint);
+      }
+    }
+
+    return subtraceConstraints;
+  }
+
+  private Set<FeatureExpr> getIDTAConstraints(String programName) throws IOException {
+    System.err.println(
+        "Might want to change how to get the IDTA constraints to a map from statements to constraints");
+    idtaConstraintsAnalyzer idtaConstraintsAnalyzer = new idtaConstraintsAnalyzer(programName);
+    String[] args = new String[0];
+
+    return idtaConstraintsAnalyzer.analyze(args);
   }
 
   @Test

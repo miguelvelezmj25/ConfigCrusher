@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtracesValueAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
@@ -25,11 +25,11 @@ public class SubtracesConstraintsAnalyzerTest {
     args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-    Set<FeatureExpr> write = analysis.analyze(args);
+    Set<SubtraceOutcomeConstraint> write = analysis.analyze(args);
 
     analysis = new SubtracesConstraintsAnalyzer(programName);
     args = new String[0];
-    Set<FeatureExpr> read = analysis.analyze(args);
+    Set<SubtraceOutcomeConstraint> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }

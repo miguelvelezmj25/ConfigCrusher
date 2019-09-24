@@ -1,6 +1,22 @@
 [
   {
-    "subtrace": "6c60c483-3c78-448c-bd3c-fdb8b028359c",
+    "subtrace": "54168d9d-f008-4704-90a1-04f2c2d26e5a",
+    "valuesToConfigs": {
+      "TRUE": [
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "FALSE": [
+        [
+          "A"
+        ]
+      ]
+    }
+  },
+  {
+    "subtrace": "c02fc2df-ed0f-443f-81cc-ad6ac6f293dd",
     "valuesToConfigs": {
       "TRUE": [
         [
@@ -15,22 +31,6 @@
         [],
         [
           "B"
-        ]
-      ]
-    }
-  },
-  {
-    "subtrace": "deba908b-94c6-4a7e-9739-1a70af31b469",
-    "valuesToConfigs": {
-      "TRUE": [
-        [
-          "A",
-          "B"
-        ]
-      ],
-      "FALSE": [
-        [
-          "A"
         ]
       ]
     }

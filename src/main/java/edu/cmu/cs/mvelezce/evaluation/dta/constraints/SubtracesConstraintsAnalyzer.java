@@ -4,21 +4,20 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
+import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public class SubtracesConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> {
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcomeConstraint>> {
+
+  private static final String ID = "id";
+  private static final String OUTCOMES_TO_STRING_CONSTRAINTS = "outcomesToStringConstraints";
 
   private final String programName;
   private final Set<SubtraceAnalysisInfo> subtraceAnalysisInfos;
@@ -38,44 +37,37 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> 
   }
 
   @Override
-  public Set<FeatureExpr> analyze() {
-    List<String> constraints = this.buildStringConstraints();
-
-    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(constraints));
-  }
-
-  private List<String> buildStringConstraints() {
-    System.err.println("This is copied and pasted code");
-    List<String> constraints = new ArrayList<>();
-
-    Set<Set<Set<String>>> processedConfigs = new HashSet<>();
+  public Set<SubtraceOutcomeConstraint> analyze() {
+    Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint = new HashSet<>();
 
     for (SubtraceAnalysisInfo subtraceAnalysisInfo : this.subtraceAnalysisInfos) {
       Map<String, Set<Set<String>>> valuesToConfigs = subtraceAnalysisInfo.getValuesToConfigs();
 
       if (valuesToConfigs.size() == 1) {
-        continue;
+        throw new UnsupportedOperationException("Implement size == 1");
       }
+
+      SubtraceOutcomeConstraint subtraceOutcomeConstraint =
+          new SubtraceOutcomeConstraint(subtraceAnalysisInfo.getSubtrace());
 
       for (Map.Entry<String, Set<Set<String>>> entry : valuesToConfigs.entrySet()) {
         Set<Set<String>> configs = entry.getValue();
-
-        if (processedConfigs.contains(configs)) {
-          continue;
-        }
-
         String stringConstraints = toStringConstraints(configs);
 
         if (stringConstraints.isEmpty()) {
-          continue;
+          throw new UnsupportedOperationException("Implement string constraint empty");
         }
 
-        constraints.add(stringConstraints);
-        processedConfigs.add(configs);
+        Map<String, FeatureExpr> outcomesToConstraints =
+            subtraceOutcomeConstraint.getOutcomesToConstraints();
+        FeatureExpr featureExpr = MinConfigsGenerator.parseAsFeatureExpr(stringConstraints);
+        outcomesToConstraints.put(entry.getKey(), featureExpr);
       }
+
+      subtracesOutcomeConstraint.add(subtraceOutcomeConstraint);
     }
 
-    return constraints;
+    return subtracesOutcomeConstraint;
   }
 
   private String toStringConstraints(Set<Set<String>> configs) {
@@ -121,7 +113,7 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> 
   }
 
   @Override
-  public Set<FeatureExpr> analyze(String[] args) throws IOException {
+  public Set<SubtraceOutcomeConstraint> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -140,45 +132,80 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<FeatureExpr>> 
       return this.readFromFile(files.iterator().next());
     }
 
-    Set<FeatureExpr> interactions = this.analyze();
+    Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint = this.analyze();
 
     if (Options.checkIfSave()) {
-      this.writeToFile(interactions);
+      this.writeToFile(subtracesOutcomeConstraint);
     }
 
-    return interactions;
+    return subtracesOutcomeConstraint;
   }
 
   @Override
-  public void writeToFile(Set<FeatureExpr> interactions) throws IOException {
-    System.err.println("This code was copied and pasted");
+  public void writeToFile(Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint)
+      throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
-    List<String> stringInteractions = new ArrayList<>();
+    Set<Map<String, Object>> serialObjects = new HashSet<>();
 
-    for (FeatureExpr featureExpr : interactions) {
-      String stringInteraction = featureExpr.toTextExpr().replaceAll("definedEx\\(", "");
+    for (SubtraceOutcomeConstraint subtraceOutcomeConstraint : subtracesOutcomeConstraint) {
+      Map<String, Object> serialObject = new LinkedHashMap<>();
+      serialObject.put(ID, subtraceOutcomeConstraint.getSubtraceLabelUUID().toString());
 
-      for (String option : this.options) {
-        stringInteraction = stringInteraction.replaceAll(option + "\\)", option);
+      Map<String, String> serializableOutcomesToStringConstraints = new HashMap<>();
+      serialObject.put(OUTCOMES_TO_STRING_CONSTRAINTS, serializableOutcomesToStringConstraints);
+
+      Map<String, FeatureExpr> outcomesToConstraints =
+          subtraceOutcomeConstraint.getOutcomesToConstraints();
+
+      for (Map.Entry<String, FeatureExpr> entry : outcomesToConstraints.entrySet()) {
+        String constraint = entry.getValue().toTextExpr().replaceAll("definedEx\\(", "");
+
+        for (String option : this.options) {
+          constraint = constraint.replaceAll(option + "\\)", option);
+        }
+
+        serializableOutcomesToStringConstraints.put(entry.getKey(), constraint);
       }
 
-      stringInteractions.add(stringInteraction);
+      serialObjects.add(serialObject);
     }
 
     ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(file, stringInteractions);
+    mapper.writeValue(file, serialObjects);
   }
 
   @Override
-  public Set<FeatureExpr> readFromFile(File file) throws IOException {
-    System.err.println("This code was copied and pasted");
+  public Set<SubtraceOutcomeConstraint> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<String> stringConstraints = mapper.readValue(file, new TypeReference<List<String>>() {});
+    List<Map<String, Object>> input =
+        mapper.readValue(file, new TypeReference<List<Map<String, Object>>>() {});
 
-    return new HashSet<>(MinConfigsGenerator.getFeatureExprs(stringConstraints));
+    Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint = new HashSet<>();
+
+    for (Map<String, Object> entry : input) {
+      String id = (String) entry.get(ID);
+      SubtraceOutcomeConstraint subtraceOutcomeConstraint = new SubtraceOutcomeConstraint(id);
+
+      Map<String, FeatureExpr> outcomesToConstraints =
+          subtraceOutcomeConstraint.getOutcomesToConstraints();
+      Map<String, String> outcomesToStringConstraints =
+          (Map<String, String>) entry.get(OUTCOMES_TO_STRING_CONSTRAINTS);
+
+      for (Map.Entry<String, String> outcomeToStringConstraint :
+          outcomesToStringConstraints.entrySet()) {
+        String stringConstraint = outcomeToStringConstraint.getValue();
+        FeatureExpr featureExpr = MinConfigsGenerator.parseAsFeatureExpr(stringConstraint);
+
+        outcomesToConstraints.put(outcomeToStringConstraint.getKey(), featureExpr);
+      }
+
+      subtracesOutcomeConstraint.add(subtraceOutcomeConstraint);
+    }
+
+    return subtracesOutcomeConstraint;
   }
 
   @Override

@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.Options;
@@ -49,17 +50,19 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcom
 
       SubtraceOutcomeConstraint subtraceOutcomeConstraint =
           new SubtraceOutcomeConstraint(subtraceAnalysisInfo.getSubtrace());
+      Map<String, FeatureExpr> outcomesToConstraints =
+          subtraceOutcomeConstraint.getOutcomesToConstraints();
 
       for (Map.Entry<String, Set<Set<String>>> entry : valuesToConfigs.entrySet()) {
         Set<Set<String>> configs = entry.getValue();
         String stringConstraints = toStringConstraints(configs);
 
         if (stringConstraints.isEmpty()) {
-          throw new UnsupportedOperationException("Implement string constraint empty");
+          outcomesToConstraints.put(entry.getKey(), SATFeatureExprFactory.False());
+
+          continue;
         }
 
-        Map<String, FeatureExpr> outcomesToConstraints =
-            subtraceOutcomeConstraint.getOutcomesToConstraints();
         FeatureExpr featureExpr = MinConfigsGenerator.parseAsFeatureExpr(stringConstraints);
         outcomesToConstraints.put(entry.getKey(), featureExpr);
       }
@@ -197,7 +200,16 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcom
       for (Map.Entry<String, String> outcomeToStringConstraint :
           outcomesToStringConstraints.entrySet()) {
         String stringConstraint = outcomeToStringConstraint.getValue();
-        FeatureExpr featureExpr = MinConfigsGenerator.parseAsFeatureExpr(stringConstraint);
+
+        FeatureExpr featureExpr;
+
+        if (stringConstraint.equals("0")) {
+          featureExpr = SATFeatureExprFactory.False();
+        } else if (stringConstraint.equals("1")) {
+          featureExpr = SATFeatureExprFactory.True();
+        } else {
+          featureExpr = MinConfigsGenerator.parseAsFeatureExpr(stringConstraint);
+        }
 
         outcomesToConstraints.put(outcomeToStringConstraint.getKey(), featureExpr);
       }

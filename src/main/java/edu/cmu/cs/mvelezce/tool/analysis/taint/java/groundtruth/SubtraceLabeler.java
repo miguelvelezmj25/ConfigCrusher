@@ -30,12 +30,13 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   }
 
   @Override
-  public Map<Set<String>, List<String>> analyze() {
+  public Map<Set<String>, List<String>> analyze() throws IOException {
     System.err.println("Check that the decision exited is the one that we expected");
     Map<Set<String>, List<String>> configsToLabeledTraces = new HashMap<>();
 
     Iterator<Map.Entry<Set<String>, List<String>>> configsToTracesIter =
         this.configsToTraces.entrySet().iterator();
+
     for (int i = 0; configsToTracesIter.hasNext(); i++) {
       Map.Entry<Set<String>, List<String>> entry = configsToTracesIter.next();
       List<String> trace = entry.getValue();
@@ -44,6 +45,8 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
 
       System.out.println("Processed trace " + i);
     }
+
+    SubtraceManager.saveIdsToSubtraceLabels(this.getProgramName());
 
     return configsToLabeledTraces;
   }
@@ -131,7 +134,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
   }
 
   private void printStack(Deque<UUID> stack) {
-    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
+    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getIdsToSubtraceLabels();
 
     for (UUID uuid : stack) {
       System.err.println(labelsToSubtraceLabels.get(uuid));
@@ -142,7 +145,7 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
 
   private String getTopDecisionInStack(Deque<UUID> stack) {
     UUID uuidTop = stack.peekFirst();
-    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getLabelsToSubtraceLabels();
+    Map<UUID, SubtraceLabel> labelsToSubtraceLabels = SubtraceManager.getIdsToSubtraceLabels();
     SubtraceLabel subtraceLabel = labelsToSubtraceLabels.get(uuidTop);
 
     if (subtraceLabel == null) {
@@ -172,9 +175,9 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     return label.toString();
   }
 
-  // TODO abstract since it is repeated with SubtracesAnalysisExecutor
   @Override
   public void writeToFile(Map<Set<String>, List<String>> configsToTraces) throws IOException {
+    System.err.println("Abstract since it is repeated with SubtracesAnalysisExecutor");
     String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -190,9 +193,9 @@ public class SubtraceLabeler extends BaseDynamicAnalysis<Map<Set<String>, List<S
     mapper.writeValue(file, infos);
   }
 
-  // TODO abstract since it is repeated with SubtracesAnalysisExecutor
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
+    System.err.println("Abstract since it is repeated with SubtracesAnalysisExecutor");
     ObjectMapper mapper = new ObjectMapper();
     List<ConfigToTraceInfo> configToTraceInfoList =
         mapper.readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {});

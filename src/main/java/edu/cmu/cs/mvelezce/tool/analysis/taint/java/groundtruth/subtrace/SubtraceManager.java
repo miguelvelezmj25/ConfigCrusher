@@ -1,17 +1,37 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.tool.Options;
+
 import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class SubtraceManager {
 
-  private static final Map<SubtraceLabel, UUID> SUBTRACE_LABELS_TO_LABELS = new HashMap<>();
-  private static final Map<UUID, SubtraceLabel> LABELS_TO_SUBTRACE_LABELS = new HashMap<>();
+  private static final Map<SubtraceLabel, UUID> SUBTRACE_LABELS_TO_IDS = new HashMap<>();
+  private static final Map<UUID, SubtraceLabel> IDS_TO_SUBTRACE_LABELS = new HashMap<>();
 
   private final Map<ControlFlowDecision, Integer> decisionsToCounts = new HashMap<>();
 
-  public static Map<UUID, SubtraceLabel> getLabelsToSubtraceLabels() {
-    return LABELS_TO_SUBTRACE_LABELS;
+  public static Map<UUID, SubtraceLabel> getIdsToSubtraceLabels() {
+    return IDS_TO_SUBTRACE_LABELS;
+  }
+
+  public static void saveIdsToSubtraceLabels(String programName) throws IOException {
+    String outputFile =
+        Options.DIRECTORY
+            + "/analysis/spec/traces/subtraceManager/java/programs/"
+            + programName
+            + "/"
+            + programName
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, IDS_TO_SUBTRACE_LABELS.values());
   }
 
   private int getDecisionExecutionCount(ControlFlowDecision decisionLabelWithContext) {
@@ -32,12 +52,12 @@ public class SubtraceManager {
     ControlFlowStatement controlFlowStatement = new ControlFlowStatement(decision);
     SubtraceLabel subtraceLabel = new SubtraceLabel(stackTop, controlFlowStatement, execCount);
 
-    if (SUBTRACE_LABELS_TO_LABELS.containsKey(subtraceLabel)) {
-      return SUBTRACE_LABELS_TO_LABELS.get(subtraceLabel);
+    if (SUBTRACE_LABELS_TO_IDS.containsKey(subtraceLabel)) {
+      return SUBTRACE_LABELS_TO_IDS.get(subtraceLabel);
     }
 
-    SUBTRACE_LABELS_TO_LABELS.put(subtraceLabel, subtraceLabel.getUUID());
-    LABELS_TO_SUBTRACE_LABELS.put(subtraceLabel.getUUID(), subtraceLabel);
+    SUBTRACE_LABELS_TO_IDS.put(subtraceLabel, subtraceLabel.getUUID());
+    IDS_TO_SUBTRACE_LABELS.put(subtraceLabel.getUUID(), subtraceLabel);
 
     return subtraceLabel.getUUID();
   }

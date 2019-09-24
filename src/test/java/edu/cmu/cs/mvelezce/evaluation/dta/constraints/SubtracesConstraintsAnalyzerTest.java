@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class SubtracesConstraintsAnalyzerTest {
 
-  private void analyzeInteractions(String programName, Set<String> options) throws Exception {
+  private void analyzeConstraints(String programName, Set<String> options) throws Exception {
     SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
     String[] args = new String[0];
     Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = subtracesValueAnalysis.analyze(args);
@@ -38,27 +38,27 @@ public class SubtracesConstraintsAnalyzerTest {
   public void trivial() throws Exception {
     String programName = TrivialAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
-    analyzeInteractions(programName, options);
+    analyzeConstraints(programName, options);
   }
 
   @Test
   public void measuredDiskOrderedScan() throws Exception {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
-    analyzeInteractions(programName, options);
+    analyzeConstraints(programName, options);
   }
 
   @Test
   public void indexFiles() throws Exception {
     String programName = IndexFilesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(IndexFilesAdapter.getListOfOptions());
-    analyzeInteractions(programName, options);
+    analyzeConstraints(programName, options);
   }
 
   @Test
   public void nesting() throws Exception {
     String programName = NestingAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(NestingAdapter.getListOfOptions());
-    analyzeInteractions(programName, options);
+    analyzeConstraints(programName, options);
   }
 }

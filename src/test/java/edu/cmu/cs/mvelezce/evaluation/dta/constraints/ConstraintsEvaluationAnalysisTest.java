@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
+import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtracesConstraintsAnalyzer;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;

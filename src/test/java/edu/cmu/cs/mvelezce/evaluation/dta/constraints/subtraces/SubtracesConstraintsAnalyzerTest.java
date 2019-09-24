@@ -1,6 +1,5 @@
-package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
+package edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces;
 
-import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtracesValueAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.indexFiles.IndexFilesAdapter;

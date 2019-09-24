@@ -1,11 +1,10 @@
-package edu.cmu.cs.mvelezce.evaluation.dta.constraints;
+package edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
-import edu.cmu.cs.mvelezce.evaluation.dta.constraints.subtraces.SubtraceOutcomeConstraint;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SubtraceAnalysisInfo;
@@ -31,7 +30,7 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcom
     this.options = options;
   }
 
-  SubtracesConstraintsAnalyzer(String programName) {
+  public SubtracesConstraintsAnalyzer(String programName) {
     this.programName = programName;
     this.subtraceAnalysisInfos = new HashSet<>();
     this.options = new HashSet<>();

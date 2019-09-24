@@ -12,11 +12,11 @@ public class SubtraceOutcomeConstraint {
   private final UUID subtraceLabelUUID;
   private final Map<String, FeatureExpr> outcomesToConstraints = new HashMap<>();
 
-  public SubtraceOutcomeConstraint(String subtraceLabelUUID) {
+  SubtraceOutcomeConstraint(String subtraceLabelUUID) {
     this.subtraceLabelUUID = UUID.fromString(subtraceLabelUUID);
   }
 
-  public UUID getSubtraceLabelUUID() {
+  UUID getSubtraceLabelUUID() {
     return subtraceLabelUUID;
   }
 

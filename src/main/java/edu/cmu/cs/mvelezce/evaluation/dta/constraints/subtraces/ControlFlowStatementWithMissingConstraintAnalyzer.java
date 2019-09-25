@@ -9,11 +9,13 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.ControlFlowStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceLabel;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace.SubtraceManager;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 class ControlFlowStatementWithMissingConstraintAnalyzer
     implements Analysis<ControlFlowStatementsWithMissingConstraint> {
@@ -39,26 +41,12 @@ class ControlFlowStatementWithMissingConstraintAnalyzer
   public ControlFlowStatementsWithMissingConstraint analyze(String[] args) throws Exception {
     Options.getCommandLine(args);
 
-    String outputFile = this.outputDir();
+    String outputFile = this.getFileName();
     File file = new File(outputFile);
     Options.checkIfDeleteResult(file);
 
     if (file.exists()) {
-      String[] extensions = new String[] {"json"};
-      Collection<File> files = FileUtils.listFiles(file, extensions, false);
-
-      for (File resultFile : files) {
-        ControlFlowStatementsWithMissingConstraint result = this.readFromFile(resultFile);
-
-        if (!this.stringConstraint.equals(result.getMissingConstraint())) {
-          continue;
-        }
-
-        return result;
-      }
-
-      throw new RuntimeException(
-          "Could not find results for " + this.stringConstraint + " in " + this.programName);
+      return this.readFromFile(file);
     }
 
     ControlFlowStatementsWithMissingConstraint results = this.analyze();
@@ -103,7 +91,7 @@ class ControlFlowStatementWithMissingConstraintAnalyzer
 
   @Override
   public void writeToFile(ControlFlowStatementsWithMissingConstraint result) throws IOException {
-    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
+    String outputFile = this.getFileName();
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
@@ -162,5 +150,14 @@ class ControlFlowStatementWithMissingConstraintAnalyzer
     }
 
     return uuidsWithConstraint;
+  }
+
+  private String getFileName() {
+    return this.outputDir()
+        + "/"
+        + this.programName
+        + "_"
+        + this.stringConstraint.hashCode()
+        + Options.DOT_JSON;
   }
 }

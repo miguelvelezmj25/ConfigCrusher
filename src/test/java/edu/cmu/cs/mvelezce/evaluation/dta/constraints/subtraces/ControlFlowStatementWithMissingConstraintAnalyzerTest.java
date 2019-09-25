@@ -18,6 +18,54 @@ public class ControlFlowStatementWithMissingConstraintAnalyzerTest {
   }
 
   @Test
+  public void berkeleyDB_3() throws Exception {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    String missingConstraint =
+        "((!DUPLICATES && SHAREDCACHE && !REPLICATED && !SEQUENTIAL && JECACHESIZE) || (!JECACHESIZE && ((DUPLICATES && ((!SHAREDCACHE && !REPLICATED && SEQUENTIAL) || (SHAREDCACHE && !REPLICATED && !SEQUENTIAL))) || (!DUPLICATES && ((SHAREDCACHE && REPLICATED && SEQUENTIAL) || (SHAREDCACHE && !REPLICATED && !SEQUENTIAL))))))";
+    Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint =
+        getSubtracesOutcomeConstraint(programName);
+    ControlFlowStatementWithMissingConstraintAnalyzer analysis =
+        new ControlFlowStatementWithMissingConstraintAnalyzer(
+            programName, missingConstraint, subtracesOutcomeConstraint);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    ControlFlowStatementsWithMissingConstraint write = analysis.analyze(args);
+
+    analysis =
+        new ControlFlowStatementWithMissingConstraintAnalyzer(programName, missingConstraint);
+    args = new String[0];
+    ControlFlowStatementsWithMissingConstraint read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void berkeleyDB_2() throws Exception {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    String missingConstraint =
+        "((JECACHESIZE && ((SHAREDCACHE && REPLICATED && !SEQUENTIAL && DUPLICATES) || (!SHAREDCACHE && REPLICATED && !SEQUENTIAL && !DUPLICATES))) || (DUPLICATES && ((SHAREDCACHE && !REPLICATED && SEQUENTIAL) || (SHAREDCACHE && REPLICATED && !SEQUENTIAL)) && !JECACHESIZE))";
+    Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint =
+        getSubtracesOutcomeConstraint(programName);
+    ControlFlowStatementWithMissingConstraintAnalyzer analysis =
+        new ControlFlowStatementWithMissingConstraintAnalyzer(
+            programName, missingConstraint, subtracesOutcomeConstraint);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    ControlFlowStatementsWithMissingConstraint write = analysis.analyze(args);
+
+    analysis =
+        new ControlFlowStatementWithMissingConstraintAnalyzer(programName, missingConstraint);
+    args = new String[0];
+    ControlFlowStatementsWithMissingConstraint read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
   public void berkeleyDB_1() throws Exception {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     String missingConstraint = "(!DUPLICATES && SEQUENTIAL)";
@@ -30,12 +78,10 @@ public class ControlFlowStatementWithMissingConstraintAnalyzerTest {
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-
     ControlFlowStatementsWithMissingConstraint write = analysis.analyze(args);
 
     analysis =
         new ControlFlowStatementWithMissingConstraintAnalyzer(programName, missingConstraint);
-
     args = new String[0];
     ControlFlowStatementsWithMissingConstraint read = analysis.analyze(args);
 

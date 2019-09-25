@@ -1,0 +1,14 @@
+{
+  "missingConstraint": "((COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && !MERGE_SCHEDULER && READER_POOLING) || (!READER_POOLING && ((!COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && MERGE_SCHEDULER) || (!MERGE_SCHEDULER && (!COMMIT_ON_CLOSE || CHECK_PENDING_FLUSH_UPDATE)))))",
+  "controlFlowStatements": [
+    {
+      "statement": "org/apache/lucene/core/util/FutureArrays.equals([BII[BII)Z.0"
+    },
+    {
+      "statement": "org/apache/lucene/core/util/FutureArrays.equals([BII[BII)Z.1"
+    },
+    {
+      "statement": "org/apache/lucene/core/util/FutureArrays.equals([BII[BII)Z.2"
+    }
+  ]
+}

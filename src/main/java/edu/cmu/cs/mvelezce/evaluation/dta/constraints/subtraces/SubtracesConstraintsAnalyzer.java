@@ -40,6 +40,8 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcom
   public Set<SubtraceOutcomeConstraint> analyze() {
     Set<SubtraceOutcomeConstraint> subtracesOutcomeConstraint = new HashSet<>();
 
+    int count = 0;
+
     for (SubtraceAnalysisInfo subtraceAnalysisInfo : this.subtraceAnalysisInfos) {
       Map<String, Set<Set<String>>> valuesToConfigs = subtraceAnalysisInfo.getValuesToConfigs();
 
@@ -67,6 +69,10 @@ public class SubtracesConstraintsAnalyzer implements Analysis<Set<SubtraceOutcom
       }
 
       subtracesOutcomeConstraint.add(subtraceOutcomeConstraint);
+
+      count++;
+
+      System.out.println("Subtraces to analyze: " + (this.subtraceAnalysisInfos.size() - count));
     }
 
     return subtracesOutcomeConstraint;

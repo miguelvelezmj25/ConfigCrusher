@@ -4,6 +4,11 @@ public class ControlFlowStatement {
 
   private final String statement;
 
+  // Dummy constructor for faster xml
+  private ControlFlowStatement() {
+    this.statement = "";
+  }
+
   ControlFlowStatement(String statement) {
     this.statement = statement;
   }

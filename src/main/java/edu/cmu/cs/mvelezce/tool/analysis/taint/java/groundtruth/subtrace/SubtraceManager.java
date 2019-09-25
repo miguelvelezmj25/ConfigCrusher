@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.subtrace;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 
@@ -10,23 +11,75 @@ import java.util.*;
 
 public class SubtraceManager {
 
+  private static final String UUID_FIELD = "uuid";
+  private static final String CONTEXT = "context";
+  private static final String CONTROL_FLOW_STATEMENT = "controlFlowStatement";
+  private static final String STATEMENT = "statement";
+  private static final String EXEC_COUNT = "execCount";
+
   private static final Map<SubtraceLabel, UUID> SUBTRACE_LABELS_TO_IDS = new HashMap<>();
   private static final Map<UUID, SubtraceLabel> IDS_TO_SUBTRACE_LABELS = new HashMap<>();
 
+  static {
+    System.err.println("Can this subtrace manager extend an analysis?");
+  }
+
   private final Map<ControlFlowDecision, Integer> decisionsToCounts = new HashMap<>();
+
+  private static String getOutputDir() {
+    return Options.DIRECTORY + "/analysis/spec/traces/subtraceManager/java/programs/";
+  }
 
   public static Map<UUID, SubtraceLabel> getIdsToSubtraceLabels() {
     return IDS_TO_SUBTRACE_LABELS;
   }
 
+  public static Map<UUID, SubtraceLabel> readIdsToSubtraceLabels(String programName)
+      throws IOException {
+    String outputFile = getOutputDir() + programName + "/" + programName + Options.DOT_JSON;
+    File file = new File(outputFile);
+
+    ObjectMapper mapper = new ObjectMapper();
+    List<Map<String, Object>> object =
+        mapper.readValue(file, new TypeReference<List<Map<String, Object>>>() {});
+
+    Map<UUID, SubtraceLabel> idsToSubtraceLabels = new HashMap<>();
+
+    for (Map<String, Object> entry : object) {
+      UUID uuid = UUID.fromString((String) entry.get(UUID_FIELD));
+      UUID context = getContext(entry);
+      ControlFlowStatement controlFlowStatement = getControlFlowStatement(entry);
+      int execCount = (int) entry.get(EXEC_COUNT);
+      SubtraceLabel subtraceLabel =
+          new SubtraceLabel(uuid, context, controlFlowStatement, execCount);
+
+      idsToSubtraceLabels.put(uuid, subtraceLabel);
+    }
+
+    return idsToSubtraceLabels;
+  }
+
+  @Nullable
+  private static UUID getContext(Map<String, Object> entry) {
+    Object context = entry.get(CONTEXT);
+
+    if (context == null) {
+      return null;
+    }
+
+    return UUID.fromString((String) context);
+  }
+
+  private static ControlFlowStatement getControlFlowStatement(Map<String, Object> entry) {
+    Map<String, String> controlFlowStatement =
+        (Map<String, String>) entry.get(CONTROL_FLOW_STATEMENT);
+    String statement = controlFlowStatement.get(STATEMENT);
+
+    return new ControlFlowStatement(statement);
+  }
+
   public static void saveIdsToSubtraceLabels(String programName) throws IOException {
-    String outputFile =
-        Options.DIRECTORY
-            + "/analysis/spec/traces/subtraceManager/java/programs/"
-            + programName
-            + "/"
-            + programName
-            + Options.DOT_JSON;
+    String outputFile = getOutputDir() + programName + "/" + programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 

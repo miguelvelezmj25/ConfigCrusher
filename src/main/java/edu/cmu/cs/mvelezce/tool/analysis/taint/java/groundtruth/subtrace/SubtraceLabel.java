@@ -8,15 +8,21 @@ import java.util.UUID;
 public class SubtraceLabel {
 
   // Helper field for IDing, not part of equals and hashcode
-  private final UUID uuid = UUID.randomUUID();
-  private final UUID context;
+  private final UUID uuid;
+  @Nullable private final UUID context;
   private final ControlFlowStatement controlFlowStatement;
   private final int execCount;
 
-  SubtraceLabel(@Nullable UUID context, ControlFlowStatement controlFlowStatement, int execCount) {
+  SubtraceLabel(
+      UUID uuid, @Nullable UUID context, ControlFlowStatement controlFlowStatement, int execCount) {
+    this.uuid = uuid;
     this.context = context;
     this.controlFlowStatement = controlFlowStatement;
     this.execCount = execCount;
+  }
+
+  SubtraceLabel(@Nullable UUID context, ControlFlowStatement controlFlowStatement, int execCount) {
+    this(UUID.randomUUID(), context, controlFlowStatement, execCount);
   }
 
   public UUID getUUID() {

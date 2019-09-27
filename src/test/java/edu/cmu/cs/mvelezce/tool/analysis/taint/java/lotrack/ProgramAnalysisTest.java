@@ -22,7 +22,7 @@ public class ProgramAnalysisTest {
                 JavaRegion readRegion = read.getKey();
                 Set<Set<String>> readOptions = read.getValue();
 
-                if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartBytecodeIndex() == readRegion.getStartBytecodeIndex()
+                if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartRegionIndex() == readRegion.getStartRegionIndex()
 //                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
                         && saveRegion.getRegionPackage().equals(readRegion.getRegionPackage())
                         && saveRegion.getRegionClass().equals(readRegion.getRegionClass())

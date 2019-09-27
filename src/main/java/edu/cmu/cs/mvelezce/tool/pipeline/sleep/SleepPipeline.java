@@ -27,8 +27,8 @@ public class SleepPipeline {
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
 //
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(program);
+//        CFGBuilder build = new CFGBuilder();
+//        CFG cfg = build.buildCFG(program);
 //
 //        // Taint ProgramAnalysis (Language dependent)
 //        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);

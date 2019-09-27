@@ -27,7 +27,7 @@ public class PairwisePerformanceModelBuilder extends ApproachPerformanceModelBui
         this.getLearnedModel().remove(empty);
 
         Map<Region, Map<Set<String>, Double>> regionToConfigurationPerformance = new HashMap<>();
-        Region programRegion = new Region("program");
+        Region programRegion = new Region.Builder("program").build();
         regionToConfigurationPerformance.put(programRegion, this.getLearnedModel());
 
         PerformanceModel pm = new PairwisePerformanceModel(baseTime, regionToConfigurationPerformance);

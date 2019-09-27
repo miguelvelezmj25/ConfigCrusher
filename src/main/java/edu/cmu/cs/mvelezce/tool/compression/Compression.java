@@ -2,18 +2,17 @@ package edu.cmu.cs.mvelezce.tool.compression;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
-public interface Compression {
+public interface Compression<T> {
 
-    public Set<Set<String>> compressConfigurations();
+  T compressConfigurations();
 
-    public Set<Set<String>> compressConfigurations(String[] args) throws IOException;
+  T compressConfigurations(String[] args) throws IOException;
 
-    public void writeToFile(Set<Set<String>> compressedConfigurations) throws IOException;
+  void writeToFile(T compressedConfigurations) throws IOException;
 
-    public Set<Set<String>> readFromFile(File file) throws IOException;
+  T readFromFile(File file) throws IOException;
 
-    public String getOutputDir();
+  String getOutputDir();
 
 }

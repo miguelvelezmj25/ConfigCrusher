@@ -1,24 +1,20 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
-import java.io.BufferedReader;
-import java.io.File;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
+  // TODO move to options
   public static final String USER_HOME = System.getProperty("user.home");
   public static final String PATH_SEPARATOR = System.getProperty("path.separator");
+  public static final String CONFIGCRUSHER_CLASS_PATH = "./target/classes";
 
-  private static final String CONFIGCRUSHER = "./target/classes";
   //  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
   //  private static final String CLASS_CONTAINER = "target/classes/";
   private static final String JACKSON_PATH =
@@ -88,18 +84,22 @@ public abstract class BaseAdapter implements Adapter {
     return sleepConfiguration;
   }
 
+  @Override
   public String getProgramName() {
     return programName;
   }
 
+  @Override
   public String getMainClass() {
     return mainClass;
   }
 
+  @Override
   public String getDirectory() {
     return directory;
   }
 
+  @Override
   public List<String> getOptions() {
     return options;
   }
@@ -116,51 +116,14 @@ public abstract class BaseAdapter implements Adapter {
     String[] command = this.buildCommand(commandList);
     Process process = Runtime.getRuntime().exec(command);
 
-    this.processOutput(process);
-    System.out.println();
-    this.processError(process);
-    System.out.println();
+    Helper.processOutput(process);
+    Helper.processError(process);
 
     process.waitFor();
 
     //    if (!output.toString().isEmpty()) {
     //      throw new IOException();
     //    }
-  }
-
-  private void processError(Process process) throws IOException {
-    System.out.println("Errors: ");
-    //    output = new StringBuilder();
-    BufferedReader errorReader =
-        new BufferedReader(new InputStreamReader(process.getErrorStream()));
-    String string;
-
-    while ((string = errorReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-        //        output.append(string).append("\n");
-      }
-    }
-
-    //    System.out.println(output);
-  }
-
-  private void processOutput(Process process) throws IOException {
-    System.out.println("Output: ");
-    BufferedReader inputReader =
-        new BufferedReader(new InputStreamReader(process.getInputStream()));
-    String string;
-
-    //    StringBuilder output = new StringBuilder();
-
-    while ((string = inputReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-        //        output.append(string).append("\n");
-      }
-    }
-
-    //    System.out.println(output);
   }
 
   private String[] buildCommand(List<String> commandList) {
@@ -177,13 +140,14 @@ public abstract class BaseAdapter implements Adapter {
     commandList.add("-Xms10G");
     commandList.add("-Xmx10G");
     commandList.add("-XX:+UseConcMarkSweepGC");
+//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
     //        commandList.add(this.directory + BaseAdapter.PATH_SEPARATOR + BaseAdapter.CLASS_CONTAINER + BaseAdapter.PATH_SEPARATOR +
     // BaseAdapter.JACKSON_PATH + BaseAdapter.PATH_SEPARATOR + cp.toString());
     commandList.add(
         this.directory
             + BaseAdapter.PATH_SEPARATOR
-            + BaseAdapter.CONFIGCRUSHER
+            + BaseAdapter.CONFIGCRUSHER_CLASS_PATH
             + BaseAdapter.PATH_SEPARATOR
             //            + BaseAdapter.CLASS_CONTAINER
             //            + BaseAdapter.PATH_SEPARATOR
@@ -198,22 +162,22 @@ public abstract class BaseAdapter implements Adapter {
     return commandList;
   }
 
-  private String getMVNLocalRepoAsClassPath() {
-    Collection<File> m2Files = getM2Files();
-    StringBuilder m2FilesAsClassPath = new StringBuilder();
-
-    for (File jarFile : m2Files) {
-      m2FilesAsClassPath.append(jarFile);
-      m2FilesAsClassPath.append(BaseAdapter.PATH_SEPARATOR);
-    }
-
-    m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);
-
-    return m2FilesAsClassPath.toString();
-  }
-
-  private Collection<File> getM2Files() {
-    File m2Dir = new File(CompileInstrumenter.M2_DIR);
-    return FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
-  }
+//  private String getMVNLocalRepoAsClassPath() {
+//    Collection<File> m2Files = getM2Files();
+//    StringBuilder m2FilesAsClassPath = new StringBuilder();
+//
+//    for (File jarFile : m2Files) {
+//      m2FilesAsClassPath.append(jarFile);
+//      m2FilesAsClassPath.append(BaseAdapter.PATH_SEPARATOR);
+//    }
+//
+//    m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);
+//
+//    return m2FilesAsClassPath.toString();
+//  }
+//
+//  private Collection<File> getM2Files() {
+//    File m2Dir = new File(CompileInstrumenter.M2_DIR);
+//    return FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
+//  }
 }

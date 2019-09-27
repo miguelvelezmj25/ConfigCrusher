@@ -1,0 +1,17 @@
+digraph isOverBudget {
+node [shape=record];
+1988534588 [label="L0\lLINENUMBER 51 L0\lLDC \"70eafede-e474-489c-9030-c857f9c1fcca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lL1\lLINENUMBER 52 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getMaxMemory ()J\lLCMP\lIFLE L2\l"];
+1840826999 [label="L2\lFRAME SAME\lICONST_0\l"];
+1941114746 [label="ICONST_1\lGOTO L3\l"];
+1178953317 [label="L3\lLINENUMBER 51 L3\lFRAME SAME1 I\lLDC \"70eafede-e474-489c-9030-c857f9c1fcca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1988534588;
+1988534588 -> 1840826999;
+1988534588 -> 1941114746;
+1840826999 -> 1178953317;
+1941114746 -> 1178953317;
+1178953317 -> exit;
+1988534588[fontcolor="purple", penwidth=3, color="purple"];
+1178953317[fontcolor="purple", penwidth=3, color="purple"];
+}

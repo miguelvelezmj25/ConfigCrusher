@@ -258,7 +258,7 @@ public class JavaPipeline {
         }
 
         String[] args = new String[0];
-        Compression compression = new SimpleCompression(programName);
+        Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
         Set<Set<String>> measuredConfigurations = compression.compressConfigurations(args);
         // TODO
         Set<String> options = null;

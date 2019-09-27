@@ -1,0 +1,42 @@
+[
+  {
+    "subtrace": "2089c210-b570-4f56-940d-b777cdec61f3",
+    "valuesToConfigs": {
+      "TRUE": [
+        [
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "FALSE": [
+        [],
+        [
+          "B"
+        ]
+      ]
+    }
+  },
+  {
+    "subtrace": "7817e459-2799-450e-b080-d8f5427a0be8",
+    "valuesToConfigs": {
+      "TRUE": [
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "FALSE": [
+        [],
+        [
+          "A"
+        ]
+      ]
+    }
+  }
+]

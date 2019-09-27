@@ -1,0 +1,5 @@
+measured,configuration,performance,std
+true,"[]",0.001,0.0
+false,"[A]",1.004,0.0
+false,"[B]",2.002,0.0
+true,"[A, B]",3.005,0.0

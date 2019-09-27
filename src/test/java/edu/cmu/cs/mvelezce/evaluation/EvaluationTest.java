@@ -18,7 +18,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.SPLatDelay;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.execute.SPLatDelayExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.RegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -36,7 +36,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziMain;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
@@ -49,8 +48,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExamp
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortMain;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
@@ -895,11 +894,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1163,11 +1162,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1653,11 +1652,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1923,11 +1922,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2198,11 +2197,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2452,11 +2451,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2900,11 +2899,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3155,11 +3154,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3199,11 +3198,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3234,11 +3233,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3312,11 +3311,11 @@ public class EvaluationTest {
     // arguments
     String[] args = new String[0];
 
-    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
     instrumenter.instrument(args);
-    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3494,23 +3493,13 @@ public class EvaluationTest {
     this.analyzeGroundTruth(BerkeleyMain.PROGRAM_NAME);
   }
 
-  @Test
-  public void luceneGroundTruth() throws IOException, InterruptedException {
-    this.analyzeGroundTruth(LuceneMain.PROGRAM_NAME);
-  }
-
-  @Test
-  public void luceneGroundTruthSamplingTime() throws IOException {
-    this.analyzeGroundTruthSamplingTime(LuceneMain.PROGRAM_NAME);
-  }
-
   private void analyzeGroundTruthSamplingTime(String programName) throws IOException {
     Evaluation eval = new Evaluation(programName);
     double samplingTime = eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH);
     Evaluation.prettyPrintTime(samplingTime);
   }
 
-  private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
+  protected void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
     // arguments
     String[] args = new String[0];
 

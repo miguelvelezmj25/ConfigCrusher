@@ -1,17 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley;
 
-import com.sleepycat.analysis.Run;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+// import com.sleepycat.analysis.Run;
+
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
+
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -48,38 +44,40 @@ public class BerkeleyMain extends BaseMain {
 
   @Override
   public void execute(String mainClass, String[] args) {
-    if (!mainClass.contains("Run")) {
-      throw new RuntimeException(
-          "Could not find the main class " + mainClass + " to execute with berkeley db");
-    }
-
-    try {
-      BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(PROGRAM_NAME);
-      instrumenter.instrument(args);
-      Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
-
-      for (JavaRegion region : regions) {
-        Regions.regionsToOverhead.put(region.getRegionID(), 0L);
-      }
-
-      Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
-    } catch (InvocationTargetException
-        | NoSuchMethodException
-        | IOException
-        | IllegalAccessException
-        | InterruptedException e) {
-      throw new RuntimeException("Could not add regions to the Regions class");
-    }
-
-    Region program = new Region(Regions.PROGRAM_REGION_ID);
-
-    try {
-      Regions.enter(program.getRegionID());
-      Run.main(args);
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      Regions.exit(program.getRegionID());
-    }
+    throw new UnsupportedOperationException("Implement");
+    //    if (!mainClass.contains("Run")) {
+    //      throw new RuntimeException(
+    //          "Could not find the main class " + mainClass + " to execute with berkeley db");
+    //    }
+    //
+    //    try {
+    //      BaseRegionInstrumenter instrumenter = new
+    // ConfigCrusherTimerRegionInstrumenter(PROGRAM_NAME);
+    //      instrumenter.instrument(args);
+    //      Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+    //
+    //      for (JavaRegion region : regions) {
+    //        Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+    //      }
+    //
+    //      Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
+    //    } catch (InvocationTargetException
+    //        | NoSuchMethodException
+    //        | IOException
+    //        | IllegalAccessException
+    //        | InterruptedException e) {
+    //      throw new RuntimeException("Could not add regions to the Regions class");
+    //    }
+    //
+    //    Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
+    //
+    //    try {
+    //      Regions.enter(program.getRegionID());
+    //      Run.main(args);
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //    } finally {
+    //      Regions.exit(program.getRegionID());
+    //    }
   }
 }

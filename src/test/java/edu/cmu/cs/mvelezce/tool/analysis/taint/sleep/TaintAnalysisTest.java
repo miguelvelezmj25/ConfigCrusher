@@ -456,8 +456,8 @@ public class TaintAnalysisTest {
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
 //
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(program);
+//        CFGBuilder build = new CFGBuilder();
+//        CFG cfg = build.buildCFG(program);
 //
 //        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 //        System.out.println(instructionsToTainted);

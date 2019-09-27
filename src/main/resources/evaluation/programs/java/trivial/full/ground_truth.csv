@@ -1,0 +1,5 @@
+measured,configuration,performance,std,minci,maxci
+true,"[A]",1.004,0,0,0
+true,"[]",0.001,0,0,0
+true,"[A, B]",3.002,0,0,0
+true,"[B]",2.003,0,0,0

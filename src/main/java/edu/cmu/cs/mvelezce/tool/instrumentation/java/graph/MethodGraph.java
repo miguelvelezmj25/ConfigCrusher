@@ -1,9 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import javax.annotation.Nullable;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
 import java.util.*;
-
+// TODO check this class for the algorithms and returning null
 /**
  * Created by mvelezce on 5/3/17.
  */
@@ -36,7 +37,7 @@ public class MethodGraph {
         from.addSuccessor(to);
         to.addPredecessor(from);
     }
-
+// TODO expensive
     public void calculateDominators() {
         for(MethodBlock block : this.blocks.values()) {
             this.blocksToDominators.put(block, new HashSet<>(this.blocks.values()));
@@ -87,9 +88,9 @@ public class MethodGraph {
         return this.blocksToDominators;
     }
 
+    @Nullable
     public MethodBlock getImmediateDominator(MethodBlock start) {
 //        System.out.println(this.toDotString("reverse"));
-
         this.getDominators();
         Set<MethodBlock> dominators = new HashSet<>(this.blocksToDominators.get(start));
         dominators.remove(start);
@@ -188,7 +189,7 @@ public class MethodGraph {
         while(!queue.isEmpty()) {
             MethodBlock currentBlock = queue.poll();
 
-            if(currentBlock == end) {
+            if(currentBlock.equals(end)) {
                 continue;
             }
 
@@ -313,6 +314,8 @@ public class MethodGraph {
         return this.blocks.get(ID);
     }
 
+    // TODO added this annotation and need to make sure (1) it is correct to add it and (2) callers handle null
+    @Nullable
     public MethodBlock getMethodBlock(AbstractInsnNode insnNode) {
         return this.getMethodBlock(MethodBlock.asID(insnNode));
     }

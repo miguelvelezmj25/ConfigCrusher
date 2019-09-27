@@ -1,0 +1,23 @@
+{
+  "missingConstraint": "(!DUPLICATES && SEQUENTIAL)",
+  "controlFlowStatements": [
+    {
+      "statement": "com/sleepycat/je/tree/INKeyRep$Default.compareSuffixes([BIIIZ)I.1"
+    },
+    {
+      "statement": "com/sleepycat/je/tree/INKeyRep$Default.compareSuffixes([BIIIZ)I.0"
+    },
+    {
+      "statement": "com/sleepycat/je/tree/INKeyRep$Default.compareKeys([B[BIZLjava/util/Comparator;)I.0"
+    },
+    {
+      "statement": "com/sleepycat/je/tree/INKeyRep$Default.compareKeys([B[BIZLjava/util/Comparator;)I.1"
+    },
+    {
+      "statement": "com/sleepycat/je/tree/Key.compareUnsignedBytes([BII[BII)I.0"
+    },
+    {
+      "statement": "com/sleepycat/je/tree/Key.compareUnsignedBytes([BII[BII)I.1"
+    }
+  ]
+}

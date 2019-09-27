@@ -1,17 +1,19 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
+
 public interface MethodGraphBuilder {
 
-    public MethodGraph build();
+  MethodGraph build(MethodNode methodNode);
 
-    public void addEdges();
+  void addEdges(MethodGraph graph, MethodNode methodNode);
 
-    public void getBlocks();
+  void addBlocks(MethodGraph graph, MethodNode methodNode);
 
-    public void addInstructions();
+  void addInstructions(MethodGraph graph, MethodNode methodNode);
 
-    public void connectEntryNode();
+  void connectEntryNode(MethodGraph graph, MethodNode methodNode);
 
-    public void connectExitNode();
+  void connectExitNode(MethodGraph graph, MethodNode methodNode);
 
 }

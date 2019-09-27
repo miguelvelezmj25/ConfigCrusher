@@ -1,0 +1,8 @@
+{
+  "missingConstraint": "((JECACHESIZE && ((SHAREDCACHE && REPLICATED && !SEQUENTIAL && DUPLICATES) || (!SHAREDCACHE && REPLICATED && !SEQUENTIAL && !DUPLICATES))) || (DUPLICATES && ((SHAREDCACHE && !REPLICATED && SEQUENTIAL) || (SHAREDCACHE && REPLICATED && !SEQUENTIAL)) && !JECACHESIZE))",
+  "controlFlowStatements": [
+    {
+      "statement": "com/sleepycat/je/utilint/LongMaxStat.setMax(J)Z.0"
+    }
+  ]
+}

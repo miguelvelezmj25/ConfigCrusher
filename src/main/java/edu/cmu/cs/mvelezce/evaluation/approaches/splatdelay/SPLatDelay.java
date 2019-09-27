@@ -68,7 +68,7 @@ public class SPLatDelay extends Approach {
 
     public Set<Set<String>> getSPLatDelayConfigurations() {
         String[] args = new String[0];
-        Compression compressor = new SPLatDelayCompression(this.getProgramName());
+        Compression<Set<Set<String>>> compressor = new SPLatDelayCompression(this.getProgramName());
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         try {

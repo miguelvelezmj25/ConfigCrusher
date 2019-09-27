@@ -20,6 +20,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExamp
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
@@ -127,6 +128,9 @@ public class ConfigCrusherExecutor extends BaseExecutor {
         else if(this.getProgramName().contains("email")) {
             adapter = new EmailAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
+        else if(this.getProgramName().contains(TrivialAdapter.PROGRAM_NAME)) {
+            adapter = new TrivialAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
         }
@@ -145,8 +149,7 @@ public class ConfigCrusherExecutor extends BaseExecutor {
             throw new RuntimeException("The output file could not be found " + outputDir);
         }
 
-        Set<DefaultPerformanceEntry> performanceEntries = this.aggregateExecutions(outputFile);
-        return performanceEntries;
+        return this.aggregateExecutions(outputFile);
     }
 
     @Override

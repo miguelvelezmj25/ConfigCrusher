@@ -1,52 +1,64 @@
 package edu.cmu.cs.mvelezce.tool;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import org.apache.commons.math3.util.Combinations;
 
-import java.util.*;
-
-// TODO what is this class helping for?
-
 /**
- * Incling class for performing analyses.
+ * Helping class for performing analyses.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
  */
 public class Helper {
 
-    /**
-     * Get all combinations of the specified parameters.
-     *
-     * @param parameters
-     * @return
-     */
-    public static Set<Set<String>> getConfigurations(Set<String> parameters) {
-        if(parameters == null) {
-            throw new IllegalArgumentException("The parameters cannot be null");
-        }
-
-        List<String> parametersList = new ArrayList<>(parameters);
-        Set<Set<String>> configurations = new HashSet<>();
-        int configurationMaxLength = parameters.size();
-
-        for(int i = 1; i <= configurationMaxLength; i++) {
-            Combinations combinations = new Combinations(configurationMaxLength, i);
-
-            for(int[] combination : combinations) {
-                Set<String> configuration = new HashSet<>();
-
-                for(int element : combination) {
-                    configuration.add(parametersList.get(element));
-                }
-
-                configurations.add(configuration);
-            }
-
-        }
-
-        configurations.add(new HashSet<>());
-        return configurations;
+  /**
+   * Get all combinations of the specified options.
+   */
+  public static Set<Set<String>> getConfigurations(Collection<String> options) {
+    if (options == null) {
+      throw new IllegalArgumentException("The options passed cannot be null");
     }
+
+    Set<Set<String>> configs = new HashSet<>(Helper.getCombinations(options));
+    configs.add(new HashSet<>());
+
+    return configs;
+  }
+
+  public static Set<Set<String>> getCombinations(Collection<String> options) {
+    if (options == null) {
+      throw new IllegalArgumentException("The options passed cannot be null");
+    }
+
+    List<String> optionsList = new ArrayList<>(options);
+    Set<Set<String>> combos = new HashSet<>();
+    int comboMaxLength = options.size();
+
+    for (int i = 1; i <= comboMaxLength; i++) {
+      Combinations currentCombos = new Combinations(comboMaxLength, i);
+
+      for (int[] currentCombo : currentCombos) {
+        Set<String> combo = new HashSet<>();
+
+        for (int element : currentCombo) {
+          combo.add(optionsList.get(element));
+        }
+
+        combos.add(combo);
+      }
+
+    }
+
+    return combos;
+  }
 
 //    public static void removeSampledConfigurations(String name, Set<Set<String>> configurations) throws IOException, InterruptedException {
 //        // arguments
@@ -60,44 +72,79 @@ public class Helper {
 //        }
 //    }
 
-    public static Set<Set<String>> getRandomConfigs(List<String> options, int size, Set<Set<String>> excludeConfigs) {
-        Set<Set<String>> configs = new HashSet<>(size);
-        int length = options.size();
+  public static Set<Set<String>> getRandomConfigs(List<String> options, int size,
+      Set<Set<String>> excludeConfigs) {
+    Set<Set<String>> configs = new HashSet<>(size);
+    int length = options.size();
 
-        Random numOfOpts = new Random();
+    Random numOfOpts = new Random();
 
-        while(configs.size() < size) {
-            int num = numOfOpts.nextInt(length + 1);
-            Set<String> config = new HashSet<>(num);
-            Random opts = new Random();
+    while (configs.size() < size) {
+      int num = numOfOpts.nextInt(length + 1);
+      Set<String> config = new HashSet<>(num);
+      Random opts = new Random();
 
-            while(config.size() < num) {
-                int index = opts.nextInt(length);
-                String opt = options.get(index);
+      while (config.size() < num) {
+        int index = opts.nextInt(length);
+        String opt = options.get(index);
+        config.add(opt);
+      }
 
-                if(!config.contains(opt)) {
-                    config.add(opt);
-                }
-            }
-
-            if(!configs.contains(config) && !excludeConfigs.contains(config)) {
-                configs.add(config);
-            }
-        }
-
-        return configs;
+      if (!configs.contains(config) && !excludeConfigs.contains(config)) {
+        configs.add(config);
+      }
     }
 
-    public static Set<Set<String>> mergeConfigs(Set<Set<String>> configs1, Set<Set<String>> configs2) {
-        Set<Set<String>> configs = new HashSet<>(configs1);
+    return configs;
+  }
 
-        for(Set<String> config : configs2) {
-            if(!configs.contains(config)) {
-                configs.add(config);
-            }
-        }
+  public static Set<Set<String>> mergeConfigs(Set<Set<String>> configs1,
+      Set<Set<String>> configs2) {
+    Set<Set<String>> configs = new HashSet<>(configs1);
+    configs.addAll(configs2);
 
-        return configs;
+    return configs;
+  }
+
+  public static void processOutput(Process process) throws IOException {
+    System.out.println("Output: ");
+    BufferedReader inputReader =
+        new BufferedReader(new InputStreamReader(process.getInputStream()));
+    String string;
+
+    while ((string = inputReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+      }
     }
+
+    System.out.println();
+  }
+
+  public static void processError(Process process) throws IOException {
+    StringBuilder stringBuilder = new StringBuilder();
+    System.out.println("Errors: ");
+    BufferedReader errorReader =
+        new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    String string;
+
+    while ((string = errorReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        stringBuilder.append(string);
+        System.out.println(string);
+      }
+    }
+
+    if(stringBuilder.length() != 0) {
+      String potentialErrors = stringBuilder.toString();
+      potentialErrors = potentialErrors.toLowerCase();
+
+      if(potentialErrors.contains("error") || potentialErrors.contains("exception")) {
+        throw new RuntimeException("There was an error in the application code");
+      }
+    }
+
+    System.out.println();
+  }
 
 }

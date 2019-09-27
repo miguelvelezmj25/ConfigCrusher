@@ -10,7 +10,7 @@ import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -46,7 +46,7 @@ public class ConfigCrusher {
         Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
 
         Set<Set<String>> options = BaseCompression.expandOptions(javaRegionsToOptionSet.values());
-        Compression compressor = new SimpleCompression(this.programName, options);
+        Compression<Set<Set<String>>> compressor = new SimpleCompression(this.programName, options);
         Set<Set<String>> configurations = compressor.compressConfigurations(args);
         System.out.println("Configurations to sample: " + configurations.size());
 
@@ -65,7 +65,7 @@ public class ConfigCrusher {
 
     public void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(this.srcDir, this.classDir);
-        compiler.compileFromSource();
+        compiler.compile();
     }
 
     public void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {

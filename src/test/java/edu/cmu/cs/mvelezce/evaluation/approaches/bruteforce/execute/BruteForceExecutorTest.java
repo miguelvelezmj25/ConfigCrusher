@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -15,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -316,7 +316,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
     System.out.println("Configurations to sample: " + configurations.size());
@@ -343,7 +343,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
     System.out.println("Configurations to sample: " + configurations.size());
@@ -495,7 +495,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -547,5 +547,26 @@ public class BruteForceExecutorTest {
     Executor executor =
         new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
     Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+  }
+
+  @Test
+  public void trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    String classDirectory = TrivialAdapter.ORIGINAL_CLASS_PATH;
+    String entryPoint = TrivialAdapter.MAIN_CLASS;
+
+    Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+    Set<Set<String>> configurations =
+        BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    System.out.println("Configurations to sample: " + configurations.size());
+    Executor executor =
+        new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+
+    String[] args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i2";
+
+    executor.execute(args);
   }
 }

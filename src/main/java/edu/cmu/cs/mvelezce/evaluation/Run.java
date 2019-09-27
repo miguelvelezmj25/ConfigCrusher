@@ -27,7 +27,7 @@ public class Run {
         args = new String[0];
 
 
-        Compression compression = new SimpleCompression(programName);
+        Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
         Set<Set<String>> ccConfigs = compression.compressConfigurations(args);
 
         List<String> options = DensityAdapter.getDensityOptions();

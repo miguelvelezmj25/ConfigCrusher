@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,138 +8,189 @@ import java.util.Set;
  * Created by mvelezce on 4/19/17.
  */
 public class JavaRegion extends Region {
-    private String regionPackage = "";
-    private String regionClass = "";
-    private String regionMethod = "";
+
+  private final String regionPackage;
+  private final String regionClass;
+  private final String regionMethod;
+
+  private int startRegionIndex;
+  private String startBlockID;
+  private Set<String> endBlocksIDs;
+  private MethodBlock startMethodBlock;
+  private Set<MethodBlock> endMethodBlocks;
+
+  // Needed for saving and reading regions in json
+  private JavaRegion() {
+    this.regionPackage = "";
+    this.regionClass = "";
+    this.regionMethod = "";
+  }
+
+  private JavaRegion(Builder builder) {
+    super(builder);
+    this.regionPackage = builder.regionPackage;
+    this.regionClass = builder.regionClass;
+    this.regionMethod = builder.regionMethod;
+    this.startRegionIndex = builder.startBytecodeIndex;
+    this.startMethodBlock = builder.startMethodBlock;
+    this.endMethodBlocks = builder.endMethodBlocks;
+    this.startBlockID = builder.startBlockID;
+    this.endBlocksIDs = builder.endBlocksIDs;
+  }
+
+//  // TODO this implementation might brake the implementation in other CC components since they are
+  // saved in sets or maps, but the state changes, so the hashcode does not match anymore.
+//  @Override
+//  public boolean equals(Object o) {
+//    if (this == o) {
+//      return true;
+//    }
+//    if (o == null || getClass() != o.getClass()) {
+//      return false;
+//    }
+//
+//    JavaRegion that = (JavaRegion) o;
+//
+//    if (startRegionIndex != that.startRegionIndex) {
+//      return false;
+//    }
+//
+//    if (!regionPackage.equals(that.regionPackage)) {
+//      return false;
+//    }
+//
+//    if (!regionClass.equals(that.regionClass)) {
+//      return false;
+//    }
+//
+//    return regionMethod.equals(that.regionMethod);
+//  }
+//
+//  // TODO this implementation might brake the implementation in other CC components
+//  @Override
+//  public int hashCode() {
+//    int result = regionPackage.hashCode();
+//    result = 31 * result + regionClass.hashCode();
+//    result = 31 * result + regionMethod.hashCode();
+//    result = 31 * result + startRegionIndex;
+//    return result;
+//  }
+
+  public String getRegionPackage() {
+    return this.regionPackage;
+  }
+
+  public String getRegionClass() {
+    return this.regionClass;
+  }
+
+  public String getRegionMethod() {
+    return this.regionMethod;
+  }
+
+  public int getStartRegionIndex() {
+    return this.startRegionIndex;
+  }
+
+  public MethodBlock getStartMethodBlock() {
+    return this.startMethodBlock;
+  }
+
+  public Set<MethodBlock> getEndMethodBlocks() {
+    return endMethodBlocks;
+  }
+
+  public String getStartBlockID() {
+    return startBlockID;
+  }
+
+  public Set<String> getEndBlocksIDs() {
+    return endBlocksIDs;
+  }
+
+  public void setStartBlockID(String startBlockID) {
+    this.startBlockID = startBlockID;
+  }
+
+  public void setEndBlocksIDs(Set<String> endBlocksIDs) {
+    this.endBlocksIDs = endBlocksIDs;
+  }
+
+  public void setStartRegionIndex(int startRegionIndex) {
+    this.startRegionIndex = startRegionIndex;
+  }
+
+  public void setStartMethodBlock(MethodBlock startMethodBlock) {
+    this.startMethodBlock = startMethodBlock;
+  }
+
+  public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
+    this.endMethodBlocks = endMethodBlocks;
+  }
+
+  @Override
+  public String toString() {
+    return "JavaRegion{" +
+        "regionPackage='" + this.regionPackage + '\'' +
+        ", regionClass='" + this.regionClass + '\'' +
+        ", regionMethod='" + this.regionMethod + '\'' +
+        ", startRegionIndex=" + this.startRegionIndex +
+        '}';
+  }
+
+  public static class Builder extends Region.Builder {
+
+    private final String regionPackage;
+    private final String regionClass;
+    private final String regionMethod;
+
     private int startBytecodeIndex = Integer.MIN_VALUE;
-    //    private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
     private String startBlockID = "";
     private Set<String> endBlocksIDs = new HashSet<>();
 
-    private JavaRegion() {
-        ;
+    public Builder(String regionID, String regionPackage, String regionClass, String regionMethod) {
+      super(regionID);
+      this.regionPackage = regionPackage;
+      this.regionClass = regionClass;
+      this.regionMethod = regionMethod;
     }
 
-    public JavaRegion(String regionClass, String regionMethod) {
-        this.regionClass = regionClass;
-        this.regionMethod = regionMethod;
+    public Builder(String regionPackage, String regionClass, String regionMethod) {
+      this.regionPackage = regionPackage;
+      this.regionClass = regionClass;
+      this.regionMethod = regionMethod;
     }
 
-    public JavaRegion(String regionPackage, String regionClass, String regionMethod) {
-        this(regionClass, regionMethod);
-        this.regionPackage = regionPackage;
+    public Builder startBytecodeIndex(int startBytecodeIndex) {
+      this.startBytecodeIndex = startBytecodeIndex;
+      return this;
     }
 
-    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex) {
-        this(regionPackage, regionClass, regionMethod);
-        this.startBytecodeIndex = startBytecodeIndex;
+    public Builder startMethodBlock(MethodBlock startMethodBlock) {
+      this.startMethodBlock = startMethodBlock;
+      return this;
     }
 
-//    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
-//        this(regionPackage, regionClass, regionMethod, startBytecodeIndex);
-//        this.endBytecodeIndex = endBytecodeIndex;
-//    }
-
-    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod) {
-        super(regionId);
-        this.regionPackage = regionPackage;
-        this.regionClass = regionClass;
-        this.regionMethod = regionMethod;
+    public Builder endMethodBlocks(Set<MethodBlock> endMethodBlocks) {
+      this.endMethodBlocks = endMethodBlocks;
+      return this;
     }
 
-    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex) {
-        super(regionId);
-        this.regionPackage = regionPackage;
-        this.regionClass = regionClass;
-        this.regionMethod = regionMethod;
-        this.startBytecodeIndex = startBytecodeIndex;
+    public Builder startBlockID(String startBlockID) {
+      this.startBlockID = startBlockID;
+      return this;
     }
 
-    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex,
-                      String startBlockID, Set<String> endBlocksIDs) {
-        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
-        this.startBlockID = startBlockID;
-        this.endBlocksIDs.addAll(endBlocksIDs);
-    }
-//    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
-//        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
-//        this.endBytecodeIndex = endBytecodeIndex;
-//    }
-
-    @Override
-    public String toString() {
-        return "JavaRegion{" +
-                "regionPackage='" + this.regionPackage + '\'' +
-                ", regionClass='" + this.regionClass + '\'' +
-                ", regionMethod='" + this.regionMethod + '\'' +
-                ", startBytecodeIndex=" + this.startBytecodeIndex +
-                '}';
+    public Builder endBlocksIDs(Set<String> endBlocksIDs) {
+      this.endBlocksIDs = endBlocksIDs;
+      return this;
     }
 
-    public String getRegionPackage() {
-        return this.regionPackage;
+    public JavaRegion build() {
+      return new JavaRegion(this);
     }
+  }
 
-    public String getRegionClass() {
-        return this.regionClass;
-    }
-
-    public String getRegionMethod() {
-        return this.regionMethod;
-    }
-
-    public int getStartBytecodeIndex() {
-        return this.startBytecodeIndex;
-    }
-
-//    public int getEndBytecodeIndex() { return this.endBytecodeIndex; }
-
-    public void setStartBytecodeIndex(int startBytecodeIndex) {
-        this.startBytecodeIndex = startBytecodeIndex;
-    }
-
-    public MethodBlock getStartMethodBlock() {
-        return this.startMethodBlock;
-    }
-
-    public void setStartMethodBlock(MethodBlock startMethodBlock) {
-        this.startMethodBlock = startMethodBlock;
-    }
-
-    public Set<MethodBlock> getEndMethodBlocks() {
-        return endMethodBlocks;
-    }
-
-//    public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
-
-    public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
-        this.endMethodBlocks = endMethodBlocks;
-    }
-
-//    public int getJavaLineNubmer() {
-//        return this.javaLineNubmer;
-//    }
-//
-//    public void setJavaLineNubmer(int javaLineNubmer) {
-//        this.javaLineNubmer = javaLineNubmer;
-//    }
-
-
-    public String getStartBlockID() {
-        return startBlockID;
-    }
-
-    public void setStartBlockID(String startBlockID) {
-        this.startBlockID = startBlockID;
-    }
-
-    public Set<String> getEndBlocksIDs() {
-        return endBlocksIDs;
-    }
-
-    public void setEndBlocksIDs(Set<String> endBlocksIDs) {
-        this.endBlocksIDs = endBlocksIDs;
-    }
 }

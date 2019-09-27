@@ -222,3 +222,8 @@ vignettes/*.pdf
 
 
 # End of https://www.gitignore.io/api/r
+/src/main/resources/analysis/spec/traces/java/programs/indexFiles/
+/src/main/resources/analysis/spec/analysisvalues/java/programs/indexFiles/
+/src/main/resources/analysis/spec/traces/labeled/java/programs/indexFiles/
+/src/main/resources/analysis/spec/traces/subtraceManager/java/programs/indexFiles/
+/src/main/resources/evaluation/dta/constraints/java/programs/subtraces/indexFiles/

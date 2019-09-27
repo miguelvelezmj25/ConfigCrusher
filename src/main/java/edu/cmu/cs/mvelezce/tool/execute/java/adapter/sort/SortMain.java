@@ -7,8 +7,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.ConfigCrusherTimerRegionInstrumenter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class SortMain extends BaseMain {
     try {
       BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("sort");
       instrumenter.instrument(args);
-      Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+      Set<JavaRegion> regions = instrumenter.getRegionsToData().keySet();
 
       for (JavaRegion region : regions) {
         Regions.regionsToOverhead.put(region.getRegionID(), 0L);
@@ -61,7 +61,7 @@ public class SortMain extends BaseMain {
     }
 
     if (mainClass.contains("Main")) {
-      Region program = new Region(Regions.PROGRAM_REGION_ID);
+      Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
       try {
         Regions.enter(program.getRegionID());
         org.unix4j.sort.Main.main(args);

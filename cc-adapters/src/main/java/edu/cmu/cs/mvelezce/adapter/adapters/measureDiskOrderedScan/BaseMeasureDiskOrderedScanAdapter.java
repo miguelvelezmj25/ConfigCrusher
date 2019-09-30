@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /** Berkeley DB */
-public abstract class AbstractMeasureDiskOrderedScanAdapter extends BaseAdapter {
+public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "MeasureDiskOrderedScan";
   public static final String MAIN_CLASS = "com.sleepycat.analysis.MeasureDiskOrderedScan";
@@ -32,17 +33,23 @@ public abstract class AbstractMeasureDiskOrderedScanAdapter extends BaseAdapter 
     "REPLICATED"
   };
 
-  public AbstractMeasureDiskOrderedScanAdapter() {
+  public BaseMeasureDiskOrderedScanAdapter() {
     // TODO check that we are passing empty string
     super(
-        AbstractMeasureDiskOrderedScanAdapter.PROGRAM_NAME,
-        AbstractMeasureDiskOrderedScanAdapter.MAIN_CLASS,
+        BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME,
+        BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS,
         "",
-        AbstractMeasureDiskOrderedScanAdapter.getListOfOptions());
+        BaseMeasureDiskOrderedScanAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
-    return Arrays.asList(AbstractMeasureDiskOrderedScanAdapter.OPTIONS);
+    return Arrays.asList(BaseMeasureDiskOrderedScanAdapter.OPTIONS);
+  }
+
+  @Override
+  public void execute(Set<String> configuration, int iteration)
+      throws IOException, InterruptedException {
+    throw new UnsupportedOperationException("Implement");
   }
 
   //  public void preProcess() {

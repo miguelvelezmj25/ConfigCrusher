@@ -10,7 +10,7 @@ public abstract class BaseAdapter implements Adapter {
   // TODO move to options
   public static final String USER_HOME = System.getProperty("user.home");
   public static final String PATH_SEPARATOR = System.getProperty("path.separator");
-  public static final String CONFIGCRUSHER_CLASS_PATH = "./target/classes";
+  public static final String CLASS_PATH = "./target/classes";
 
   //  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
   //  private static final String CLASS_CONTAINER = "target/classes/";
@@ -143,14 +143,14 @@ public abstract class BaseAdapter implements Adapter {
     // BaseAdapter.JACKSON_PATH + BaseAdapter.PATH_SEPARATOR + cp.toString());
     commandList.add(
         this.directory
-            + BaseAdapter.PATH_SEPARATOR
-            + BaseAdapter.CONFIGCRUSHER_CLASS_PATH
-            + BaseAdapter.PATH_SEPARATOR
-            //            + BaseAdapter.CLASS_CONTAINER
-            //            + BaseAdapter.PATH_SEPARATOR
-            + BaseAdapter.JACKSON_PATH
-            + BaseAdapter.PATH_SEPARATOR
-            + BaseAdapter.COMMONS_CLI);
+            + PATH_SEPARATOR
+            + CLASS_PATH
+            + PATH_SEPARATOR
+            //            + CLASS_CONTAINER
+            //            + PATH_SEPARATOR
+            + JACKSON_PATH
+            + PATH_SEPARATOR
+            + COMMONS_CLI);
     commandList.add(mainAdapter);
     commandList.add(this.programName);
     commandList.add(this.mainClass);

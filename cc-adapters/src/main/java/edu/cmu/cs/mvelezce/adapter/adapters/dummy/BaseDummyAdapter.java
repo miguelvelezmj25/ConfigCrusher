@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public abstract class AbstractDummyAdapter extends BaseAdapter {
+public class BaseDummyAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "dummy";
   private static final String MAIN_CLASS = "";
@@ -16,10 +16,9 @@ public abstract class AbstractDummyAdapter extends BaseAdapter {
   private static final String INSTRUMENTED_CLASS_PATH =
       "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
 
-  public AbstractDummyAdapter() {
+  public BaseDummyAdapter() {
     // TODO check that we are passing empty string
-    super(
-        AbstractDummyAdapter.PROGRAM_NAME, AbstractDummyAdapter.MAIN_CLASS, "", new ArrayList<>());
+    super(BaseDummyAdapter.PROGRAM_NAME, BaseDummyAdapter.MAIN_CLASS, "", new ArrayList<>());
   }
 
   // TODO abstract method in base adapter?

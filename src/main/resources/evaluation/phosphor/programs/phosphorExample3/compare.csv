@@ -1,3 +1,0 @@
-"Sink","BF Taints","BF Ctx","CC Taints","CC Ctx","Equal Taints","Equal Ctxs","Missing taints from CC","Missing taints from BF","Missing ctx from CC","Missing ctx from BF"
-"edu.cmu.cs.mvelezce.analysis.Example3.main([Ljava/lang/String;)V.1","[A=false, A=true]","[TRUE]","[A=false, A=true]","[TRUE]","true","true","[]","[]","[]","[]"
-"edu.cmu.cs.mvelezce.analysis.Example3.main([Ljava/lang/String;)V.2","[A=false, A=true]","[TRUE]","[A=false, A=true]","[TRUE]","true","true","[]","[]","[]","[]"

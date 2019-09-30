@@ -1,4 +1,0 @@
-"Sink","BF Taints","BF Ctx","CC Taints","CC Ctx","Equal Taints"," Equal Ctxs"
-"edu.cmu.cs.mvelezce.RunningExample.foo(Z)V.1","[B=false, B=true]","[A=true]","[B=false, B=true]","[A=true]","true","true"
-"edu.cmu.cs.mvelezce.RunningExample.main([Ljava/lang/String;)V.2","[A=false, A=true]","[TRUE]","[A=false, A=true]","[TRUE]","true","true"
-"edu.cmu.cs.mvelezce.RunningExample.main([Ljava/lang/String;)V.1","[A=false, A=true]","[TRUE]","[A=false, A=true]","[TRUE]","true","true"

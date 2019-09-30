@@ -1,5 +1,0 @@
-Constraints found by Phosphor A
-Constraints found by Phosphor B
-Constraints found by Phosphor !A
-Constraints found by Phosphor !B
-

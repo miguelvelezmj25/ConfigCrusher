@@ -295,6 +295,12 @@
             <version>2.10.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.bpodgursky</groupId>
+            <artifactId>jbool_expressions</artifactId>
+            <version>1.13</version>
+        </dependency>
     </dependencies>
 
     <repositories>

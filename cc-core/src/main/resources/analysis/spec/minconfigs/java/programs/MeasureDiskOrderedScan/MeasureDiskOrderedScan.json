@@ -1,0 +1,19 @@
+[
+  [
+    "DUPLICATES",
+    "SEQUENTIAL"
+  ],
+  [
+    "SHAREDCACHE",
+    "DUPLICATES"
+  ],
+  [
+    "JECACHESIZE",
+    "REPLICATED"
+  ],
+  [
+    "SHAREDCACHE",
+    "REPLICATED",
+    "SEQUENTIAL"
+  ]
+]

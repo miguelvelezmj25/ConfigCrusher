@@ -8,13 +8,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 108,
+      "startRegionIndex": 108,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -29,13 +29,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 249,
+      "startRegionIndex": 249,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -50,13 +50,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic",
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 263,
+      "startRegionIndex": 263,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "MINALPHA"
       ]
@@ -71,13 +71,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 269,
+      "startRegionIndex": 269,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -92,13 +92,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 174,
+      "startRegionIndex": 174,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -113,13 +113,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 162,
+      "startRegionIndex": 162,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -134,13 +134,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 690,
+      "startRegionIndex": 690,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "FREQTHRESHOLD",
         "TIMEOUT"
@@ -156,13 +156,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 164,
+      "startRegionIndex": 164,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -177,13 +177,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "Logger",
       "regionMethod": "debug(Ljava/lang/String;[Ljava/lang/Object;)V",
-      "startBytecodeIndex": 9,
+      "startRegionIndex": 9,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT",
         "LOGLEVEL"
@@ -199,13 +199,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 181,
+      "startRegionIndex": 181,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "DISTTHRESHOLD",
         "TIMEOUT"
@@ -221,13 +221,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "Logger",
       "regionMethod": "<init>(Ljava/lang/String;)V",
-      "startBytecodeIndex": 21,
+      "startRegionIndex": 21,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "LOGLEVEL"
       ]
@@ -242,13 +242,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic",
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 240,
+      "startRegionIndex": 240,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "FREQTHRESHOLD"
       ]
@@ -263,13 +263,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 294,
+      "startRegionIndex": 294,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -284,13 +284,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic",
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 217,
+      "startRegionIndex": 217,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "DISTTHRESHOLD"
       ]
@@ -305,13 +305,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 336,
+      "startRegionIndex": 336,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -326,13 +326,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 833,
+      "startRegionIndex": 833,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -347,13 +347,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 63,
+      "startRegionIndex": 63,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -368,13 +368,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 476,
+      "startRegionIndex": 476,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -389,13 +389,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "Logger",
       "regionMethod": "error(Ljava/lang/String;[Ljava/lang/Object;)V",
-      "startBytecodeIndex": 9,
+      "startRegionIndex": 9,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "LOGLEVEL"
       ]
@@ -410,13 +410,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 732,
+      "startRegionIndex": 732,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "FREQTHRESHOLD",
         "TIMEOUT"
@@ -432,13 +432,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 762,
+      "startRegionIndex": 762,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "FREQTHRESHOLD",
         "TIMEOUT"
@@ -454,13 +454,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 127,
+      "startRegionIndex": 127,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -475,13 +475,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic",
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 285,
+      "startRegionIndex": 285,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -496,13 +496,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 147,
+      "startRegionIndex": 147,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -517,13 +517,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 42,
+      "startRegionIndex": 42,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -538,13 +538,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "Logger",
       "regionMethod": "<init>(Ljava/lang/String;)V",
-      "startBytecodeIndex": 6,
+      "startRegionIndex": 6,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "LOGLEVEL"
       ]
@@ -559,13 +559,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 76,
+      "startRegionIndex": 76,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -580,13 +580,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 194,
+      "startRegionIndex": 194,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "DISTTHRESHOLD",
         "TIMEOUT"
@@ -602,13 +602,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 444,
+      "startRegionIndex": 444,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -623,13 +623,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic",
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 307,
+      "startRegionIndex": 307,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "LOGLEVEL"
       ]
@@ -644,13 +644,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 612,
+      "startRegionIndex": 612,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT",
         "MINALPHA"
@@ -666,13 +666,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 52,
+      "startRegionIndex": 52,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -687,13 +687,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngPixel",
       "regionMethod": "<init>(IIIIIZ)V",
-      "startBytecodeIndex": 10,
+      "startRegionIndex": 10,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -708,13 +708,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 65,
+      "startRegionIndex": 65,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]
@@ -729,13 +729,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 589,
+      "startRegionIndex": 589,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT",
         "MINALPHA"
@@ -751,13 +751,13 @@
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 31,
+      "startRegionIndex": 31,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "TIMEOUT"
       ]

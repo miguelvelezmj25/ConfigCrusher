@@ -1,0 +1,41 @@
+[
+  {
+    "config": [],
+    "trace": [
+      "c02fc2df-ed0f-443f-81cc-ad6ac6f293dd",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A"
+    ],
+    "trace": [
+      "c02fc2df-ed0f-443f-81cc-ad6ac6f293dd",
+      "TRUE",
+      "54168d9d-f008-4704-90a1-04f2c2d26e5a",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "B"
+    ],
+    "trace": [
+      "c02fc2df-ed0f-443f-81cc-ad6ac6f293dd",
+      "FALSE"
+    ]
+  },
+  {
+    "config": [
+      "A",
+      "B"
+    ],
+    "trace": [
+      "c02fc2df-ed0f-443f-81cc-ad6ac6f293dd",
+      "TRUE",
+      "54168d9d-f008-4704-90a1-04f2c2d26e5a",
+      "TRUE"
+    ]
+  }
+]

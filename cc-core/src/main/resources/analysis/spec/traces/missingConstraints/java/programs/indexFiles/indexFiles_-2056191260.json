@@ -1,0 +1,8 @@
+{
+  "missingConstraint": "((READER_POOLING && ((COMMIT_ON_CLOSE && !CHECK_PENDING_FLUSH_UPDATE && MERGE_SCHEDULER) || (COMMIT_ON_CLOSE && CHECK_PENDING_FLUSH_UPDATE && !MERGE_SCHEDULER))) || (MERGE_SCHEDULER && CHECK_PENDING_FLUSH_UPDATE && !READER_POOLING))",
+  "controlFlowStatements": [
+    {
+      "statement": "org/apache/lucene/core/util/FutureArrays.equals([BII[BII)Z.0"
+    }
+  ]
+}

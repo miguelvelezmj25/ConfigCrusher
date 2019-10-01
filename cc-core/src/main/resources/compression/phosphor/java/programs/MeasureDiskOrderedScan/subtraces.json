@@ -1,0 +1,54 @@
+[
+  [
+    "DUPLICATES",
+    "SEQUENTIAL",
+  ],
+  [
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "JECACHESIZE",
+    "SHAREDCACHE"
+  ],
+  [
+    "DUPLICATES"
+  ],
+  [
+    "DUPLICATES",
+    "JECACHESIZE",
+    "SHAREDCACHE"
+  ],
+  [
+    "DUPLICATES",
+    "SHAREDCACHE"
+  ],
+  [
+    "DUPLICATES",
+    "JECACHESIZE"
+  ],
+  [
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "SHAREDCACHE"
+  ],
+  [
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "JECACHESIZE"
+  ],
+
+  [
+    "JECACHESIZE",
+    "SHAREDCACHE"
+  ],
+  [
+
+  ],
+  [
+    "SHAREDCACHE",
+    "REPLICATED"
+  ],
+  [
+    "JECACHESIZE",
+    "REPLICATED"
+  ]
+]

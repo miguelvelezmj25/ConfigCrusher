@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.instrument.region;
+package edu.cmu.cs.mvelezce.instrument.region.instrumenter;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrumenter.instrument.BaseInstrumenter;

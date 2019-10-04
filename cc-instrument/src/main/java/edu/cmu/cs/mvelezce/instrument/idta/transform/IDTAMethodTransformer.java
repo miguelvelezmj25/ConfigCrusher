@@ -2,22 +2,19 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
-import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.utils.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTAMethodTransformer extends BaseMethodTransformer {
-
-  private final Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints;
+public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
@@ -26,9 +23,9 @@ public class IDTAMethodTransformer extends BaseMethodTransformer {
         builder.programName,
         new DefaultClassTransformer(builder.classDir),
         builder.mainClass,
-        builder.debug);
-
-    this.regionsToConstraints = builder.regionsToConstraints;
+        builder.debug,
+        builder.regionsToConstraints,
+        new DynamicInstructionRegionMatcher());
   }
 
   @Override
@@ -37,25 +34,9 @@ public class IDTAMethodTransformer extends BaseMethodTransformer {
   }
 
   @Override
-  public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
-    Set<MethodNode> methodsToInstrument = new HashSet<>();
-    Set<JavaRegion> regions = this.regionsToConstraints.keySet();
-
-    if (InstrumenterUtils.getRegionsInClass(classNode, regions).isEmpty()) {
-      return methodsToInstrument;
-    }
-
-    for (MethodNode methodNode : classNode.methods) {
-      if (!InstrumenterUtils.getRegionsInMethod(methodNode, classNode, regions).isEmpty()) {
-        methodsToInstrument.add(methodNode);
-      }
-    }
-
-    return methodsToInstrument;
-  }
-
-  @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
+    super.transformMethod(methodNode, classNode);
+
     methodNode.visitMaxs(200, 200);
   }
 

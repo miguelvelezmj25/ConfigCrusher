@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.BaseMethodTransformer;
+import edu.cmu.cs.mvelezce.utils.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -32,7 +33,7 @@ public class IDTAMethodTransformer extends BaseMethodTransformer {
 
   @Override
   protected String getDebugDir() {
-    throw new UnsupportedOperationException("Determine output dir");
+    return Options.DIRECTORY + "/instrument/idta/java/programs";
   }
 
   @Override
@@ -55,7 +56,7 @@ public class IDTAMethodTransformer extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    throw new UnsupportedOperationException("Now transform the method");
+    methodNode.visitMaxs(200, 200);
   }
 
   public static class Builder {

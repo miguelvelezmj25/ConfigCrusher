@@ -9,7 +9,7 @@ public interface Analysis<T> {
 
   T analyze(String[] args) throws IOException, InterruptedException;
 
-  void writeToFile(T value) throws IOException;
+  void writeToFile(T results) throws IOException;
 
   T readFromFile(File file) throws IOException;
 

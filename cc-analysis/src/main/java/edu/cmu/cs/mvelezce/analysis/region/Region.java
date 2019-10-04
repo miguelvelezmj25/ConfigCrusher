@@ -4,105 +4,106 @@ import java.util.UUID;
 
 public class Region {
 
-  private final String regionID;
+  private final UUID id;
 
   private long startTime;
   private long endTime;
   private long duration;
 
-  // Needed for saving and reading regions in json
+  // Dummy constructor for faster xml
   protected Region() {
-    this.regionID = "";
+    this.id = UUID.randomUUID();
   }
 
   protected Region(Builder builder) {
-    this.regionID = builder.regionID;
+    this.id = builder.id;
     this.startTime = builder.startTime;
     this.endTime = builder.endTime;
     this.duration = builder.duration;
   }
 
-  public void startTime(long startTime) {
-    this.startTime = startTime;
-  }
+  //  public UUID getId() {
+  //    return id;
+  //  }
+  //
+  //  public long getStartTime() {
+  //    return startTime;
+  //  }
+  //
+  //  public long getEndTime() {
+  //    return endTime;
+  //  }
+  //
+  //  public long getDuration() {
+  //    return duration;
+  //  }
 
-  public void endTime(long endTime) {
-    this.endTime = endTime;
-  }
-
-  public String getRegionID() {
-    return regionID;
-  }
-
-  public long getStartTime() {
-    return this.startTime;
-  }
-
-  public long getEndTime() {
-    return this.endTime;
-  }
-
-  public long getDuration() {
-    return duration;
-  }
-
-  public void setDuration(long duration) {
-    this.duration = duration;
-  }
-
-  @Override
-  public String toString() {
-    return "Region{"
-        + "regionID='"
-        + regionID
-        + '\''
-        + ", startTime="
-        + startTime
-        + ", endTime="
-        + endTime
-        + ", duration="
-        + duration
-        + '}';
-  }
-
-  public void enter() {
-    this.startTime();
-  }
-
-  public void startTime() {
-    this.startTime(System.nanoTime());
-  }
-
-  public void enter(long startTime) {
-    this.startTime(startTime);
-  }
-
-  public void exit() {
-    this.endTime();
-  }
-
-  public void endTime() {
-    this.endTime(System.nanoTime());
-  }
-
-  public void exit(long endTime) {
-    this.endTime(endTime);
-  }
+  //  public void startTime(long startTime) {
+  //    this.startTime = startTime;
+  //  }
+  //
+  //  public void endTime(long endTime) {
+  //    this.endTime = endTime;
+  //  }
+  //
+  //  public UUID getId() {
+  //    return id;
+  //  }
+  //
+  //  public long getStartTime() {
+  //    return this.startTime;
+  //  }
+  //
+  //  public long getEndTime() {
+  //    return this.endTime;
+  //  }
+  //
+  //  public long getDuration() {
+  //    return duration;
+  //  }
+  //
+  //  public void setDuration(long duration) {
+  //    this.duration = duration;
+  //  }
+  //
+  //  public void enter() {
+  //    this.startTime();
+  //  }
+  //
+  //  public void startTime() {
+  //    this.startTime(System.nanoTime());
+  //  }
+  //
+  //  public void enter(long startTime) {
+  //    this.startTime(startTime);
+  //  }
+  //
+  //  public void exit() {
+  //    this.endTime();
+  //  }
+  //
+  //  public void endTime() {
+  //    this.endTime(System.nanoTime());
+  //  }
+  //
+  //  public void exit(long endTime) {
+  //    this.endTime(endTime);
+  //  }
 
   public static class Builder {
 
-    private final String regionID;
+    private final UUID id;
 
     private long startTime = -1;
     private long endTime = -1;
     private long duration = -1;
 
-    public Builder() {
-      this(UUID.randomUUID().toString());
+    protected Builder() {
+      this(UUID.randomUUID());
     }
 
-    public Builder(String regionID) {
-      this.regionID = regionID;
+    Builder(UUID id) {
+      this.id = id;
     }
 
     public Builder startTime(long startTime) {

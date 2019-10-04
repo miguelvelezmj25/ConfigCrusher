@@ -36,6 +36,22 @@ public class JavaRegion extends Region {
     //    this.endBlocksIDs = builder.endBlocksIDs;
   }
 
+  public String getRegionPackage() {
+    return regionPackage;
+  }
+
+  public String getRegionClass() {
+    return regionClass;
+  }
+
+  public String getRegionMethod() {
+    return regionMethod;
+  }
+
+  public int getStartIndex() {
+    return startIndex;
+  }
+
   //  // TODO this implementation might brake the implementation in other CC components since they
   // are
   // saved in sets or maps, but the state changes, so the hashcode does not match anymore.

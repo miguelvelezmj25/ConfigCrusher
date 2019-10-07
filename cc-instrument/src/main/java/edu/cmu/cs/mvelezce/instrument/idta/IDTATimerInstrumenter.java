@@ -20,6 +20,8 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
       String classDir,
       Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints) {
     super(programName, mainClass, srcDir, classDir, regionsToConstraints);
+    System.out.println(
+        "Remember that we are instrumenting blocks. Therefore, we might not need to know the start index of a region; only the start and end blocks");
   }
 
   @Override

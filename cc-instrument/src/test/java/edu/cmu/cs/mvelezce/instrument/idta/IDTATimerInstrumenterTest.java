@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
@@ -27,6 +28,28 @@ public class IDTATimerInstrumenterTest {
     String mainClass = BaseTrivialAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseTrivialAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseTrivialAdapter.INSTRUMENTED_CLASS_PATH;
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(programName, mainClass, srcDir, classDir, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void iGen()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseIGenAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseIGenAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseIGenAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseIGenAdapter.INSTRUMENTED_CLASS_PATH;
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(programName, mainClass, srcDir, classDir, regionsToConstraints);
 

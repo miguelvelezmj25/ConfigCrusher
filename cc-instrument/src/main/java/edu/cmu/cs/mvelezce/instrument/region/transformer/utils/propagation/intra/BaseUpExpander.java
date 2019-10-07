@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -21,19 +22,18 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
   }
 
   @Override
-  protected void processBlock(
+  protected Set<MethodBlock> processBlock(
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    System.err.println("Have to continue expanding regions until a fix point");
     MethodBlock id = graph.getImmediateDominator(block);
 
     if (id == null || id == graph.getEntryBlock()) {
-      return;
+      return new HashSet<>();
     }
 
-    System.out.println(graph.toDotString("test"));
+    //    System.out.println(graph.toDotString("test"));
 
     JavaRegion idRegion = blocksToRegions.get(id);
     T idData = this.getData(idRegion);
@@ -45,19 +45,21 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
 
     // If the data are the same, we do not want to process anything
     if (regionData.equals(idData) || !this.canExpandUp(regionData, idData)) {
-      return;
+      return new HashSet<>();
     }
 
-    this.expandUp(block, regionData, blocksToRegions);
+    return this.expandUp(block, regionData, blocksToRegions);
   }
 
-  private void expandUp(
+  private Set<MethodBlock> expandUp(
       MethodBlock block, T regionData, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     Set<MethodBlock> predBlocks = block.getPredecessors();
 
     if (block.getPredecessors().isEmpty()) {
       throw new RuntimeException("The predecessors cannot be empty " + block.getID());
     }
+
+    Set<MethodBlock> updatedBlocks = new HashSet<>();
 
     for (MethodBlock predBlock : predBlocks) {
       // A block might jump to itself
@@ -91,6 +93,7 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
 
       T newData = this.mergeData(regionData, predData);
       this.addRegionToData(predRegion, newData);
+      updatedBlocks.add(predBlock);
       //
       //      JavaRegion newRegion = new JavaRegion.Builder(blockRegion.getRegionPackage(),
       //              blockRegion.getRegionClass(), blockRegion.getRegionMethod()).build();
@@ -115,7 +118,7 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
       //      updatedBlocks.add(0, pred);
     }
 
-    //    return updatedBlocks;
+    return updatedBlocks;
   }
 
   protected abstract T mergeData(T thisData, @Nullable T thatData);

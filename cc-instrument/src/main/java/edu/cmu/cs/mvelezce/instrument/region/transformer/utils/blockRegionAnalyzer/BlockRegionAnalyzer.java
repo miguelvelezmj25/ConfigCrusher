@@ -11,14 +11,19 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class BlockRegionAnalyzer<T> {
 
+  private final Set<String> options;
   private final Map<JavaRegion, T> regionsToData;
   private final BlockRegionMatcher blockRegionMatcher;
 
   public BlockRegionAnalyzer(
-      BlockRegionMatcher blockRegionMatcher, Map<JavaRegion, T> regionsToData) {
+      Set<String> options,
+      BlockRegionMatcher blockRegionMatcher,
+      Map<JavaRegion, T> regionsToData) {
+    this.options = options;
     this.blockRegionMatcher = blockRegionMatcher;
     this.regionsToData = regionsToData;
   }
@@ -44,58 +49,61 @@ public abstract class BlockRegionAnalyzer<T> {
       this.processBlock(block, region, graph, blocksToRegions);
     }
 
-    //    this.debug()
+    this.debugBlockData(methodNode, graph, blocksToRegions);
   }
 
-  //    Set<MethodBlock> blocks = graph.getBlocks();
-  //
-  //    //        if(methodNode.name.equals("init")) {
-  //    //            System.out.println();
-  //    //        }
-  //    //
-  //    //        if(methodNode.name.equals("<init>")) {
-  //    //            System.out.println();
-  //    //        }
-  //
-  //    StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
-  //    dotString.append("node [shape=record];\n");
-  //
-  //    for (MethodBlock block : blocks) {
-  //      dotString.append(block.getID());
-  //      dotString.append(" [label=\"");
-  //      dotString.append(block.getID());
-  //      dotString.append(" - ");
-  //
-  //      JavaRegion region = blocksToRegions.get(block);
-  //
-  //      if (region == null) {
-  //        dotString.append("[]");
-  //      } else {
-  //        T decision = this.getData(region);
-  //        dotString.append(decision);
-  //      }
-  //
-  //      dotString.append("\"];\n");
-  //    }
-  //
-  //    dotString.append(graph.getEntryBlock().getID());
-  //    dotString.append(";\n");
-  //    dotString.append(graph.getExitBlock().getID());
-  //    dotString.append(";\n");
-  //
-  //    for (MethodBlock methodBlock : graph.getBlocks()) {
-  //      for (MethodBlock successor : methodBlock.getSuccessors()) {
-  //        dotString.append(methodBlock.getID());
-  //        dotString.append(" -> ");
-  //        dotString.append(successor.getID());
-  //        dotString.append(";\n");
-  //      }
-  //    }
-  //
-  //    dotString.append("}");
-  //
-  //    System.out.println(dotString);
-  //    System.out.println();
+  private void debugBlockData(
+      MethodNode methodNode,
+      MethodGraph graph,
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    Set<MethodBlock> blocks = graph.getBlocks();
+
+    StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
+    dotString.append("node [shape=record];\n");
+
+    for (MethodBlock block : blocks) {
+      dotString.append(block.getID());
+      dotString.append(" [label=\"");
+      dotString.append(block.getID());
+      dotString.append(" - ");
+
+      JavaRegion region = blocksToRegions.get(block);
+
+      if (region == null) {
+        dotString.append("[]");
+      } else {
+        String prettyData = this.getPrettyData(region);
+        dotString.append(prettyData);
+      }
+
+      dotString.append("\"];\n");
+    }
+
+    dotString.append(graph.getEntryBlock().getID());
+    dotString.append(";\n");
+    dotString.append(graph.getExitBlock().getID());
+    dotString.append(";\n");
+
+    for (MethodBlock methodBlock : graph.getBlocks()) {
+      for (MethodBlock successor : methodBlock.getSuccessors()) {
+        dotString.append(methodBlock.getID());
+        dotString.append(" -> ");
+        dotString.append(successor.getID());
+        dotString.append(";\n");
+      }
+    }
+
+    dotString.append("}");
+
+    System.out.println(dotString);
+    System.out.println();
+  }
+
+  protected Set<String> getOptions() {
+    return options;
+  }
+
+  protected abstract String getPrettyData(@Nullable JavaRegion region);
 
   @Nullable
   protected T getData(@Nullable JavaRegion region) {

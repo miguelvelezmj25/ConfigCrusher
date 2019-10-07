@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,8 +29,10 @@ public class IDTATimerInstrumenterTest {
     String mainClass = BaseTrivialAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseTrivialAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseTrivialAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseTrivialAdapter.getListOfOptions());
     Instrumenter instrumenter =
-        new IDTATimerInstrumenter(programName, mainClass, srcDir, classDir, regionsToConstraints);
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -50,8 +53,10 @@ public class IDTATimerInstrumenterTest {
     String mainClass = BaseIGenAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseIGenAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseIGenAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseIGenAdapter.getListOfOptions());
     Instrumenter instrumenter =
-        new IDTATimerInstrumenter(programName, mainClass, srcDir, classDir, regionsToConstraints);
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";

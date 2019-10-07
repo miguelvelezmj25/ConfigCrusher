@@ -31,7 +31,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         builder.regionsToConstraints,
         new DynamicInstructionRegionMatcher());
 
-    this.upExpander = new IDTAUpExpander(this.getBlockRegionMatcher(), this.getRegionsToData());
+    this.upExpander =
+        new IDTAUpExpander(builder.options, this.getBlockRegionMatcher(), this.getRegionsToData());
   }
 
   @Override
@@ -54,6 +55,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     private final String mainClass;
     private final String classDir;
     private final Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints;
+    private final Set<String> options;
 
     private boolean debug = false;
 
@@ -61,11 +63,13 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         String programName,
         String mainClass,
         String classDir,
+        Set<String> options,
         Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints) {
       this.programName = programName;
       this.mainClass = mainClass;
       this.classDir = classDir;
       this.regionsToConstraints = regionsToConstraints;
+      this.options = options;
     }
 
     public Builder setDebug(boolean debug) {

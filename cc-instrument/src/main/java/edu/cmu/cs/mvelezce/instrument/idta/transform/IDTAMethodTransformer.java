@@ -4,8 +4,10 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.BaseUpExpander;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta.IDTAUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.down.BaseDownExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.down.idta.IDTADownExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.BaseUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.idta.IDTAUpExpander;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.utils.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -19,6 +21,7 @@ import java.util.Set;
 public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   private final BaseUpExpander<Set<FeatureExpr>> upExpander;
+  private final BaseDownExpander<Set<FeatureExpr>> downExpander;
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
@@ -33,6 +36,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     this.upExpander =
         new IDTAUpExpander(builder.options, this.getBlockRegionMatcher(), this.getRegionsToData());
+    this.downExpander =
+        new IDTADownExpander(
+            builder.options, this.getBlockRegionMatcher(), this.getRegionsToData());
   }
 
   @Override
@@ -45,6 +51,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     super.transformMethod(methodNode, classNode);
 
     this.upExpander.processBlocks(methodNode, classNode);
+    this.downExpander.processBlocks(methodNode, classNode);
 
     methodNode.visitMaxs(200, 200);
   }

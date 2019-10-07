@@ -103,8 +103,6 @@ public abstract class BlockRegionAnalyzer<T> {
     return options;
   }
 
-  protected abstract String getPrettyData(@Nullable JavaRegion region);
-
   @Nullable
   protected T getData(@Nullable JavaRegion region) {
     return this.regionsToData.get(region);
@@ -113,6 +111,8 @@ public abstract class BlockRegionAnalyzer<T> {
   protected void addRegionToData(JavaRegion region, @Nullable T data) {
     this.regionsToData.put(region, data);
   }
+
+  protected abstract String getPrettyData(@Nullable JavaRegion region);
 
   protected abstract Set<MethodBlock> processBlock(
       MethodBlock block,

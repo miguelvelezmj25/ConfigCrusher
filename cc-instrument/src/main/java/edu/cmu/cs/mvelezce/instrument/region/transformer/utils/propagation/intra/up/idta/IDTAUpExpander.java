@@ -1,10 +1,10 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta;
+package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.BlockRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.BaseUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta.BaseIDTAExpander;
+import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.BaseUpExpander;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
@@ -22,21 +22,10 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
 
   @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
-    Set<String> prettyConstraints = new HashSet<>();
-    Set<String> options = this.getOptions();
     Set<FeatureExpr> constraints = this.getData(region);
+    Set<String> options = this.getOptions();
 
-    if (constraints == null) {
-
-      throw new RuntimeException("The constraints cannot be null");
-    }
-
-    for (FeatureExpr constraint : constraints) {
-      String prettyConstraint = ConstraintUtils.prettyPrintFeatureExpr(constraint, options);
-      prettyConstraints.add(prettyConstraint);
-    }
-
-    return prettyConstraints.toString();
+    return BaseIDTAExpander.prettyPrintConstraints(constraints, options);
   }
 
   @Override

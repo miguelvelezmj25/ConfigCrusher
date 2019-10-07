@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra;
+package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionAnalyzer.BlockRegionAnalyzer;

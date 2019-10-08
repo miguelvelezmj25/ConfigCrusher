@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -79,6 +80,30 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseMeasureDiskOrderedScanAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void lucene()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseIndexFilesAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseIndexFilesAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseIndexFilesAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseIndexFilesAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName, mainClass, srcDir, classDir, options, regionsToConstraints);

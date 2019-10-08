@@ -1,0 +1,16 @@
+digraph checkReplicaWrite {
+node [shape=record];
+6214844 [label="L0\lLINENUMBER 877 L0\lALOAD 2\lIFNULL L1\l"];
+1710641643 [label="L1\lLINENUMBER 880 L1\lFRAME SAME\lRETURN\lL3\l"];
+1771190979 [label="L2\lLINENUMBER 878 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.disallowReplicaWrite ()V\l"];
+1763750076 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 6214844;
+6214844 -> 1710641643;
+6214844 -> 1763750076;
+1710641643 -> exit;
+1771190979 -> 1710641643;
+1763750076 -> 1710641643;
+1763750076 -> 1771190979;
+}

@@ -1,0 +1,13 @@
+digraph refreshTreeMemoryUsage {
+node [shape=record];
+1651214370 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lRETURN\lL5\l"];
+2058855659 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+2117921377 [label="L0\lLINENUMBER 966 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 2117921377;
+1651214370 -> exit;
+2058855659 -> 1651214370;
+2117921377 -> 1651214370;
+2117921377 -> 2058855659;
+}

@@ -1,0 +1,34 @@
+digraph updateCounter {
+node [shape=record];
+9688820 [label="L8\lLINENUMBER 1050 L8\lFRAME SAME\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"-------DEC=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 6\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+903167315 [label="L6\lLINENUMBER 1055 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L1\l"];
+155682435 [label="ALOAD 0\lLLOAD 6\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.sizeNotNegative (J)Z\lIFNE L4\l"];
+1977332251 [label="L1\lLINENUMBER 1059 L1\lFRAME CHOP 1\lRETURN\lL11\l"];
+139040535 [label="L0\lLINENUMBER 1039 L0\lLLOAD 1\lLCONST_0\lLCMP\lIFEQ L1\l"];
+231262971 [label="L2\lLINENUMBER 1040 L2\lALOAD 3\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lLSTORE 6\lL3\lLINENUMBER 1042 L3\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.$assertionsDisabled : Z\lIFNE L4\l"];
+831018661 [label="L10\lLINENUMBER 1056 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+1518865854 [label="L9\lLINENUMBER 1047 L9\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"INC-------- =\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 6\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L6\l"];
+1116932674 [label="NEW java/lang/AssertionError\lDUP\lALOAD 0\lALOAD 4\lLLOAD 6\lLLOAD 1\lL5\lLINENUMBER 1043 L5\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.makeErrorMessage (Ljava/lang/String;JJ)Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
+1785733985 [label="L7\lLINENUMBER 1046 L7\lLLOAD 1\lLCONST_0\lLCMP\lIFLE L8\l"];
+1307726085 [label="L4\lLINENUMBER 1045 L4\lFRAME APPEND [J]\lILOAD 5\lIFEQ L6\l"];
+entry;
+exit;
+9688820 -> 903167315;
+903167315 -> 1977332251;
+903167315 -> 831018661;
+155682435 -> 1116932674;
+155682435 -> 1307726085;
+831018661 -> 1977332251;
+1785733985 -> 9688820;
+1785733985 -> 1518865854;
+1307726085 -> 903167315;
+1307726085 -> 1785733985;
+entry -> 139040535;
+1977332251 -> exit;
+139040535 -> 1977332251;
+139040535 -> 231262971;
+231262971 -> 155682435;
+231262971 -> 1307726085;
+1518865854 -> 903167315;
+1116932674 -> exit;
+}

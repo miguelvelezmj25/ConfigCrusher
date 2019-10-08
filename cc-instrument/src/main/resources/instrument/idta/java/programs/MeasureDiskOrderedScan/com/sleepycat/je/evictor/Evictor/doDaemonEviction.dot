@@ -1,0 +1,16 @@
+digraph doDaemonEviction {
+node [shape=record];
+422635759 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+764482683 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1969217453 [label="L0\lLINENUMBER 2080 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1016654505 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lRETURN\lL5\l"];
+entry;
+exit;
+entry -> 1969217453;
+422635759 -> 1016654505;
+764482683 -> 422635759;
+764482683 -> 1016654505;
+1969217453 -> 764482683;
+1969217453 -> 1016654505;
+1016654505 -> exit;
+}

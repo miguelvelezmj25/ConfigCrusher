@@ -1,0 +1,15 @@
+digraph getSortedDuplicates {
+node [shape=record];
+866776496 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+171261439 [label="L0\lLINENUMBER 594 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_1\lIAND\lIFEQ L1\l"];
+724960833 [label="ICONST_1\lGOTO L2\l"];
+2006810612 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+866776496 -> exit;
+entry -> 171261439;
+171261439 -> 724960833;
+171261439 -> 2006810612;
+724960833 -> 866776496;
+2006810612 -> 866776496;
+}

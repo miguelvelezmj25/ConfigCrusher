@@ -1,0 +1,15 @@
+digraph isExpirationInHours {
+node [shape=record];
+38773473 [label="ICONST_1\lGOTO L2\l"];
+371958171 [label="L0\lLINENUMBER 995 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.flags : I\lSIPUSH 1024\lIAND\lIFEQ L1\l"];
+627921408 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+698097853 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+38773473 -> 627921408;
+entry -> 371958171;
+371958171 -> 38773473;
+371958171 -> 698097853;
+627921408 -> exit;
+698097853 -> 627921408;
+}

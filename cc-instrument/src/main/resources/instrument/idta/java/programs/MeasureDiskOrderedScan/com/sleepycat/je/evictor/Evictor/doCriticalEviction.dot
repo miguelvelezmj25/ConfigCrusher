@@ -1,0 +1,16 @@
+digraph doCriticalEviction {
+node [shape=record];
+2105051301 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+438506351 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1842201464 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1254933470 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
+entry;
+exit;
+entry -> 2105051301;
+2105051301 -> 1842201464;
+2105051301 -> 1254933470;
+438506351 -> 1254933470;
+1842201464 -> 438506351;
+1842201464 -> 1254933470;
+1254933470 -> exit;
+}

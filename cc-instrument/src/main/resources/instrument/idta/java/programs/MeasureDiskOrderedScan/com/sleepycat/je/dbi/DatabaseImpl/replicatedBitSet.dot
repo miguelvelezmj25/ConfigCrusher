@@ -1,0 +1,15 @@
+digraph replicatedBitSet {
+node [shape=record];
+1334498385 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+733641536 [label="L1\lFRAME SAME\lICONST_0\l"];
+631832452 [label="L0\lLINENUMBER 731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_4\lIAND\lIFEQ L1\l"];
+1162602998 [label="ICONST_1\lGOTO L2\l"];
+entry;
+exit;
+entry -> 631832452;
+1334498385 -> exit;
+733641536 -> 1334498385;
+631832452 -> 733641536;
+631832452 -> 1162602998;
+1162602998 -> 1334498385;
+}

@@ -1,0 +1,15 @@
+digraph isTemporary {
+node [shape=record];
+1447824952 [label="L0\lLINENUMBER 539 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_2\lIAND\lIFEQ L1\l"];
+1381674508 [label="L1\lFRAME SAME\lICONST_0\l"];
+721133643 [label="ICONST_1\lGOTO L2\l"];
+1436207231 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+entry;
+exit;
+entry -> 1447824952;
+1447824952 -> 1381674508;
+1447824952 -> 721133643;
+1381674508 -> 1436207231;
+721133643 -> 1436207231;
+1436207231 -> exit;
+}

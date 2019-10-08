@@ -1,0 +1,21 @@
+digraph close {
+node [shape=record];
+1326369820 [label="L3\lLINENUMBER 540 L3\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Cursor.checkEnv ()V\lL5\lLINENUMBER 541 L5\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\lL6\lLINENUMBER 542 L6\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lIFNULL L4\l"];
+322560573 [label="L2\lLINENUMBER 546 L2\lFRAME SAME1 java/lang/Error\lASTORE 1\lL10\lLINENUMBER 547 L10\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL11\lLINENUMBER 548 L11\lALOAD 1\lATHROW\l"];
+1601914627 [label="L9\lLINENUMBER 550 L9\lFRAME SAME\lRETURN\lL12\l"];
+1714162166 [label="L4\lLINENUMBER 549 L4\lFRAME SAME\lGOTO L9\l"];
+625813617 [label="L1\lLINENUMBER 533 L1\lRETURN\l"];
+1514632785 [label="L7\lLINENUMBER 543 L7\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.removeCursor (Lcom/sleepycat/je/ForwardCursor;)V\lL8\lLINENUMBER 544 L8\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\l"];
+1447908188 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lTRYCATCHBLOCK L3 L4 L2 java/lang/Error\lL0\lLINENUMBER 532 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.isClosed ()Z\lIFEQ L3\l"];
+entry;
+exit;
+1326369820 -> 1714162166;
+1326369820 -> 1514632785;
+entry -> 1447908188;
+1601914627 -> exit;
+1714162166 -> 1601914627;
+625813617 -> exit;
+1514632785 -> 1714162166;
+1447908188 -> 1326369820;
+1447908188 -> 625813617;
+}

@@ -1,0 +1,20 @@
+digraph putInternal {
+node [shape=record];
+873577040 [label="L9\lLINENUMBER 2416 L9\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putHandleDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL1\lARETURN\l"];
+1873578788 [label="L11\lLINENUMBER 2421 L11\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"Database is not configured for duplicate data.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1969209259 [label="L3\lLINENUMBER 2420 L3\lFRAME APPEND [java/lang/Object]\lALOAD 5\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_DUP_DATA : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L10\l"];
+1829134436 [label="L10\lLINENUMBER 2425 L10\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putNoDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL4\lARETURN\l"];
+1417450670 [label="L2\lLINENUMBER 2427 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lALOAD 6\lMONITOREXIT\lL5\lALOAD 7\lATHROW\lL12\l"];
+2115999483 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 2410 L6\lALOAD 0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed (Lcom/sleepycat/je/dbi/ExpirationInfo;)V\lL7\lLINENUMBER 2412 L7\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.getTxnSynchronizer ()Ljava/lang/Object;\lDUP\lASTORE 6\lMONITORENTER\lL0\lLINENUMBER 2413 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkTxnState ()V\lL8\lLINENUMBER 2415 L8\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 2115999483;
+873577040 -> exit;
+1873578788 -> exit;
+1969209259 -> 1873578788;
+1969209259 -> 1829134436;
+1829134436 -> exit;
+1417450670 -> exit;
+2115999483 -> 873577040;
+2115999483 -> 1969209259;
+}

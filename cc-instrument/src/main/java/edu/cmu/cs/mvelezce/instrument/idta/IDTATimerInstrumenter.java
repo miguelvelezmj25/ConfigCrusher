@@ -23,6 +23,7 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
     super(programName, mainClass, srcDir, classDir, options, regionsToConstraints);
     System.err.println(
         "Remember that we are instrumenting blocks. Therefore, we might not need to know the start index of a region; only the start and end blocks");
+    System.err.println("We are not deleting the .dot and .pdf files");
   }
 
   @Override

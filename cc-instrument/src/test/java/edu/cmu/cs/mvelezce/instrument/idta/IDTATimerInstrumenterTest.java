@@ -1,9 +1,11 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.adapter.adapters.expandDown.BaseExpandDownAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.pngtastic.BasePngtasticAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
@@ -107,6 +109,54 @@ public class IDTATimerInstrumenterTest {
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void pngtasticCounter()
+          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BasePngtasticAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BasePngtasticAdapter.MAIN_CLASS;
+    String srcDir = "../" + BasePngtasticAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BasePngtasticAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BasePngtasticAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+            new IDTATimerInstrumenter(
+                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void expandDown()
+          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseExpandDownAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseExpandDownAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseExpandDownAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseExpandDownAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseExpandDownAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+            new IDTATimerInstrumenter(
+                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";

@@ -30,17 +30,17 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
 
   @Override
   protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> thatData) {
-    if (thatData != null && thatData.isEmpty()) {
+      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
+    if (upData != null && upData.isEmpty()) {
       throw new RuntimeException("How can the up data be empty, but not null?");
     }
 
-    if (thatData == null) {
+    if (upData == null) {
       return thisData;
     }
 
-    Set<FeatureExpr> constraints = this.mergeConstraints(thisData, thatData);
-    Set<FeatureExpr> upConstraints = this.getUpConstraintsNotMerged(constraints, thatData);
+    Set<FeatureExpr> constraints = this.mergeConstraints(thisData, upData);
+    Set<FeatureExpr> upConstraints = this.getUpConstraintsNotMerged(constraints, upData);
     constraints.addAll(upConstraints);
 
     return constraints;
@@ -98,7 +98,7 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
   protected boolean canExpandUp(
       @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
     if (thisData == null) {
-      return false;
+      throw new RuntimeException("This case should never happen");
     }
 
     if (thisData.isEmpty()) {
@@ -113,14 +113,18 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
       throw new RuntimeException("How can that data be empty, but not null?");
     }
 
+    Set<FeatureExpr> implyingConstraints = new HashSet<>();
+
     for (FeatureExpr thisConstraint : thisData) {
       for (FeatureExpr upConstraint : upData) {
         if (thisConstraint.implies(upConstraint).isTautology()) {
-          return true;
+          implyingConstraints.add(thisConstraint);
+
+          break;
         }
       }
     }
 
-    return false;
+    return implyingConstraints.equals(thisData);
   }
 }

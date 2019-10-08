@@ -20,6 +20,28 @@ public class IDTADownExpander extends BaseDownExpander<Set<FeatureExpr>> {
   }
 
   @Override
+  protected boolean canExpandDown(
+      @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> downData) {
+    if (thisData == null) {
+      throw new RuntimeException("This case should never happen");
+    }
+
+    if (thisData.isEmpty()) {
+      throw new RuntimeException("How can this data be empty, but not null?");
+    }
+
+    if (downData == null) {
+      return true;
+    }
+
+    if (downData.isEmpty()) {
+      throw new RuntimeException("How can that data be empty, but not null?");
+    }
+
+    return thisData.equals(downData);
+  }
+
+  @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
     Set<FeatureExpr> constraints = this.getData(region);
     Set<String> options = this.getOptions();

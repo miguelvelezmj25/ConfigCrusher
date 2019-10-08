@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatche
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
+import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -43,8 +44,7 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
       throw new RuntimeException("The data at this region cannot be null");
     }
 
-    //      // TODO BUG THIS SHOULD BE BLOCKDECISION.CONSTAINSALL(IPDDECISION)
-    while (!ipd.equals(exit) && regionData.equals(ipdData)) {
+    while (!ipd.equals(exit) && this.canExpandDown(regionData, ipdData)) {
       ipd = graph.getImmediatePostDominator(ipd);
       ipdRegion = blocksToRegions.get(ipd);
       ipdData = this.getData(ipdRegion);
@@ -90,4 +90,6 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
 
     return updatedBlocks;
   }
+
+  protected abstract boolean canExpandDown(@Nullable T thisData, @Nullable T downData);
 }

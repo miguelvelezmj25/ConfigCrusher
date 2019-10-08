@@ -48,10 +48,10 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
       return new HashSet<>();
     }
 
-    return this.expandUp(region, block, regionData, blocksToRegions);
+    return this.expandDataUp(region, block, regionData, blocksToRegions);
   }
 
-  private Set<MethodBlock> expandUp(
+  private Set<MethodBlock> expandDataUp(
       JavaRegion region,
       MethodBlock block,
       T regionData,
@@ -72,6 +72,10 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
 
       JavaRegion predRegion = blocksToRegions.get(predBlock);
       T predData = this.getData(predRegion);
+
+      if (regionData.equals(predData)) {
+        throw new RuntimeException("TELL ME");
+      }
 
       if (!this.canExpandUp(regionData, predData)) {
         System.err.println(

@@ -48,11 +48,14 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
       return new HashSet<>();
     }
 
-    return this.expandUp(block, regionData, blocksToRegions);
+    return this.expandUp(region, block, regionData, blocksToRegions);
   }
 
   private Set<MethodBlock> expandUp(
-      MethodBlock block, T regionData, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+      JavaRegion region,
+      MethodBlock block,
+      T regionData,
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     Set<MethodBlock> predBlocks = block.getPredecessors();
 
     if (block.getPredecessors().isEmpty()) {
@@ -67,7 +70,7 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
         continue;
       }
 
-      @Nullable JavaRegion predRegion = blocksToRegions.get(predBlock);
+      JavaRegion predRegion = blocksToRegions.get(predBlock);
       T predData = this.getData(predRegion);
 
       if (!this.canExpandUp(regionData, predData)) {
@@ -88,7 +91,14 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
       }
 
       if (predRegion == null) {
-        throw new UnsupportedOperationException("Implement");
+        predRegion =
+            new JavaRegion.Builder(
+                    region.getRegionPackage(),
+                    region.getRegionClass(),
+                    region.getRegionMethod(),
+                    region.getStartIndex())
+                .build();
+        blocksToRegions.put(predBlock, predRegion);
       }
 
       T newData = this.mergeData(regionData, predData);

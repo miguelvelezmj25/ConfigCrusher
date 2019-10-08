@@ -25,11 +25,6 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    // Optimization
-    if (!graph.isConnectedToExit(block)) {
-      throw new RuntimeException("The graph is not connected to an exit block?");
-    }
-
     Set<MethodBlock> succBlocks = block.getSuccessors();
     MethodBlock exit = graph.getExitBlock();
 
@@ -37,7 +32,7 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
       return new HashSet<>();
     }
 
-    System.out.println(graph.toDotString("test"));
+    //    System.out.println(graph.toDotString("test"));
 
     MethodBlock ipd = graph.getImmediatePostDominator(block);
     JavaRegion ipdRegion = blocksToRegions.get(ipd);

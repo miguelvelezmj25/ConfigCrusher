@@ -28,6 +28,13 @@ public abstract class BlockRegionAnalyzer<T> {
 
   public void processBlocks(MethodNode methodNode, ClassNode classNode) {
     MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
+
+    if (!graph.isConnectedToExit(graph.getEntryBlock())) {
+      System.err.println("Skipping graphs that is not connected to the exit block");
+
+      return;
+    }
+
     LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
         this.blockRegionMatcher.getMethodNodesToRegionsInBlocks().get(methodNode);
     Queue<MethodBlock> worklist = new ArrayDeque<>(blocksToRegions.keySet());
@@ -49,7 +56,7 @@ public abstract class BlockRegionAnalyzer<T> {
       worklist.addAll(updatedBlocks);
     }
 
-    this.debugBlockData(methodNode, graph, blocksToRegions);
+    //    this.debugBlockData(methodNode, graph, blocksToRegions);
   }
 
   private void debugBlockData(

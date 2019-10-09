@@ -50,8 +50,12 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     super.transformMethod(methodNode, classNode);
 
-    this.upExpander.processBlocks(methodNode, classNode);
-    this.downExpander.processBlocks(methodNode, classNode);
+    boolean updatedBlocks = true;
+
+    while (updatedBlocks) {
+      updatedBlocks = this.upExpander.processBlocks(methodNode, classNode);
+      updatedBlocks = updatedBlocks || this.downExpander.processBlocks(methodNode, classNode);
+    }
 
     methodNode.visitMaxs(200, 200);
   }

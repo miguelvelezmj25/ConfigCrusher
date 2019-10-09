@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.adapter.adapters.cannotExpandConstraintsDown.BaseCann
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.multipleReturns.BaseMultipleReturnsAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.pngtastic.BasePngtasticAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -120,7 +121,7 @@ public class IDTATimerInstrumenterTest {
 
   @Test
   public void pngtasticCounter()
-          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BasePngtasticAdapter.PROGRAM_NAME;
 
@@ -132,8 +133,8 @@ public class IDTATimerInstrumenterTest {
     String classDir = "../" + BasePngtasticAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BasePngtasticAdapter.getListOfOptions());
     Instrumenter instrumenter =
-            new IDTATimerInstrumenter(
-                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -144,7 +145,7 @@ public class IDTATimerInstrumenterTest {
 
   @Test
   public void cannotExpandConstraintsDown()
-          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCannotExpandConstraintsDownAdapter.PROGRAM_NAME;
 
@@ -156,8 +157,8 @@ public class IDTATimerInstrumenterTest {
     String classDir = "../" + BaseCannotExpandConstraintsDownAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseCannotExpandConstraintsDownAdapter.getListOfOptions());
     Instrumenter instrumenter =
-            new IDTATimerInstrumenter(
-                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -168,7 +169,7 @@ public class IDTATimerInstrumenterTest {
 
   @Test
   public void canExpandConstraintsDown()
-          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCanExpandConstraintsDownAdapter.PROGRAM_NAME;
 
@@ -180,8 +181,32 @@ public class IDTATimerInstrumenterTest {
     String classDir = "../" + BaseCanExpandConstraintsDownAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseCanExpandConstraintsDownAdapter.getListOfOptions());
     Instrumenter instrumenter =
-            new IDTATimerInstrumenter(
-                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void multipleReturns()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseMultipleReturnsAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseMultipleReturnsAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseMultipleReturnsAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseMultipleReturnsAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseMultipleReturnsAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
 
     String[] args = new String[2];
     args[0] = "-delres";

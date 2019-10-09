@@ -1,0 +1,18 @@
+digraph main {
+node [shape=record];
+57497692 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
+142247393 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+231786897 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1595282218 [label="L4\lLINENUMBER 10 L4\lRETURN\l"];
+1778081847 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
+entry;
+exit;
+entry -> 231786897;
+57497692 -> exit;
+142247393 -> 57497692;
+231786897 -> 1595282218;
+231786897 -> 1778081847;
+1595282218 -> exit;
+1778081847 -> 57497692;
+1778081847 -> 142247393;
+}

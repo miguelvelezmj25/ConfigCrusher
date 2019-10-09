@@ -13,11 +13,22 @@ import java.util.Set;
 
 public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
 
+  private final BaseIDTAExpander baseIDTAExpander;
+
   public IDTAUpExpander(
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, Set<FeatureExpr>> regionsToData) {
     super(options, blockRegionMatcher, regionsToData);
+
+    this.baseIDTAExpander = BaseIDTAExpander.getInstance();
+    this.baseIDTAExpander.init(regionsToData.values());
+  }
+
+  @Override
+  protected boolean containsAll(
+      @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> thatData) {
+    return this.baseIDTAExpander.containsAll(thisData, thatData);
   }
 
   @Override
@@ -25,106 +36,87 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
     Set<FeatureExpr> constraints = this.getData(region);
     Set<String> options = this.getOptions();
 
-    return BaseIDTAExpander.prettyPrintConstraints(constraints, options);
-  }
-
-  @Override
-  protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
-    if (upData != null && upData.isEmpty()) {
-      throw new RuntimeException("How can the up data be empty, but not null?");
-    }
-
-    if (upData == null) {
-      return thisData;
-    }
-
-    Set<FeatureExpr> constraints = this.mergeConstraints(thisData, upData);
-    Set<FeatureExpr> upConstraints = this.getUpConstraintsNotMerged(constraints, upData);
-    constraints.addAll(upConstraints);
-
-    return constraints;
-  }
-
-  private Set<FeatureExpr> getUpConstraintsNotMerged(
-      Set<FeatureExpr> constraints, Set<FeatureExpr> upConstraints) {
-    Set<FeatureExpr> upConstraintsNotMerged = new HashSet<>();
-
-    for (FeatureExpr upConstraint : upConstraints) {
-      boolean merged = false;
-
-      for (FeatureExpr constraint : constraints) {
-        if (constraint.implies(upConstraint).isTautology()) {
-          merged = true;
-
-          break;
-        }
-      }
-
-      if (merged) {
-        continue;
-      }
-
-      upConstraintsNotMerged.add(upConstraint);
-    }
-
-    return upConstraintsNotMerged;
-  }
-
-  private Set<FeatureExpr> mergeConstraints(
-      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> upConstraints) {
-    Set<FeatureExpr> constraints = new HashSet<>();
-
-    for (FeatureExpr thisConstraint : thisConstraints) {
-      for (FeatureExpr upConstraint : upConstraints) {
-        if (!thisConstraint.implies(upConstraint).isTautology()) {
-          continue;
-        }
-
-        constraints.add(thisConstraint);
-
-        break;
-      }
-    }
-
-    if (!constraints.equals(thisConstraints)) {
-      throw new RuntimeException("Could not merge all of this region's data");
-    }
-
-    return constraints;
+    return this.baseIDTAExpander.prettyPrintConstraints(constraints, options);
   }
 
   @Override
   protected boolean canExpandUp(
       @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
-    if (thisData == null) {
-      throw new RuntimeException("This case should never happen");
-    }
+    return this.baseIDTAExpander.canExpandConstraints(thisData, upData);
+  }
 
-    if (thisData.isEmpty()) {
-      throw new RuntimeException("How can this data be empty, but not null?");
-    }
+  @Override
+  protected Set<FeatureExpr> mergeData(
+      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
+    Set<FeatureExpr> newConstraints = new HashSet<>(thisData);
 
     if (upData == null) {
-      return true;
+      return newConstraints;
     }
 
-    if (upData.isEmpty()) {
-      throw new RuntimeException("How can that data be empty, but not null?");
-    }
+    newConstraints.addAll(upData);
 
-    Set<FeatureExpr> implyingConstraints = new HashSet<>();
-
-    for (FeatureExpr thisConstraint : thisData) {
-      for (FeatureExpr upConstraint : upData) {
-        if (thisConstraint.implies(upConstraint).isTautology()) {
-          implyingConstraints.add(thisConstraint);
-
-          break;
-        }
-      }
-    }
-
-    return implyingConstraints.equals(thisData);
+    return newConstraints;
+    //    if (upData != null && upData.isEmpty()) {
+    //      throw new RuntimeException("How can the up data be empty, but not null?");
+    //    }
+    //
+    //    if (upData == null) {
+    //      return thisData;
+    //    }
+    //
+    //    Set<FeatureExpr> constraints = this.mergeConstraints(thisData, upData);
+    //    Set<FeatureExpr> upConstraints = this.getUpConstraintsNotMerged(constraints, upData);
+    //    constraints.addAll(upConstraints);
+    //
+    //    return constraints;
   }
+
+  //  private Set<FeatureExpr> getUpConstraintsNotMerged(
+  //      Set<FeatureExpr> constraints, Set<FeatureExpr> upConstraints) {
+  //    Set<FeatureExpr> upConstraintsNotMerged = new HashSet<>();
+  //
+  //    for (FeatureExpr upConstraint : upConstraints) {
+  //      boolean merged = false;
+  //
+  //      for (FeatureExpr constraint : constraints) {
+  //        if (constraint.implies(upConstraint).isTautology()) {
+  //          merged = true;
+  //
+  //          break;
+  //        }
+  //      }
+  //
+  //      if (merged) {
+  //        continue;
+  //      }
+  //
+  //      upConstraintsNotMerged.add(upConstraint);
+  //    }
+  //
+  //    return upConstraintsNotMerged;
+  //  }
+  //
+  //  private Set<FeatureExpr> mergeConstraints(
+  //      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> upConstraints) {
+  //    Set<FeatureExpr> constraints = new HashSet<>();
+  //
+  //    for (FeatureExpr thisConstraint : thisConstraints) {
+  //      for (FeatureExpr upConstraint : upConstraints) {
+  //        if (!thisConstraint.implies(upConstraint).isTautology()) {
+  //          continue;
+  //        }
+  //
+  //        constraints.add(thisConstraint);
+  //
+  //        break;
+  //      }
+  //    }
+  //
+  //    if (!constraints.equals(thisConstraints)) {
+  //      throw new RuntimeException("Could not merge all of this region's data");
+  //    }
+  //
+  //    return constraints;
+  //  }
 }

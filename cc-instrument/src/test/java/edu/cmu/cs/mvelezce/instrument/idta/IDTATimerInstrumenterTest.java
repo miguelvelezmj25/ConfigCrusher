@@ -1,7 +1,8 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.adapter.adapters.expandDown.BaseExpandDownAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.canExpandConstraintsDown.BaseCanExpandConstraintsDownAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.cannotExpandConstraintsDown.BaseCannotExpandConstraintsDownAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -142,18 +143,42 @@ public class IDTATimerInstrumenterTest {
   }
 
   @Test
-  public void expandDown()
+  public void cannotExpandConstraintsDown()
           throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
-    String programName = BaseExpandDownAdapter.PROGRAM_NAME;
+    String programName = BaseCannotExpandConstraintsDownAdapter.PROGRAM_NAME;
 
     Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
-    String mainClass = BaseExpandDownAdapter.MAIN_CLASS;
-    String srcDir = "../" + BaseExpandDownAdapter.INSTRUMENTED_DIR_PATH;
-    String classDir = "../" + BaseExpandDownAdapter.INSTRUMENTED_CLASS_PATH;
-    Set<String> options = new HashSet<>(BaseExpandDownAdapter.getListOfOptions());
+    String mainClass = BaseCannotExpandConstraintsDownAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseCannotExpandConstraintsDownAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseCannotExpandConstraintsDownAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseCannotExpandConstraintsDownAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+            new IDTATimerInstrumenter(
+                    programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void canExpandConstraintsDown()
+          throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseCanExpandConstraintsDownAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseCanExpandConstraintsDownAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseCanExpandConstraintsDownAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseCanExpandConstraintsDownAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseCanExpandConstraintsDownAdapter.getListOfOptions());
     Instrumenter instrumenter =
             new IDTATimerInstrumenter(
                     programName, mainClass, srcDir, classDir, options, regionsToConstraints);

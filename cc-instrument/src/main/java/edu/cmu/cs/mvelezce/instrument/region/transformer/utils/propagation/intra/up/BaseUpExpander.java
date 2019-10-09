@@ -73,25 +73,19 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
       JavaRegion predRegion = blocksToRegions.get(predBlock);
       T predData = this.getData(predRegion);
 
-      if (regionData.equals(predData)) {
-        throw new RuntimeException("TELL ME");
+      if (regionData.equals(predData) || this.containsAll(predData, regionData)) {
+        continue;
       }
 
       if (!this.canExpandUp(regionData, predData)) {
         System.err.println(
             "Might not be able to merge all constraints (e.g., up = {A}, {!A}; down = {A}, {B}; can only merge up {A}, not {B})");
-        if (predBlock.isCatchWithImplicitThrow()) {
-          throw new RuntimeException("Why do we check this?");
-          //                  continue;
-        }
+        //        if (predBlock.isCatchWithImplicitThrow()) {
+        //          throw new RuntimeException("Why do we check this?");
+        //        }
 
-        //        this.debugBlockDecisions(methodNode);
         throw new RuntimeException(
             "Cannot merge data from " + block.getID() + " to " + predBlock.getID());
-        //
-        //////                    System.out.println("Cannot push up to predecessor in " +
-        // methodNode.name + " " + bDecision + " -> " + aDecision);
-        ////                    continue;
       }
 
       if (predRegion == null) {
@@ -135,7 +129,9 @@ public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
     return updatedBlocks;
   }
 
-  protected abstract T mergeData(T thisData, @Nullable T thatData);
+  protected abstract boolean containsAll(@Nullable T upData, @Nullable T thisData);
+
+  protected abstract T mergeData(T thisData, @Nullable T upData);
 
   protected abstract boolean canExpandUp(@Nullable T thisData, @Nullable T upData);
 }

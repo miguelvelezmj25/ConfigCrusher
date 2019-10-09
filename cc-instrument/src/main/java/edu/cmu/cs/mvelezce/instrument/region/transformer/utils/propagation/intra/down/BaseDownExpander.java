@@ -7,10 +7,7 @@ import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
   public BaseDownExpander(
@@ -54,22 +51,54 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
     reachables.remove(block);
     reachables.remove(exit);
     reachables.remove(ipd);
+    List<MethodBlock> orderReachables = this.orderReachables(reachables, blocksToRegions);
 
-    return this.copyRegionDataDown(region, regionData, reachables, blocksToRegions);
+    return this.expandDataDown(region, regionData, orderReachables, blocksToRegions, graph, ipd);
   }
 
-  private Set<MethodBlock> copyRegionDataDown(
+  private List<MethodBlock> orderReachables(
+      Set<MethodBlock> reachables, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    List<MethodBlock> orderedReachables = new ArrayList<>();
+
+    for (Map.Entry<MethodBlock, JavaRegion> entry : blocksToRegions.entrySet()) {
+      MethodBlock block = entry.getKey();
+
+      if (reachables.contains(block)) {
+        orderedReachables.add(block);
+      }
+    }
+
+    return orderedReachables;
+  }
+
+  private Set<MethodBlock> expandDataDown(
       JavaRegion region,
       T regionData,
-      Set<MethodBlock> reachables,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+      List<MethodBlock> reachables,
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
+      MethodGraph graph,
+      MethodBlock ipd) {
     Set<MethodBlock> updatedBlocks = new HashSet<>();
 
+    Set<MethodBlock> blocksToSkip = new HashSet<>();
+
     for (MethodBlock reachable : reachables) {
+      if (blocksToSkip.contains(reachable)) {
+        continue;
+      }
+
       JavaRegion reachableRegion = blocksToRegions.get(reachable);
       T reachableData = this.getData(reachableRegion);
 
-      if (regionData.equals(reachableData)) {
+      if (regionData.equals(reachableData) || this.containsAll(reachableData, regionData)) {
+        continue;
+      }
+
+      if (!this.canExpandDown(regionData, reachableData)) {
+        Set<MethodBlock> reachablesToSkip = graph.getReachableBlocks(reachable, ipd);
+        reachablesToSkip.remove(ipd);
+        blocksToSkip.addAll(reachablesToSkip);
+
         continue;
       }
 
@@ -84,12 +113,17 @@ public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
         blocksToRegions.put(reachable, reachableRegion);
       }
 
-      this.addRegionToData(reachableRegion, regionData);
+      T newData = this.mergeData(regionData, reachableData);
+      this.addRegionToData(reachableRegion, newData);
       updatedBlocks.add(reachable);
     }
 
     return updatedBlocks;
   }
+
+  protected abstract boolean containsAll(T downData, T thisData);
+
+  protected abstract T mergeData(T thisData, @Nullable T downData);
 
   protected abstract boolean canExpandDown(@Nullable T thisData, @Nullable T downData);
 }

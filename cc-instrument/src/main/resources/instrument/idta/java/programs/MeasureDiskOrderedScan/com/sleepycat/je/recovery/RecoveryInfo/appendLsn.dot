@@ -1,13 +1,13 @@
 digraph appendLsn {
 node [shape=record];
-1930186237 [label="L0\lLINENUMBER 94 L0\lLLOAD 3\lLDC -1\lLCMP\lIFEQ L1\l"];
-1936262654 [label="L2\lLINENUMBER 95 L2\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
-464849318 [label="L1\lLINENUMBER 97 L1\lFRAME SAME\lRETURN\lL3\l"];
+396734075 [label="L1\lLINENUMBER 97 L1\lFRAME SAME\lRETURN\lL3\l"];
+154003348 [label="L0\lLINENUMBER 94 L0\lLLOAD 3\lLDC -1\lLCMP\lIFEQ L1\l"];
+1542262772 [label="L2\lLINENUMBER 95 L2\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
 entry;
 exit;
-entry -> 1930186237;
-1930186237 -> 1936262654;
-1930186237 -> 464849318;
-1936262654 -> 464849318;
-464849318 -> exit;
+entry -> 154003348;
+396734075 -> exit;
+154003348 -> 396734075;
+154003348 -> 1542262772;
+1542262772 -> 396734075;
 }

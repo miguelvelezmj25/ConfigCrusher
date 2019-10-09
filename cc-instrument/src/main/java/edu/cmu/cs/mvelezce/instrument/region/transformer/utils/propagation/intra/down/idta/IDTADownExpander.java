@@ -7,38 +7,47 @@ import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta.BaseIDTAExpander;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class IDTADownExpander extends BaseDownExpander<Set<FeatureExpr>> {
+
+  private final BaseIDTAExpander baseIDTAExpander;
 
   public IDTADownExpander(
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, Set<FeatureExpr>> regionsToData) {
     super(options, blockRegionMatcher, regionsToData);
+
+    this.baseIDTAExpander = BaseIDTAExpander.getInstance();
+    this.baseIDTAExpander.init(regionsToData.values());
+  }
+
+  @Override
+  protected boolean containsAll(Set<FeatureExpr> downData, Set<FeatureExpr> thisData) {
+    return this.baseIDTAExpander.containsAll(downData, thisData);
+  }
+
+  @Override
+  protected Set<FeatureExpr> mergeData(
+      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> downData) {
+    Set<FeatureExpr> newConstraints = new HashSet<>(thisData);
+
+    if (downData == null) {
+      return newConstraints;
+    }
+
+    newConstraints.addAll(downData);
+
+    return newConstraints;
   }
 
   @Override
   protected boolean canExpandDown(
       @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> downData) {
-    if (thisData == null) {
-      throw new RuntimeException("This case should never happen");
-    }
-
-    if (thisData.isEmpty()) {
-      throw new RuntimeException("How can this data be empty, but not null?");
-    }
-
-    if (downData == null) {
-      return true;
-    }
-
-    if (downData.isEmpty()) {
-      throw new RuntimeException("How can that data be empty, but not null?");
-    }
-
-    return thisData.equals(downData);
+    return this.baseIDTAExpander.canExpandConstraints(thisData, downData);
   }
 
   @Override
@@ -46,6 +55,6 @@ public class IDTADownExpander extends BaseDownExpander<Set<FeatureExpr>> {
     Set<FeatureExpr> constraints = this.getData(region);
     Set<String> options = this.getOptions();
 
-    return BaseIDTAExpander.prettyPrintConstraints(constraints, options);
+    return this.baseIDTAExpander.prettyPrintConstraints(constraints, options);
   }
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 public class DynamicInstructionRegionMatcher implements InstructionRegionMatcher {
 
   static {
-    System.err.println("add table switch, lookup switch");
+    System.err.println("Add table switch, lookup switch");
   }
 
   public Map<AbstractInsnNode, JavaRegion> matchInstructionToRegion(

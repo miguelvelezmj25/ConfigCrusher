@@ -1,13 +1,13 @@
 digraph requestShutdownDaemons {
 node [shape=record];
-1861482284 [label="L0\lLINENUMBER 2305 L0\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/dbi/EnvironmentImpl.closing : Z\lL1\lLINENUMBER 2307 L1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.inCompressor : Lcom/sleepycat/je/incomp/INCompressor;\lINVOKEVIRTUAL com/sleepycat/je/incomp/INCompressor.requestShutdown ()V\lL2\lLINENUMBER 2313 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.sharedCache : Z\lIFNE L3\l"];
-1316560467 [label="L4\lLINENUMBER 2314 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.requestShutdown ()V\lL5\lLINENUMBER 2315 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.requestShutdown ()V\l"];
-760114098 [label="L3\lLINENUMBER 2318 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.checkpointer : Lcom/sleepycat/je/recovery/Checkpointer;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.requestShutdown ()V\lL6\lLINENUMBER 2319 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.requestShutdown ()V\lL7\lLINENUMBER 2320 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statCapture : Lcom/sleepycat/je/statcap/StatCapture;\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.requestShutdown ()V\lL8\lLINENUMBER 2321 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.logFlusher : Lcom/sleepycat/je/log/LogFlusher;\lINVOKEVIRTUAL com/sleepycat/je/log/LogFlusher.requestShutdown ()V\lL9\lLINENUMBER 2322 L9\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.dataVerifier : Lcom/sleepycat/je/util/verify/DataVerifier;\lINVOKEVIRTUAL com/sleepycat/je/util/verify/DataVerifier.requestShutdown ()V\lL10\lLINENUMBER 2323 L10\lRETURN\lL11\l"];
+2042703899 [label="L3\lLINENUMBER 2318 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.checkpointer : Lcom/sleepycat/je/recovery/Checkpointer;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.requestShutdown ()V\lL6\lLINENUMBER 2319 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.requestShutdown ()V\lL7\lLINENUMBER 2320 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statCapture : Lcom/sleepycat/je/statcap/StatCapture;\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.requestShutdown ()V\lL8\lLINENUMBER 2321 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.logFlusher : Lcom/sleepycat/je/log/LogFlusher;\lINVOKEVIRTUAL com/sleepycat/je/log/LogFlusher.requestShutdown ()V\lL9\lLINENUMBER 2322 L9\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.dataVerifier : Lcom/sleepycat/je/util/verify/DataVerifier;\lINVOKEVIRTUAL com/sleepycat/je/util/verify/DataVerifier.requestShutdown ()V\lL10\lLINENUMBER 2323 L10\lRETURN\lL11\l"];
+1509147006 [label="L4\lLINENUMBER 2314 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.requestShutdown ()V\lL5\lLINENUMBER 2315 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.requestShutdown ()V\l"];
+1623937066 [label="L0\lLINENUMBER 2305 L0\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/dbi/EnvironmentImpl.closing : Z\lL1\lLINENUMBER 2307 L1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.inCompressor : Lcom/sleepycat/je/incomp/INCompressor;\lINVOKEVIRTUAL com/sleepycat/je/incomp/INCompressor.requestShutdown ()V\lL2\lLINENUMBER 2313 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.sharedCache : Z\lIFNE L3\l"];
 entry;
 exit;
-entry -> 1861482284;
-1861482284 -> 1316560467;
-1861482284 -> 760114098;
-1316560467 -> 760114098;
-760114098 -> exit;
+entry -> 1623937066;
+2042703899 -> exit;
+1509147006 -> 2042703899;
+1623937066 -> 2042703899;
+1623937066 -> 1509147006;
 }

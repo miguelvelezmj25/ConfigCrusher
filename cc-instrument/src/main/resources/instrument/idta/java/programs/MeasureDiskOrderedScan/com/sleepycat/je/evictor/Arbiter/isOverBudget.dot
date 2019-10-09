@@ -1,15 +1,15 @@
 digraph isOverBudget {
 node [shape=record];
-1697230968 [label="L0\lLINENUMBER 51 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lL1\lLINENUMBER 52 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getMaxMemory ()J\lLCMP\lIFLE L2\l"];
-2094446442 [label="L2\lFRAME SAME\lICONST_0\l"];
-560312688 [label="L3\lLINENUMBER 51 L3\lFRAME SAME1 I\lIRETURN\lL4\l"];
-1869892430 [label="ICONST_1\lGOTO L3\l"];
+428036930 [label="ICONST_1\lGOTO L3\l"];
+1437379910 [label="L3\lLINENUMBER 51 L3\lFRAME SAME1 I\lIRETURN\lL4\l"];
+1970982612 [label="L2\lFRAME SAME\lICONST_0\l"];
+1869160669 [label="L0\lLINENUMBER 51 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lL1\lLINENUMBER 52 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getMaxMemory ()J\lLCMP\lIFLE L2\l"];
 entry;
 exit;
-1697230968 -> 2094446442;
-1697230968 -> 1869892430;
-entry -> 1697230968;
-2094446442 -> 560312688;
-560312688 -> exit;
-1869892430 -> 560312688;
+entry -> 1869160669;
+428036930 -> 1437379910;
+1437379910 -> exit;
+1970982612 -> 1437379910;
+1869160669 -> 428036930;
+1869160669 -> 1970982612;
 }

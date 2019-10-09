@@ -9,7 +9,9 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class BlockRegionAnalyzer<T> {
 
@@ -37,23 +39,30 @@ public abstract class BlockRegionAnalyzer<T> {
 
     LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
         this.blockRegionMatcher.getMethodNodesToRegionsInBlocks().get(methodNode);
-    Queue<MethodBlock> worklist = new ArrayDeque<>(blocksToRegions.keySet());
+    boolean updatedBlocks = true;
 
-    while (!worklist.isEmpty()) {
-      MethodBlock block = worklist.remove();
+    while (updatedBlocks) {
+      updatedBlocks = false;
 
-      if (graph.getEntryBlock().equals(block) || graph.getExitBlock().equals(block)) {
-        continue;
+      for (Map.Entry<MethodBlock, JavaRegion> entry : blocksToRegions.entrySet()) {
+        MethodBlock block = entry.getKey();
+
+        if (graph.getEntryBlock().equals(block) || graph.getExitBlock().equals(block)) {
+          continue;
+        }
+
+        JavaRegion region = entry.getValue();
+
+        if (region == null) {
+          continue;
+        }
+
+        Set<MethodBlock> modifiedBlocks = this.processBlock(block, region, graph, blocksToRegions);
+
+        if (!modifiedBlocks.isEmpty()) {
+          updatedBlocks = true;
+        }
       }
-
-      JavaRegion region = blocksToRegions.get(block);
-
-      if (region == null) {
-        continue;
-      }
-
-      Set<MethodBlock> updatedBlocks = this.processBlock(block, region, graph, blocksToRegions);
-      worklist.addAll(updatedBlocks);
     }
 
     //    this.debugBlockData(methodNode, graph, blocksToRegions);

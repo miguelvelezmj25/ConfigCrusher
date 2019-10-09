@@ -7,7 +7,6 @@ import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.BaseUpExpander;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,8 +28,8 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
 
   @Override
   protected boolean containsAll(
-      @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> thatData) {
-    return this.baseIDTAExpander.containsAll(thisData, thatData);
+      @Nullable Set<FeatureExpr> upConstraints, @Nullable Set<FeatureExpr> thisConstraints) {
+    return this.baseIDTAExpander.containsAll(upConstraints, thisConstraints);
   }
 
   @Override
@@ -43,82 +42,13 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
 
   @Override
   protected boolean canExpandUp(
-      @Nullable Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
-    return this.baseIDTAExpander.canExpandConstraints(thisData, upData);
+      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
+    return this.baseIDTAExpander.canExpandConstraints(thisConstraints, thatConstraints);
   }
 
   @Override
   protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisData, @Nullable Set<FeatureExpr> upData) {
-    Set<FeatureExpr> newConstraints = new HashSet<>(thisData);
-
-    if (upData == null) {
-      return newConstraints;
-    }
-
-    newConstraints.addAll(upData);
-
-    return newConstraints;
-    //    if (upData != null && upData.isEmpty()) {
-    //      throw new RuntimeException("How can the up data be empty, but not null?");
-    //    }
-    //
-    //    if (upData == null) {
-    //      return thisData;
-    //    }
-    //
-    //    Set<FeatureExpr> constraints = this.mergeConstraints(thisData, upData);
-    //    Set<FeatureExpr> upConstraints = this.getUpConstraintsNotMerged(constraints, upData);
-    //    constraints.addAll(upConstraints);
-    //
-    //    return constraints;
+      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> upConstraints) {
+    return this.baseIDTAExpander.mergeData(thisConstraints, upConstraints);
   }
-
-  //  private Set<FeatureExpr> getUpConstraintsNotMerged(
-  //      Set<FeatureExpr> constraints, Set<FeatureExpr> upConstraints) {
-  //    Set<FeatureExpr> upConstraintsNotMerged = new HashSet<>();
-  //
-  //    for (FeatureExpr upConstraint : upConstraints) {
-  //      boolean merged = false;
-  //
-  //      for (FeatureExpr constraint : constraints) {
-  //        if (constraint.implies(upConstraint).isTautology()) {
-  //          merged = true;
-  //
-  //          break;
-  //        }
-  //      }
-  //
-  //      if (merged) {
-  //        continue;
-  //      }
-  //
-  //      upConstraintsNotMerged.add(upConstraint);
-  //    }
-  //
-  //    return upConstraintsNotMerged;
-  //  }
-  //
-  //  private Set<FeatureExpr> mergeConstraints(
-  //      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> upConstraints) {
-  //    Set<FeatureExpr> constraints = new HashSet<>();
-  //
-  //    for (FeatureExpr thisConstraint : thisConstraints) {
-  //      for (FeatureExpr upConstraint : upConstraints) {
-  //        if (!thisConstraint.implies(upConstraint).isTautology()) {
-  //          continue;
-  //        }
-  //
-  //        constraints.add(thisConstraint);
-  //
-  //        break;
-  //      }
-  //    }
-  //
-  //    if (!constraints.equals(thisConstraints)) {
-  //      throw new RuntimeException("Could not merge all of this region's data");
-  //    }
-  //
-  //    return constraints;
-  //  }
 }

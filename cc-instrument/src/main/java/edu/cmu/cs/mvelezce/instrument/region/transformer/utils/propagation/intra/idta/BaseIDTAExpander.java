@@ -47,28 +47,29 @@ public final class BaseIDTAExpander {
     }
   }
 
-  public boolean canExpandConstraints(Set<FeatureExpr> thisData, Set<FeatureExpr> thatData) {
-    if (thisData == null) {
+  public boolean canExpandConstraints(
+      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
+    if (thisConstraints == null) {
       throw new RuntimeException("This case should never happen");
     }
 
-    if (thisData.isEmpty()) {
+    if (thisConstraints.isEmpty()) {
       throw new RuntimeException("How can this data be empty, but not null?");
     }
 
-    if (thatData == null) {
+    if (thatConstraints == null) {
       return true;
     }
 
-    if (thatData.isEmpty()) {
+    if (thatConstraints.isEmpty()) {
       throw new RuntimeException("How can that data be empty, but not null?");
     }
 
     Set<FeatureExpr> newConstraints = new HashSet<>();
 
-    for (FeatureExpr thisConstraint : thisData) {
-      for (FeatureExpr downConstraint : thatData) {
-        FeatureExpr newConstraint = thisConstraint.and(downConstraint);
+    for (FeatureExpr thisConstraint : thisConstraints) {
+      for (FeatureExpr thatConstraint : thatConstraints) {
+        FeatureExpr newConstraint = thisConstraint.and(thatConstraint);
 
         if (newConstraint.equals(BaseIDTAExpander.FALSE)) {
           continue;
@@ -81,11 +82,24 @@ public final class BaseIDTAExpander {
     return this.globalConstraints.containsAll(newConstraints);
   }
 
-  public boolean containsAll(Set<FeatureExpr> thisData, Set<FeatureExpr> thatData) {
-    if (thisData == null || thatData == null) {
+  public boolean containsAll(Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
+    if (thisConstraints == null || thatConstraints == null) {
       return false;
     }
 
-    return thisData.containsAll(thatData);
+    return thisConstraints.containsAll(thatConstraints);
+  }
+
+  public Set<FeatureExpr> mergeData(
+      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
+    Set<FeatureExpr> newConstraints = new HashSet<>(thisConstraints);
+
+    if (thatConstraints == null) {
+      return newConstraints;
+    }
+
+    newConstraints.addAll(thatConstraints);
+
+    return newConstraints;
   }
 }

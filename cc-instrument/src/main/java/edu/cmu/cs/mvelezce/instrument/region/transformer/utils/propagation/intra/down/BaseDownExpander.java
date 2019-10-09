@@ -11,10 +11,12 @@ import java.util.*;
 
 public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
   public BaseDownExpander(
+      String programName,
+      String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, T> regionsToData) {
-    super(options, blockRegionMatcher, regionsToData);
+    super(programName, debugDir, options, blockRegionMatcher, regionsToData);
   }
 
   @Override

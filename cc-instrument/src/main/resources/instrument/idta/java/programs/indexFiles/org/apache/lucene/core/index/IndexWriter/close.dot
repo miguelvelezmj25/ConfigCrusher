@@ -1,15 +1,15 @@
 digraph close {
 node [shape=record];
-2031882979 [label="L1\lLINENUMBER 1073 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL org/apache/lucene/core/index/IndexWriter.rollback ()V\l"];
-223696575 [label="L2\lLINENUMBER 1071 L2\lALOAD 0\lINVOKESPECIAL org/apache/lucene/core/index/IndexWriter.shutdown ()V\lGOTO L3\l"];
-92621336 [label="L0\lLINENUMBER 1070 L0\lALOAD 0\lGETFIELD org/apache/lucene/core/index/IndexWriter.config : Lorg/apache/lucene/core/index/LiveIndexWriterConfig;\lINVOKEVIRTUAL org/apache/lucene/core/index/LiveIndexWriterConfig.getCommitOnClose ()Z\lDUP\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L1\l"];
-185674515 [label="L3\lFRAME SAME\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL4\lLINENUMBER 1075 L4\lRETURN\lL5\l"];
+61620079 [label="L0\lLINENUMBER 1070 L0\lALOAD 0\lGETFIELD org/apache/lucene/core/index/IndexWriter.config : Lorg/apache/lucene/core/index/LiveIndexWriterConfig;\lINVOKEVIRTUAL org/apache/lucene/core/index/LiveIndexWriterConfig.getCommitOnClose ()Z\lDUP\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L1\l"];
+418731780 [label="L2\lLINENUMBER 1071 L2\lALOAD 0\lINVOKESPECIAL org/apache/lucene/core/index/IndexWriter.shutdown ()V\lGOTO L3\l"];
+1741618564 [label="L3\lFRAME SAME\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL4\lLINENUMBER 1075 L4\lRETURN\lL5\l"];
+448708339 [label="L1\lLINENUMBER 1073 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL org/apache/lucene/core/index/IndexWriter.rollback ()V\l"];
 entry;
 exit;
-entry -> 92621336;
-2031882979 -> 185674515;
-223696575 -> 185674515;
-92621336 -> 2031882979;
-92621336 -> 223696575;
-185674515 -> exit;
+entry -> 61620079;
+61620079 -> 418731780;
+61620079 -> 448708339;
+418731780 -> 1741618564;
+1741618564 -> exit;
+448708339 -> 1741618564;
 }

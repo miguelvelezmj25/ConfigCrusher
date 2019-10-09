@@ -1,15 +1,15 @@
 digraph updateCacheUsage {
 node [shape=record];
-1208288923 [label="L1\lFRAME SAME\lICONST_0\l"];
-721783805 [label="L0\lLINENUMBER 1340 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.usage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
-348817596 [label="ICONST_1\lGOTO L2\l"];
-251788397 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+2116089059 [label="ICONST_1\lGOTO L2\l"];
+83296098 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+621257072 [label="L0\lLINENUMBER 1340 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.usage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+989044347 [label="L1\lFRAME SAME\lICONST_0\l"];
 entry;
 exit;
-entry -> 721783805;
-1208288923 -> 251788397;
-721783805 -> 1208288923;
-721783805 -> 348817596;
-348817596 -> 251788397;
-251788397 -> exit;
+entry -> 621257072;
+2116089059 -> 83296098;
+83296098 -> exit;
+621257072 -> 2116089059;
+621257072 -> 989044347;
+989044347 -> 83296098;
 }

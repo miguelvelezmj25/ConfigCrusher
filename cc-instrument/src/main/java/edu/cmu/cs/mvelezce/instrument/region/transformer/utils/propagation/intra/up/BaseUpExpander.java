@@ -15,10 +15,12 @@ import java.util.Set;
 public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
 
   public BaseUpExpander(
+      String programName,
+      String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, T> regionsToData) {
-    super(options, blockRegionMatcher, regionsToData);
+    super(programName, debugDir, options, blockRegionMatcher, regionsToData);
   }
 
   @Override

@@ -1,18 +1,18 @@
 digraph refreshTreeAdminMemoryUsage {
 node [shape=record];
-1048842522 [label="L0\lLINENUMBER 951 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeAdminMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 952 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 954 L2\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_TREEADMIN : Z\lIFEQ L3\l"];
-1934908288 [label="L5\lLINENUMBER 960 L5\lFRAME SAME\lRETURN\lL7\l"];
-1833343025 [label="L6\lLINENUMBER 958 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
-1260012504 [label="L4\lLINENUMBER 955 L4\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"RESET = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1873189623 [label="L3\lLINENUMBER 957 L3\lFRAME APPEND [J J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L5\l"];
+750797656 [label="L5\lLINENUMBER 960 L5\lFRAME SAME\lRETURN\lL7\l"];
+1756726852 [label="L6\lLINENUMBER 958 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+1733903473 [label="L4\lLINENUMBER 955 L4\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"RESET = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+847174133 [label="L0\lLINENUMBER 951 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeAdminMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 952 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 954 L2\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_TREEADMIN : Z\lIFEQ L3\l"];
+1969969319 [label="L3\lLINENUMBER 957 L3\lFRAME APPEND [J J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L5\l"];
 entry;
 exit;
-entry -> 1048842522;
-1048842522 -> 1260012504;
-1048842522 -> 1873189623;
-1934908288 -> exit;
-1833343025 -> 1934908288;
-1260012504 -> 1873189623;
-1873189623 -> 1934908288;
-1873189623 -> 1833343025;
+750797656 -> exit;
+entry -> 847174133;
+1756726852 -> 750797656;
+1733903473 -> 1969969319;
+847174133 -> 1733903473;
+847174133 -> 1969969319;
+1969969319 -> 750797656;
+1969969319 -> 1756726852;
 }

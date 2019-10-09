@@ -1,16 +1,16 @@
 digraph checkReplicaWrite {
 node [shape=record];
-1258120701 [label="L1\lLINENUMBER 880 L1\lFRAME SAME\lRETURN\lL3\l"];
-1578052738 [label="L0\lLINENUMBER 877 L0\lALOAD 2\lIFNULL L1\l"];
-159791010 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L1\l"];
-337295973 [label="L2\lLINENUMBER 878 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.disallowReplicaWrite ()V\l"];
+167318637 [label="L0\lLINENUMBER 877 L0\lALOAD 2\lIFNULL L1\l"];
+1172814713 [label="L1\lLINENUMBER 880 L1\lFRAME SAME\lRETURN\lL3\l"];
+1616673438 [label="L2\lLINENUMBER 878 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.disallowReplicaWrite ()V\l"];
+787497403 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1578052738;
-1258120701 -> exit;
-1578052738 -> 1258120701;
-1578052738 -> 159791010;
-159791010 -> 1258120701;
-159791010 -> 337295973;
-337295973 -> 1258120701;
+entry -> 167318637;
+167318637 -> 1172814713;
+167318637 -> 787497403;
+1172814713 -> exit;
+1616673438 -> 1172814713;
+787497403 -> 1172814713;
+787497403 -> 1616673438;
 }

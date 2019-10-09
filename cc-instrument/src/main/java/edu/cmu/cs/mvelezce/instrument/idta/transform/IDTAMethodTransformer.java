@@ -20,6 +20,7 @@ import java.util.Set;
 
 public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
+  private static final String DEBUG_DIR = Options.DIRECTORY + "/instrument/idta/java/programs";;
   private final BaseUpExpander<Set<FeatureExpr>> upExpander;
   private final BaseDownExpander<Set<FeatureExpr>> downExpander;
 
@@ -35,21 +36,36 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         new DynamicInstructionRegionMatcher());
 
     this.upExpander =
-        new IDTAUpExpander(builder.options, this.getBlockRegionMatcher(), this.getRegionsToData());
+        new IDTAUpExpander(
+            builder.programName,
+            DEBUG_DIR,
+            builder.options,
+            this.getBlockRegionMatcher(),
+            this.getRegionsToData());
     this.downExpander =
         new IDTADownExpander(
-            builder.options, this.getBlockRegionMatcher(), this.getRegionsToData());
+            builder.programName,
+            DEBUG_DIR,
+            builder.options,
+            this.getBlockRegionMatcher(),
+            this.getRegionsToData());
   }
 
   @Override
   protected String getDebugDir() {
-    return Options.DIRECTORY + "/instrument/idta/java/programs";
+    return DEBUG_DIR;
   }
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     super.transformMethod(methodNode, classNode);
 
+    this.expandRegionsIntra(methodNode, classNode);
+
+    methodNode.visitMaxs(200, 200);
+  }
+
+  private void expandRegionsIntra(MethodNode methodNode, ClassNode classNode) {
     boolean updatedBlocks = true;
 
     while (updatedBlocks) {
@@ -57,7 +73,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       updatedBlocks = updatedBlocks || this.downExpander.processBlocks(methodNode, classNode);
     }
 
-    methodNode.visitMaxs(200, 200);
+    if (this.debug()) {
+      this.upExpander.debugBlockData(methodNode, classNode);
+    }
   }
 
   public static class Builder {

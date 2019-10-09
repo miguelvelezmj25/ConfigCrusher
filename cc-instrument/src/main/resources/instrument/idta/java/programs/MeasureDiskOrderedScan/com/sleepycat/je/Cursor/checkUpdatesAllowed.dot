@@ -1,21 +1,21 @@
 digraph checkUpdatesAllowed {
 node [shape=record];
-588030915 [label="L1\lLINENUMBER 5330 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbType ()Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.isInternal ()Z\lIFNE L3\l"];
-915791536 [label="L0\lLINENUMBER 5326 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.updateOperationsProhibited : Z\lIFEQ L1\l"];
-1824882470 [label="L7\lLINENUMBER 5336 L7\lNEW com/sleepycat/je/DiskLimitException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lL8\lLINENUMBER 5337 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/DiskLimitException.\<init\> (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;)V\lATHROW\l"];
-442783851 [label="L2\lLINENUMBER 5327 L2\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lINVOKESPECIAL com/sleepycat/je/Cursor.updatesProhibitedException (Lcom/sleepycat/je/txn/Locker;)Ljava/lang/UnsupportedOperationException;\lATHROW\l"];
-854191039 [label="L4\lLINENUMBER 5332 L4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 5333 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDiskLimitViolation ()Ljava/lang/String;\lASTORE 1\lL6\lLINENUMBER 5335 L6\lALOAD 1\lIFNULL L3\l"];
-714195724 [label="L3\lLINENUMBER 5340 L3\lFRAME SAME\lRETURN\lL9\l"];
+1713697006 [label="L0\lLINENUMBER 5326 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.updateOperationsProhibited : Z\lIFEQ L1\l"];
+1551028661 [label="L4\lLINENUMBER 5332 L4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 5333 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDiskLimitViolation ()Ljava/lang/String;\lASTORE 1\lL6\lLINENUMBER 5335 L6\lALOAD 1\lIFNULL L3\l"];
+496038249 [label="L3\lLINENUMBER 5340 L3\lFRAME SAME\lRETURN\lL9\l"];
+1709797662 [label="L1\lLINENUMBER 5330 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbType ()Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.isInternal ()Z\lIFNE L3\l"];
+151848981 [label="L7\lLINENUMBER 5336 L7\lNEW com/sleepycat/je/DiskLimitException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lL8\lLINENUMBER 5337 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/DiskLimitException.\<init\> (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;)V\lATHROW\l"];
+929843414 [label="L2\lLINENUMBER 5327 L2\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lINVOKESPECIAL com/sleepycat/je/Cursor.updatesProhibitedException (Lcom/sleepycat/je/txn/Locker;)Ljava/lang/UnsupportedOperationException;\lATHROW\l"];
 entry;
 exit;
-entry -> 915791536;
-588030915 -> 854191039;
-588030915 -> 714195724;
-915791536 -> 588030915;
-915791536 -> 442783851;
-1824882470 -> exit;
-442783851 -> exit;
-854191039 -> 1824882470;
-854191039 -> 714195724;
-714195724 -> exit;
+entry -> 1713697006;
+1713697006 -> 1709797662;
+1713697006 -> 929843414;
+1551028661 -> 496038249;
+1551028661 -> 151848981;
+496038249 -> exit;
+1709797662 -> 1551028661;
+1709797662 -> 496038249;
+151848981 -> exit;
+929843414 -> exit;
 }

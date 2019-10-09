@@ -1,16 +1,16 @@
 digraph doCriticalEviction {
 node [shape=record];
-168874772 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
-1081076870 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1027537492 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-1991177090 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1973649083 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
+1707794778 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1883133402 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1901018663 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
 entry;
 exit;
-entry -> 1027537492;
-168874772 -> exit;
-1081076870 -> 168874772;
-1027537492 -> 168874772;
-1027537492 -> 1991177090;
-1991177090 -> 168874772;
-1991177090 -> 1081076870;
+entry -> 1707794778;
+1973649083 -> exit;
+1707794778 -> 1973649083;
+1707794778 -> 1883133402;
+1883133402 -> 1973649083;
+1883133402 -> 1901018663;
+1901018663 -> 1973649083;
 }

@@ -1,20 +1,20 @@
 digraph putInternal {
 node [shape=record];
-141469969 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 2410 L6\lALOAD 0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed (Lcom/sleepycat/je/dbi/ExpirationInfo;)V\lL7\lLINENUMBER 2412 L7\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.getTxnSynchronizer ()Ljava/lang/Object;\lDUP\lASTORE 6\lMONITORENTER\lL0\lLINENUMBER 2413 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkTxnState ()V\lL8\lLINENUMBER 2415 L8\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L3\l"];
-1338109379 [label="L10\lLINENUMBER 2425 L10\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putNoDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL4\lARETURN\l"];
-1453787012 [label="L3\lLINENUMBER 2420 L3\lFRAME APPEND [java/lang/Object]\lALOAD 5\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_DUP_DATA : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L10\l"];
-840625328 [label="L11\lLINENUMBER 2421 L11\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"Database is not configured for duplicate data.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-1297395775 [label="L9\lLINENUMBER 2416 L9\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putHandleDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL1\lARETURN\l"];
-565463192 [label="L2\lLINENUMBER 2427 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lALOAD 6\lMONITOREXIT\lL5\lALOAD 7\lATHROW\lL12\l"];
+1429833986 [label="L9\lLINENUMBER 2416 L9\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putHandleDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL1\lARETURN\l"];
+1118870888 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 2410 L6\lALOAD 0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed (Lcom/sleepycat/je/dbi/ExpirationInfo;)V\lL7\lLINENUMBER 2412 L7\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.getTxnSynchronizer ()Ljava/lang/Object;\lDUP\lASTORE 6\lMONITORENTER\lL0\lLINENUMBER 2413 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkTxnState ()V\lL8\lLINENUMBER 2415 L8\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L3\l"];
+1532852291 [label="L10\lLINENUMBER 2425 L10\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putNoDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\lL4\lARETURN\l"];
+78122686 [label="L2\lLINENUMBER 2427 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lALOAD 6\lMONITOREXIT\lL5\lALOAD 7\lATHROW\lL12\l"];
+499185053 [label="L11\lLINENUMBER 2421 L11\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"Database is not configured for duplicate data.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+903727515 [label="L3\lLINENUMBER 2420 L3\lFRAME APPEND [java/lang/Object]\lALOAD 5\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_DUP_DATA : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L10\l"];
 entry;
 exit;
-entry -> 141469969;
-141469969 -> 1453787012;
-141469969 -> 1297395775;
-1338109379 -> exit;
-1453787012 -> 1338109379;
-1453787012 -> 840625328;
-840625328 -> exit;
-1297395775 -> exit;
-565463192 -> exit;
+1429833986 -> exit;
+entry -> 1118870888;
+1118870888 -> 1429833986;
+1118870888 -> 903727515;
+1532852291 -> exit;
+78122686 -> exit;
+499185053 -> exit;
+903727515 -> 1532852291;
+903727515 -> 499185053;
 }

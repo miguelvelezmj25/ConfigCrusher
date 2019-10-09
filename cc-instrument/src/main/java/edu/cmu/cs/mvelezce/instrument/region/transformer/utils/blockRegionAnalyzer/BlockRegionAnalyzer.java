@@ -4,25 +4,34 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.graphBuilder.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.instrumenter.graph.PrettyMethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import javax.annotation.Nullable;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class BlockRegionAnalyzer<T> {
 
+  private final String programName;
+  private final String debugDir;
   private final Set<String> options;
   private final Map<JavaRegion, T> regionsToData;
   private final BlockRegionMatcher blockRegionMatcher;
 
   public BlockRegionAnalyzer(
+      String programName,
+      String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, T> regionsToData) {
+    this.programName = programName;
+    this.debugDir = debugDir;
     this.options = options;
     this.blockRegionMatcher = blockRegionMatcher;
     this.regionsToData = regionsToData;
@@ -77,7 +86,32 @@ public abstract class BlockRegionAnalyzer<T> {
     return updatedSomeBlock;
   }
 
-  private void debugBlockData(
+  public void debugBlockData(MethodNode methodNode, ClassNode classNode) {
+    MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
+        this.blockRegionMatcher.getMethodNodesToRegionsInBlocks().get(methodNode);
+
+    String dotString = this.debugBlockData(methodNode, graph, blocksToRegions);
+
+    try {
+      String methodNameSuffix = "-blockData";
+      PrettyMethodGraph.saveDotFile(
+          dotString,
+          this.debugDir,
+          this.programName,
+          classNode.name,
+          methodNode.name,
+          methodNameSuffix);
+      PrettyMethodGraph.savePdfFile(
+          this.debugDir, this.programName, classNode.name, methodNode.name, methodNameSuffix);
+    } catch (FileNotFoundException fnfe) {
+      throw new RuntimeException(fnfe);
+    } catch (InterruptedException | IOException ieioe) {
+      ieioe.printStackTrace();
+    }
+  }
+
+  private String debugBlockData(
       MethodNode methodNode,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
@@ -120,8 +154,7 @@ public abstract class BlockRegionAnalyzer<T> {
 
     dotString.append("}");
 
-    System.out.println(dotString);
-    System.out.println();
+    return dotString.toString();
   }
 
   protected Set<String> getOptions() {

@@ -2,7 +2,11 @@ package edu.cmu.cs.mvelezce.instrument.region.instrumenter;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrumenter.instrument.BaseInstrumenter;
+import edu.cmu.cs.mvelezce.utils.Options;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +33,20 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
     this.regionsToData = regionsToData;
   }
 
+  public void instrument(String[] args)
+      throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException,
+          InterruptedException {
+    Options.getCommandLine(args);
+    if (Options.checkIfDeleteResult()) {
+      this.compile();
+    }
+
+    if (Options.checkIfSave()) {
+      this.instrument();
+      this.writeToFile(this.regionsToData);
+    }
+  }
+
   protected Set<String> getOptions() {
     return options;
   }
@@ -40,4 +58,8 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
   protected Map<JavaRegion, T> getRegionsToData() {
     return regionsToData;
   }
+
+  protected abstract void writeToFile(Map<JavaRegion, T> regionsToData) throws IOException;
+
+  protected abstract Map<JavaRegion, T> readFromFile(File file);
 }

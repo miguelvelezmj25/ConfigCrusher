@@ -1,0 +1,15 @@
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "MultipleReturns",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A",
+      "(!A && !B)",
+      "(!A && B)"
+    ]
+  }
+]

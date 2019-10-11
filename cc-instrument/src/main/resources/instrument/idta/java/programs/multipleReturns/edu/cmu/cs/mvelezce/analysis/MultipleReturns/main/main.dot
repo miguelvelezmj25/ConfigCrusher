@@ -1,18 +1,19 @@
 digraph main {
 node [shape=record];
-1044639817 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1361241279 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1891799894 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
-1968861720 [label="L4\lLINENUMBER 10 L4\lRETURN\l"];
-343722304 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
+1198859194 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
+931003277 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
+1117812847 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1170735890 [label="L0\lLINENUMBER 6 L0\lLDC \"2789d272-70f2-4d7d-a09f-ec40178d5cdf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+2077462509 [label="L4\lLINENUMBER 10 L4\lRETURN\l"];
 entry;
 exit;
-entry -> 1044639817;
-1044639817 -> 1968861720;
-1044639817 -> 343722304;
-1361241279 -> 1891799894;
-1891799894 -> exit;
-1968861720 -> exit;
-343722304 -> 1361241279;
-343722304 -> 1891799894;
+entry -> 1170735890;
+1198859194 -> exit;
+931003277 -> 1198859194;
+931003277 -> 1117812847;
+1117812847 -> 1198859194;
+1170735890 -> 931003277;
+1170735890 -> 2077462509;
+2077462509 -> exit;
+1170735890[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,14 +1,20 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.results.statement.info.ControlFlowStatementConstraintsPretty;
+import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
+import edu.cmu.cs.mvelezce.utils.Options;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -52,5 +58,50 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   public void compile() throws IOException, InterruptedException {
     System.err.println("Delete method once we are done with testing instrumenting");
     super.compile();
+  }
+
+  @Override
+  protected void writeToFile(Map<JavaRegion, Set<FeatureExpr>> regionsToData) throws IOException {
+    String outputFile =
+        IDTAMethodTransformer.DEBUG_DIR
+            + "/"
+            + this.getProgramName()
+            + "/"
+            + this.getProgramName()
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    Set<ControlFlowStatementConstraintsPretty> regionsToPrettyConstraints = new HashSet<>();
+
+    for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : regionsToData.entrySet()) {
+      Set<String> prettyConstraints = new HashSet<>();
+      Set<FeatureExpr> constraints = entry.getValue();
+
+      for (FeatureExpr constraint : constraints) {
+        String prettyConstraint =
+            ConstraintUtils.prettyPrintFeatureExpr(constraint, this.getOptions());
+        prettyConstraints.add(prettyConstraint);
+      }
+
+      JavaRegion region = entry.getKey();
+      ControlFlowStatementConstraintsPretty regionToPrettyConstraints =
+          new ControlFlowStatementConstraintsPretty(
+              region.getRegionPackage(),
+              region.getRegionClass(),
+              region.getRegionMethod(),
+              region.getStartIndex(),
+              prettyConstraints);
+
+      regionsToPrettyConstraints.add(regionToPrettyConstraints);
+    }
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, regionsToPrettyConstraints);
+  }
+
+  @Override
+  protected Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) {
+    throw new UnsupportedOperationException("Implemenet");
   }
 }

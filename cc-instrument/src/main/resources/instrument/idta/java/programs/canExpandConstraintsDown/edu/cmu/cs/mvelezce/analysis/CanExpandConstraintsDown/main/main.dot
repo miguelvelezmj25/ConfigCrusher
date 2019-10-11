@@ -1,21 +1,22 @@
 digraph main {
 node [shape=record];
-602280210 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-670503317 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-92962244 [label="ILOAD 2\lIFEQ L3\l"];
-1639319040 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
-873134840 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
-1647891936 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+67928167 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
+540962910 [label="L0\lLINENUMBER 6 L0\lLDC \"2bf145a1-c682-43e1-b483-96f560fb2a64\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1186663391 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+2026325575 [label="ILOAD 2\lIFEQ L3\l"];
+962931248 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+1466148437 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;
-entry -> 602280210;
-602280210 -> 92962244;
-602280210 -> 1639319040;
-670503317 -> 1639319040;
-92962244 -> 670503317;
-92962244 -> 1639319040;
-1639319040 -> 873134840;
-1639319040 -> 1647891936;
-873134840 -> exit;
-1647891936 -> 873134840;
+entry -> 540962910;
+67928167 -> exit;
+540962910 -> 2026325575;
+540962910 -> 962931248;
+1186663391 -> 67928167;
+2026325575 -> 962931248;
+2026325575 -> 1466148437;
+962931248 -> 67928167;
+962931248 -> 1186663391;
+1466148437 -> 962931248;
+540962910[fontcolor="purple", penwidth=3, color="purple"];
 }

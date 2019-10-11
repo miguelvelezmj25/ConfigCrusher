@@ -1,16 +1,1 @@
-[
-  {
-    "packageName": "edu.cmu.cs.mvelezce.analysis",
-    "className": "CanExpandConstraintsDown",
-    "methodSignature": "main([Ljava/lang/String;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "!A",
-      "A",
-      "(A && B)",
-      "(A && !B)"
-    ],
-    "id": "bf2206bb-1f7f-41b7-89b3-ea2125fe85e3"
-  }
-]
+[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanExpandConstraintsDown","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(A && B)","(A && !B)"],"id":"fc0f79fc-3754-4f5a-a066-d130a2d45819"}]

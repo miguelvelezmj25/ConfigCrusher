@@ -50,34 +50,10 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
   }
 
   private void instrumentEntireMethodEnd(MethodNode methodNode, JavaRegion region) {
-    InsnList insnList = methodNode.instructions;
     Set<MethodBlock> endBlocks = region.getEndMethodBlocks();
 
     for (MethodBlock endBlock : endBlocks) {
-      List<AbstractInsnNode> blockInstructions = endBlock.getInstructions();
-      AbstractInsnNode lastInsn = blockInstructions.get(blockInstructions.size() - 1);
-      int opcodeLastInsn = lastInsn.getOpcode();
-
-      if (this.isExitMethodInsn(opcodeLastInsn)) {
-        InsnList endInstructions = this.getEndRegionInsnList(region);
-        insnList.insertBefore(lastInsn, endInstructions);
-      } else {
-        // Some blocks might have a label node at the end of the block
-        lastInsn = blockInstructions.get(blockInstructions.size() - 2);
-        opcodeLastInsn = lastInsn.getOpcode();
-
-        if (this.isExitMethodInsn(opcodeLastInsn)) {
-          InsnList endInstructions = this.getEndRegionInsnList(region);
-          insnList.insertBefore(lastInsn, endInstructions);
-        } else {
-          //          if(!this.getMethodsToGraphs().get(methodNode).isWithWhileTrue()) {
-          //            throw new RuntimeException("The last instruction in a method with return is
-          // not
-          // a return instruction");
-          //          }
-          throw new RuntimeException("Handle this case");
-        }
-      }
+      this.instrumentBlockWithReturn(methodNode, region, endBlock);
     }
   }
 
@@ -134,6 +110,54 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
 
     for (JavaRegion region : reversedOrderedRegions) {
       this.instrumentNormalStart(methodNode, region);
+      this.instrumentNormalEnd(methodNode, region);
+    }
+  }
+
+  private void instrumentNormalEnd(MethodNode methodNode, JavaRegion region) {
+    Set<MethodBlock> endBlocks = region.getEndMethodBlocks();
+
+    for (MethodBlock endBlock : endBlocks) {
+      if (endBlock.isWithReturn()
+          || endBlock.isWithExplicitThrow()
+          || endBlock.isWithLastInstruction()) {
+        this.instrumentBlockWithReturn(methodNode, region, endBlock);
+      } else {
+        AbstractInsnNode endBlockInsn = endBlock.getInstructions().get(0);
+        InsnList endRegionInsnList = this.getEndRegionInsnList(region);
+
+        InsnList insnList = methodNode.instructions;
+        insnList.insert(endBlockInsn, endRegionInsnList);
+      }
+    }
+  }
+
+  private void instrumentBlockWithReturn(
+      MethodNode methodNode, JavaRegion region, MethodBlock endBlock) {
+    InsnList insnList = methodNode.instructions;
+    List<AbstractInsnNode> blockInstructions = endBlock.getInstructions();
+    AbstractInsnNode lastInsn = blockInstructions.get(blockInstructions.size() - 1);
+    int opcodeLastInsn = lastInsn.getOpcode();
+
+    if (this.isExitMethodInsn(opcodeLastInsn)) {
+      InsnList endInstructions = this.getEndRegionInsnList(region);
+      insnList.insertBefore(lastInsn, endInstructions);
+    } else {
+      // Some blocks might have a label node at the end of the block
+      lastInsn = blockInstructions.get(blockInstructions.size() - 2);
+      opcodeLastInsn = lastInsn.getOpcode();
+
+      if (this.isExitMethodInsn(opcodeLastInsn)) {
+        InsnList endInstructions = this.getEndRegionInsnList(region);
+        insnList.insertBefore(lastInsn, endInstructions);
+      } else {
+        //          if(!this.getMethodsToGraphs().get(methodNode).isWithWhileTrue()) {
+        //            throw new RuntimeException("The last instruction in a method with return is
+        // not
+        // a return instruction");
+        //          }
+        throw new RuntimeException("Handle this case");
+      }
     }
   }
 

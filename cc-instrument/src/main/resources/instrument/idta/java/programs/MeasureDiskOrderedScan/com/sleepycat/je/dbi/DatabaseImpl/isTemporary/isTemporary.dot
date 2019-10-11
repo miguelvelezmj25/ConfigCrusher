@@ -1,15 +1,17 @@
 digraph isTemporary {
 node [shape=record];
-460972724 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1004209460 [label="L0\lLINENUMBER 539 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_2\lIAND\lIFEQ L1\l"];
-271672961 [label="ICONST_1\lGOTO L2\l"];
-1390776994 [label="L1\lFRAME SAME\lICONST_0\l"];
+1446376975 [label="L0\lLINENUMBER 539 L0\lLDC \"ecbc189e-f955-4f72-bb71-93b6a928dd73\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_2\lIAND\lIFEQ L1\l"];
+724020987 [label="L1\lFRAME SAME\lICONST_0\l"];
+854342868 [label="L2\lFRAME SAME1 I\lLDC \"ecbc189e-f955-4f72-bb71-93b6a928dd73\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+1496593140 [label="ICONST_1\lGOTO L2\l"];
 entry;
 exit;
-460972724 -> exit;
-entry -> 1004209460;
-1004209460 -> 271672961;
-1004209460 -> 1390776994;
-271672961 -> 460972724;
-1390776994 -> 460972724;
+1446376975 -> 724020987;
+1446376975 -> 1496593140;
+entry -> 1446376975;
+724020987 -> 854342868;
+854342868 -> exit;
+1496593140 -> 854342868;
+1446376975[fontcolor="purple", penwidth=3, color="purple"];
+854342868[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,15 +1,17 @@
 digraph replicatedBitSet {
 node [shape=record];
-1840952796 [label="L1\lFRAME SAME\lICONST_0\l"];
-1186309530 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-413094111 [label="ICONST_1\lGOTO L2\l"];
-703308584 [label="L0\lLINENUMBER 731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_4\lIAND\lIFEQ L1\l"];
+748548269 [label="ICONST_1\lGOTO L2\l"];
+449872375 [label="L2\lFRAME SAME1 I\lLDC \"9ca2404e-c894-48d5-911e-f9de600532a4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+182498772 [label="L1\lFRAME SAME\lICONST_0\l"];
+34808068 [label="L0\lLINENUMBER 731 L0\lLDC \"9ca2404e-c894-48d5-911e-f9de600532a4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_4\lIAND\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 703308584;
-1840952796 -> 1186309530;
-1186309530 -> exit;
-413094111 -> 1186309530;
-703308584 -> 1840952796;
-703308584 -> 413094111;
+entry -> 34808068;
+748548269 -> 449872375;
+449872375 -> exit;
+182498772 -> 449872375;
+34808068 -> 748548269;
+34808068 -> 182498772;
+449872375[fontcolor="purple", penwidth=3, color="purple"];
+34808068[fontcolor="purple", penwidth=3, color="purple"];
 }

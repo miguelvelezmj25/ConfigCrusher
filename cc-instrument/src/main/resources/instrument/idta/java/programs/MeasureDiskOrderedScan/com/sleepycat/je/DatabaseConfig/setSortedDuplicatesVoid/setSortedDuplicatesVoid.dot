@@ -1,13 +1,15 @@
 digraph setSortedDuplicatesVoid {
 node [shape=record];
-1461801265 [label="L0\lLINENUMBER 261 L0\lALOAD 0\lILOAD 1\lPUTFIELD com/sleepycat/je/DatabaseConfig.sortedDuplicates : Z\lL1\lLINENUMBER 262 L1\lILOAD 1\lIFEQ L2\l"];
-2068519072 [label="L3\lLINENUMBER 263 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.setKeyPrefixingVoid (Z)V\l"];
-1720157138 [label="L2\lLINENUMBER 265 L2\lFRAME SAME\lRETURN\lL4\l"];
+250820877 [label="L0\lLINENUMBER 261 L0\lLDC \"4f605feb-81e4-4284-93bc-be720ee7d2be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lPUTFIELD com/sleepycat/je/DatabaseConfig.sortedDuplicates : Z\lL1\lLINENUMBER 262 L1\lILOAD 1\lIFEQ L2\l"];
+1577700534 [label="L3\lLINENUMBER 263 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.setKeyPrefixingVoid (Z)V\l"];
+1875803957 [label="L2\lLINENUMBER 265 L2\lFRAME SAME\lLDC \"4f605feb-81e4-4284-93bc-be720ee7d2be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
 entry;
 exit;
-entry -> 1461801265;
-1461801265 -> 2068519072;
-1461801265 -> 1720157138;
-2068519072 -> 1720157138;
-1720157138 -> exit;
+entry -> 250820877;
+250820877 -> 1577700534;
+250820877 -> 1875803957;
+1577700534 -> 1875803957;
+1875803957 -> exit;
+250820877[fontcolor="purple", penwidth=3, color="purple"];
+1875803957[fontcolor="purple", penwidth=3, color="purple"];
 }

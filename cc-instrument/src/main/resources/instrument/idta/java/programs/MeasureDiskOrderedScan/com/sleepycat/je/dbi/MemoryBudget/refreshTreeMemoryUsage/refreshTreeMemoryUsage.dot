@@ -1,13 +1,15 @@
 digraph refreshTreeMemoryUsage {
 node [shape=record];
-726900941 [label="L0\lLINENUMBER 966 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
-180689638 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lRETURN\lL5\l"];
-1593020298 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+1057749455 [label="L0\lLINENUMBER 966 L0\lLDC \"1eb7691a-5633-4291-9097-578b8b1213d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
+331887829 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lLDC \"1eb7691a-5633-4291-9097-578b8b1213d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1161884045 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
 entry;
 exit;
-entry -> 726900941;
-726900941 -> 180689638;
-726900941 -> 1593020298;
-180689638 -> exit;
-1593020298 -> 180689638;
+entry -> 1057749455;
+1057749455 -> 331887829;
+1057749455 -> 1161884045;
+331887829 -> exit;
+1161884045 -> 331887829;
+1057749455[fontcolor="purple", penwidth=3, color="purple"];
+331887829[fontcolor="purple", penwidth=3, color="purple"];
 }

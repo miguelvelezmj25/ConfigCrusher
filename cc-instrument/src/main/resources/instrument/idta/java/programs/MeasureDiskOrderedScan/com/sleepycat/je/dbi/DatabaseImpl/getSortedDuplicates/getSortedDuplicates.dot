@@ -1,15 +1,17 @@
 digraph getSortedDuplicates {
 node [shape=record];
-1715329060 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1874509398 [label="ICONST_1\lGOTO L2\l"];
-877537350 [label="L0\lLINENUMBER 594 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_1\lIAND\lIFEQ L1\l"];
-255600312 [label="L1\lFRAME SAME\lICONST_0\l"];
+1679891587 [label="L2\lFRAME SAME1 I\lLDC \"a5ee38be-8b03-479c-a448-fd5a51cf0c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+1761262683 [label="L0\lLINENUMBER 594 L0\lLDC \"a5ee38be-8b03-479c-a448-fd5a51cf0c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_1\lIAND\lIFEQ L1\l"];
+660448039 [label="L1\lFRAME SAME\lICONST_0\l"];
+91844285 [label="ICONST_1\lGOTO L2\l"];
 entry;
 exit;
-entry -> 877537350;
-1715329060 -> exit;
-1874509398 -> 1715329060;
-877537350 -> 1874509398;
-877537350 -> 255600312;
-255600312 -> 1715329060;
+1679891587 -> exit;
+entry -> 1761262683;
+1761262683 -> 660448039;
+1761262683 -> 91844285;
+660448039 -> 1679891587;
+91844285 -> 1679891587;
+1679891587[fontcolor="purple", penwidth=3, color="purple"];
+1761262683[fontcolor="purple", penwidth=3, color="purple"];
 }

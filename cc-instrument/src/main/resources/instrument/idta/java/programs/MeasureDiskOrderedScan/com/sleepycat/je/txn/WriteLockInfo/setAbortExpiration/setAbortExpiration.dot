@@ -1,15 +1,17 @@
 digraph setAbortExpiration {
 node [shape=record];
-337083471 [label="L1\lFRAME SAME1 com/sleepycat/je/txn/WriteLockInfo\lILOAD 1\l"];
-157270851 [label="ILOAD 1\lINEG\lGOTO L2\l"];
-1323849839 [label="L0\lLINENUMBER 163 L0\lALOAD 0\lILOAD 2\lIFEQ L1\l"];
-1710188346 [label="L2\lFRAME FULL [com/sleepycat/je/txn/WriteLockInfo I I] [com/sleepycat/je/txn/WriteLockInfo I]\lPUTFIELD com/sleepycat/je/txn/WriteLockInfo.abortExpiration : I\lL3\lLINENUMBER 164 L3\lRETURN\lL4\l"];
+5579241 [label="ILOAD 1\lINEG\lGOTO L2\l"];
+292317924 [label="L1\lFRAME SAME1 com/sleepycat/je/txn/WriteLockInfo\lILOAD 1\l"];
+139394773 [label="L0\lLINENUMBER 163 L0\lLDC \"860a7903-bdae-4103-9316-2e079e7c70e2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 2\lIFEQ L1\l"];
+1102132751 [label="L2\lFRAME FULL [com/sleepycat/je/txn/WriteLockInfo I I] [com/sleepycat/je/txn/WriteLockInfo I]\lPUTFIELD com/sleepycat/je/txn/WriteLockInfo.abortExpiration : I\lL3\lLINENUMBER 164 L3\lLDC \"860a7903-bdae-4103-9316-2e079e7c70e2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
 entry;
 exit;
-337083471 -> 1710188346;
-entry -> 1323849839;
-157270851 -> 1710188346;
-1323849839 -> 337083471;
-1323849839 -> 157270851;
-1710188346 -> exit;
+entry -> 139394773;
+5579241 -> 1102132751;
+292317924 -> 1102132751;
+139394773 -> 5579241;
+139394773 -> 292317924;
+1102132751 -> exit;
+139394773[fontcolor="purple", penwidth=3, color="purple"];
+1102132751[fontcolor="purple", penwidth=3, color="purple"];
 }

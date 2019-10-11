@@ -1,15 +1,17 @@
 digraph getUtilizationRepairDone {
 node [shape=record];
-96631167 [label="L1\lFRAME SAME\lICONST_0\l"];
-72385384 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1893967193 [label="L0\lLINENUMBER 753 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lBIPUSH 32\lIAND\lIFEQ L1\l"];
-893968710 [label="ICONST_1\lGOTO L2\l"];
+499421498 [label="L1\lFRAME SAME\lICONST_0\l"];
+872932873 [label="L2\lFRAME SAME1 I\lLDC \"2d759b05-e89e-4f63-8cf1-84f5dee5936d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+555505262 [label="ICONST_1\lGOTO L2\l"];
+1095609674 [label="L0\lLINENUMBER 753 L0\lLDC \"2d759b05-e89e-4f63-8cf1-84f5dee5936d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lBIPUSH 32\lIAND\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1893967193;
-96631167 -> 72385384;
-72385384 -> exit;
-1893967193 -> 96631167;
-1893967193 -> 893968710;
-893968710 -> 72385384;
+entry -> 1095609674;
+499421498 -> 872932873;
+872932873 -> exit;
+555505262 -> 872932873;
+1095609674 -> 499421498;
+1095609674 -> 555505262;
+872932873[fontcolor="purple", penwidth=3, color="purple"];
+1095609674[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,13 +1,16 @@
 digraph getSize {
 node [shape=record];
-90084747 [label="L0\lLINENUMBER 341 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
-263742754 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lIRETURN\l"];
-400611511 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lIRETURN\lL3\l"];
+2137555962 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lLDC \"2902c499-10dc-4496-b4aa-073915bf41be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1810817583 [label="L0\lLINENUMBER 341 L0\lLDC \"2902c499-10dc-4496-b4aa-073915bf41be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
+1500297373 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lLDC \"2902c499-10dc-4496-b4aa-073915bf41be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
 entry;
 exit;
-entry -> 90084747;
-90084747 -> 263742754;
-90084747 -> 400611511;
-263742754 -> exit;
-400611511 -> exit;
+entry -> 1810817583;
+2137555962 -> exit;
+1810817583 -> 2137555962;
+1810817583 -> 1500297373;
+1500297373 -> exit;
+2137555962[fontcolor="purple", penwidth=3, color="purple"];
+1810817583[fontcolor="purple", penwidth=3, color="purple"];
+1500297373[fontcolor="purple", penwidth=3, color="purple"];
 }

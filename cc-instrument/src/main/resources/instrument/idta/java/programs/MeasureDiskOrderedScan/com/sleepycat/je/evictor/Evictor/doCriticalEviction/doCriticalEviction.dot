@@ -1,16 +1,18 @@
 digraph doCriticalEviction {
 node [shape=record];
-2013961010 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-980939924 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-554998843 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
-455837819 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
+1808879437 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1513942030 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+290843249 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lLDC \"d7f774b0-3f84-4829-973b-e9f428a2c441\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+730310354 [label="L0\lLINENUMBER 2056 L0\lLDC \"d7f774b0-3f84-4829-973b-e9f428a2c441\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 2013961010;
-2013961010 -> 554998843;
-2013961010 -> 455837819;
-980939924 -> 455837819;
-554998843 -> 980939924;
-554998843 -> 455837819;
-455837819 -> exit;
+1808879437 -> 290843249;
+entry -> 730310354;
+1513942030 -> 1808879437;
+1513942030 -> 290843249;
+290843249 -> exit;
+730310354 -> 1513942030;
+730310354 -> 290843249;
+290843249[fontcolor="purple", penwidth=3, color="purple"];
+730310354[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,15 +1,17 @@
 digraph isEmbeddedLN {
 node [shape=record];
-1798583582 [label="L0\lLINENUMBER 1178 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lBALOAD\lBIPUSH 16\lIAND\lIFEQ L1\l"];
-267097106 [label="ICONST_1\lGOTO L2\l"];
-1627415461 [label="L1\lFRAME SAME\lICONST_0\l"];
-1108360432 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+639507129 [label="L1\lFRAME SAME\lICONST_0\l"];
+1042050702 [label="L0\lLINENUMBER 1178 L0\lLDC \"074cc7d1-4d63-45dd-bd5c-d8f9baa4fe7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lBALOAD\lBIPUSH 16\lIAND\lIFEQ L1\l"];
+1701111558 [label="L2\lFRAME SAME1 I\lLDC \"074cc7d1-4d63-45dd-bd5c-d8f9baa4fe7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+2117858471 [label="ICONST_1\lGOTO L2\l"];
 entry;
 exit;
-entry -> 1798583582;
-1798583582 -> 267097106;
-1798583582 -> 1627415461;
-267097106 -> 1108360432;
-1627415461 -> 1108360432;
-1108360432 -> exit;
+entry -> 1042050702;
+639507129 -> 1701111558;
+1042050702 -> 639507129;
+1042050702 -> 2117858471;
+1701111558 -> exit;
+2117858471 -> 1701111558;
+1042050702[fontcolor="purple", penwidth=3, color="purple"];
+1701111558[fontcolor="purple", penwidth=3, color="purple"];
 }

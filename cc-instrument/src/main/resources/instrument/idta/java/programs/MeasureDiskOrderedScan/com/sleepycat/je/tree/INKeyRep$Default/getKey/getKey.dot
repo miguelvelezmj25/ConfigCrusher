@@ -1,18 +1,22 @@
 digraph getKey {
 node [shape=record];
-1482049159 [label="L5\lLINENUMBER 176 L5\lALOAD 3\lICONST_0\lALOAD 3\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/DupKeyData.getKey ([BII)[B\lARETURN\l"];
-1223561273 [label="L3\lLINENUMBER 174 L3\lGETSTATIC com/sleepycat/je/tree/Key.EMPTY_KEY : [B\lARETURN\l"];
-1767582324 [label="L0\lLINENUMBER 171 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/INKeyRep$Default.keys : [[B\lILOAD 1\lAALOAD\lASTORE 3\lL1\lLINENUMBER 173 L1\lALOAD 3\lIFNONNULL L2\l"];
-1752096627 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 3\lARETURN\lL6\l"];
-33036513 [label="L2\lLINENUMBER 175 L2\lFRAME APPEND [[B]\lILOAD 2\lIFEQ L4\l"];
+319075313 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 3\lLDC \"961524a3-1c8f-496e-9d09-c98cce0fbfdc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL6\l"];
+15759193 [label="L2\lLINENUMBER 175 L2\lFRAME APPEND [[B]\lILOAD 2\lIFEQ L4\l"];
+1765617626 [label="L3\lLINENUMBER 174 L3\lGETSTATIC com/sleepycat/je/tree/Key.EMPTY_KEY : [B\lLDC \"961524a3-1c8f-496e-9d09-c98cce0fbfdc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+747432242 [label="L0\lLINENUMBER 171 L0\lLDC \"961524a3-1c8f-496e-9d09-c98cce0fbfdc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/INKeyRep$Default.keys : [[B\lILOAD 1\lAALOAD\lASTORE 3\lL1\lLINENUMBER 173 L1\lALOAD 3\lIFNONNULL L2\l"];
+1477055675 [label="L5\lLINENUMBER 176 L5\lALOAD 3\lICONST_0\lALOAD 3\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/DupKeyData.getKey ([BII)[B\lLDC \"961524a3-1c8f-496e-9d09-c98cce0fbfdc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-entry -> 1767582324;
-1482049159 -> exit;
-1223561273 -> exit;
-1767582324 -> 1223561273;
-1767582324 -> 33036513;
-1752096627 -> exit;
-33036513 -> 1482049159;
-33036513 -> 1752096627;
+entry -> 747432242;
+319075313 -> exit;
+15759193 -> 319075313;
+15759193 -> 1477055675;
+1765617626 -> exit;
+747432242 -> 15759193;
+747432242 -> 1765617626;
+1477055675 -> exit;
+319075313[fontcolor="purple", penwidth=3, color="purple"];
+1765617626[fontcolor="purple", penwidth=3, color="purple"];
+747432242[fontcolor="purple", penwidth=3, color="purple"];
+1477055675[fontcolor="purple", penwidth=3, color="purple"];
 }

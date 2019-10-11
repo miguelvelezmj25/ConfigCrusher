@@ -1,18 +1,20 @@
 digraph mustGenerateVLSN {
 node [shape=record];
-705861234 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1639557786 [label="L1\lFRAME SAME\lICONST_0\l"];
-173944567 [label="ICONST_1\lGOTO L2\l"];
-612404635 [label="L0\lLINENUMBER 120 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.inReplicationStream : Z\lIFEQ L1\l"];
-2070844598 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.clientVLSN : Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L1\l"];
+836180418 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.clientVLSN : Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L1\l"];
+672368766 [label="ICONST_1\lGOTO L2\l"];
+1425291003 [label="L2\lFRAME SAME1 I\lLDC \"c6365dd2-0ff6-4e5f-b412-6bd915ca560e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+2011675029 [label="L1\lFRAME SAME\lICONST_0\l"];
+744097847 [label="L0\lLINENUMBER 120 L0\lLDC \"c6365dd2-0ff6-4e5f-b412-6bd915ca560e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.inReplicationStream : Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 612404635;
-705861234 -> exit;
-1639557786 -> 705861234;
-173944567 -> 705861234;
-612404635 -> 1639557786;
-612404635 -> 2070844598;
-2070844598 -> 1639557786;
-2070844598 -> 173944567;
+836180418 -> 672368766;
+836180418 -> 2011675029;
+entry -> 744097847;
+672368766 -> 1425291003;
+1425291003 -> exit;
+2011675029 -> 1425291003;
+744097847 -> 836180418;
+744097847 -> 2011675029;
+1425291003[fontcolor="purple", penwidth=3, color="purple"];
+744097847[fontcolor="purple", penwidth=3, color="purple"];
 }

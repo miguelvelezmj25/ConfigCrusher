@@ -1,18 +1,20 @@
 digraph haveEmbeddedData {
 node [shape=record];
-691354771 [label="L0\lLINENUMBER 1240 L0\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isEmbeddedLN (I)Z\lIFEQ L1\l"];
-800528447 [label="ALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isNoDataLN (I)Z\lIFNE L1\l"];
-2057511162 [label="L1\lFRAME SAME\lICONST_0\l"];
-1710027783 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1698532759 [label="ICONST_1\lGOTO L2\l"];
+1829327824 [label="ICONST_1\lGOTO L2\l"];
+298452566 [label="L0\lLINENUMBER 1240 L0\lLDC \"4a78a620-09f8-427f-992e-432b96e9d28e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isEmbeddedLN (I)Z\lIFEQ L1\l"];
+574459335 [label="ALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isNoDataLN (I)Z\lIFNE L1\l"];
+741347473 [label="L2\lFRAME SAME1 I\lLDC \"4a78a620-09f8-427f-992e-432b96e9d28e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+1436486890 [label="L1\lFRAME SAME\lICONST_0\l"];
 entry;
 exit;
-entry -> 691354771;
-691354771 -> 800528447;
-691354771 -> 2057511162;
-800528447 -> 2057511162;
-800528447 -> 1698532759;
-2057511162 -> 1710027783;
-1710027783 -> exit;
-1698532759 -> 1710027783;
+entry -> 298452566;
+1829327824 -> 741347473;
+298452566 -> 574459335;
+298452566 -> 1436486890;
+574459335 -> 1829327824;
+574459335 -> 1436486890;
+741347473 -> exit;
+1436486890 -> 741347473;
+298452566[fontcolor="purple", penwidth=3, color="purple"];
+741347473[fontcolor="purple", penwidth=3, color="purple"];
 }

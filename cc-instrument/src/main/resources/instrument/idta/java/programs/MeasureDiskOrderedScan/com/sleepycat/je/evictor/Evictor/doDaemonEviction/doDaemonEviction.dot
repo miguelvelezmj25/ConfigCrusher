@@ -1,16 +1,18 @@
 digraph doDaemonEviction {
 node [shape=record];
-456466341 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1752596197 [label="L0\lLINENUMBER 2080 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-517764425 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lRETURN\lL5\l"];
-1180639575 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+308636274 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1422946164 [label="L0\lLINENUMBER 2080 L0\lLDC \"0b85013f-49e5-4784-bffe-e80e222bb195\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1446799313 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+296272974 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lLDC \"0b85013f-49e5-4784-bffe-e80e222bb195\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
 entry;
 exit;
-entry -> 1752596197;
-456466341 -> 517764425;
-1752596197 -> 517764425;
-1752596197 -> 1180639575;
-517764425 -> exit;
-1180639575 -> 456466341;
-1180639575 -> 517764425;
+entry -> 1422946164;
+308636274 -> 1446799313;
+308636274 -> 296272974;
+1422946164 -> 308636274;
+1422946164 -> 296272974;
+1446799313 -> 296272974;
+296272974 -> exit;
+1422946164[fontcolor="purple", penwidth=3, color="purple"];
+296272974[fontcolor="purple", penwidth=3, color="purple"];
 }

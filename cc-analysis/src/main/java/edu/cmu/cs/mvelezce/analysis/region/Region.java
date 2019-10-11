@@ -22,6 +22,10 @@ public class Region {
     this.duration = builder.duration;
   }
 
+  public UUID getId() {
+    return id;
+  }
+
   //  public UUID getId() {
   //    return id;
   //  }

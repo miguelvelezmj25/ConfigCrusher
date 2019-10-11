@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.graphBuilder;
+package edu.cmu.cs.mvelezce.instrument.region.utils.graphBuilder;
 
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.builder.cfg.CFGBuilder;

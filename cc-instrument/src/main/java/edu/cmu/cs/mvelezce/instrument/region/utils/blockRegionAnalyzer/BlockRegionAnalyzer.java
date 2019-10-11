@@ -1,8 +1,8 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionAnalyzer;
+package edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.BlockRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.graphBuilder.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.graphBuilder.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.PrettyMethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;

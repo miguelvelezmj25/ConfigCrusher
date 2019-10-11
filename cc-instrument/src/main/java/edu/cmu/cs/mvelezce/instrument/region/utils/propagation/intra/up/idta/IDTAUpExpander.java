@@ -1,10 +1,10 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.idta;
+package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.blockRegionMatcher.BlockRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta.BaseIDTAExpander;
-import edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.up.BaseUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpExpander;
 
 import javax.annotation.Nullable;
 import java.util.Map;

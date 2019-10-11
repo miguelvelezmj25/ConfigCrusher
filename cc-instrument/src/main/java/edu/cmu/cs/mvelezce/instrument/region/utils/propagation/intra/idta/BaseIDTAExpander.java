@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.instrument.region.transformer.utils.propagation.intra.idta;
+package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;

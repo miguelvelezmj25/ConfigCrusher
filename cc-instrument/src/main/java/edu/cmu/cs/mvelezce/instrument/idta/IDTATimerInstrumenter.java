@@ -3,11 +3,11 @@ package edu.cmu.cs.mvelezce.instrument.idta;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.explorer.idta.results.statement.info.ControlFlowStatementConstraintsPretty;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
 import edu.cmu.cs.mvelezce.utils.Options;
 
@@ -72,7 +72,7 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
-    Set<ControlFlowStatementConstraintsPretty> regionsToPrettyConstraints = new HashSet<>();
+    Set<RegionConstraintPretty> regionsToPrettyConstraints = new HashSet<>();
 
     for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : regionsToData.entrySet()) {
       Set<String> prettyConstraints = new HashSet<>();
@@ -85,13 +85,14 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
       }
 
       JavaRegion region = entry.getKey();
-      ControlFlowStatementConstraintsPretty regionToPrettyConstraints =
-          new ControlFlowStatementConstraintsPretty(
+      RegionConstraintPretty regionToPrettyConstraints =
+          new RegionConstraintPretty(
               region.getRegionPackage(),
               region.getRegionClass(),
               region.getRegionMethod(),
               region.getStartIndex(),
-              prettyConstraints);
+              prettyConstraints,
+              region.getId().toString());
 
       regionsToPrettyConstraints.add(regionToPrettyConstraints);
     }

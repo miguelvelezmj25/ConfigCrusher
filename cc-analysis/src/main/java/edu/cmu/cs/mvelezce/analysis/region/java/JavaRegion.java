@@ -62,6 +62,10 @@ public class JavaRegion extends Region {
     this.startMethodBlock = startMethodBlock;
   }
 
+  public Set<MethodBlock> getEndMethodBlocks() {
+    return endMethodBlocks;
+  }
+
   public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
     this.endMethodBlocks = endMethodBlocks;
   }

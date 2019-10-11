@@ -7,9 +7,7 @@ import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrumenter {
 
@@ -36,6 +34,63 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
   }
 
   private void instrumentEntireMethod(MethodNode methodNode, JavaRegion region) {
+    this.instrumentEntireMethodStart(methodNode, region);
+    this.instrumentEntireMethodEnd(methodNode, region);
+  }
+
+  private void instrumentEntireMethodEnd(MethodNode methodNode, JavaRegion region) {
+    InsnList insnList = methodNode.instructions;
+    Set<MethodBlock> endBlocks = region.getEndMethodBlocks();
+
+    for (MethodBlock endBlock : endBlocks) {
+      List<AbstractInsnNode> blockInstructions = endBlock.getInstructions();
+      AbstractInsnNode lastInsn = blockInstructions.get(blockInstructions.size() - 1);
+      int opcodeLastInsn = lastInsn.getOpcode();
+
+      if (this.isExitMethodInsn(opcodeLastInsn)) {
+        InsnList endInstructions = this.getEndRegionInsnList(region);
+        insnList.insertBefore(lastInsn, endInstructions);
+      } else {
+        // Some blocks might have a label node at the end of the block
+        lastInsn = blockInstructions.get(blockInstructions.size() - 2);
+        opcodeLastInsn = lastInsn.getOpcode();
+
+        if (this.isExitMethodInsn(opcodeLastInsn)) {
+          InsnList endInstructions = this.getEndRegionInsnList(region);
+          insnList.insertBefore(lastInsn, endInstructions);
+        } else {
+          //          if(!this.getMethodsToGraphs().get(methodNode).isWithWhileTrue()) {
+          //            throw new RuntimeException("The last instruction in a method with return is
+          // not
+          // a return instruction");
+          //          }
+          throw new RuntimeException("Handle this case");
+        }
+      }
+    }
+  }
+
+  private boolean isExitMethodInsn(int opcodeLastInsn) {
+    return (opcodeLastInsn >= Opcodes.IRETURN && opcodeLastInsn <= Opcodes.RETURN)
+        || opcodeLastInsn == Opcodes.RET
+        || opcodeLastInsn == Opcodes.ATHROW;
+  }
+
+  private InsnList getEndRegionInsnList(JavaRegion region) {
+    InsnList instructionsEndRegion = new InsnList();
+    instructionsEndRegion.add(new LdcInsnNode(region.getId().toString()));
+    instructionsEndRegion.add(
+        new MethodInsnNode(
+            Opcodes.INVOKESTATIC,
+            RegionsManager.INTERNAL_NAME,
+            RegionsManager.EXIT_REGION,
+            RegionsManager.REGION_DESCRIPTOR,
+            false));
+
+    return instructionsEndRegion;
+  }
+
+  private void instrumentEntireMethodStart(MethodNode methodNode, JavaRegion region) {
     InsnList startRegionInsnList = this.getStartRegionInsnList(region);
 
     InsnList insnList = methodNode.instructions;

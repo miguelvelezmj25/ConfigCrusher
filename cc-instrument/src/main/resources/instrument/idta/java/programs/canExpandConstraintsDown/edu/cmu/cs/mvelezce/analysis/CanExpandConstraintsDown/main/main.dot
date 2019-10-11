@@ -1,0 +1,21 @@
+digraph main {
+node [shape=record];
+602280210 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+670503317 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+92962244 [label="ILOAD 2\lIFEQ L3\l"];
+1639319040 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+873134840 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lRETURN\lL7\l"];
+1647891936 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 602280210;
+602280210 -> 92962244;
+602280210 -> 1639319040;
+670503317 -> 1639319040;
+92962244 -> 670503317;
+92962244 -> 1639319040;
+1639319040 -> 873134840;
+1639319040 -> 1647891936;
+873134840 -> exit;
+1647891936 -> 873134840;
+}

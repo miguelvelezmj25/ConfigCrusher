@@ -19,11 +19,11 @@ public class IDTADownExpander extends BaseDownExpander<Set<FeatureExpr>> {
       String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
-      Map<JavaRegion, Set<FeatureExpr>> regionsToData) {
+      Map<JavaRegion, Set<FeatureExpr>> regionsToData,
+      BaseIDTAExpander baseIDTAExpander) {
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
 
-    this.baseIDTAExpander = BaseIDTAExpander.getInstance();
-    this.baseIDTAExpander.init(regionsToData.values());
+    this.baseIDTAExpander = baseIDTAExpander;
   }
 
   @Override

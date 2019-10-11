@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.BaseExpander;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class BaseUpExpander<T> extends BlockRegionAnalyzer<T> {
+public abstract class BaseUpExpander<T> extends BaseExpander<T> {
 
   public BaseUpExpander(
       String programName,

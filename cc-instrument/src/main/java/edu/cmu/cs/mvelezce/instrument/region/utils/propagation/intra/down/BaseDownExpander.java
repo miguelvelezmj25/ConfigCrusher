@@ -1,15 +1,15 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.BaseExpander;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-public abstract class BaseDownExpander<T> extends BlockRegionAnalyzer<T> {
+public abstract class BaseDownExpander<T> extends BaseExpander<T> {
   public BaseDownExpander(
       String programName,
       String debugDir,

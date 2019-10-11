@@ -1,20 +1,21 @@
-package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta;
+package edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
-import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
+public class IDTAStartEndRegionBlocksSetter
+    extends BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> {
 
   private final BaseIDTAExpander baseIDTAExpander;
 
-  public IDTAUpExpander(
+  public IDTAStartEndRegionBlocksSetter(
       String programName,
       String debugDir,
       Set<String> options,
@@ -27,28 +28,10 @@ public class IDTAUpExpander extends BaseUpExpander<Set<FeatureExpr>> {
   }
 
   @Override
-  protected boolean containsAll(
-      @Nullable Set<FeatureExpr> upConstraints, @Nullable Set<FeatureExpr> thisConstraints) {
-    return this.baseIDTAExpander.containsAll(upConstraints, thisConstraints);
-  }
-
-  @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
     Set<FeatureExpr> constraints = this.getData(region);
     Set<String> options = this.getOptions();
 
     return this.baseIDTAExpander.prettyPrintConstraints(constraints, options);
-  }
-
-  @Override
-  protected boolean canExpandUp(
-      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
-    return this.baseIDTAExpander.canExpandConstraints(thisConstraints, thatConstraints);
-  }
-
-  @Override
-  protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> upConstraints) {
-    return this.baseIDTAExpander.mergeData(thisConstraints, upConstraints);
   }
 }

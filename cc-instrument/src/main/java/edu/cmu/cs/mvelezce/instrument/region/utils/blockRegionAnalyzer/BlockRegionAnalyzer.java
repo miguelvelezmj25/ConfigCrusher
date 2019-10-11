@@ -94,22 +94,24 @@ public abstract class BlockRegionAnalyzer<T> {
     String dotString = this.debugBlockData(methodNode, graph, blocksToRegions);
 
     try {
-      String methodNameSuffix = "-blockData";
+      String debugFileName = this.debugFileName(methodNode.name);
       PrettyMethodGraph.saveDotFile(
           dotString,
           this.debugDir,
           this.programName,
           classNode.name,
           methodNode.name,
-          methodNameSuffix);
+          debugFileName);
       PrettyMethodGraph.savePdfFile(
-          this.debugDir, this.programName, classNode.name, methodNode.name, methodNameSuffix);
+          this.debugDir, this.programName, classNode.name, methodNode.name, debugFileName);
     } catch (FileNotFoundException fnfe) {
       throw new RuntimeException(fnfe);
     } catch (InterruptedException | IOException ieioe) {
       ieioe.printStackTrace();
     }
   }
+
+  protected abstract String debugFileName(String methodName);
 
   private String debugBlockData(
       MethodNode methodNode,
@@ -168,6 +170,10 @@ public abstract class BlockRegionAnalyzer<T> {
 
   protected void addRegionToData(JavaRegion region, @Nullable T data) {
     this.regionsToData.put(region, data);
+  }
+
+  protected void removeRegionToData(JavaRegion region) {
+    this.regionsToData.remove(region);
   }
 
   protected abstract String getPrettyData(@Nullable JavaRegion region);

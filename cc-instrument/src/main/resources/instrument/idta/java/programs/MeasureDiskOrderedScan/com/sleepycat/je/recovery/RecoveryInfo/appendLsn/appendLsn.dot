@@ -1,0 +1,13 @@
+digraph appendLsn {
+node [shape=record];
+821717043 [label="L1\lLINENUMBER 97 L1\lFRAME SAME\lRETURN\lL3\l"];
+1184089280 [label="L2\lLINENUMBER 95 L2\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
+1330303613 [label="L0\lLINENUMBER 94 L0\lLLOAD 3\lLDC -1\lLCMP\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 1330303613;
+821717043 -> exit;
+1184089280 -> 821717043;
+1330303613 -> 821717043;
+1330303613 -> 1184089280;
+}

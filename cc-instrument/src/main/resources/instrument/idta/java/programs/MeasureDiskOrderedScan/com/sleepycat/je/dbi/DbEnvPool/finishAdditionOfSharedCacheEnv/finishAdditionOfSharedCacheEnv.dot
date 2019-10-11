@@ -1,0 +1,26 @@
+digraph finishAdditionOfSharedCacheEnv {
+node [shape=record];
+1253167692 [label="L0\lLINENUMBER 296 L0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getSharedCache ()Z\lIFEQ L1\l"];
+1703240110 [label="L1\lLINENUMBER 303 L1\lFRAME SAME\lRETURN\lL6\l"];
+916655133 [label="L5\lLINENUMBER 301 L5\lFRAME SAME\lALOAD 0\lLDC -1\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/dbi/DbEnvPool.resetSharedCache (JLcom/sleepycat/je/dbi/EnvironmentImpl;)V\l"];
+2005626727 [label="L3\lLINENUMBER 300 L3\lFRAME SAME\lGETSTATIC com/sleepycat/je/dbi/DbEnvPool.$assertionsDisabled : Z\lIFNE L5\l"];
+1658649077 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+969799721 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.checkEnv (Lcom/sleepycat/je/dbi/EnvironmentImpl;)Z\lIFNE L5\l"];
+871168228 [label="L4\lLINENUMBER 298 L4\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState ()Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+70351375 [label="L2\lLINENUMBER 297 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.sharedCacheEnvs : Ljava/util/Set;\lALOAD 1\lINVOKEINTERFACE java/util/Set.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
+entry;
+exit;
+entry -> 1253167692;
+1253167692 -> 1703240110;
+1253167692 -> 70351375;
+1703240110 -> exit;
+916655133 -> 1703240110;
+2005626727 -> 916655133;
+2005626727 -> 969799721;
+1658649077 -> exit;
+969799721 -> 916655133;
+969799721 -> 1658649077;
+871168228 -> exit;
+70351375 -> 2005626727;
+70351375 -> 871168228;
+}

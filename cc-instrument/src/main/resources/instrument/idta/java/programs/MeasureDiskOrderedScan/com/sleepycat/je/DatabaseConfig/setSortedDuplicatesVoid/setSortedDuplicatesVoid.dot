@@ -1,0 +1,13 @@
+digraph setSortedDuplicatesVoid {
+node [shape=record];
+1461801265 [label="L0\lLINENUMBER 261 L0\lALOAD 0\lILOAD 1\lPUTFIELD com/sleepycat/je/DatabaseConfig.sortedDuplicates : Z\lL1\lLINENUMBER 262 L1\lILOAD 1\lIFEQ L2\l"];
+2068519072 [label="L3\lLINENUMBER 263 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.setKeyPrefixingVoid (Z)V\l"];
+1720157138 [label="L2\lLINENUMBER 265 L2\lFRAME SAME\lRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1461801265;
+1461801265 -> 2068519072;
+1461801265 -> 1720157138;
+2068519072 -> 1720157138;
+1720157138 -> exit;
+}

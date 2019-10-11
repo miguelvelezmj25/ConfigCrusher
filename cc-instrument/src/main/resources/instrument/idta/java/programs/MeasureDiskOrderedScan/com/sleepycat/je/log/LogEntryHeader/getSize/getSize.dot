@@ -1,0 +1,13 @@
+digraph getSize {
+node [shape=record];
+90084747 [label="L0\lLINENUMBER 341 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
+263742754 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lIRETURN\l"];
+400611511 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lIRETURN\lL3\l"];
+entry;
+exit;
+entry -> 90084747;
+90084747 -> 263742754;
+90084747 -> 400611511;
+263742754 -> exit;
+400611511 -> exit;
+}

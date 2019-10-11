@@ -4,11 +4,11 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownExpander;
-import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta.IDTADownExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta.IDTADownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
-import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpExpander;
-import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta.IDTAUpExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpIntraExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta.IDTAUpIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
@@ -24,8 +24,8 @@ import java.util.Set;
 public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   private static final String DEBUG_DIR = Options.DIRECTORY + "/instrument/idta/java/programs";
-  private final BaseUpExpander<Set<FeatureExpr>> upExpander;
-  private final BaseDownExpander<Set<FeatureExpr>> downExpander;
+  private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
+  private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
 
   private IDTAMethodTransformer(Builder builder)
@@ -42,16 +42,16 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     BaseIDTAExpander baseIDTAExpander = BaseIDTAExpander.getInstance();
     baseIDTAExpander.init(this.getRegionsToData().values());
 
-    this.upExpander =
-        new IDTAUpExpander(
+    this.upIntraExpander =
+        new IDTAUpIntraExpander(
             builder.programName,
             DEBUG_DIR,
             builder.options,
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             baseIDTAExpander);
-    this.downExpander =
-        new IDTADownExpander(
+    this.downIntraExpander =
+        new IDTADownIntraExpander(
             builder.programName,
             DEBUG_DIR,
             builder.options,
@@ -124,12 +124,13 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     boolean updatedBlocks = true;
 
     while (updatedBlocks) {
-      updatedBlocks = this.upExpander.processBlocks(methodNode, classNode);
-      updatedBlocks = updatedBlocks || this.downExpander.processBlocks(methodNode, classNode);
+      updatedBlocks = this.upIntraExpander.processBlocks(methodNode, classNode);
+      updatedBlocks = updatedBlocks || this.downIntraExpander.processBlocks(methodNode, classNode);
     }
 
     if (this.debug()) {
-      this.upExpander.debugBlockData(methodNode, classNode);
+      this.upIntraExpander.debugBlockData(methodNode, classNode);
+      this.upIntraExpander.validateAllBlocksHaveRegions(methodNode, classNode);
     }
   }
 

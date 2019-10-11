@@ -1,0 +1,15 @@
+digraph updateCacheUsage {
+node [shape=record];
+234236190 [label="ICONST_1\lGOTO L2\l"];
+2136122164 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+550186850 [label="L0\lLINENUMBER 1312 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.parent : Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLocalCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+1860712327 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+entry -> 550186850;
+234236190 -> 2136122164;
+2136122164 -> exit;
+550186850 -> 234236190;
+550186850 -> 1860712327;
+1860712327 -> 2136122164;
+}

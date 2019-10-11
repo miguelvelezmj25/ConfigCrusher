@@ -37,6 +37,10 @@ public abstract class BlockRegionAnalyzer<T> {
     this.regionsToData = regionsToData;
   }
 
+  protected BlockRegionMatcher getBlockRegionMatcher() {
+    return blockRegionMatcher;
+  }
+
   public boolean processBlocks(MethodNode methodNode, ClassNode classNode) {
     MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
 
@@ -81,7 +85,7 @@ public abstract class BlockRegionAnalyzer<T> {
       }
     }
 
-    //    this.debugBlockData(methodNode, graph, blocksToRegions);
+    //    System.out.println(this.debugBlockData(methodNode, graph, blocksToRegions));
 
     return updatedSomeBlock;
   }

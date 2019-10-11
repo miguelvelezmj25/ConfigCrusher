@@ -1,0 +1,21 @@
+digraph close {
+node [shape=record];
+1831521506 [label="L9\lLINENUMBER 550 L9\lFRAME SAME\lRETURN\lL12\l"];
+279517587 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lTRYCATCHBLOCK L3 L4 L2 java/lang/Error\lL0\lLINENUMBER 532 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.isClosed ()Z\lIFEQ L3\l"];
+796904941 [label="L4\lLINENUMBER 549 L4\lFRAME SAME\lGOTO L9\l"];
+194128902 [label="L1\lLINENUMBER 533 L1\lRETURN\l"];
+2000825360 [label="L7\lLINENUMBER 543 L7\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.removeCursor (Lcom/sleepycat/je/ForwardCursor;)V\lL8\lLINENUMBER 544 L8\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\l"];
+1201120262 [label="L3\lLINENUMBER 540 L3\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Cursor.checkEnv ()V\lL5\lLINENUMBER 541 L5\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\lL6\lLINENUMBER 542 L6\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lIFNULL L4\l"];
+401076949 [label="L2\lLINENUMBER 546 L2\lFRAME SAME1 java/lang/Error\lASTORE 1\lL10\lLINENUMBER 547 L10\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL11\lLINENUMBER 548 L11\lALOAD 1\lATHROW\l"];
+entry;
+exit;
+1831521506 -> exit;
+entry -> 279517587;
+279517587 -> 194128902;
+279517587 -> 1201120262;
+796904941 -> 1831521506;
+194128902 -> exit;
+2000825360 -> 796904941;
+1201120262 -> 796904941;
+1201120262 -> 2000825360;
+}

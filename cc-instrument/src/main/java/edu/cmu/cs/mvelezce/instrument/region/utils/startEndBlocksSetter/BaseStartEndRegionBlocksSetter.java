@@ -127,11 +127,7 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       T reachableData = this.getData(reachableRegion);
 
       if (!regionData.equals(reachableData)) {
-        throw new RuntimeException(
-            "How could the reachable data "
-                + reachableData
-                + " that we supposedly cover not equal the region data"
-                + regionData);
+        continue;
       }
 
       blocksToRegions.put(reachable, null);
@@ -146,18 +142,16 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       throw new RuntimeException("Start and end equal");
     }
 
-    if (start.getSuccessors().size() == 1) {
-      //        && start.getSuccessors().iterator().next().equals(ipd)) {
+    if (graph.getExitBlock().equals(ipd)) {
+      //      this.getEndRegionBlocksWithReturn().addAll(ipd.getPredecessors());
+      ends.addAll(ipd.getPredecessors());
+    } else if (start.getSuccessors().size() == 1
+        && start.getSuccessors().iterator().next().equals(ipd)) {
       //      ends.add(start);
       //      if (graph.getExitBlock() == ipd) {
       //        this.getEndRegionBlocksWithReturn().add(start);
       //      }
       throw new RuntimeException("Handle case");
-    }
-
-    if (graph.getExitBlock().equals(ipd)) {
-      //      this.getEndRegionBlocksWithReturn().addAll(ipd.getPredecessors());
-      ends.addAll(ipd.getPredecessors());
     } else {
       ends.add(ipd);
     }

@@ -1,0 +1,16 @@
+digraph setLsn {
+node [shape=record];
+996613578 [label="L0\lLINENUMBER 1784 L0\lILOAD 4\lIFEQ L1\l"];
+266844407 [label="ALOAD 0\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getLsn (I)J\lLLOAD 2\lINVOKESPECIAL com/sleepycat/je/tree/IN.shouldUpdateLsn (JJ)Z\lIFEQ L2\l"];
+1770392114 [label="L1\lLINENUMBER 1786 L1\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lISTORE 5\lL3\lLINENUMBER 1789 L3\lALOAD 0\lILOAD 1\lLLOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setLsnInternal (IJ)V\lL4\lLINENUMBER 1791 L4\lALOAD 0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lILOAD 5\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL5\lLINENUMBER 1792 L5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lDUP2\lBALOAD\lICONST_2\lIOR\lI2B\lBASTORE\lL6\lLINENUMBER 1793 L6\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\l"];
+319219043 [label="L2\lLINENUMBER 1795 L2\lFRAME SAME\lRETURN\lL7\l"];
+entry;
+exit;
+entry -> 996613578;
+996613578 -> 266844407;
+996613578 -> 1770392114;
+266844407 -> 1770392114;
+266844407 -> 319219043;
+1770392114 -> 319219043;
+319219043 -> exit;
+}

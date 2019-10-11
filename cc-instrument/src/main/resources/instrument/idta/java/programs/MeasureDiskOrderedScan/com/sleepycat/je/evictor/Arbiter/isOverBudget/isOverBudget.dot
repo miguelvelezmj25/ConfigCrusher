@@ -1,0 +1,15 @@
+digraph isOverBudget {
+node [shape=record];
+1690777814 [label="L0\lLINENUMBER 51 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lL1\lLINENUMBER 52 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getMaxMemory ()J\lLCMP\lIFLE L2\l"];
+122334632 [label="L2\lFRAME SAME\lICONST_0\l"];
+680133483 [label="ICONST_1\lGOTO L3\l"];
+1393339801 [label="L3\lLINENUMBER 51 L3\lFRAME SAME1 I\lIRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1690777814;
+1690777814 -> 122334632;
+1690777814 -> 680133483;
+122334632 -> 1393339801;
+680133483 -> 1393339801;
+1393339801 -> exit;
+}

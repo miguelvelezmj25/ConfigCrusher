@@ -1,0 +1,18 @@
+digraph mustGenerateVLSN {
+node [shape=record];
+705861234 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+1639557786 [label="L1\lFRAME SAME\lICONST_0\l"];
+173944567 [label="ICONST_1\lGOTO L2\l"];
+612404635 [label="L0\lLINENUMBER 120 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.inReplicationStream : Z\lIFEQ L1\l"];
+2070844598 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.clientVLSN : Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L1\l"];
+entry;
+exit;
+entry -> 612404635;
+705861234 -> exit;
+1639557786 -> 705861234;
+173944567 -> 705861234;
+612404635 -> 1639557786;
+612404635 -> 2070844598;
+2070844598 -> 1639557786;
+2070844598 -> 173944567;
+}

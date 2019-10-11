@@ -1,0 +1,15 @@
+digraph updateCacheUsage {
+node [shape=record];
+817792331 [label="ICONST_1\lGOTO L2\l"];
+1490103745 [label="L1\lFRAME SAME\lICONST_0\l"];
+207192664 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+566105340 [label="L0\lLINENUMBER 1340 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.usage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+entry;
+exit;
+entry -> 566105340;
+817792331 -> 207192664;
+1490103745 -> 207192664;
+207192664 -> exit;
+566105340 -> 817792331;
+566105340 -> 1490103745;
+}

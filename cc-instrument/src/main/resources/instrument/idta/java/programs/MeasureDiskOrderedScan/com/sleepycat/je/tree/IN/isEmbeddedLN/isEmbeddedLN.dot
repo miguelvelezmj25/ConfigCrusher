@@ -1,0 +1,15 @@
+digraph isEmbeddedLN {
+node [shape=record];
+1798583582 [label="L0\lLINENUMBER 1178 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lBALOAD\lBIPUSH 16\lIAND\lIFEQ L1\l"];
+267097106 [label="ICONST_1\lGOTO L2\l"];
+1627415461 [label="L1\lFRAME SAME\lICONST_0\l"];
+1108360432 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+entry;
+exit;
+entry -> 1798583582;
+1798583582 -> 267097106;
+1798583582 -> 1627415461;
+267097106 -> 1108360432;
+1627415461 -> 1108360432;
+1108360432 -> exit;
+}

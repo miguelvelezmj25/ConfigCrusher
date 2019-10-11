@@ -1,0 +1,15 @@
+digraph close {
+node [shape=record];
+1108824773 [label="L3\lFRAME SAME\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL4\lLINENUMBER 1075 L4\lRETURN\lL5\l"];
+983758498 [label="L1\lLINENUMBER 1073 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL org/apache/lucene/core/index/IndexWriter.rollback ()V\l"];
+66003609 [label="L0\lLINENUMBER 1070 L0\lALOAD 0\lGETFIELD org/apache/lucene/core/index/IndexWriter.config : Lorg/apache/lucene/core/index/LiveIndexWriterConfig;\lINVOKEVIRTUAL org/apache/lucene/core/index/LiveIndexWriterConfig.getCommitOnClose ()Z\lDUP\lLDC \"org/apache/lucene/core/index/IndexWriter.close()V.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L1\l"];
+218606690 [label="L2\lLINENUMBER 1071 L2\lALOAD 0\lINVOKESPECIAL org/apache/lucene/core/index/IndexWriter.shutdown ()V\lGOTO L3\l"];
+entry;
+exit;
+entry -> 66003609;
+1108824773 -> exit;
+983758498 -> 1108824773;
+66003609 -> 983758498;
+66003609 -> 218606690;
+218606690 -> 1108824773;
+}

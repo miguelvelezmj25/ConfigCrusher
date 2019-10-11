@@ -1,0 +1,25 @@
+digraph postUpdate {
+node [shape=record];
+1479711010 [label="L0\lLINENUMBER 411 L0\lILOAD 2\lALOAD 0\lALOAD 0\lGETFIELD org/apache/lucene/core/index/DocumentsWriter.deleteQueue : Lorg/apache/lucene/core/index/DocumentsWriterDeleteQueue;\lINVOKESPECIAL org/apache/lucene/core/index/DocumentsWriter.applyAllDeletes (Lorg/apache/lucene/core/index/DocumentsWriterDeleteQueue;)Z\lIOR\lISTORE 2\lL1\lLINENUMBER 412 L1\lALOAD 1\lDUP\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;Ljava/lang/String;)V\lIFNULL L2\l"];
+545614952 [label="L8\lFRAME APPEND [org/apache/lucene/core/index/DocumentsWriterPerThread]\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\l"];
+58803787 [label="L4\lFRAME SAME\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\lL10\lLINENUMBER 421 L10\lILOAD 2\lIRETURN\lL11\l"];
+1794359167 [label="L3\lLINENUMBER 413 L3\lILOAD 2\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/apache/lucene/core/index/DocumentsWriter.doFlush (Lorg/apache/lucene/core/index/DocumentsWriterPerThread;)Z\lIOR\lISTORE 2\lGOTO L4\l"];
+692048922 [label="L9\lLINENUMBER 417 L9\lILOAD 2\lALOAD 0\lALOAD 3\lINVOKESPECIAL org/apache/lucene/core/index/DocumentsWriter.doFlush (Lorg/apache/lucene/core/index/DocumentsWriterPerThread;)Z\lIOR\lISTORE 2\l"];
+439450310 [label="L2\lLINENUMBER 414 L2\lFRAME SAME\lALOAD 0\lGETFIELD org/apache/lucene/core/index/DocumentsWriter.config : Lorg/apache/lucene/core/index/LiveIndexWriterConfig;\lGETFIELD org/apache/lucene/core/index/LiveIndexWriterConfig.checkPendingFlushOnUpdate : Z\lDUP\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFEQEval (ILjava/lang/String;)V\lIFEQ L5\l"];
+1581285610 [label="L6\lLINENUMBER 415 L6\lALOAD 0\lGETFIELD org/apache/lucene/core/index/DocumentsWriter.flushControl : Lorg/apache/lucene/core/index/DocumentsWriterFlushControl;\lINVOKEVIRTUAL org/apache/lucene/core/index/DocumentsWriterFlushControl.nextPendingFlush ()Lorg/apache/lucene/core/index/DocumentsWriterPerThread;\lASTORE 3\lL7\lLINENUMBER 416 L7\lALOAD 3\lDUP\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;Ljava/lang/String;)V\lIFNULL L8\l"];
+1337341072 [label="L5\lFRAME CHOP 1\lLDC \"org/apache/lucene/core/index/DocumentsWriter.postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z.1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/explorer/gt/log/SubtracesLogger.exitDecision (Ljava/lang/String;)V\l"];
+entry;
+exit;
+1479711010 -> 1794359167;
+1479711010 -> 439450310;
+545614952 -> 1337341072;
+entry -> 1479711010;
+58803787 -> exit;
+1794359167 -> 58803787;
+692048922 -> 545614952;
+439450310 -> 1581285610;
+439450310 -> 1337341072;
+1581285610 -> 545614952;
+1581285610 -> 692048922;
+1337341072 -> 58803787;
+}

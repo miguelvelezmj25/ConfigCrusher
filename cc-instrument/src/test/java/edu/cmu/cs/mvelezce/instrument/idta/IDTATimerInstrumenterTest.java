@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time.IDTAExecutionTimeMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrumenter.instrument.Instrumenter;
 import org.junit.Test;
 
@@ -38,7 +39,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseTrivialAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -62,7 +69,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseIGenAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -86,7 +99,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseMeasureDiskOrderedScanAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -110,7 +129,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseIndexFilesAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -134,7 +159,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BasePngtasticAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -158,7 +189,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseCannotExpandConstraintsDownAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -182,7 +219,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseCanExpandConstraintsDownAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -206,7 +249,13 @@ public class IDTATimerInstrumenterTest {
     Set<String> options = new HashSet<>(BaseMultipleReturnsAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
-            programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
     args[0] = "-delres";

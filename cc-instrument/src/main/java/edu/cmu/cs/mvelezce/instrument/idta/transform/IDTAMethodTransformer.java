@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
@@ -11,6 +12,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpIn
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta.IDTAUpIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
+import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.utils.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -18,6 +20,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +30,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
+  private final IDTAMethodInstrumenter idtaMethodInstrumenter;
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
@@ -66,6 +70,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             baseIDTAExpander);
+    this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
   }
 
   @Override
@@ -75,8 +80,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    System.err.println("Implement actually instrumenting the method");
-    methodNode.visitMaxs(200, 200);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
+        this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
+    this.idtaMethodInstrumenter.instrument(methodNode, classNode, blocksToRegions);
   }
 
   @Override
@@ -141,6 +147,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     private final String classDir;
     private final Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints;
     private final Set<String> options;
+    private final IDTAMethodInstrumenter idtaMethodInstrumenter;
 
     private boolean debug = false;
 
@@ -149,12 +156,14 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         String mainClass,
         String classDir,
         Set<String> options,
-        Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints) {
+        Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints,
+        IDTAMethodInstrumenter idtaMethodInstrumenter) {
       this.programName = programName;
       this.mainClass = mainClass;
       this.classDir = classDir;
       this.regionsToConstraints = regionsToConstraints;
       this.options = options;
+      this.idtaMethodInstrumenter = idtaMethodInstrumenter;
     }
 
     public Builder setDebug(boolean debug) {

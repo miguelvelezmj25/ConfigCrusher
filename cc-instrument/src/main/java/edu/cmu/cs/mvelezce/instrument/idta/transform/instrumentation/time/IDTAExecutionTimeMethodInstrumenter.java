@@ -16,21 +16,32 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
       MethodNode methodNode,
       ClassNode classNode,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    Collection<JavaRegion> regionsInMethod = blocksToRegions.values();
-    regionsInMethod.removeIf(Objects::isNull);
+    List<JavaRegion> orderedRegionsInMethod = this.getOrderedRegionsInMethod(blocksToRegions);
+    orderedRegionsInMethod.removeIf(Objects::isNull);
 
-    if (regionsInMethod.isEmpty()) {
+    if (orderedRegionsInMethod.isEmpty()) {
       throw new RuntimeException(
           classNode.name + " - " + methodNode.name + " does not have any regions");
     }
 
-    if (regionsInMethod.size() == 1) {
-      this.instrumentEntireMethod(methodNode, regionsInMethod.iterator().next());
+    if (orderedRegionsInMethod.size() == 1) {
+      this.instrumentEntireMethod(methodNode, orderedRegionsInMethod.iterator().next());
     } else {
-      this.instrumentMethod(methodNode, regionsInMethod);
+      this.instrumentMethod(methodNode, orderedRegionsInMethod);
     }
 
     methodNode.visitMaxs(200, 200);
+  }
+
+  private List<JavaRegion> getOrderedRegionsInMethod(
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    List<JavaRegion> orderedRegions = new ArrayList<>();
+
+    for (Map.Entry<MethodBlock, JavaRegion> entry : blocksToRegions.entrySet()) {
+      orderedRegions.add(entry.getValue());
+    }
+
+    return orderedRegions;
   }
 
   private void instrumentEntireMethod(MethodNode methodNode, JavaRegion region) {
@@ -112,7 +123,51 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
     return instructionsStartRegion;
   }
 
-  private void instrumentMethod(MethodNode methodNode, Collection<JavaRegion> regionsInMethod) {
-    throw new UnsupportedOperationException("implement");
+  private void instrumentMethod(MethodNode methodNode, List<JavaRegion> orderedRegionsInMethod) {
+    this.instrumentSameBlock(methodNode, orderedRegionsInMethod);
+    this.instrumentNormal(methodNode, orderedRegionsInMethod);
+  }
+
+  private void instrumentNormal(MethodNode methodNode, List<JavaRegion> orderedRegionsInMethod) {
+    List<JavaRegion> reversedOrderedRegions = new ArrayList<>(orderedRegionsInMethod);
+    Collections.reverse(reversedOrderedRegions);
+
+    for (JavaRegion region : reversedOrderedRegions) {
+      this.instrumentNormalStart(methodNode, region);
+    }
+  }
+
+  private void instrumentNormalStart(MethodNode methodNode, JavaRegion region) {
+    MethodBlock startBlock = region.getStartMethodBlock();
+    AbstractInsnNode firstStartInsn = startBlock.getInstructions().get(0);
+    InsnList insnList = methodNode.instructions;
+
+    if (!insnList.contains(firstStartInsn)) {
+      throw new RuntimeException(
+          "The first instruction of this block is not in the method node instructions");
+    }
+
+    InsnList startRegionInsnList = this.getStartRegionInsnList(region);
+    insnList.insert(firstStartInsn, startRegionInsnList);
+  }
+
+  private void instrumentSameBlock(MethodNode methodNode, List<JavaRegion> orderedRegionsInMethod) {
+    for (JavaRegion region : orderedRegionsInMethod) {
+      if (this.startAndEndInSameBlock(region)) {
+        throw new UnsupportedOperationException("Handle this case");
+      }
+    }
+  }
+
+  private boolean startAndEndInSameBlock(JavaRegion region) {
+    Set<MethodBlock> endBlocks = region.getEndMethodBlocks();
+
+    if (endBlocks.size() != 1) {
+      return false;
+    }
+
+    MethodBlock startBlock = region.getStartMethodBlock();
+
+    return region.getEndMethodBlocks().iterator().next().equals(startBlock);
   }
 }

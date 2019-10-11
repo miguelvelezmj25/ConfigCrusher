@@ -62,6 +62,8 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
 
   @Override
   protected void writeToFile(Map<JavaRegion, Set<FeatureExpr>> regionsToData) throws IOException {
+    System.err.println(
+        "The index of the regions might not be accurate. Not sure at the moment if we need the index for later analysis or understanding");
     String outputFile =
         IDTAMethodTransformer.DEBUG_DIR
             + "/"

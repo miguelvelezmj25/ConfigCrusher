@@ -9,6 +9,15 @@ import java.util.LinkedHashMap;
 
 public interface IDTAMethodInstrumenter {
 
+  Void errorMessage = errorMessage();
+
+  static Void errorMessage() {
+    System.err.println(
+        "This interface is not specific to IDTA. Hence, we can probably move it up to a 'MethodInstrumenter'");
+
+    return null;
+  }
+
   void instrument(
       MethodNode methodNode,
       ClassNode classNode,

@@ -1,0 +1,26 @@
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Trivial",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A"
+    ],
+    "id": "0d4be61c-d36d-4792-90d1-04eaa999f783"
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Trivial",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 2,
+    "info": [],
+    "prettyConstraints": [
+      "!B",
+      "B"
+    ],
+    "id": "277234b4-d36b-4167-b1d0-dad418d9105b"
+  }
+]

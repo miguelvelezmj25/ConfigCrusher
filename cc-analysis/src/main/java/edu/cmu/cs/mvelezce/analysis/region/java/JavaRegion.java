@@ -58,6 +58,10 @@ public class JavaRegion extends Region {
     return startIndex;
   }
 
+  public MethodBlock getStartMethodBlock() {
+    return startMethodBlock;
+  }
+
   public void setStartMethodBlock(MethodBlock startMethodBlock) {
     this.startMethodBlock = startMethodBlock;
   }

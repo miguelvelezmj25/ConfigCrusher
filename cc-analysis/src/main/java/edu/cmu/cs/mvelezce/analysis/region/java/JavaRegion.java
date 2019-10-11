@@ -1,6 +1,10 @@
 package edu.cmu.cs.mvelezce.analysis.region.java;
 
 import edu.cmu.cs.mvelezce.analysis.region.Region;
+import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class JavaRegion extends Region {
 
@@ -12,8 +16,8 @@ public class JavaRegion extends Region {
   //  private int startRegionIndex;
   //  private String startBlockID;
   //  private Set<String> endBlocksIDs;
-  //  private MethodBlock startMethodBlock;
-  //  private Set<MethodBlock> endMethodBlocks;
+  private MethodBlock startMethodBlock;
+  private Set<MethodBlock> endMethodBlocks;
 
   // Dummy constructor for faster xml
   private JavaRegion() {
@@ -21,6 +25,8 @@ public class JavaRegion extends Region {
     this.regionClass = "";
     this.regionMethod = "";
     this.startIndex = -1;
+    this.startMethodBlock = new MethodBlock("");
+    this.endMethodBlocks = new HashSet<>();
   }
 
   private JavaRegion(Builder builder) {
@@ -30,8 +36,8 @@ public class JavaRegion extends Region {
     this.regionMethod = builder.regionMethod;
     this.startIndex = builder.startIndex;
     //    this.startRegionIndex = builder.startBytecodeIndex;
-    //    this.startMethodBlock = builder.startMethodBlock;
-    //    this.endMethodBlocks = builder.endMethodBlocks;
+    this.startMethodBlock = builder.startMethodBlock;
+    this.endMethodBlocks = builder.endMethodBlocks;
     //    this.startBlockID = builder.startBlockID;
     //    this.endBlocksIDs = builder.endBlocksIDs;
   }
@@ -50,6 +56,14 @@ public class JavaRegion extends Region {
 
   public int getStartIndex() {
     return startIndex;
+  }
+
+  public void setStartMethodBlock(MethodBlock startMethodBlock) {
+    this.startMethodBlock = startMethodBlock;
+  }
+
+  public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
+    this.endMethodBlocks = endMethodBlocks;
   }
 
   //  // TODO this implementation might brake the implementation in other CC components since they
@@ -168,8 +182,8 @@ public class JavaRegion extends Region {
     private final int startIndex;
 
     //    private int startBytecodeIndex = Integer.MIN_VALUE;
-    //    private MethodBlock startMethodBlock = null;
-    //    private Set<MethodBlock> endMethodBlocks = new HashSet<>();
+    private MethodBlock startMethodBlock = null;
+    private Set<MethodBlock> endMethodBlocks = new HashSet<>();
     //    private String startBlockID = "";
     //    private Set<String> endBlocksIDs = new HashSet<>();
 
@@ -192,15 +206,15 @@ public class JavaRegion extends Region {
     //      return this;
     //    }
     //
-    //    public Builder startMethodBlock(MethodBlock startMethodBlock) {
-    //      this.startMethodBlock = startMethodBlock;
-    //      return this;
-    //    }
-    //
-    //    public Builder endMethodBlocks(Set<MethodBlock> endMethodBlocks) {
-    //      this.endMethodBlocks = endMethodBlocks;
-    //      return this;
-    //    }
+    public Builder startMethodBlock(MethodBlock startMethodBlock) {
+      this.startMethodBlock = startMethodBlock;
+      return this;
+    }
+
+    public Builder endMethodBlocks(Set<MethodBlock> endMethodBlocks) {
+      this.endMethodBlocks = endMethodBlocks;
+      return this;
+    }
     //
     //    public Builder startBlockID(String startBlockID) {
     //      this.startBlockID = startBlockID;

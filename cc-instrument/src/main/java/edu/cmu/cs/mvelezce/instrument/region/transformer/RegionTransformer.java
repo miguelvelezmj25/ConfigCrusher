@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.BaseMethodTransform
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -59,7 +60,16 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   @Override
-  public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    this.blockRegionMatcher.matchBlocksToRegions(methodNode, classNode);
+  public void transformMethods(Set<ClassNode> classNodes) throws IOException {
+    for (ClassNode classNode : classNodes) {
+      for (MethodNode methodNode : classNode.methods) {
+        this.blockRegionMatcher.matchBlocksToRegions(methodNode, classNode);
+      }
+    }
+
+    this.transformRegions(classNodes);
+    super.transformMethods(classNodes);
   }
+
+  protected abstract void transformRegions(Set<ClassNode> classNodes);
 }

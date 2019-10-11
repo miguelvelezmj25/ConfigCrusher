@@ -58,11 +58,29 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    super.transformMethod(methodNode, classNode);
-
-    this.expandRegionsIntra(methodNode, classNode);
-
+    System.err.println("Implement actually instrumenting the method");
     methodNode.visitMaxs(200, 200);
+  }
+
+  @Override
+  protected void transformRegions(Set<ClassNode> classNodes) {
+    this.propagateRegionsIntra(classNodes);
+    System.err.println("Expand regions interprocedural and repeat until fix point");
+    //    this.setStartAndEndBlocks(classNodes);
+  }
+
+  private void propagateRegionsIntra(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
+        this.expandRegionsIntra(methodNode, classNode);
+      }
+    }
   }
 
   private void expandRegionsIntra(MethodNode methodNode, ClassNode classNode) {

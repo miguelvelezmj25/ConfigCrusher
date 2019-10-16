@@ -2,10 +2,12 @@ package edu.cmu.cs.mvelezce.adapter.adapters.subtraces;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
-public abstract class AbstractSubtracesAdapter extends BaseAdapter {
+public class BaseSubtracesAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "subtraces";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Subtraces";
@@ -19,17 +21,22 @@ public abstract class AbstractSubtracesAdapter extends BaseAdapter {
 
   private static final String[] OPTIONS = {"A", "B", "C"};
 
-  public AbstractSubtracesAdapter() {
+  public BaseSubtracesAdapter() {
     // TODO check that we are passing empty string
     super(
-        AbstractSubtracesAdapter.PROGRAM_NAME,
-        AbstractSubtracesAdapter.MAIN_CLASS,
+        BaseSubtracesAdapter.PROGRAM_NAME,
+        BaseSubtracesAdapter.MAIN_CLASS,
         "",
-        AbstractSubtracesAdapter.getListOfOptions());
+        BaseSubtracesAdapter.getListOfOptions());
   }
 
-  // TODO abstract method in base adapter?
   public static List<String> getListOfOptions() {
-    return Arrays.asList(AbstractSubtracesAdapter.OPTIONS);
+    return Arrays.asList(BaseSubtracesAdapter.OPTIONS);
+  }
+
+  @Override
+  public void execute(Set<String> configuration, int iteration)
+      throws IOException, InterruptedException {
+    throw new UnsupportedOperationException("Implement");
   }
 }

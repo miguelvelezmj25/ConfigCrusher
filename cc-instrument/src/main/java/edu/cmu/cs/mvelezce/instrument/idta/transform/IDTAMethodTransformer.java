@@ -5,11 +5,13 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.cg.SootCallGraphBuilder;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta.IDTADownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta.IDTAUpIntraExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
@@ -17,6 +19,7 @@ import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransfor
 import edu.cmu.cs.mvelezce.utils.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import soot.jimple.toolkits.callgraph.CallGraph;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -32,6 +35,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
+  private final CallGraph callGraph;
+  private final SootAsmMethodMatcher sootAsmMethodMatcher;
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
@@ -71,6 +76,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             baseIDTAExpander);
+
+    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
+    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
     this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
   }
 
@@ -88,6 +96,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   @Override
   protected void transformRegions(Set<ClassNode> classNodes) {
+    this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
+
     this.propagateRegionsIntra(classNodes);
     System.err.println("Expand regions interprocedural and repeat until fix point");
     this.setStartAndEndBlocks(classNodes);

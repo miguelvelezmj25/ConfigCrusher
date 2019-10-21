@@ -28,7 +28,7 @@ public class InstrumenterUtils {
     return regionsInClass;
   }
 
-  private static String getClassPackage(ClassNode classNode) {
+  public static String getClassPackage(ClassNode classNode) {
     String classPackage = classNode.name;
     classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
     classPackage = classPackage.replace("/", ".");
@@ -36,14 +36,14 @@ public class InstrumenterUtils {
     return classPackage;
   }
 
-  private static String getClassName(ClassNode classNode) {
+  public static String getClassName(ClassNode classNode) {
     String className = classNode.name;
     className = className.substring(className.lastIndexOf("/") + 1);
 
     return className;
   }
 
-  private static String getMethodName(MethodNode methodNode) {
+  public static String getMethodName(MethodNode methodNode) {
     return methodNode.name + methodNode.desc;
   }
 

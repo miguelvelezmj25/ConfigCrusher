@@ -6,11 +6,11 @@ import soot.SootClass;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.options.Options;
 
-final class SootCallGraphBuilder {
+public final class SootCallGraphBuilder {
 
   private SootCallGraphBuilder() {}
 
-  static CallGraph buildCallGraph(String entryPoint, String appPath) {
+  public static CallGraph buildCallGraph(String entryPoint, String appPath) {
     initializeSoot(entryPoint, appPath);
 
     PackManager.v().getPack("wjpp").apply();

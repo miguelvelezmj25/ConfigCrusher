@@ -6,6 +6,8 @@ import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodI
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.cg.SootCallGraphBuilder;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.BaseInterExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.idta.BaseIDTAInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta.IDTADownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
@@ -33,6 +35,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
+  private final BaseInterExpander<Set<FeatureExpr>> interExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
   private final CallGraph callGraph;
@@ -79,6 +82,16 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
     this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
+
+    this.interExpander =
+        new BaseIDTAInterExpander(
+            builder.programName,
+            DEBUG_DIR,
+            builder.options,
+            this.getBlockRegionMatcher(),
+            this.getRegionsToData(),
+            this.callGraph,
+            this.sootAsmMethodMatcher);
     this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
   }
 
@@ -99,8 +112,27 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
 
     this.propagateRegionsIntra(classNodes);
+    this.propagateRegionsInter(classNodes);
     System.err.println("Expand regions interprocedural and repeat until fix point");
     this.setStartAndEndBlocks(classNodes);
+  }
+
+  private void propagateRegionsInter(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
+        this.expandRegionsInter(methodNode, classNode);
+      }
+    }
+  }
+
+  private void expandRegionsInter(MethodNode methodNode, ClassNode classNode) {
+    this.interExpander.processBlocks(methodNode, classNode);
   }
 
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {

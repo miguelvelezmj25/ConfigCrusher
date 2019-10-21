@@ -19,6 +19,7 @@ public final class SootAsmMethodMatcher {
 
   private static final SootAsmMethodMatcher INSTANCE = new SootAsmMethodMatcher();
 
+  private final Set<String> applicationPackages = new HashSet<>();
   private final Map<SootMethod, MethodNode> sootMethodsToMethodNodes = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodesToSootMethods = new HashMap<>();
 
@@ -39,13 +40,28 @@ public final class SootAsmMethodMatcher {
       }
     }
 
-    Set<String> applicationPackages = this.getApplicationPackages(classNodes);
+    this.calcApplicationPackages(classNodes);
+
     Map<String, MethodNode> fullyQualifiedMethodNodes =
         this.getFullyQualifiedMethodNodes(classNodes);
     Map<String, SootMethod> fullyQualifiedSootMethods =
-        this.getFullyQualifiedSootMethods(callGraph, applicationPackages);
+        this.getFullyQualifiedSootMethods(callGraph);
 
     this.matchMethodNodesAndSootMethods(fullyQualifiedMethodNodes, fullyQualifiedSootMethods);
+  }
+
+  @Nullable
+  public MethodNode getMethodNode(SootMethod sootMethod) {
+    return this.sootMethodsToMethodNodes.get(sootMethod);
+  }
+
+  @Nullable
+  public SootMethod getSootMethod(MethodNode methodNode) {
+    return this.methodNodesToSootMethods.get(methodNode);
+  }
+
+  public Set<String> getApplicationPackages() {
+    return applicationPackages;
   }
 
   private void matchMethodNodesAndSootMethods(
@@ -69,21 +85,20 @@ public final class SootAsmMethodMatcher {
     }
   }
 
-  private Map<String, SootMethod> getFullyQualifiedSootMethods(
-      CallGraph callGraph, Set<String> applicationPackages) {
+  private Map<String, SootMethod> getFullyQualifiedSootMethods(CallGraph callGraph) {
     Map<String, SootMethod> fullyQualifiedNamesToSootMethods = new HashMap<>();
     QueueReader<Edge> edges = callGraph.listener();
 
     while (edges.hasNext()) {
       Edge edge = edges.next();
 
-      String fullyQualifiedSootMethod = this.getFullyQualifiedName(edge.src(), applicationPackages);
+      String fullyQualifiedSootMethod = this.getFullyQualifiedName(edge.src());
 
       if (fullyQualifiedSootMethod != null) {
         fullyQualifiedNamesToSootMethods.put(fullyQualifiedSootMethod, edge.src());
       }
 
-      fullyQualifiedSootMethod = this.getFullyQualifiedName(edge.tgt(), applicationPackages);
+      fullyQualifiedSootMethod = this.getFullyQualifiedName(edge.tgt());
 
       if (fullyQualifiedSootMethod != null) {
         fullyQualifiedNamesToSootMethods.put(fullyQualifiedSootMethod, edge.tgt());
@@ -96,11 +111,11 @@ public final class SootAsmMethodMatcher {
   }
 
   @Nullable
-  private String getFullyQualifiedName(SootMethod sootMethod, Set<String> applicationPackages) {
+  private String getFullyQualifiedName(SootMethod sootMethod) {
     SootClass sootClass = sootMethod.getDeclaringClass();
     String packageName = sootClass.getPackageName();
 
-    if (!applicationPackages.contains(packageName)) {
+    if (!this.applicationPackages.contains(packageName)) {
       return null;
     }
 
@@ -113,15 +128,11 @@ public final class SootAsmMethodMatcher {
     return this.getFullyQualifiedName(packageName, sootClass.getShortName(), methodSignature);
   }
 
-  private Set<String> getApplicationPackages(Set<ClassNode> classNodes) {
-    Set<String> applicationPackages = new HashSet<>();
-
+  private void calcApplicationPackages(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
       String packageName = InstrumenterUtils.getClassPackage(classNode);
-      applicationPackages.add(packageName);
+      this.applicationPackages.add(packageName);
     }
-
-    return applicationPackages;
   }
 
   private Map<String, MethodNode> getFullyQualifiedMethodNodes(Set<ClassNode> classNodes) {

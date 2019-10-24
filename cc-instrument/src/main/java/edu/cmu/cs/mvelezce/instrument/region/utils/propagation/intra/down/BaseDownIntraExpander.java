@@ -43,7 +43,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       throw new RuntimeException("The data at this region cannot be null");
     }
 
-    while (!ipd.equals(exit) && this.canExpandDown(regionData, ipdData)) {
+    while (!ipd.equals(exit) && this.canExpandDataDown(regionData, ipdData)) {
       ipd = graph.getImmediatePostDominator(ipd);
       ipdRegion = blocksToRegions.get(ipd);
       ipdData = this.getData(ipdRegion);
@@ -96,7 +96,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
         continue;
       }
 
-      if (!this.canExpandDown(regionData, reachableData)) {
+      if (!this.canExpandDataDown(regionData, reachableData)) {
         MethodBlock reachableIPD = graph.getImmediatePostDominator(reachable);
         Set<MethodBlock> reachablesToSkip = graph.getReachableBlocks(reachable, reachableIPD);
         reachablesToSkip.remove(reachableIPD);
@@ -128,5 +128,5 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
 
   protected abstract T mergeData(T thisData, @Nullable T downData);
 
-  protected abstract boolean canExpandDown(@Nullable T thisData, @Nullable T downData);
+  protected abstract boolean canExpandDataDown(@Nullable T thisData, @Nullable T downData);
 }

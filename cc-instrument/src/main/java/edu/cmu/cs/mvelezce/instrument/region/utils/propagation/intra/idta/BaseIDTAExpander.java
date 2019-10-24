@@ -47,7 +47,7 @@ public final class BaseIDTAExpander {
     }
   }
 
-  public boolean canExpandConstraints(
+  public boolean canMergeConstraints(
       @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
     if (thisConstraints == null) {
       throw new RuntimeException("This case should never happen");
@@ -71,7 +71,7 @@ public final class BaseIDTAExpander {
       for (FeatureExpr thatConstraint : thatConstraints) {
         FeatureExpr newConstraint = thisConstraint.and(thatConstraint);
 
-        if (newConstraint.equals(BaseIDTAExpander.FALSE)) {
+        if (newConstraint.isContradiction()) {
           continue;
         }
 
@@ -79,7 +79,27 @@ public final class BaseIDTAExpander {
       }
     }
 
-    return this.globalConstraints.containsAll(newConstraints);
+    for (FeatureExpr newConstraint : newConstraints) {
+      boolean existsGlobalConstraint = false;
+
+      for (FeatureExpr globalConstraint : this.globalConstraints) {
+        if (globalConstraint.implies(newConstraint).isTautology()) {
+          existsGlobalConstraint = true;
+          break;
+        }
+      }
+
+      if (!existsGlobalConstraint) {
+        return false;
+      }
+    }
+
+    if (!this.globalConstraints.containsAll(newConstraints)) {
+      throw new RuntimeException(
+          "The global set of constraints does not include all of the new constraints that we derived, but all of the new constraints are implied by at least one global constraints");
+    }
+
+    return true;
   }
 
   public boolean containsAll(Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
@@ -91,7 +111,7 @@ public final class BaseIDTAExpander {
   }
 
   public Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
+      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
     Set<FeatureExpr> newConstraints = new HashSet<>(thisConstraints);
 
     if (thatConstraints == null) {

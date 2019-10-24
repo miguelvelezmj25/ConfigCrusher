@@ -41,9 +41,9 @@ public class IDTAUpIntraExpander extends BaseUpIntraExpander<Set<FeatureExpr>> {
   }
 
   @Override
-  protected boolean canExpandUp(
+  protected boolean canExpandDataUp(
       @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
-    return this.baseIDTAExpander.canExpandConstraints(thisConstraints, thatConstraints);
+    return this.baseIDTAExpander.canMergeConstraints(thisConstraints, thatConstraints);
   }
 
   @Override

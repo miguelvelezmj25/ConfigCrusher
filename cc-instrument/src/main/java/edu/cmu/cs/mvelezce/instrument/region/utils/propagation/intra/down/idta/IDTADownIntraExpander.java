@@ -38,9 +38,9 @@ public class IDTADownIntraExpander extends BaseDownIntraExpander<Set<FeatureExpr
   }
 
   @Override
-  protected boolean canExpandDown(
+  protected boolean canExpandDataDown(
       @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> downConstraints) {
-    return this.baseIDTAExpander.canExpandConstraints(thisConstraints, downConstraints);
+    return this.baseIDTAExpander.canMergeConstraints(thisConstraints, downConstraints);
   }
 
   @Override

@@ -46,7 +46,7 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
     }
 
     // If the data are the same, we do not want to process anything
-    if (regionData.equals(idData) || !this.canExpandUp(regionData, idData)) {
+    if (regionData.equals(idData) || !this.canExpandDataUp(regionData, idData)) {
       return new HashSet<>();
     }
 
@@ -79,7 +79,7 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
         continue;
       }
 
-      if (!this.canExpandUp(regionData, predData)) {
+      if (!this.canExpandDataUp(regionData, predData)) {
         System.err.println(
             "Might not be able to merge all constraints (e.g., up = {A}, {!A}; down = {A}, {B}; can only merge up {A}, not {B})");
         //        if (predBlock.isCatchWithImplicitThrow()) {
@@ -113,5 +113,5 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
 
   protected abstract T mergeData(T thisData, @Nullable T upData);
 
-  protected abstract boolean canExpandUp(@Nullable T thisData, @Nullable T upData);
+  protected abstract boolean canExpandDataUp(@Nullable T thisData, @Nullable T upData);
 }

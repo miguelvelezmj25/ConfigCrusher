@@ -81,7 +81,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       return false;
     }
 
-    throw new UnsupportedOperationException("Implement");
+    throw new UnsupportedOperationException("Implement to propagate the region to all callers");
   }
 
   private boolean canPropagateUp(T firstData, MethodNode methodNode) {
@@ -98,10 +98,11 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       return false;
     }
 
-    return this.some(firstData, callerSootMethodsToEdges);
+    return this.canPropagateUpToAllCallers(firstData, callerSootMethodsToEdges);
   }
 
-  private boolean some(T firstData, Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
+  private boolean canPropagateUpToAllCallers(
+      T firstData, Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
     for (Map.Entry<SootMethod, List<Edge>> entry : callerSootMethodsToEdges.entrySet()) {
       SootMethod sootMethod = entry.getKey();
       MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
@@ -116,7 +117,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
         JavaRegion callerRegion = blocks.get(callerBlock);
         T callerData = this.getData(callerRegion);
 
-        if (!this.canMoveUp(firstData, callerData)) {
+        if (!this.canExpandDataUp(firstData, callerData)) {
           return false;
         }
 
@@ -126,8 +127,6 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
     return true;
   }
-
-  protected abstract boolean canMoveUp(T firstData, @Nullable T callerData);
 
   private MethodBlock getCallerBlock(Set<MethodBlock> blocks, AbstractInsnNode callerInsn) {
     for (MethodBlock block : blocks) {
@@ -267,6 +266,8 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
     throw new UnsupportedOperationException("Implement");
     //    return "expandData/" + methodName;
   }
+
+  protected abstract boolean canExpandDataUp(T firstData, @Nullable T callerData);
 
   private static class EdgeComparator implements Comparator<Edge> {
 

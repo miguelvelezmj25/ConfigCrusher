@@ -22,6 +22,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
@@ -76,14 +77,14 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       return false;
     }
 
-    if (!this.canPropagateUp(methodNode)) {
+    if (!this.canPropagateUp(this.getData(firstRegion), methodNode)) {
       return false;
     }
 
     throw new UnsupportedOperationException("Implement");
   }
 
-  private boolean canPropagateUp(MethodNode methodNode) {
+  private boolean canPropagateUp(T firstData, MethodNode methodNode) {
     SootMethod sootMethod = this.sootAsmMethodMatcher.getSootMethod(methodNode);
 
     if (sootMethod == null) {
@@ -97,21 +98,46 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       return false;
     }
 
-    return this.some(callerSootMethodsToEdges);
+    return this.some(firstData, callerSootMethodsToEdges);
   }
 
-  private boolean some(Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
+  private boolean some(T firstData, Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
     for (Map.Entry<SootMethod, List<Edge>> entry : callerSootMethodsToEdges.entrySet()) {
+      SootMethod sootMethod = entry.getKey();
+      MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
+      LinkedHashMap<MethodBlock, JavaRegion> blocks =
+          this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
       List<Edge> edges = entry.getValue();
 
       for (int i = 0; i < edges.size(); i++) {
         Edge edge = edges.get(i);
         AbstractInsnNode callerInsn = this.getCallerInsn(edge, i);
+        MethodBlock callerBlock = this.getCallerBlock(blocks.keySet(), callerInsn);
+        JavaRegion callerRegion = blocks.get(callerBlock);
+        T callerData = this.getData(callerRegion);
+
+        if (!this.canMoveUp(firstData, callerData)) {
+          return false;
+        }
 
         System.out.println();
       }
     }
-    throw new UnsupportedOperationException("Implement");
+
+    return true;
+  }
+
+  protected abstract boolean canMoveUp(T firstData, @Nullable T callerData);
+
+  private MethodBlock getCallerBlock(Set<MethodBlock> blocks, AbstractInsnNode callerInsn) {
+    for (MethodBlock block : blocks) {
+      if (block.getInstructions().contains(callerInsn)) {
+        return block;
+      }
+    }
+
+    throw new RuntimeException(
+        "Could not find the block containing the instruction " + callerInsn.getOpcode());
   }
 
   private AbstractInsnNode getCallerInsn(Edge edge, int invokeIndex) {

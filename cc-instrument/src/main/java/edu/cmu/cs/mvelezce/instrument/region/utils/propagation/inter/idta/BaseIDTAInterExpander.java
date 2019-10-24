@@ -4,6 +4,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.BaseInterExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import soot.jimple.toolkits.callgraph.CallGraph;
 
@@ -13,6 +14,8 @@ import java.util.Set;
 
 public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
 
+  private final BaseIDTAExpander baseIDTAExpander;
+
   public BaseIDTAInterExpander(
       String programName,
       String debugDir,
@@ -20,7 +23,8 @@ public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
       CallGraph callGraph,
-      SootAsmMethodMatcher sootAsmMethodMatcher) {
+      SootAsmMethodMatcher sootAsmMethodMatcher,
+      BaseIDTAExpander baseIDTAExpander) {
     super(
         programName,
         debugDir,
@@ -29,6 +33,13 @@ public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
         regionsToData,
         callGraph,
         sootAsmMethodMatcher);
+
+    this.baseIDTAExpander = baseIDTAExpander;
+  }
+
+  @Override
+  protected boolean canMoveUp(Set<FeatureExpr> firstData, @Nullable Set<FeatureExpr> callerData) {
+    return this.baseIDTAExpander.canExpandConstraints(firstData, callerData);
   }
 
   @Override

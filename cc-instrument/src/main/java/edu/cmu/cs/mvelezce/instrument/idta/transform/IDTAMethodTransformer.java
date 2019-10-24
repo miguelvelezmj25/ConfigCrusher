@@ -91,7 +91,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             this.callGraph,
-            this.sootAsmMethodMatcher);
+            this.sootAsmMethodMatcher,
+            baseIDTAExpander);
     this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
   }
 

@@ -48,7 +48,7 @@ public final class BaseIDTAExpander {
   }
 
   public boolean canExpandConstraints(
-      Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
+      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
     if (thisConstraints == null) {
       throw new RuntimeException("This case should never happen");
     }

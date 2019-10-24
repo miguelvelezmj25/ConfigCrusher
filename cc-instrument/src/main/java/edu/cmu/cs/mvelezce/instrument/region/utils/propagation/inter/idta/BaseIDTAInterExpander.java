@@ -39,8 +39,20 @@ public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
 
   @Override
   protected boolean canExpandDataUp(
-      Set<FeatureExpr> firstData, @Nullable Set<FeatureExpr> callerData) {
-    return this.baseIDTAExpander.canMergeConstraints(firstData, callerData);
+      Set<FeatureExpr> firstRegionData, @Nullable Set<FeatureExpr> callerData) {
+    return this.baseIDTAExpander.canMergeConstraints(firstRegionData, callerData);
+  }
+
+  @Override
+  protected Set<FeatureExpr> mergeData(
+      Set<FeatureExpr> firstRegionData, @Nullable Set<FeatureExpr> callerData) {
+    return this.baseIDTAExpander.mergeData(firstRegionData, callerData);
+  }
+
+  @Override
+  protected boolean containsAll(
+      @Nullable Set<FeatureExpr> callerData, Set<FeatureExpr> firstRegionData) {
+    return this.baseIDTAExpander.containsAll(callerData, firstRegionData);
   }
 
   @Override

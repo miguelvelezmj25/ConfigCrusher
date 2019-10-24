@@ -57,7 +57,7 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   @Override
   public void compile() throws IOException, InterruptedException {
     System.err.println("Delete method once we are done with testing instrumenting");
-//    super.compile();
+    super.compile();
   }
 
   @Override

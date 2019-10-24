@@ -77,32 +77,78 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       return false;
     }
 
-    if (!this.canPropagateUp(this.getData(firstRegion), methodNode)) {
+    T firstRegionData = this.getData(firstRegion);
+
+    // Collecting this information will make the propagation step much simpler, since we do not need
+    // to recalculate blocks to propagate
+    Map<MethodNode, Set<MethodBlock>> methodsToBlocksToPropagate =
+        this.getMethodsToBlocksToPropagate(firstRegionData, methodNode);
+
+    // If the map is empty, we cannot propagate
+    if (methodsToBlocksToPropagate.isEmpty()) {
       return false;
     }
 
-    throw new UnsupportedOperationException("Implement to propagate the region to all callers");
+    return this.expandDataUp(firstRegionData, methodsToBlocksToPropagate);
   }
 
-  private boolean canPropagateUp(T firstData, MethodNode methodNode) {
+  private boolean expandDataUp(
+      T firstRegionData, Map<MethodNode, Set<MethodBlock>> methodsToBlocksToPropagate) {
+    boolean expandedDataUp = false;
+
+    for (Map.Entry<MethodNode, Set<MethodBlock>> entry : methodsToBlocksToPropagate.entrySet()) {
+      MethodNode callerMethodNode = entry.getKey();
+      LinkedHashMap<MethodBlock, JavaRegion> blocks =
+          this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(callerMethodNode);
+      Set<MethodBlock> callerBlocks = entry.getValue();
+
+      for (MethodBlock callerBlock : callerBlocks) {
+        JavaRegion callerRegion = blocks.get(callerBlock);
+        T callerData = this.getData(callerRegion);
+
+        if (firstRegionData.equals(callerData) || this.containsAll(callerData, firstRegionData)) {
+          continue;
+        }
+
+        if (callerRegion == null) {
+          throw new UnsupportedOperationException("Implement");
+        }
+
+        T newData = this.mergeData(firstRegionData, callerData);
+        this.addRegionToData(callerRegion, newData);
+        expandedDataUp = true;
+      }
+    }
+
+    return expandedDataUp;
+  }
+
+  private Map<MethodNode, Set<MethodBlock>> getMethodsToBlocksToPropagate(
+      T firstRegionData, MethodNode methodNode) {
+    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
+        this.getCallerSootMethodsToEdges(methodNode);
+
+    if (callerSootMethodsToEdges.isEmpty()) {
+      return new HashMap<>();
+    }
+
+    return this.canPropagateUpToAllCallers(firstRegionData, callerSootMethodsToEdges);
+  }
+
+  private Map<SootMethod, List<Edge>> getCallerSootMethodsToEdges(MethodNode methodNode) {
     SootMethod sootMethod = this.sootAsmMethodMatcher.getSootMethod(methodNode);
 
     if (sootMethod == null) {
       throw new RuntimeException("Could not find a soot method for " + methodNode.name);
     }
 
-    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
-        this.getCallerSootMethodsToEdges(sootMethod);
-
-    if (callerSootMethodsToEdges.isEmpty()) {
-      return false;
-    }
-
-    return this.canPropagateUpToAllCallers(firstData, callerSootMethodsToEdges);
+    return this.getCallerSootMethodsToEdges(sootMethod);
   }
 
-  private boolean canPropagateUpToAllCallers(
-      T firstData, Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
+  private Map<MethodNode, Set<MethodBlock>> canPropagateUpToAllCallers(
+      T firstRegionData, Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
+    Map<MethodNode, Set<MethodBlock>> methodsToBlocksToPropagate = new HashMap<>();
+
     for (Map.Entry<SootMethod, List<Edge>> entry : callerSootMethodsToEdges.entrySet()) {
       SootMethod sootMethod = entry.getKey();
       MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
@@ -117,15 +163,18 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
         JavaRegion callerRegion = blocks.get(callerBlock);
         T callerData = this.getData(callerRegion);
 
-        if (!this.canExpandDataUp(firstData, callerData)) {
-          return false;
+        if (!this.canExpandDataUp(firstRegionData, callerData)) {
+          methodsToBlocksToPropagate.clear();
+          return methodsToBlocksToPropagate;
         }
 
-        System.out.println();
+        methodsToBlocksToPropagate.putIfAbsent(methodNode, new HashSet<>());
+        Set<MethodBlock> blocksToPropagateTo = methodsToBlocksToPropagate.get(methodNode);
+        blocksToPropagateTo.add(callerBlock);
       }
     }
 
-    return true;
+    return methodsToBlocksToPropagate;
   }
 
   private MethodBlock getCallerBlock(Set<MethodBlock> blocks, AbstractInsnNode callerInsn) {
@@ -227,21 +276,8 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
             "Apparently, JRE methods could be callers to application methods. So, we used to check the callers of those JRE methods to find application methods. Not sure if this is still relevant now");
       }
 
-      callerSootMethodsToEdges.put(srcMethod, new ArrayList<>());
-    }
-
-    edgesInto = this.callGraph.edgesInto(sootMethod);
-
-    while (edgesInto.hasNext()) {
-      Edge edge = edgesInto.next();
-      SootMethod srcMethod = edge.src();
-
+      callerSootMethodsToEdges.putIfAbsent(srcMethod, new ArrayList<>());
       List<Edge> edges = callerSootMethodsToEdges.get(srcMethod);
-
-      if (edges == null) {
-        continue;
-      }
-
       edges.add(edge);
     }
 
@@ -267,7 +303,11 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
     //    return "expandData/" + methodName;
   }
 
-  protected abstract boolean canExpandDataUp(T firstData, @Nullable T callerData);
+  protected abstract boolean canExpandDataUp(T firstRegionData, @Nullable T callerData);
+
+  protected abstract T mergeData(T firstRegionData, @Nullable T callerData);
+
+  protected abstract boolean containsAll(@Nullable T callerData, T firstRegionData);
 
   private static class EdgeComparator implements Comparator<Edge> {
 

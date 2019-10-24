@@ -112,13 +112,19 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   protected void transformRegions(Set<ClassNode> classNodes) {
     this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
 
-    this.propagateRegionsIntra(classNodes);
-    this.propagateRegionsInter(classNodes);
-    System.err.println("Expand regions interprocedural and repeat until fix point");
+    boolean propagatedRegions = true;
+
+    while (propagatedRegions) {
+      propagatedRegions = this.propagateRegionsIntra(classNodes);
+      propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
+    }
+
     this.setStartAndEndBlocks(classNodes);
   }
 
-  private void propagateRegionsInter(Set<ClassNode> classNodes) {
+  private boolean propagateRegionsInter(Set<ClassNode> classNodes) {
+    boolean propagatedRegions = false;
+
     for (ClassNode classNode : classNodes) {
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
@@ -127,13 +133,15 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
-        this.expandRegionsInter(methodNode, classNode);
+        propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode, classNode);
       }
     }
+
+    return propagatedRegions;
   }
 
-  private void expandRegionsInter(MethodNode methodNode, ClassNode classNode) {
-    this.interExpander.processBlocks(methodNode, classNode);
+  private boolean expandRegionsInter(MethodNode methodNode, ClassNode classNode) {
+    return this.interExpander.processBlocks(methodNode, classNode);
   }
 
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
@@ -154,7 +162,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     }
   }
 
-  private void propagateRegionsIntra(Set<ClassNode> classNodes) {
+  private boolean propagateRegionsIntra(Set<ClassNode> classNodes) {
+    boolean propagatedRegions = false;
+
     for (ClassNode classNode : classNodes) {
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
@@ -163,25 +173,32 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
-        this.expandRegionsIntra(methodNode, classNode);
+        propagatedRegions = propagatedRegions | this.expandRegionsIntra(methodNode, classNode);
       }
     }
+
+    return propagatedRegions;
   }
 
-  private void expandRegionsIntra(MethodNode methodNode, ClassNode classNode) {
-    System.err.println(
-        "Might have to use equivalence or implication instead of equals when determining if we can expand regions");
+  private boolean expandRegionsIntra(MethodNode methodNode, ClassNode classNode) {
+    boolean propagatedRegions = false;
     boolean updatedBlocks = true;
 
     while (updatedBlocks) {
       updatedBlocks = this.upIntraExpander.processBlocks(methodNode, classNode);
-      updatedBlocks = updatedBlocks || this.downIntraExpander.processBlocks(methodNode, classNode);
+      updatedBlocks = updatedBlocks | this.downIntraExpander.processBlocks(methodNode, classNode);
+
+      if (updatedBlocks) {
+        propagatedRegions = true;
+      }
     }
 
     if (this.debug()) {
       this.upIntraExpander.debugBlockData(methodNode, classNode);
       this.upIntraExpander.validateAllBlocksHaveRegions(methodNode, classNode);
     }
+
+    return propagatedRegions;
   }
 
   public static class Builder {

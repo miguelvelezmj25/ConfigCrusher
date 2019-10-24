@@ -95,7 +95,7 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
             new JavaRegion.Builder(
                     region.getRegionPackage(),
                     region.getRegionClass(),
-                    region.getRegionMethod(),
+                    region.getRegionMethodSignature(),
                     region.getStartIndex())
                 .build();
         blocksToRegions.put(predBlock, predRegion);

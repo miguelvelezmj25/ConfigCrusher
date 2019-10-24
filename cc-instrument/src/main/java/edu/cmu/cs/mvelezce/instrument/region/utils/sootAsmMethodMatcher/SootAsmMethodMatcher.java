@@ -1,10 +1,13 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher;
 
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
+import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
+import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.queue.QueueReader;
@@ -22,8 +25,14 @@ public final class SootAsmMethodMatcher {
   private final Set<String> applicationPackages = new HashSet<>();
   private final Map<SootMethod, MethodNode> sootMethodsToMethodNodes = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodesToSootMethods = new HashMap<>();
+  private final Map<Class<? extends InvokeExpr>, Integer> sootInvokesToOpcodes = new HashMap<>();
+  private final Map<Integer, Class<? extends InvokeExpr>> opcodesToSootInvokes = new HashMap<>();
 
-  private SootAsmMethodMatcher() {}
+  private SootAsmMethodMatcher() {
+    sootInvokesToOpcodes.put(JStaticInvokeExpr.class, Opcodes.INVOKESTATIC);
+
+    opcodesToSootInvokes.put(Opcodes.INVOKESTATIC, JStaticInvokeExpr.class);
+  }
 
   public static SootAsmMethodMatcher getInstance() {
     return INSTANCE;
@@ -58,6 +67,16 @@ public final class SootAsmMethodMatcher {
   @Nullable
   public SootMethod getSootMethod(MethodNode methodNode) {
     return this.methodNodesToSootMethods.get(methodNode);
+  }
+
+  @Nullable
+  public Integer getOpcode(Class<? extends InvokeExpr> invokeExpr) {
+    return sootInvokesToOpcodes.get(invokeExpr);
+  }
+
+  @Nullable
+  public Class<? extends InvokeExpr> getSootInvokeExpr(int opcode) {
+    return opcodesToSootInvokes.get(opcode);
   }
 
   public Set<String> getApplicationPackages() {
@@ -119,11 +138,7 @@ public final class SootAsmMethodMatcher {
       return null;
     }
 
-    String methodSignature = sootMethod.getBytecodeSignature();
-    methodSignature = methodSignature.replaceAll("<", "");
-    methodSignature = methodSignature.replaceAll(">", "");
-    int index = methodSignature.indexOf(":");
-    methodSignature = methodSignature.substring(index + 1).trim();
+    String methodSignature = InstrumenterUtils.getSootMethodSignature(sootMethod);
 
     return this.getFullyQualifiedName(packageName, sootClass.getShortName(), methodSignature);
   }
@@ -143,7 +158,7 @@ public final class SootAsmMethodMatcher {
       String className = InstrumenterUtils.getClassName(classNode);
 
       for (MethodNode methodNode : classNode.methods) {
-        String methodSignature = InstrumenterUtils.getMethodName(methodNode);
+        String methodSignature = InstrumenterUtils.getMethodSignature(methodNode);
         fullyQualifiedNamesToMethodNodes.put(
             this.getFullyQualifiedName(packageName, className, methodSignature), methodNode);
       }

@@ -110,7 +110,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
             new JavaRegion.Builder(
                     region.getRegionPackage(),
                     region.getRegionClass(),
-                    region.getRegionMethod(),
+                    region.getRegionMethodSignature(),
                     region.getStartIndex())
                 .build();
         blocksToRegions.put(reachable, reachableRegion);

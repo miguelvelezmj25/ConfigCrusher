@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.instrument;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import soot.SootMethod;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class InstrumenterUtils {
     return className;
   }
 
-  public static String getMethodName(MethodNode methodNode) {
+  public static String getMethodSignature(MethodNode methodNode) {
     return methodNode.name + methodNode.desc;
   }
 
@@ -51,18 +52,26 @@ public class InstrumenterUtils {
       MethodNode methodNode, ClassNode classNode, Set<JavaRegion> regions) {
     String classPackage = getClassPackage(classNode);
     String className = getClassName(classNode);
-    String methodName = getMethodName(methodNode);
+    String methodSignature = getMethodSignature(methodNode);
 
     Set<JavaRegion> regionsInMethod = new HashSet<>();
 
     for (JavaRegion region : regions) {
       if (region.getRegionPackage().equals(classPackage)
           && region.getRegionClass().equals(className)
-          && region.getRegionMethod().equals(methodName)) {
+          && region.getRegionMethodSignature().equals(methodSignature)) {
         regionsInMethod.add(region);
       }
     }
 
     return regionsInMethod;
+  }
+
+  public static String getSootMethodSignature(SootMethod sootMethod) {
+    String methodSignature = sootMethod.getBytecodeSignature();
+    methodSignature = methodSignature.replaceAll("<", "");
+    methodSignature = methodSignature.replaceAll(">", "");
+    int index = methodSignature.indexOf(":");
+    return methodSignature.substring(index + 1).trim();
   }
 }

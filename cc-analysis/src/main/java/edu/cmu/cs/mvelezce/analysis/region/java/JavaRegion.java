@@ -10,7 +10,7 @@ public class JavaRegion extends Region {
 
   private final String regionPackage;
   private final String regionClass;
-  private final String regionMethod;
+  private final String regionMethodSignature;
   private final int startIndex;
 
   //  private int startRegionIndex;
@@ -23,7 +23,7 @@ public class JavaRegion extends Region {
   private JavaRegion() {
     this.regionPackage = "";
     this.regionClass = "";
-    this.regionMethod = "";
+    this.regionMethodSignature = "";
     this.startIndex = -1;
     this.startMethodBlock = new MethodBlock("");
     this.endMethodBlocks = new HashSet<>();
@@ -33,7 +33,7 @@ public class JavaRegion extends Region {
     super(builder);
     this.regionPackage = builder.regionPackage;
     this.regionClass = builder.regionClass;
-    this.regionMethod = builder.regionMethod;
+    this.regionMethodSignature = builder.regionMethodSignature;
     this.startIndex = builder.startIndex;
     //    this.startRegionIndex = builder.startBytecodeIndex;
     this.startMethodBlock = builder.startMethodBlock;
@@ -50,8 +50,8 @@ public class JavaRegion extends Region {
     return regionClass;
   }
 
-  public String getRegionMethod() {
-    return regionMethod;
+  public String getRegionMethodSignature() {
+    return regionMethodSignature;
   }
 
   public int getStartIndex() {
@@ -186,7 +186,7 @@ public class JavaRegion extends Region {
 
     private final String regionPackage;
     private final String regionClass;
-    private final String regionMethod;
+    private final String regionMethodSignature;
     private final int startIndex;
 
     //    private int startBytecodeIndex = Integer.MIN_VALUE;
@@ -202,10 +202,11 @@ public class JavaRegion extends Region {
     //      this.regionMethod = regionMethod;
     //    }
 
-    public Builder(String regionPackage, String regionClass, String regionMethod, int startIndex) {
+    public Builder(
+        String regionPackage, String regionClass, String regionMethodSignature, int startIndex) {
       this.regionPackage = regionPackage;
       this.regionClass = regionClass;
-      this.regionMethod = regionMethod;
+      this.regionMethodSignature = regionMethodSignature;
       this.startIndex = startIndex;
     }
 

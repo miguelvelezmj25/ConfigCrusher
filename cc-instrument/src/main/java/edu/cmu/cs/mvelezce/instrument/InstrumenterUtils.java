@@ -69,8 +69,19 @@ public class InstrumenterUtils {
 
   public static String getSootMethodSignature(SootMethod sootMethod) {
     String methodSignature = sootMethod.getBytecodeSignature();
-    methodSignature = methodSignature.replaceAll("<", "");
-    methodSignature = methodSignature.replaceAll(">", "");
+    if (methodSignature.charAt(0) != '<') {
+      throw new RuntimeException(
+          "Expected the first char in the method signature to be '<', but this is the method signature "
+              + methodSignature);
+    }
+
+    if (methodSignature.charAt(methodSignature.length() - 1) != '>') {
+      throw new RuntimeException(
+          "Expected the last char in the method signature to be '>', but this is the method signature "
+              + methodSignature);
+    }
+
+    methodSignature = methodSignature.substring(1, methodSignature.length() - 1);
     int index = methodSignature.indexOf(":");
     return methodSignature.substring(index + 1).trim();
   }

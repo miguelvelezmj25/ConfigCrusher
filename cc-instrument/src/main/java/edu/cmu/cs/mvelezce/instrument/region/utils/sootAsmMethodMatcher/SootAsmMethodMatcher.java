@@ -7,6 +7,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
@@ -30,8 +31,10 @@ public final class SootAsmMethodMatcher {
 
   private SootAsmMethodMatcher() {
     sootInvokesToOpcodes.put(JStaticInvokeExpr.class, Opcodes.INVOKESTATIC);
+    sootInvokesToOpcodes.put(JSpecialInvokeExpr.class, Opcodes.INVOKESPECIAL);
 
     opcodesToSootInvokes.put(Opcodes.INVOKESTATIC, JStaticInvokeExpr.class);
+    opcodesToSootInvokes.put(Opcodes.INVOKESPECIAL, JSpecialInvokeExpr.class);
   }
 
   public static SootAsmMethodMatcher getInstance() {
@@ -140,6 +143,10 @@ public final class SootAsmMethodMatcher {
 
     String methodSignature = InstrumenterUtils.getSootMethodSignature(sootMethod);
 
+    if (sootClass.getShortName().equals("MethodCall")) {
+      System.out.println();
+    }
+
     return this.getFullyQualifiedName(packageName, sootClass.getShortName(), methodSignature);
   }
 
@@ -156,6 +163,10 @@ public final class SootAsmMethodMatcher {
     for (ClassNode classNode : classNodes) {
       String packageName = InstrumenterUtils.getClassPackage(classNode);
       String className = InstrumenterUtils.getClassName(classNode);
+
+      if (className.equals("MethodCall")) {
+        System.out.println();
+      }
 
       for (MethodNode methodNode : classNode.methods) {
         String methodSignature = InstrumenterUtils.getMethodSignature(methodNode);

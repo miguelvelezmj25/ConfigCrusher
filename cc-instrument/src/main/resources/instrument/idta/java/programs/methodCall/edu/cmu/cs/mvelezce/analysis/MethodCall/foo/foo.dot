@@ -1,7 +1,7 @@
 digraph foo {
 node [shape=record];
-399685190 [label="L0\lLINENUMBER 13 L0\lLDC \"6100fde3-79a0-4ca6-bb0b-18556cb61c23\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L1\l"];
-1219403403 [label="L1\lLINENUMBER 16 L1\lFRAME SAME\lLDC \"6100fde3-79a0-4ca6-bb0b-18556cb61c23\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+399685190 [label="L0\lLINENUMBER 13 L0\lLDC \"064579eb-f88e-4cee-aecb-30562d98b0de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L1\l"];
+1219403403 [label="L1\lLINENUMBER 16 L1\lFRAME SAME\lLDC \"064579eb-f88e-4cee-aecb-30562d98b0de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
 1856662284 [label="L2\lLINENUMBER 14 L2\lALOAD 0\lILOAD 2\lINVOKESPECIAL edu/cmu/cs/mvelezce/analysis/MethodCall.bar (Z)V\l"];
 entry;
 exit;

@@ -1,1 +1,1 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanExpandConstraintsDown","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(A && B)","(A && !B)"],"id":"fc0f79fc-3754-4f5a-a066-d130a2d45819"}]
+[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanExpandConstraintsDown","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(A && B)","(A && !B)"],"id":"1e91d9f4-644b-4305-b648-3dbf589ad6f4"}]

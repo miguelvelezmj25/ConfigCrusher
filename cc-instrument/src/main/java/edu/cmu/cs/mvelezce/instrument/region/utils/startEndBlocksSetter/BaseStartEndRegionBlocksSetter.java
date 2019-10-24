@@ -48,9 +48,9 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
     Set<MethodBlock> succBlocks = startBlock.getSuccessors();
     MethodBlock exit = graph.getExitBlock();
 
-    if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {
-      throw new UnsupportedOperationException("Implement");
-    }
+    //    if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {
+    //      throw new UnsupportedOperationException("Implement");
+    //    }
 
     MethodBlock ipd = this.getIPD(startBlock, region, graph, blocksToRegions);
     Set<MethodBlock> ends = this.getEndBlocks(startBlock, ipd, graph);

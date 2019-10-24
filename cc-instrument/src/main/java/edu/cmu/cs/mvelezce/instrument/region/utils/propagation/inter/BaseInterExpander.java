@@ -98,12 +98,12 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
     for (Map.Entry<MethodNode, Set<MethodBlock>> entry : methodsToBlocksToPropagate.entrySet()) {
       MethodNode callerMethodNode = entry.getKey();
-      LinkedHashMap<MethodBlock, JavaRegion> blocks =
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
           this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(callerMethodNode);
       Set<MethodBlock> callerBlocks = entry.getValue();
 
       for (MethodBlock callerBlock : callerBlocks) {
-        JavaRegion callerRegion = blocks.get(callerBlock);
+        JavaRegion callerRegion = blocksToRegions.get(callerBlock);
         T callerData = this.getData(callerRegion);
 
         if (firstRegionData.equals(callerData) || this.containsAll(callerData, firstRegionData)) {
@@ -111,7 +111,22 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
         }
 
         if (callerRegion == null) {
-          throw new UnsupportedOperationException("Implement");
+          SootMethod callerSootMethod = this.sootAsmMethodMatcher.getSootMethod(callerMethodNode);
+
+          if (callerSootMethod == null) {
+            throw new RuntimeException("Could not find a soot method for " + callerMethodNode.name);
+          }
+
+          SootClass callerSootClass = callerSootMethod.getDeclaringClass();
+
+          callerRegion =
+              new JavaRegion.Builder(
+                      callerSootClass.getPackageName(),
+                      callerSootClass.getShortName(),
+                      InstrumenterUtils.getSootMethodSignature(callerSootMethod),
+                      -1)
+                  .build();
+          blocksToRegions.put(callerBlock, callerRegion);
         }
 
         T newData = this.mergeData(firstRegionData, callerData);

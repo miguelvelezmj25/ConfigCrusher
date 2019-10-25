@@ -178,14 +178,15 @@ public final class BaseIDTAExpander {
     FeatureExpr implyingConstraintsDisjunction = this.getDisjunction(implyingConstraints);
     FeatureExpr impliedConstraintsDisjunction = this.getDisjunction(impliedConstraints);
 
-    boolean completelyImply =
-        impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
-
-    if (containsAll != completelyImply) {
-      throw new RuntimeException("The contains all and implies all results do not match");
-    }
-
-    return completelyImply;
+    //    boolean completelyImply =
+    //        impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
+    //
+    //    if (containsAll != completelyImply) {
+    //      throw new RuntimeException("The contains all and implies all results do not match");
+    //    }
+    //
+    //    return completelyImply;
+    return containsAll;
   }
 
   private FeatureExpr getDisjunction(Set<FeatureExpr> constraints) {

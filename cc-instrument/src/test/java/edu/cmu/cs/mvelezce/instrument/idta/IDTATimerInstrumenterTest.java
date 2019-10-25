@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.instrument.idta;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapter.adapters.canExpandConstraintsDown.BaseCanExpandConstraintsDownAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.cannotExpandConstraintsDown.BaseCannotExpandConstraintsDownAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.cannotRemoveNestedRegions.BaseCannotRemoveNestedRegionsAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -70,6 +71,36 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseStaticMethodCallAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseStaticMethodCallAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseStaticMethodCallAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void cannotRemoveNestedRegions()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseCannotRemoveNestedRegionsAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseCannotRemoveNestedRegionsAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseCannotRemoveNestedRegionsAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseCannotRemoveNestedRegionsAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseCannotRemoveNestedRegionsAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

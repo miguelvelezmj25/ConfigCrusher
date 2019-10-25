@@ -30,11 +30,18 @@ public class InstrumenterUtils {
   }
 
   public static String getClassPackage(ClassNode classNode) {
-    String classPackage = classNode.name;
-    classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
+    return getClassNodePackage(classNode.name);
+  }
+
+  public static String getClassNodePackage(String classNodeName) {
+    String classPackage = classNodeName.substring(0, classNodeName.lastIndexOf("/"));
     classPackage = classPackage.replace("/", ".");
 
     return classPackage;
+  }
+
+  public static String getClassNodeName(String classNodeName) {
+    return classNodeName.replace("/", ".");
   }
 
   public static String getClassName(ClassNode classNode) {

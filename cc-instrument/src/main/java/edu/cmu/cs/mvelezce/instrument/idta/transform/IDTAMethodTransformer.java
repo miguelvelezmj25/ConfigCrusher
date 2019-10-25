@@ -73,6 +73,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             baseIDTAExpander);
 
     this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
+    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
 
     this.startEndRegionBlocksSetter =
         new IDTAStartEndRegionBlocksSetter(
@@ -82,9 +83,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             this.sootAsmMethodMatcher,
+            this.callGraph,
             baseIDTAExpander);
-
-    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
 
     this.interExpander =
         new BaseIDTAInterExpander(

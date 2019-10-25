@@ -49,14 +49,13 @@ public final class BaseIDTAExpander {
 
   /** ∃ c ∈ GlobalConstraints . c ⟹ newConstraint */
   public boolean canMergeConstraints(
-      @Nullable Set<FeatureExpr> expandingConstraints,
-      @Nullable Set<FeatureExpr> currentConstraints) {
+      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> currentConstraints) {
     if (expandingConstraints == null) {
-      throw new RuntimeException("This case should never happen");
+      throw new RuntimeException("Expanding constraints should never be null");
     }
 
     if (expandingConstraints.isEmpty()) {
-      throw new RuntimeException("How can this data be empty, but not null?");
+      throw new RuntimeException("Expanding constraints should never be empty");
     }
 
     if (currentConstraints == null) {
@@ -109,7 +108,8 @@ public final class BaseIDTAExpander {
 
   /** ∀ dc ∈ ImpliedConstraints . ∃ gc ∈ ImplyingConstraints . gc ⟹ dc */
   public boolean impliesAll(
-      Set<FeatureExpr> implyingConstraints, Set<FeatureExpr> impliedConstraints) {
+      @Nullable Set<FeatureExpr> implyingConstraints,
+      @Nullable Set<FeatureExpr> impliedConstraints) {
     boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
 
     if (implyingConstraints == null || impliedConstraints == null) {
@@ -162,5 +162,39 @@ public final class BaseIDTAExpander {
     newConstraints.addAll(thatConstraints);
 
     return newConstraints;
+  }
+
+  /**
+   * The disjunction of all implying constraints implies the disjunction of all implied constraints
+   */
+  public boolean completelyImplies(
+      Set<FeatureExpr> implyingConstraints, @Nullable Set<FeatureExpr> impliedConstraints) {
+    if (impliedConstraints == null) {
+      return true;
+    }
+
+    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
+
+    FeatureExpr implyingConstraintsDisjunction = this.getDisjunction(implyingConstraints);
+    FeatureExpr impliedConstraintsDisjunction = this.getDisjunction(impliedConstraints);
+
+    boolean completelyImply =
+        impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
+
+    if (containsAll != completelyImply) {
+      throw new RuntimeException("The contains all and implies all results do not match");
+    }
+
+    return completelyImply;
+  }
+
+  private FeatureExpr getDisjunction(Set<FeatureExpr> constraints) {
+    FeatureExpr disjunction = FALSE;
+
+    for (FeatureExpr constraint : constraints) {
+      disjunction = disjunction.or(constraint);
+    }
+
+    return disjunction;
   }
 }

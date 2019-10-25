@@ -1,15 +1,15 @@
 digraph main {
 node [shape=record];
-240259175 [label="L0\lLINENUMBER 6 L0\lLDC \"662a8822-f025-4807-84c6-89b6386d073d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1907201435 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"662a8822-f025-4807-84c6-89b6386d073d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
-1001100746 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
+1742056495 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"4a895aa9-76bd-428c-907c-2e36dd56ea8e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1905830810 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
+414453734 [label="L0\lLINENUMBER 6 L0\lLDC \"4a895aa9-76bd-428c-907c-2e36dd56ea8e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
 entry;
 exit;
-entry -> 240259175;
-240259175 -> 1907201435;
-240259175 -> 1001100746;
-1907201435 -> exit;
-1001100746 -> 1907201435;
-240259175[fontcolor="purple", penwidth=3, color="purple"];
-1907201435[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 414453734;
+1742056495 -> exit;
+1905830810 -> 1742056495;
+414453734 -> 1742056495;
+414453734 -> 1905830810;
+1742056495[fontcolor="purple", penwidth=3, color="purple"];
+414453734[fontcolor="purple", penwidth=3, color="purple"];
 }

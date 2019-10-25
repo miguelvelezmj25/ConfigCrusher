@@ -149,10 +149,6 @@ public final class SootAsmMethodMatcher {
 
     String methodSignature = InstrumenterUtils.getSootMethodSignature(sootMethod);
 
-    if (sootClass.getShortName().equals("MethodCall")) {
-      System.out.println();
-    }
-
     return this.getFullyQualifiedName(packageName, sootClass.getShortName(), methodSignature);
   }
 
@@ -169,10 +165,6 @@ public final class SootAsmMethodMatcher {
     for (ClassNode classNode : classNodes) {
       String packageName = InstrumenterUtils.getClassPackage(classNode);
       String className = InstrumenterUtils.getClassName(classNode);
-
-      if (className.equals("MethodCall")) {
-        System.out.println();
-      }
 
       for (MethodNode methodNode : classNode.methods) {
         String methodSignature = InstrumenterUtils.getMethodSignature(methodNode);

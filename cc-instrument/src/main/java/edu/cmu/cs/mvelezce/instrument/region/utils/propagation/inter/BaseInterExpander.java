@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.comparator.edge.EdgeComparator;
 import edu.cmu.cs.mvelezce.instrument.region.utils.graphBuilder.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
@@ -19,15 +20,11 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
-import soot.tagkit.BytecodeOffsetTag;
-import soot.tagkit.Tag;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
 public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
-
-  private static final Comparator<Edge> EDGE_COMPARATOR = new EdgeComparator();
 
   private final CallGraph callGraph;
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
@@ -248,7 +245,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       AbstractInsnNode invokeInsn, String tgtQualifiedClassName, String tgtMethodSignature) {
     if (!(invokeInsn instanceof MethodInsnNode)) {
       throw new RuntimeException(
-          "This seems to be an invoke instruction that we need to handle " + invokeInsn);
+          "This seems to be an invoke instruction that we needs to handle " + invokeInsn);
     }
 
     MethodInsnNode methodInsnNode = ((MethodInsnNode) invokeInsn);
@@ -262,7 +259,8 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
   private int getSrcOpcode(Unit srcUnit) {
     if (!(srcUnit instanceof JInvokeStmt)) {
-      throw new RuntimeException("Expected this statement to be a method invocation");
+      throw new RuntimeException(
+          "Expected this statement to be a method invocation, but was " + srcUnit.getClass());
     }
 
     InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
@@ -296,7 +294,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
     }
 
     for (Map.Entry<SootMethod, List<Edge>> entry : callerSootMethodsToEdges.entrySet()) {
-      entry.getValue().sort(EDGE_COMPARATOR);
+      entry.getValue().sort(EdgeComparator.getInstance());
     }
 
     return callerSootMethodsToEdges;
@@ -323,33 +321,4 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
   protected abstract T mergeData(T firstRegionData, @Nullable T callerData);
 
   protected abstract boolean containsAll(@Nullable T callerData, T firstRegionData);
-
-  private static class EdgeComparator implements Comparator<Edge> {
-
-    @Override
-    public int compare(Edge e1, Edge e2) {
-      String sig1 = e1.src().getBytecodeSignature();
-      String sig2 = e2.src().getBytecodeSignature();
-      int compare1 = sig1.compareTo(sig2);
-
-      if (compare1 != 0) {
-        return compare1;
-      }
-
-      int tag1 = this.getBytecodeOffsetTag(e1);
-      int tag2 = this.getBytecodeOffsetTag(e2);
-
-      return Integer.compare(tag1, tag2);
-    }
-
-    private int getBytecodeOffsetTag(Edge edge) {
-      for (Tag tag : edge.srcUnit().getTags()) {
-        if (tag instanceof BytecodeOffsetTag) {
-          return ((BytecodeOffsetTag) tag).getBytecodeOffset();
-        }
-      }
-
-      throw new RuntimeException("Could not find a bytecode offset tag for this edge " + edge);
-    }
-  }
 }

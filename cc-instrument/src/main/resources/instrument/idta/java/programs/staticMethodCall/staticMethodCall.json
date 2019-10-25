@@ -1,1 +1,20 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"StaticMethodCall","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(A && B)","(A && !B)"],"id":"662a8822-f025-4807-84c6-89b6386d073d"},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"StaticMethodCall","methodSignature":"foo(Z)V","decisionIndex":1,"info":[],"prettyConstraints":["(A && B)","(A && !B)"],"id":"b93c0d1a-6ce4-4783-9879-00bea3cfe027"}]
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "StaticMethodCall",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A",
+      "(A && B)",
+      "(A && !B)"
+    ],
+    "id": "4a895aa9-76bd-428c-907c-2e36dd56ea8e",
+    "startBlock": "1166452906",
+    "endBlocks": [
+      "1413886848"
+    ]
+  }
+]

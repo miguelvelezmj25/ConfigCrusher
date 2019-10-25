@@ -4,9 +4,8 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
-import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.BaseRemoveNestedRegionsIntra;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
-import soot.jimple.toolkits.callgraph.CallGraph;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -23,8 +22,7 @@ public class IDTAStartEndRegionBlocksSetter
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
-      SootAsmMethodMatcher sootAsmMethodMatcher,
-      CallGraph callGraph,
+      BaseRemoveNestedRegionsIntra<Set<FeatureExpr>> baseRemoveNestedRegionsIntra,
       BaseIDTAExpander baseIDTAExpander) {
     super(
         programName,
@@ -32,8 +30,7 @@ public class IDTAStartEndRegionBlocksSetter
         options,
         blockRegionMatcher,
         regionsToData,
-        sootAsmMethodMatcher,
-        callGraph);
+        baseRemoveNestedRegionsIntra);
 
     this.baseIDTAExpander = baseIDTAExpander;
   }
@@ -44,11 +41,5 @@ public class IDTAStartEndRegionBlocksSetter
     Set<String> options = this.getOptions();
 
     return this.baseIDTAExpander.prettyPrintConstraints(constraints, options);
-  }
-
-  @Override
-  protected boolean completelyContainsAll(
-      Set<FeatureExpr> callerConstraints, @Nullable Set<FeatureExpr> calleeConstraints) {
-    return this.baseIDTAExpander.completelyImplies(callerConstraints, calleeConstraints);
   }
 }

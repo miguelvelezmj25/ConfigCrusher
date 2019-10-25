@@ -13,6 +13,8 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta.I
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.BaseUpIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.up.idta.IDTAUpIntraExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.inter.BaseRemoveNestedRegionsInter;
+import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.inter.idta.IDTARemoveNestedRegionsInter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.BaseRemoveNestedRegionsIntra;
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.idta.IDTARemoveNestedRegionsIntra;
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
@@ -39,6 +41,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
   private final BaseInterExpander<Set<FeatureExpr>> interExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
+  private final BaseRemoveNestedRegionsInter<Set<FeatureExpr>> removeNestedRegionsInter;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
   private final CallGraph callGraph;
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
@@ -53,9 +56,6 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         builder.debug,
         builder.regionsToConstraints,
         new DynamicInstructionRegionMatcher());
-
-    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
-    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
 
     BaseIDTAExpander baseIDTAExpander = BaseIDTAExpander.getInstance();
     baseIDTAExpander.init(this.getRegionsToData().values());
@@ -95,6 +95,20 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             idtaRemoveNestedRegionsIntra,
             baseIDTAExpander);
 
+    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
+    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
+
+    this.removeNestedRegionsInter =
+        new IDTARemoveNestedRegionsInter(
+            builder.programName,
+            DEBUG_DIR,
+            builder.options,
+            this.getBlockRegionMatcher(),
+            this.getRegionsToData(),
+            this.sootAsmMethodMatcher,
+            this.callGraph,
+            baseIDTAExpander);
+
     this.interExpander =
         new BaseIDTAInterExpander(
             builder.programName,
@@ -132,7 +146,26 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
     }
 
+    this.removeNestedRegionsInter(classNodes);
     this.setStartAndEndBlocks(classNodes);
+  }
+
+  private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
+        this.removeNestedRegionsInter.processBlocks(methodNode, classNode);
+
+        if (this.debug()) {
+          this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
+        }
+      }
+    }
   }
 
   private boolean propagateRegionsInter(Set<ClassNode> classNodes) {

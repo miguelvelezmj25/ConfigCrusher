@@ -28,8 +28,8 @@ public class IDTAUpIntraExpander extends BaseUpIntraExpander<Set<FeatureExpr>> {
 
   @Override
   protected boolean containsAll(
-      @Nullable Set<FeatureExpr> upConstraints, @Nullable Set<FeatureExpr> thisConstraints) {
-    return this.baseIDTAExpander.containsAll(upConstraints, thisConstraints);
+      @Nullable Set<FeatureExpr> upConstraints, Set<FeatureExpr> expandingConstraints) {
+    return this.baseIDTAExpander.impliesAll(upConstraints, expandingConstraints);
   }
 
   @Override
@@ -42,13 +42,13 @@ public class IDTAUpIntraExpander extends BaseUpIntraExpander<Set<FeatureExpr>> {
 
   @Override
   protected boolean canExpandDataUp(
-      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
-    return this.baseIDTAExpander.canMergeConstraints(thisConstraints, thatConstraints);
+      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> upConstraints) {
+    return this.baseIDTAExpander.canMergeConstraints(expandingConstraints, upConstraints);
   }
 
   @Override
   protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> upConstraints) {
-    return this.baseIDTAExpander.mergeData(thisConstraints, upConstraints);
+      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> upConstraints) {
+    return this.baseIDTAExpander.mergeData(expandingConstraints, upConstraints);
   }
 }

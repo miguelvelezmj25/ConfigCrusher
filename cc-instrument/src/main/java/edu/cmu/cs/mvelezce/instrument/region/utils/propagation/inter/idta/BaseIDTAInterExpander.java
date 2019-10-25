@@ -52,7 +52,7 @@ public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
   @Override
   protected boolean containsAll(
       @Nullable Set<FeatureExpr> callerData, Set<FeatureExpr> firstRegionData) {
-    return this.baseIDTAExpander.containsAll(callerData, firstRegionData);
+    return this.baseIDTAExpander.impliesAll(callerData, firstRegionData);
   }
 
   @Override

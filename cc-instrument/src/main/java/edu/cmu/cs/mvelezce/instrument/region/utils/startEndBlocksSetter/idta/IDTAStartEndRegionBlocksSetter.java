@@ -4,6 +4,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
+import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 
 import javax.annotation.Nullable;
@@ -21,8 +22,9 @@ public class IDTAStartEndRegionBlocksSetter
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
+      SootAsmMethodMatcher sootAsmMethodMatcher,
       BaseIDTAExpander baseIDTAExpander) {
-    super(programName, debugDir, options, blockRegionMatcher, regionsToData);
+    super(programName, debugDir, options, blockRegionMatcher, regionsToData, sootAsmMethodMatcher);
 
     this.baseIDTAExpander = baseIDTAExpander;
   }

@@ -47,29 +47,31 @@ public final class BaseIDTAExpander {
     }
   }
 
+  /** ∃ c ∈ GlobalConstraints . c ⟹ newConstraint */
   public boolean canMergeConstraints(
-      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
-    if (thisConstraints == null) {
+      @Nullable Set<FeatureExpr> expandingConstraints,
+      @Nullable Set<FeatureExpr> currentConstraints) {
+    if (expandingConstraints == null) {
       throw new RuntimeException("This case should never happen");
     }
 
-    if (thisConstraints.isEmpty()) {
+    if (expandingConstraints.isEmpty()) {
       throw new RuntimeException("How can this data be empty, but not null?");
     }
 
-    if (thatConstraints == null) {
+    if (currentConstraints == null) {
       return true;
     }
 
-    if (thatConstraints.isEmpty()) {
+    if (currentConstraints.isEmpty()) {
       throw new RuntimeException("How can that data be empty, but not null?");
     }
 
     Set<FeatureExpr> newConstraints = new HashSet<>();
 
-    for (FeatureExpr thisConstraint : thisConstraints) {
-      for (FeatureExpr thatConstraint : thatConstraints) {
-        FeatureExpr newConstraint = thisConstraint.and(thatConstraint);
+    for (FeatureExpr expandingConstraint : expandingConstraints) {
+      for (FeatureExpr currentConstraint : currentConstraints) {
+        FeatureExpr newConstraint = expandingConstraint.and(currentConstraint);
 
         if (newConstraint.isContradiction()) {
           continue;
@@ -79,35 +81,74 @@ public final class BaseIDTAExpander {
       }
     }
 
-    for (FeatureExpr newConstraint : newConstraints) {
-      boolean existsGlobalConstraint = false;
+    //    for (FeatureExpr newConstraint : newConstraints) {
+    //      boolean existsGlobalConstraint = false;
+    //
+    //      for (FeatureExpr globalConstraint : this.globalConstraints) {
+    //        if (globalConstraint.implies(newConstraint).isTautology()) {
+    //          existsGlobalConstraint = true;
+    //          break;
+    //        }
+    //      }
+    //
+    //      if (!existsGlobalConstraint) {
+    //        return false;
+    //      }
+    //    }
+    //
+    //    if (!this.globalConstraints.containsAll(newConstraints)) {
+    //      throw new RuntimeException(
+    //          "The global set of constraints does not include all of the new constraints that we
+    // derived, but all of the new constraints are implied by at least one global constraints");
+    //    }
+    //
+    //    return true;
 
-      for (FeatureExpr globalConstraint : this.globalConstraints) {
-        if (globalConstraint.implies(newConstraint).isTautology()) {
-          existsGlobalConstraint = true;
+    return this.impliesAll(this.globalConstraints, newConstraints);
+  }
+
+  /** ∀ dc ∈ ImpliedConstraints . ∃ gc ∈ ImplyingConstraints . gc ⟹ dc */
+  public boolean impliesAll(
+      Set<FeatureExpr> implyingConstraints, Set<FeatureExpr> impliedConstraints) {
+    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
+
+    if (implyingConstraints == null || impliedConstraints == null) {
+      return false;
+    }
+
+    for (FeatureExpr impliedConstraint : impliedConstraints) {
+      boolean exists = false;
+
+      for (FeatureExpr implyingConstraint : implyingConstraints) {
+        if (implyingConstraint.implies(impliedConstraint).isTautology()) {
+          exists = true;
           break;
         }
       }
 
-      if (!existsGlobalConstraint) {
+      if (!exists) {
+        if (containsAll) {
+          throw new RuntimeException(
+              "The implying constraints contain all of the implied constraints, but the implication check failed");
+        }
         return false;
       }
     }
 
-    if (!this.globalConstraints.containsAll(newConstraints)) {
+    if (!containsAll) {
       throw new RuntimeException(
-          "The global set of constraints does not include all of the new constraints that we derived, but all of the new constraints are implied by at least one global constraints");
+          "The implying constraints do not contain all of the implied constraints, but the implication check passed");
     }
-
     return true;
   }
 
-  public boolean containsAll(Set<FeatureExpr> thisConstraints, Set<FeatureExpr> thatConstraints) {
-    if (thisConstraints == null || thatConstraints == null) {
+  private boolean containsAll(
+      Set<FeatureExpr> currentConstraints, Set<FeatureExpr> expandingConstraints) {
+    if (currentConstraints == null || expandingConstraints == null) {
       return false;
     }
 
-    return thisConstraints.containsAll(thatConstraints);
+    return currentConstraints.containsAll(expandingConstraints);
   }
 
   public Set<FeatureExpr> mergeData(

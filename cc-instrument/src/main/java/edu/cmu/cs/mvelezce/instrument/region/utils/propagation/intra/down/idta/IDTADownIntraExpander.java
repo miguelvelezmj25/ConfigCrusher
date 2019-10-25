@@ -27,20 +27,21 @@ public class IDTADownIntraExpander extends BaseDownIntraExpander<Set<FeatureExpr
   }
 
   @Override
-  protected boolean containsAll(Set<FeatureExpr> downData, Set<FeatureExpr> thisConstraints) {
-    return this.baseIDTAExpander.containsAll(downData, thisConstraints);
+  protected boolean containsAll(
+      @Nullable Set<FeatureExpr> downConstraints, Set<FeatureExpr> expandingConstraints) {
+    return this.baseIDTAExpander.impliesAll(downConstraints, expandingConstraints);
   }
 
   @Override
   protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> downConstraints) {
-    return this.baseIDTAExpander.mergeData(thisConstraints, downConstraints);
+      Set<FeatureExpr> regionConstraints, @Nullable Set<FeatureExpr> downConstraints) {
+    return this.baseIDTAExpander.mergeData(regionConstraints, downConstraints);
   }
 
   @Override
   protected boolean canExpandDataDown(
-      @Nullable Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> downConstraints) {
-    return this.baseIDTAExpander.canMergeConstraints(thisConstraints, downConstraints);
+      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> downConstraints) {
+    return this.baseIDTAExpander.canMergeConstraints(expandingConstraints, downConstraints);
   }
 
   @Override

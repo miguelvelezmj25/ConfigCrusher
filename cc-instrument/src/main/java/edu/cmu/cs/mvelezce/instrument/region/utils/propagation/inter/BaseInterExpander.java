@@ -308,7 +308,8 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
+      MethodNode methodNode) {
     throw new UnsupportedOperationException("Implement");
   }
 

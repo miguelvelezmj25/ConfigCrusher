@@ -3,8 +3,10 @@ package edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
+import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -13,13 +15,18 @@ import java.util.Set;
 
 public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnalyzer<T> {
 
+  private final SootAsmMethodMatcher sootAsmMethodMatcher;
+
   public BaseStartEndRegionBlocksSetter(
       String programName,
       String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
-      Map<JavaRegion, T> regionsToData) {
+      Map<JavaRegion, T> regionsToData,
+      SootAsmMethodMatcher sootAsmMethodMatcher) {
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
+
+    this.sootAsmMethodMatcher = sootAsmMethodMatcher;
   }
 
   @Override
@@ -32,10 +39,18 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
+      MethodNode methodNode) {
     //    System.out.println(graph.toDotString("test"));
     region.setStartMethodBlock(block);
     this.setRegionEndBlocks(block, region, graph, blocksToRegions);
+
+    this.removeCoveredNestedRegions(
+        region.getStartMethodBlock(),
+        region.getEndMethodBlocks(),
+        graph,
+        blocksToRegions,
+        this.getData(region));
 
     return new HashSet<>();
   }
@@ -45,9 +60,6 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    Set<MethodBlock> succBlocks = startBlock.getSuccessors();
-    MethodBlock exit = graph.getExitBlock();
-
     //    if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {
     //      throw new UnsupportedOperationException("Implement");
     //    }
@@ -55,8 +67,6 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
     MethodBlock ipd = this.getIPD(startBlock, region, graph, blocksToRegions);
     Set<MethodBlock> ends = this.getEndBlocks(startBlock, ipd, graph);
     region.setEndMethodBlocks(ends);
-
-    this.removeCoveredNestedRegions(startBlock, ends, graph, blocksToRegions, this.getData(region));
   }
 
   private MethodBlock getIPD(

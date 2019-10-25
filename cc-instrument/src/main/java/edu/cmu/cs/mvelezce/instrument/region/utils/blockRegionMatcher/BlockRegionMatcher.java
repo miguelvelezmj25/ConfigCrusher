@@ -12,6 +12,7 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class BlockRegionMatcher {
@@ -20,6 +21,7 @@ public class BlockRegionMatcher {
   private final InstructionRegionMatcher instructionRegionMatcher;
   private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>>
       methodNodesToRegionsInBlocks = new HashMap<>();
+  private final Map<MethodBlock, MethodNode> blocksToMethodNodes = new HashMap<>();
 
   public BlockRegionMatcher(
       InstructionRegionMatcher instructionRegionMatcher, Set<JavaRegion> regions) {
@@ -42,6 +44,27 @@ public class BlockRegionMatcher {
     }
 
     this.methodNodesToRegionsInBlocks.put(methodNode, blocksToRegions);
+  }
+
+  public void matchBlocksToMethodNodes(MethodNode methodNode, ClassNode classNode) {
+    Set<MethodBlock> blocks = new HashSet<>();
+
+    try {
+      MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
+      blocks = graph.getBlocks();
+    } catch (InvalidGraphException ignored) {
+      System.err.println(
+          "Is there a better way to implement this logic without ignoring the exception?");
+    }
+
+    for (MethodBlock block : blocks) {
+      this.blocksToMethodNodes.put(block, methodNode);
+    }
+  }
+
+  @Nullable
+  public MethodNode getMethodNode(MethodBlock methodBlock) {
+    return this.blocksToMethodNodes.get(methodBlock);
   }
 
   public Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodNodesToRegionsInBlocks() {

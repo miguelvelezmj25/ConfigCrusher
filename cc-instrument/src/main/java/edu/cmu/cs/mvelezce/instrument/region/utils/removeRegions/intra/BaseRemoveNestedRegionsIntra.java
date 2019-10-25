@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegi
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
@@ -31,8 +30,7 @@ public abstract class BaseRemoveNestedRegionsIntra<T> extends BlockRegionAnalyze
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
-      MethodNode methodNode) {
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     throw new UnsupportedOperationException("Method should not be called");
   }
 

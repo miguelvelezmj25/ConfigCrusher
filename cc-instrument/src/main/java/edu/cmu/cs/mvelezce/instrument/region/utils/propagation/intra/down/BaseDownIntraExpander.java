@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegio
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.BaseIntraExpander;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -25,8 +24,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
-      MethodNode methodNode) {
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     Set<MethodBlock> succBlocks = block.getSuccessors();
     MethodBlock exit = graph.getExitBlock();
 

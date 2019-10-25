@@ -64,6 +64,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     for (ClassNode classNode : classNodes) {
       for (MethodNode methodNode : classNode.methods) {
         this.blockRegionMatcher.matchBlocksToRegions(methodNode, classNode);
+        this.blockRegionMatcher.matchBlocksToMethodNodes(methodNode, classNode);
       }
     }
 

@@ -73,8 +73,7 @@ public abstract class BlockRegionAnalyzer<T> {
           continue;
         }
 
-        Set<MethodBlock> modifiedBlocks =
-            this.processBlock(block, region, graph, blocksToRegions, methodNode);
+        Set<MethodBlock> modifiedBlocks = this.processBlock(block, region, graph, blocksToRegions);
 
         if (!modifiedBlocks.isEmpty()) {
           updatedBlocks = true;
@@ -187,6 +186,5 @@ public abstract class BlockRegionAnalyzer<T> {
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
-      MethodNode methodNode);
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions);
 }

@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegio
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.BaseRemoveNestedRegionsIntra;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -39,8 +38,7 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       MethodBlock block,
       JavaRegion region,
       MethodGraph graph,
-      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
-      MethodNode methodNode) {
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     //    System.out.println(graph.toDotString("test"));
     region.setStartMethodBlock(block);
     this.setRegionEndBlocks(block, region, graph, blocksToRegions);

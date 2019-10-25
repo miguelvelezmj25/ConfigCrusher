@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
+import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
 import edu.cmu.cs.mvelezce.utils.Options;
 
@@ -87,6 +88,12 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
       }
 
       JavaRegion region = entry.getKey();
+      Set<String> endBlocks = new HashSet<>();
+
+      for (MethodBlock endBlock : region.getEndMethodBlocks()) {
+        endBlocks.add(endBlock.getID());
+      }
+
       RegionConstraintPretty regionToPrettyConstraints =
           new RegionConstraintPretty(
               region.getRegionPackage(),
@@ -94,7 +101,9 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
               region.getRegionMethodSignature(),
               region.getStartIndex(),
               prettyConstraints,
-              region.getId().toString());
+              region.getId().toString(),
+              region.getStartMethodBlock().getID(),
+              endBlocks);
 
       regionsToPrettyConstraints.add(regionToPrettyConstraints);
     }

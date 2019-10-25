@@ -123,8 +123,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
               new JavaRegion.Builder(
                       callerSootClass.getPackageName(),
                       callerSootClass.getShortName(),
-                      InstrumenterUtils.getSootMethodSignature(callerSootMethod),
-                      -1)
+                      InstrumenterUtils.getSootMethodSignature(callerSootMethod))
                   .build();
           blocksToRegions.put(callerBlock, callerRegion);
         }

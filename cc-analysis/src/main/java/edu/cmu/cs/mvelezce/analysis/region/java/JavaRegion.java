@@ -11,11 +11,11 @@ public class JavaRegion extends Region {
   private final String regionPackage;
   private final String regionClass;
   private final String regionMethodSignature;
-  private final int startIndex;
 
   //  private int startRegionIndex;
   //  private String startBlockID;
   //  private Set<String> endBlocksIDs;
+  private int startIndex;
   private MethodBlock startMethodBlock;
   private Set<MethodBlock> endMethodBlocks;
 
@@ -187,9 +187,9 @@ public class JavaRegion extends Region {
     private final String regionPackage;
     private final String regionClass;
     private final String regionMethodSignature;
-    private final int startIndex;
 
     //    private int startBytecodeIndex = Integer.MIN_VALUE;
+    private int startIndex = -1;
     private MethodBlock startMethodBlock = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
     //    private String startBlockID = "";
@@ -202,19 +202,17 @@ public class JavaRegion extends Region {
     //      this.regionMethod = regionMethod;
     //    }
 
-    public Builder(
-        String regionPackage, String regionClass, String regionMethodSignature, int startIndex) {
+    public Builder(String regionPackage, String regionClass, String regionMethodSignature) {
       this.regionPackage = regionPackage;
       this.regionClass = regionClass;
       this.regionMethodSignature = regionMethodSignature;
-      this.startIndex = startIndex;
     }
 
-    //    public Builder startBytecodeIndex(int startBytecodeIndex) {
-    //      this.startBytecodeIndex = startBytecodeIndex;
-    //      return this;
-    //    }
-    //
+    public Builder startIndex(int startIndex) {
+      this.startIndex = startIndex;
+      return this;
+    }
+
     public Builder startMethodBlock(MethodBlock startMethodBlock) {
       this.startMethodBlock = startMethodBlock;
       return this;

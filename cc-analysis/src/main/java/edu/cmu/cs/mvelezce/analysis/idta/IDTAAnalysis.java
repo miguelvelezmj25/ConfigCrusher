@@ -32,8 +32,8 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
           new JavaRegion.Builder(
                   idtaResult.getPackageName(),
                   idtaResult.getClassName(),
-                  idtaResult.getMethodSignature(),
-                  idtaResult.getDecisionIndex())
+                  idtaResult.getMethodSignature())
+              .startIndex(idtaResult.getDecisionIndex())
               .build();
       Set<FeatureExpr> constraints = this.getConstraints(idtaResult.getPrettyConstraints());
       results.put(javaRegion, constraints);

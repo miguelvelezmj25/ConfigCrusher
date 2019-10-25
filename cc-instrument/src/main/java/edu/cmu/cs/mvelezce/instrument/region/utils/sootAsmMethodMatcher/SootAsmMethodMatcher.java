@@ -7,8 +7,10 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JInterfaceInvokeExpr;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JStaticInvokeExpr;
+import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.queue.QueueReader;
@@ -32,9 +34,13 @@ public final class SootAsmMethodMatcher {
   private SootAsmMethodMatcher() {
     sootInvokesToOpcodes.put(JStaticInvokeExpr.class, Opcodes.INVOKESTATIC);
     sootInvokesToOpcodes.put(JSpecialInvokeExpr.class, Opcodes.INVOKESPECIAL);
+    sootInvokesToOpcodes.put(JVirtualInvokeExpr.class, Opcodes.INVOKEVIRTUAL);
+    sootInvokesToOpcodes.put(JInterfaceInvokeExpr.class, Opcodes.INVOKEINTERFACE);
 
     opcodesToSootInvokes.put(Opcodes.INVOKESTATIC, JStaticInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKESPECIAL, JSpecialInvokeExpr.class);
+    opcodesToSootInvokes.put(Opcodes.INVOKEVIRTUAL, JVirtualInvokeExpr.class);
+    opcodesToSootInvokes.put(Opcodes.INVOKEINTERFACE, JInterfaceInvokeExpr.class);
   }
 
   public static SootAsmMethodMatcher getInstance() {

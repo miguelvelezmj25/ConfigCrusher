@@ -11,6 +11,7 @@ public final class SootCallGraphBuilder {
   private SootCallGraphBuilder() {}
 
   public static CallGraph buildCallGraph(String entryPoint, String appPath) {
+    long startTime = System.nanoTime();
     initializeSoot(entryPoint, appPath);
 
     PackManager.v().getPack("wjpp").apply();
@@ -18,7 +19,12 @@ public final class SootCallGraphBuilder {
 
     Scene.v().getOrMakeFastHierarchy();
 
-    return Scene.v().getCallGraph();
+    CallGraph callGraph = Scene.v().getCallGraph();
+
+    long endTime = System.nanoTime();
+    System.out.println("Time to build call graph: " + ((endTime - startTime) / 1E9));
+
+    return callGraph;
   }
 
   private static void initializeSoot(String entryPoint, String appPath) {

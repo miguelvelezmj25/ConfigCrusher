@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.inter.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.inter.BaseRemoveNestedRegionsInter;
@@ -24,6 +25,7 @@ public class IDTARemoveNestedRegionsInter extends BaseRemoveNestedRegionsInter<S
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
       SootAsmMethodMatcher sootAsmMethodMatcher,
       CallGraph callGraph,
+      BaseInterAnalysisUtils<Set<FeatureExpr>> baseInterAnalysisUtils,
       BaseIDTAExpander baseIDTAExpander) {
     super(
         programName,
@@ -32,7 +34,8 @@ public class IDTARemoveNestedRegionsInter extends BaseRemoveNestedRegionsInter<S
         blockRegionMatcher,
         regionsToData,
         sootAsmMethodMatcher,
-        callGraph);
+        callGraph,
+        baseInterAnalysisUtils);
 
     this.baseIDTAExpander = baseIDTAExpander;
   }

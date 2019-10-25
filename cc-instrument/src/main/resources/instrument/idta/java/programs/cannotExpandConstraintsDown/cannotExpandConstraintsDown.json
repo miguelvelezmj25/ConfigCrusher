@@ -1,1 +1,36 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CannotExpandConstraintsDown","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":3,"info":[],"prettyConstraints":["!B","B"],"id":"ee85ddaf-cf9b-4e11-8a68-471ec09580c3","startBlock":"1138356642","endBlocks":["2101086700"]},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CannotExpandConstraintsDown","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(!B && A)","(B && A)"],"id":"6615639e-67e9-4ebe-a172-72442c6b760b","startBlock":"1596708569","endBlocks":["1138356642"]}]
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CannotExpandConstraintsDown",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 3,
+    "info": [],
+    "prettyConstraints": [
+      "!B",
+      "B"
+    ],
+    "id": "5b09ee46-7ead-456b-9fc0-ef07c409d114",
+    "startBlock": "1138356642",
+    "endBlocks": [
+      "2101086700"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CannotExpandConstraintsDown",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A",
+      "(!B && A)",
+      "(B && A)"
+    ],
+    "id": "709f7bf1-12cf-445f-aab8-3975a436620c",
+    "startBlock": "1596708569",
+    "endBlocks": [
+      "1138356642"
+    ]
+  }
+]

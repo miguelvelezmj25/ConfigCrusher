@@ -1,7 +1,7 @@
 digraph foo {
 node [shape=record];
-1970038733 [label="L1\lLINENUMBER 20 L1\lFRAME SAME\lLDC \"25fa66d2-45a5-4d7f-b3cf-c2583ad7b8c4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
-304172847 [label="L0\lLINENUMBER 17 L0\lLDC \"25fa66d2-45a5-4d7f-b3cf-c2583ad7b8c4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+1970038733 [label="L1\lLINENUMBER 20 L1\lFRAME SAME\lLDC \"82d192ff-97de-41d6-b5d7-98216452e977\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+304172847 [label="L0\lLINENUMBER 17 L0\lLDC \"82d192ff-97de-41d6-b5d7-98216452e977\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
 1356763258 [label="L2\lLINENUMBER 18 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
 entry;
 exit;

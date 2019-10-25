@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.inter;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
+import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.comparator.edge.EdgeComparator;
@@ -23,8 +24,9 @@ import java.util.*;
 
 public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyzer<T> {
 
-  private final SootAsmMethodMatcher sootAsmMethodMatcher;
   private final CallGraph callGraph;
+  private final SootAsmMethodMatcher sootAsmMethodMatcher;
+  private final BaseInterAnalysisUtils<T> baseInterAnalysisUtils;
 
   public BaseRemoveNestedRegionsInter(
       String programName,
@@ -33,11 +35,13 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
       BlockRegionMatcher blockRegionMatcher,
       Map<JavaRegion, T> regionsToData,
       SootAsmMethodMatcher sootAsmMethodMatcher,
-      CallGraph callGraph) {
+      CallGraph callGraph,
+      BaseInterAnalysisUtils<T> baseInterAnalysisUtils) {
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
 
     this.sootAsmMethodMatcher = sootAsmMethodMatcher;
     this.callGraph = callGraph;
+    this.baseInterAnalysisUtils = baseInterAnalysisUtils;
   }
 
   protected abstract boolean completelyContainsAll(T coveringData, @Nullable T regionData);
@@ -155,24 +159,11 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
   }
 
   private boolean canRemoveNestedRegion(SootMethod targetSootMethod, T callerData) {
-    Iterator<Edge> callerEdgesIter = this.callGraph.edgesInto(targetSootMethod);
-    Set<Edge> callerEdges = new HashSet<>();
+    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
+        this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(targetSootMethod);
 
-    while (callerEdgesIter.hasNext()) {
-      Edge edge = callerEdgesIter.next();
-      SootMethod srcMethod = edge.src();
-      SootClass srcClass = srcMethod.getDeclaringClass();
-      String packageName = srcClass.getPackageName();
-
-      if (!this.sootAsmMethodMatcher.getApplicationPackages().contains(packageName)) {
-        throw new RuntimeException(
-            "Apparently, JRE methods could be callers to application methods. So, we used to check the callers of those JRE methods to find application methods. Not sure if this is still relevant now");
-      }
-
-      callerEdges.add(edge);
-    }
-
-    if (callerEdges.size() == 1) {
+    if (callerSootMethodsToEdges.size() == 1
+        && callerSootMethodsToEdges.values().iterator().next().size() == 1) {
       return true;
     }
 

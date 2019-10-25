@@ -1,1 +1,34 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CannotRemoveNestedRegions","methodSignature":"foo(Z)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A"],"id":"25fa66d2-45a5-4d7f-b3cf-c2583ad7b8c4","startBlock":"1935994577","endBlocks":["1749978269"]},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CannotRemoveNestedRegions","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!B","B"],"id":"58d07307-107f-465d-b1b8-b33dcfdedb3d","startBlock":"1781668126","endBlocks":["1727776231"]}]
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CannotRemoveNestedRegions",
+    "methodSignature": "foo(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A"
+    ],
+    "id": "82d192ff-97de-41d6-b5d7-98216452e977",
+    "startBlock": "1935994577",
+    "endBlocks": [
+      "1749978269"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CannotRemoveNestedRegions",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!B",
+      "B"
+    ],
+    "id": "59c9b497-92f5-4287-ac27-db048ec53f9f",
+    "startBlock": "1781668126",
+    "endBlocks": [
+      "1727776231"
+    ]
+  }
+]

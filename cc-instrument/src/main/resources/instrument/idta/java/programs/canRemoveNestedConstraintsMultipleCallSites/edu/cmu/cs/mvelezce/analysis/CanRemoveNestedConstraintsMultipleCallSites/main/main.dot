@@ -1,0 +1,20 @@
+digraph main {
+node [shape=record];
+1608217492 [label="L0\lLINENUMBER 6 L0\lLDC \"b44b0f3f-19a6-40ec-9a8b-b04bc71e7314\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1264031938 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+765321860 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+1896062177 [label="L6\lLINENUMBER 14 L6\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+1967134222 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"b44b0f3f-19a6-40ec-9a8b-b04bc71e7314\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+entry;
+exit;
+1608217492 -> 1264031938;
+1608217492 -> 765321860;
+entry -> 1608217492;
+1264031938 -> 765321860;
+765321860 -> 1896062177;
+765321860 -> 1967134222;
+1896062177 -> 1967134222;
+1967134222 -> exit;
+1608217492[fontcolor="purple", penwidth=3, color="purple"];
+1967134222[fontcolor="purple", penwidth=3, color="purple"];
+}

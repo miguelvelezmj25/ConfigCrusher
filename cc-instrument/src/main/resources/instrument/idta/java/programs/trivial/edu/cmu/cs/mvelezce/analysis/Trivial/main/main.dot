@@ -1,21 +1,21 @@
 digraph main {
 node [shape=record];
-1626759869 [label="L8\lLINENUMBER 16 L8\lSIPUSH 2000\lISTORE 3\lL9\lLINENUMBER 17 L9\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL10\lLINENUMBER 18 L10\lILOAD 3\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
-1207580273 [label="L3\lLINENUMBER 15 L3\lFRAME APPEND [I I]\lLDC \"eb1994bf-4d1c-4ee4-8443-90a8e152ddb7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"3680759d-d977-4aff-8a04-143d69def958\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 2\lIFEQ L7\l"];
-1662235713 [label="L4\lLINENUMBER 10 L4\lSIPUSH 1000\lISTORE 3\lL5\lLINENUMBER 11 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL6\lLINENUMBER 12 L6\lILOAD 3\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
-622007642 [label="L0\lLINENUMBER 6 L0\lLDC \"eb1994bf-4d1c-4ee4-8443-90a8e152ddb7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1576141372 [label="L7\lLINENUMBER 20 L7\lFRAME SAME\lLDC \"3680759d-d977-4aff-8a04-143d69def958\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL11\l"];
+701747451 [label="L4\lLINENUMBER 10 L4\lSIPUSH 1000\lISTORE 3\lL5\lLINENUMBER 11 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL6\lLINENUMBER 12 L6\lILOAD 3\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
+1554132505 [label="L3\lLINENUMBER 15 L3\lFRAME APPEND [I I]\lLDC \"4a1bfdb0-812f-4e97-a37c-40b73d5a63de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"9e60bd40-da2e-43f2-ba3b-a658b6098728\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 2\lIFEQ L7\l"];
+1895322165 [label="L7\lLINENUMBER 20 L7\lFRAME SAME\lLDC \"9e60bd40-da2e-43f2-ba3b-a658b6098728\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL11\l"];
+833308761 [label="L0\lLINENUMBER 6 L0\lLDC \"4a1bfdb0-812f-4e97-a37c-40b73d5a63de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+469383315 [label="L8\lLINENUMBER 16 L8\lSIPUSH 2000\lISTORE 3\lL9\lLINENUMBER 17 L9\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 3\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL10\lLINENUMBER 18 L10\lILOAD 3\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
 entry;
 exit;
-1626759869 -> 1576141372;
-entry -> 622007642;
-1207580273 -> 1626759869;
-1207580273 -> 1576141372;
-1662235713 -> 1207580273;
-622007642 -> 1207580273;
-622007642 -> 1662235713;
-1576141372 -> exit;
-1207580273[fontcolor="purple", penwidth=3, color="purple"];
-622007642[fontcolor="purple", penwidth=3, color="purple"];
-1576141372[fontcolor="purple", penwidth=3, color="purple"];
+701747451 -> 1554132505;
+entry -> 833308761;
+1554132505 -> 1895322165;
+1554132505 -> 469383315;
+1895322165 -> exit;
+833308761 -> 701747451;
+833308761 -> 1554132505;
+469383315 -> 1895322165;
+1554132505[fontcolor="purple", penwidth=3, color="purple"];
+1895322165[fontcolor="purple", penwidth=3, color="purple"];
+833308761[fontcolor="purple", penwidth=3, color="purple"];
 }

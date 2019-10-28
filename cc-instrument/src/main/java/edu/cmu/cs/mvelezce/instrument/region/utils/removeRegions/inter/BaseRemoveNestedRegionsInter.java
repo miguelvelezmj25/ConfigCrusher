@@ -99,11 +99,11 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
 
         int methodCallIndex = this.getMethodCallIndex(methodInsnNode, methodNode);
         Unit srcUnit = this.getSrcUnit(methodNode, methodInsnNode, methodCallIndex);
-        Iterator<Edge> calleeEdges = this.callGraph.edgesOutOf(srcUnit);
+        Iterator<Edge> callEdges = this.callGraph.edgesOutOf(srcUnit);
 
-        while (calleeEdges.hasNext()) {
-          Edge calleeEdge = calleeEdges.next();
-          SootMethod targetSootMethod = calleeEdge.tgt();
+        while (callEdges.hasNext()) {
+          Edge callEdge = callEdges.next();
+          SootMethod targetSootMethod = callEdge.tgt();
 
           if (!this.canRemoveNestedRegion(targetSootMethod, callerData)) {
             continue;
@@ -159,16 +159,35 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
   }
 
   private boolean canRemoveNestedRegion(SootMethod targetSootMethod, T callerData) {
-    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
-        this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(targetSootMethod);
-
-    if (callerSootMethodsToEdges.size() == 1
-        && callerSootMethodsToEdges.values().iterator().next().size() == 1) {
+    if (this.noRegionsInTargetMethod(targetSootMethod)) {
       return true;
     }
 
-    throw new UnsupportedOperationException(
-        "Check that the regions in this method can be remove if all callers match? the caller data ");
+    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
+        this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(targetSootMethod);
+
+    return this.baseInterAnalysisUtils.callerDataCriteriaConstainsAllCallerDataOfCallee(
+        callerData, callerSootMethodsToEdges);
+  }
+
+  private boolean noRegionsInTargetMethod(SootMethod targetSootMethod) {
+    MethodNode targetMethodNode = this.sootAsmMethodMatcher.getMethodNode(targetSootMethod);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
+        this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(targetMethodNode);
+    Set<JavaRegion> regions = this.getRegionsInMethod(blocksToRegions);
+
+    return regions.size() == 1 && regions.iterator().next() == null;
+  }
+
+  private Set<JavaRegion> getRegionsInMethod(
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    Set<JavaRegion> regions = new HashSet<>();
+
+    for (Map.Entry<MethodBlock, JavaRegion> entry : blocksToRegions.entrySet()) {
+      regions.add(entry.getValue());
+    }
+
+    return regions;
   }
 
   private Unit getSrcUnit(

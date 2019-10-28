@@ -1,0 +1,1 @@
+[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanRemoveNestedConstraintsMultipleCallSites","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A","(A && B)","(A && !B)"],"id":"b44b0f3f-19a6-40ec-9a8b-b04bc71e7314","startBlock":"1989332276","endBlocks":["1895054149"]}]

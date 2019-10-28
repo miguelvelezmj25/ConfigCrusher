@@ -62,6 +62,9 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
 
   protected abstract boolean canExpandDataUp(T firstRegionData, @Nullable T callerData);
 
+  protected abstract boolean containsAll(
+      T callerDataCriteriaToRemoveNestedData, T currentCallerData);
+
   public Map<SootMethod, List<Edge>> getCallerSootMethodsToEdges(SootMethod sootMethod) {
     Map<SootMethod, List<Edge>> callerSootMethodsToEdges = new HashMap<>();
     Iterator<Edge> edgesInto = this.callGraph.edgesInto(sootMethod);
@@ -120,6 +123,40 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
     }
 
     return methodsToBlocksToPropagate;
+  }
+
+  public boolean callerDataCriteriaConstainsAllCallerDataOfCallee(
+      T callerDataCriteriaToRemoveNestedData,
+      Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
+    Queue<Map.Entry<SootMethod, List<Edge>>> worklist =
+        new ArrayDeque<>(callerSootMethodsToEdges.entrySet());
+    // TODO might need to add analyzed edges or soot methods
+    while (!worklist.isEmpty()) {
+      Map.Entry<SootMethod, List<Edge>> entry = worklist.poll();
+      SootMethod sootMethod = entry.getKey();
+      MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
+      LinkedHashMap<MethodBlock, JavaRegion> blocks =
+          this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
+      List<Edge> edges = entry.getValue();
+
+      for (int i = 0; i < edges.size(); i++) {
+        Edge edge = edges.get(i);
+        AbstractInsnNode callerInsn = this.getCallerInsn(edge, i);
+        MethodBlock callerBlock = this.getCallerBlock(blocks.keySet(), callerInsn);
+        JavaRegion callerRegion = blocks.get(callerBlock);
+        T currentCallerData = this.getData(callerRegion);
+
+        if (currentCallerData == null) {
+//          Map<SootMethod, List<Edge>> x = this.getCallerSootMethodsToEdges(edge.src());
+//          worklist.addAll(x.entrySet());
+          throw new UnsupportedOperationException("Implement");
+        } else if (!this.containsAll(callerDataCriteriaToRemoveNestedData, currentCallerData)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
   private MethodBlock getCallerBlock(Set<MethodBlock> blocks, AbstractInsnNode callerInsn) {

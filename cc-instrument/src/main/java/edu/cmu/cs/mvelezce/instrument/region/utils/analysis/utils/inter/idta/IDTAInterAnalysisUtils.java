@@ -42,4 +42,12 @@ public class IDTAInterAnalysisUtils extends BaseInterAnalysisUtils<Set<FeatureEx
       Set<FeatureExpr> firstRegionData, @Nullable Set<FeatureExpr> callerData) {
     return this.baseIDTAExpander.canMergeConstraints(firstRegionData, callerData);
   }
+
+  @Override
+  protected boolean containsAll(
+      Set<FeatureExpr> callerDataCriteriaToRemoveNestedConstraints,
+      Set<FeatureExpr> currentCallerConstraints) {
+    return this.baseIDTAExpander.impliesAll(
+        callerDataCriteriaToRemoveNestedConstraints, currentCallerConstraints);
+  }
 }

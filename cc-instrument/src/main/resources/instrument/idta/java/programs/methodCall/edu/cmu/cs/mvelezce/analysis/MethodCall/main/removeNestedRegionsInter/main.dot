@@ -2,9 +2,9 @@ digraph main {
 node [shape=record];
 entry [label="entry - []"];
 exit [label="exit - []"];
-707492405 [label="707492405 - [!A, A, (A && B), (A && !B)]"];
+526981115 [label="526981115 - [!A, A, (A && B), (A && !B)]"];
 entry;
 exit;
-entry -> 707492405;
-707492405 -> exit;
+entry -> 526981115;
+526981115 -> exit;
 }

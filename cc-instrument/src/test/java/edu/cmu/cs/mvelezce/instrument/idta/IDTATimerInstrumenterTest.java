@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapter.adapters.canExpandConstraintsDown.BaseCanExpandConstraintsDownAdapter;
+import edu.cmu.cs.mvelezce.adapter.adapters.canRemoveNestedConstraintsMultipleCallSites.BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.cannotExpandConstraintsDown.BaseCannotExpandConstraintsDownAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.cannotRemoveNestedRegions.BaseCannotRemoveNestedRegionsAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.iGen.BaseIGenAdapter;
@@ -161,6 +162,39 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseSubtracesAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseSubtracesAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseSubtracesAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void canRemoveNestedConstraintsMultipleCallSites()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.PROGRAM_NAME;
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.MAIN_CLASS;
+    String srcDir =
+        "../" + BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir =
+        "../" + BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options =
+        new HashSet<>(BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

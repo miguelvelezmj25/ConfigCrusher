@@ -1,1 +1,36 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanRemoveNestedConstraintsMultipleCallSites","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A"],"id":"a97b93d0-c7e0-4c54-ba2c-7a8f3b723790","startBlock":"1989332276","endBlocks":["1895054149"]},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"CanRemoveNestedConstraintsMultipleCallSites","methodSignature":"foo(Z)V","decisionIndex":1,"info":[],"prettyConstraints":["(A && B)","(A && !B)"],"id":"71ccce3a-c3d7-40ed-90d1-2b0f8cf4fb80","startBlock":"1642308093","endBlocks":["1370224403"]}]
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CanRemoveNestedConstraintsMultipleCallSites",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A",
+      "(A && B)",
+      "(A && !B)"
+    ],
+    "id": "031cc0ad-3dd6-48b5-ab90-a1f4240fe99f",
+    "startBlock": "1989332276",
+    "endBlocks": [
+      "1895054149"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CanRemoveNestedConstraintsMultipleCallSites",
+    "methodSignature": "foo(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(A && B)",
+      "(A && !B)"
+    ],
+    "id": "ecca1e13-694d-41c8-af68-8a0679e7537e",
+    "startBlock": "1642308093",
+    "endBlocks": [
+      "1370224403"
+    ]
+  }
+]

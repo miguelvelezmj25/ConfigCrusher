@@ -157,7 +157,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     while (propagatedRegions) {
       propagatedRegions = this.propagateRegionsIntra(classNodes);
-      //      propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
+      propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
     }
 
     //    this.removeNestedRegionsInter(classNodes);

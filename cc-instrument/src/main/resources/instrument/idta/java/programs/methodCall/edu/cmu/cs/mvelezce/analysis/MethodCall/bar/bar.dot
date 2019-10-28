@@ -1,15 +1,15 @@
 digraph bar {
 node [shape=record];
-22426187 [label="L2\lLINENUMBER 20 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-950243028 [label="L1\lLINENUMBER 22 L1\lFRAME SAME\lLDC \"3bb6cfd8-16d7-44a5-8766-a4ce7400ef25\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
-111965547 [label="L0\lLINENUMBER 19 L0\lLDC \"3bb6cfd8-16d7-44a5-8766-a4ce7400ef25\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L1\l"];
+1043170851 [label="L2\lLINENUMBER 20 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1920032353 [label="L1\lLINENUMBER 22 L1\lFRAME SAME\lLDC \"23d5505b-dc4d-487a-baf9-9a6d7d336370\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+276060674 [label="L0\lLINENUMBER 19 L0\lLDC \"23d5505b-dc4d-487a-baf9-9a6d7d336370\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L1\l"];
 entry;
 exit;
-22426187 -> 950243028;
-entry -> 111965547;
-950243028 -> exit;
-111965547 -> 22426187;
-111965547 -> 950243028;
-950243028[fontcolor="purple", penwidth=3, color="purple"];
-111965547[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 276060674;
+1043170851 -> 1920032353;
+1920032353 -> exit;
+276060674 -> 1043170851;
+276060674 -> 1920032353;
+1920032353[fontcolor="purple", penwidth=3, color="purple"];
+276060674[fontcolor="purple", penwidth=3, color="purple"];
 }

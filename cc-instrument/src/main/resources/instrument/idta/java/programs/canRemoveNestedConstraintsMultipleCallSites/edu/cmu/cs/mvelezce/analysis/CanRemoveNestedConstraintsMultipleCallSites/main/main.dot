@@ -1,20 +1,20 @@
 digraph main {
 node [shape=record];
-1608217492 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"a97b93d0-c7e0-4c54-ba2c-7a8f3b723790\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-686840588 [label="L0\lLINENUMBER 6 L0\lLDC \"a97b93d0-c7e0-4c54-ba2c-7a8f3b723790\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1711445717 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
-1977187864 [label="L6\lLINENUMBER 14 L6\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
-1831953318 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+1608217492 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+1977187864 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+1264031938 [label="L6\lLINENUMBER 14 L6\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+1831953318 [label="L0\lLINENUMBER 6 L0\lLDC \"031cc0ad-3dd6-48b5-ab90-a1f4240fe99f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+765321860 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"031cc0ad-3dd6-48b5-ab90-a1f4240fe99f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
 entry;
 exit;
-1608217492 -> exit;
-entry -> 686840588;
-686840588 -> 1711445717;
-686840588 -> 1831953318;
-1711445717 -> 1608217492;
-1711445717 -> 1977187864;
-1977187864 -> 1608217492;
-1831953318 -> 1711445717;
-1608217492[fontcolor="purple", penwidth=3, color="purple"];
-686840588[fontcolor="purple", penwidth=3, color="purple"];
+1608217492 -> 1977187864;
+entry -> 1831953318;
+1977187864 -> 1264031938;
+1977187864 -> 765321860;
+1264031938 -> 765321860;
+1831953318 -> 1608217492;
+1831953318 -> 1977187864;
+765321860 -> exit;
+1831953318[fontcolor="purple", penwidth=3, color="purple"];
+765321860[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -81,7 +81,6 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       MethodGraph graph,
       MethodBlock ipd) {
     Set<MethodBlock> updatedBlocks = new HashSet<>();
-
     Set<MethodBlock> blocksToSkip = new HashSet<>();
 
     for (MethodBlock reachable : reachables) {
@@ -92,7 +91,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       JavaRegion reachableRegion = blocksToRegions.get(reachable);
       T reachableData = this.getData(reachableRegion);
 
-      if (regionData.equals(reachableData) || this.containsAll(reachableData, regionData)) {
+      if (regionData.equals(reachableData)) {
         continue;
       }
 
@@ -116,6 +115,11 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       }
 
       T newData = this.mergeData(regionData, reachableData);
+
+      if (newData.equals(reachableData)) {
+        continue;
+      }
+
       this.addRegionToData(reachableRegion, newData);
       updatedBlocks.add(reachable);
     }

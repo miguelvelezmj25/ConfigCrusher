@@ -1,21 +1,21 @@
 digraph main {
 node [shape=record];
-329410765 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"9326e572-8779-45e4-b7f3-0c783b3b9b4c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-1288168365 [label="L0\lLINENUMBER 6 L0\lLDC \"9326e572-8779-45e4-b7f3-0c783b3b9b4c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1619736058 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1574347976 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
-1203651014 [label="L4\lLINENUMBER 10 L4\lLDC \"9326e572-8779-45e4-b7f3-0c783b3b9b4c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1025726005 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
+1264696 [label="L0\lLINENUMBER 6 L0\lLDC \"b78a841c-6238-4cc7-b169-6af77747d308\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1288168365 [label="L4\lLINENUMBER 10 L4\lLDC \"b78a841c-6238-4cc7-b169-6af77747d308\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1574347976 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"b78a841c-6238-4cc7-b169-6af77747d308\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+1203651014 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;
-entry -> 1288168365;
-329410765 -> exit;
-1288168365 -> 1574347976;
-1288168365 -> 1203651014;
-1619736058 -> 329410765;
-1574347976 -> 329410765;
-1574347976 -> 1619736058;
-1203651014 -> exit;
-329410765[fontcolor="purple", penwidth=3, color="purple"];
+1025726005 -> 1574347976;
+1025726005 -> 1203651014;
+entry -> 1264696;
+1264696 -> 1025726005;
+1264696 -> 1288168365;
+1288168365 -> exit;
+1574347976 -> exit;
+1203651014 -> 1574347976;
+1264696[fontcolor="purple", penwidth=3, color="purple"];
 1288168365[fontcolor="purple", penwidth=3, color="purple"];
-1203651014[fontcolor="purple", penwidth=3, color="purple"];
+1574347976[fontcolor="purple", penwidth=3, color="purple"];
 }

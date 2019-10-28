@@ -110,8 +110,6 @@ public final class BaseIDTAExpander {
   public boolean impliesAll(
       @Nullable Set<FeatureExpr> implyingConstraints,
       @Nullable Set<FeatureExpr> impliedConstraints) {
-    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
-
     if (implyingConstraints == null || impliedConstraints == null) {
       return false;
     }
@@ -127,18 +125,10 @@ public final class BaseIDTAExpander {
       }
 
       if (!exists) {
-        if (containsAll) {
-          throw new RuntimeException(
-              "The implying constraints contain all of the implied constraints, but the implication check failed");
-        }
         return false;
       }
     }
 
-    if (!containsAll) {
-      throw new RuntimeException(
-          "The implying constraints do not contain all of the implied constraints, but the implication check passed");
-    }
     return true;
   }
 

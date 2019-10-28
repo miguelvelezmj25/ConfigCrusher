@@ -52,12 +52,6 @@ public final class SootAsmMethodMatcher {
       return;
     }
 
-    for (ClassNode classNode : classNodes) {
-      if (classNode.name.contains("$")) {
-        throw new UnsupportedOperationException("Check the naming of the classes");
-      }
-    }
-
     this.calcApplicationPackages(classNodes);
 
     Map<String, MethodNode> fullyQualifiedMethodNodes =

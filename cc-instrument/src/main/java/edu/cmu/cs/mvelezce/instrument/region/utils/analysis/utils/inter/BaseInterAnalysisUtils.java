@@ -15,6 +15,7 @@ import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
@@ -147,8 +148,8 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
         T currentCallerData = this.getData(callerRegion);
 
         if (currentCallerData == null) {
-//          Map<SootMethod, List<Edge>> x = this.getCallerSootMethodsToEdges(edge.src());
-//          worklist.addAll(x.entrySet());
+          //          Map<SootMethod, List<Edge>> x = this.getCallerSootMethodsToEdges(edge.src());
+          //          worklist.addAll(x.entrySet());
           throw new UnsupportedOperationException("Implement");
         } else if (!this.containsAll(callerDataCriteriaToRemoveNestedData, currentCallerData)) {
           return false;
@@ -213,16 +214,21 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
   }
 
   private int getSrcOpcode(Unit srcUnit) {
-    if (!(srcUnit instanceof JInvokeStmt)) {
+    Integer opcode;
+
+    if (srcUnit instanceof JInvokeStmt) {
+      InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
+      opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
+    } else if (srcUnit instanceof JAssignStmt) {
+      InvokeExpr invokeExpr = ((JAssignStmt) srcUnit).getInvokeExpr();
+      opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
+    } else {
       throw new RuntimeException(
-          "Expected this statement to be a method invocation, but was " + srcUnit.getClass());
+          "This class type of src unit calls a method " + srcUnit.getClass());
     }
 
-    InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
-    Integer opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
-
     if (opcode == null) {
-      throw new RuntimeException("Could not find an opcode for " + invokeExpr.getClass());
+      throw new RuntimeException("Could not find an opcode for the instruction in " + srcUnit);
     }
 
     return opcode;

@@ -56,7 +56,8 @@ public final class SootCallGraphBuilder {
     Options.v().setPhaseOption("jb", "use-original-names:true");
 
     // Options needed for instrumentation
-    // Including this list helped to fix a "bug" that was not adding an edge to a method within a loop
+    // Including this list helped to fix a "bug" that was not adding an edge to a method within a
+    // loop
     List<String> includeList = new LinkedList<>();
     includeList.add("java.lang.*");
     includeList.add("java.util.*");
@@ -77,8 +78,8 @@ public final class SootCallGraphBuilder {
     Options.v().set_include(includeList);
 
     Options.v().set_keep_line_number(true);
+    Options.v().set_coffi(true);
     Options.v().set_keep_offset(true);
-    //    Options.v().set_coffi(true);
     Options.v().set_ignore_classpath_errors(true);
 
     loadClassesAndBodies(entryPoint);

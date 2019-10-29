@@ -34,6 +34,10 @@ public class InstrumenterUtils {
   }
 
   public static String getClassNodePackage(String classNodeName) {
+    if (classNodeName.equals("[B")) {
+      return classNodeName;
+    }
+
     String classPackage = classNodeName.substring(0, classNodeName.lastIndexOf("/"));
     classPackage = classPackage.replace("/", ".");
 

@@ -6,6 +6,10 @@ import soot.SootClass;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.options.Options;
 
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+
 public final class SootCallGraphBuilder {
 
   private SootCallGraphBuilder() {}
@@ -33,7 +37,13 @@ public final class SootCallGraphBuilder {
     Options.v().set_no_bodies_for_excluded(true);
     Options.v().set_allow_phantom_refs(true);
     Options.v().set_output_format(Options.output_format_none);
-    Options.v().set_soot_classpath(appPath);
+    Options.v()
+        .set_soot_classpath(
+            appPath
+                + File.pathSeparator
+                + "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/rt.jar"
+                + File.pathSeparator
+                + ":/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/jce.jar");
 
     setSparkOptions();
 
@@ -46,9 +56,29 @@ public final class SootCallGraphBuilder {
     Options.v().setPhaseOption("jb", "use-original-names:true");
 
     // Options needed for instrumentation
+    // Including this list helped to fix a "bug" that was not adding an edge to a method within a loop
+    List<String> includeList = new LinkedList<>();
+    includeList.add("java.lang.*");
+    includeList.add("java.util.*");
+    includeList.add("java.io.*");
+    includeList.add("sun.misc.*");
+    includeList.add("java.net.*");
+    includeList.add("javax.servlet.*");
+    includeList.add("javax.crypto.*");
+
+    includeList.add("android.*");
+    includeList.add("org.apache.http.*");
+
+    includeList.add("de.test.*");
+    includeList.add("soot.*");
+    includeList.add("com.example.*");
+    includeList.add("libcore.icu.*");
+    includeList.add("securibench.*");
+    Options.v().set_include(includeList);
+
     Options.v().set_keep_line_number(true);
     Options.v().set_keep_offset(true);
-    Options.v().set_coffi(true);
+    //    Options.v().set_coffi(true);
     Options.v().set_ignore_classpath_errors(true);
 
     loadClassesAndBodies(entryPoint);
@@ -74,5 +104,6 @@ public final class SootCallGraphBuilder {
   private static void setSparkOptions() {
     Options.v().setPhaseOption("cg.spark", "on");
     Options.v().setPhaseOption("cg.spark", "string-constants:true");
+    Options.v().setPhaseOption("cg.spark", "verbose:true");
   }
 }

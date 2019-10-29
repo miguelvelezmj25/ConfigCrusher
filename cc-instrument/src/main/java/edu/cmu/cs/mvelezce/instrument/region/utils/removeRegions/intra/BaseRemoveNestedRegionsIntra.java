@@ -23,7 +23,7 @@ public abstract class BaseRemoveNestedRegionsIntra<T> extends BlockRegionAnalyze
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
   }
 
-  protected abstract boolean completelyContainsAll(T coveringData, @Nullable T regionData);
+  protected abstract boolean coversAll(T coveringData, @Nullable T regionData);
 
   @Override
   protected Set<MethodBlock> processBlock(
@@ -87,13 +87,13 @@ public abstract class BaseRemoveNestedRegionsIntra<T> extends BlockRegionAnalyze
       T reachableData = this.getData(reachableRegion);
 
       boolean equals = regionData.equals(reachableData);
-      boolean completelyContainsAll = this.completelyContainsAll(regionData, reachableData);
+      boolean coversAll = this.coversAll(regionData, reachableData);
 
-      if (equals != completelyContainsAll) {
-        throw new RuntimeException("The equals and completely contains all checks do not match");
+      if (equals != coversAll) {
+        throw new RuntimeException("The equals and covers all checks do not match");
       }
 
-      if (!completelyContainsAll) {
+      if (!coversAll) {
         continue;
       }
 

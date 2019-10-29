@@ -63,8 +63,7 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
 
   protected abstract boolean canExpandDataUp(T firstRegionData, @Nullable T callerData);
 
-  protected abstract boolean containsAll(
-      T callerDataCriteriaToRemoveNestedData, T currentCallerData);
+  protected abstract boolean coversAll(T callerDataCriteriaToRemoveNestedData, T currentCallerData);
 
   public Map<SootMethod, List<Edge>> getCallerSootMethodsToEdges(SootMethod sootMethod) {
     Map<SootMethod, List<Edge>> callerSootMethodsToEdges = new HashMap<>();
@@ -126,7 +125,7 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
     return methodsToBlocksToPropagate;
   }
 
-  public boolean callerDataCriteriaConstainsAllCallerDataOfCallee(
+  public boolean callerDataCriteriaCoversAllCallerDataOfCallee(
       T callerDataCriteriaToRemoveNestedData,
       Map<SootMethod, List<Edge>> callerSootMethodsToEdges) {
     Queue<Map.Entry<SootMethod, List<Edge>>> worklist =
@@ -148,10 +147,9 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
         T currentCallerData = this.getData(callerRegion);
 
         if (currentCallerData == null) {
-          //          Map<SootMethod, List<Edge>> x = this.getCallerSootMethodsToEdges(edge.src());
-          //          worklist.addAll(x.entrySet());
-          throw new UnsupportedOperationException("Implement");
-        } else if (!this.containsAll(callerDataCriteriaToRemoveNestedData, currentCallerData)) {
+          Map<SootMethod, List<Edge>> sourceCallers = this.getCallerSootMethodsToEdges(edge.src());
+          worklist.addAll(sourceCallers.entrySet());
+        } else if (!this.coversAll(callerDataCriteriaToRemoveNestedData, currentCallerData)) {
           return false;
         }
       }

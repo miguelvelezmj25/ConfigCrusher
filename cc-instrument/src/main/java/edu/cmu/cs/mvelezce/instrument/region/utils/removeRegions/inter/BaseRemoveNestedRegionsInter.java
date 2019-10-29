@@ -16,6 +16,11 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
+import soot.Value;
+import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JAssignStmt;
+import soot.jimple.internal.JInvokeStmt;
+import soot.jimple.internal.JNewExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 
@@ -23,6 +28,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyzer<T> {
+
+  private static final String ENUM_ORDINAL_SIGNATURE = "ordinal()I";
 
   private final CallGraph callGraph;
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
@@ -44,7 +51,7 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     this.baseInterAnalysisUtils = baseInterAnalysisUtils;
   }
 
-  protected abstract boolean completelyContainsAll(T coveringData, @Nullable T regionData);
+  protected abstract boolean coversAll(T coveringData, @Nullable T regionData);
 
   @Override
   protected String debugFileName(String methodName) {
@@ -99,10 +106,14 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
 
         int methodCallIndex = this.getMethodCallIndex(methodInsnNode, methodNode);
         Unit srcUnit = this.getSrcUnit(methodNode, methodInsnNode, methodCallIndex);
-        Iterator<Edge> callEdges = this.callGraph.edgesOutOf(srcUnit);
 
-        while (callEdges.hasNext()) {
-          Edge callEdge = callEdges.next();
+        if (srcUnit == null) {
+          continue;
+        }
+
+        List<Edge> callEdges = this.getCallerEdges(srcUnit);
+
+        for (Edge callEdge : callEdges) {
           SootMethod targetSootMethod = callEdge.tgt();
 
           if (!this.canRemoveNestedRegion(targetSootMethod, callerData)) {
@@ -145,7 +156,7 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
       JavaRegion region = entry.getValue();
       T regionData = this.getData(region);
 
-      if (!this.completelyContainsAll(callerData, regionData)) {
+      if (!this.coversAll(callerData, regionData)) {
         blocksWithUncoveredData.add(block);
 
         continue;
@@ -166,7 +177,7 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
         this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(targetSootMethod);
 
-    return this.baseInterAnalysisUtils.callerDataCriteriaConstainsAllCallerDataOfCallee(
+    return this.baseInterAnalysisUtils.callerDataCriteriaCoversAllCallerDataOfCallee(
         callerData, callerSootMethodsToEdges);
   }
 
@@ -190,6 +201,7 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     return regions;
   }
 
+  @Nullable
   private Unit getSrcUnit(
       MethodNode methodNode, MethodInsnNode methodInsnNode, int methodCallIndex) {
     SootMethod sootMethod = this.sootAsmMethodMatcher.getSootMethod(methodNode);
@@ -202,14 +214,47 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     List<Edge> callerEdges = this.getCallerEdges(sootMethod);
 
     for (Edge edge : callerEdges) {
-      SootMethod targetSootMethod = edge.tgt();
-      SootClass targetSootClass = targetSootMethod.getDeclaringClass();
+      SootClass targetSootClass;
+      Unit srcUnit = edge.srcUnit();
+
+      if (srcUnit instanceof JInvokeStmt) {
+        JInvokeStmt jInvokeStmt = ((JInvokeStmt) srcUnit);
+
+        if (!jInvokeStmt.containsInvokeExpr()) {
+          throw new RuntimeException("The JInvokeStmt does not have an InvokeExpr");
+        }
+
+        InvokeExpr invokeExpr = jInvokeStmt.getInvokeExpr();
+        targetSootClass = invokeExpr.getMethodRef().getDeclaringClass();
+      } else if (srcUnit instanceof JAssignStmt) {
+        JAssignStmt jAssignStmt = ((JAssignStmt) srcUnit);
+
+        if (jAssignStmt.containsInvokeExpr()) {
+          InvokeExpr invokeExpr = jAssignStmt.getInvokeExpr();
+          targetSootClass = invokeExpr.getMethodRef().getDeclaringClass();
+        } else {
+          Value rightOp = jAssignStmt.getRightOp();
+
+          if (rightOp instanceof JNewExpr) {
+            targetSootClass = edge.tgt().getDeclaringClass();
+          } else if (edge.isClinit()) {
+            targetSootClass = edge.tgt().getDeclaringClass();
+          } else {
+            throw new RuntimeException("Handle special case of JAssigStmt without an invoke");
+          }
+        }
+      } else {
+        throw new RuntimeException(
+            "This class type of src unit calls a method " + srcUnit.getClass());
+      }
+
       String targetClassNodeName = InstrumenterUtils.getClassNodeName(methodInsnNode.owner);
 
       if (!targetSootClass.getName().equals(targetClassNodeName)) {
         continue;
       }
 
+      SootMethod targetSootMethod = edge.tgt();
       String targetSootMethodSignature = InstrumenterUtils.getSootMethodSignature(targetSootMethod);
       String targetMethodNodeSignature = methodInsnNode.name + methodInsnNode.desc;
 
@@ -224,8 +269,38 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
       index++;
     }
 
-    throw new RuntimeException(
-        "Could not find the source unit to call " + methodInsnNode.name + " in " + methodNode.name);
+    if ((methodInsnNode.name + methodInsnNode.desc).equals(ENUM_ORDINAL_SIGNATURE)) {
+      return null;
+    }
+
+    System.err.println(
+        "Could not find the source unit to call "
+            + methodInsnNode.name
+            + " in "
+            + methodNode.name
+            + ". Soot might be smart to know that those method will never be called");
+
+    return null;
+  }
+
+  private List<Edge> getCallerEdges(Unit srcUnit) {
+    Iterator<Edge> callerEdgesIter = this.callGraph.edgesOutOf(srcUnit);
+    List<Edge> callerEdges = new ArrayList<>();
+
+    while (callerEdgesIter.hasNext()) {
+      Edge edge = callerEdgesIter.next();
+      SootMethod tgtMethod = edge.tgt();
+      SootClass tgtClass = tgtMethod.getDeclaringClass();
+      String tgtPackageName = tgtClass.getPackageName();
+
+      if (!this.sootAsmMethodMatcher.getApplicationPackages().contains(tgtPackageName)) {
+        continue;
+      }
+
+      callerEdges.add(edge);
+    }
+
+    return callerEdges;
   }
 
   private List<Edge> getCallerEdges(SootMethod sootMethod) {
@@ -233,7 +308,16 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     List<Edge> orderedCallerEdges = new ArrayList<>();
 
     while (callerEdges.hasNext()) {
-      orderedCallerEdges.add(callerEdges.next());
+      Edge edge = callerEdges.next();
+      SootMethod tgtMethod = edge.tgt();
+      SootClass tgtClass = tgtMethod.getDeclaringClass();
+      String tgtPackageName = tgtClass.getPackageName();
+
+      if (!this.sootAsmMethodMatcher.getApplicationPackages().contains(tgtPackageName)) {
+        continue;
+      }
+
+      orderedCallerEdges.add(edge);
     }
 
     orderedCallerEdges.sort(EdgeComparator.getInstance());

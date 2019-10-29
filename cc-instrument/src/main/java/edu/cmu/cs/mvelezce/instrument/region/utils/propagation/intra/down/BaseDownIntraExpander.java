@@ -32,8 +32,6 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       return new HashSet<>();
     }
 
-    //    System.out.println(graph.toDotString("test"));
-
     MethodBlock ipd = graph.getImmediatePostDominator(block);
     JavaRegion ipdRegion = blocksToRegions.get(ipd);
     T ipdData = this.getData(ipdRegion);
@@ -55,7 +53,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
     reachables.remove(ipd);
     List<MethodBlock> orderReachables = this.orderReachables(reachables, blocksToRegions);
 
-    return this.expandDataDown(region, regionData, orderReachables, blocksToRegions, graph, ipd);
+    return this.expandDataDown(region, regionData, orderReachables, blocksToRegions, graph);
   }
 
   private List<MethodBlock> orderReachables(
@@ -78,8 +76,7 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       T regionData,
       List<MethodBlock> reachables,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions,
-      MethodGraph graph,
-      MethodBlock ipd) {
+      MethodGraph graph) {
     Set<MethodBlock> updatedBlocks = new HashSet<>();
     Set<MethodBlock> blocksToSkip = new HashSet<>();
 
@@ -126,8 +123,6 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
 
     return updatedBlocks;
   }
-
-  protected abstract boolean containsAll(@Nullable T downData, T expandingData);
 
   protected abstract T mergeData(T expandingData, @Nullable T downData);
 

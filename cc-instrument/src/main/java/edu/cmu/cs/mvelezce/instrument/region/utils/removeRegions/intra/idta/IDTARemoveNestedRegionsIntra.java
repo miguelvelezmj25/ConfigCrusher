@@ -27,8 +27,8 @@ public class IDTARemoveNestedRegionsIntra extends BaseRemoveNestedRegionsIntra<S
   }
 
   @Override
-  protected boolean completelyContainsAll(
+  protected boolean coversAll(
       Set<FeatureExpr> callerConstraints, @Nullable Set<FeatureExpr> calleeConstraints) {
-    return this.baseIDTAExpander.completelyImplies(callerConstraints, calleeConstraints);
+    return this.baseIDTAExpander.impliesAll(callerConstraints, calleeConstraints);
   }
 }

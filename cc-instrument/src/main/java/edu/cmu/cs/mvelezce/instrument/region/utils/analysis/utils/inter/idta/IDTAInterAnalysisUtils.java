@@ -44,7 +44,7 @@ public class IDTAInterAnalysisUtils extends BaseInterAnalysisUtils<Set<FeatureEx
   }
 
   @Override
-  protected boolean containsAll(
+  protected boolean coversAll(
       Set<FeatureExpr> callerDataCriteriaToRemoveNestedConstraints,
       Set<FeatureExpr> currentCallerConstraints) {
     return this.baseIDTAExpander.impliesAll(

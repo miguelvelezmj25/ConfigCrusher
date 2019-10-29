@@ -80,37 +80,34 @@ public final class BaseIDTAExpander {
       }
     }
 
-    //    for (FeatureExpr newConstraint : newConstraints) {
-    //      boolean existsGlobalConstraint = false;
-    //
-    //      for (FeatureExpr globalConstraint : this.globalConstraints) {
-    //        if (globalConstraint.implies(newConstraint).isTautology()) {
-    //          existsGlobalConstraint = true;
-    //          break;
-    //        }
-    //      }
-    //
-    //      if (!existsGlobalConstraint) {
-    //        return false;
-    //      }
-    //    }
-    //
-    //    if (!this.globalConstraints.containsAll(newConstraints)) {
-    //      throw new RuntimeException(
-    //          "The global set of constraints does not include all of the new constraints that we
-    // derived, but all of the new constraints are implied by at least one global constraints");
-    //    }
-    //
-    //    return true;
+    for (FeatureExpr newConstraint : newConstraints) {
+      boolean existsGlobalConstraint = false;
 
-    return this.impliesAll(this.globalConstraints, newConstraints);
+      for (FeatureExpr globalConstraint : this.globalConstraints) {
+        if (globalConstraint.implies(newConstraint).isTautology()) {
+          existsGlobalConstraint = true;
+          break;
+        }
+      }
+
+      if (!existsGlobalConstraint) {
+        return false;
+      }
+    }
+
+    if (!this.globalConstraints.containsAll(newConstraints)) {
+      throw new RuntimeException(
+          "The global set of constraints does not include all of the new constraints that we derived, but all of the new constraints are implied by at least one global constraints");
+    }
+
+    return true;
+    //    return this.impliesAll(this.globalConstraints, newConstraints);
   }
 
   /** ∀ dc ∈ ImpliedConstraints . ∃ gc ∈ ImplyingConstraints . gc ⟹ dc */
   public boolean impliesAll(
-      @Nullable Set<FeatureExpr> implyingConstraints,
-      @Nullable Set<FeatureExpr> impliedConstraints) {
-    if (implyingConstraints == null || impliedConstraints == null) {
+      @Nullable Set<FeatureExpr> implyingConstraints, Set<FeatureExpr> impliedConstraints) {
+    if (implyingConstraints == null) {
       return false;
     }
 
@@ -132,15 +129,6 @@ public final class BaseIDTAExpander {
     return true;
   }
 
-  private boolean containsAll(
-      Set<FeatureExpr> currentConstraints, Set<FeatureExpr> expandingConstraints) {
-    if (currentConstraints == null || expandingConstraints == null) {
-      return false;
-    }
-
-    return currentConstraints.containsAll(expandingConstraints);
-  }
-
   public Set<FeatureExpr> mergeData(
       Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
     Set<FeatureExpr> newConstraints = new HashSet<>(thisConstraints);
@@ -154,38 +142,48 @@ public final class BaseIDTAExpander {
     return newConstraints;
   }
 
-  /**
-   * The disjunction of all implying constraints implies the disjunction of all implied constraints
-   */
-  public boolean completelyImplies(
-      Set<FeatureExpr> implyingConstraints, @Nullable Set<FeatureExpr> impliedConstraints) {
-    if (impliedConstraints == null) {
-      return true;
-    }
-
-    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
-
-    FeatureExpr implyingConstraintsDisjunction = this.getDisjunction(implyingConstraints);
-    FeatureExpr impliedConstraintsDisjunction = this.getDisjunction(impliedConstraints);
-
-    //    boolean completelyImply =
-    //        impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
-    //
-    //    if (containsAll != completelyImply) {
-    //      throw new RuntimeException("The contains all and implies all results do not match");
-    //    }
-    //
-    //    return completelyImply;
-    return containsAll;
-  }
-
-  private FeatureExpr getDisjunction(Set<FeatureExpr> constraints) {
-    FeatureExpr disjunction = FALSE;
-
-    for (FeatureExpr constraint : constraints) {
-      disjunction = disjunction.or(constraint);
-    }
-
-    return disjunction;
-  }
+  //  private boolean containsAll(
+  //      Set<FeatureExpr> currentConstraints, Set<FeatureExpr> expandingConstraints) {
+  //    if (currentConstraints == null || expandingConstraints == null) {
+  //      return false;
+  //    }
+  //
+  //    return currentConstraints.containsAll(expandingConstraints);
+  //  }
+  //  /**
+  //   * The disjunction of all implying constraints implies the disjunction of all implied
+  // constraints
+  //   */
+  //  public boolean completelyImplies(
+  //      Set<FeatureExpr> implyingConstraints, @Nullable Set<FeatureExpr> impliedConstraints) {
+  //    if (impliedConstraints == null) {
+  //      return true;
+  //    }
+  //
+  //    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
+  //
+  //    FeatureExpr implyingConstraintsDisjunction = this.getDisjunction(implyingConstraints);
+  //    FeatureExpr impliedConstraintsDisjunction = this.getDisjunction(impliedConstraints);
+  //
+  //    //    boolean completelyImply =
+  //    //
+  // impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
+  //    //
+  //    //    if (containsAll != completelyImply) {
+  //    //      throw new RuntimeException("The contains all and implies all results do not match");
+  //    //    }
+  //    //
+  //    //    return completelyImply;
+  //    return containsAll;
+  //  }
+  //
+  //  private FeatureExpr getDisjunction(Set<FeatureExpr> constraints) {
+  //    FeatureExpr disjunction = FALSE;
+  //
+  //    for (FeatureExpr constraint : constraints) {
+  //      disjunction = disjunction.or(constraint);
+  //    }
+  //
+  //    return disjunction;
+  //  }
 }

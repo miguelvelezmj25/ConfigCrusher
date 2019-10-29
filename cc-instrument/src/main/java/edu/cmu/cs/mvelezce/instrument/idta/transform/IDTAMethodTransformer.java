@@ -44,7 +44,6 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final BaseInterExpander<Set<FeatureExpr>> interExpander;
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
   private final BaseRemoveNestedRegionsInter<Set<FeatureExpr>> removeNestedRegionsInter;
-  private final BaseInterAnalysisUtils<Set<FeatureExpr>> baseInterAnalysisUtils;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
   private final CallGraph callGraph;
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
@@ -100,7 +99,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
     this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
-    this.baseInterAnalysisUtils =
+    BaseInterAnalysisUtils<Set<FeatureExpr>> baseInterAnalysisUtils =
         new IDTAInterAnalysisUtils(
             builder.programName,
             DEBUG_DIR,
@@ -120,7 +119,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getRegionsToData(),
             this.sootAsmMethodMatcher,
             this.callGraph,
-            this.baseInterAnalysisUtils,
+            baseInterAnalysisUtils,
             baseIDTAExpander);
 
     this.interExpander =
@@ -130,7 +129,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             builder.options,
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
-            this.baseInterAnalysisUtils,
+            baseInterAnalysisUtils,
             this.sootAsmMethodMatcher,
             baseIDTAExpander);
 
@@ -160,7 +159,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
     }
 
-    //    this.removeNestedRegionsInter(classNodes);
+    this.removeNestedRegionsInter(classNodes);
     this.setStartAndEndBlocks(classNodes);
   }
 
@@ -174,7 +173,17 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
       for (MethodNode methodNode : methodsToProcess) {
         this.removeNestedRegionsInter.processBlocks(methodNode, classNode);
+      }
+    }
 
+    for (ClassNode classNode : classNodes) {
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
         if (this.debug()) {
           this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
         }

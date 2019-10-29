@@ -6,7 +6,8 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
-import soot.jimple.InvokeExpr;
+import soot.Value;
+import soot.jimple.StaticFieldRef;
 import soot.jimple.internal.JInterfaceInvokeExpr;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JStaticInvokeExpr;
@@ -28,19 +29,21 @@ public final class SootAsmMethodMatcher {
   private final Set<String> applicationPackages = new HashSet<>();
   private final Map<SootMethod, MethodNode> sootMethodsToMethodNodes = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodesToSootMethods = new HashMap<>();
-  private final Map<Class<? extends InvokeExpr>, Integer> sootInvokesToOpcodes = new HashMap<>();
-  private final Map<Integer, Class<? extends InvokeExpr>> opcodesToSootInvokes = new HashMap<>();
+  private final Map<Class<? extends Value>, Integer> sootInvokesToOpcodes = new HashMap<>();
+  private final Map<Integer, Class<? extends Value>> opcodesToSootInvokes = new HashMap<>();
 
   private SootAsmMethodMatcher() {
     sootInvokesToOpcodes.put(JStaticInvokeExpr.class, Opcodes.INVOKESTATIC);
     sootInvokesToOpcodes.put(JSpecialInvokeExpr.class, Opcodes.INVOKESPECIAL);
     sootInvokesToOpcodes.put(JVirtualInvokeExpr.class, Opcodes.INVOKEVIRTUAL);
     sootInvokesToOpcodes.put(JInterfaceInvokeExpr.class, Opcodes.INVOKEINTERFACE);
+    sootInvokesToOpcodes.put(StaticFieldRef.class, Opcodes.GETSTATIC);
 
     opcodesToSootInvokes.put(Opcodes.INVOKESTATIC, JStaticInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKESPECIAL, JSpecialInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKEVIRTUAL, JVirtualInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKEINTERFACE, JInterfaceInvokeExpr.class);
+    opcodesToSootInvokes.put(Opcodes.GETSTATIC, StaticFieldRef.class);
   }
 
   public static SootAsmMethodMatcher getInstance() {
@@ -73,12 +76,12 @@ public final class SootAsmMethodMatcher {
   }
 
   @Nullable
-  public Integer getOpcode(Class<? extends InvokeExpr> invokeExpr) {
+  public Integer getOpcode(Class<? extends Value> invokeExpr) {
     return sootInvokesToOpcodes.get(invokeExpr);
   }
 
   @Nullable
-  public Class<? extends InvokeExpr> getSootInvokeExpr(int opcode) {
+  public Class<? extends Value> getSootInvokeExpr(int opcode) {
     return opcodesToSootInvokes.get(opcode);
   }
 
@@ -125,8 +128,6 @@ public final class SootAsmMethodMatcher {
       if (fullyQualifiedSootMethod != null) {
         fullyQualifiedNamesToSootMethods.put(fullyQualifiedSootMethod, edge.tgt());
       }
-
-      edge.tgt();
     }
 
     return fullyQualifiedNamesToSootMethods;

@@ -16,11 +16,6 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
-import soot.Value;
-import soot.jimple.InvokeExpr;
-import soot.jimple.internal.JAssignStmt;
-import soot.jimple.internal.JInvokeStmt;
-import soot.jimple.internal.JNewExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 
@@ -211,52 +206,19 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     }
 
     int index = 0;
+    String targetMethodNodeSignature = methodInsnNode.name + methodInsnNode.desc;
     List<Edge> callerEdges = this.getCallerEdges(sootMethod);
 
     for (Edge edge : callerEdges) {
-      SootClass targetSootClass;
-      Unit srcUnit = edge.srcUnit();
-
-      if (srcUnit instanceof JInvokeStmt) {
-        JInvokeStmt jInvokeStmt = ((JInvokeStmt) srcUnit);
-
-        if (!jInvokeStmt.containsInvokeExpr()) {
-          throw new RuntimeException("The JInvokeStmt does not have an InvokeExpr");
-        }
-
-        InvokeExpr invokeExpr = jInvokeStmt.getInvokeExpr();
-        targetSootClass = invokeExpr.getMethodRef().getDeclaringClass();
-      } else if (srcUnit instanceof JAssignStmt) {
-        JAssignStmt jAssignStmt = ((JAssignStmt) srcUnit);
-
-        if (jAssignStmt.containsInvokeExpr()) {
-          InvokeExpr invokeExpr = jAssignStmt.getInvokeExpr();
-          targetSootClass = invokeExpr.getMethodRef().getDeclaringClass();
-        } else {
-          Value rightOp = jAssignStmt.getRightOp();
-
-          if (rightOp instanceof JNewExpr) {
-            targetSootClass = edge.tgt().getDeclaringClass();
-          } else if (edge.isClinit()) {
-            targetSootClass = edge.tgt().getDeclaringClass();
-          } else {
-            throw new RuntimeException("Handle special case of JAssigStmt without an invoke");
-          }
-        }
-      } else {
-        throw new RuntimeException(
-            "This class type of src unit calls a method " + srcUnit.getClass());
-      }
-
+      SootClass targetSootClass = this.baseInterAnalysisUtils.getSootClassOfInvokeStmt(edge);
       String targetClassNodeName = InstrumenterUtils.getClassNodeName(methodInsnNode.owner);
 
       if (!targetSootClass.getName().equals(targetClassNodeName)) {
         continue;
       }
 
-      SootMethod targetSootMethod = edge.tgt();
+      SootMethod targetSootMethod = this.baseInterAnalysisUtils.getSootMethodOfInvokeStmt(edge);
       String targetSootMethodSignature = InstrumenterUtils.getSootMethodSignature(targetSootMethod);
-      String targetMethodNodeSignature = methodInsnNode.name + methodInsnNode.desc;
 
       if (!targetSootMethodSignature.equals(targetMethodNodeSignature)) {
         continue;

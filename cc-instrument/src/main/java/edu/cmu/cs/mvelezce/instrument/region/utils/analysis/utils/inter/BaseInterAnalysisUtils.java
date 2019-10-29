@@ -9,14 +9,16 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmM
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import soot.SootClass;
-import soot.SootMethod;
-import soot.Unit;
+import soot.*;
+import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
+import soot.jimple.StaticFieldRef;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
+import soot.jimple.internal.JNewExpr;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 
@@ -158,6 +160,51 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
     return true;
   }
 
+  public SootClass getSootClassOfInvokeStmt(Edge edge) {
+    Unit srcUnit = edge.srcUnit();
+
+    if (srcUnit instanceof JInvokeStmt) {
+      InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
+      SootMethod tgtSootMethod = invokeExpr.getMethod();
+
+      return tgtSootMethod.getDeclaringClass();
+    } else if (srcUnit instanceof JAssignStmt) {
+      JAssignStmt jAssignStmt = ((JAssignStmt) srcUnit);
+
+      if (jAssignStmt.containsInvokeExpr()) {
+        InvokeExpr invokeExpr = jAssignStmt.getInvokeExpr();
+        SootMethodRef tgtSootMethod = invokeExpr.getMethodRef();
+
+        return tgtSootMethod.getDeclaringClass();
+      } else if (jAssignStmt.containsFieldRef()) {
+        FieldRef fieldRef = jAssignStmt.getFieldRef();
+
+        if (!(fieldRef instanceof StaticFieldRef)) {
+          throw new RuntimeException(
+              "There is a different invoke field ref type to handle" + jAssignStmt);
+        }
+
+        SootField sootField = fieldRef.getField();
+
+        if (!edge.tgt().getDeclaringClass().equals(sootField.getDeclaringClass())) {
+          throw new RuntimeException("The target class and the invoked class do not match");
+        }
+
+        return sootField.getDeclaringClass();
+      } else {
+        Value rightOp = jAssignStmt.getRightOp();
+
+        if (rightOp instanceof JNewExpr) {
+          return edge.tgt().getDeclaringClass();
+        } else {
+          throw new RuntimeException("Handle special case of JAssigStmt without an invoke");
+        }
+      }
+    }
+
+    throw new RuntimeException("Could not find the SootClass for this unit " + srcUnit);
+  }
+
   private MethodBlock getCallerBlock(Set<MethodBlock> blocks, AbstractInsnNode callerInsn) {
     for (MethodBlock block : blocks) {
       if (block.getInstructions().contains(callerInsn)) {
@@ -181,11 +228,12 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
 
     int srcOpcode = this.getSrcOpcode(edge.srcUnit());
     int invokeCount = 0;
-    SootMethod tgtSootMethod = edge.tgt();
-    SootClass tgtSootClass = tgtSootMethod.getDeclaringClass();
+    SootClass tgtSootClass = this.getSootClassOfInvokeStmt(edge);
     String tgtPackageName = tgtSootClass.getPackageName();
     String tgtClassName = tgtSootClass.getShortName();
     String tgtQualifiedClassName = tgtPackageName + "." + tgtClassName;
+
+    SootMethod tgtSootMethod = this.getSootMethodOfInvokeStmt(edge);
     String tgtSootMethodSignature = InstrumenterUtils.getSootMethodSignature(tgtSootMethod);
 
     while (insnIter.hasNext()) {
@@ -211,6 +259,38 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
     throw new RuntimeException("Could not find the instruction " + edge);
   }
 
+  public SootMethod getSootMethodOfInvokeStmt(Edge edge) {
+    Unit srcUnit = edge.srcUnit();
+
+    if (srcUnit instanceof JInvokeStmt) {
+      InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
+
+      return invokeExpr.getMethod();
+    } else if (srcUnit instanceof JAssignStmt) {
+      JAssignStmt jAssignStmt = ((JAssignStmt) srcUnit);
+
+      if (jAssignStmt.containsInvokeExpr()) {
+        InvokeExpr invokeExpr = jAssignStmt.getInvokeExpr();
+        SootMethodRef tgtSootMethod = invokeExpr.getMethodRef();
+
+        return tgtSootMethod.resolve();
+      } else if (jAssignStmt.containsFieldRef()) {
+        return edge.tgt();
+      } else {
+        Value rightOp = jAssignStmt.getRightOp();
+
+        if (rightOp instanceof JNewExpr) {
+          return edge.tgt();
+        } else {
+          throw new RuntimeException(
+              "Handle special case of JAssigStmt without an invoke " + srcUnit);
+        }
+      }
+    }
+
+    throw new RuntimeException("Count determine the SootMethod for this unit " + srcUnit);
+  }
+
   private int getSrcOpcode(Unit srcUnit) {
     Integer opcode;
 
@@ -218,8 +298,17 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
       InvokeExpr invokeExpr = ((JInvokeStmt) srcUnit).getInvokeExpr();
       opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
     } else if (srcUnit instanceof JAssignStmt) {
-      InvokeExpr invokeExpr = ((JAssignStmt) srcUnit).getInvokeExpr();
-      opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
+      JAssignStmt jAssignStmt = ((JAssignStmt) srcUnit);
+
+      if (jAssignStmt.containsInvokeExpr()) {
+        InvokeExpr invokeExpr = jAssignStmt.getInvokeExpr();
+        opcode = this.sootAsmMethodMatcher.getOpcode(invokeExpr.getClass());
+      } else if (jAssignStmt.containsFieldRef()) {
+        FieldRef fieldRef = jAssignStmt.getFieldRef();
+        opcode = this.sootAsmMethodMatcher.getOpcode(fieldRef.getClass());
+      } else {
+        throw new RuntimeException("Handle special case for getting the opcode of " + srcUnit);
+      }
     } else {
       throw new RuntimeException(
           "This class type of src unit calls a method " + srcUnit.getClass());
@@ -234,17 +323,27 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
 
   private boolean matchesMethodInvocation(
       AbstractInsnNode invokeInsn, String tgtQualifiedClassName, String tgtMethodSignature) {
-    if (!(invokeInsn instanceof MethodInsnNode)) {
+
+    String invokeInsnOwner;
+    String invokeInsnSig;
+
+    if (invokeInsn instanceof MethodInsnNode) {
+      MethodInsnNode methodInsnNode = ((MethodInsnNode) invokeInsn);
+      invokeInsnOwner = methodInsnNode.owner;
+      invokeInsnSig = methodInsnNode.name + methodInsnNode.desc;
+    } else if (invokeInsn instanceof FieldInsnNode) {
+      FieldInsnNode fieldInsnNode = ((FieldInsnNode) invokeInsn);
+      invokeInsnOwner = fieldInsnNode.owner;
+      invokeInsnSig = fieldInsnNode.name + fieldInsnNode.desc;
+    } else {
       throw new RuntimeException(
           "This seems to be an invoke instruction that we needs to handle " + invokeInsn);
     }
 
-    MethodInsnNode methodInsnNode = ((MethodInsnNode) invokeInsn);
-
-    if (!methodInsnNode.owner.replace("/", ".").equals(tgtQualifiedClassName)) {
+    if (!invokeInsnOwner.replace("/", ".").equals(tgtQualifiedClassName)) {
       return false;
     }
 
-    return (methodInsnNode.name + methodInsnNode.desc).equals(tgtMethodSignature);
+    return (invokeInsnSig).equals(tgtMethodSignature);
   }
 }

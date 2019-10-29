@@ -1,21 +1,21 @@
 digraph main {
 node [shape=record];
-237223007 [label="L0\lLINENUMBER 6 L0\lLDC \"240c3f69-34c6-4413-b41b-c4e401a3786b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-660819007 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+660819007 [label="L4\lLINENUMBER 10 L4\lLDC \"4250b37d-fb77-4e04-9d7d-f68f46c1f7e0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
 121237613 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 2\lIFEQ L5\l"];
-959694315 [label="L4\lLINENUMBER 10 L4\lLDC \"240c3f69-34c6-4413-b41b-c4e401a3786b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-884067784 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"240c3f69-34c6-4413-b41b-c4e401a3786b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+959694315 [label="L0\lLINENUMBER 6 L0\lLDC \"4250b37d-fb77-4e04-9d7d-f68f46c1f7e0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+327830056 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+884067784 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"4250b37d-fb77-4e04-9d7d-f68f46c1f7e0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
 entry;
 exit;
-entry -> 237223007;
-237223007 -> 121237613;
-237223007 -> 959694315;
-660819007 -> 884067784;
-121237613 -> 660819007;
+entry -> 959694315;
+660819007 -> exit;
+121237613 -> 327830056;
 121237613 -> 884067784;
-959694315 -> exit;
+959694315 -> 660819007;
+959694315 -> 121237613;
+327830056 -> 884067784;
 884067784 -> exit;
-237223007[fontcolor="purple", penwidth=3, color="purple"];
+660819007[fontcolor="purple", penwidth=3, color="purple"];
 959694315[fontcolor="purple", penwidth=3, color="purple"];
 884067784[fontcolor="purple", penwidth=3, color="purple"];
 }

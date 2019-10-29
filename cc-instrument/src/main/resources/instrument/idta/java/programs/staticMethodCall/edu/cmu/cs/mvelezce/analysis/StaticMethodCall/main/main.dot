@@ -1,15 +1,15 @@
 digraph main {
 node [shape=record];
-353131341 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
-93190002 [label="L0\lLINENUMBER 6 L0\lLDC \"6ead10e5-91b9-44f7-9946-f2821b4151c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1571294620 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"6ead10e5-91b9-44f7-9946-f2821b4151c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+353131341 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"69dda65f-3a81-4847-8183-326fd9bbf28d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1571294620 [label="L0\lLINENUMBER 6 L0\lLDC \"69dda65f-3a81-4847-8183-326fd9bbf28d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1248862548 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
 entry;
 exit;
-entry -> 93190002;
-353131341 -> 1571294620;
-93190002 -> 353131341;
-93190002 -> 1571294620;
-1571294620 -> exit;
-93190002[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1571294620;
+353131341 -> exit;
+1571294620 -> 353131341;
+1571294620 -> 1248862548;
+1248862548 -> 353131341;
+353131341[fontcolor="purple", penwidth=3, color="purple"];
 1571294620[fontcolor="purple", penwidth=3, color="purple"];
 }

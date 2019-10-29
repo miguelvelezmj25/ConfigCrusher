@@ -1,15 +1,15 @@
 digraph main {
 node [shape=record];
-1288168365 [label="L0\lLINENUMBER 6 L0\lLDC \"4fe4206c-561d-43f1-b256-d0bcce439585\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1574347976 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
-1203651014 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"4fe4206c-561d-43f1-b256-d0bcce439585\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+353131341 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
+93190002 [label="L0\lLINENUMBER 6 L0\lLDC \"6ead10e5-91b9-44f7-9946-f2821b4151c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1571294620 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"6ead10e5-91b9-44f7-9946-f2821b4151c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
 entry;
 exit;
-entry -> 1288168365;
-1288168365 -> 1574347976;
-1288168365 -> 1203651014;
-1574347976 -> 1203651014;
-1203651014 -> exit;
-1288168365[fontcolor="purple", penwidth=3, color="purple"];
-1203651014[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 93190002;
+353131341 -> 1571294620;
+93190002 -> 353131341;
+93190002 -> 1571294620;
+1571294620 -> exit;
+93190002[fontcolor="purple", penwidth=3, color="purple"];
+1571294620[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -29,8 +29,9 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.jimple.toolkits.callgraph.CallGraph;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -49,8 +50,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
 
   private IDTAMethodTransformer(Builder builder)
-      throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
-          InvocationTargetException {
+      throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
     super(
         builder.programName,
         new DefaultClassTransformer(builder.classDir),
@@ -58,6 +58,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         builder.debug,
         builder.regionsToConstraints,
         new DynamicInstructionRegionMatcher());
+
+    Options.checkIfDeleteResult(new File(DEBUG_DIR + "/" + builder.programName));
 
     BaseIDTAExpander baseIDTAExpander = BaseIDTAExpander.getInstance();
     baseIDTAExpander.init(this.getRegionsToData().values());
@@ -302,7 +304,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     }
 
     public IDTAMethodTransformer build()
-        throws InvocationTargetException, NoSuchMethodException, MalformedURLException,
+        throws InvocationTargetException, NoSuchMethodException, IOException,
             IllegalAccessException {
       return new IDTAMethodTransformer(this);
     }

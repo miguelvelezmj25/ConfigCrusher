@@ -26,6 +26,12 @@ public abstract class BaseDownIntraExpander<T> extends BaseIntraExpander<T> {
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     Set<MethodBlock> succBlocks = block.getSuccessors();
+
+    if (succBlocks.isEmpty() && block.getPredecessors().isEmpty()) {
+      // Block is not connected to the rest of the graph
+      return new HashSet<>();
+    }
+
     MethodBlock exit = graph.getExitBlock();
 
     if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {

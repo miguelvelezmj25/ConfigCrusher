@@ -169,11 +169,11 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
       return true;
     }
 
-    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
-        this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(targetSootMethod);
+    Map<SootMethod, BaseInterAnalysisUtils.DetailedCallSites> callerSootMethodsToDetailedCallSites =
+        this.baseInterAnalysisUtils.getCallerSootMethodsToDetailedCallSites(targetSootMethod);
 
     return this.baseInterAnalysisUtils.callerDataCriteriaCoversAllCallerDataOfCallee(
-        callerData, callerSootMethodsToEdges);
+        callerData, callerSootMethodsToDetailedCallSites);
   }
 
   private boolean noRegionsInTargetMethod(SootMethod targetSootMethod) {

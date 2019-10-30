@@ -4,14 +4,12 @@ import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import org.apache.commons.lang3.tuple.Pair;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Value;
 import soot.jimple.StaticFieldRef;
-import soot.jimple.internal.JInterfaceInvokeExpr;
-import soot.jimple.internal.JSpecialInvokeExpr;
-import soot.jimple.internal.JStaticInvokeExpr;
-import soot.jimple.internal.JVirtualInvokeExpr;
+import soot.jimple.internal.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.queue.QueueReader;
@@ -29,21 +27,32 @@ public final class SootAsmMethodMatcher {
   private final Set<String> applicationPackages = new HashSet<>();
   private final Map<SootMethod, MethodNode> sootMethodsToMethodNodes = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodesToSootMethods = new HashMap<>();
-  private final Map<Class<? extends Value>, Integer> sootInvokesToOpcodes = new HashMap<>();
+  private final Map<Class<? extends Value>, Pair<Integer, Integer>> sootInvokesToOpcodes =
+      new HashMap<>();
   private final Map<Integer, Class<? extends Value>> opcodesToSootInvokes = new HashMap<>();
 
   private SootAsmMethodMatcher() {
-    sootInvokesToOpcodes.put(JStaticInvokeExpr.class, Opcodes.INVOKESTATIC);
-    sootInvokesToOpcodes.put(JSpecialInvokeExpr.class, Opcodes.INVOKESPECIAL);
-    sootInvokesToOpcodes.put(JVirtualInvokeExpr.class, Opcodes.INVOKEVIRTUAL);
-    sootInvokesToOpcodes.put(JInterfaceInvokeExpr.class, Opcodes.INVOKEINTERFACE);
-    sootInvokesToOpcodes.put(StaticFieldRef.class, Opcodes.GETSTATIC);
+    sootInvokesToOpcodes.put(
+        JStaticInvokeExpr.class, Pair.of(Opcodes.INVOKESTATIC, Opcodes.INVOKESTATIC));
+    sootInvokesToOpcodes.put(
+        JSpecialInvokeExpr.class, Pair.of(Opcodes.INVOKESPECIAL, Opcodes.INVOKESPECIAL));
+    sootInvokesToOpcodes.put(
+        JVirtualInvokeExpr.class, Pair.of(Opcodes.INVOKEVIRTUAL, Opcodes.INVOKEVIRTUAL));
+    sootInvokesToOpcodes.put(
+        JInterfaceInvokeExpr.class, Pair.of(Opcodes.INVOKEINTERFACE, Opcodes.INVOKEINTERFACE));
+    sootInvokesToOpcodes.put(StaticFieldRef.class, Pair.of(Opcodes.PUTSTATIC, Opcodes.GETSTATIC));
+    sootInvokesToOpcodes.put(JNewExpr.class, Pair.of(Opcodes.NEW, Opcodes.NEW));
+    sootInvokesToOpcodes.put(JNewArrayExpr.class, Pair.of(Opcodes.NEWARRAY, Opcodes.ANEWARRAY));
 
     opcodesToSootInvokes.put(Opcodes.INVOKESTATIC, JStaticInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKESPECIAL, JSpecialInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKEVIRTUAL, JVirtualInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.INVOKEINTERFACE, JInterfaceInvokeExpr.class);
     opcodesToSootInvokes.put(Opcodes.GETSTATIC, StaticFieldRef.class);
+    opcodesToSootInvokes.put(Opcodes.PUTSTATIC, StaticFieldRef.class);
+    opcodesToSootInvokes.put(Opcodes.NEW, JNewExpr.class);
+    opcodesToSootInvokes.put(Opcodes.NEWARRAY, JNewArrayExpr.class);
+    opcodesToSootInvokes.put(Opcodes.ANEWARRAY, JNewArrayExpr.class);
   }
 
   public static SootAsmMethodMatcher getInstance() {
@@ -77,7 +86,28 @@ public final class SootAsmMethodMatcher {
 
   @Nullable
   public Integer getOpcode(Class<? extends Value> invokeExpr) {
-    return sootInvokesToOpcodes.get(invokeExpr);
+    return this.getOpcode(invokeExpr, false);
+  }
+
+  @Nullable
+  public Integer getOpcodeArrayType(Class<? extends Value> invokeExpr, boolean primType) {
+    return this.getOpcode(invokeExpr, primType);
+  }
+
+  @Nullable
+  public Integer getOpcodeStaticRef(Class<? extends Value> invokeExpr, boolean assign) {
+    return this.getOpcode(invokeExpr, assign);
+  }
+
+  @Nullable
+  private Integer getOpcode(Class<? extends Value> invokeExpr, boolean condition) {
+    Pair<Integer, Integer> opcodes = sootInvokesToOpcodes.get(invokeExpr);
+
+    if (condition) {
+      return opcodes.getLeft();
+    }
+
+    return opcodes.getRight();
   }
 
   @Nullable

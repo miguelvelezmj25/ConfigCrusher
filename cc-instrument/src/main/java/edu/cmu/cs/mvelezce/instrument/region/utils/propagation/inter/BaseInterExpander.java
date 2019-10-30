@@ -13,10 +13,12 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootClass;
 import soot.SootMethod;
-import soot.jimple.toolkits.callgraph.Edge;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
@@ -154,24 +156,25 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
   private Map<MethodNode, Set<MethodBlock>> getMethodsToBlocksToPropagate(
       T firstRegionData, MethodNode methodNode) {
-    Map<SootMethod, List<Edge>> callerSootMethodsToEdges =
-        this.getCallerSootMethodsToEdges(methodNode);
+    Map<SootMethod, BaseInterAnalysisUtils.DetailedCallSites> callerSootMethodsToDetailedCallSites =
+        this.getCallerSootMethodsToDetailedCallSites(methodNode);
 
-    if (callerSootMethodsToEdges.isEmpty()) {
+    if (callerSootMethodsToDetailedCallSites.isEmpty()) {
       return new HashMap<>();
     }
 
     return this.baseInterAnalysisUtils.canPropagateUpToAllCallers(
-        firstRegionData, callerSootMethodsToEdges);
+        firstRegionData, callerSootMethodsToDetailedCallSites);
   }
 
-  private Map<SootMethod, List<Edge>> getCallerSootMethodsToEdges(MethodNode methodNode) {
+  private Map<SootMethod, BaseInterAnalysisUtils.DetailedCallSites>
+      getCallerSootMethodsToDetailedCallSites(MethodNode methodNode) {
     SootMethod sootMethod = this.sootAsmMethodMatcher.getSootMethod(methodNode);
 
     if (sootMethod == null) {
       throw new RuntimeException("Could not find a soot method for " + methodNode.name);
     }
 
-    return this.baseInterAnalysisUtils.getCallerSootMethodsToEdges(sootMethod);
+    return this.baseInterAnalysisUtils.getCallerSootMethodsToDetailedCallSites(sootMethod);
   }
 }

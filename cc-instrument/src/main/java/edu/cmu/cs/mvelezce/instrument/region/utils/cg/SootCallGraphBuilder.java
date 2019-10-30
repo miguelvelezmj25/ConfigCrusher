@@ -48,6 +48,8 @@ public final class SootCallGraphBuilder {
     setSparkOptions();
 
     Options.v().set_whole_program(true);
+    Options.v().setPhaseOption("cg", "verbose:true");
+    System.err.println("Experiment with trim-clinit:true");
     Options.v().setPhaseOption("cg", "trim-clinit:false");
     Options.v().setPhaseOption("jb.ulp", "off");
     Options.v().set_src_prec(Options.src_prec_java);

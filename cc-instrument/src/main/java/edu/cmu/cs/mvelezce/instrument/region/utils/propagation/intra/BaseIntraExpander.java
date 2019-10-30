@@ -45,6 +45,9 @@ public abstract class BaseIntraExpander<T> extends BlockRegionAnalyzer<T> {
         continue;
       }
 
+      // TODO check that the block is connected to both the entry and exit nodes. Otherwise,
+      // continue
+
       if (entry.getValue() == null) {
         throw new RuntimeException(
             "The block "

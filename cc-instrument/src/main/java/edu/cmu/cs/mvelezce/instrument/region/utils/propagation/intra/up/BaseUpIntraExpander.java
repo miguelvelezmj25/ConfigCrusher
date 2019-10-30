@@ -29,6 +29,11 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    if (block.getSuccessors().isEmpty() && block.getPredecessors().isEmpty()) {
+      // Block is not connected to the rest of the graph
+      return new HashSet<>();
+    }
+
     MethodBlock id = graph.getImmediateDominator(block);
 
     if (id == null || id == graph.getEntryBlock()) {

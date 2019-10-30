@@ -95,11 +95,6 @@ public final class BaseIDTAExpander {
       }
     }
 
-    if (!this.globalConstraints.containsAll(newConstraints)) {
-      throw new RuntimeException(
-          "The global set of constraints does not include all of the new constraints that we derived, but all of the new constraints are implied by at least one global constraints");
-    }
-
     return true;
     //    return this.impliesAll(this.globalConstraints, newConstraints);
   }

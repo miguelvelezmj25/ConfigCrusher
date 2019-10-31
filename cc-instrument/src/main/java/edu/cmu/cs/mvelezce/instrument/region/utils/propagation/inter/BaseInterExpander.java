@@ -123,7 +123,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
         JavaRegion callerRegion = blocksToRegions.get(callerBlock);
         T callerData = this.getData(callerRegion);
 
-        if (firstRegionData.equals(callerData) || this.containsAll(callerData, firstRegionData)) {
+        if (firstRegionData.equals(callerData)) {
           continue;
         }
 
@@ -146,6 +146,11 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
         }
 
         T newData = this.mergeData(firstRegionData, callerData);
+
+        if (newData.equals(callerData)) {
+          continue;
+        }
+
         this.addRegionToData(callerRegion, newData);
         expandedDataUp = true;
       }

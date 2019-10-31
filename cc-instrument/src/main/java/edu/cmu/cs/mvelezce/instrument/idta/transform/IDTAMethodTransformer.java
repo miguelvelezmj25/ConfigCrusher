@@ -24,7 +24,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStar
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
-import edu.cmu.cs.mvelezce.utils.Options;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -161,9 +161,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
     }
 
-    throw new UnsupportedOperationException("Continue now");
     //            this.removeNestedRegionsInter(classNodes);
-    //            this.setStartAndEndBlocks(classNodes);
+    this.setStartAndEndBlocks(classNodes);
   }
 
   private void removeNestedRegionsInter(Set<ClassNode> classNodes) {

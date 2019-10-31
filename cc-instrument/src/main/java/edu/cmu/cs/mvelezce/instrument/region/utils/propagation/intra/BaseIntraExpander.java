@@ -37,16 +37,13 @@ public abstract class BaseIntraExpander<T> extends BlockRegionAnalyzer<T> {
     for (Map.Entry<MethodBlock, JavaRegion> entry : regionsInBlocks.entrySet()) {
       MethodBlock block = entry.getKey();
 
-      if (block.getSuccessors().isEmpty() && block.getPredecessors().isEmpty()) {
+      if (!graph.isConnectedToEntry(block) && !graph.isConnectedToExit(block)) {
         continue;
       }
 
       if (block.equals(graph.getEntryBlock()) || block.equals(graph.getExitBlock())) {
         continue;
       }
-
-      // TODO check that the block is connected to both the entry and exit nodes. Otherwise,
-      // continue
 
       if (entry.getValue() == null) {
         throw new RuntimeException(

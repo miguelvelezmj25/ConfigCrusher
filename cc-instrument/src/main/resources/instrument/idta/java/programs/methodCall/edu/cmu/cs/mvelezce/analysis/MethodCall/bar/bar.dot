@@ -1,0 +1,15 @@
+digraph bar {
+node [shape=record];
+2114484571 [label="L2\lLINENUMBER 20 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+2032735 [label="L0\lLINENUMBER 19 L0\lLDC \"7bd046fd-5394-45e8-965b-4d66a5e0c025\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L1\l"];
+357373827 [label="L1\lLINENUMBER 22 L1\lFRAME SAME\lLDC \"7bd046fd-5394-45e8-965b-4d66a5e0c025\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+entry;
+exit;
+entry -> 2032735;
+2114484571 -> 357373827;
+2032735 -> 2114484571;
+2032735 -> 357373827;
+357373827 -> exit;
+2032735[fontcolor="purple", penwidth=3, color="purple"];
+357373827[fontcolor="purple", penwidth=3, color="purple"];
+}

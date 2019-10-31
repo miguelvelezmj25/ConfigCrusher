@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.instrument.region.instrumenter;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrumenter.instrument.BaseInstrumenter;
-import edu.cmu.cs.mvelezce.utils.Options;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;

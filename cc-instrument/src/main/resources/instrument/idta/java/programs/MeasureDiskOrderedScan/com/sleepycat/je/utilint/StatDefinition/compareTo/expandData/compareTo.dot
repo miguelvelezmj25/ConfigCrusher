@@ -1,0 +1,10 @@
+digraph compareTo {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+398193170 [label="398193170 - [(DUPLICATES && !SEQUENTIAL && JECACHESIZE), (DUPLICATES && SEQUENTIAL && JECACHESIZE), (DUPLICATES && SEQUENTIAL && !JECACHESIZE), (DUPLICATES && !SEQUENTIAL && !JECACHESIZE), (JECACHESIZE && DUPLICATES), (JECACHESIZE && !DUPLICATES), (!JECACHESIZE && DUPLICATES), (!JECACHESIZE && !DUPLICATES)]"];
+entry;
+exit;
+entry -> 398193170;
+398193170 -> exit;
+}

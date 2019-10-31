@@ -80,7 +80,7 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
       JavaRegion predRegion = blocksToRegions.get(predBlock);
       T predData = this.getData(predRegion);
 
-      if (regionData.equals(predData) || this.containsAll(predData, regionData)) {
+      if (regionData.equals(predData)) {
         continue;
       }
 
@@ -106,6 +106,11 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
       }
 
       T newData = this.mergeData(regionData, predData);
+
+      if (newData.equals(predData)) {
+        continue;
+      }
+
       this.addRegionToData(predRegion, newData);
       updatedBlocks.add(predBlock);
     }

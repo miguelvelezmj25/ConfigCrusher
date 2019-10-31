@@ -1,0 +1,17 @@
+digraph computeLsnOverhead {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+745853690 [label="745853690 - [!JECACHESIZE, JECACHESIZE]"];
+2059942502 [label="2059942502 - [!JECACHESIZE, JECACHESIZE]"];
+1601523467 [label="1601523467 - [!JECACHESIZE, JECACHESIZE]"];
+43079198 [label="43079198 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 2059942502;
+745853690 -> 1601523467;
+2059942502 -> 745853690;
+2059942502 -> 43079198;
+1601523467 -> exit;
+43079198 -> 1601523467;
+}

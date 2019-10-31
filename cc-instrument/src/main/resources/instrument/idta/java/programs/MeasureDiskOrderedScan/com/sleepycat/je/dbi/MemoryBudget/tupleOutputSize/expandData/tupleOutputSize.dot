@@ -1,0 +1,10 @@
+digraph tupleOutputSize {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+129876232 [label="129876232 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 129876232;
+129876232 -> exit;
+}

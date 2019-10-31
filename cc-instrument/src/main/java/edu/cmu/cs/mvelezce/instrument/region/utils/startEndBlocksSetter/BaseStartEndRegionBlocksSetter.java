@@ -58,6 +58,14 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    // Special case
+    if (!graph.isConnectedToEntry(startBlock) && !graph.isConnectedToExit(startBlock)) {
+      Set<MethodBlock> ends = new HashSet<>();
+      ends.add(startBlock);
+      region.setEndMethodBlocks(ends);
+
+      return;
+    }
     //    if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {
     //      throw new UnsupportedOperationException("Implement");
     //    }

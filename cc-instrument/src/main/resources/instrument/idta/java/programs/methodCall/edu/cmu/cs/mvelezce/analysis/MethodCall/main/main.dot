@@ -1,9 +1,9 @@
 digraph main {
 node [shape=record];
-1713295326 [label="L0\lLINENUMBER 6 L0\lLDC \"26e5cee8-5e79-4c35-9439-168fd431f1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lNEW edu/cmu/cs/mvelezce/analysis/MethodCall\lDUP\lINVOKESPECIAL edu/cmu/cs/mvelezce/analysis/MethodCall.\<init\> ()V\lILOAD 1\lILOAD 2\lINVOKESPECIAL edu/cmu/cs/mvelezce/analysis/MethodCall.foo (ZZ)V\lL3\lLINENUMBER 10 L3\lLDC \"26e5cee8-5e79-4c35-9439-168fd431f1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
+1834469621 [label="L0\lLINENUMBER 6 L0\lLDC \"3f38efa7-3d1d-415c-8174-12289da0c95d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lNEW edu/cmu/cs/mvelezce/analysis/MethodCall\lDUP\lINVOKESPECIAL edu/cmu/cs/mvelezce/analysis/MethodCall.\<init\> ()V\lILOAD 1\lILOAD 2\lINVOKESPECIAL edu/cmu/cs/mvelezce/analysis/MethodCall.foo (ZZ)V\lL3\lLINENUMBER 10 L3\lLDC \"3f38efa7-3d1d-415c-8174-12289da0c95d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
 entry;
 exit;
-entry -> 1713295326;
-1713295326 -> exit;
-1713295326[fontcolor="purple", penwidth=3, color="purple"];
+1834469621 -> exit;
+entry -> 1834469621;
+1834469621[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,0 +1,15 @@
+digraph getMemorySizeIncludedByParent {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+1932297379 [label="1932297379 - [!JECACHESIZE, JECACHESIZE]"];
+1275941670 [label="1275941670 - [!JECACHESIZE, JECACHESIZE]"];
+1986608995 [label="1986608995 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 1275941670;
+1932297379 -> exit;
+1275941670 -> 1932297379;
+1275941670 -> 1986608995;
+1986608995 -> 1932297379;
+}

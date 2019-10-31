@@ -10,7 +10,7 @@ import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter
 import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
-import edu.cmu.cs.mvelezce.utils.Options;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;

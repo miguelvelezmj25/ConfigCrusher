@@ -25,7 +25,7 @@ public class JavaRegion extends Region {
     this.regionClass = "";
     this.regionMethodSignature = "";
     this.startIndex = -1;
-    this.startMethodBlock = new MethodBlock("");
+    this.startMethodBlock = new MethodBlock.Builder("").build();
     this.endMethodBlocks = new HashSet<>();
   }
 

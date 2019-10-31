@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.dynamic;
 
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
-import edu.cmu.cs.mvelezce.utils.Options;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.Set;
 

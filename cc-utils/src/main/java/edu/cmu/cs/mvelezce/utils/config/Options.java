@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.utils;
+package edu.cmu.cs.mvelezce.utils.config;
 
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;

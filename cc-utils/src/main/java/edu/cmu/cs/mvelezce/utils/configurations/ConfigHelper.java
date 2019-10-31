@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.utils;
+package edu.cmu.cs.mvelezce.utils.configurations;
 
 import org.apache.commons.math3.util.Combinations;
 

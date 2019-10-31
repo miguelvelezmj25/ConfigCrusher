@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.adapter.adapters;
 
-import edu.cmu.cs.mvelezce.adapter.utils.Executor;
+import edu.cmu.cs.mvelezce.utils.execute.Executor;
 
 import java.io.IOException;
 import java.util.*;

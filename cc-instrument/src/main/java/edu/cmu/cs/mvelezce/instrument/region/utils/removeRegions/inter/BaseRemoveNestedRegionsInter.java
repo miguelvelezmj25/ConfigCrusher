@@ -10,9 +10,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmM
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.*;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
@@ -77,17 +75,29 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
       for (AbstractInsnNode insnNode : insnList) {
         int opcode = insnNode.getOpcode();
 
-        if (opcode < Opcodes.INVOKEVIRTUAL || opcode > Opcodes.INVOKEDYNAMIC) {
+        if (opcode < Opcodes.GETSTATIC
+            || opcode > Opcodes.ANEWARRAY
+            || opcode == Opcodes.NEWARRAY) {
           continue;
         }
 
-        if (!(insnNode instanceof MethodInsnNode)) {
+        String callingPackageName;
+
+        if (insnNode instanceof MethodInsnNode) {
+          MethodInsnNode methodInsnNode = ((MethodInsnNode) insnNode);
+          callingPackageName = InstrumenterUtils.getClassNodePackage(methodInsnNode.owner);
+        } else if (insnNode instanceof FieldInsnNode) {
+          // Calling clinit
+          FieldInsnNode fieldInsnNode = ((FieldInsnNode) insnNode);
+          callingPackageName = InstrumenterUtils.getClassNodePackage(fieldInsnNode.owner);
+        } else if (insnNode instanceof TypeInsnNode) {
+          // Calling clinit
+          TypeInsnNode typeInsnNode = ((TypeInsnNode) insnNode);
+          callingPackageName = InstrumenterUtils.getClassNodePackage(typeInsnNode.desc);
+        } else {
           throw new RuntimeException(
               "This seems to be an invoke instruction that we needs to handle " + insnNode);
         }
-
-        MethodInsnNode methodInsnNode = ((MethodInsnNode) insnNode);
-        String callingPackageName = InstrumenterUtils.getClassNodePackage(methodInsnNode.owner);
 
         if (!this.sootAsmMethodMatcher.getApplicationPackages().contains(callingPackageName)) {
           continue;
@@ -99,8 +109,8 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
           throw new RuntimeException("Could not find the method node with a specific method block");
         }
 
-        int methodCallIndex = this.getMethodCallIndex(methodInsnNode, methodNode);
-        Unit srcUnit = this.getSrcUnit(methodNode, methodInsnNode, methodCallIndex);
+        int methodCallIndex = this.getMethodCallIndex(insnNode, methodNode);
+        Unit srcUnit = this.getSrcUnit(methodNode, insnNode, methodCallIndex);
 
         if (srcUnit == null) {
           continue;
@@ -197,47 +207,50 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
   }
 
   @Nullable
-  private Unit getSrcUnit(
-      MethodNode methodNode, MethodInsnNode methodInsnNode, int methodCallIndex) {
+  private Unit getSrcUnit(MethodNode methodNode, AbstractInsnNode insnNode, int methodCallIndex) {
     SootMethod sootMethod = this.sootAsmMethodMatcher.getSootMethod(methodNode);
 
     if (sootMethod == null) {
       throw new RuntimeException("Could not find a soot method for " + methodNode.name);
     }
 
-    int index = 0;
-    String targetMethodNodeSignature = methodInsnNode.name + methodInsnNode.desc;
+    int callIndex = 0;
     List<Edge> callerEdges = this.getCallerEdges(sootMethod);
 
     for (Edge edge : callerEdges) {
-      SootClass targetSootClass = this.baseInterAnalysisUtils.getSootClassOfInvokeStmt(edge);
-      String targetClassNodeName = InstrumenterUtils.getClassNodeName(methodInsnNode.owner);
+      SootClass tgtSootClass = this.baseInterAnalysisUtils.getSootClassOfInvokeStmt(edge);
+      String tgtPackageName = tgtSootClass.getPackageName();
+      String tgtClassName = tgtSootClass.getShortName();
+      String tgtQualifiedClassName = tgtPackageName + "." + tgtClassName;
 
-      if (!targetSootClass.getName().equals(targetClassNodeName)) {
+      SootMethod tgtSootMethod = this.baseInterAnalysisUtils.getSootMethodOfInvokeStmt(edge);
+      String tgtSootMethodSignature = InstrumenterUtils.getSootMethodSignature(tgtSootMethod);
+
+      if (!this.baseInterAnalysisUtils.matchesMethodInvocation(
+          insnNode, tgtQualifiedClassName, tgtSootMethodSignature, edge)) {
         continue;
       }
 
-      SootMethod targetSootMethod = this.baseInterAnalysisUtils.getSootMethodOfInvokeStmt(edge);
-      String targetSootMethodSignature = InstrumenterUtils.getSootMethodSignature(targetSootMethod);
+      if (callIndex != methodCallIndex) {
+        callIndex++;
 
-      if (!targetSootMethodSignature.equals(targetMethodNodeSignature)) {
         continue;
       }
 
-      if (index == methodCallIndex) {
-        return edge.srcUnit();
-      }
-
-      index++;
+      return edge.srcUnit();
     }
 
-    if ((methodInsnNode.name + methodInsnNode.desc).equals(ENUM_ORDINAL_SIGNATURE)) {
-      return null;
+    if (insnNode instanceof MethodInsnNode) {
+      MethodInsnNode methodInsnNode = ((MethodInsnNode) insnNode);
+
+      if ((methodInsnNode.name + methodInsnNode.desc).equals(ENUM_ORDINAL_SIGNATURE)) {
+        return null;
+      }
     }
 
     System.err.println(
         "Could not find the source unit to call "
-            + methodInsnNode.name
+            + insnNode.getOpcode()
             + " in "
             + methodNode.name
             + ". Soot might be smart to know that those method will never be called");
@@ -287,33 +300,57 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     return orderedCallerEdges;
   }
 
-  private int getMethodCallIndex(MethodInsnNode methodInsnNode, MethodNode methodNode) {
+  private int getMethodCallIndex(AbstractInsnNode insnNode, MethodNode methodNode) {
     int methodCallIndex = 0;
-    int opcode = methodInsnNode.getOpcode();
+    int opcode = insnNode.getOpcode();
     ListIterator<AbstractInsnNode> insnIter = methodNode.instructions.iterator();
 
     while (insnIter.hasNext()) {
-      AbstractInsnNode insnNode = insnIter.next();
+      AbstractInsnNode currentInsnNode = insnIter.next();
 
-      if (insnNode.getOpcode() != opcode) {
+      if (currentInsnNode.getOpcode() != opcode) {
         continue;
       }
 
-      if (!(insnNode instanceof MethodInsnNode)) {
+      if (currentInsnNode instanceof MethodInsnNode && insnNode instanceof MethodInsnNode) {
+        MethodInsnNode methodInsnNode = ((MethodInsnNode) insnNode);
+        MethodInsnNode currentMethodInsnNode = ((MethodInsnNode) currentInsnNode);
+
+        if (!methodInsnNode.owner.equals(currentMethodInsnNode.owner)
+            || !methodInsnNode.name.equals(currentMethodInsnNode.name)
+            || !methodInsnNode.desc.equals(currentMethodInsnNode.desc)) {
+          continue;
+        }
+
+        if (methodInsnNode.equals(currentMethodInsnNode)) {
+          return methodCallIndex;
+        }
+      } else if (currentInsnNode instanceof FieldInsnNode && insnNode instanceof FieldInsnNode) {
+        FieldInsnNode fieldInsnNode = ((FieldInsnNode) insnNode);
+        FieldInsnNode currentFieldInsnNode = ((FieldInsnNode) currentInsnNode);
+
+        if (!fieldInsnNode.owner.equals(currentFieldInsnNode.owner)) {
+          continue;
+        }
+
+        if (fieldInsnNode.equals(currentFieldInsnNode)) {
+          return methodCallIndex;
+        }
+      } else if (currentInsnNode instanceof TypeInsnNode && insnNode instanceof TypeInsnNode) {
+        TypeInsnNode typeInsnNode = ((TypeInsnNode) insnNode);
+        TypeInsnNode currentTypeInsnNode = ((TypeInsnNode) currentInsnNode);
+
+        if (!typeInsnNode.desc.equals(currentTypeInsnNode.desc)) {
+          continue;
+        }
+
+        if (typeInsnNode.equals(currentTypeInsnNode)) {
+          return methodCallIndex;
+        }
+
+      } else {
         throw new RuntimeException(
-            "This seems to be an invoke instruction that we needs to handle " + insnNode);
-      }
-
-      MethodInsnNode currentMethodInsnNode = ((MethodInsnNode) insnNode);
-
-      if (!methodInsnNode.owner.equals(currentMethodInsnNode.owner)
-          || !methodInsnNode.name.equals(currentMethodInsnNode.name)
-          || !methodInsnNode.desc.equals(currentMethodInsnNode.desc)) {
-        continue;
-      }
-
-      if (methodInsnNode.equals(currentMethodInsnNode)) {
-        return methodCallIndex;
+            "This seems to be an invoke instruction that we needs to handle " + currentInsnNode);
       }
 
       methodCallIndex++;

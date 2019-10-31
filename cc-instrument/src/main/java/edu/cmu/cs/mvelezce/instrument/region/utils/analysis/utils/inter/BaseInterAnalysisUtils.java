@@ -172,37 +172,39 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
         new ArrayDeque<>(callerSootMethodsToDetailedCallSites.entrySet());
     // TODO might need to add analyzed edges or soot methods
     while (!worklist.isEmpty()) {
-      throw new RuntimeException("implement now that we hace detailed call sites");
-      //      Map.Entry<SootMethod, Map<Integer, List<Edge>>> entry = worklist.poll();
-      //      SootMethod sootMethod = entry.getKey();
-      //      MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
-      //      LinkedHashMap<MethodBlock, JavaRegion> blocks =
-      //          this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
-      //      Map<Integer, List<Edge>> opcodesEdges = entry.getValue();
-      //
-      //      for (Map.Entry<Integer, List<Edge>> opcodeEdges : opcodesEdges.entrySet()) {
-      //        int opcode = opcodeEdges.getKey();
-      //        List<Edge> edges = opcodeEdges.getValue();
-      //
-      //        for (int i = 0; i < edges.size(); i++) {
-      //          throw new UnsupportedOperationException("implement now that we have opcode");
-      //          //          Edge edge = edges.get(i);
-      //          //          AbstractInsnNode callerInsn = this.getCallerInsn(edge, i);
-      //          //          MethodBlock callerBlock = this.getCallerBlock(blocks.keySet(),
-      // callerInsn);
-      //          //          JavaRegion callerRegion = blocks.get(callerBlock);
-      //          //          T currentCallerData = this.getData(callerRegion);
-      //          //
-      //          //          if (currentCallerData == null) {
-      //          //            Map<SootMethod, Map<Integer, List<Edge>>> sourceCallers =
-      //          //                this.getCallerSootMethodsToOpcodeEdges(edge.src());
-      //          //            worklist.addAll(sourceCallers.entrySet());
-      //          //          } else if (!this.coversAll(callerDataCriteriaToRemoveNestedData,
-      //          // currentCallerData)) {
-      //          //            return false;
-      //          //          }
-      //        }
-      //      }
+      Map.Entry<SootMethod, DetailedCallSites> entry = worklist.poll();
+      SootMethod sootMethod = entry.getKey();
+      MethodNode methodNode = this.sootAsmMethodMatcher.getMethodNode(sootMethod);
+      LinkedHashMap<MethodBlock, JavaRegion> blocks =
+          this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
+      DetailedCallSites detailedCallSites = entry.getValue();
+
+      for (Map.Entry<Integer, Map<SootClass, List<Edge>>> opcodesToCallSites :
+          detailedCallSites.getOpcodesToCallSites().entrySet()) {
+        int opcode = opcodesToCallSites.getKey();
+        Map<SootClass, List<Edge>> callSites = opcodesToCallSites.getValue();
+
+        for (Map.Entry<SootClass, List<Edge>> callSite : callSites.entrySet()) {
+          SootClass tgtSootClass = callSite.getKey();
+          List<Edge> edges = callSite.getValue();
+
+          for (int i = 0; i < edges.size(); i++) {
+            Edge edge = edges.get(i);
+            AbstractInsnNode callerInsn = this.getCallerInsn(opcode, tgtSootClass, edge, i);
+            MethodBlock callerBlock = this.getCallerBlock(blocks.keySet(), callerInsn);
+            JavaRegion callerRegion = blocks.get(callerBlock);
+            T currentCallerData = this.getData(callerRegion);
+
+            if (currentCallerData == null) {
+              Map<SootMethod, DetailedCallSites> sourceCallers =
+                  this.getCallerSootMethodsToDetailedCallSites(edge.src());
+              worklist.addAll(sourceCallers.entrySet());
+            } else if (!this.coversAll(callerDataCriteriaToRemoveNestedData, currentCallerData)) {
+              return false;
+            }
+          }
+        }
+      }
     }
 
     return true;
@@ -386,7 +388,7 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
     return opcode;
   }
 
-  private boolean matchesMethodInvocation(
+  public boolean matchesMethodInvocation(
       AbstractInsnNode invokeInsn,
       String tgtQualifiedClassName,
       String tgtMethodSignature,

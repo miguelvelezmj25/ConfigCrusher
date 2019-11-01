@@ -109,6 +109,10 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
     Collections.reverse(reversedOrderedRegions);
 
     for (JavaRegion region : reversedOrderedRegions) {
+      if (this.startAndEndInSameBlock(region)) {
+        continue;
+      }
+
       this.instrumentNormalStart(methodNode, region);
       this.instrumentNormalEnd(methodNode, region);
     }
@@ -177,10 +181,27 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
 
   private void instrumentSameBlock(MethodNode methodNode, List<JavaRegion> orderedRegionsInMethod) {
     for (JavaRegion region : orderedRegionsInMethod) {
-      if (this.startAndEndInSameBlock(region)) {
-        throw new UnsupportedOperationException("Handle this case");
+      if (!this.startAndEndInSameBlock(region)) {
+        continue;
       }
+
+      this.instrumentEntireMethodStart(methodNode, region);
+      this.instrumentLastInsn(methodNode, region, region.getStartMethodBlock());
     }
+  }
+
+  private void instrumentLastInsn(MethodNode methodNode, JavaRegion region, MethodBlock block) {
+    InsnList startRegionInsnList = this.getEndRegionInsnList(region);
+
+    AbstractInsnNode lastInstruction =
+        block.getInstructions().get(block.getInstructions().size() - 1);
+
+    if (block.isWithReturn()) {
+      lastInstruction = lastInstruction.getPrevious();
+    }
+
+    InsnList insnList = methodNode.instructions;
+    insnList.insertBefore(lastInstruction, startRegionInsnList);
   }
 
   private boolean startAndEndInSameBlock(JavaRegion region) {

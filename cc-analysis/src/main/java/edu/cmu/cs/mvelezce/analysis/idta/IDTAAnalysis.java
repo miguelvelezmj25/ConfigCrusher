@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
-import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.utils.execute.Executor;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.*;
 public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>> {
 
   private static final String IDTA_OUTPUT_DIR =
-      BaseAdapter.USER_HOME
+      Executor.USER_HOME
           + "/Documents/Programming/Java/Projects/subtrace-explorer/src/main/resources/idta/analysis";
 
   public IDTAAnalysis(String programName) {

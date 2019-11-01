@@ -106,7 +106,7 @@ public class Region {
       this(UUID.randomUUID());
     }
 
-    Builder(UUID id) {
+    public Builder(UUID id) {
       this.id = id;
     }
 

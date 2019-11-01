@@ -9,7 +9,7 @@
     <inceptionYear>2017</inceptionYear>
     <modules>
         <module>cc-adapters</module>
-        <module>cc-core</module>
+        <!--        <module>cc-core</module>-->
         <module>cc-analysis</module>
         <module>cc-utils</module>
         <module>cc-instrument</module>

@@ -42,10 +42,4 @@ public class BaseIDTAInterExpander extends BaseInterExpander<Set<FeatureExpr>> {
       Set<FeatureExpr> firstRegionData, @Nullable Set<FeatureExpr> callerData) {
     return this.baseIDTAExpander.mergeData(firstRegionData, callerData);
   }
-
-  @Override
-  protected boolean containsAll(
-      @Nullable Set<FeatureExpr> callerData, Set<FeatureExpr> firstRegionData) {
-    return this.baseIDTAExpander.impliesAll(callerData, firstRegionData);
-  }
 }

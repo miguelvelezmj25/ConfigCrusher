@@ -118,8 +118,6 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
     return updatedBlocks;
   }
 
-  protected abstract boolean containsAll(@Nullable T upData, T expandingData);
-
   protected abstract T mergeData(T expandingData, @Nullable T upData);
 
   protected abstract boolean canExpandDataUp(T expandingData, @Nullable T upData);

@@ -170,7 +170,8 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
       Map<SootMethod, DetailedCallSites> callerSootMethodsToDetailedCallSites) {
     Queue<Map.Entry<SootMethod, DetailedCallSites>> worklist =
         new ArrayDeque<>(callerSootMethodsToDetailedCallSites.entrySet());
-    // TODO might need to add analyzed edges or soot methods
+    Set<Edge> analyzedEdges = new HashSet<>();
+
     while (!worklist.isEmpty()) {
       Map.Entry<SootMethod, DetailedCallSites> entry = worklist.poll();
       SootMethod sootMethod = entry.getKey();
@@ -190,6 +191,12 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
 
           for (int i = 0; i < edges.size(); i++) {
             Edge edge = edges.get(i);
+
+            if (analyzedEdges.contains(edge)) {
+              continue;
+            }
+
+            analyzedEdges.add(edge);
             AbstractInsnNode callerInsn = this.getCallerInsn(opcode, tgtSootClass, edge, i);
             MethodBlock callerBlock = this.getCallerBlock(blocks.keySet(), callerInsn);
             JavaRegion callerRegion = blocks.get(callerBlock);
@@ -235,10 +242,6 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
         }
 
         SootField sootField = fieldRef.getField();
-
-        if (!edge.tgt().getDeclaringClass().equals(sootField.getDeclaringClass())) {
-          throw new RuntimeException("The target class and the invoked class do not match");
-        }
 
         return sootField.getDeclaringClass();
       } else {

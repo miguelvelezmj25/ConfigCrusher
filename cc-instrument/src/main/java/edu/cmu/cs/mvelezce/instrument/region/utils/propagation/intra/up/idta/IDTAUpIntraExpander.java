@@ -27,12 +27,6 @@ public class IDTAUpIntraExpander extends BaseUpIntraExpander<Set<FeatureExpr>> {
   }
 
   @Override
-  protected boolean containsAll(
-      @Nullable Set<FeatureExpr> upConstraints, Set<FeatureExpr> expandingConstraints) {
-    return this.baseIDTAExpander.impliesAll(upConstraints, expandingConstraints);
-  }
-
-  @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
     Set<FeatureExpr> constraints = this.getData(region);
     Set<String> options = this.getOptions();

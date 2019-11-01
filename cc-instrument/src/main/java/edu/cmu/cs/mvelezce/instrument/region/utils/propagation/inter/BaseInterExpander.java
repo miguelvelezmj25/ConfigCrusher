@@ -41,8 +41,6 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
 
   protected abstract T mergeData(T firstRegionData, @Nullable T callerData);
 
-  protected abstract boolean containsAll(@Nullable T callerData, T firstRegionData);
-
   @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
     throw new UnsupportedOperationException("Should not be called");

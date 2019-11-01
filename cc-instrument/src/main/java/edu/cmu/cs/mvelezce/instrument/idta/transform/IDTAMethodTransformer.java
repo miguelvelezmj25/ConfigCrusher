@@ -25,6 +25,8 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDT
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import edu.cmu.cs.mvelezce.utils.gc.GC;
+import edu.cmu.cs.mvelezce.utils.monitor.memory.MemoryMonitor;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -155,18 +157,58 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
 
     boolean propagatedRegions = true;
+    boolean mustExitNextIter = false;
 
     while (propagatedRegions) {
-      propagatedRegions = this.propagateRegionsIntra(classNodes);
-      propagatedRegions = propagatedRegions | this.propagateRegionsInter(classNodes);
+      boolean propagatedIntra = this.propagateRegionsIntra(classNodes);
+      MemoryMonitor.printMemoryUsage("Memory:");
+      boolean propagatedInter = this.propagateRegionsInter(classNodes);
+      MemoryMonitor.printMemoryUsage("Memory:");
+      propagatedRegions = propagatedIntra | propagatedInter;
+
+      if (mustExitNextIter && (propagatedIntra || propagatedInter)) {
+        throw new RuntimeException(
+            "Expected to exit in the next iteration, since we did not propagate inter, but, somehow we propagated intra: "
+                + propagatedIntra
+                + " or propagated inter: "
+                + propagatedInter);
+      }
+
+      if (!propagatedIntra) {
+        mustExitNextIter = true;
+      }
     }
 
+    try {
+      GC.gc(5_000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    MemoryMonitor.printMemoryUsage("Memory:");
+
     this.removeNestedRegionsInter(classNodes);
+
+    try {
+      GC.gc(5_000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    MemoryMonitor.printMemoryUsage("Memory:");
+
     this.setStartAndEndBlocks(classNodes);
   }
 
   private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
+
     for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to remove inter: " + (classNodesCount - processedClassNodesCount));
+
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
       if (methodsToProcess.isEmpty()) {
@@ -174,8 +216,17 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
+        System.out.println(
+            "Removing nested regions inter " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
         this.removeNestedRegionsInter.processBlocks(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
       }
+    }
+
+    if (!this.debug()) {
+      return;
     }
 
     for (ClassNode classNode : classNodes) {
@@ -186,17 +237,20 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
-        if (this.debug()) {
-          this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
-        }
+        this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
       }
     }
   }
 
   private boolean propagateRegionsInter(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
     boolean propagatedRegions = false;
 
     for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to propagate inter: " + (classNodesCount - processedClassNodesCount));
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
       if (methodsToProcess.isEmpty()) {
@@ -204,7 +258,11 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
+        System.out.println("Processing intra " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
         propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
       }
     }
 
@@ -216,7 +274,14 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   }
 
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
+
     for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to set start and end blocks: "
+              + (classNodesCount - processedClassNodesCount));
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
       if (methodsToProcess.isEmpty()) {
@@ -224,7 +289,12 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
+        System.out.println(
+            "Setting start and end blocks " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
         this.startEndRegionBlocksSetter.processBlocks(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
 
         if (this.debug()) {
           this.startEndRegionBlocksSetter.debugBlockData(methodNode, classNode);
@@ -234,9 +304,14 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   }
 
   private boolean propagateRegionsIntra(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
     boolean propagatedRegions = false;
 
     for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to propagate intra: " + (classNodesCount - processedClassNodesCount));
       Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
 
       if (methodsToProcess.isEmpty()) {
@@ -244,7 +319,11 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
+        System.out.println("Processing intra " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
         propagatedRegions = propagatedRegions | this.expandRegionsIntra(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
       }
     }
 
@@ -266,7 +345,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     if (this.debug()) {
       this.upIntraExpander.debugBlockData(methodNode, classNode);
-      this.upIntraExpander.validateAllBlocksHaveRegions(methodNode, classNode);
+      //      this.upIntraExpander.validateAllBlocksHaveRegions(methodNode, classNode);
     }
 
     return propagatedRegions;

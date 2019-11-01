@@ -50,7 +50,7 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
                 this.getOptions(),
                 this.getRegionsToData(),
                 this.idtaMethodInstrumenter)
-            .setDebug(true)
+            .setDebug(false)
             .build();
     transformer.transformMethods();
   }

@@ -72,6 +72,8 @@ public final class SootAsmMethodMatcher {
         this.getFullyQualifiedSootMethods(callGraph);
 
     this.matchMethodNodesAndSootMethods(fullyQualifiedMethodNodes, fullyQualifiedSootMethods);
+    System.err.println(
+        "Use the class nodes that have matched with soot class nodes instead of ALL possible class nodes");
   }
 
   @Nullable

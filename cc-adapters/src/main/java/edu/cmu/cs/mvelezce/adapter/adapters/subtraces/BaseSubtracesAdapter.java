@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.subtraces;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseSubtracesAdapter extends BaseAdapter {
 
@@ -26,17 +24,10 @@ public class BaseSubtracesAdapter extends BaseAdapter {
     super(
         BaseSubtracesAdapter.PROGRAM_NAME,
         BaseSubtracesAdapter.MAIN_CLASS,
-        "",
         BaseSubtracesAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseSubtracesAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

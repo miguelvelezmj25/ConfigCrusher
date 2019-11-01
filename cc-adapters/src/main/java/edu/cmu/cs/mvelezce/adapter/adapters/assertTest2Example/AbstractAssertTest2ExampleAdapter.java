@@ -21,7 +21,6 @@ public abstract class AbstractAssertTest2ExampleAdapter extends BaseAdapter {
     super(
         AbstractAssertTest2ExampleAdapter.PROGRAM_NAME,
         AbstractAssertTest2ExampleAdapter.MAIN_CLASS,
-        "",
         AbstractAssertTest2ExampleAdapter.getListOfOptions());
   }
 

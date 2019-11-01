@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 // https://cwiki.apache.org/confluence/display/LUCENE/ImproveIndexingSpeed
 public class BaseIndexFilesAdapter extends BaseAdapter {
@@ -34,22 +33,11 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
     super(
         BaseIndexFilesAdapter.PROGRAM_NAME,
         BaseIndexFilesAdapter.MAIN_CLASS,
-        "",
         BaseIndexFilesAdapter.getListOfOptions());
-  }
-
-  public BaseIndexFilesAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseIndexFilesAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseIndexFilesAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 
   public void preProcess() {

@@ -21,7 +21,6 @@ public abstract class AbstractMultiFacetsAdapter extends BaseAdapter {
     super(
         AbstractMultiFacetsAdapter.PROGRAM_NAME,
         AbstractMultiFacetsAdapter.MAIN_CLASS,
-        "",
         AbstractMultiFacetsAdapter.getListOfOptions());
   }
 

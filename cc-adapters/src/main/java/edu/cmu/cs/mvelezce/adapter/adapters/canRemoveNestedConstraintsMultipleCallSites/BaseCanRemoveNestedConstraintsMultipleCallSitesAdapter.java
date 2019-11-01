@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.canRemoveNestedConstraintsMultipleC
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter extends BaseAdapter {
 
@@ -28,26 +26,10 @@ public class BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter extends Base
     super(
         BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.PROGRAM_NAME,
         BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.MAIN_CLASS,
-        "",
-        BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.getListOfOptions());
-  }
-
-  public BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter(
-      String programName, String entryPoint, String classDir) {
-    super(
-        programName,
-        entryPoint,
-        classDir,
         BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

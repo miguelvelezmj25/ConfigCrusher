@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.adapter.adapters.gpl;
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /** Created by miguelvelez on 4/30/17. */
@@ -26,9 +27,8 @@ public abstract class AbstractGPLAdapter extends BaseAdapter {
     "SHORTEST"
   };
 
-  public AbstractGPLAdapter(String programName, String mainClass, String directory) {
-    //        super(programName, mainClass, directory);
-    super(null, null, null, null);
+  public AbstractGPLAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -57,20 +57,20 @@ public abstract class AbstractGPLAdapter extends BaseAdapter {
     return performanceConfiguration;
   }
 
-  @Override
-  public void execute(Set<String> configuration, int iteration) {}
-
-  @Override
-  public void execute(Set<String> configuration) {
-    String[] argsArray = AbstractGPLAdapter.adaptConfigurationToProgram(configuration);
-    StringBuilder args = new StringBuilder();
-
-    for (String arg : argsArray) {
-      args.append(arg);
-      args.append(" ");
-    }
-
-    //        BaseAdapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass,
-    // this.directory, args.toString().trim());
-  }
+  //  @Override
+  //  public void execute(Set<String> configuration, int iteration) {}
+  //
+  //  @Override
+  //  public void execute(Set<String> configuration) {
+  //    String[] argsArray = AbstractGPLAdapter.adaptConfigurationToProgram(configuration);
+  //    StringBuilder args = new StringBuilder();
+  //
+  //    for (String arg : argsArray) {
+  //      args.append(arg);
+  //      args.append(" ");
+  //    }
+  //
+  //    //        BaseAdapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass,
+  //    // this.directory, args.toString().trim());
+  //  }
 }

@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractRunningExampleAdapter extends BaseAdapter {
 
-  public AbstractRunningExampleAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractRunningExampleAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractRunningExampleAdapter.getRunningExampleOptions());
+  public AbstractRunningExampleAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getRunningExampleOptions() {

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /** Berkeley DB */
 public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
@@ -38,18 +37,11 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
     super(
         BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME,
         BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS,
-        "",
         BaseMeasureDiskOrderedScanAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseMeasureDiskOrderedScanAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 
   //  public void preProcess() {

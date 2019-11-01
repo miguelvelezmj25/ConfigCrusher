@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.whileTrueNoReturn;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseWhileTrueNoReturnAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseWhileTrueNoReturnAdapter extends BaseAdapter {
     super(
         BaseWhileTrueNoReturnAdapter.PROGRAM_NAME,
         BaseWhileTrueNoReturnAdapter.MAIN_CLASS,
-        "",
         BaseWhileTrueNoReturnAdapter.getListOfOptions());
-  }
-
-  public BaseWhileTrueNoReturnAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseWhileTrueNoReturnAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseWhileTrueNoReturnAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

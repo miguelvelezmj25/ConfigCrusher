@@ -21,7 +21,6 @@ public abstract class AbstractPhosphorExample8Adapter extends BaseAdapter {
     super(
         AbstractPhosphorExample8Adapter.PROGRAM_NAME,
         AbstractPhosphorExample8Adapter.MAIN_CLASS,
-        "",
         AbstractPhosphorExample8Adapter.getListOfOptions());
   }
 

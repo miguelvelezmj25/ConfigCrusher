@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractDensityAdapter extends BaseAdapter {
 
-  public AbstractDensityAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractDensityAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractDensityAdapter.getDensityOptions());
+  public AbstractDensityAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getDensityOptions() {

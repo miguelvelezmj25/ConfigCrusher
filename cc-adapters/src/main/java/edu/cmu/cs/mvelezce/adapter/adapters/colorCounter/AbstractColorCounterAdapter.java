@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractColorCounterAdapter extends BaseAdapter {
 
-  public AbstractColorCounterAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractColorCounterAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractColorCounterAdapter.getColorCounterOptions());
+  public AbstractColorCounterAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getColorCounterOptions() {

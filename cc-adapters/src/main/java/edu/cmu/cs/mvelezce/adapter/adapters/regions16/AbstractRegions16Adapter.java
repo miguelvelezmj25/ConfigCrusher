@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractRegions16Adapter extends BaseAdapter {
 
-  public AbstractRegions16Adapter() {
-    this(null, null, null);
-  }
-
-  public AbstractRegions16Adapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractRegions16Adapter.getRegions16Options());
+  public AbstractRegions16Adapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getRegions16Options() {

@@ -21,7 +21,6 @@ public abstract class AbstractSoundAdapter extends BaseAdapter {
     super(
         AbstractSoundAdapter.PROGRAM_NAME,
         AbstractSoundAdapter.MAIN_CLASS,
-        "",
         AbstractSoundAdapter.getListOfOptions());
   }
 

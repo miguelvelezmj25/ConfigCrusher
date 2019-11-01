@@ -8,12 +8,8 @@ import java.util.List;
 /** Created by miguelvelez on 4/30/17. */
 public abstract class AbstractEmailAdapter extends BaseAdapter {
 
-  public AbstractEmailAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractEmailAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractEmailAdapter.getEmailOptions());
+  public AbstractEmailAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getEmailOptions() {

@@ -21,7 +21,6 @@ public abstract class AbstractDynamicRunningExampleAdapter extends BaseAdapter {
     super(
         AbstractDynamicRunningExampleAdapter.PROGRAM_NAME,
         AbstractDynamicRunningExampleAdapter.MAIN_CLASS,
-        "",
         AbstractDynamicRunningExampleAdapter.getListOfOptions());
   }
 

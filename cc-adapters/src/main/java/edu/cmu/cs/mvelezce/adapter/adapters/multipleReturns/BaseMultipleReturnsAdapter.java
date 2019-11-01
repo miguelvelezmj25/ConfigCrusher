@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.multipleReturns;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseMultipleReturnsAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseMultipleReturnsAdapter extends BaseAdapter {
     super(
         BaseMultipleReturnsAdapter.PROGRAM_NAME,
         BaseMultipleReturnsAdapter.MAIN_CLASS,
-        "",
         BaseMultipleReturnsAdapter.getListOfOptions());
-  }
-
-  public BaseMultipleReturnsAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseMultipleReturnsAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseMultipleReturnsAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

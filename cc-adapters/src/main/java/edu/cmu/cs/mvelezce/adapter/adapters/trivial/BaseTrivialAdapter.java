@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseTrivialAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseTrivialAdapter extends BaseAdapter {
     super(
         BaseTrivialAdapter.PROGRAM_NAME,
         BaseTrivialAdapter.MAIN_CLASS,
-        "",
         BaseTrivialAdapter.getListOfOptions());
-  }
-
-  public BaseTrivialAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseTrivialAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseTrivialAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

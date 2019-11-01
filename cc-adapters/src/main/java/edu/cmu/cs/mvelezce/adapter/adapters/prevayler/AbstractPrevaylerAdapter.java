@@ -5,6 +5,9 @@ import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 import java.util.Arrays;
 import java.util.List;
 
+import static edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR;
+import static edu.cmu.cs.mvelezce.utils.execute.Executor.USER_HOME;
+
 public abstract class AbstractPrevaylerAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "prevayler";
@@ -46,11 +49,7 @@ public abstract class AbstractPrevaylerAdapter extends BaseAdapter {
 
   public AbstractPrevaylerAdapter() {
     // TODO check that we are passing empty string
-    super(PROGRAM_NAME, MAIN_CLASS, "", getListOfOptions());
-  }
-
-  public AbstractPrevaylerAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractPrevaylerAdapter.getPrevaylerOptions());
+    super(PROGRAM_NAME, MAIN_CLASS, getListOfOptions());
   }
 
   public static List<String> getPrevaylerOptions() {

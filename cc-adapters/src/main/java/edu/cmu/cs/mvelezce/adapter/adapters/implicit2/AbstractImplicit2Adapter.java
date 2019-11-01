@@ -21,7 +21,6 @@ public abstract class AbstractImplicit2Adapter extends BaseAdapter {
     super(
         AbstractImplicit2Adapter.PROGRAM_NAME,
         AbstractImplicit2Adapter.MAIN_CLASS,
-        "",
         AbstractImplicit2Adapter.getListOfOptions());
   }
 

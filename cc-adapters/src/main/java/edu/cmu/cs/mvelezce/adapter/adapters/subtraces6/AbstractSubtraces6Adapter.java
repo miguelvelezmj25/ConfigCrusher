@@ -21,7 +21,6 @@ public abstract class AbstractSubtraces6Adapter extends BaseAdapter {
     super(
         AbstractSubtraces6Adapter.PROGRAM_NAME,
         AbstractSubtraces6Adapter.MAIN_CLASS,
-        "",
         AbstractSubtraces6Adapter.getListOfOptions());
   }
 

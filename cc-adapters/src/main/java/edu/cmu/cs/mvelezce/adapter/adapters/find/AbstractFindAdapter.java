@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractFindAdapter extends BaseAdapter {
 
-  public AbstractFindAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractFindAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractFindAdapter.getFindOptions());
+  public AbstractFindAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getFindOptions() {

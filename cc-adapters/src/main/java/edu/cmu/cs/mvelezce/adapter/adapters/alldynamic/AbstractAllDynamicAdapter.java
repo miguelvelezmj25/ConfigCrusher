@@ -18,7 +18,7 @@ public abstract class AbstractAllDynamicAdapter extends BaseAdapter {
 
   public AbstractAllDynamicAdapter(String programName, String mainClass) {
     // TODO check why we are passing empty string
-    super(programName, mainClass, "", AbstractAllDynamicAdapter.getListOfOptions());
+    super(programName, mainClass, AbstractAllDynamicAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {

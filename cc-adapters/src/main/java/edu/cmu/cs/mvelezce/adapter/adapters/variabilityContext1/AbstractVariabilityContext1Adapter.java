@@ -21,7 +21,6 @@ public abstract class AbstractVariabilityContext1Adapter extends BaseAdapter {
     super(
         AbstractVariabilityContext1Adapter.PROGRAM_NAME,
         AbstractVariabilityContext1Adapter.MAIN_CLASS,
-        "",
         AbstractVariabilityContext1Adapter.getListOfOptions());
   }
 

@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.dummy;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class BaseDummyAdapter extends BaseAdapter {
 
@@ -18,17 +16,11 @@ public class BaseDummyAdapter extends BaseAdapter {
 
   public BaseDummyAdapter() {
     // TODO check that we are passing empty string
-    super(BaseDummyAdapter.PROGRAM_NAME, BaseDummyAdapter.MAIN_CLASS, "", new ArrayList<>());
+    super(BaseDummyAdapter.PROGRAM_NAME, BaseDummyAdapter.MAIN_CLASS, new ArrayList<>());
   }
 
   // TODO abstract method in base adapter?
   public static List<String> getListOfOptions() {
-    throw new UnsupportedOperationException("Should not execute");
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
     throw new UnsupportedOperationException("Should not execute");
   }
 }

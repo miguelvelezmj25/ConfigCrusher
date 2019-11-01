@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.methodCall;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseMethodCallAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseMethodCallAdapter extends BaseAdapter {
     super(
         BaseMethodCallAdapter.PROGRAM_NAME,
         BaseMethodCallAdapter.MAIN_CLASS,
-        "",
         BaseMethodCallAdapter.getListOfOptions());
-  }
-
-  public BaseMethodCallAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseMethodCallAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseMethodCallAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

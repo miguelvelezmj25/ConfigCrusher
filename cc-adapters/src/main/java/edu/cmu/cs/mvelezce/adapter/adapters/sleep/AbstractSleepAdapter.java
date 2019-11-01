@@ -8,12 +8,8 @@ import java.util.List;
 /** Created by miguelvelez on 4/30/17. */
 public abstract class AbstractSleepAdapter extends BaseAdapter {
 
-  public AbstractSleepAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractSleepAdapter(String programName, String mainClass, String directory) {
-    super(programName, mainClass, directory, getSleepOptions());
+  public AbstractSleepAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   private static List<String> getSleepOptions() {

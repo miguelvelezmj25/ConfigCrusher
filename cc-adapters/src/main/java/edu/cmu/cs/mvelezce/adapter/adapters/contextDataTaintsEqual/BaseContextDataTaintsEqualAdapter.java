@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.contextDataTaintsEqual;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseContextDataTaintsEqualAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseContextDataTaintsEqualAdapter extends BaseAdapter {
     super(
         BaseContextDataTaintsEqualAdapter.PROGRAM_NAME,
         BaseContextDataTaintsEqualAdapter.MAIN_CLASS,
-        "",
         BaseContextDataTaintsEqualAdapter.getListOfOptions());
-  }
-
-  public BaseContextDataTaintsEqualAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseContextDataTaintsEqualAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseContextDataTaintsEqualAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

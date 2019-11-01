@@ -22,12 +22,7 @@ public abstract class AbstractNestingAdapter extends BaseAdapter {
     super(
         AbstractNestingAdapter.PROGRAM_NAME,
         AbstractNestingAdapter.MAIN_CLASS,
-        "",
         AbstractNestingAdapter.getListOfOptions());
-  }
-
-  public AbstractNestingAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, AbstractNestingAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {

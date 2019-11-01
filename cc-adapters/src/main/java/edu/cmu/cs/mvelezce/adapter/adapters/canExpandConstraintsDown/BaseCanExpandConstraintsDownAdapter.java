@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.canExpandConstraintsDown;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseCanExpandConstraintsDownAdapter extends BaseAdapter {
 
@@ -27,23 +25,10 @@ public class BaseCanExpandConstraintsDownAdapter extends BaseAdapter {
     super(
         BaseCanExpandConstraintsDownAdapter.PROGRAM_NAME,
         BaseCanExpandConstraintsDownAdapter.MAIN_CLASS,
-        "",
         BaseCanExpandConstraintsDownAdapter.getListOfOptions());
-  }
-
-  public BaseCanExpandConstraintsDownAdapter(
-      String programName, String entryPoint, String classDir) {
-    super(
-        programName, entryPoint, classDir, BaseCanExpandConstraintsDownAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseCanExpandConstraintsDownAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

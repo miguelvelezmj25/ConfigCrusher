@@ -21,7 +21,6 @@ public abstract class AbstractThrowIfAdapter extends BaseAdapter {
     super(
         AbstractThrowIfAdapter.PROGRAM_NAME,
         AbstractThrowIfAdapter.MAIN_CLASS,
-        "",
         AbstractThrowIfAdapter.getListOfOptions());
   }
 

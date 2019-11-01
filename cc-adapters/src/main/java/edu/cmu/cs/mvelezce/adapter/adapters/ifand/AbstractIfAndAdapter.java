@@ -21,7 +21,6 @@ public abstract class AbstractIfAndAdapter extends BaseAdapter {
     super(
         AbstractIfAndAdapter.PROGRAM_NAME,
         AbstractIfAndAdapter.MAIN_CLASS,
-        "",
         AbstractIfAndAdapter.getListOfOptions());
   }
 

@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.iGen;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseIGenAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseIGenAdapter extends BaseAdapter {
     super(
         BaseIGenAdapter.PROGRAM_NAME,
         BaseIGenAdapter.MAIN_CLASS,
-        "",
         BaseIGenAdapter.getListOfOptions());
-  }
-
-  public BaseIGenAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseIGenAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseIGenAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

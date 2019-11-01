@@ -24,7 +24,6 @@ public abstract class AbstractConstructorAdapter extends BaseAdapter {
     super(
         AbstractConstructorAdapter.PROGRAM_NAME,
         AbstractConstructorAdapter.MAIN_CLASS,
-        "",
         AbstractConstructorAdapter.getListOfOptions());
   }
 

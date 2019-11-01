@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractBerkeleyAdapter extends BaseAdapter {
 
-  public AbstractBerkeleyAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractBerkeleyAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractBerkeleyAdapter.getBerkeleyOptions());
+  public AbstractBerkeleyAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getBerkeleyOptions() {

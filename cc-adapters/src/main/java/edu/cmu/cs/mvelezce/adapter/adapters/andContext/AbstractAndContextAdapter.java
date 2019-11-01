@@ -21,7 +21,6 @@ public abstract class AbstractAndContextAdapter extends BaseAdapter {
     super(
         AbstractAndContextAdapter.PROGRAM_NAME,
         AbstractAndContextAdapter.MAIN_CLASS,
-        "",
         AbstractAndContextAdapter.getListOfOptions());
   }
 

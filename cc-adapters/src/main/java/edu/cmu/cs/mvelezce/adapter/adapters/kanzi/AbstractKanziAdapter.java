@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractKanziAdapter extends BaseAdapter {
 
-  public AbstractKanziAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractKanziAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractKanziAdapter.getKanziOptions());
+  public AbstractKanziAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getKanziOptions() {

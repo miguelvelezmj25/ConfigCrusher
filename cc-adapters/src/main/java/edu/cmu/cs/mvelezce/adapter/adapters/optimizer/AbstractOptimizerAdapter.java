@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractOptimizerAdapter extends BaseAdapter {
 
-  public AbstractOptimizerAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractOptimizerAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractOptimizerAdapter.getOptimizerOptions());
+  public AbstractOptimizerAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getOptimizerOptions() {

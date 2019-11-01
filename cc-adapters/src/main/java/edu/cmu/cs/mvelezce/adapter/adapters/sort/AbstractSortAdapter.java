@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractSortAdapter extends BaseAdapter {
 
-  public AbstractSortAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractSortAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractSortAdapter.getSortOptions());
+  public AbstractSortAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getSortOptions() {

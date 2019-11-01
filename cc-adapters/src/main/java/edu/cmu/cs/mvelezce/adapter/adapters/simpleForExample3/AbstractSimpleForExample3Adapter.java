@@ -21,7 +21,6 @@ public abstract class AbstractSimpleForExample3Adapter extends BaseAdapter {
     super(
         AbstractSimpleForExample3Adapter.PROGRAM_NAME,
         AbstractSimpleForExample3Adapter.MAIN_CLASS,
-        "",
         AbstractSimpleForExample3Adapter.getListOfOptions());
   }
 

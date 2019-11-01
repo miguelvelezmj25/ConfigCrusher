@@ -7,12 +7,8 @@ import java.util.List;
 
 public abstract class AbstractGrepAdapter extends BaseAdapter {
 
-  public AbstractGrepAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractGrepAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractGrepAdapter.getGrepOptions());
+  public AbstractGrepAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getGrepOptions() {

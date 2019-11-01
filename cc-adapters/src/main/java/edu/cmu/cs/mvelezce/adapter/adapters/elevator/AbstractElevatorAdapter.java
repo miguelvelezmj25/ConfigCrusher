@@ -8,12 +8,8 @@ import java.util.List;
 /** Created by miguelvelez on 4/30/17. */
 public abstract class AbstractElevatorAdapter extends BaseAdapter {
 
-  public AbstractElevatorAdapter() {
-    this(null, null, null);
-  }
-
-  public AbstractElevatorAdapter(String programName, String entryPoint, String dir) {
-    super(programName, entryPoint, dir, AbstractElevatorAdapter.getElevatorOptions());
+  public AbstractElevatorAdapter(String programName, String directory, List<String> options) {
+    super(programName, directory, options);
   }
 
   public static List<String> getElevatorOptions() {

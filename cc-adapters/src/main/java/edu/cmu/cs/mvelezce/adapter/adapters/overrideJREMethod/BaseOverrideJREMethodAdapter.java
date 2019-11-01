@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.overrideJREMethod;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BaseOverrideJREMethodAdapter extends BaseAdapter {
 
@@ -27,21 +25,10 @@ public class BaseOverrideJREMethodAdapter extends BaseAdapter {
     super(
         BaseOverrideJREMethodAdapter.PROGRAM_NAME,
         BaseOverrideJREMethodAdapter.MAIN_CLASS,
-        "",
         BaseOverrideJREMethodAdapter.getListOfOptions());
-  }
-
-  public BaseOverrideJREMethodAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BaseOverrideJREMethodAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BaseOverrideJREMethodAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

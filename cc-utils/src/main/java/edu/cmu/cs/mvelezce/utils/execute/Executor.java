@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public final class Executor {
+  public static final String USER_HOME = System.getProperty("user.home");
+  public static final String PATH_SEPARATOR = System.getProperty("path.separator");
+  public static final String CLASS_PATH = "./target/classes";
 
   private Executor() {}
 

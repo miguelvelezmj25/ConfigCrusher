@@ -21,7 +21,6 @@ public abstract class AbstractOrContext3Adapter extends BaseAdapter {
     super(
         AbstractOrContext3Adapter.PROGRAM_NAME,
         AbstractOrContext3Adapter.MAIN_CLASS,
-        "",
         AbstractOrContext3Adapter.getListOfOptions());
   }
 

@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.adapter.adapters.pngtastic;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class BasePngtasticAdapter extends BaseAdapter {
 
@@ -29,21 +27,10 @@ public class BasePngtasticAdapter extends BaseAdapter {
     super(
         BasePngtasticAdapter.PROGRAM_NAME,
         BasePngtasticAdapter.MAIN_CLASS,
-        "",
         BasePngtasticAdapter.getListOfOptions());
-  }
-
-  public BasePngtasticAdapter(String programName, String entryPoint, String classDir) {
-    super(programName, entryPoint, classDir, BasePngtasticAdapter.getListOfOptions());
   }
 
   public static List<String> getListOfOptions() {
     return Arrays.asList(BasePngtasticAdapter.OPTIONS);
-  }
-
-  @Override
-  public void execute(Set<String> configuration, int iteration)
-      throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("Implement");
   }
 }

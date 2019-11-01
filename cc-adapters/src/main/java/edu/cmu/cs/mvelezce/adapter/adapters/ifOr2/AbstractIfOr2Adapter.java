@@ -21,7 +21,6 @@ public abstract class AbstractIfOr2Adapter extends BaseAdapter {
     super(
         AbstractIfOr2Adapter.PROGRAM_NAME,
         AbstractIfOr2Adapter.MAIN_CLASS,
-        "",
         AbstractIfOr2Adapter.getListOfOptions());
   }
 

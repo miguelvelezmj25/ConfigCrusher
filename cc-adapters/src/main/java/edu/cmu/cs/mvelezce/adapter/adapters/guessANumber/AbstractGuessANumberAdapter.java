@@ -21,7 +21,6 @@ public abstract class AbstractGuessANumberAdapter extends BaseAdapter {
     super(
         AbstractGuessANumberAdapter.PROGRAM_NAME,
         AbstractGuessANumberAdapter.MAIN_CLASS,
-        "",
         AbstractGuessANumberAdapter.getListOfOptions());
   }
 

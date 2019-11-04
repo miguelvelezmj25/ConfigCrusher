@@ -2,10 +2,11 @@ package edu.cmu.cs.mvelezce.java.idta;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.java.Executor;
+import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class IDTAExecutorTest {
@@ -13,11 +14,8 @@ public class IDTAExecutorTest {
   @Test
   public void trivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    Set<Set<String>> configurations = new HashSet<>();
-    Set<String> x = new HashSet<>();
-    x.add("A");
-    x.add("B");
-    configurations.add(x);
+    List<String> options = BaseTrivialAdapter.getListOfOptions();
+    Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
 
     Executor executor = new IDTAExecutor(programName, configurations);
 
@@ -27,6 +25,5 @@ public class IDTAExecutorTest {
     args[2] = "-i2";
 
     executor.execute(args);
-    System.out.println();
   }
 }

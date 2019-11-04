@@ -1,6 +1,10 @@
 package edu.cmu.cs.mvelezce.java;
 
+import edu.cmu.cs.mvelezce.java.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.adapters.trivial.TrivialExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.results.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import edu.cmu.cs.mvelezce.utils.gc.GC;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,10 +17,13 @@ public abstract class BaseExecutor implements Executor {
 
   private final String programName;
   private final Set<Set<String>> configurations;
+  private final RawExecutionParser rawExecutionParser;
 
   public BaseExecutor(String programName, Set<Set<String>> configurations) {
     this.programName = programName;
     this.configurations = configurations;
+
+    this.rawExecutionParser = new RawExecutionParser(programName, this.outputDir());
   }
 
   @Override
@@ -96,6 +103,36 @@ public abstract class BaseExecutor implements Executor {
     process.waitFor();
   }
 
+  @Override
+  public Object executeIteration(int iteration) throws InterruptedException, IOException {
+    ExecutorAdapter adapter;
+
+    switch (this.programName) {
+      case TrivialExecutorAdapter.PROGRAM_NAME:
+        adapter = new TrivialExecutorAdapter(this);
+        break;
+      default:
+        throw new RuntimeException("Could not find an adapter for " + this.programName);
+    }
+
+    for (Set<String> configuration : this.configurations) {
+      adapter.execute(configuration);
+      this.rawExecutionParser.logExecution(configuration, iteration);
+
+      GC.gc(2000);
+    }
+
+    String rawOutputDir = this.rawExecutionParser.getRawOutputDir(iteration);
+    File outputFile = new File(rawOutputDir);
+
+    if (!outputFile.exists()) {
+      throw new RuntimeException("The output file could not be found " + rawOutputDir);
+    }
+
+    //    return this.processExecutions(outputFile);
+    throw new RuntimeException("Contine");
+  }
+
   private List<String> buildCommandAsList(
       String programClassPath, String mainClass, String[] configArgs) {
     List<String> commandList = new ArrayList<>();
@@ -137,14 +174,6 @@ public abstract class BaseExecutor implements Executor {
         + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
         + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
         + programClassPath;
-  }
-
-  protected String getProgramName() {
-    return programName;
-  }
-
-  protected Set<Set<String>> getConfigurations() {
-    return configurations;
   }
 
   /*

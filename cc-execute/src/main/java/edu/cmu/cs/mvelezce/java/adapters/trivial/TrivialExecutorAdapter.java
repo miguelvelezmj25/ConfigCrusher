@@ -23,9 +23,4 @@ public class TrivialExecutorAdapter extends BaseTrivialAdapter implements Execut
         ExecutorAdapter.EXECUTOR_MAIN_CLASS_PREFIX + "Trivial",
         configAsArgs);
   }
-
-  @Override
-  public void logExecution(Set<String> configuration, int iteration) {
-    throw new UnsupportedOperationException("Implement");
-  }
 }

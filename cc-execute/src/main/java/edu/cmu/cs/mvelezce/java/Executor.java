@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.java;
 
 import java.io.IOException;
+import java.util.Set;
 
 public interface Executor {
 
@@ -12,6 +13,8 @@ public interface Executor {
 
   void executeProgram(String programClassPath, String mainClass, String[] configuration)
       throws InterruptedException, IOException;
+
+//  void logExecution(Set<String> configuration, int iter) throws IOException;
 
   String outputDir();
 

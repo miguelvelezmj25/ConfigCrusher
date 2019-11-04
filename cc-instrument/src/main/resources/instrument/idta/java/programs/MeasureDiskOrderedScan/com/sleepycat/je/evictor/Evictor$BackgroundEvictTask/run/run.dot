@@ -1,0 +1,13 @@
+digraph run {
+node [shape=record];
+1958381869 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 3293 L3\lLDC \"ee3c3f15-26a5-4fee-9d61-ee14156d74ae\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\lL0\lLINENUMBER 3295 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.EVICTORTHREAD : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.backgroundIO : Z\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\lL1\lLINENUMBER 3297 L1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL4\lLINENUMBER 3298 L4\lGOTO L5\l"];
+1236890104 [label="L2\lLINENUMBER 3297 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL6\lLINENUMBER 3298 L6\lALOAD 1\lATHROW\l"];
+275665683 [label="L5\lLINENUMBER 3299 L5\lFRAME SAME\lLDC \"ee3c3f15-26a5-4fee-9d61-ee14156d74ae\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+entry;
+exit;
+1958381869 -> 275665683;
+entry -> 1958381869;
+275665683 -> exit;
+1958381869[fontcolor="purple", penwidth=3, color="purple"];
+275665683[fontcolor="purple", penwidth=3, color="purple"];
+}

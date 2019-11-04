@@ -1,0 +1,27 @@
+digraph run {
+node [shape=record];
+1498227841 [label="L8\lLINENUMBER 230 L8\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushSync ()V\lGOTO L9\l"];
+1945734247 [label="L9\lLINENUMBER 235 L9\lFRAME SAME\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lL10\lLINENUMBER 236 L10\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\lL4\lLINENUMBER 244 L4\lGOTO L11\l"];
+1440730231 [label="L2\lLINENUMBER 238 L2\lFRAME FULL [com/sleepycat/je/log/LogFlusher$FlushTask] [java/lang/Throwable]\lASTORE 1\lL12\lLINENUMBER 239 L12\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L11\lL13\lLINENUMBER 240 L13\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL14\lLINENUMBER 241 L14\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogger ()Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lL15\lLINENUMBER 240 L15\lLDC \"8437194f-0b09-4f54-a1f3-b85b6998fa90\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lINVOKESTATIC com/sleepycat/je/utilint/StoppableThread.handleUncaughtException (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Thread;Ljava/lang/Throwable;)V\l"];
+476392714 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Throwable\lTRYCATCHBLOCK L3 L4 L2 java/lang/Throwable\lL0\lLINENUMBER 221 L0\lLDC \"821cb153-cdd5-4649-8b97-73f0f187abc0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lLDC \"8437194f-0b09-4f54-a1f3-b85b6998fa90\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL5\lLINENUMBER 222 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.getNTotalCommits ()J\lLSTORE 1\lL6\lLINENUMBER 225 L6\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lLCMP\lIFGT L3\l"];
+321382754 [label="L11\lLINENUMBER 245 L11\lFRAME SAME\lLDC \"821cb153-cdd5-4649-8b97-73f0f187abc0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
+1828018536 [label="L7\lLINENUMBER 232 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushNoSync ()V\l"];
+594623970 [label="L3\lLINENUMBER 229 L3\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.fsync : Z\lIFEQ L7\l"];
+1574419775 [label="L1\lLINENUMBER 226 L1\lLDC \"821cb153-cdd5-4649-8b97-73f0f187abc0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 476392714;
+1498227841 -> 1945734247;
+1945734247 -> 321382754;
+476392714 -> 594623970;
+476392714 -> 1574419775;
+321382754 -> exit;
+1828018536 -> 1945734247;
+594623970 -> 1498227841;
+594623970 -> 1828018536;
+1574419775 -> exit;
+1440730231[fontcolor="purple", penwidth=3, color="purple"];
+476392714[fontcolor="purple", penwidth=3, color="purple"];
+321382754[fontcolor="purple", penwidth=3, color="purple"];
+1574419775[fontcolor="purple", penwidth=3, color="purple"];
+}

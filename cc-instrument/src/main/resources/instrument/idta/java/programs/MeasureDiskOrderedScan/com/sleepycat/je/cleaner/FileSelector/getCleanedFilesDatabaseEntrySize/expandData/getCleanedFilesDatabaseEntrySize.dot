@@ -1,0 +1,10 @@
+digraph getCleanedFilesDatabaseEntrySize {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+912857699 [label="912857699 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 912857699;
+912857699 -> exit;
+}

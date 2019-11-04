@@ -1,0 +1,29 @@
+digraph setDebugNameForDatabaseImpl {
+node [shape=record];
+1241555058 [label="L0\lLINENUMBER 1712 L0\lLDC \"7c31037d-487b-4a48-bc11-0f2c3b35b22b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lIFNULL L1\l"];
+1399921502 [label="L7\lLINENUMBER 1730 L7\lALOAD 1\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDbName (Lcom/sleepycat/je/dbi/DatabaseId;)Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setDebugDatabaseName (Ljava/lang/String;)V\l"];
+1599303668 [label="L2\lLINENUMBER 1713 L2\lALOAD 2\lIFNULL L3\l"];
+912377768 [label="ALOAD 0\lL6\lLINENUMBER 1729 L6\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.getFastNameLookup ()Z\lIFEQ L1\l"];
+1913203410 [label="ALOAD 1\lL5\lLINENUMBER 1728 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDebugNameAvailable ()Z\lIFNE L1\l"];
+159593447 [label="L1\lLINENUMBER 1734 L1\lFRAME SAME\lLDC \"7c31037d-487b-4a48-bc11-0f2c3b35b22b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+1644507518 [label="L3\lLINENUMBER 1727 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L1\l"];
+759760789 [label="L4\lLINENUMBER 1715 L4\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setDebugDatabaseName (Ljava/lang/String;)V\lGOTO L1\l"];
+entry;
+exit;
+entry -> 1241555058;
+1241555058 -> 1599303668;
+1241555058 -> 159593447;
+1399921502 -> 159593447;
+1599303668 -> 1644507518;
+1599303668 -> 759760789;
+912377768 -> 1399921502;
+912377768 -> 159593447;
+1913203410 -> 912377768;
+1913203410 -> 159593447;
+159593447 -> exit;
+1644507518 -> 1913203410;
+1644507518 -> 159593447;
+759760789 -> 159593447;
+1241555058[fontcolor="purple", penwidth=3, color="purple"];
+159593447[fontcolor="purple", penwidth=3, color="purple"];
+}

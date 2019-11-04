@@ -1,0 +1,15 @@
+digraph getLogSize {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+1106344215 [label="1106344215 - [!JECACHESIZE, JECACHESIZE]"];
+1362481478 [label="1362481478 - [!JECACHESIZE, JECACHESIZE]"];
+234050136 [label="234050136 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 1106344215;
+1106344215 -> 1362481478;
+1106344215 -> 234050136;
+1362481478 -> 234050136;
+234050136 -> exit;
+}

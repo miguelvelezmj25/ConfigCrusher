@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+1396177377 [label="L0\lLINENUMBER 670 L0\lLDC \"f71a189f-96f2-4e3b-a6c1-6028ef6121a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lL1\lLINENUMBER 671 L1\lINVOKEVIRTUAL com/sleepycat/je/txn/RollbackStart.getMatchpoint ()J\lLLOAD 3\lLDC -1\lALOAD 1\lL2\lLINENUMBER 674 L2\lINVOKEVIRTUAL com/sleepycat/je/recovery/RollbackTracker.getCheckpointStart ()J\lALOAD 2\lL3\lLINENUMBER 675 L3\lINVOKEVIRTUAL com/sleepycat/je/txn/RollbackStart.getActiveTxnIds ()Ljava/util/Set;\lL4\lLINENUMBER 670 L4\lINVOKESPECIAL com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.\<init\> (Lcom/sleepycat/je/recovery/RollbackTracker;JJJJLjava/util/Set;)V\lL5\lLINENUMBER 676 L5\lLDC \"f71a189f-96f2-4e3b-a6c1-6028ef6121a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+entry;
+exit;
+entry -> 1396177377;
+1396177377 -> exit;
+1396177377[fontcolor="purple", penwidth=3, color="purple"];
+}

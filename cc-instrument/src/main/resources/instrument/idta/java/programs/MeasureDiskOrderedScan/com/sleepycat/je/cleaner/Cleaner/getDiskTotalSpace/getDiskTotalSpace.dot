@@ -1,0 +1,9 @@
+digraph getDiskTotalSpace {
+node [shape=record];
+894344302 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL0\lLINENUMBER 1137 L0\lLDC \"23d5eafd-f61f-4f98-96e1-7fcd3ebe2655\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.fileStoreInfo : Lcom/sleepycat/je/utilint/FileStoreInfo;\lINVOKEVIRTUAL com/sleepycat/je/utilint/FileStoreInfo.getTotalSpace ()J\lL1\lLRETURN\lL2\lLINENUMBER 1138 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\lL3\lLINENUMBER 1139 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"23d5eafd-f61f-4f98-96e1-7fcd3ebe2655\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL4\l"];
+entry;
+exit;
+entry -> 894344302;
+894344302 -> exit;
+894344302[fontcolor="purple", penwidth=3, color="purple"];
+}

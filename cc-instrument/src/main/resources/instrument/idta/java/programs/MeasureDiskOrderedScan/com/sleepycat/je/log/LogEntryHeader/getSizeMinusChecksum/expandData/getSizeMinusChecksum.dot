@@ -1,0 +1,10 @@
+digraph getSizeMinusChecksum {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+155074074 [label="155074074 - [(JECACHESIZE && DUPLICATES), (JECACHESIZE && !DUPLICATES), (!JECACHESIZE && DUPLICATES), (!JECACHESIZE && !DUPLICATES)]"];
+entry;
+exit;
+entry -> 155074074;
+155074074 -> exit;
+}

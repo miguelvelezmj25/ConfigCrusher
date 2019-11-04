@@ -1,0 +1,15 @@
+digraph getExtraMemorySize {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+472622642 [label="472622642 - [!JECACHESIZE, JECACHESIZE]"];
+837144074 [label="837144074 - [!JECACHESIZE, JECACHESIZE]"];
+40645745 [label="40645745 - [!JECACHESIZE, JECACHESIZE]"];
+entry;
+exit;
+entry -> 837144074;
+472622642 -> exit;
+837144074 -> 472622642;
+837144074 -> 40645745;
+40645745 -> exit;
+}

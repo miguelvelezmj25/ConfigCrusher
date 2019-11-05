@@ -115,4 +115,8 @@ public abstract class BaseExecutor implements Executor {
         + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
         + programClassPath;
   }
+
+  public RawExecutionParser getRawExecutionParser() {
+    return rawExecutionParser;
+  }
 }

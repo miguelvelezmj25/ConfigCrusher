@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -33,7 +34,7 @@ public final class RawExecutionParser {
     mapper.writeValue(file, rawPerfExecution);
   }
 
-  public String getRawOutputDir(int iter) {
+  private String getRawOutputDir(int iter) {
     return this.outputDir + "/" + this.programName + "/execution/raw/" + iter;
   }
 
@@ -61,5 +62,34 @@ public final class RawExecutionParser {
     reader.close();
 
     return trace;
+  }
+
+  public Map<Integer, Set<RawPerfExecution>> readResults() throws IOException {
+    Map<Integer, Set<RawPerfExecution>> itersToPerfExecutions = new HashMap<>();
+
+    int iter = 0;
+    File file = new File(this.getRawOutputDir(iter));
+
+    while (file.exists()) {
+      Set<RawPerfExecution> rawPerfExecutions = new HashSet<>();
+      Collection<File> files = FileUtils.listFiles(file, new String[] {"json"}, true);
+
+      for (File perfFile : files) {
+        RawPerfExecution rawPerfExecution = this.readFromFile(perfFile);
+        rawPerfExecutions.add(rawPerfExecution);
+      }
+
+      itersToPerfExecutions.put(iter, rawPerfExecutions);
+
+      iter++;
+      file = new File(this.getRawOutputDir(iter));
+    }
+
+    return itersToPerfExecutions;
+  }
+
+  private RawPerfExecution readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(file, new TypeReference<RawPerfExecution>() {});
   }
 }

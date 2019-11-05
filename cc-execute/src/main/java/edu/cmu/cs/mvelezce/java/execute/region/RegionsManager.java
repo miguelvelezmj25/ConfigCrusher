@@ -21,12 +21,10 @@ public class RegionsManager implements IProducerConsumer {
   public static final String REGION_DESCRIPTOR = "(Ljava/lang/String;)V";
   public static final UUID PROGRAM_REGION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000000");
+  public static final String START = "s";
+  public static final String END = "e";
+  public static final String COMMA = ",";
   private static final Region PROGRAM_REGION = new Region.Builder(PROGRAM_REGION_ID).build();
-
-  private static final String START = "s";
-  private static final String END = "e";
-  private static final String COMMA = ",";
-
   private static final BlockingQueue<String> INPUT_QUEUE = new ArrayBlockingQueue<>(1_000_000);
   private static final ProducerConsumerSetup<String> PRODUCER_CONSUMER_SETUP;
   private static final Runnable PRODUCER;

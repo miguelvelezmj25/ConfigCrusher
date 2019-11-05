@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute;
 
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.trivial.TrivialExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.processor.RawExecutionParser;
+import edu.cmu.cs.mvelezce.java.execute.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.gc.GC;
 

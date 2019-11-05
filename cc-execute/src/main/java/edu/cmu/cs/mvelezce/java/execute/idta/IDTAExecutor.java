@@ -1,6 +1,6 @@
-package edu.cmu.cs.mvelezce.java.idta;
+package edu.cmu.cs.mvelezce.java.execute.idta;
 
-import edu.cmu.cs.mvelezce.java.BaseExecutor;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.Set;

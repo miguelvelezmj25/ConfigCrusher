@@ -1,8 +1,8 @@
-package edu.cmu.cs.mvelezce.java.adapters.trivial;
+package edu.cmu.cs.mvelezce.java.execute.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
-import edu.cmu.cs.mvelezce.java.Executor;
-import edu.cmu.cs.mvelezce.java.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.Executor;
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 
 import java.io.IOException;
 import java.util.Set;

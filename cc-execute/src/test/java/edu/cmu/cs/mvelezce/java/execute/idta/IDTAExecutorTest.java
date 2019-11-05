@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.java.idta;
+package edu.cmu.cs.mvelezce.java.execute.idta;
 
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
-import edu.cmu.cs.mvelezce.java.Executor;
+import edu.cmu.cs.mvelezce.java.execute.Executor;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
 

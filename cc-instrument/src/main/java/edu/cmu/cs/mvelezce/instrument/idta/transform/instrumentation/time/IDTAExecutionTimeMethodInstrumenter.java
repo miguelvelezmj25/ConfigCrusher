@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import edu.cmu.cs.mvelezce.java.region.RegionsManager;
+import edu.cmu.cs.mvelezce.java.execute.region.RegionsManager;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 

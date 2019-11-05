@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.producerconsumer.producer;
+package edu.cmu.cs.mvelezce.java.execute.producerconsumer.producer;
 
 import edu.cmu.cs.mvelezce.producer.IProducer;
 import edu.cmu.cs.mvelezce.setup.IProducerConsumer;

@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.java.results.parser;
+package edu.cmu.cs.mvelezce.java.processor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.java.results.RawPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 

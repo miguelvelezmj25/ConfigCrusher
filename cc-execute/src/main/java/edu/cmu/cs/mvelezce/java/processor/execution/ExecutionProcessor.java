@@ -1,11 +1,13 @@
 package edu.cmu.cs.mvelezce.java.processor.execution;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.execute.region.RegionsManager;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +16,14 @@ import java.util.*;
 public abstract class ExecutionProcessor
     implements Analysis<Map<Integer, Set<ProcessedPerfExecution>>> {
 
-  private final String programName;
   private final Map<Integer, Set<RawPerfExecution>> itersToRawPerfExecutions;
   private final String outputDir;
 
   public ExecutionProcessor(
       String programName, Map<Integer, Set<RawPerfExecution>> itersToRawPerfExecutions) {
-    this.programName = programName;
     this.itersToRawPerfExecutions = itersToRawPerfExecutions;
 
-    this.outputDir = this.outputDir() + "/" + this.programName + "/execution/processed/";
+    this.outputDir = this.outputDir() + "/" + programName + "/execution/processed";
   }
 
   @Override
@@ -35,16 +35,7 @@ public abstract class ExecutionProcessor
     Options.checkIfDeleteResult(file);
 
     if (file.exists()) {
-      throw new UnsupportedOperationException("implement");
-      //      Collection<File> files = FileUtils.listFiles(file, null, true);
-      //
-      //      if (files.size() != 1) {
-      //        throw new RuntimeException(
-      //                "We expected to find 1 file in the directory, but that is not the case " +
-      // outputFile);
-      //      }
-      //
-      //      return this.readFromFile(files.iterator().next());
+      return this.readFromFile(file);
     }
 
     Map<Integer, Set<ProcessedPerfExecution>> results = this.analyze();
@@ -55,35 +46,6 @@ public abstract class ExecutionProcessor
 
     return results;
   }
-
-  //  public Object process(File rawOutputDir) throws IOException {
-  //    Collection<File> files = FileUtils.listFiles(rawOutputDir, new String[] {"json"}, true);
-  //    //    Set<PerformanceEntry> performanceEntries = new HashSet<>();
-  //
-  //    for (File file : files) {
-  //      RawPerfExecution rawPerfExecution = this.readFromFile(file);
-  //      Object object = this.process(rawPerfExecution);
-  //      //      performanceEntries.add(result);
-  //    }
-  //
-  //    //    return performanceEntries;
-  //    throw new RuntimeException("Implement");
-  //  }
-  //
-  //  private Object process(RawPerfExecution rawPerfExecution) {
-  //    List<String> trace = rawPerfExecution.getTrace();
-  //
-  //    Map<String, Long> regionsToPerf = this.addRegions(trace);
-  //
-  //    Deque<UUID> stack = new ArrayDeque<>();
-  //
-  //    for (String entry : trace) {
-  //      String[] item = entry.split(",");
-  //      System.out.println();
-  //    }
-  //
-  //    throw new RuntimeException("Implement");
-  //  }
 
   @Override
   public Map<Integer, Set<ProcessedPerfExecution>> analyze() {
@@ -182,7 +144,8 @@ public abstract class ExecutionProcessor
       int iter = entry.getKey();
 
       for (ProcessedPerfExecution processedPerfExecution : entry.getValue()) {
-        String outputFile = this.outputDir + iter + "/" + UUID.randomUUID() + Options.DOT_JSON;
+        String outputFile =
+            this.outputDir + "/" + iter + "/" + UUID.randomUUID() + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
 
@@ -193,7 +156,30 @@ public abstract class ExecutionProcessor
   }
 
   @Override
-  public Map<Integer, Set<ProcessedPerfExecution>> readFromFile(File file) {
-    throw new UnsupportedOperationException("implement");
+  public Map<Integer, Set<ProcessedPerfExecution>> readFromFile(File file) throws IOException {
+    File[] dirs = file.listFiles();
+
+    if (dirs == null) {
+      throw new RuntimeException("Could not find any directories in " + file);
+    }
+
+    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecutions = new HashMap<>();
+
+    for (File dir : dirs) {
+      Set<ProcessedPerfExecution> perfExecutions = new HashSet<>();
+
+      Collection<File> files = FileUtils.listFiles(dir, new String[] {"json"}, false);
+
+      for (File dataFile : files) {
+        ObjectMapper mapper = new ObjectMapper();
+        ProcessedPerfExecution processedPerfExecution =
+            mapper.readValue(dataFile, new TypeReference<ProcessedPerfExecution>() {});
+        perfExecutions.add(processedPerfExecution);
+      }
+
+      itersToProcessedPerfExecutions.put(Integer.parseInt(dir.getName()), perfExecutions);
+    }
+
+    return itersToProcessedPerfExecutions;
   }
 }

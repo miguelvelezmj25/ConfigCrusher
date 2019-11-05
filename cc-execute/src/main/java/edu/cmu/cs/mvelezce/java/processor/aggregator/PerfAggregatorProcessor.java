@@ -8,9 +8,12 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public abstract class PerfAggregatorProcessor implements Analysis<Set<PerformanceEntry>> {
+
+  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
 
   private final Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution;
   private final String outputDir;
@@ -72,7 +75,33 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Map<String, Long> regionsToMax = this.getRegionsToMax(config, allProcessedPerfExecutions);
     Map<String, Long> regionsToDiff = this.getRegionsToDiff(regionsToMin, regionsToMax);
 
-    return new PerformanceEntry(config, regionsToPerf, regionsToMin, regionsToMax, regionsToDiff);
+    return new PerformanceEntry(
+        config,
+        regionsToPerf,
+        regionsToMin,
+        regionsToMax,
+        regionsToDiff,
+        this.toHumanReadable(regionsToPerf),
+        this.toHumanReadable(regionsToMin),
+        this.toHumanReadable(regionsToMax),
+        this.toHumanReadable(regionsToDiff));
+  }
+
+  private Map<String, String> toHumanReadable(Map<String, Long> regionsToData) {
+
+    Map<String, String> regionsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<String, Long> entry : regionsToData.entrySet()) {
+      regionsToHumanReadableData.put(entry.getKey(), entry.getValue().toString());
+    }
+
+    for (Map.Entry<String, String> entry : regionsToHumanReadableData.entrySet()) {
+      double data = Double.parseDouble(entry.getValue());
+      data = data / 1E9;
+      regionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return regionsToHumanReadableData;
   }
 
   private Map<String, Long> getRegionsToMin(

@@ -1,72 +1,72 @@
 digraph main {
 node [shape=record];
-1779735636 [label="L38\lLINENUMBER 115 L38\lFRAME APPEND [java/lang/Integer]\lLDC \"4c2a1200-d744-4aa3-b37a-700e281bc14e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"de1f4bc3-9df0-48ce-85f4-faa46f51cd3a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.TIMEOUT : Z\lIFEQ L39\l"];
-787624282 [label="L7\lLINENUMBER 33 L7\lFRAME CHOP 1\lIINC 3 1\lGOTO L3\l"];
-422690323 [label="L19\lLINENUMBER 59 L19\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"No files to process\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL20\lLINENUMBER 60 L20\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"java -jar pngtastic-x.x.jar com.googlecode.pngtastic.PngtasticColorCounter [options] file1 [file2 ..]\nOptions:\n  --distThreshold    the distance below which two colors are considered similar (0.0 to 1.0)\n  --freqThreshold    the percentage a color must be represented in the overall image (0.0 to 1.0)\n  --minAlpha         the minimum alpha channel value a pixel must have\n  --timeout          the number of milliseconds after which color counting will be aborted\n  --logLevel         the level of logging output (none, debug, info, or error)\n\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL21\lLINENUMBER 61 L21\lLDC \"a00aa71c-7a6e-48f1-b2a6-3912d53efb24\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"72ae195b-349e-4e1c-b733-8d90f6276fbf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1665099105 [label="L27\lLINENUMBER 100 L27\lFRAME SAME\lDCONST_1\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 4\l"];
-1039330521 [label="L5\lLINENUMBER 34 L5\lALOAD 0\lILOAD 3\lAALOAD\lASTORE 4\lL6\lLINENUMBER 35 L6\lALOAD 4\lLDC \"--\"\lINVOKEVIRTUAL java/lang/String.startsWith (Ljava/lang/String;)Z\lIFEQ L7\l"];
-1955106624 [label="L31\lLINENUMBER 106 L31\lFRAME SAME\lDCONST_1\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 5\l"];
-439012577 [label="L34\lLINENUMBER 109 L34\lFRAME APPEND [java/lang/Double]\lLDC \"6fe92dbd-bd93-4502-96fc-97b3b652bc6a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"4c2a1200-d744-4aa3-b37a-700e281bc14e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.MINALPHA : Z\lIFEQ L35\l"];
-2077353659 [label="L3\lFRAME APPEND [java/util/HashMap I I]\lILOAD 3\lALOAD 0\lARRAYLENGTH\lIF_ICMPGE L4\l"];
-1242164028 [label="L46\lLINENUMBER 127 L46\lFRAME APPEND [java/lang/String]\lLDC \"a00aa71c-7a6e-48f1-b2a6-3912d53efb24\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW counter/com/googlecode/pngtastic/PngtasticColorCounter\lDUP\lALOAD 3\lALOAD 8\lALOAD 4\lINVOKEVIRTUAL java/lang/Double.doubleValue ()D\lALOAD 5\lINVOKEVIRTUAL java/lang/Double.doubleValue ()D\lALOAD 6\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lALOAD 7\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lI2L\lINVOKESPECIAL counter/com/googlecode/pngtastic/PngtasticColorCounter.\<init\> ([Ljava/lang/String;Ljava/lang/String;DDIJ)V\lPOP\lL47\lLINENUMBER 128 L47\lLDC \"a00aa71c-7a6e-48f1-b2a6-3912d53efb24\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"4c738791-6b33-4548-87dd-6bc18f7d015c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"72ae195b-349e-4e1c-b733-8d90f6276fbf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL48\l"];
-1797899447 [label="L11\lLINENUMBER 38 L11\lALOAD 1\lALOAD 4\lALOAD 0\lILOAD 5\lAALOAD\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL12\lLINENUMBER 39 L12\lILOAD 5\lICONST_1\lIADD\lISTORE 2\lGOTO L7\l"];
-93058827 [label="L42\lLINENUMBER 121 L42\lFRAME APPEND [java/lang/Integer]\lLDC \"de1f4bc3-9df0-48ce-85f4-faa46f51cd3a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"4c738791-6b33-4548-87dd-6bc18f7d015c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.LOGLEVEL : Z\lIFEQ L43\l"];
-1616733310 [label="L30\lLINENUMBER 103 L30\lFRAME APPEND [java/lang/Double]\lLDC \"6fe92dbd-bd93-4502-96fc-97b3b652bc6a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.FREQTHRESHOLD : Z\lIFEQ L31\l"];
-1184242125 [label="L28\lLINENUMBER 98 L28\lLDC 0.005\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 4\lL29\lGOTO L30\l"];
-1423501684 [label="L0\lLINENUMBER 31 L0\lLDC \"72ae195b-349e-4e1c-b733-8d90f6276fbf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lASTORE 1\lL1\lLINENUMBER 32 L1\lICONST_0\lISTORE 2\lL2\lLINENUMBER 33 L2\lICONST_0\lISTORE 3\l"];
-1812265181 [label="L32\lLINENUMBER 104 L32\lLDC 0.005\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 5\lL33\lGOTO L34\l"];
-299840846 [label="L35\lLINENUMBER 112 L35\lFRAME SAME\lBIPUSH 50\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 6\l"];
-1524825601 [label="L8\lLINENUMBER 36 L8\lILOAD 3\lICONST_1\lIADD\lISTORE 5\lL9\lLINENUMBER 37 L9\lILOAD 5\lALOAD 0\lARRAYLENGTH\lIF_ICMPGE L10\l"];
-1309162730 [label="L39\lLINENUMBER 118 L39\lFRAME SAME\lLDC 1000000\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 7\l"];
-1261649362 [label="L43\lLINENUMBER 124 L43\lFRAME SAME\lLDC \"none\"\lASTORE 8\l"];
-555567802 [label="L36\lLINENUMBER 110 L36\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 6\lL37\lGOTO L38\l"];
-647301171 [label="L40\lLINENUMBER 116 L40\lICONST_0\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 7\lL41\lGOTO L42\l"];
-1092058216 [label="L10\lLINENUMBER 41 L10\lFRAME APPEND [java/lang/String I]\lALOAD 1\lALOAD 4\lACONST_NULL\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL13\lLINENUMBER 42 L13\lILOAD 5\lISTORE 2\l"];
-1416511593 [label="L18\lLINENUMBER 85 L18\lFRAME FULL [[Ljava/lang/String; java/util/HashMap I [Ljava/lang/String;] []\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.FREQTHRESHOLD_0 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.FREQTHRESHOLD : Z\lL22\lLINENUMBER 86 L22\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.DISTTHRESHOLD_1 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.DISTTHRESHOLD : Z\lL23\lLINENUMBER 87 L23\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.MINALPHA_2 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.MINALPHA : Z\lL24\lLINENUMBER 88 L24\lALOAD 0\lICONST_3\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.TIMEOUT_3 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.TIMEOUT : Z\lL25\lLINENUMBER 89 L25\lALOAD 0\lICONST_4\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.LOGLEVEL_4 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.LOGLEVEL : Z\lL26\lLINENUMBER 97 L26\lGETSTATIC counter/com/googlecode/pngtastic/Run.DISTTHRESHOLD : Z\lIFEQ L27\l"];
-1164537879 [label="L44\lLINENUMBER 122 L44\lLDC \"debug\"\lASTORE 8\lL45\lGOTO L46\l"];
-1012201298 [label="L4\lLINENUMBER 46 L4\lFRAME CHOP 1\lALOAD 0\lILOAD 2\lALOAD 0\lARRAYLENGTH\lINVOKESTATIC java/util/Arrays.copyOfRange ([Ljava/lang/Object;II)[Ljava/lang/Object;\lCHECKCAST [Ljava/lang/String;\lASTORE 3\lL14\lLINENUMBER 48 L14\lICONST_1\lANEWARRAY java/lang/String\lASTORE 3\lL15\lLINENUMBER 49 L15\lALOAD 3\lICONST_0\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"user.home\"\lL16\lLINENUMBER 50 L16\lINVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/images/optimizer/lena.png\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lAASTORE\lL17\lLINENUMBER 58 L17\lALOAD 3\lARRAYLENGTH\lIFNE L18\l"];
+1314019513 [label="L35\lLINENUMBER 112 L35\lFRAME SAME\lBIPUSH 50\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 6\l"];
+1612423285 [label="L38\lLINENUMBER 115 L38\lFRAME APPEND [java/lang/Integer]\lLDC \"044e8368-d6cb-41d5-865e-e710f580e7cf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"d5da98d5-f760-4246-abed-60413ad57e74\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.TIMEOUT : Z\lIFEQ L39\l"];
+269526630 [label="L28\lLINENUMBER 98 L28\lLDC 0.005\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 4\lL29\lGOTO L30\l"];
+1366518840 [label="L30\lLINENUMBER 103 L30\lFRAME APPEND [java/lang/Double]\lLDC \"2d8b995c-aa58-4a89-9672-3aaa519d2456\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.FREQTHRESHOLD : Z\lIFEQ L31\l"];
+11231698 [label="L40\lLINENUMBER 116 L40\lICONST_0\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 7\lL41\lGOTO L42\l"];
+561261961 [label="L10\lLINENUMBER 41 L10\lFRAME APPEND [java/lang/String I]\lALOAD 1\lALOAD 4\lACONST_NULL\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL13\lLINENUMBER 42 L13\lILOAD 5\lISTORE 2\l"];
+1179891282 [label="L11\lLINENUMBER 38 L11\lALOAD 1\lALOAD 4\lALOAD 0\lILOAD 5\lAALOAD\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL12\lLINENUMBER 39 L12\lILOAD 5\lICONST_1\lIADD\lISTORE 2\lGOTO L7\l"];
+688317204 [label="L46\lLINENUMBER 127 L46\lFRAME APPEND [java/lang/String]\lLDC \"f0a3a785-1c7b-495b-9482-bc8916836fc9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW counter/com/googlecode/pngtastic/PngtasticColorCounter\lDUP\lALOAD 3\lALOAD 8\lALOAD 4\lINVOKEVIRTUAL java/lang/Double.doubleValue ()D\lALOAD 5\lINVOKEVIRTUAL java/lang/Double.doubleValue ()D\lALOAD 6\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lALOAD 7\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lI2L\lINVOKESPECIAL counter/com/googlecode/pngtastic/PngtasticColorCounter.\<init\> ([Ljava/lang/String;Ljava/lang/String;DDIJ)V\lPOP\lL47\lLINENUMBER 128 L47\lLDC \"f0a3a785-1c7b-495b-9482-bc8916836fc9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"5db82aac-934b-4668-b10f-23b7c6e8e828\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"993c71f7-ab62-4665-8230-2c1755e19aed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL48\l"];
+1519004557 [label="L0\lLINENUMBER 31 L0\lLDC \"993c71f7-ab62-4665-8230-2c1755e19aed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lASTORE 1\lL1\lLINENUMBER 32 L1\lICONST_0\lISTORE 2\lL2\lLINENUMBER 33 L2\lICONST_0\lISTORE 3\l"];
+184370601 [label="L34\lLINENUMBER 109 L34\lFRAME APPEND [java/lang/Double]\lLDC \"2d8b995c-aa58-4a89-9672-3aaa519d2456\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"044e8368-d6cb-41d5-865e-e710f580e7cf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.MINALPHA : Z\lIFEQ L35\l"];
+307729936 [label="L31\lLINENUMBER 106 L31\lFRAME SAME\lDCONST_1\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 5\l"];
+1844407356 [label="L3\lFRAME APPEND [java/util/HashMap I I]\lILOAD 3\lALOAD 0\lARRAYLENGTH\lIF_ICMPGE L4\l"];
+1873968479 [label="L39\lLINENUMBER 118 L39\lFRAME SAME\lLDC 1000000\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 7\l"];
+269015435 [label="L19\lLINENUMBER 59 L19\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"No files to process\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL20\lLINENUMBER 60 L20\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"java -jar pngtastic-x.x.jar com.googlecode.pngtastic.PngtasticColorCounter [options] file1 [file2 ..]\nOptions:\n  --distThreshold    the distance below which two colors are considered similar (0.0 to 1.0)\n  --freqThreshold    the percentage a color must be represented in the overall image (0.0 to 1.0)\n  --minAlpha         the minimum alpha channel value a pixel must have\n  --timeout          the number of milliseconds after which color counting will be aborted\n  --logLevel         the level of logging output (none, debug, info, or error)\n\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL21\lLINENUMBER 61 L21\lLDC \"f0a3a785-1c7b-495b-9482-bc8916836fc9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"993c71f7-ab62-4665-8230-2c1755e19aed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+188587962 [label="L4\lLINENUMBER 46 L4\lFRAME CHOP 1\lALOAD 0\lILOAD 2\lALOAD 0\lARRAYLENGTH\lINVOKESTATIC java/util/Arrays.copyOfRange ([Ljava/lang/Object;II)[Ljava/lang/Object;\lCHECKCAST [Ljava/lang/String;\lASTORE 3\lL14\lLINENUMBER 48 L14\lICONST_1\lANEWARRAY java/lang/String\lASTORE 3\lL15\lLINENUMBER 49 L15\lALOAD 3\lICONST_0\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"user.home\"\lL16\lLINENUMBER 50 L16\lINVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/images/optimizer/lena.png\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lAASTORE\lL17\lLINENUMBER 58 L17\lALOAD 3\lARRAYLENGTH\lIFNE L18\l"];
+132199196 [label="L32\lLINENUMBER 104 L32\lLDC 0.005\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 5\lL33\lGOTO L34\l"];
+1084615266 [label="L36\lLINENUMBER 110 L36\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 6\lL37\lGOTO L38\l"];
+1261069072 [label="L27\lLINENUMBER 100 L27\lFRAME SAME\lDCONST_1\lINVOKESTATIC java/lang/Double.valueOf (D)Ljava/lang/Double;\lASTORE 4\l"];
+1189844248 [label="L18\lLINENUMBER 85 L18\lFRAME FULL [[Ljava/lang/String; java/util/HashMap I [Ljava/lang/String;] []\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.FREQTHRESHOLD_0 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.FREQTHRESHOLD : Z\lL22\lLINENUMBER 86 L22\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.DISTTHRESHOLD_1 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.DISTTHRESHOLD : Z\lL23\lLINENUMBER 87 L23\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.MINALPHA_2 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.MINALPHA : Z\lL24\lLINENUMBER 88 L24\lALOAD 0\lICONST_3\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.TIMEOUT_3 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.TIMEOUT : Z\lL25\lLINENUMBER 89 L25\lALOAD 0\lICONST_4\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.LOGLEVEL_4 (Z)Z\lPUTSTATIC counter/com/googlecode/pngtastic/Run.LOGLEVEL : Z\lL26\lLINENUMBER 97 L26\lGETSTATIC counter/com/googlecode/pngtastic/Run.DISTTHRESHOLD : Z\lIFEQ L27\l"];
+249328002 [label="L44\lLINENUMBER 122 L44\lLDC \"debug\"\lASTORE 8\lL45\lGOTO L46\l"];
+1436693626 [label="L43\lLINENUMBER 124 L43\lFRAME SAME\lLDC \"none\"\lASTORE 8\l"];
+852536676 [label="L5\lLINENUMBER 34 L5\lALOAD 0\lILOAD 3\lAALOAD\lASTORE 4\lL6\lLINENUMBER 35 L6\lALOAD 4\lLDC \"--\"\lINVOKEVIRTUAL java/lang/String.startsWith (Ljava/lang/String;)Z\lIFEQ L7\l"];
+385354175 [label="L8\lLINENUMBER 36 L8\lILOAD 3\lICONST_1\lIADD\lISTORE 5\lL9\lLINENUMBER 37 L9\lILOAD 5\lALOAD 0\lARRAYLENGTH\lIF_ICMPGE L10\l"];
+871987072 [label="L42\lLINENUMBER 121 L42\lFRAME APPEND [java/lang/Integer]\lLDC \"d5da98d5-f760-4246-abed-60413ad57e74\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"5db82aac-934b-4668-b10f-23b7c6e8e828\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC counter/com/googlecode/pngtastic/Run.LOGLEVEL : Z\lIFEQ L43\l"];
+14682899 [label="L7\lLINENUMBER 33 L7\lFRAME CHOP 1\lIINC 3 1\lGOTO L3\l"];
 entry;
 exit;
-1779735636 -> 647301171;
-1779735636 -> 1309162730;
-787624282 -> 2077353659;
-422690323 -> exit;
-1665099105 -> 1616733310;
-1039330521 -> 787624282;
-1039330521 -> 1524825601;
-1955106624 -> 439012577;
-439012577 -> 299840846;
-439012577 -> 555567802;
-2077353659 -> 1039330521;
-2077353659 -> 1012201298;
-1242164028 -> exit;
-1797899447 -> 787624282;
-93058827 -> 1261649362;
-93058827 -> 1164537879;
-1616733310 -> 1955106624;
-1616733310 -> 1812265181;
-1184242125 -> 1616733310;
-1423501684 -> 2077353659;
-1812265181 -> 439012577;
-299840846 -> 1779735636;
-1524825601 -> 1092058216;
-1524825601 -> 1797899447;
-1309162730 -> 93058827;
-1261649362 -> 1242164028;
-555567802 -> 1779735636;
-entry -> 1423501684;
-647301171 -> 93058827;
-1092058216 -> 787624282;
-1416511593 -> 1665099105;
-1416511593 -> 1184242125;
-1164537879 -> 1242164028;
-1012201298 -> 422690323;
-1012201298 -> 1416511593;
-1779735636[fontcolor="purple", penwidth=3, color="purple"];
-422690323[fontcolor="purple", penwidth=3, color="purple"];
-439012577[fontcolor="purple", penwidth=3, color="purple"];
-1242164028[fontcolor="purple", penwidth=3, color="purple"];
-93058827[fontcolor="purple", penwidth=3, color="purple"];
-1423501684[fontcolor="purple", penwidth=3, color="purple"];
-1616733310[fontcolor="purple", penwidth=3, color="purple"];
+1314019513 -> 1612423285
+1612423285 -> 1873968479
+1612423285 -> 11231698
+269526630 -> 1366518840
+1366518840 -> 132199196
+1366518840 -> 307729936
+11231698 -> 871987072
+561261961 -> 14682899
+1179891282 -> 14682899
+688317204 -> exit
+1519004557 -> 1844407356
+184370601 -> 1314019513
+184370601 -> 1084615266
+307729936 -> 184370601
+1844407356 -> 852536676
+1844407356 -> 188587962
+1873968479 -> 871987072
+269015435 -> exit
+188587962 -> 269015435
+188587962 -> 1189844248
+132199196 -> 184370601
+1084615266 -> 1612423285
+1261069072 -> 1366518840
+1189844248 -> 269526630
+1189844248 -> 1261069072
+249328002 -> 688317204
+entry -> 1519004557
+1436693626 -> 688317204
+852536676 -> 385354175
+852536676 -> 14682899
+385354175 -> 561261961
+385354175 -> 1179891282
+871987072 -> 1436693626
+871987072 -> 249328002
+14682899 -> 1844407356
+688317204[fontcolor="purple", penwidth=3, color="purple"];
+1612423285[fontcolor="purple", penwidth=3, color="purple"];
+269015435[fontcolor="purple", penwidth=3, color="purple"];
+1366518840[fontcolor="purple", penwidth=3, color="purple"];
+1519004557[fontcolor="purple", penwidth=3, color="purple"];
+871987072[fontcolor="purple", penwidth=3, color="purple"];
+184370601[fontcolor="purple", penwidth=3, color="purple"];
 }

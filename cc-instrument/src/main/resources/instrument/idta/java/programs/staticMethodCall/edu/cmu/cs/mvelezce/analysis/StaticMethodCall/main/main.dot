@@ -1,15 +1,15 @@
 digraph main {
 node [shape=record];
-1862455679 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
-16020000 [label="L0\lLINENUMBER 6 L0\lLDC \"c77f4ae5-f8cd-45ae-af39-a80e65c81cba\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1080243487 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"c77f4ae5-f8cd-45ae-af39-a80e65c81cba\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+585754327 [label="L0\lLINENUMBER 6 L0\lLDC \"585aebb4-cb20-455d-b038-3d7a8eac7e25\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+885962508 [label="L3\lLINENUMBER 12 L3\lFRAME APPEND [I I]\lLDC \"585aebb4-cb20-455d-b038-3d7a8eac7e25\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+2116250002 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/StaticMethodCall.foo (Z)V\l"];
 entry;
 exit;
-entry -> 16020000;
-1862455679 -> 1080243487;
-16020000 -> 1862455679;
-16020000 -> 1080243487;
-1080243487 -> exit;
-16020000[fontcolor="purple", penwidth=3, color="purple"];
-1080243487[fontcolor="purple", penwidth=3, color="purple"];
+585754327 -> 885962508
+585754327 -> 2116250002
+entry -> 585754327
+885962508 -> exit
+2116250002 -> 885962508
+585754327[fontcolor="purple", penwidth=3, color="purple"];
+885962508[fontcolor="purple", penwidth=3, color="purple"];
 }

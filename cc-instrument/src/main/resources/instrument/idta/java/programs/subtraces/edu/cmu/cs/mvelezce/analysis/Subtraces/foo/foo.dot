@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-1982523212 [label="L0\lLINENUMBER 37 L0\lLDC \"8a3e3756-9d5e-4ab0-9ebf-d7c6ae872cb1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
-659885503 [label="L2\lLINENUMBER 38 L2\lSIPUSH 4000\lISTORE 1\lL3\lLINENUMBER 39 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL4\lLINENUMBER 40 L4\lILOAD 1\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
-468810134 [label="L1\lLINENUMBER 42 L1\lFRAME SAME\lLDC \"8a3e3756-9d5e-4ab0-9ebf-d7c6ae872cb1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1642920959 [label="L0\lLINENUMBER 37 L0\lLDC \"74ad137f-8db8-4f1f-9b01-a1e9b5674705\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+1300201504 [label="L1\lLINENUMBER 42 L1\lFRAME SAME\lLDC \"74ad137f-8db8-4f1f-9b01-a1e9b5674705\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+923451762 [label="L2\lLINENUMBER 38 L2\lSIPUSH 4000\lISTORE 1\lL3\lLINENUMBER 39 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL4\lLINENUMBER 40 L4\lILOAD 1\lI2L\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
 entry;
 exit;
-entry -> 1982523212;
-1982523212 -> 659885503;
-1982523212 -> 468810134;
-659885503 -> 468810134;
-468810134 -> exit;
-1982523212[fontcolor="purple", penwidth=3, color="purple"];
-468810134[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1642920959
+1642920959 -> 1300201504
+1642920959 -> 923451762
+1300201504 -> exit
+923451762 -> 1300201504
+1642920959[fontcolor="purple", penwidth=3, color="purple"];
+1300201504[fontcolor="purple", penwidth=3, color="purple"];
 }

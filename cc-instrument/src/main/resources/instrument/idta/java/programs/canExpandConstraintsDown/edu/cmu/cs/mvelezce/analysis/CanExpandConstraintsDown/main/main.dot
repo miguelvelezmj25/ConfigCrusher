@@ -1,23 +1,23 @@
 digraph main {
 node [shape=record];
-591588585 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-969095906 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1373952672 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
-2047607545 [label="L0\lLINENUMBER 6 L0\lLDC \"fe1d456b-f007-4b0e-997b-c32c82443c60\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-2116826057 [label="ILOAD 2\lIFEQ L3\l"];
-1417942011 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"fe1d456b-f007-4b0e-997b-c32c82443c60\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+300883695 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+708475711 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1834665625 [label="L0\lLINENUMBER 6 L0\lLDC \"fee6b12b-2583-4d75-947b-cb4ccc80048f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1675794348 [label="ILOAD 2\lIFEQ L3\l"];
+2029456245 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+1367540484 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"fee6b12b-2583-4d75-947b-cb4ccc80048f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
 entry;
 exit;
-entry -> 2047607545;
-591588585 -> 1417942011;
-969095906 -> 1373952672;
-1373952672 -> 591588585;
-1373952672 -> 1417942011;
-2047607545 -> 1373952672;
-2047607545 -> 2116826057;
-2116826057 -> 969095906;
-2116826057 -> 1373952672;
-1417942011 -> exit;
-2047607545[fontcolor="purple", penwidth=3, color="purple"];
-1417942011[fontcolor="purple", penwidth=3, color="purple"];
+300883695 -> 1367540484
+entry -> 1834665625
+708475711 -> 2029456245
+1834665625 -> 1675794348
+1834665625 -> 2029456245
+1675794348 -> 708475711
+1675794348 -> 2029456245
+2029456245 -> 300883695
+2029456245 -> 1367540484
+1367540484 -> exit
+1834665625[fontcolor="purple", penwidth=3, color="purple"];
+1367540484[fontcolor="purple", penwidth=3, color="purple"];
 }

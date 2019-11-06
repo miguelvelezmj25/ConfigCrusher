@@ -1,24 +1,24 @@
 digraph main {
 node [shape=record];
-727953547 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"cbc8f107-d746-4349-aafa-5ac034c70d55\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-1805514596 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1594649434 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-591588585 [label="L0\lLINENUMBER 6 L0\lLDC \"8b673739-e639-49b9-ad0c-2daea7aa9f2d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1269420249 [label="ILOAD 2\lIFEQ L3\l"];
-1417942011 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lLDC \"8b673739-e639-49b9-ad0c-2daea7aa9f2d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"cbc8f107-d746-4349-aafa-5ac034c70d55\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 2\lIFEQ L5\l"];
+1455420222 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lLDC \"1a4f34da-3637-49b3-bd96-93f7abbe1ebc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLDC \"4ebb2062-a259-4821-8032-c0c9ca9ab493\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 2\lIFEQ L5\l"];
+1304624659 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"4ebb2062-a259-4821-8032-c0c9ca9ab493\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+905090420 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+2064328942 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1181206012 [label="L0\lLINENUMBER 6 L0\lLDC \"1a4f34da-3637-49b3-bd96-93f7abbe1ebc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+1916307685 [label="ILOAD 2\lIFEQ L3\l"];
 entry;
 exit;
-entry -> 591588585;
-727953547 -> exit;
-1805514596 -> 1417942011;
-1594649434 -> 727953547;
-591588585 -> 1269420249;
-591588585 -> 1417942011;
-1269420249 -> 1805514596;
-1269420249 -> 1417942011;
-1417942011 -> 727953547;
-1417942011 -> 1594649434;
-727953547[fontcolor="purple", penwidth=3, color="purple"];
-591588585[fontcolor="purple", penwidth=3, color="purple"];
-1417942011[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1181206012
+1455420222 -> 1304624659
+1455420222 -> 2064328942
+1304624659 -> exit
+905090420 -> 1455420222
+2064328942 -> 1304624659
+1181206012 -> 1455420222
+1181206012 -> 1916307685
+1916307685 -> 1455420222
+1916307685 -> 905090420
+1455420222[fontcolor="purple", penwidth=3, color="purple"];
+1304624659[fontcolor="purple", penwidth=3, color="purple"];
+1181206012[fontcolor="purple", penwidth=3, color="purple"];
 }

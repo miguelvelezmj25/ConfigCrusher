@@ -1,20 +1,20 @@
 digraph main {
 node [shape=record];
-519529484 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
-312022529 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
-2109141839 [label="L0\lLINENUMBER 6 L0\lLDC \"6a44da20-89e7-413d-8bc7-88f817c46809\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-2062448608 [label="L6\lLINENUMBER 14 L6\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
-814274101 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"6a44da20-89e7-413d-8bc7-88f817c46809\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+1481090468 [label="L4\lLINENUMBER 10 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+743941546 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+234647056 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"7c195786-2053-4058-b63a-fe884318301d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+1351776918 [label="L6\lLINENUMBER 14 L6\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CanRemoveNestedConstraintsMultipleCallSites.foo (Z)V\l"];
+1674038927 [label="L0\lLINENUMBER 6 L0\lLDC \"7c195786-2053-4058-b63a-fe884318301d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
 entry;
 exit;
-entry -> 2109141839;
-519529484 -> 312022529;
-312022529 -> 2062448608;
-312022529 -> 814274101;
-2109141839 -> 519529484;
-2109141839 -> 312022529;
-2062448608 -> 814274101;
-814274101 -> exit;
-2109141839[fontcolor="purple", penwidth=3, color="purple"];
-814274101[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1674038927
+1481090468 -> 743941546
+743941546 -> 234647056
+743941546 -> 1351776918
+234647056 -> exit
+1351776918 -> 234647056
+1674038927 -> 1481090468
+1674038927 -> 743941546
+234647056[fontcolor="purple", penwidth=3, color="purple"];
+1674038927[fontcolor="purple", penwidth=3, color="purple"];
 }

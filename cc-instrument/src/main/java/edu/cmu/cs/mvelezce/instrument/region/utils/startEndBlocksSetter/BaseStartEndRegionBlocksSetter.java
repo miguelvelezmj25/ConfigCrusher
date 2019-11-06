@@ -58,14 +58,6 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       JavaRegion region,
       MethodGraph graph,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
-    // Special case
-    if (!graph.isConnectedToEntry(startBlock) && !graph.isConnectedToExit(startBlock)) {
-      Set<MethodBlock> ends = new HashSet<>();
-      ends.add(startBlock);
-      region.setEndMethodBlocks(ends);
-
-      return;
-    }
     //    if (succBlocks.size() == 1 && succBlocks.iterator().next().equals(exit)) {
     //      throw new UnsupportedOperationException("Implement");
     //    }
@@ -106,19 +98,20 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
       throw new RuntimeException("Start and end equal");
     }
 
-    if (graph.getExitBlock().equals(ipd)) {
-      //      this.getEndRegionBlocksWithReturn().addAll(ipd.getPredecessors());
-      ends.addAll(ipd.getPredecessors());
-    } else if (start.getSuccessors().size() == 1
-        && start.getSuccessors().iterator().next().equals(ipd)) {
-      //      ends.add(start);
-      //      if (graph.getExitBlock() == ipd) {
-      //        this.getEndRegionBlocksWithReturn().add(start);
-      //      }
-      throw new RuntimeException("Handle case");
-    } else {
-      ends.add(ipd);
-    }
+    //    if (graph.getExitBlock().equals(ipd)) {
+    //      //      this.getEndRegionBlocksWithReturn().addAll(ipd.getPredecessors());
+    //      ends.addAll(ipd.getPredecessors());
+    //    } else if (start.getSuccessors().size() == 1
+    //        && start.getSuccessors().iterator().next().equals(ipd)) {
+    //      //      ends.add(start);
+    //      //      if (graph.getExitBlock() == ipd) {
+    //      //        this.getEndRegionBlocksWithReturn().add(start);
+    //      //      }
+    //      throw new RuntimeException("Handle case");
+    //    } else {
+    //      ends.add(ipd);
+    //    }
+    ends.add(ipd);
 
     return ends;
   }

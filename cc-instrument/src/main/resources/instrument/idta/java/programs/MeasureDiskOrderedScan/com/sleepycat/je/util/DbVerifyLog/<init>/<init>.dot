@@ -1,0 +1,17 @@
+digraph <init> {
+node [shape=record];
+1906527104 [label="L4\lFRAME FULL [com/sleepycat/je/util/DbVerifyLog com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/util/DbVerifyLog]\lALOAD 1\lL6\lLINENUMBER 116 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.LOG_ITERATOR_READ_SIZE : Lcom/sleepycat/je/config/IntConfigParam;\lL7\lLINENUMBER 117 L7\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\l"];
+83433069 [label="L5\lFRAME FULL [com/sleepycat/je/util/DbVerifyLog com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/util/DbVerifyLog I]\lPUTFIELD com/sleepycat/je/util/DbVerifyLog.readBufferSize : I\lL8\lLINENUMBER 118 L8\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/util/DbVerifyLog.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL9\lLINENUMBER 119 L9\lLDC \"98364de4-63b9-4432-8782-0db85fe91d5c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL10\l"];
+963240737 [label="L0\lLINENUMBER 113 L0\lLDC \"98364de4-63b9-4432-8782-0db85fe91d5c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 74 L1\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/util/DbVerifyLog.stopVerify : Z\lL2\lLINENUMBER 76 L2\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/util/DbVerifyLog.delayMs : J\lL3\lLINENUMBER 114 L3\lALOAD 0\lILOAD 2\lIFLE L4\l"];
+1645129575 [label="ILOAD 2\lGOTO L5\l"];
+entry;
+exit;
+entry -> 963240737
+1906527104 -> 83433069
+83433069 -> exit
+963240737 -> 1906527104
+963240737 -> 1645129575
+1645129575 -> 83433069
+83433069[fontcolor="purple", penwidth=3, color="purple"];
+963240737[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -56,19 +56,9 @@ public abstract class BaseRemoveNestedRegionsIntra<T> extends BlockRegionAnalyze
       reachables.addAll(graph.getReachableBlocks(start, endBlock));
     }
 
+    reachables.remove(start);
     reachables.removeAll(endBlocks);
 
-    // If the ends are connected to the exit block, we want to analyze them
-    MethodBlock exitBlock = graph.getExitBlock();
-    for (MethodBlock endBlock : endBlocks) {
-      Set<MethodBlock> endBlockSuccs = endBlock.getSuccessors();
-
-      if (endBlockSuccs.size() == 1 && endBlockSuccs.iterator().next().equals(exitBlock)) {
-        reachables.add(endBlock);
-      }
-    }
-
-    reachables.remove(start);
     this.removeCoveredRegionsIntra(reachables, blocksToRegions, regionData);
   }
 

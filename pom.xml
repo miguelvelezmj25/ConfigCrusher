@@ -14,6 +14,7 @@
         <module>cc-utils</module>
         <module>cc-instrument</module>
         <module>cc-execute</module>
+        <module>cc-perf-model</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

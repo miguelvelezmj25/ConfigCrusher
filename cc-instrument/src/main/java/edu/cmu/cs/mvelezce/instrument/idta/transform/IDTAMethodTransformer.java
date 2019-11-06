@@ -158,6 +158,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     boolean propagatedRegions = true;
     boolean mustExitNextIter = false;
+    classNodes = this.sootAsmMethodMatcher.getClassNodesToConsider();
 
     while (propagatedRegions) {
       boolean propagatedIntra = this.propagateRegionsIntra(classNodes);

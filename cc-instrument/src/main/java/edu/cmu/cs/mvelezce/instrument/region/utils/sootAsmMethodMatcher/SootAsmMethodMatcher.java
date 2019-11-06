@@ -15,10 +15,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.queue.QueueReader;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public final class SootAsmMethodMatcher {
 
@@ -30,6 +27,7 @@ public final class SootAsmMethodMatcher {
   private final Map<Class<? extends Value>, Pair<Integer, Integer>> sootInvokesToOpcodes =
       new HashMap<>();
   private final Map<Integer, Class<? extends Value>> opcodesToSootInvokes = new HashMap<>();
+  private final Set<ClassNode> classNodesToConsider = new HashSet<>();
 
   private SootAsmMethodMatcher() {
     sootInvokesToOpcodes.put(
@@ -72,8 +70,22 @@ public final class SootAsmMethodMatcher {
         this.getFullyQualifiedSootMethods(callGraph);
 
     this.matchMethodNodesAndSootMethods(fullyQualifiedMethodNodes, fullyQualifiedSootMethods);
-    System.err.println(
-        "Use the class nodes that have matched with soot class nodes instead of ALL possible class nodes");
+    this.getClassNodesToConsider(classNodes);
+  }
+
+  private void getClassNodesToConsider(Set<ClassNode> classNodes) {
+    Set<MethodNode> methodNodesToConsider = this.methodNodesToSootMethods.keySet();
+
+    for (ClassNode classNode : classNodes) {
+      List<MethodNode> methodNodes = classNode.methods;
+
+      for (MethodNode methodNode : methodNodes) {
+        if (methodNodesToConsider.contains(methodNode)) {
+          this.classNodesToConsider.add(classNode);
+          break;
+        }
+      }
+    }
   }
 
   @Nullable
@@ -119,6 +131,10 @@ public final class SootAsmMethodMatcher {
 
   public Set<String> getApplicationPackages() {
     return applicationPackages;
+  }
+
+  public Set<ClassNode> getClassNodesToConsider() {
+    return classNodesToConsider;
   }
 
   private void matchMethodNodesAndSootMethods(

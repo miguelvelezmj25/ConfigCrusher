@@ -8,7 +8,8 @@ import java.util.Set;
 
 public class IDTAExecutor extends BaseExecutor {
 
-  public static final String OUTPUT_DIR = Options.DIRECTORY + "/executor/java/idta/programs";
+  public static final String OUTPUT_DIR =
+      "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs";
 
   public IDTAExecutor(String programName) {
     this(programName, new HashSet<>());

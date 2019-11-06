@@ -1,10 +1,12 @@
 package edu.cmu.cs.mvelezce.java.processor.aggregator;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +36,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Options.checkIfDeleteResult(file);
 
     if (file.exists()) {
-      throw new UnsupportedOperationException("implement");
+      return this.readFromFile(file);
     }
 
     Set<PerformanceEntry> performanceEntries = this.analyze();
@@ -253,7 +255,17 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   }
 
   @Override
-  public Set<PerformanceEntry> readFromFile(File file) {
-    throw new UnsupportedOperationException("implement");
+  public Set<PerformanceEntry> readFromFile(File dir) throws IOException {
+    Collection<File> files = FileUtils.listFiles(dir, new String[] {"json"}, false);
+    Set<PerformanceEntry> entries = new HashSet<>();
+
+    for (File file : files) {
+      ObjectMapper mapper = new ObjectMapper();
+      PerformanceEntry performanceEntry =
+          mapper.readValue(file, new TypeReference<PerformanceEntry>() {});
+      entries.add(performanceEntry);
+    }
+
+    return entries;
   }
 }

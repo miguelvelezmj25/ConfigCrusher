@@ -1,68 +1,68 @@
 digraph selectDirtyBINChildrenForCheckpoint {
 node [shape=record];
-1832699494 [label="L0\lLINENUMBER 394 L0\lFRAME APPEND [I]\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDirty ()Z\lIFEQ L1\l"];
-124584564 [label="L2\lLINENUMBER 398 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 5\l"];
-781470929 [label="L3\lILOAD 4\lIFEQ L20\l"];
-1640278271 [label="L12\lLINENUMBER 387 L12\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFNE L13\l"];
-1107212837 [label="ICONST_1\lGOTO L14\l"];
-936966878 [label="L21\lLINENUMBER 399 L21\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
-1711561575 [label="L5\lLINENUMBER 380 L5\lFRAME SAME\lICONST_0\lISTORE 2\l"];
-160795505 [label="L7\lFRAME APPEND [I]\lILOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNEntries ()I\lIF_ICMPGE L8\l"];
-724793900 [label="L19\lLINENUMBER 399 L19\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lGOTO L18\l"];
-1695864958 [label="L1\lLINENUMBER 398 L1\lFRAME SAME\lILOAD 4\lIFEQ L18\l"];
-979681894 [label="L16\lLINENUMBER 390 L16\lALOAD 3\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.latchShared (Lcom/sleepycat/je/CacheMode;)V\l"];
-1858365926 [label="L23\lLINENUMBER 404 L23\lALOAD 0\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/recovery/DirtyINMap.selectForCheckpoint (Lcom/sleepycat/je/tree/IN;I)V\l"];
-1940738397 [label="L20\lLINENUMBER 401 L20\lFRAME APPEND [java/lang/Throwable]\lALOAD 5\lLDC \"2379c3ed-c4f2-4a15-b6d5-6c438b1199dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-486470778 [label="L13\lFRAME APPEND [com/sleepycat/je/tree/IN]\lICONST_0\l"];
-99331158 [label="L9\lLINENUMBER 382 L9\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getTarget (I)Lcom/sleepycat/je/tree/Node;\lCHECKCAST com/sleepycat/je/tree/IN\lASTORE 3\lL10\lLINENUMBER 384 L10\lALOAD 3\lIFNULL L11\l"];
-1143957941 [label="L11\lLINENUMBER 403 L11\lFRAME CHOP 1\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isOffHeapBINDirty (I)Z\lIFEQ L22\l"];
-1372761204 [label="L17\lLINENUMBER 395 L17\lALOAD 0\lALOAD 3\lICONST_M1\lINVOKEVIRTUAL com/sleepycat/je/recovery/DirtyINMap.selectForCheckpoint (Lcom/sleepycat/je/tree/IN;I)V\l"];
-950156870 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 376 L4\lLDC \"2379c3ed-c4f2-4a15-b6d5-6c438b1199dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNormalizedLevel ()I\lICONST_2\lIF_ICMPEQ L5\l"];
-1707678713 [label="L18\lLINENUMBER 402 L18\lFRAME CHOP 1\lGOTO L22\l"];
-1586928130 [label="L22\lLINENUMBER 380 L22\lFRAME SAME\lIINC 2 1\lGOTO L7\l"];
-87650741 [label="L14\lFRAME SAME1 I\lISTORE 4\lL15\lLINENUMBER 389 L15\lILOAD 4\lIFEQ L0\l"];
-621850771 [label="L6\lLINENUMBER 377 L6\lLDC \"2379c3ed-c4f2-4a15-b6d5-6c438b1199dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-626987088 [label="L8\lLINENUMBER 408 L8\lFRAME CHOP 1\lLDC \"2379c3ed-c4f2-4a15-b6d5-6c438b1199dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL24\l"];
+49901103 [label="L21\lLINENUMBER 399 L21\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
+2030865110 [label="L6\lLINENUMBER 377 L6\lLDC \"1d69a373-3a6b-4356-9753-e6dbca57c00a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+433035791 [label="L9\lLINENUMBER 382 L9\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getTarget (I)Lcom/sleepycat/je/tree/Node;\lCHECKCAST com/sleepycat/je/tree/IN\lASTORE 3\lL10\lLINENUMBER 384 L10\lALOAD 3\lIFNULL L11\l"];
+1234491082 [label="L0\lLINENUMBER 394 L0\lFRAME APPEND [I]\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDirty ()Z\lIFEQ L1\l"];
+1129220367 [label="L12\lLINENUMBER 387 L12\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFNE L13\l"];
+387368654 [label="L14\lFRAME SAME1 I\lISTORE 4\lL15\lLINENUMBER 389 L15\lILOAD 4\lIFEQ L0\l"];
+804526324 [label="L23\lLINENUMBER 404 L23\lALOAD 0\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/recovery/DirtyINMap.selectForCheckpoint (Lcom/sleepycat/je/tree/IN;I)V\l"];
+2079405869 [label="L11\lLINENUMBER 403 L11\lFRAME CHOP 1\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isOffHeapBINDirty (I)Z\lIFEQ L22\l"];
+1705823497 [label="ICONST_1\lGOTO L14\l"];
+1066121961 [label="L5\lLINENUMBER 380 L5\lFRAME SAME\lICONST_0\lISTORE 2\l"];
+539440082 [label="L16\lLINENUMBER 390 L16\lALOAD 3\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.latchShared (Lcom/sleepycat/je/CacheMode;)V\l"];
+310408524 [label="L18\lLINENUMBER 402 L18\lFRAME CHOP 1\lGOTO L22\l"];
+381758530 [label="L3\lILOAD 4\lIFEQ L20\l"];
+715255157 [label="L20\lLINENUMBER 401 L20\lFRAME APPEND [java/lang/Throwable]\lALOAD 5\lLDC \"1d69a373-3a6b-4356-9753-e6dbca57c00a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+464807530 [label="L7\lFRAME APPEND [I]\lILOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNEntries ()I\lIF_ICMPGE L8\l"];
+14033150 [label="L13\lFRAME APPEND [com/sleepycat/je/tree/IN]\lICONST_0\l"];
+855765348 [label="L19\lLINENUMBER 399 L19\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lGOTO L18\l"];
+67693154 [label="L8\lLINENUMBER 408 L8\lFRAME CHOP 1\lLDC \"1d69a373-3a6b-4356-9753-e6dbca57c00a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL24\l"];
+323113257 [label="L22\lLINENUMBER 380 L22\lFRAME SAME\lIINC 2 1\lGOTO L7\l"];
+1914359858 [label="L2\lLINENUMBER 398 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 5\l"];
+298268408 [label="L17\lLINENUMBER 395 L17\lALOAD 0\lALOAD 3\lICONST_M1\lINVOKEVIRTUAL com/sleepycat/je/recovery/DirtyINMap.selectForCheckpoint (Lcom/sleepycat/je/tree/IN;I)V\l"];
+1096072574 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 376 L4\lLDC \"1d69a373-3a6b-4356-9753-e6dbca57c00a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNormalizedLevel ()I\lICONST_2\lIF_ICMPEQ L5\l"];
+1362292336 [label="L1\lLINENUMBER 398 L1\lFRAME SAME\lILOAD 4\lIFEQ L18\l"];
 entry;
 exit;
-1832699494 -> 1372761204
-1832699494 -> 124584564 [style=dashed, color=red]
-1832699494 -> 1695864958
-1711561575 -> 160795505
-724793900 -> 1707678713
-1695864958 -> 1707678713
-1695864958 -> 724793900
-1858365926 -> 1586928130
-486470778 -> 87650741
-99331158 -> 1143957941
-99331158 -> 1640278271
-1143957941 -> 1586928130
-1143957941 -> 1858365926
-87650741 -> 1832699494
-87650741 -> 979681894
-621850771 -> exit
-626987088 -> exit
-124584564 -> 781470929
-124584564 -> 124584564 [style=dashed, color=red]
-781470929 -> 936966878
-781470929 -> 1940738397
-1640278271 -> 1107212837
-1640278271 -> 486470778
-1107212837 -> 87650741
-936966878 -> 1940738397
-160795505 -> 99331158
-160795505 -> 626987088
-979681894 -> 1832699494
-1940738397 -> exit
-entry -> 950156870
-1372761204 -> 124584564 [style=dashed, color=red]
-1372761204 -> 1695864958
-950156870 -> 1711561575
-950156870 -> 621850771
-1707678713 -> 1586928130
-1586928130 -> 160795505
-950156870[fontcolor="purple", penwidth=3, color="purple"];
-1940738397[fontcolor="purple", penwidth=3, color="purple"];
-621850771[fontcolor="purple", penwidth=3, color="purple"];
-626987088[fontcolor="purple", penwidth=3, color="purple"];
+49901103 -> 715255157
+2030865110 -> exit
+387368654 -> 1234491082
+387368654 -> 539440082
+2079405869 -> 323113257
+2079405869 -> 804526324
+1066121961 -> 464807530
+715255157 -> exit
+464807530 -> 433035791
+464807530 -> 67693154
+67693154 -> exit
+1914359858 -> 381758530
+1914359858 -> 1914359858 [style=dashed, color=red]
+298268408 -> 1914359858 [style=dashed, color=red]
+298268408 -> 1362292336
+433035791 -> 1129220367
+433035791 -> 2079405869
+1234491082 -> 298268408
+1234491082 -> 1914359858 [style=dashed, color=red]
+1234491082 -> 1362292336
+1129220367 -> 14033150
+1129220367 -> 1705823497
+804526324 -> 323113257
+1705823497 -> 387368654
+539440082 -> 1234491082
+310408524 -> 323113257
+381758530 -> 49901103
+381758530 -> 715255157
+entry -> 1096072574
+14033150 -> 387368654
+855765348 -> 310408524
+323113257 -> 464807530
+1096072574 -> 2030865110
+1096072574 -> 1066121961
+1362292336 -> 855765348
+1362292336 -> 310408524
+2030865110[fontcolor="purple", penwidth=3, color="purple"];
+715255157[fontcolor="purple", penwidth=3, color="purple"];
+67693154[fontcolor="purple", penwidth=3, color="purple"];
+1096072574[fontcolor="purple", penwidth=3, color="purple"];
 }

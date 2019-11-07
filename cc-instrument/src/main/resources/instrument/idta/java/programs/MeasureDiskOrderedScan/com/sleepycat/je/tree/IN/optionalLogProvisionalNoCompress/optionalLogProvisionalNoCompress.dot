@@ -1,0 +1,9 @@
+digraph optionalLogProvisionalNoCompress {
+node [shape=record];
+1042103574 [label="L0\lLINENUMBER 5370 L0\lLDC \"652fc83a-88c6-404a-b08f-da168f54a2a1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lICONST_0\lINVOKESPECIAL com/sleepycat/je/tree/IN.optionalLogProvisional (Lcom/sleepycat/je/tree/IN;Z)J\lLDC \"652fc83a-88c6-404a-b08f-da168f54a2a1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL1\l"];
+entry;
+exit;
+entry -> 1042103574
+1042103574 -> exit
+1042103574[fontcolor="purple", penwidth=3, color="purple"];
+}

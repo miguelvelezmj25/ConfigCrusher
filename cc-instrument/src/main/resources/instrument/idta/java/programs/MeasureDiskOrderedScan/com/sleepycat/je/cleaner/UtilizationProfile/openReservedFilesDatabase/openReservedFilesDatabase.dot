@@ -1,0 +1,23 @@
+digraph openReservedFilesDatabase {
+node [shape=record];
+537986927 [label="L2\lLINENUMBER 1197 L2\lICONST_1\lLDC \"ae93067a-6f9a-47b3-93f4-625065e2b461\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+564156098 [label="ICONST_1\lGOTO L6\l"];
+1157032931 [label="L1\lLINENUMBER 1200 L1\lFRAME SAME\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/UtilizationProfile.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL3\lLINENUMBER 1201 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lGETSTATIC com/sleepycat/je/dbi/DbType.RESERVED_FILES : Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.openNonRepInternalDB (Lcom/sleepycat/je/dbi/DbType;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lPUTFIELD com/sleepycat/je/cleaner/UtilizationProfile.reservedFilesDb : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL4\lLINENUMBER 1203 L4\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/UtilizationProfile.reservedFilesDb : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIFNULL L5\l"];
+840113917 [label="L6\lFRAME SAME1 I\lLDC \"ae93067a-6f9a-47b3-93f4-625065e2b461\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL7\l"];
+1565317321 [label="L0\lLINENUMBER 1196 L0\lLDC \"ae93067a-6f9a-47b3-93f4-625065e2b461\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/UtilizationProfile.reservedFilesDb : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIFNULL L1\l"];
+437340335 [label="L5\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+537986927 -> exit
+564156098 -> 840113917
+entry -> 1565317321
+1157032931 -> 564156098
+1157032931 -> 437340335
+840113917 -> exit
+1565317321 -> 537986927
+1565317321 -> 1157032931
+437340335 -> 840113917
+537986927[fontcolor="purple", penwidth=3, color="purple"];
+840113917[fontcolor="purple", penwidth=3, color="purple"];
+1565317321[fontcolor="purple", penwidth=3, color="purple"];
+}

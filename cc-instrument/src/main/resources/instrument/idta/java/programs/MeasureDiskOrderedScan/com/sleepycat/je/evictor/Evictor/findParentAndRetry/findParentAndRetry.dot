@@ -1,0 +1,43 @@
+digraph findParentAndRetry {
+node [shape=record];
+1048919381 [label="L16\lLINENUMBER 2979 L16\lFRAME SAME\lLCONST_0\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL18\l"];
+1012001923 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+302778376 [label="L2\lLINENUMBER 2976 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 7\l"];
+1573333702 [label="L8\lLINENUMBER 2945 L8\lALOAD 0\lACONST_NULL\lALOAD 1\lALOAD 6\lGETFIELD com/sleepycat/je/tree/SearchResult.parent : Lcom/sleepycat/je/tree/IN;\lALOAD 6\lGETFIELD com/sleepycat/je/tree/SearchResult.index : I\lILOAD 2\lALOAD 3\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/evictor/Evictor.processTarget (Lcom/sleepycat/je/evictor/Evictor$RootEvictor;Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/tree/IN;IZLcom/sleepycat/je/evictor/Evictor$EvictionSource;Lcom/sleepycat/je/evictor/Evictor$EvictionDebugStats;)J\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1468460799 [label="L3\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lL17\lLINENUMBER 2977 L17\lALOAD 7\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+627439068 [label="L0\lLINENUMBER 2965 L0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getInListResident ()Z\lIFEQ L1\l"];
+612789152 [label="L1\lLINENUMBER 2976 L1\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lL15\lLINENUMBER 2977 L15\lGOTO L16\l"];
+951426228 [label="ALOAD 6\lGETFIELD com/sleepycat/je/tree/SearchResult.parent : Lcom/sleepycat/je/tree/IN;\lIFNULL L9\l"];
+1599296397 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2933 L4\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getTree ()Lcom/sleepycat/je/tree/Tree;\lASTORE 5\lL5\lLINENUMBER 2940 L5\lALOAD 5\lALOAD 1\lICONST_0\lICONST_0\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/Tree.getParentINForChildIN (Lcom/sleepycat/je/tree/IN;ZZLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/SearchResult;\lASTORE 6\lL6\lLINENUMBER 2944 L6\lALOAD 6\lGETFIELD com/sleepycat/je/tree/SearchResult.exactParentFound : Z\lIFEQ L7\l"];
+1487170635 [label="L9\lLINENUMBER 2962 L9\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.latchNoUpdateLRU ()V\l"];
+1242272181 [label="L7\lLINENUMBER 2960 L7\lFRAME APPEND [com/sleepycat/je/tree/Tree com/sleepycat/je/tree/SearchResult]\lGETSTATIC com/sleepycat/je/evictor/Evictor.$assertionsDisabled : Z\lIFNE L9\l"];
+717313157 [label="L10\lLINENUMBER 2967 L10\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.firstEnvImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInMemoryINs ()Lcom/sleepycat/je/dbi/INList;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/INList.remove (Lcom/sleepycat/je/tree/IN;)V\lL11\lLINENUMBER 2969 L11\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Node \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lL12\lLINENUMBER 2970 L12\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNodeId ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" has been detached from the in-memory tree, but it is still in the INList. lastLogged=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lL13\lLINENUMBER 2973 L13\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getLastLoggedLsn ()J\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL14\lLINENUMBER 2969 L14\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"8462218f-52cb-4891-91a6-be5d7ab7055f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+1048919381 -> exit
+302778376 -> 302778376 [style=dashed, color=red]
+302778376 -> 1468460799
+1573333702 -> exit
+612789152 -> 1048919381
+1599296397 -> 1573333702
+1599296397 -> 1242272181
+1242272181 -> 951426228
+1242272181 -> 1487170635
+717313157 -> exit
+717313157 -> 302778376 [style=dashed, color=red]
+entry -> 1599296397
+1012001923 -> exit
+1468460799 -> exit
+627439068 -> 302778376 [style=dashed, color=red]
+627439068 -> 612789152
+627439068 -> 717313157
+951426228 -> 1012001923
+951426228 -> 1487170635
+1487170635 -> 627439068
+1048919381[fontcolor="purple", penwidth=3, color="purple"];
+1012001923[fontcolor="purple", penwidth=3, color="purple"];
+1573333702[fontcolor="purple", penwidth=3, color="purple"];
+1468460799[fontcolor="purple", penwidth=3, color="purple"];
+1599296397[fontcolor="purple", penwidth=3, color="purple"];
+717313157[fontcolor="purple", penwidth=3, color="purple"];
+}

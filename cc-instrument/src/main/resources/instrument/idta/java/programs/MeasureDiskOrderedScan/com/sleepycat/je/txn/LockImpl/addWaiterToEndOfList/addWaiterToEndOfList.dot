@@ -1,0 +1,22 @@
+digraph addWaiterToEndOfList {
+node [shape=record];
+161421489 [label="L0\lLINENUMBER 90 L0\lLDC \"daba3289-06b7-4678-afac-10308da6b640\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockImpl.waiterList : Ljava/util/List;\lIFNONNULL L1\l"];
+1714999144 [label="L4\lLINENUMBER 92 L4\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/txn/LockImpl.firstWaiter : Lcom/sleepycat/je/txn/LockInfo;\lGOTO L5\l"];
+1130054760 [label="L5\lLINENUMBER 100 L5\lFRAME SAME\lALOAD 2\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.LOCKINFO_OVERHEAD : I\lI2L\lILOAD 3\lL7\lLINENUMBER 101 L7\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\lL8\lLINENUMBER 102 L8\lLDC \"daba3289-06b7-4678-afac-10308da6b640\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL9\l"];
+1447977238 [label="L2\lLINENUMBER 91 L2\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockImpl.firstWaiter : Lcom/sleepycat/je/txn/LockInfo;\lIFNONNULL L3\l"];
+1021328118 [label="L1\lLINENUMBER 98 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockImpl.waiterList : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\l"];
+387127211 [label="L3\lLINENUMBER 94 L3\lFRAME SAME\lALOAD 0\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lPUTFIELD com/sleepycat/je/txn/LockImpl.waiterList : Ljava/util/List;\lL6\lLINENUMBER 95 L6\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockImpl.waiterList : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lGOTO L5\l"];
+entry;
+exit;
+entry -> 161421489
+161421489 -> 1447977238
+161421489 -> 1021328118
+1714999144 -> 1130054760
+1130054760 -> exit
+1447977238 -> 1714999144
+1447977238 -> 387127211
+1021328118 -> 1130054760
+387127211 -> 1130054760
+161421489[fontcolor="purple", penwidth=3, color="purple"];
+1130054760[fontcolor="purple", penwidth=3, color="purple"];
+}

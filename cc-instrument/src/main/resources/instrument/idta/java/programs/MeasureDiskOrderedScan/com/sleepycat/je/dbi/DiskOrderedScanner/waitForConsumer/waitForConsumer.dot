@@ -1,0 +1,69 @@
+digraph waitForConsumer {
+node [shape=record];
+956019729 [label="L1\lGOTO L16\l"];
+2130182880 [label="L12\lLINENUMBER 1475 L12\lFRAME APPEND [I I]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lILOAD 4\lINVOKEINTERFACE com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor.canProcessWithoutBlocking (I)Z\lIFNE L5\l"];
+1190348495 [label="L6\lLINENUMBER 1481 L6\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner com/sleepycat/je/dbi/DiskOrderedScanner$DBContext I] [java/lang/InterruptedException]\lASTORE 3\lL18\lLINENUMBER 1482 L18\lALOAD 1\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DBContext.parent : Lcom/sleepycat/je/tree/IN;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.unpin ()V\lL19\lLINENUMBER 1483 L19\lNEW com/sleepycat/je/ThreadInterruptedException\lDUP\lALOAD 1\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DBContext.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/ThreadInterruptedException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Throwable;)V\lLDC \"45abb47a-c766-45d5-92af-d1c9d87bb5ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1375625797 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 java/lang/InterruptedException\lTRYCATCHBLOCK L4 L5 L7 java/lang/Error\lL8\lLINENUMBER 1469 L8\lLDC \"45abb47a-c766-45d5-92af-d1c9d87bb5ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DiskOrderedScanner.releaseParent (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;)V\l"];
+1173200496 [label="L17\lLINENUMBER 1489 L17\lFRAME APPEND [I I]\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DiskOrderedScanner.resumeParent (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;)V\lL22\lLINENUMBER 1490 L22\lLDC \"45abb47a-c766-45d5-92af-d1c9d87bb5ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL23\l"];
+1716830898 [label="L4\lLINENUMBER 1472 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.binsOnly : Z\lIFEQ L9\l"];
+1459259431 [label="L13\lLINENUMBER 1476 L13\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lDUP\lASTORE 5\lMONITORENTER\l"];
+337086375 [label="L9\lFRAME SAME\lICONST_1\l"];
+511203276 [label="L10\lFRAME SAME1 I\lISTORE 3\lL11\lLINENUMBER 1473 L11\lILOAD 3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lINVOKEINTERFACE com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor.getCapacity ()I\lICONST_5\lIDIV\lINVOKESTATIC java/lang/Math.max (II)I\lISTORE 4\l"];
+2057136794 [label="L0\lLINENUMBER 1477 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lLDC 50\lINVOKEVIRTUAL java/lang/Object.wait (J)V\lL14\lLINENUMBER 1478 L14\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lINVOKEINTERFACE com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor.checkShutdown ()V\lL15\lLINENUMBER 1479 L15\lALOAD 5\lMONITOREXIT\l"];
+1430393796 [label="L2\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner com/sleepycat/je/dbi/DiskOrderedScanner$DBContext I I I com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor] [java/lang/Throwable]\lASTORE 6\lALOAD 5\lMONITOREXIT\l"];
+57321813 [label="L5\lLINENUMBER 1487 L5\lFRAME CHOP 1\lGOTO L17\l"];
+1419157205 [label="L7\lLINENUMBER 1484 L7\lFRAME SAME1 java/lang/Error\lASTORE 3\lL20\lLINENUMBER 1485 L20\lALOAD 1\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DBContext.parent : Lcom/sleepycat/je/tree/IN;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.unpin ()V\lL21\lLINENUMBER 1486 L21\lALOAD 3\lLDC \"45abb47a-c766-45d5-92af-d1c9d87bb5ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2005712739 [label="L3\lALOAD 6\lLDC \"45abb47a-c766-45d5-92af-d1c9d87bb5ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+435645621 [label="L16\lFRAME SAME\lGOTO L12\l"];
+1113699441 [label="ILOAD 2\lGOTO L10\l"];
+entry;
+exit;
+956019729 -> 1190348495 [style=dashed, color=red]
+956019729 -> 1419157205 [style=dashed, color=red]
+956019729 -> 435645621
+2130182880 -> 1190348495 [style=dashed, color=red]
+2130182880 -> 57321813
+2130182880 -> 1419157205 [style=dashed, color=red]
+2130182880 -> 1459259431
+1190348495 -> exit
+1375625797 -> 1716830898
+1173200496 -> exit
+1716830898 -> 337086375
+1716830898 -> 1190348495 [style=dashed, color=red]
+1716830898 -> 1419157205 [style=dashed, color=red]
+1716830898 -> 1113699441
+1459259431 -> 1190348495 [style=dashed, color=red]
+1459259431 -> 2057136794
+1459259431 -> 1419157205 [style=dashed, color=red]
+entry -> 1375625797
+337086375 -> 1190348495 [style=dashed, color=red]
+337086375 -> 511203276
+337086375 -> 1419157205 [style=dashed, color=red]
+511203276 -> 2130182880
+511203276 -> 1190348495 [style=dashed, color=red]
+511203276 -> 1419157205 [style=dashed, color=red]
+2057136794 -> 956019729
+2057136794 -> 1190348495 [style=dashed, color=red]
+2057136794 -> 1430393796 [style=dashed, color=red]
+2057136794 -> 1419157205 [style=dashed, color=red]
+1430393796 -> 1190348495 [style=dashed, color=red]
+1430393796 -> 1430393796 [style=dashed, color=red]
+1430393796 -> 1419157205 [style=dashed, color=red]
+1430393796 -> 2005712739
+57321813 -> 1173200496
+1419157205 -> exit
+2005712739 -> exit
+2005712739 -> 1190348495 [style=dashed, color=red]
+2005712739 -> 1419157205 [style=dashed, color=red]
+435645621 -> 2130182880
+435645621 -> 1190348495 [style=dashed, color=red]
+435645621 -> 1419157205 [style=dashed, color=red]
+1113699441 -> 1190348495 [style=dashed, color=red]
+1113699441 -> 511203276
+1113699441 -> 1419157205 [style=dashed, color=red]
+1190348495[fontcolor="purple", penwidth=3, color="purple"];
+1375625797[fontcolor="purple", penwidth=3, color="purple"];
+1173200496[fontcolor="purple", penwidth=3, color="purple"];
+1419157205[fontcolor="purple", penwidth=3, color="purple"];
+2005712739[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+426633025 [label="L0\lLINENUMBER 86 L0\lLDC \"1c79cc90-b426-4438-83e1-8b45e0168adf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 81 L1\lALOAD 0\lNEW java/util/concurrent/atomic/AtomicInteger\lDUP\lINVOKESPECIAL java/util/concurrent/atomic/AtomicInteger.\<init\> ()V\lPUTFIELD com/sleepycat/je/log/LogBuffer.writePinCount : Ljava/util/concurrent/atomic/AtomicInteger;\lL2\lLINENUMBER 88 L2\lALOAD 0\lILOAD 1\lNEWARRAY T_BYTE\lPUTFIELD com/sleepycat/je/log/LogBuffer.data : [B\lL3\lLINENUMBER 89 L3\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBuffer.data : [B\lINVOKESTATIC java/nio/ByteBuffer.wrap ([B)Ljava/nio/ByteBuffer;\lPUTFIELD com/sleepycat/je/log/LogBuffer.buffer : Ljava/nio/ByteBuffer;\lL4\lLINENUMBER 90 L4\lALOAD 0\lALOAD 2\lGETSTATIC com/sleepycat/je/log/LogBuffer.DEBUG_NAME : Ljava/lang/String;\lICONST_0\lINVOKESTATIC com/sleepycat/je/latch/LatchFactory.createExclusiveLatch (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Z)Lcom/sleepycat/je/latch/Latch;\lPUTFIELD com/sleepycat/je/log/LogBuffer.readLatch : Lcom/sleepycat/je/latch/Latch;\lL5\lLINENUMBER 92 L5\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/log/LogBuffer.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL6\lLINENUMBER 93 L6\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/log/LogBuffer.reinit ()V\lL7\lLINENUMBER 94 L7\lLDC \"1c79cc90-b426-4438-83e1-8b45e0168adf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+entry;
+exit;
+entry -> 426633025
+426633025 -> exit
+426633025[fontcolor="purple", penwidth=3, color="purple"];
+}

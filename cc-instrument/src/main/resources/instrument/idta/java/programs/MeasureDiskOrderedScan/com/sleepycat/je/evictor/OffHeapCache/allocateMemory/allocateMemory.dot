@@ -1,0 +1,33 @@
+digraph allocateMemory {
+node [shape=record];
+710942650 [label="L3\lLINENUMBER 2641 L3\lFRAME SAME1 com/sleepycat/je/evictor/OffHeapAllocator$OffHeapOverflowException\lASTORE 5\lL15\lLINENUMBER 2643 L15\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.nAllocOverflow : Ljava/util/concurrent/atomic/AtomicLong;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.incrementAndGet ()J\lPOP2\lL16\lLINENUMBER 2645 L16\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.allocator : Lcom/sleepycat/je/evictor/OffHeapAllocator;\lINVOKEINTERFACE com/sleepycat/je/evictor/OffHeapAllocator.getUsedBytes ()J\lPUTFIELD com/sleepycat/je/evictor/OffHeapCache.memoryLimit : J\l"];
+1415597121 [label="L1\lLINENUMBER 2646 L1\lGOTO L8\l"];
+1597839873 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/OutOfMemoryError\lTRYCATCHBLOCK L0 L1 L3 com/sleepycat/je/evictor/OffHeapAllocator$OffHeapOverflowException\lL4\lLINENUMBER 2613 L4\lLDC \"fcb9f694-39b7-46c9-a83c-34860ddb0a09\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFNE L5\l"];
+1720314509 [label="L6\lLINENUMBER 2614 L6\lLCONST_0\lLDC \"fcb9f694-39b7-46c9-a83c-34860ddb0a09\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+819830873 [label="L5\lLINENUMBER 2617 L5\lFRAME SAME\lLCONST_0\lLSTORE 3\l"];
+227030462 [label="L0\lLINENUMBER 2620 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.allocator : Lcom/sleepycat/je/evictor/OffHeapAllocator;\lILOAD 2\lINVOKEINTERFACE com/sleepycat/je/evictor/OffHeapAllocator.allocate (I)J\lLSTORE 3\lL7\lLINENUMBER 2621 L7\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.totalBlocks : Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\l"];
+490398478 [label="L2\lLINENUMBER 2629 L2\lFRAME FULL [com/sleepycat/je/evictor/OffHeapCache com/sleepycat/je/dbi/EnvironmentImpl I J] [java/lang/OutOfMemoryError]\lASTORE 5\lL9\lLINENUMBER 2631 L9\lGETSTATIC java/util/logging/Level.SEVERE : Ljava/util/logging/Level;\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"OutOfMemoryError trying to allocate in the off-heap cache. Continuing, but more problems are likely. Allocator error: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 5\lL10\lLINENUMBER 2635 L10\lINVOKEVIRTUAL java/lang/OutOfMemoryError.getMessage ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 2631 L11\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.envLogMsg (Ljava/util/logging/Level;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)V\lL12\lLINENUMBER 2637 L12\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.nAllocFailure : Ljava/util/concurrent/atomic/AtomicLong;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.incrementAndGet ()J\lPOP2\lL13\lLINENUMBER 2639 L13\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.allocator : Lcom/sleepycat/je/evictor/OffHeapAllocator;\lINVOKEINTERFACE com/sleepycat/je/evictor/OffHeapAllocator.getUsedBytes ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache.evictBytes : J\lLSUB\lPUTFIELD com/sleepycat/je/evictor/OffHeapCache.memoryLimit : J\lL14\lLINENUMBER 2646 L14\lGOTO L8\l"];
+1342331628 [label="L18\lLINENUMBER 2649 L18\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/evictor/OffHeapCache.wakeUpEvictionThreads ()V\l"];
+2046169059 [label="L17\lLINENUMBER 2652 L17\lFRAME SAME\lLLOAD 3\lLDC \"fcb9f694-39b7-46c9-a83c-34860ddb0a09\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL19\l"];
+2050299871 [label="L8\lLINENUMBER 2648 L8\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/evictor/OffHeapCache.needEviction ()Z\lIFEQ L17\l"];
+entry;
+exit;
+710942650 -> 2050299871
+1415597121 -> 2050299871
+227030462 -> 710942650 [style=dashed, color=red]
+227030462 -> 1415597121
+227030462 -> 490398478 [style=dashed, color=red]
+2046169059 -> exit
+entry -> 1597839873
+1597839873 -> 1720314509
+1597839873 -> 819830873
+1720314509 -> exit
+819830873 -> 227030462
+490398478 -> 2050299871
+1342331628 -> 2046169059
+2050299871 -> 1342331628
+2050299871 -> 2046169059
+1597839873[fontcolor="purple", penwidth=3, color="purple"];
+1720314509[fontcolor="purple", penwidth=3, color="purple"];
+2046169059[fontcolor="purple", penwidth=3, color="purple"];
+}

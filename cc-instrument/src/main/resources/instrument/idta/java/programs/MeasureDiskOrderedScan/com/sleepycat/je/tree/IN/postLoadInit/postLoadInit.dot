@@ -1,0 +1,24 @@
+digraph postLoadInit {
+node [shape=record];
+1252465026 [label="L0\lLINENUMBER 2927 L0\lLDC \"ae0a3bd1-e0ef-4e8e-815e-bd453984d766\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L1\l"];
+1148568624 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchExclusiveOwner ()Z\lIFNE L1\l"];
+683120037 [label="L1\lLINENUMBER 2929 L1\lFRAME SAME\lALOAD 0\lALOAD 1\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKESPECIAL com/sleepycat/je/tree/IN.commonInit (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL2\lLINENUMBER 2930 L2\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.addToMainCache ()V\lL3\lLINENUMBER 2932 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFEQ L4\l"];
+1875901373 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"ae0a3bd1-e0ef-4e8e-815e-bd453984d766\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+492209359 [label="L5\lLINENUMBER 2933 L5\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setFetchedCold (Z)V\lL6\lLINENUMBER 2934 L6\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setFetchedColdOffHeap (Z)V\l"];
+2011731729 [label="L4\lLINENUMBER 2937 L4\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getOffHeapCache ()Lcom/sleepycat/je/evictor/OffHeapCache;\lALOAD 1\lILOAD 2\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.postBINLoad (Lcom/sleepycat/je/tree/IN;ILcom/sleepycat/je/tree/BIN;)V\lL7\lLINENUMBER 2938 L7\lLDC \"ae0a3bd1-e0ef-4e8e-815e-bd453984d766\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+entry;
+exit;
+1252465026 -> 1148568624
+1252465026 -> 683120037
+entry -> 1252465026
+1148568624 -> 683120037
+1148568624 -> 1875901373
+683120037 -> 492209359
+683120037 -> 2011731729
+1875901373 -> exit
+492209359 -> 2011731729
+2011731729 -> exit
+1252465026[fontcolor="purple", penwidth=3, color="purple"];
+1875901373[fontcolor="purple", penwidth=3, color="purple"];
+2011731729[fontcolor="purple", penwidth=3, color="purple"];
+}

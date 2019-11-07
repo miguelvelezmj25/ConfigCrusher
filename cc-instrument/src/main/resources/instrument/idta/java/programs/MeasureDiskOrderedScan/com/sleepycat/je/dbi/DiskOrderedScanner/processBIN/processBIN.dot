@@ -1,0 +1,23 @@
+digraph processBIN {
+node [shape=record];
+1091249342 [label="L1\lLINENUMBER 1928 L1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatch ()V\lL5\lLINENUMBER 1929 L5\lGOTO L6\l"];
+960203823 [label="L0\lLINENUMBER 1926 L0\lALOAD 0\lALOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/dbi/DiskOrderedScanner.processBINInternal (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;Lcom/sleepycat/je/tree/BIN;Z)V\l"];
+155007289 [label="L2\lLINENUMBER 1928 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
+1351803496 [label="L3\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatch ()V\lL7\lLINENUMBER 1929 L7\lALOAD 4\lLDC \"90f599e3-dc42-4d6c-b9a6-76bb872290c5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+892163745 [label="L6\lLINENUMBER 1930 L6\lFRAME SAME\lLDC \"90f599e3-dc42-4d6c-b9a6-76bb872290c5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+2056547402 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1923 L4\lLDC \"90f599e3-dc42-4d6c-b9a6-76bb872290c5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 2\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.latch (Lcom/sleepycat/je/CacheMode;)V\l"];
+entry;
+exit;
+1091249342 -> 892163745
+entry -> 2056547402
+960203823 -> 1091249342
+960203823 -> 155007289 [style=dashed, color=red]
+155007289 -> 155007289 [style=dashed, color=red]
+155007289 -> 1351803496
+1351803496 -> exit
+892163745 -> exit
+2056547402 -> 960203823
+1351803496[fontcolor="purple", penwidth=3, color="purple"];
+892163745[fontcolor="purple", penwidth=3, color="purple"];
+2056547402[fontcolor="purple", penwidth=3, color="purple"];
+}

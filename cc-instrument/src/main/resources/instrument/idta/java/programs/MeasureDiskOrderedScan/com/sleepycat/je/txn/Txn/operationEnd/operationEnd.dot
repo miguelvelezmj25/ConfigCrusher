@@ -1,0 +1,23 @@
+digraph operationEnd {
+node [shape=record];
+408475995 [label="L2\lLINENUMBER 1799 L2\lLDC \"62ef60db-84ed-47cf-8187-7b5110285b6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+777160687 [label="L3\lLINENUMBER 1805 L3\lFRAME SAME\lALOAD 0\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.abort (Z)J\lPOP2\l"];
+1413924050 [label="L0\lLINENUMBER 1797 L0\lLDC \"62ef60db-84ed-47cf-8187-7b5110285b6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.isAutoCommit : Z\lIFNE L1\l"];
+1280359139 [label="L4\lLINENUMBER 1803 L4\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.commit ()J\lPOP2\lGOTO L5\l"];
+738808723 [label="L1\lLINENUMBER 1802 L1\lFRAME SAME\lILOAD 1\lIFEQ L3\l"];
+1210178685 [label="L5\lLINENUMBER 1807 L5\lFRAME SAME\lLDC \"62ef60db-84ed-47cf-8187-7b5110285b6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+entry;
+exit;
+entry -> 1413924050
+408475995 -> exit
+777160687 -> 1210178685
+1413924050 -> 408475995
+1413924050 -> 738808723
+1280359139 -> 1210178685
+738808723 -> 777160687
+738808723 -> 1280359139
+1210178685 -> exit
+408475995[fontcolor="purple", penwidth=3, color="purple"];
+1413924050[fontcolor="purple", penwidth=3, color="purple"];
+1210178685[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,24 +1,24 @@
 digraph computeInterval {
 node [shape=record];
-124020261 [label="L0\lLINENUMBER 150 L0\lLDC \"a858c48d-a24f-4c1d-9d5f-5408d1c641d3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lASTORE 2\lL1\lLINENUMBER 154 L1\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.stats : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.entrySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 3\l"];
-2098972694 [label="L8\lLINENUMBER 162 L8\lFRAME FULL [com/sleepycat/je/utilint/StatGroup com/sleepycat/je/utilint/StatGroup java/util/HashMap java/util/Iterator java/util/Map$Entry com/sleepycat/je/utilint/StatDefinition com/sleepycat/je/utilint/Stat com/sleepycat/je/utilint/Stat] []\lALOAD 2\lALOAD 5\lALOAD 6\lALOAD 7\lL11\lLINENUMBER 163 L11\lINVOKEVIRTUAL com/sleepycat/je/utilint/Stat.computeInterval (Lcom/sleepycat/je/utilint/Stat;)Lcom/sleepycat/je/utilint/Stat;\lL12\lLINENUMBER 162 L12\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
-716203576 [label="L9\lLINENUMBER 160 L9\lALOAD 2\lALOAD 5\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/utilint/Stat.copy ()Lcom/sleepycat/je/utilint/Stat;\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lGOTO L10\l"];
-236252597 [label="L10\lLINENUMBER 165 L10\lFRAME SAME\lGOTO L2\l"];
-1091755472 [label="L2\lFRAME APPEND [java/util/HashMap java/util/Iterator]\lALOAD 3\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L3\l"];
-1508558912 [label="L3\lLINENUMBER 166 L3\lFRAME FULL [com/sleepycat/je/utilint/StatGroup com/sleepycat/je/utilint/StatGroup java/util/HashMap java/util/Iterator] []\lNEW com/sleepycat/je/utilint/StatGroup\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.groupName : Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.groupDescription : Ljava/lang/String;\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/utilint/StatGroup.\<init\> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V\lLDC \"a858c48d-a24f-4c1d-9d5f-5408d1c641d3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL13\l"];
-297182933 [label="ALOAD 3\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/util/Map$Entry\lASTORE 4\lL4\lLINENUMBER 155 L4\lALOAD 4\lINVOKEINTERFACE java/util/Map$Entry.getKey ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/StatDefinition\lASTORE 5\lL5\lLINENUMBER 156 L5\lALOAD 4\lINVOKEINTERFACE java/util/Map$Entry.getValue ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/Stat\lASTORE 6\lL6\lLINENUMBER 158 L6\lALOAD 1\lGETFIELD com/sleepycat/je/utilint/StatGroup.stats : Ljava/util/Map;\lALOAD 5\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/Stat\lASTORE 7\lL7\lLINENUMBER 159 L7\lALOAD 7\lIFNONNULL L8\l"];
+132798093 [label="L2\lFRAME APPEND [java/util/HashMap java/util/Iterator]\lALOAD 3\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L3\l"];
+1794714697 [label="L3\lLINENUMBER 166 L3\lFRAME FULL [com/sleepycat/je/utilint/StatGroup com/sleepycat/je/utilint/StatGroup java/util/HashMap java/util/Iterator] []\lNEW com/sleepycat/je/utilint/StatGroup\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.groupName : Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.groupDescription : Ljava/lang/String;\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/utilint/StatGroup.\<init\> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V\lLDC \"fc1ba0fe-9283-41eb-965a-91f07729f901\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL13\l"];
+842418874 [label="L0\lLINENUMBER 150 L0\lLDC \"fc1ba0fe-9283-41eb-965a-91f07729f901\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lASTORE 2\lL1\lLINENUMBER 154 L1\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/StatGroup.stats : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.entrySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 3\l"];
+540135113 [label="ALOAD 3\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/util/Map$Entry\lASTORE 4\lL4\lLINENUMBER 155 L4\lALOAD 4\lINVOKEINTERFACE java/util/Map$Entry.getKey ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/StatDefinition\lASTORE 5\lL5\lLINENUMBER 156 L5\lALOAD 4\lINVOKEINTERFACE java/util/Map$Entry.getValue ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/Stat\lASTORE 6\lL6\lLINENUMBER 158 L6\lALOAD 1\lGETFIELD com/sleepycat/je/utilint/StatGroup.stats : Ljava/util/Map;\lALOAD 5\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/utilint/Stat\lASTORE 7\lL7\lLINENUMBER 159 L7\lALOAD 7\lIFNONNULL L8\l"];
+1780144182 [label="L8\lLINENUMBER 162 L8\lFRAME FULL [com/sleepycat/je/utilint/StatGroup com/sleepycat/je/utilint/StatGroup java/util/HashMap java/util/Iterator java/util/Map$Entry com/sleepycat/je/utilint/StatDefinition com/sleepycat/je/utilint/Stat com/sleepycat/je/utilint/Stat] []\lALOAD 2\lALOAD 5\lALOAD 6\lALOAD 7\lL11\lLINENUMBER 163 L11\lINVOKEVIRTUAL com/sleepycat/je/utilint/Stat.computeInterval (Lcom/sleepycat/je/utilint/Stat;)Lcom/sleepycat/je/utilint/Stat;\lL12\lLINENUMBER 162 L12\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+1066509766 [label="L9\lLINENUMBER 160 L9\lALOAD 2\lALOAD 5\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/utilint/Stat.copy ()Lcom/sleepycat/je/utilint/Stat;\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lGOTO L10\l"];
+301491067 [label="L10\lLINENUMBER 165 L10\lFRAME SAME\lGOTO L2\l"];
 entry;
 exit;
-entry -> 124020261
-124020261 -> 1091755472
-2098972694 -> 236252597
-716203576 -> 236252597
-236252597 -> 1091755472
-1091755472 -> 1508558912
-1091755472 -> 297182933
-1508558912 -> exit
-297182933 -> 2098972694
-297182933 -> 716203576
-124020261[fontcolor="purple", penwidth=3, color="purple"];
-1508558912[fontcolor="purple", penwidth=3, color="purple"];
+132798093 -> 1794714697
+132798093 -> 540135113
+entry -> 842418874
+1794714697 -> exit
+842418874 -> 132798093
+540135113 -> 1780144182
+540135113 -> 1066509766
+1780144182 -> 301491067
+1066509766 -> 301491067
+301491067 -> 132798093
+1794714697[fontcolor="purple", penwidth=3, color="purple"];
+842418874[fontcolor="purple", penwidth=3, color="purple"];
 }

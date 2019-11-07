@@ -1,0 +1,43 @@
+digraph undo {
+node [shape=record];
+139796903 [label="L1\lLINENUMBER 1333 L1\lFRAME CHOP 1\lGOTO L17\l"];
+1757618163 [label="L12\lLINENUMBER 1314 L12\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL13\lLINENUMBER 1315 L13\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogger ()Ljava/util/logging/Logger;\lGETSTATIC java/util/logging/Level.FINER : Ljava/util/logging/Level;\lALOAD 3\lALOAD 6\lGETFIELD com/sleepycat/je/txn/UndoReader.db : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 6\lGETFIELD com/sleepycat/je/txn/UndoReader.logEntry : Lcom/sleepycat/je/log/entry/LNLogEntry;\lLLOAD 4\lL14\lLINENUMBER 1314 L14\lINVOKESTATIC com/sleepycat/je/recovery/RecoveryManager.abortUndo (Ljava/util/logging/Logger;Ljava/util/logging/Level;Lcom/sleepycat/je/tree/TreeLocation;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/log/entry/LNLogEntry;J)V\lL15\lLINENUMBER 1318 L15\lALOAD 0\lLLOAD 4\lALOAD 6\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.isRolledBack ()Z\lINVOKESPECIAL com/sleepycat/je/txn/Txn.countObsoleteExact (JLcom/sleepycat/je/txn/UndoReader;Z)V\l"];
+1060695877 [label="L25\lLINENUMBER 1340 L25\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.clearReadLocks ()I\lPOP\l"];
+1299555945 [label="L24\lLINENUMBER 1344 L24\lFRAME SAME\lALOAD 0\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.setDeletedDatabaseState (Z)V\lL26\lLINENUMBER 1347 L26\lINVOKESTATIC java/util/Collections.emptySet ()Ljava/util/Set;\lASTORE 6\lL27\lLINENUMBER 1348 L27\lALOAD 0\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.clearWriteLocks (Ljava/util/Set;)V\lL28\lLINENUMBER 1355 L28\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/txn/Txn.deleteInfo : Ljava/util/Map;\lL29\lLINENUMBER 1356 L29\lLDC \"959e6d74-2c95-4d0c-a769-2a514e316887\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL30\l"];
+356610949 [label="L2\lLINENUMBER 1324 L2\lFRAME SAME1 com/sleepycat/je/DatabaseException\lASTORE 6\lL18\lLINENUMBER 1325 L18\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"LSN=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 4\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 7\lL19\lLINENUMBER 1326 L19\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Txn\"\lLDC \"undo\"\lALOAD 7\lALOAD 6\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\lL20\lLINENUMBER 1328 L20\lALOAD 6\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/DatabaseException.addErrorMessage (Ljava/lang/String;)V\lL21\lLINENUMBER 1329 L21\lALOAD 6\lLDC \"959e6d74-2c95-4d0c-a769-2a514e316887\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1425054839 [label="L17\lLINENUMBER 1339 L17\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.readLocks : Ljava/util/Set;\lIFNULL L24\l"];
+1988139005 [label="L11\lLINENUMBER 1322 L11\lFRAME APPEND [com/sleepycat/je/txn/UndoReader]\lALOAD 6\lGETFIELD com/sleepycat/je/txn/UndoReader.logEntry : Lcom/sleepycat/je/log/entry/LNLogEntry;\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getUserTxn ()Lcom/sleepycat/je/txn/Txn;\lINVOKEVIRTUAL com/sleepycat/je/txn/Txn.getLastLsn ()J\lLSTORE 4\lL16\lLINENUMBER 1323 L16\lGOTO L0\l"];
+63437069 [label="L3\lLINENUMBER 1330 L3\lFRAME SAME1 java/lang/RuntimeException\lASTORE 6\lL22\lLINENUMBER 1331 L22\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Txn undo for LSN=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 4\lL23\lLINENUMBER 1332 L23\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 6\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Ljava/lang/String;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"959e6d74-2c95-4d0c-a769-2a514e316887\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1475992764 [label="L8\lLINENUMBER 1304 L8\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLLOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.undoDatabases : Ljava/util/Map;\lL9\lLINENUMBER 1305 L9\lINVOKESTATIC com/sleepycat/je/txn/UndoReader.create (Lcom/sleepycat/je/dbi/EnvironmentImpl;JLjava/util/Map;)Lcom/sleepycat/je/txn/UndoReader;\lASTORE 6\lL10\lLINENUMBER 1311 L10\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/txn/Txn.firstInstance (Ljava/util/Set;Ljava/util/Set;Lcom/sleepycat/je/txn/UndoReader;)Z\lIFEQ L11\l"];
+1737916294 [label="L0\lLINENUMBER 1303 L0\lFRAME FULL [com/sleepycat/je/txn/Txn java/util/HashSet java/util/TreeSet com/sleepycat/je/tree/TreeLocation J] []\lLLOAD 4\lLDC -1\lLCMP\lIFEQ L1\l"];
+945146024 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/DatabaseException\lTRYCATCHBLOCK L0 L1 L3 java/lang/RuntimeException\lL4\lLINENUMBER 1297 L4\lLDC \"959e6d74-2c95-4d0c-a769-2a514e316887\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/util/HashSet\lDUP\lINVOKESPECIAL java/util/HashSet.\<init\> ()V\lASTORE 1\lL5\lLINENUMBER 1298 L5\lNEW java/util/TreeSet\lDUP\lINVOKESPECIAL java/util/TreeSet.\<init\> ()V\lASTORE 2\lL6\lLINENUMBER 1299 L6\lNEW com/sleepycat/je/tree/TreeLocation\lDUP\lINVOKESPECIAL com/sleepycat/je/tree/TreeLocation.\<init\> ()V\lASTORE 3\lL7\lLINENUMBER 1300 L7\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Txn.lastLoggedLsn : J\lLSTORE 4\l"];
+entry;
+exit;
+1299555945 -> exit
+356610949 -> exit
+945146024 -> 1737916294
+139796903 -> 1425054839
+1757618163 -> 356610949 [style=dashed, color=red]
+1757618163 -> 1988139005
+1757618163 -> 63437069 [style=dashed, color=red]
+1060695877 -> 1299555945
+entry -> 945146024
+1425054839 -> 1060695877
+1425054839 -> 1299555945
+1988139005 -> 356610949 [style=dashed, color=red]
+1988139005 -> 63437069 [style=dashed, color=red]
+1988139005 -> 1737916294
+63437069 -> exit
+1475992764 -> 1757618163
+1475992764 -> 356610949 [style=dashed, color=red]
+1475992764 -> 1988139005
+1475992764 -> 63437069 [style=dashed, color=red]
+1737916294 -> 139796903
+1737916294 -> 356610949 [style=dashed, color=red]
+1737916294 -> 63437069 [style=dashed, color=red]
+1737916294 -> 1475992764
+1299555945[fontcolor="purple", penwidth=3, color="purple"];
+356610949[fontcolor="purple", penwidth=3, color="purple"];
+63437069[fontcolor="purple", penwidth=3, color="purple"];
+945146024[fontcolor="purple", penwidth=3, color="purple"];
+}

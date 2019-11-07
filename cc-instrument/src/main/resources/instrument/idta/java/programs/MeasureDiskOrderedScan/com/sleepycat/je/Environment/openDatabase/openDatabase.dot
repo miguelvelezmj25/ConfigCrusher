@@ -1,0 +1,21 @@
+digraph openDatabase {
+node [shape=record];
+1693539728 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lL3\lLINENUMBER 648 L3\lLDC \"9128614e-411a-4ba6-8c21-0ef48f5514e3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.checkOpen ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 4\lL4\lLINENUMBER 650 L4\lALOAD 3\lIFNONNULL L0\l"];
+559877323 [label="L0\lLINENUMBER 655 L0\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lNEW com/sleepycat/je/Database\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Database.\<init\> (Lcom/sleepycat/je/Environment;)V\lASTORE 5\lL6\lLINENUMBER 657 L6\lALOAD 0\lALOAD 4\lALOAD 1\lALOAD 5\lALOAD 2\lALOAD 3\lICONST_0\lINVOKESPECIAL com/sleepycat/je/Environment.setupDatabase (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V\lL7\lLINENUMBER 661 L7\lALOAD 5\l"];
+955742218 [label="L5\lLINENUMBER 651 L5\lGETSTATIC com/sleepycat/je/DatabaseConfig.DEFAULT : Lcom/sleepycat/je/DatabaseConfig;\lASTORE 3\l"];
+1443144327 [label="L2\lLINENUMBER 662 L2\lFRAME SAME1 java/lang/Error\lASTORE 5\lL8\lLINENUMBER 663 L8\lALOAD 4\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL9\lLINENUMBER 664 L9\lALOAD 5\lLDC \"9128614e-411a-4ba6-8c21-0ef48f5514e3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL10\l"];
+1064885264 [label="L1\lLDC \"9128614e-411a-4ba6-8c21-0ef48f5514e3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 1693539728
+1693539728 -> 955742218
+1693539728 -> 559877323
+559877323 -> 1443144327 [style=dashed, color=red]
+559877323 -> 1064885264
+955742218 -> 559877323
+1443144327 -> exit
+1064885264 -> exit
+1693539728[fontcolor="purple", penwidth=3, color="purple"];
+1443144327[fontcolor="purple", penwidth=3, color="purple"];
+1064885264[fontcolor="purple", penwidth=3, color="purple"];
+}

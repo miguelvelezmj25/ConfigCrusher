@@ -1,27 +1,27 @@
 digraph <init> {
 node [shape=record];
-1632323352 [label="L8\lFRAME FULL [com/sleepycat/je/log/CleanerFileReader com/sleepycat/je/dbi/EnvironmentImpl I J java/lang/Long com/sleepycat/je/cleaner/FileSummary com/sleepycat/je/cleaner/INSummary com/sleepycat/je/cleaner/ExpirationTracker java/util/Iterator] []\lALOAD 9\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L9\l"];
-1165719910 [label="L12\lLINENUMBER 95 L12\lALOAD 0\lICONST_0\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\l"];
-2138092048 [label="L13\lLINENUMBER 105 L13\lFRAME SAME\lGOTO L8\l"];
-1063299627 [label="L9\lLINENUMBER 106 L9\lFRAME CHOP 1\lALOAD 0\lICONST_2\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_BIN_DELTA : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL15\lLINENUMBER 107 L15\lALOAD 0\lICONST_3\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_OLD_BIN_DELTA : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL16\lLINENUMBER 108 L16\lALOAD 0\lICONST_4\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_DBTREE : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL17\lLINENUMBER 109 L17\lALOAD 0\lICONST_5\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_FILE_HEADER : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL18\lLINENUMBER 110 L18\lLDC \"16c3b688-dd31-45b4-a531-1df3817966dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL19\l"];
-2109009862 [label="L0\lLINENUMBER 79 L0\lLDC \"16c3b688-dd31-45b4-a531-1df3817966dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lILOAD 2\lICONST_1\lLLOAD 3\lALOAD 5\lLDC -1\lLDC -1\lINVOKESPECIAL com/sleepycat/je/log/FileReader.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;IZJLjava/lang/Long;JJ)V\lL1\lLINENUMBER 58 L1\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.firstVLSN : Lcom/sleepycat/je/utilint/VLSN;\lL2\lLINENUMBER 60 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/utilint/VLSN.NULL_VLSN : Lcom/sleepycat/je/utilint/VLSN;\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.lastVLSN : Lcom/sleepycat/je/utilint/VLSN;\lL3\lLINENUMBER 87 L3\lALOAD 0\lALOAD 6\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.fileSummary : Lcom/sleepycat/je/cleaner/FileSummary;\lL4\lLINENUMBER 88 L4\lALOAD 0\lALOAD 7\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.inSummary : Lcom/sleepycat/je/cleaner/INSummary;\lL5\lLINENUMBER 89 L5\lALOAD 0\lALOAD 8\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.expTracker : Lcom/sleepycat/je/cleaner/ExpirationTracker;\lL6\lLINENUMBER 91 L6\lALOAD 0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.targetEntryMap : Ljava/util/Map;\lL7\lLINENUMBER 93 L7\lINVOKESTATIC com/sleepycat/je/log/LogEntryType.getAllTypes ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 9\l"];
-2117304895 [label="L11\lLINENUMBER 102 L11\lFRAME APPEND [com/sleepycat/je/log/LogEntryType]\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isINType ()Z\lIFEQ L13\l"];
-1198948431 [label="L14\lLINENUMBER 103 L14\lALOAD 0\lICONST_1\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\l"];
-614699954 [label="ALOAD 9\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/log/LogEntryType\lASTORE 10\lL10\lLINENUMBER 94 L10\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isLNType ()Z\lIFEQ L11\l"];
+308738175 [label="L8\lFRAME FULL [com/sleepycat/je/log/CleanerFileReader com/sleepycat/je/dbi/EnvironmentImpl I J java/lang/Long com/sleepycat/je/cleaner/FileSummary com/sleepycat/je/cleaner/INSummary com/sleepycat/je/cleaner/ExpirationTracker java/util/Iterator] []\lALOAD 9\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L9\l"];
+495701884 [label="L9\lLINENUMBER 106 L9\lFRAME CHOP 1\lALOAD 0\lICONST_2\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_BIN_DELTA : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL15\lLINENUMBER 107 L15\lALOAD 0\lICONST_3\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_OLD_BIN_DELTA : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL16\lLINENUMBER 108 L16\lALOAD 0\lICONST_4\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_DBTREE : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL17\lLINENUMBER 109 L17\lALOAD 0\lICONST_5\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_FILE_HEADER : Lcom/sleepycat/je/log/LogEntryType;\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\lL18\lLINENUMBER 110 L18\lLDC \"02c5d2ef-1de8-4096-bff9-a207fbdd5f0d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL19\l"];
+1363796489 [label="ALOAD 9\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/log/LogEntryType\lASTORE 10\lL10\lLINENUMBER 94 L10\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isLNType ()Z\lIFEQ L11\l"];
+1344276182 [label="L12\lLINENUMBER 95 L12\lALOAD 0\lICONST_0\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\l"];
+676633899 [label="L13\lLINENUMBER 105 L13\lFRAME SAME\lGOTO L8\l"];
+1574671968 [label="L0\lLINENUMBER 79 L0\lLDC \"02c5d2ef-1de8-4096-bff9-a207fbdd5f0d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lILOAD 2\lICONST_1\lLLOAD 3\lALOAD 5\lLDC -1\lLDC -1\lINVOKESPECIAL com/sleepycat/je/log/FileReader.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;IZJLjava/lang/Long;JJ)V\lL1\lLINENUMBER 58 L1\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.firstVLSN : Lcom/sleepycat/je/utilint/VLSN;\lL2\lLINENUMBER 60 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/utilint/VLSN.NULL_VLSN : Lcom/sleepycat/je/utilint/VLSN;\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.lastVLSN : Lcom/sleepycat/je/utilint/VLSN;\lL3\lLINENUMBER 87 L3\lALOAD 0\lALOAD 6\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.fileSummary : Lcom/sleepycat/je/cleaner/FileSummary;\lL4\lLINENUMBER 88 L4\lALOAD 0\lALOAD 7\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.inSummary : Lcom/sleepycat/je/cleaner/INSummary;\lL5\lLINENUMBER 89 L5\lALOAD 0\lALOAD 8\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.expTracker : Lcom/sleepycat/je/cleaner/ExpirationTracker;\lL6\lLINENUMBER 91 L6\lALOAD 0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/log/CleanerFileReader.targetEntryMap : Ljava/util/Map;\lL7\lLINENUMBER 93 L7\lINVOKESTATIC com/sleepycat/je/log/LogEntryType.getAllTypes ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 9\l"];
+1965078957 [label="L11\lLINENUMBER 102 L11\lFRAME APPEND [com/sleepycat/je/log/LogEntryType]\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isINType ()Z\lIFEQ L13\l"];
+915630170 [label="L14\lLINENUMBER 103 L14\lALOAD 0\lICONST_1\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/log/CleanerFileReader.addTargetType (BLcom/sleepycat/je/log/LogEntryType;)V\l"];
 entry;
 exit;
-entry -> 2109009862
-1632323352 -> 1063299627
-1632323352 -> 614699954
-1165719910 -> 2117304895
-2138092048 -> 1632323352
-1063299627 -> exit
-2109009862 -> 1632323352
-2117304895 -> 2138092048
-2117304895 -> 1198948431
-1198948431 -> 2138092048
-614699954 -> 1165719910
-614699954 -> 2117304895
-1063299627[fontcolor="purple", penwidth=3, color="purple"];
-2109009862[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1574671968
+308738175 -> 495701884
+308738175 -> 1363796489
+495701884 -> exit
+1363796489 -> 1344276182
+1363796489 -> 1965078957
+1344276182 -> 1965078957
+676633899 -> 308738175
+1574671968 -> 308738175
+1965078957 -> 676633899
+1965078957 -> 915630170
+915630170 -> 676633899
+495701884[fontcolor="purple", penwidth=3, color="purple"];
+1574671968[fontcolor="purple", penwidth=3, color="purple"];
 }

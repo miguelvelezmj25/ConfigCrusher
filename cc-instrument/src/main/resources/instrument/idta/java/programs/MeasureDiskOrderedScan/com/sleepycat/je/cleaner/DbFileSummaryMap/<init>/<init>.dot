@@ -1,15 +1,15 @@
 digraph <init> {
 node [shape=record];
-71448314 [label="L4\lLINENUMBER 53 L4\lFRAME FULL [com/sleepycat/je/cleaner/DbFileSummaryMap I] []\lLDC \"993e39bf-cbfd-4aa0-89f9-8352f06446ee\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
-1473011658 [label="L0\lLINENUMBER 47 L0\lLDC \"993e39bf-cbfd-4aa0-89f9-8352f06446ee\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 48 L1\lALOAD 0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.map : Ljava/util/Map;\lL2\lLINENUMBER 49 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.HASHMAP_OVERHEAD : I\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lL3\lLINENUMBER 50 L3\lILOAD 1\lIFEQ L4\l"];
-619292441 [label="L5\lLINENUMBER 51 L5\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.HASHMAP_ENTRY_OVERHEAD : I\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\l"];
+505311919 [label="L4\lLINENUMBER 53 L4\lFRAME FULL [com/sleepycat/je/cleaner/DbFileSummaryMap I] []\lLDC \"88b8cf00-37ec-4ba4-8066-834913b2dea7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+1655674208 [label="L5\lLINENUMBER 51 L5\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.HASHMAP_ENTRY_OVERHEAD : I\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\l"];
+1933056105 [label="L0\lLINENUMBER 47 L0\lLDC \"88b8cf00-37ec-4ba4-8066-834913b2dea7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 48 L1\lALOAD 0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.map : Ljava/util/Map;\lL2\lLINENUMBER 49 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.HASHMAP_OVERHEAD : I\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lL3\lLINENUMBER 50 L3\lILOAD 1\lIFEQ L4\l"];
 entry;
 exit;
-entry -> 1473011658
-71448314 -> exit
-1473011658 -> 71448314
-1473011658 -> 619292441
-619292441 -> 71448314
-71448314[fontcolor="purple", penwidth=3, color="purple"];
-1473011658[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1933056105
+505311919 -> exit
+1655674208 -> 505311919
+1933056105 -> 505311919
+1933056105 -> 1655674208
+505311919[fontcolor="purple", penwidth=3, color="purple"];
+1933056105[fontcolor="purple", penwidth=3, color="purple"];
 }

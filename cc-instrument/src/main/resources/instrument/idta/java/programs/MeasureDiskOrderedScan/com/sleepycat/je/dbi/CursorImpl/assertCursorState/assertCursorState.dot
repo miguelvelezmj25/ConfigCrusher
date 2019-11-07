@@ -1,22 +1,22 @@
 digraph assertCursorState {
 node [shape=record];
-1268989586 [label="L2\lLINENUMBER 3758 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 3\lL4\lLINENUMBER 3759 L4\lGETSTATIC com/sleepycat/je/dbi/CursorImpl.$assertionsDisabled : Z\lIFNE L5\l"];
-1645237495 [label="L5\lLINENUMBER 3760 L5\lFRAME APPEND [java/lang/RuntimeException]\lICONST_0\lLDC \"d92809c1-99e3-4ddc-8b4c-48d918ad0a8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL6\l"];
-999715000 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/RuntimeException\lL0\lLINENUMBER 3756 L0\lLDC \"d92809c1-99e3-4ddc-8b4c-48d918ad0a8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.checkCursorState (ZZ)V\lL3\lLINENUMBER 3757 L3\lICONST_1\l"];
-1787554478 [label="NEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 3\lINVOKEVIRTUAL java/lang/RuntimeException.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.dumpToString (Z)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"d92809c1-99e3-4ddc-8b4c-48d918ad0a8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-866803506 [label="L1\lLDC \"d92809c1-99e3-4ddc-8b4c-48d918ad0a8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+470663262 [label="L1\lLDC \"026fa365-12ac-4c45-a307-aa2eba51ce78\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+48065089 [label="L2\lLINENUMBER 3758 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 3\lL4\lLINENUMBER 3759 L4\lGETSTATIC com/sleepycat/je/dbi/CursorImpl.$assertionsDisabled : Z\lIFNE L5\l"];
+769855429 [label="L5\lLINENUMBER 3760 L5\lFRAME APPEND [java/lang/RuntimeException]\lICONST_0\lLDC \"026fa365-12ac-4c45-a307-aa2eba51ce78\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL6\l"];
+1964082495 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/RuntimeException\lL0\lLINENUMBER 3756 L0\lLDC \"026fa365-12ac-4c45-a307-aa2eba51ce78\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.checkCursorState (ZZ)V\lL3\lLINENUMBER 3757 L3\lICONST_1\l"];
+1419923259 [label="NEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 3\lINVOKEVIRTUAL java/lang/RuntimeException.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.dumpToString (Z)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"026fa365-12ac-4c45-a307-aa2eba51ce78\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
 entry;
 exit;
-1268989586 -> 1645237495
-1268989586 -> 1787554478
-1645237495 -> exit
-entry -> 999715000
-999715000 -> 1268989586 [style=dashed, color=red]
-999715000 -> 866803506
-1787554478 -> exit
-866803506 -> exit
-1645237495[fontcolor="purple", penwidth=3, color="purple"];
-999715000[fontcolor="purple", penwidth=3, color="purple"];
-1787554478[fontcolor="purple", penwidth=3, color="purple"];
-866803506[fontcolor="purple", penwidth=3, color="purple"];
+470663262 -> exit
+entry -> 1964082495
+48065089 -> 769855429
+48065089 -> 1419923259
+769855429 -> exit
+1964082495 -> 470663262
+1964082495 -> 48065089 [style=dashed, color=red]
+1419923259 -> exit
+470663262[fontcolor="purple", penwidth=3, color="purple"];
+769855429[fontcolor="purple", penwidth=3, color="purple"];
+1964082495[fontcolor="purple", penwidth=3, color="purple"];
+1419923259[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,9 +1,9 @@
 digraph makeChild {
 node [shape=record];
-1309649790 [label="L0\lLINENUMBER 844 L0\lLDC \"66cb1b92-57fb-46a8-a182-f280f65e3ac3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lNEW com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.tracker : Lcom/sleepycat/je/recovery/RollbackTracker;\lALOAD 1\lLLOAD 2\lINVOKESPECIAL com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.\<init\> (Lcom/sleepycat/je/recovery/RollbackTracker;Lcom/sleepycat/je/txn/RollbackStart;J)V\lPUTFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.currentChild : Lcom/sleepycat/je/recovery/RollbackTracker$RollbackPeriod;\lL1\lLINENUMBER 847 L1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.children : Ljava/util/List;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.currentChild : Lcom/sleepycat/je/recovery/RollbackTracker$RollbackPeriod;\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL2\lLINENUMBER 848 L2\lLDC \"66cb1b92-57fb-46a8-a182-f280f65e3ac3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+1270682765 [label="L0\lLINENUMBER 844 L0\lLDC \"bcfb4a49-64b7-4868-aa5b-af6fa6f673f3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lNEW com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.tracker : Lcom/sleepycat/je/recovery/RollbackTracker;\lALOAD 1\lLLOAD 2\lINVOKESPECIAL com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.\<init\> (Lcom/sleepycat/je/recovery/RollbackTracker;Lcom/sleepycat/je/txn/RollbackStart;J)V\lPUTFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.currentChild : Lcom/sleepycat/je/recovery/RollbackTracker$RollbackPeriod;\lL1\lLINENUMBER 847 L1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.children : Ljava/util/List;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RollbackTracker$RollbackPeriod.currentChild : Lcom/sleepycat/je/recovery/RollbackTracker$RollbackPeriod;\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL2\lLINENUMBER 848 L2\lLDC \"bcfb4a49-64b7-4868-aa5b-af6fa6f673f3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
 entry;
 exit;
-entry -> 1309649790
-1309649790 -> exit
-1309649790[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1270682765
+1270682765 -> exit
+1270682765[fontcolor="purple", penwidth=3, color="purple"];
 }

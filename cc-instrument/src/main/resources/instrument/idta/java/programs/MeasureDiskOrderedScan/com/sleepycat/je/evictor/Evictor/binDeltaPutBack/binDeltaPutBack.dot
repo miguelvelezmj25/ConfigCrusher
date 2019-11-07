@@ -1,0 +1,22 @@
+digraph binDeltaPutBack {
+node [shape=record];
+13456117 [label="L4\lLINENUMBER 2902 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.nNodesMutated : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL6\lLINENUMBER 2903 L6\lLDC \"26a859ed-f454-4602-96b7-7a7e4af507b3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+1462766836 [label="L3\lLINENUMBER 2898 L3\lFRAME SAME\lALOAD 2\lIFNULL L4\l"];
+209954953 [label="L5\lLINENUMBER 2899 L5\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor$EvictionDebugStats.incNumMutated ()V\l"];
+1936248940 [label="L1\lLINENUMBER 2895 L1\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.addBack (Lcom/sleepycat/je/tree/IN;)V\l"];
+102381081 [label="L0\lLINENUMBER 2892 L0\lLDC \"26a859ed-f454-4602-96b7-7a7e4af507b3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isInPri2LRU ()Z\lIFEQ L1\l"];
+784617693 [label="L2\lLINENUMBER 2893 L2\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/evictor/Evictor.pri2AddBack (Lcom/sleepycat/je/tree/IN;)V\lGOTO L3\l"];
+entry;
+exit;
+entry -> 102381081
+13456117 -> exit
+1462766836 -> 13456117
+1462766836 -> 209954953
+209954953 -> 13456117
+1936248940 -> 1462766836
+102381081 -> 1936248940
+102381081 -> 784617693
+784617693 -> 1462766836
+13456117[fontcolor="purple", penwidth=3, color="purple"];
+102381081[fontcolor="purple", penwidth=3, color="purple"];
+}

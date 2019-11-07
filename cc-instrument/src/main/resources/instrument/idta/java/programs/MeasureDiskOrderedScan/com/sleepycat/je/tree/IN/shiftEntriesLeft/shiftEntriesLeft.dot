@@ -1,0 +1,17 @@
+digraph shiftEntriesLeft {
+node [shape=record];
+2110778486 [label="L0\lLINENUMBER 4567 L0\lLDC \"2e62c738-7677-48d9-bf2a-bbabebd9e3c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lILOAD 1\lISUB\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.copyEntries (III)V\lL1\lLINENUMBER 4568 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lILOAD 1\lISUB\lISTORE 2\l"];
+335497335 [label="L4\lLINENUMBER 4569 L4\lALOAD 0\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.clearEntry (I)V\lL5\lLINENUMBER 4568 L5\lIINC 2 1\lGOTO L2\l"];
+63934906 [label="L2\lFRAME APPEND [I]\lILOAD 2\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lIF_ICMPGE L3\l"];
+1760352390 [label="L3\lLINENUMBER 4571 L3\lFRAME SAME\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\lL6\lLINENUMBER 4572 L6\lLDC \"2e62c738-7677-48d9-bf2a-bbabebd9e3c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+entry;
+exit;
+entry -> 2110778486
+2110778486 -> 63934906
+335497335 -> 63934906
+63934906 -> 335497335
+63934906 -> 1760352390
+1760352390 -> exit
+2110778486[fontcolor="purple", penwidth=3, color="purple"];
+1760352390[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,9 @@
+digraph getRootINLatchedExclusive {
+node [shape=record];
+352129949 [label="L0\lLINENUMBER 460 L0\lLDC \"ec7bf083-41c4-460b-8c89-78d3206c8b40\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lICONST_1\lINVOKESPECIAL com/sleepycat/je/tree/Tree.getRootINInternal (Lcom/sleepycat/je/CacheMode;Z)Lcom/sleepycat/je/tree/IN;\lLDC \"ec7bf083-41c4-460b-8c89-78d3206c8b40\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL1\l"];
+entry;
+exit;
+entry -> 352129949
+352129949 -> exit
+352129949[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -251,6 +251,19 @@ public class IDTATimerInstrumenterTest {
     Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
+    Set<JavaRegion> regionsToRemove = new HashSet<>();
+
+    for (JavaRegion region : regionsToConstraints.keySet()) {
+      //          if (!region.getRegionClass().equals("MeasureDiskOrderedScan")) {
+      if (!region.getRegionClass().equals("TxnChain$CompareSlot")) {
+        regionsToRemove.add(region);
+      }
+    }
+
+    //    for (JavaRegion region : regionsToRemove) {
+    //      regionsToConstraints.remove(region);
+    //    }
+
     String mainClass = BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;

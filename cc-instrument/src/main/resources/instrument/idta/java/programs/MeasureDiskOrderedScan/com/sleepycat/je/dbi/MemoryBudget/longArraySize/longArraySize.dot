@@ -1,0 +1,9 @@
+digraph longArraySize {
+node [shape=record];
+105051955 [label="L0\lLINENUMBER 1220 L0\lLDC \"11af7132-38ec-4bdb-8272-e300d1127797\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 0\lBIPUSH 8\lIMUL\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lLDC \"11af7132-38ec-4bdb-8272-e300d1127797\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
+entry;
+exit;
+entry -> 105051955
+105051955 -> exit
+105051955[fontcolor="purple", penwidth=3, color="purple"];
+}

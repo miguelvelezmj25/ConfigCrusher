@@ -1,0 +1,16 @@
+digraph convertDupKeys {
+node [shape=record];
+63787340 [label="L2\lLINENUMBER 2993 L2\lLDC \"250a892c-5305-45cc-92ec-da15a27145aa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+2019239042 [label="L0\lLINENUMBER 2992 L0\lLDC \"250a892c-5305-45cc-92ec-da15a27145aa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.needDupKeyConversion : Z\lIFNE L1\l"];
+797699253 [label="L1\lLINENUMBER 2995 L1\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/tree/IN.needDupKeyConversion : Z\lL3\lLINENUMBER 2996 L3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 0\lINVOKESTATIC com/sleepycat/je/tree/dupConvert/DupConvert.convertInKeys (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/tree/IN;)V\lL4\lLINENUMBER 2997 L4\lLDC \"250a892c-5305-45cc-92ec-da15a27145aa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+entry;
+exit;
+63787340 -> exit
+entry -> 2019239042
+2019239042 -> 63787340
+2019239042 -> 797699253
+797699253 -> exit
+63787340[fontcolor="purple", penwidth=3, color="purple"];
+2019239042[fontcolor="purple", penwidth=3, color="purple"];
+797699253[fontcolor="purple", penwidth=3, color="purple"];
+}

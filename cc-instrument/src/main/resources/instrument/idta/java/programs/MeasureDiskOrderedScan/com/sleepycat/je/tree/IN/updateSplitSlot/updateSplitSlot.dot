@@ -1,0 +1,47 @@
+digraph updateSplitSlot {
+node [shape=record];
+1341191938 [label="L15\lLINENUMBER 4528 L15\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.computeMemorySize ()J\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\lGOTO L16\l"];
+705058667 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isUpperIN ()Z\lIFNE L1\l"];
+201717252 [label="L12\lLINENUMBER 4527 L12\lFRAME APPEND [J I I]\lILOAD 9\lIFEQ L14\l"];
+1641546565 [label="L18\lLINENUMBER 4538 L18\lFRAME SAME\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\lL20\lLINENUMBER 4540 L20\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L21\l"];
+616738331 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"c8da2d65-6536-4e40-8cd9-9916b671fe0c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2081772362 [label="L21\lLINENUMBER 4541 L21\lFRAME SAME\lLDC \"c8da2d65-6536-4e40-8cd9-9916b671fe0c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL22\l"];
+1546685722 [label="L6\lLINENUMBER 4518 L6\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lALOAD 5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lILOAD 1\lALOAD 0\lILOAD 1\lL7\lLINENUMBER 4519 L7\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.haveEmbeddedData (I)Z\lALOAD 0\lL8\lLINENUMBER 4520 L8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getKeyComparator ()Ljava/util/Comparator;\lL9\lLINENUMBER 4518 L9\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.compareKeys ([B[BIZLjava/util/Comparator;)I\lISTORE 8\lL10\lLINENUMBER 4522 L10\lICONST_0\lISTORE 9\lL11\lLINENUMBER 4523 L11\lILOAD 8\lIFGE L12\l"];
+1410022997 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"c8da2d65-6536-4e40-8cd9-9916b671fe0c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1500618046 [label="L14\lLINENUMBER 4530 L14\lFRAME SAME\lALOAD 0\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lLSTORE 10\lL17\lLINENUMBER 4531 L17\lALOAD 0\lLLOAD 6\lLLOAD 10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\l"];
+873855533 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildren ()Z\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildrenFlag ()Z\lIF_ICMPEQ L21\l"];
+90286660 [label="L0\lLINENUMBER 4510 L0\lLDC \"c8da2d65-6536-4e40-8cd9-9916b671fe0c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L1\l"];
+32610375 [label="L13\lLINENUMBER 4524 L13\lALOAD 0\lILOAD 1\lALOAD 5\lACONST_NULL\lINVOKESPECIAL com/sleepycat/je/tree/IN.updateKey (I[B[B)Z\lISTORE 9\l"];
+337352816 [label="L1\lLINENUMBER 4512 L1\lFRAME SAME\lALOAD 0\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lLSTORE 6\lL2\lLINENUMBER 4514 L2\lALOAD 0\lILOAD 1\lLLOAD 3\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setLsn (IJ)V\lL3\lLINENUMBER 4515 L3\lALOAD 0\lILOAD 1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setTarget (ILcom/sleepycat/je/tree/Node;)V\lL4\lLINENUMBER 4517 L4\lILOAD 1\lIFNE L5\l"];
+346048244 [label="L5\lLINENUMBER 4534 L5\lFRAME CHOP 2\lALOAD 0\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lLSTORE 8\lL19\lLINENUMBER 4535 L19\lALOAD 0\lLLOAD 6\lLLOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\l"];
+1818660142 [label="L16\lLINENUMBER 4533 L16\lFRAME SAME\lGOTO L18\l"];
+entry;
+exit;
+1341191938 -> 1818660142
+705058667 -> 1410022997
+705058667 -> 337352816
+201717252 -> 1341191938
+201717252 -> 1500618046
+1641546565 -> 873855533
+1641546565 -> 2081772362
+616738331 -> exit
+2081772362 -> exit
+entry -> 90286660
+1546685722 -> 32610375
+1546685722 -> 201717252
+1410022997 -> exit
+1500618046 -> 1818660142
+873855533 -> 616738331
+873855533 -> 2081772362
+90286660 -> 705058667
+90286660 -> 337352816
+32610375 -> 201717252
+337352816 -> 1546685722
+337352816 -> 346048244
+346048244 -> 1641546565
+1818660142 -> 1641546565
+1410022997[fontcolor="purple", penwidth=3, color="purple"];
+90286660[fontcolor="purple", penwidth=3, color="purple"];
+616738331[fontcolor="purple", penwidth=3, color="purple"];
+2081772362[fontcolor="purple", penwidth=3, color="purple"];
+}

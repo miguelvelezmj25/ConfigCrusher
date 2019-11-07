@@ -1,0 +1,175 @@
+digraph getEnvironment {
+node [shape=record];
+1341214121 [label="L18\lALOAD 14\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+957110542 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+60038545 [label="L19\lILOAD 7\lIFNE L61\l"];
+1886224418 [label="L1\lGOTO L51\l"];
+452697635 [label="L57\lLINENUMBER 231 L57\lALOAD 0\lDUP\lASTORE 8\lMONITORENTER\l"];
+2090636446 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentConfig.getSharedCache ()Z\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getSharedCache ()Z\lIF_ICMPEQ L48\l"];
+678278932 [label="NEW com/sleepycat/je/dbi/EnvironmentImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 8\lINVOKESPECIAL com/sleepycat/je/dbi/EnvironmentImpl.\<init\> (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lGOTO L45\l"];
+1171571607 [label="L60\lFRAME SAME\lGOTO L56\l"];
+1290429933 [label="L31\lLINENUMBER 136 L31\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"This environment was previously opened for replication. It cannot be re-opened in read/write mode for standalone operation.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1415591168 [label="L14\lLINENUMBER 230 L14\lFRAME FULL [com/sleepycat/je/dbi/DbEnvPool java/io/File com/sleepycat/je/EnvironmentConfig I com/sleepycat/je/dbi/RepConfigProxy java/lang/String com/sleepycat/je/dbi/EnvironmentImpl I] [java/lang/Throwable]\lASTORE 12\l"];
+1936115543 [label="L54\lLINENUMBER 224 L54\lALOAD 0\lDUP\lASTORE 8\lMONITORENTER\l"];
+1929010078 [label="L9\lGOTO L60\l"];
+520153897 [label="L13\lLINENUMBER 230 L13\lILOAD 7\lIFNE L56\l"];
+1663981821 [label="L29\lLINENUMBER 145 L29\lFRAME SAME\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isArbiter ()Z\lIFEQ L32\l"];
+1223509106 [label="L33\lLINENUMBER 146 L33\lNEW java/lang/UnsupportedOperationException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"An Arbiter is currently using this directory. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lL34\lLINENUMBER 148 L34\lINVOKEVIRTUAL java/io/File.getAbsolutePath ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1750944274 [label="L0\lLINENUMBER 110 L0\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbEnvPool.getEnvironmentMapKey (Ljava/io/File;)Ljava/lang/String;\lASTORE 5\lL23\lLINENUMBER 111 L23\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.envs : Ljava/util/Map;\lALOAD 5\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/EnvironmentImpl\lASTORE 6\lL24\lLINENUMBER 113 L24\lALOAD 6\lIFNULL L25\l"];
+1726786230 [label="L8\lLINENUMBER 232 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.envs : Ljava/util/Map;\lALOAD 5\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL58\lLINENUMBER 233 L58\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.sharedCacheEnvs : Ljava/util/Set;\lALOAD 6\lINVOKEINTERFACE java/util/Set.remove (Ljava/lang/Object;)Z\lPOP\lL59\lLINENUMBER 234 L59\lALOAD 8\lMONITOREXIT\l"];
+1389375706 [label="L37\lLINENUMBER 170 L37\lALOAD 6\lALOAD 2\lL38\lLINENUMBER 171 L38\lINVOKESTATIC com/sleepycat/je/DbInternal.getProps (Lcom/sleepycat/je/EnvironmentMutableConfig;)Ljava/util/Properties;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkImmutablePropsForEquality (Ljava/util/Properties;)V\l"];
+1888790000 [label="L40\lFRAME SAME\lACONST_NULL\l"];
+443331537 [label="L17\lFRAME FULL [com/sleepycat/je/dbi/DbEnvPool java/io/File com/sleepycat/je/EnvironmentConfig I com/sleepycat/je/dbi/RepConfigProxy java/lang/String com/sleepycat/je/dbi/EnvironmentImpl I T T T T java/lang/Throwable com/sleepycat/je/dbi/DbEnvPool] [java/lang/Throwable]\lASTORE 14\lALOAD 13\lMONITOREXIT\l"];
+1364037363 [label="ALOAD 4\lIFNULL L27\l"];
+1805242692 [label="L25\lLINENUMBER 182 L25\lFRAME SAME\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentConfig.getSharedCache ()Z\lIFEQ L40\l"];
+1065775596 [label="L12\lLINENUMBER 222 L12\lALOAD 6\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.finishInit (Lcom/sleepycat/je/EnvironmentConfig;)Z\lIFEQ L53\l"];
+245907510 [label="L15\lLINENUMBER 232 L15\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.envs : Ljava/util/Map;\lALOAD 5\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL63\lLINENUMBER 233 L63\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.sharedCacheEnvs : Ljava/util/Set;\lALOAD 6\lINVOKEINTERFACE java/util/Set.remove (Ljava/lang/Object;)Z\lPOP\lL64\lLINENUMBER 234 L64\lALOAD 13\lMONITOREXIT\l"];
+65723414 [label="L44\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 8\lALOAD 4\lL46\lLINENUMBER 195 L46\lINVOKESPECIAL com/sleepycat/je/dbi/DbEnvPool.loadRepImpl (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\l"];
+1561470269 [label="L32\lLINENUMBER 151 L32\lFRAME SAME\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkIfInvalid ()V\lL35\lLINENUMBER 153 L35\lILOAD 3\lIFEQ L36\l"];
+531673855 [label="ALOAD 2\lL30\lLINENUMBER 135 L30\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentConfig.getReadOnly ()Z\lIFNE L29\l"];
+1635696538 [label="L5\lGOTO L53\l"];
+450786028 [label="L6\lFRAME FULL [com/sleepycat/je/dbi/DbEnvPool java/io/File com/sleepycat/je/EnvironmentConfig I com/sleepycat/je/dbi/RepConfigProxy java/lang/String com/sleepycat/je/dbi/EnvironmentImpl I com/sleepycat/je/dbi/DbEnvPool] [java/lang/Throwable]\lASTORE 10\lALOAD 8\lMONITOREXIT\l"];
+1635087812 [label="L61\lLINENUMBER 236 L61\lFRAME CHOP 1\lALOAD 12\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+33365281 [label="L39\lLINENUMBER 203 L39\lFRAME CHOP 1\lALOAD 7\lMONITOREXIT\l"];
+687420444 [label="L56\lLINENUMBER 238 L56\lFRAME FULL [com/sleepycat/je/dbi/DbEnvPool java/io/File com/sleepycat/je/EnvironmentConfig I com/sleepycat/je/dbi/RepConfigProxy java/lang/String com/sleepycat/je/dbi/EnvironmentImpl I] []\lALOAD 6\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL65\l"];
+596707256 [label="ALOAD 0\lL41\lLINENUMBER 183 L41\lINVOKESPECIAL com/sleepycat/je/dbi/DbEnvPool.getAnySharedCacheEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGOTO L42\l"];
+1331723407 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 null\lTRYCATCHBLOCK L6 L7 L6 null\lTRYCATCHBLOCK L8 L9 L10 null\lTRYCATCHBLOCK L10 L11 L10 null\lTRYCATCHBLOCK L12 L13 L14 null\lTRYCATCHBLOCK L15 L16 L17 null\lTRYCATCHBLOCK L17 L18 L17 null\lTRYCATCHBLOCK L14 L19 L14 null\lL20\lLINENUMBER 107 L20\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lACONST_NULL\lASTORE 5\lL21\lLINENUMBER 108 L21\lACONST_NULL\lASTORE 6\lL22\lLINENUMBER 109 L22\lALOAD 0\lDUP\lASTORE 7\lMONITORENTER\l"];
+1770641674 [label="L7\lALOAD 10\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+868811331 [label="L2\lFRAME SAME1 java/lang/Throwable\lASTORE 9\lALOAD 7\lMONITOREXIT\l"];
+2098089097 [label="L4\lLINENUMBER 225 L4\lALOAD 0\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/dbi/DbEnvPool.finishAdditionOfSharedCacheEnv (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL55\lLINENUMBER 226 L55\lALOAD 8\lMONITOREXIT\l"];
+458886719 [label="L10\lFRAME FULL [com/sleepycat/je/dbi/DbEnvPool java/io/File com/sleepycat/je/EnvironmentConfig I com/sleepycat/je/dbi/RepConfigProxy java/lang/String com/sleepycat/je/dbi/EnvironmentImpl I com/sleepycat/je/dbi/DbEnvPool] [java/lang/Throwable]\lASTORE 11\lALOAD 8\lMONITOREXIT\l"];
+1569585071 [label="L51\lLINENUMBER 219 L51\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.beforeFinishInitHook : Lcom/sleepycat/je/utilint/TestHook;\lALOAD 6\lINVOKESTATIC com/sleepycat/je/utilint/TestHookExecute.doHookIfSet (Lcom/sleepycat/je/utilint/TestHook;Ljava/lang/Object;)Z\lPOP\lL52\lLINENUMBER 220 L52\lICONST_0\lISTORE 7\l"];
+1461749033 [label="L28\lLINENUMBER 123 L28\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"This environment was previously opened as a standalone environment. It cannot be re-opened for replication.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2139194545 [label="L3\lALOAD 9\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+700708828 [label="L48\lLINENUMBER 199 L48\lFRAME SAME\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incOpenCount ()V\lL49\lLINENUMBER 200 L49\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.envs : Ljava/util/Map;\lALOAD 5\lALOAD 6\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL50\lLINENUMBER 201 L50\lALOAD 0\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/dbi/DbEnvPool.addToSharedCacheEnvs (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\l"];
+36522270 [label="L16\lGOTO L61\l"];
+336856541 [label="L26\lLINENUMBER 122 L26\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFNE L27\l"];
+1808176853 [label="L53\lLINENUMBER 228 L53\lFRAME CHOP 1\lICONST_1\lISTORE 7\l"];
+1914071518 [label="L27\lLINENUMBER 134 L27\lFRAME APPEND [java/lang/String com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbEnvPool]\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L29\l"];
+1300947552 [label="L36\lLINENUMBER 174 L36\lFRAME SAME\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incOpenCount ()V\lGOTO L39\l"];
+5109765 [label="L62\lLINENUMBER 231 L62\lALOAD 0\lDUP\lASTORE 13\lMONITORENTER\l"];
+1019008471 [label="L11\lALOAD 11\lLDC \"8e050cee-5ed6-48ee-b250-f5fcf0f3910b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1579776125 [label="ALOAD 4\lIFNONNULL L29\l"];
+2105748684 [label="L45\lFRAME SAME1 com/sleepycat/je/dbi/EnvironmentImpl\lASTORE 6\lL47\lLINENUMBER 197 L47\lGETSTATIC com/sleepycat/je/dbi/DbEnvPool.$assertionsDisabled : Z\lIFNE L48\l"];
+1779941472 [label="L42\lFRAME SAME1 com/sleepycat/je/dbi/EnvironmentImpl\lASTORE 8\lL43\lLINENUMBER 192 L43\lALOAD 4\lIFNONNULL L44\l"];
+entry;
+exit;
+1341214121 -> exit
+957110542 -> exit
+957110542 -> 868811331 [style=dashed, color=red]
+60038545 -> 5109765
+60038545 -> 1635087812
+1886224418 -> 1569585071
+452697635 -> 1726786230
+2090636446 -> 957110542
+2090636446 -> 700708828
+2090636446 -> 868811331 [style=dashed, color=red]
+678278932 -> 2105748684
+678278932 -> 868811331 [style=dashed, color=red]
+1171571607 -> 687420444
+1290429933 -> exit
+1290429933 -> 868811331 [style=dashed, color=red]
+1415591168 -> 60038545
+1415591168 -> 1415591168 [style=dashed, color=red]
+1936115543 -> 1415591168 [style=dashed, color=red]
+1936115543 -> 2098089097
+1929010078 -> 1171571607
+520153897 -> 452697635
+520153897 -> 687420444
+1663981821 -> 1561470269
+1663981821 -> 868811331 [style=dashed, color=red]
+1663981821 -> 1223509106
+1223509106 -> exit
+1223509106 -> 868811331 [style=dashed, color=red]
+entry -> 1331723407
+1750944274 -> 1805242692
+1750944274 -> 336856541
+1750944274 -> 868811331 [style=dashed, color=red]
+1726786230 -> 1929010078
+1726786230 -> 458886719 [style=dashed, color=red]
+1389375706 -> 1300947552
+1389375706 -> 868811331 [style=dashed, color=red]
+1888790000 -> 868811331 [style=dashed, color=red]
+1888790000 -> 1779941472
+443331537 -> 443331537 [style=dashed, color=red]
+443331537 -> 1341214121
+1364037363 -> 1914071518
+1364037363 -> 1461749033
+1364037363 -> 868811331 [style=dashed, color=red]
+1805242692 -> 596707256
+1805242692 -> 1888790000
+1805242692 -> 868811331 [style=dashed, color=red]
+1065775596 -> 1415591168 [style=dashed, color=red]
+1065775596 -> 1936115543
+1065775596 -> 1808176853
+245907510 -> 443331537 [style=dashed, color=red]
+245907510 -> 36522270
+65723414 -> 2105748684
+65723414 -> 868811331 [style=dashed, color=red]
+1561470269 -> 1389375706
+1561470269 -> 1300947552
+1561470269 -> 868811331 [style=dashed, color=red]
+531673855 -> 1290429933
+531673855 -> 1663981821
+531673855 -> 868811331 [style=dashed, color=red]
+1635696538 -> 1415591168 [style=dashed, color=red]
+1635696538 -> 1808176853
+450786028 -> 1770641674
+450786028 -> 450786028 [style=dashed, color=red]
+450786028 -> 1415591168 [style=dashed, color=red]
+1635087812 -> exit
+33365281 -> 1886224418
+33365281 -> 868811331 [style=dashed, color=red]
+687420444 -> exit
+596707256 -> 868811331 [style=dashed, color=red]
+596707256 -> 1779941472
+1331723407 -> 1750944274
+1770641674 -> exit
+1770641674 -> 1415591168 [style=dashed, color=red]
+868811331 -> 2139194545
+868811331 -> 868811331 [style=dashed, color=red]
+2098089097 -> 1635696538
+2098089097 -> 450786028 [style=dashed, color=red]
+2098089097 -> 1415591168 [style=dashed, color=red]
+458886719 -> 1019008471
+458886719 -> 458886719 [style=dashed, color=red]
+1569585071 -> 1065775596
+1461749033 -> exit
+1461749033 -> 868811331 [style=dashed, color=red]
+2139194545 -> exit
+700708828 -> 33365281
+700708828 -> 868811331 [style=dashed, color=red]
+36522270 -> 1635087812
+336856541 -> 1914071518
+336856541 -> 1364037363
+336856541 -> 868811331 [style=dashed, color=red]
+1808176853 -> 1415591168 [style=dashed, color=red]
+1808176853 -> 520153897
+1914071518 -> 1663981821
+1914071518 -> 1579776125
+1914071518 -> 868811331 [style=dashed, color=red]
+1300947552 -> 33365281
+1300947552 -> 868811331 [style=dashed, color=red]
+5109765 -> 245907510
+1019008471 -> exit
+1579776125 -> 531673855
+1579776125 -> 1663981821
+1579776125 -> 868811331 [style=dashed, color=red]
+2105748684 -> 700708828
+2105748684 -> 2090636446
+2105748684 -> 868811331 [style=dashed, color=red]
+1779941472 -> 65723414
+1779941472 -> 678278932
+1779941472 -> 868811331 [style=dashed, color=red]
+1331723407[fontcolor="purple", penwidth=3, color="purple"];
+1461749033[fontcolor="purple", penwidth=3, color="purple"];
+1341214121[fontcolor="purple", penwidth=3, color="purple"];
+957110542[fontcolor="purple", penwidth=3, color="purple"];
+2139194545[fontcolor="purple", penwidth=3, color="purple"];
+1290429933[fontcolor="purple", penwidth=3, color="purple"];
+1770641674[fontcolor="purple", penwidth=3, color="purple"];
+1635087812[fontcolor="purple", penwidth=3, color="purple"];
+1019008471[fontcolor="purple", penwidth=3, color="purple"];
+687420444[fontcolor="purple", penwidth=3, color="purple"];
+1223509106[fontcolor="purple", penwidth=3, color="purple"];
+}

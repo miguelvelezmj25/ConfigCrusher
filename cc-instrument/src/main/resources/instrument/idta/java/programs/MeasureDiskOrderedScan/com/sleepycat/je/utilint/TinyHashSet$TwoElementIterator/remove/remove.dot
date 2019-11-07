@@ -1,0 +1,28 @@
+digraph remove {
+node [shape=record];
+2129232530 [label="ALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.elem2 : Ljava/lang/Object;\lIFNULL L1\l"];
+967565185 [label="ALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.elem1 : Ljava/lang/Object;\lIFNULL L4\l"];
+1954671515 [label="L5\lLINENUMBER 218 L5\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.parent : Lcom/sleepycat/je/utilint/TinyHashSet;\lACONST_NULL\lINVOKESTATIC com/sleepycat/je/utilint/TinyHashSet.access$102 (Lcom/sleepycat/je/utilint/TinyHashSet;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL6\lLINENUMBER 219 L6\lLDC \"f52db077-84f7-4556-b594-f9e7e2f9f519\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1277589380 [label="L1\lLINENUMBER 217 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.returnedElem1 : Z\lIFEQ L4\l"];
+904012586 [label="L2\lLINENUMBER 214 L2\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.parent : Lcom/sleepycat/je/utilint/TinyHashSet;\lACONST_NULL\lINVOKESTATIC com/sleepycat/je/utilint/TinyHashSet.access$002 (Lcom/sleepycat/je/utilint/TinyHashSet;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL3\lLINENUMBER 215 L3\lLDC \"f52db077-84f7-4556-b594-f9e7e2f9f519\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+199501620 [label="L4\lLINENUMBER 221 L4\lFRAME SAME\lICONST_0\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.assertState (Z)V\lL7\lLINENUMBER 222 L7\lLDC \"f52db077-84f7-4556-b594-f9e7e2f9f519\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+1329098680 [label="L0\lLINENUMBER 213 L0\lLDC \"f52db077-84f7-4556-b594-f9e7e2f9f519\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/TinyHashSet$TwoElementIterator.returnedElem2 : Z\lIFEQ L1\l"];
+entry;
+exit;
+2129232530 -> 1277589380
+2129232530 -> 904012586
+entry -> 1329098680
+967565185 -> 1954671515
+967565185 -> 199501620
+1954671515 -> exit
+1277589380 -> 967565185
+1277589380 -> 199501620
+904012586 -> exit
+199501620 -> exit
+1329098680 -> 2129232530
+1329098680 -> 1277589380
+1954671515[fontcolor="purple", penwidth=3, color="purple"];
+904012586[fontcolor="purple", penwidth=3, color="purple"];
+199501620[fontcolor="purple", penwidth=3, color="purple"];
+1329098680[fontcolor="purple", penwidth=3, color="purple"];
+}

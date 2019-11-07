@@ -1,0 +1,22 @@
+digraph instantiateComparator {
+node [shape=record];
+787774335 [label="L4\lLINENUMBER 2321 L4\lACONST_NULL\lLDC \"ab0333f0-5d3d-4e83-a4f0-62a7f87ea6a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1057752329 [label="L1\lLDC \"ab0333f0-5d3d-4e83-a4f0-62a7f87ea6a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1801586594 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 2320 L3\lLDC \"ab0333f0-5d3d-4e83-a4f0-62a7f87ea6a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lIFNONNULL L0\l"];
+1431316832 [label="L2\lLINENUMBER 2326 L2\lFRAME SAME1 java/lang/Exception\lASTORE 2\lL5\lLINENUMBER 2327 L5\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Exception while trying to load \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" Comparator class.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 2\lL6\lLINENUMBER 2328 L6\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Ljava/lang/String;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"ab0333f0-5d3d-4e83-a4f0-62a7f87ea6a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL7\l"];
+31434110 [label="L0\lLINENUMBER 2325 L0\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL java/lang/Class.newInstance ()Ljava/lang/Object;\lCHECKCAST java/util/Comparator\l"];
+entry;
+exit;
+entry -> 1801586594
+787774335 -> exit
+1057752329 -> exit
+1801586594 -> 787774335
+1801586594 -> 31434110
+1431316832 -> exit
+31434110 -> 1057752329
+31434110 -> 1431316832 [style=dashed, color=red]
+787774335[fontcolor="purple", penwidth=3, color="purple"];
+1057752329[fontcolor="purple", penwidth=3, color="purple"];
+1801586594[fontcolor="purple", penwidth=3, color="purple"];
+1431316832[fontcolor="purple", penwidth=3, color="purple"];
+}

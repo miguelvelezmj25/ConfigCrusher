@@ -1,0 +1,23 @@
+digraph releaseNodeLadderLatches {
+node [shape=record];
+1217305443 [label="ALOAD 2\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Tree$SplitInfo\lASTORE 3\lL6\lLINENUMBER 816 L6\lALOAD 3\lGETFIELD com/sleepycat/je/tree/Tree$SplitInfo.child : Lcom/sleepycat/je/tree/IN;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lL7\lLINENUMBER 817 L7\lGOTO L4\l"];
+1746838892 [label="L5\lLINENUMBER 819 L5\lFRAME SAME\lALOAD 1\lINVOKEINTERFACE java/util/List.clear ()V\lL8\lLINENUMBER 820 L8\lLDC \"946ac8fa-d735-4008-8095-cdd592edd361\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL9\l"];
+1027704495 [label="L0\lLINENUMBER 809 L0\lLDC \"946ac8fa-d735-4008-8095-cdd592edd361\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEINTERFACE java/util/List.isEmpty ()Z\lIFEQ L1\l"];
+2034966043 [label="L4\lFRAME APPEND [java/util/Iterator]\lALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L5\l"];
+943975979 [label="L2\lLINENUMBER 810 L2\lLDC \"946ac8fa-d735-4008-8095-cdd592edd361\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1657298697 [label="L1\lLINENUMBER 813 L1\lFRAME SAME\lALOAD 1\lICONST_0\lINVOKEINTERFACE java/util/List.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Tree$SplitInfo\lGETFIELD com/sleepycat/je/tree/Tree$SplitInfo.parent : Lcom/sleepycat/je/tree/IN;\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lL3\lLINENUMBER 815 L3\lALOAD 1\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 2\l"];
+entry;
+exit;
+entry -> 1027704495
+1217305443 -> 2034966043
+1746838892 -> exit
+1027704495 -> 943975979
+1027704495 -> 1657298697
+2034966043 -> 1217305443
+2034966043 -> 1746838892
+943975979 -> exit
+1657298697 -> 2034966043
+1746838892[fontcolor="purple", penwidth=3, color="purple"];
+1027704495[fontcolor="purple", penwidth=3, color="purple"];
+943975979[fontcolor="purple", penwidth=3, color="purple"];
+}

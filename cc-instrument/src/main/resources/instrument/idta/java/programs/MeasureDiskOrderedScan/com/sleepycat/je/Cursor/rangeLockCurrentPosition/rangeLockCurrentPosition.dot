@@ -1,0 +1,50 @@
+digraph rangeLockCurrentPosition {
+node [shape=record];
+1269228199 [label="L20\lLINENUMBER 3634 L20\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/OperationResult com/sleepycat/je/dbi/CursorImpl] []\lALOAD 3\lIFNONNULL L22\l"];
+1183124369 [label="L0\lLINENUMBER 3603 L0\lALOAD 4\lALOAD 1\lALOAD 2\lGETSTATIC com/sleepycat/je/txn/LockType.RANGE_READ : Lcom/sleepycat/je/txn/LockType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.lockAndGetCurrent (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/txn/LockType;)Lcom/sleepycat/je/OperationResult;\lASTORE 3\lL9\lLINENUMBER 3606 L9\lALOAD 3\lIFNONNULL L1\l"];
+248071496 [label="L10\lLINENUMBER 3609 L10\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/OperationResult com/sleepycat/je/dbi/CursorImpl] []\lGETSTATIC com/sleepycat/je/latch/LatchSupport.TRACK_LATCHES : Z\lIFEQ L11\l"];
+536242773 [label="L18\lLINENUMBER 3625 L18\lICONST_0\lINVOKESTATIC com/sleepycat/je/latch/LatchSupport.expectBtreeLatchesHeld (I)V\lGOTO L1\l"];
+1618871125 [label="L3\lALOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close (Lcom/sleepycat/je/dbi/CursorImpl;)V\lL21\lLINENUMBER 3632 L21\lALOAD 5\lLDC \"0fbe03bb-ce04-4853-a910-6017e756eaaf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+339216275 [label="L12\lLINENUMBER 3610 L12\lICONST_0\lINVOKESTATIC com/sleepycat/je/latch/LatchSupport.expectBtreeLatchesHeld (I)V\l"];
+936189780 [label="L1\lLINENUMBER 3631 L1\lFRAME SAME\lALOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close (Lcom/sleepycat/je/dbi/CursorImpl;)V\lL19\lLINENUMBER 3632 L19\lGOTO L20\l"];
+1080765486 [label="L15\lLINENUMBER 3619 L15\lALOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close (Lcom/sleepycat/je/dbi/CursorImpl;)V\lL16\lLINENUMBER 3620 L16\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.cloneCursor (Z)Lcom/sleepycat/je/dbi/CursorImpl;\lASTORE 4\lL17\lLINENUMBER 3621 L17\lGOTO L10\l"];
+1369562234 [label="L11\lLINENUMBER 3613 L11\lFRAME SAME\lALOAD 4\lALOAD 1\lALOAD 2\lGETSTATIC com/sleepycat/je/txn/LockType.RANGE_READ : Lcom/sleepycat/je/txn/LockType;\lICONST_0\lICONST_1\lICONST_0\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getNext (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/txn/LockType;ZZZLcom/sleepycat/je/dbi/RangeConstraint;)Lcom/sleepycat/je/OperationResult;\lASTORE 3\lL13\lLINENUMBER 3618 L13\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lGETSTATIC com/sleepycat/je/dbi/GetMode.NEXT : Lcom/sleepycat/je/dbi/GetMode;\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.checkForInsertion (Lcom/sleepycat/je/dbi/GetMode;Lcom/sleepycat/je/dbi/CursorImpl;)Z\lIFEQ L14\l"];
+702540467 [label="L23\lLINENUMBER 3635 L23\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lGETSTATIC com/sleepycat/je/txn/LockType.RANGE_READ : Lcom/sleepycat/je/txn/LockType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.lockEof (Lcom/sleepycat/je/txn/LockType;)V\l"];
+72145642 [label="L14\lLINENUMBER 3624 L14\lFRAME SAME\lGETSTATIC com/sleepycat/je/latch/LatchSupport.TRACK_LATCHES : Z\lIFEQ L1\l"];
+756223310 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 3593 L4\lLDC \"0fbe03bb-ce04-4853-a910-6017e756eaaf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 1\lL5\lLINENUMBER 3594 L5\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 2\lL6\lLINENUMBER 3595 L6\lALOAD 1\lICONST_0\lICONST_0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.setPartial (IIZ)V\lL7\lLINENUMBER 3596 L7\lALOAD 2\lICONST_0\lICONST_0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.setPartial (IIZ)V\lL8\lLINENUMBER 3600 L8\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.cloneCursor (Z)Lcom/sleepycat/je/dbi/CursorImpl;\lASTORE 4\l"];
+1429347776 [label="L2\lLINENUMBER 3631 L2\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry T com/sleepycat/je/dbi/CursorImpl] [java/lang/Throwable]\lASTORE 5\l"];
+818723322 [label="L22\lLINENUMBER 3637 L22\lFRAME SAME\lLDC \"0fbe03bb-ce04-4853-a910-6017e756eaaf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL24\l"];
+entry;
+exit;
+1269228199 -> 702540467
+1269228199 -> 818723322
+1183124369 -> 248071496
+1183124369 -> 1429347776 [style=dashed, color=red]
+1183124369 -> 936189780
+248071496 -> 1369562234
+248071496 -> 1429347776 [style=dashed, color=red]
+248071496 -> 339216275
+536242773 -> 1429347776 [style=dashed, color=red]
+536242773 -> 936189780
+1618871125 -> exit
+339216275 -> 1369562234
+339216275 -> 1429347776 [style=dashed, color=red]
+936189780 -> 1269228199
+1080765486 -> 248071496
+1080765486 -> 1429347776 [style=dashed, color=red]
+entry -> 756223310
+1369562234 -> 72145642
+1369562234 -> 1429347776 [style=dashed, color=red]
+1369562234 -> 1080765486
+702540467 -> 818723322
+72145642 -> 536242773
+72145642 -> 1429347776 [style=dashed, color=red]
+72145642 -> 936189780
+756223310 -> 1183124369
+1429347776 -> 1429347776 [style=dashed, color=red]
+1429347776 -> 1618871125
+818723322 -> exit
+756223310[fontcolor="purple", penwidth=3, color="purple"];
+818723322[fontcolor="purple", penwidth=3, color="purple"];
+1618871125[fontcolor="purple", penwidth=3, color="purple"];
+}

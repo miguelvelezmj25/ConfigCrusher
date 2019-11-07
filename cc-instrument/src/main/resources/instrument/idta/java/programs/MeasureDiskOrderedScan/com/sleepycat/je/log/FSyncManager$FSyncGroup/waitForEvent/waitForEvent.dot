@@ -1,0 +1,40 @@
+digraph waitForEvent {
+node [shape=record];
+1948463833 [label="L7\lLINENUMBER 472 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.workDone : Z\lIFEQ L9\l"];
+458987552 [label="L5\lLINENUMBER 503 L5\lFRAME CHOP 2\lILOAD 1\lLDC \"018342ef-1506-44eb-9696-257c198761b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL20\l"];
+785252019 [label="L2\lLINENUMBER 462 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 4\lL8\lLINENUMBER 463 L8\lNEW com/sleepycat/je/ThreadInterruptedException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Unexpected interrupt while waiting for write or fsync\"\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/ThreadInterruptedException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/Throwable;)V\lLDC \"018342ef-1506-44eb-9696-257c198761b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1507292009 [label="L10\lLINENUMBER 474 L10\lGETSTATIC com/sleepycat/je/log/FSyncManager$FSyncGroup.NO_FSYNC_NEEDED : I\lISTORE 1\lL11\lLINENUMBER 475 L11\lGOTO L5\l"];
+360338649 [label="L17\lLINENUMBER 498 L17\lFRAME APPEND [J]\lGOTO L0\l"];
+1943152153 [label="L12\lLINENUMBER 492 L12\lFRAME SAME\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 4\lL16\lLINENUMBER 493 L16\lLLOAD 4\lLLOAD 2\lLSUB\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.fsyncTimeout : J\lLCMP\lIFLE L17\l"];
+1332188141 [label="L0\lLINENUMBER 461 L0\lFRAME APPEND [I J]\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.fsyncTimeout : J\lINVOKEVIRTUAL java/lang/Object.wait (J)V\l"];
+1750107708 [label="L6\lLINENUMBER 457 L6\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 2\l"];
+512391915 [label="L13\lLINENUMBER 483 L13\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.leaderExists : Z\lL14\lLINENUMBER 484 L14\lGETSTATIC com/sleepycat/je/log/FSyncManager$FSyncGroup.DO_LEADER_FSYNC : I\lISTORE 1\lL15\lLINENUMBER 485 L15\lGOTO L5\l"];
+2103598764 [label="L1\lLINENUMBER 466 L1\lGOTO L7\l"];
+903508616 [label="L9\lLINENUMBER 482 L9\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.leaderExists : Z\lIFNE L12\l"];
+2010394916 [label="L18\lLINENUMBER 495 L18\lGETSTATIC com/sleepycat/je/log/FSyncManager$FSyncGroup.DO_TIMEOUT_FSYNC : I\lISTORE 1\lL19\lLINENUMBER 496 L19\lGOTO L5\l"];
+594327264 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 454 L3\lLDC \"018342ef-1506-44eb-9696-257c198761b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/log/FSyncManager$FSyncGroup.NO_FSYNC_NEEDED : I\lISTORE 1\lL4\lLINENUMBER 456 L4\lALOAD 0\lGETFIELD com/sleepycat/je/log/FSyncManager$FSyncGroup.workDone : Z\lIFNE L5\l"];
+entry;
+exit;
+1948463833 -> 903508616
+1948463833 -> 1507292009
+458987552 -> exit
+785252019 -> exit
+1507292009 -> 458987552
+360338649 -> 1332188141
+1943152153 -> 2010394916
+1943152153 -> 360338649
+1332188141 -> 2103598764
+1332188141 -> 785252019 [style=dashed, color=red]
+1750107708 -> 1332188141
+entry -> 594327264
+512391915 -> 458987552
+2103598764 -> 1948463833
+903508616 -> 512391915
+903508616 -> 1943152153
+2010394916 -> 458987552
+594327264 -> 458987552
+594327264 -> 1750107708
+458987552[fontcolor="purple", penwidth=3, color="purple"];
+785252019[fontcolor="purple", penwidth=3, color="purple"];
+594327264[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,36 @@
+digraph generateLogWriteException {
+node [shape=record];
+1119543447 [label="L0\lLINENUMBER 3231 L0\lLDC \"2392deb0-ffc3-4849-bde2-2dfcc9c194b7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionThrown : Z\lIFEQ L1\l"];
+935692501 [label="L14\lLINENUMBER 3246 L14\lILOAD 7\lNEWARRAY T_BYTE\lASTORE 8\lL15\lLINENUMBER 3247 L15\lALOAD 2\lALOAD 8\lICONST_0\lILOAD 7\lINVOKEVIRTUAL java/nio/ByteBuffer.get ([BII)Ljava/nio/ByteBuffer;\lPOP\lL16\lLINENUMBER 3248 L16\lALOAD 8\lINVOKESTATIC java/nio/ByteBuffer.wrap ([B)Ljava/nio/ByteBuffer;\lASTORE 9\lL17\lLINENUMBER 3249 L17\lALOAD 0\lALOAD 1\lALOAD 9\lLLOAD 3\lLLOAD 5\lICONST_0\lINVOKESPECIAL com/sleepycat/je/log/FileManager.writeToFile (Ljava/io/RandomAccessFile;Ljava/nio/ByteBuffer;JJZ)I\lPOP\l"];
+177827700 [label="L10\lLINENUMBER 3255 L10\lFRAME CHOP 1\lLDC \"2392deb0-ffc3-4849-bde2-2dfcc9c194b7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL19\l"];
+1626271096 [label="L8\lLINENUMBER 3240 L8\lALOAD 0\lNEW java/util/Random\lDUP\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lINVOKESPECIAL java/util/Random.\<init\> (J)V\lPUTFIELD com/sleepycat/je/log/FileManager.logWriteExceptionRandom : Ljava/util/Random;\l"];
+1403940125 [label="L6\lLINENUMBER 3237 L6\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/FileManager.logWriteExceptionCounter : I\l"];
+1174770450 [label="L5\lLINENUMBER 3239 L5\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionRandom : Ljava/util/Random;\lIFNONNULL L7\l"];
+1226475426 [label="L7\lLINENUMBER 3242 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionCounter : I\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionRandom : Ljava/util/Random;\lBIPUSH 100\lL9\lLINENUMBER 3243 L9\lINVOKEVIRTUAL java/util/Random.nextInt (I)I\lIF_ICMPNE L10\l"];
+1297809044 [label="L2\lLINENUMBER 3232 L2\lNEW java/lang/Exception\lDUP\lLDC \"Write after LogWriteException\"\lINVOKESPECIAL java/lang/Exception.\<init\> (Ljava/lang/String;)V\lL3\lLINENUMBER 3233 L3\lINVOKEVIRTUAL java/lang/Exception.printStackTrace ()V\l"];
+1366234711 [label="L1\lLINENUMBER 3235 L1\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionCounter : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/log/FileManager.logWriteExceptionCounter : I\lL4\lLINENUMBER 3236 L4\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionCounter : I\lBIPUSH 100\lIF_ICMPLT L5\l"];
+721366463 [label="L11\lLINENUMBER 3244 L11\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.logWriteExceptionRandom : Ljava/util/Random;\lALOAD 2\lINVOKEVIRTUAL java/nio/ByteBuffer.remaining ()I\lINVOKEVIRTUAL java/util/Random.nextInt (I)I\lISTORE 7\lL12\lLINENUMBER 3245 L12\lILOAD 7\lIFLE L13\l"];
+550975096 [label="L13\lLINENUMBER 3252 L13\lFRAME APPEND [I]\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/log/FileManager.logWriteExceptionThrown : Z\lL18\lLINENUMBER 3253 L18\lNEW java/io/IOException\lDUP\lLDC \"Randomly generated for testing\"\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lLDC \"2392deb0-ffc3-4849-bde2-2dfcc9c194b7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+1119543447 -> 1297809044
+1119543447 -> 1366234711
+935692501 -> 550975096
+1403940125 -> 1174770450
+721366463 -> 935692501
+721366463 -> 550975096
+entry -> 1119543447
+177827700 -> exit
+1626271096 -> 1226475426
+1174770450 -> 1626271096
+1174770450 -> 1226475426
+1226475426 -> 177827700
+1226475426 -> 721366463
+1297809044 -> 1366234711
+1366234711 -> 1403940125
+1366234711 -> 1174770450
+550975096 -> exit
+1119543447[fontcolor="purple", penwidth=3, color="purple"];
+177827700[fontcolor="purple", penwidth=3, color="purple"];
+550975096[fontcolor="purple", penwidth=3, color="purple"];
+}

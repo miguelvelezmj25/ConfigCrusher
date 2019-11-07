@@ -1,73 +1,73 @@
 digraph enqueueWrite1 {
 node [shape=record];
-1921608461 [label="L19\lLINENUMBER 2958 L19\lFRAME SAME\lALOAD 3\lILOAD 6\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWrites : [B\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lILOAD 7\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL22\lLINENUMBER 2961 L22\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lILOAD 7\lIADD\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lL23\lLINENUMBER 2962 L23\lALOAD 8\lMONITOREXIT\l"];
-848722628 [label="L5\lLINENUMBER 2923 L5\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWrites : [B\lDUP\lASTORE 8\lMONITORENTER\l"];
-1614009936 [label="L18\lLINENUMBER 2947 L18\lALOAD 0\lLLOAD 4\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwStartingOffset : J\l"];
-1938570626 [label="L2\lFRAME FULL [com/sleepycat/je/log/FileManager$LogEndFileDescriptor J [B J I I [B] [java/lang/Throwable]\lASTORE 11\lALOAD 8\lMONITOREXIT\l"];
-150752603 [label="L3\lALOAD 11\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1076759987 [label="L15\lLINENUMBER 2941 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lISTORE 10\lL16\lLINENUMBER 2942 L16\lILOAD 10\lIFNE L17\l"];
-186196710 [label="L10\lFRAME SAME1 I\lISTORE 9\lL11\lLINENUMBER 2926 L11\lILOAD 9\lIFEQ L12\l"];
-200588511 [label="L12\lLINENUMBER 2940 L12\lFRAME APPEND [I]\lGETSTATIC com/sleepycat/je/log/FileManager$LogEndFileDescriptor.$assertionsDisabled : Z\lIFNE L15\l"];
-15161062 [label="L0\lLINENUMBER 2924 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lL8\lLINENUMBER 2925 L8\lINVOKESTATIC com/sleepycat/je/log/FileManager.access$1100 (Lcom/sleepycat/je/log/FileManager;)I\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lISUB\lILOAD 7\lIF_ICMPGE L9\l"];
-1474665949 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2918 L4\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\lLLOAD 1\lLCMP\lIFGE L5\l"];
-181938467 [label="L9\lFRAME APPEND [[B]\lICONST_0\l"];
-1926653196 [label="L6\lLINENUMBER 2919 L6\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/log/FileManager$LogEndFileDescriptor.dequeuePendingWrites ()V\lL7\lLINENUMBER 2920 L7\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\l"];
-2130465578 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1354766958 [label="L17\lLINENUMBER 2950 L17\lFRAME APPEND [I]\lILOAD 10\lI2L\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwStartingOffset : J\lLADD\lLLOAD 4\lLCMP\lIFEQ L19\l"];
-48367938 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\lLLOAD 1\lLCMP\lIFEQ L15\l"];
-1621370617 [label="ICONST_1\lGOTO L10\l"];
-1861223285 [label="L20\lLINENUMBER 2951 L20\lNEW com/sleepycat/je/EnvironmentFailureException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lL21\lLINENUMBER 2952 L21\lINVOKESTATIC com/sleepycat/je/log/FileManager.access$1200 (Lcom/sleepycat/je/log/FileManager;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC com/sleepycat/je/dbi/EnvironmentFailureReason.LOG_INTEGRITY : Lcom/sleepycat/je/dbi/EnvironmentFailureReason;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"non-consecutive writes queued. qwPos=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" write destOffset=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL com/sleepycat/je/EnvironmentFailureException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentFailureReason;Ljava/lang/String;)V\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1043560367 [label="L24\lLINENUMBER 2963 L24\lFRAME APPEND [I I]\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL25\l"];
-537657731 [label="L1\lGOTO L24\l"];
-1244059788 [label="L13\lLINENUMBER 2927 L13\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lGETFIELD com/sleepycat/je/log/FileManager.nWriteQueueOverflow : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL14\lLINENUMBER 2937 L14\lGETSTATIC com/sleepycat/je/utilint/RelatchRequiredException.relatchRequiredException : Lcom/sleepycat/je/utilint/RelatchRequiredException;\lLDC \"1ea007a6-ba97-4925-9ed2-61a83fd365f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+920743951 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2918 L4\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\lLLOAD 1\lLCMP\lIFGE L5\l"];
+1803861959 [label="L18\lLINENUMBER 2947 L18\lALOAD 0\lLLOAD 4\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwStartingOffset : J\l"];
+822989009 [label="L2\lFRAME FULL [com/sleepycat/je/log/FileManager$LogEndFileDescriptor J [B J I I [B] [java/lang/Throwable]\lASTORE 11\lALOAD 8\lMONITOREXIT\l"];
+1214634681 [label="L13\lLINENUMBER 2927 L13\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lGETFIELD com/sleepycat/je/log/FileManager.nWriteQueueOverflow : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL14\lLINENUMBER 2937 L14\lGETSTATIC com/sleepycat/je/utilint/RelatchRequiredException.relatchRequiredException : Lcom/sleepycat/je/utilint/RelatchRequiredException;\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1385960383 [label="L20\lLINENUMBER 2951 L20\lNEW com/sleepycat/je/EnvironmentFailureException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lL21\lLINENUMBER 2952 L21\lINVOKESTATIC com/sleepycat/je/log/FileManager.access$1200 (Lcom/sleepycat/je/log/FileManager;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC com/sleepycat/je/dbi/EnvironmentFailureReason.LOG_INTEGRITY : Lcom/sleepycat/je/dbi/EnvironmentFailureReason;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"non-consecutive writes queued. qwPos=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" write destOffset=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL com/sleepycat/je/EnvironmentFailureException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentFailureReason;Ljava/lang/String;)V\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+206680055 [label="L3\lALOAD 11\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+346188241 [label="L1\lGOTO L24\l"];
+402062698 [label="ICONST_1\lGOTO L10\l"];
+1279288275 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+573315883 [label="L0\lLINENUMBER 2924 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lL8\lLINENUMBER 2925 L8\lINVOKESTATIC com/sleepycat/je/log/FileManager.access$1100 (Lcom/sleepycat/je/log/FileManager;)I\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lISUB\lILOAD 7\lIF_ICMPGE L9\l"];
+274134714 [label="L12\lLINENUMBER 2940 L12\lFRAME APPEND [I]\lGETSTATIC com/sleepycat/je/log/FileManager$LogEndFileDescriptor.$assertionsDisabled : Z\lIFNE L15\l"];
+383374929 [label="L9\lFRAME APPEND [[B]\lICONST_0\l"];
+706135098 [label="L15\lLINENUMBER 2941 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lISTORE 10\lL16\lLINENUMBER 2942 L16\lILOAD 10\lIFNE L17\l"];
+27690540 [label="L17\lLINENUMBER 2950 L17\lFRAME APPEND [I]\lILOAD 10\lI2L\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwStartingOffset : J\lLADD\lLLOAD 4\lLCMP\lIFEQ L19\l"];
+487433526 [label="L19\lLINENUMBER 2958 L19\lFRAME SAME\lALOAD 3\lILOAD 6\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWrites : [B\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lILOAD 7\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL22\lLINENUMBER 2961 L22\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lILOAD 7\lIADD\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWritesPosition : I\lL23\lLINENUMBER 2962 L23\lALOAD 8\lMONITOREXIT\l"];
+1315309589 [label="L5\lLINENUMBER 2923 L5\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.queuedWrites : [B\lDUP\lASTORE 8\lMONITORENTER\l"];
+1773037857 [label="L10\lFRAME SAME1 I\lISTORE 9\lL11\lLINENUMBER 2926 L11\lILOAD 9\lIFEQ L12\l"];
+1233980649 [label="L6\lLINENUMBER 2919 L6\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/log/FileManager$LogEndFileDescriptor.dequeuePendingWrites ()V\lL7\lLINENUMBER 2920 L7\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\l"];
+472442028 [label="L24\lLINENUMBER 2963 L24\lFRAME APPEND [I I]\lLDC \"c14a5926-4f7d-4472-882d-94c832e4c5dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL25\l"];
+812340343 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.qwFileNum : J\lLLOAD 1\lLCMP\lIFEQ L15\l"];
 entry;
 exit;
-1921608461 -> 1938570626 [style=dashed, color=red]
-1921608461 -> 537657731
-848722628 -> 15161062
-1614009936 -> 1354766958
-1614009936 -> 1938570626 [style=dashed, color=red]
-1938570626 -> 1938570626 [style=dashed, color=red]
-1938570626 -> 150752603
-150752603 -> exit
-1076759987 -> 1614009936
-1076759987 -> 1354766958
-1076759987 -> 1938570626 [style=dashed, color=red]
-entry -> 1474665949
-186196710 -> 200588511
-186196710 -> 1938570626 [style=dashed, color=red]
-186196710 -> 1244059788
-200588511 -> 48367938
-200588511 -> 1938570626 [style=dashed, color=red]
-200588511 -> 1076759987
-15161062 -> 181938467
-15161062 -> 1621370617
-15161062 -> 1938570626 [style=dashed, color=red]
-1474665949 -> 848722628
-1474665949 -> 1926653196
-181938467 -> 186196710
-181938467 -> 1938570626 [style=dashed, color=red]
-1926653196 -> 848722628
-2130465578 -> exit
-2130465578 -> 1938570626 [style=dashed, color=red]
-1354766958 -> 1921608461
-1354766958 -> 1938570626 [style=dashed, color=red]
-1354766958 -> 1861223285
-48367938 -> 2130465578
-48367938 -> 1938570626 [style=dashed, color=red]
-48367938 -> 1076759987
-1621370617 -> 186196710
-1621370617 -> 1938570626 [style=dashed, color=red]
-1861223285 -> exit
-1861223285 -> 1938570626 [style=dashed, color=red]
-1043560367 -> exit
-537657731 -> 1043560367
-1244059788 -> exit
-1244059788 -> 1938570626 [style=dashed, color=red]
-1474665949[fontcolor="purple", penwidth=3, color="purple"];
-2130465578[fontcolor="purple", penwidth=3, color="purple"];
-1861223285[fontcolor="purple", penwidth=3, color="purple"];
-1043560367[fontcolor="purple", penwidth=3, color="purple"];
-150752603[fontcolor="purple", penwidth=3, color="purple"];
-1244059788[fontcolor="purple", penwidth=3, color="purple"];
+920743951 -> 1315309589
+920743951 -> 1233980649
+1803861959 -> 27690540
+1803861959 -> 822989009 [style=dashed, color=red]
+822989009 -> 822989009 [style=dashed, color=red]
+822989009 -> 206680055
+1214634681 -> exit
+1214634681 -> 822989009 [style=dashed, color=red]
+1385960383 -> exit
+1385960383 -> 822989009 [style=dashed, color=red]
+206680055 -> exit
+346188241 -> 472442028
+402062698 -> 822989009 [style=dashed, color=red]
+402062698 -> 1773037857
+1279288275 -> exit
+1279288275 -> 822989009 [style=dashed, color=red]
+entry -> 920743951
+573315883 -> 402062698
+573315883 -> 383374929
+573315883 -> 822989009 [style=dashed, color=red]
+274134714 -> 706135098
+274134714 -> 822989009 [style=dashed, color=red]
+274134714 -> 812340343
+383374929 -> 822989009 [style=dashed, color=red]
+383374929 -> 1773037857
+706135098 -> 1803861959
+706135098 -> 27690540
+706135098 -> 822989009 [style=dashed, color=red]
+27690540 -> 487433526
+27690540 -> 822989009 [style=dashed, color=red]
+27690540 -> 1385960383
+487433526 -> 822989009 [style=dashed, color=red]
+487433526 -> 346188241
+1315309589 -> 573315883
+1773037857 -> 274134714
+1773037857 -> 822989009 [style=dashed, color=red]
+1773037857 -> 1214634681
+1233980649 -> 1315309589
+472442028 -> exit
+812340343 -> 1279288275
+812340343 -> 706135098
+812340343 -> 822989009 [style=dashed, color=red]
+1279288275[fontcolor="purple", penwidth=3, color="purple"];
+920743951[fontcolor="purple", penwidth=3, color="purple"];
+1214634681[fontcolor="purple", penwidth=3, color="purple"];
+1385960383[fontcolor="purple", penwidth=3, color="purple"];
+206680055[fontcolor="purple", penwidth=3, color="purple"];
+472442028[fontcolor="purple", penwidth=3, color="purple"];
 }

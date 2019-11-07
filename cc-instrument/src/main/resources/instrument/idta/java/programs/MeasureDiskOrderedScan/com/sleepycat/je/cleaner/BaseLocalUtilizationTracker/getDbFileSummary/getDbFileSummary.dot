@@ -1,21 +1,21 @@
 digraph getDbFileSummary {
 node [shape=record];
-1452105703 [label="L1\lLINENUMBER 156 L1\lFRAME CHOP 1\lACONST_NULL\lLDC \"6f2b80d9-77b3-424b-b3b4-791b1da72e5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL12\l"];
-132243771 [label="L4\lLINENUMBER 152 L4\lFRAME APPEND [com/sleepycat/je/cleaner/DbFileSummaryMap]\lALOAD 4\lLLOAD 2\lL8\lLINENUMBER 153 L8\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lICONST_1\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL9\lLINENUMBER 154 L9\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getFileManager ()Lcom/sleepycat/je/log/FileManager;\lL10\lLINENUMBER 153 L10\lINVOKEVIRTUAL com/sleepycat/je/cleaner/DbFileSummaryMap.get (Ljava/lang/Long;ZZLcom/sleepycat/je/log/FileManager;)Lcom/sleepycat/je/cleaner/DbFileSummary;\lL11\lLINENUMBER 152 L11\lLDC \"6f2b80d9-77b3-424b-b3b4-791b1da72e5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
-278374512 [label="L5\lLINENUMBER 143 L5\lNEW com/sleepycat/je/cleaner/DbFileSummaryMap\lDUP\lICONST_1\lINVOKESPECIAL com/sleepycat/je/cleaner/DbFileSummaryMap.\<init\> (Z)V\lASTORE 4\lL6\lLINENUMBER 144 L6\lALOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/DbFileSummaryMap.init (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL7\lLINENUMBER 145 L7\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.dbMap : Ljava/util/Map;\lALOAD 1\lALOAD 4\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
-111811905 [label="L2\lLINENUMBER 141 L2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.dbMap : Ljava/util/Map;\lALOAD 1\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/cleaner/DbFileSummaryMap\lASTORE 4\lL3\lLINENUMBER 142 L3\lALOAD 4\lIFNONNULL L4\l"];
-586588899 [label="L0\lLINENUMBER 140 L0\lLDC \"6f2b80d9-77b3-424b-b3b4-791b1da72e5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lIFNULL L1\l"];
+22885035 [label="L4\lLINENUMBER 152 L4\lFRAME APPEND [com/sleepycat/je/cleaner/DbFileSummaryMap]\lALOAD 4\lLLOAD 2\lL8\lLINENUMBER 153 L8\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lICONST_1\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL9\lLINENUMBER 154 L9\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getFileManager ()Lcom/sleepycat/je/log/FileManager;\lL10\lLINENUMBER 153 L10\lINVOKEVIRTUAL com/sleepycat/je/cleaner/DbFileSummaryMap.get (Ljava/lang/Long;ZZLcom/sleepycat/je/log/FileManager;)Lcom/sleepycat/je/cleaner/DbFileSummary;\lL11\lLINENUMBER 152 L11\lLDC \"3c4ca25f-9e66-4cd4-9db6-05240d8fe414\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+596532346 [label="L1\lLINENUMBER 156 L1\lFRAME CHOP 1\lACONST_NULL\lLDC \"3c4ca25f-9e66-4cd4-9db6-05240d8fe414\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL12\l"];
+145240666 [label="L5\lLINENUMBER 143 L5\lNEW com/sleepycat/je/cleaner/DbFileSummaryMap\lDUP\lICONST_1\lINVOKESPECIAL com/sleepycat/je/cleaner/DbFileSummaryMap.\<init\> (Z)V\lASTORE 4\lL6\lLINENUMBER 144 L6\lALOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/DbFileSummaryMap.init (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL7\lLINENUMBER 145 L7\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.dbMap : Ljava/util/Map;\lALOAD 1\lALOAD 4\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+215004569 [label="L0\lLINENUMBER 140 L0\lLDC \"3c4ca25f-9e66-4cd4-9db6-05240d8fe414\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lIFNULL L1\l"];
+259972393 [label="L2\lLINENUMBER 141 L2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseLocalUtilizationTracker.dbMap : Ljava/util/Map;\lALOAD 1\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/cleaner/DbFileSummaryMap\lASTORE 4\lL3\lLINENUMBER 142 L3\lALOAD 4\lIFNONNULL L4\l"];
 entry;
 exit;
-entry -> 586588899
-1452105703 -> exit
-132243771 -> exit
-278374512 -> 132243771
-111811905 -> 132243771
-111811905 -> 278374512
-586588899 -> 1452105703
-586588899 -> 111811905
-1452105703[fontcolor="purple", penwidth=3, color="purple"];
-132243771[fontcolor="purple", penwidth=3, color="purple"];
-586588899[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 215004569
+22885035 -> exit
+596532346 -> exit
+145240666 -> 22885035
+215004569 -> 596532346
+215004569 -> 259972393
+259972393 -> 22885035
+259972393 -> 145240666
+22885035[fontcolor="purple", penwidth=3, color="purple"];
+596532346[fontcolor="purple", penwidth=3, color="purple"];
+215004569[fontcolor="purple", penwidth=3, color="purple"];
 }

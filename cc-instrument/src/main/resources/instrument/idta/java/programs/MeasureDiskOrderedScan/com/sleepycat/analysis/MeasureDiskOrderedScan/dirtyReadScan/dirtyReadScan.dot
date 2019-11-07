@@ -1,0 +1,34 @@
+digraph dirtyReadScan {
+node [shape=record];
+1943448768 [label="L9\lLINENUMBER 344 L9\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkAnyKey (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+538441944 [label="L13\lLINENUMBER 347 L13\lALOAD 0\lALOAD 2\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkData (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+456195246 [label="L6\lLINENUMBER 340 L6\lFRAME APPEND [com/sleepycat/je/Cursor I]\lALOAD 3\lALOAD 1\lALOAD 2\lGETSTATIC com/sleepycat/je/LockMode.READ_UNCOMMITTED : Lcom/sleepycat/je/LockMode;\lINVOKEVIRTUAL com/sleepycat/je/Cursor.getNext (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/LockMode;)Lcom/sleepycat/je/OperationStatus;\lGETSTATIC com/sleepycat/je/OperationStatus.SUCCESS : Lcom/sleepycat/je/OperationStatus;\lIF_ACMPNE L7\l"];
+1872754705 [label="L10\lLINENUMBER 342 L10\lALOAD 0\lALOAD 1\lILOAD 4\lI2L\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkLongKey (Lcom/sleepycat/je/DatabaseEntry;J)V\lGOTO L11\l"];
+554311943 [label="L3\lLINENUMBER 338 L3\lFRAME APPEND [com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry]\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lACONST_NULL\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/Database.openCursor (Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/CursorConfig;)Lcom/sleepycat/je/Cursor;\lASTORE 3\lL5\lLINENUMBER 339 L5\lICONST_0\lISTORE 4\l"];
+1078084392 [label="L11\lLINENUMBER 346 L11\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.keysOnly : Z\lIFNE L12\l"];
+940668612 [label="L7\lLINENUMBER 351 L7\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/Cursor.close ()V\lL14\lLINENUMBER 352 L14\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.nRecords : I\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lILOAD 4\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkEquals (Ljava/lang/Object;Ljava/lang/Object;)V\lL15\lLINENUMBER 353 L15\lLDC \"0221af5d-f1f5-4dd1-99de-fe8a7d0fc445\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
+819511714 [label="L12\lLINENUMBER 349 L12\lFRAME SAME\lIINC 4 1\lGOTO L6\l"];
+1914319623 [label="L0\lLINENUMBER 333 L0\lLDC \"0221af5d-f1f5-4dd1-99de-fe8a7d0fc445\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 1\lL1\lLINENUMBER 334 L1\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 2\lL2\lLINENUMBER 335 L2\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.keysOnly : Z\lIFEQ L3\l"];
+1108126446 [label="L4\lLINENUMBER 336 L4\lALOAD 2\lICONST_0\lICONST_0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.setPartial (IIZ)V\l"];
+535683314 [label="L8\lLINENUMBER 341 L8\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.sequentialWrites : Z\lIFEQ L9\l"];
+entry;
+exit;
+554311943 -> 456195246
+940668612 -> exit
+819511714 -> 456195246
+entry -> 1914319623
+1943448768 -> 1078084392
+538441944 -> 819511714
+456195246 -> 940668612
+456195246 -> 535683314
+1872754705 -> 1078084392
+1078084392 -> 538441944
+1078084392 -> 819511714
+1914319623 -> 554311943
+1914319623 -> 1108126446
+1108126446 -> 554311943
+535683314 -> 1943448768
+535683314 -> 1872754705
+940668612[fontcolor="purple", penwidth=3, color="purple"];
+1914319623[fontcolor="purple", penwidth=3, color="purple"];
+}

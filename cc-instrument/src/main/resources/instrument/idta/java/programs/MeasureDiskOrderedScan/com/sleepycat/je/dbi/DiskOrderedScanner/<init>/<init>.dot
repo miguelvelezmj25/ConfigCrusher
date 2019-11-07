@@ -1,0 +1,50 @@
+digraph <init> {
+node [shape=record];
+1994979210 [label="L13\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner [Lcom/sleepycat/je/dbi/DatabaseImpl; com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor I I I I J J I] [com/sleepycat/je/dbi/DiskOrderedScanner I]\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.keysOnly : Z\lL14\lLINENUMBER 610 L14\lALOAD 0\lILOAD 4\lIFNE L15\l"];
+460561134 [label="ILOAD 6\lIFEQ L16\l"];
+230457064 [label="L15\lFRAME SAME1 com/sleepycat/je/dbi/DiskOrderedScanner\lICONST_1\lGOTO L17\l"];
+860333267 [label="L31\lLINENUMBER 643 L31\lFRAME SAME\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.binDeltas : Ljava/util/ArrayList;\lL35\lLINENUMBER 644 L35\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.deferredLsns : Ljava/util/LinkedList;\l"];
+1568310672 [label="L11\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner [Lcom/sleepycat/je/dbi/DatabaseImpl; com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor I I I I J J I] [com/sleepycat/je/dbi/DiskOrderedScanner]\lICONST_1\lGOTO L13\l"];
+706116737 [label="ILOAD 5\lIFNE L15\l"];
+1702388887 [label="L27\lLINENUMBER 625 L27\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dbid2dbidxMap : Ljava/util/Map;\lALOAD 1\lILOAD 12\lAALOAD\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lILOAD 12\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL28\lLINENUMBER 627 L28\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dbs : [Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;\lILOAD 12\lNEW com/sleepycat/je/dbi/DiskOrderedScanner$DBContext\lDUP\lILOAD 12\lALOAD 1\lILOAD 12\lAALOAD\lINVOKESPECIAL com/sleepycat/je/dbi/DiskOrderedScanner$DBContext.\<init\> (ILcom/sleepycat/je/dbi/DatabaseImpl;)V\lAASTORE\lL29\lLINENUMBER 623 L29\lIINC 12 1\lGOTO L25\l"];
+779668675 [label="L34\lLINENUMBER 646 L34\lFRAME SAME\lLDC \"08ad437b-5996-4afd-aaed-9e1e07c0ee47\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL36\l"];
+537508174 [label="L32\lLINENUMBER 640 L32\lALOAD 0\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.binDeltas : Ljava/util/ArrayList;\lL33\lLINENUMBER 641 L33\lALOAD 0\lNEW java/util/LinkedList\lDUP\lINVOKESPECIAL java/util/LinkedList.\<init\> ()V\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.deferredLsns : Ljava/util/LinkedList;\lGOTO L34\l"];
+1898733107 [label="L25\lFRAME APPEND [I]\lILOAD 12\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.numDBs : I\lIF_ICMPGE L26\l"];
+1989086738 [label="L26\lLINENUMBER 630 L26\lFRAME SAME\lALOAD 0\lNEW com/sleepycat/je/dbi/DiskOrderedScanner$1\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DiskOrderedScanner$1.\<init\> (Lcom/sleepycat/je/dbi/DiskOrderedScanner;)V\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.lsnAcc : Lcom/sleepycat/je/dbi/LSNAccumulator;\lL30\lLINENUMBER 639 L30\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.binsOnly : Z\lIFEQ L31\l"];
+1301807325 [label="L0\lLINENUMBER 598 L0\lLDC \"08ad437b-5996-4afd-aaed-9e1e07c0ee47\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 573 L1\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.localMemoryUsage : J\lL2\lLINENUMBER 575 L2\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.globalMemoryUsage : J\lL3\lLINENUMBER 577 L3\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.accumulatedMemDelta : J\lL4\lLINENUMBER 579 L4\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.numLsns : J\lL5\lLINENUMBER 600 L5\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.processor : Lcom/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor;\lL6\lLINENUMBER 602 L6\lALOAD 0\lALOAD 1\lICONST_0\lAALOAD\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL7\lLINENUMBER 604 L7\lALOAD 0\lALOAD 1\lICONST_0\lAALOAD\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dupDBs : Z\lL8\lLINENUMBER 606 L8\lALOAD 0\lILOAD 3\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.scanSerial : Z\lL9\lLINENUMBER 608 L9\lALOAD 0\lILOAD 6\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.countOnly : Z\lL10\lLINENUMBER 609 L10\lALOAD 0\lILOAD 5\lIFNE L11\l"];
+107131076 [label="L16\lFRAME SAME1 com/sleepycat/je/dbi/DiskOrderedScanner\lICONST_0\l"];
+1757922782 [label="L17\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner [Lcom/sleepycat/je/dbi/DatabaseImpl; com/sleepycat/je/dbi/DiskOrderedScanner$RecordProcessor I I I I J J I] [com/sleepycat/je/dbi/DiskOrderedScanner I]\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.binsOnly : Z\lL18\lLINENUMBER 612 L18\lALOAD 0\lLLOAD 7\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.lsnBatchSize : J\lL19\lLINENUMBER 613 L19\lALOAD 0\lLLOAD 9\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.memoryLimit : J\lL20\lLINENUMBER 615 L20\lALOAD 0\lILOAD 11\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.debug : Z\lL21\lLINENUMBER 617 L21\lALOAD 0\lALOAD 1\lARRAYLENGTH\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.numDBs : I\lL22\lLINENUMBER 619 L22\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.numDBs : I\lANEWARRAY com/sleepycat/je/dbi/DiskOrderedScanner$DBContext\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dbs : [Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;\lL23\lLINENUMBER 621 L23\lALOAD 0\lNEW java/util/HashMap\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.numDBs : I\lINVOKESPECIAL java/util/HashMap.\<init\> (I)V\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dbid2dbidxMap : Ljava/util/Map;\lL24\lLINENUMBER 623 L24\lICONST_0\lISTORE 12\l"];
+2071695056 [label="L12\lFRAME SAME1 com/sleepycat/je/dbi/DiskOrderedScanner\lICONST_0\l"];
+73612785 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner.dupDBs : Z\lIFNE L15\l"];
+2035377435 [label="ILOAD 6\lIFEQ L12\l"];
+entry;
+exit;
+1994979210 -> 230457064
+1994979210 -> 73612785
+460561134 -> 230457064
+460561134 -> 107131076
+230457064 -> 1757922782
+860333267 -> 779668675
+1568310672 -> 1994979210
+706116737 -> 460561134
+706116737 -> 230457064
+1702388887 -> 1898733107
+779668675 -> exit
+537508174 -> 779668675
+1898733107 -> 1989086738
+1898733107 -> 1702388887
+1989086738 -> 860333267
+1989086738 -> 537508174
+entry -> 1301807325
+1301807325 -> 1568310672
+1301807325 -> 2035377435
+107131076 -> 1757922782
+1757922782 -> 1898733107
+2071695056 -> 1994979210
+73612785 -> 230457064
+73612785 -> 706116737
+2035377435 -> 1568310672
+2035377435 -> 2071695056
+1301807325[fontcolor="purple", penwidth=3, color="purple"];
+779668675[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,22 @@
+digraph <init> {
+node [shape=record];
+895220060 [label="L0\lLINENUMBER 69 L0\lLDC \"47fe1923-ccb0-4791-a31d-7dc21229944f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 70 L1\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL2\lLINENUMBER 71 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CLEANER_FORCE_CLEAN_FILES : Lcom/sleepycat/je/config/ConfigParam;\lL3\lLINENUMBER 72 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.get (Lcom/sleepycat/je/config/ConfigParam;)Ljava/lang/String;\lASTORE 2\lL4\lLINENUMBER 73 L4\lALOAD 0\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/cleaner/FilesToMigrate.parseForceCleanFiles (Ljava/lang/String;)V\lL5\lLINENUMBER 75 L5\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CLEANER_UPGRADE_TO_LOG_VERSION : Lcom/sleepycat/je/config/IntConfigParam;\lL6\lLINENUMBER 76 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.upgradeToVersion : I\lL7\lLINENUMBER 77 L7\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FilesToMigrate.upgradeToVersion : I\lICONST_M1\lIF_ICMPNE L8\l"];
+1272147687 [label="L8\lLINENUMBER 81 L8\lFRAME FULL [com/sleepycat/je/cleaner/FilesToMigrate com/sleepycat/je/dbi/EnvironmentImpl java/lang/String] []\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FilesToMigrate.upgradeToVersion : I\lIFEQ L10\l"];
+1578650157 [label="L9\lLINENUMBER 78 L9\lALOAD 0\lBIPUSH 15\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.upgradeToVersion : I\l"];
+1828762985 [label="L11\lFRAME FULL [com/sleepycat/je/cleaner/FilesToMigrate com/sleepycat/je/dbi/EnvironmentImpl java/lang/String] [com/sleepycat/je/cleaner/FilesToMigrate I]\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.checkLogVersion : Z\lL12\lLINENUMBER 82 L12\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.nextAvailable : Z\lL13\lLINENUMBER 83 L13\lALOAD 0\lLDC -1\lPUTFIELD com/sleepycat/je/cleaner/FilesToMigrate.nextFile : J\lL14\lLINENUMBER 84 L14\lLDC \"47fe1923-ccb0-4791-a31d-7dc21229944f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL15\l"];
+464407404 [label="L10\lFRAME SAME1 com/sleepycat/je/cleaner/FilesToMigrate\lICONST_0\l"];
+1909837916 [label="ICONST_1\lGOTO L11\l"];
+entry;
+exit;
+895220060 -> 1272147687
+895220060 -> 1578650157
+entry -> 895220060
+1272147687 -> 464407404
+1272147687 -> 1909837916
+1578650157 -> 1272147687
+1828762985 -> exit
+464407404 -> 1828762985
+1909837916 -> 1828762985
+895220060[fontcolor="purple", penwidth=3, color="purple"];
+1828762985[fontcolor="purple", penwidth=3, color="purple"];
+}

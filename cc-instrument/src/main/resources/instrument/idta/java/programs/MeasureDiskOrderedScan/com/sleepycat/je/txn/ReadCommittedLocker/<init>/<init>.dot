@@ -1,26 +1,26 @@
 digraph <init> {
 node [shape=record];
-1275462019 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/ReadCommittedLocker.getBuddy ()Lcom/sleepycat/je/txn/Locker;\lINSTANCEOF com/sleepycat/je/txn/Txn\lIFNE L5\l"];
-611153748 [label="L5\lLINENUMBER 44 L5\lFRAME FULL [com/sleepycat/je/txn/ReadCommittedLocker com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lLDC \"6e5e0b93-07e9-44a0-96c5-43a66cb9b5c6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
-1546795089 [label="L3\lLINENUMBER 39 L3\lFRAME FULL [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker]\lINVOKESPECIAL com/sleepycat/je/txn/BuddyLocker.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)V\lL4\lLINENUMBER 43 L4\lGETSTATIC com/sleepycat/je/txn/ReadCommittedLocker.$assertionsDisabled : Z\lIFNE L5\l"];
-1262259209 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"6e5e0b93-07e9-44a0-96c5-43a66cb9b5c6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-961161515 [label="L1\lFRAME FULL [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] [U com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 2\l"];
-993551328 [label="L0\lLINENUMBER 39 L0\lLDC \"6e5e0b93-07e9-44a0-96c5-43a66cb9b5c6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lINSTANCEOF com/sleepycat/je/txn/ReadCommittedLocker\lIFEQ L1\l"];
-582263091 [label="ALOAD 2\lCHECKCAST com/sleepycat/je/txn/ReadCommittedLocker\lL2\lLINENUMBER 41 L2\lINVOKEVIRTUAL com/sleepycat/je/txn/ReadCommittedLocker.getBuddy ()Lcom/sleepycat/je/txn/Locker;\lGOTO L3\l"];
+1618591352 [label="L1\lFRAME FULL [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] [U com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 2\l"];
+834716123 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/ReadCommittedLocker.getBuddy ()Lcom/sleepycat/je/txn/Locker;\lINSTANCEOF com/sleepycat/je/txn/Txn\lIFNE L5\l"];
+226379588 [label="L0\lLINENUMBER 39 L0\lLDC \"d15c6dd9-52d2-4eb6-a90a-8d8a62102e45\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lINSTANCEOF com/sleepycat/je/txn/ReadCommittedLocker\lIFEQ L1\l"];
+1316743991 [label="L3\lLINENUMBER 39 L3\lFRAME FULL [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] [U com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker]\lINVOKESPECIAL com/sleepycat/je/txn/BuddyLocker.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)V\lL4\lLINENUMBER 43 L4\lGETSTATIC com/sleepycat/je/txn/ReadCommittedLocker.$assertionsDisabled : Z\lIFNE L5\l"];
+1702073851 [label="ALOAD 2\lCHECKCAST com/sleepycat/je/txn/ReadCommittedLocker\lL2\lLINENUMBER 41 L2\lINVOKEVIRTUAL com/sleepycat/je/txn/ReadCommittedLocker.getBuddy ()Lcom/sleepycat/je/txn/Locker;\lGOTO L3\l"];
+1707258319 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"d15c6dd9-52d2-4eb6-a90a-8d8a62102e45\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+484910053 [label="L5\lLINENUMBER 44 L5\lFRAME FULL [com/sleepycat/je/txn/ReadCommittedLocker com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lLDC \"d15c6dd9-52d2-4eb6-a90a-8d8a62102e45\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
 entry;
 exit;
-entry -> 993551328
-1275462019 -> 611153748
-1275462019 -> 1262259209
-611153748 -> exit
-1546795089 -> 1275462019
-1546795089 -> 611153748
-1262259209 -> exit
-961161515 -> 1546795089
-993551328 -> 961161515
-993551328 -> 582263091
-582263091 -> 1546795089
-611153748[fontcolor="purple", penwidth=3, color="purple"];
-1262259209[fontcolor="purple", penwidth=3, color="purple"];
-993551328[fontcolor="purple", penwidth=3, color="purple"];
+1618591352 -> 1316743991
+entry -> 226379588
+834716123 -> 1707258319
+834716123 -> 484910053
+226379588 -> 1618591352
+226379588 -> 1702073851
+1316743991 -> 834716123
+1316743991 -> 484910053
+1702073851 -> 1316743991
+1707258319 -> exit
+484910053 -> exit
+226379588[fontcolor="purple", penwidth=3, color="purple"];
+1707258319[fontcolor="purple", penwidth=3, color="purple"];
+484910053[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,26 +1,26 @@
 digraph <init> {
 node [shape=record];
-373489354 [label="L6\lLINENUMBER 315 L6\lALOAD 0\lALOAD 2\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$000 (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;J)I\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\lGOTO L7\l"];
-964853320 [label="L7\lLINENUMBER 319 L7\lFRAME SAME\lLDC \"abd28e9d-beac-4083-b868-46833d7e6c5b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
-1714686255 [label="L5\lLINENUMBER 317 L5\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\l"];
-1584653993 [label="L0\lLINENUMBER 308 L0\lLDC \"abd28e9d-beac-4083-b868-46833d7e6c5b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 5\lINVOKESPECIAL java/lang/ref/WeakReference.\<init\> (Ljava/lang/Object;)V\lL1\lLINENUMBER 309 L1\lALOAD 0\lLLOAD 3\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.binLsn : J\lL2\lLINENUMBER 310 L2\lALOAD 0\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.fullBinLsn : J\lL3\lLINENUMBER 312 L3\lGETSTATIC com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.$assertionsDisabled : Z\lIFNE L4\l"];
-993823411 [label="L4\lLINENUMBER 314 L4\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef com/sleepycat/je/dbi/DiskOrderedScanner com/sleepycat/je/dbi/DiskOrderedScanner$DBContext J com/sleepycat/je/tree/BIN] []\lLLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFEQ L5\l"];
-806880222 [label="LLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFNE L4\l"];
-1464146981 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"abd28e9d-beac-4083-b868-46833d7e6c5b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1604945038 [label="L5\lLINENUMBER 317 L5\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\l"];
+1407355984 [label="L6\lLINENUMBER 315 L6\lALOAD 0\lALOAD 2\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$000 (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;J)I\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\lGOTO L7\l"];
+2123050254 [label="LLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFNE L4\l"];
+742896541 [label="L0\lLINENUMBER 308 L0\lLDC \"95444c79-1805-4b58-af0c-bc2264f6aa34\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 5\lINVOKESPECIAL java/lang/ref/WeakReference.\<init\> (Ljava/lang/Object;)V\lL1\lLINENUMBER 309 L1\lALOAD 0\lLLOAD 3\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.binLsn : J\lL2\lLINENUMBER 310 L2\lALOAD 0\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.fullBinLsn : J\lL3\lLINENUMBER 312 L3\lGETSTATIC com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.$assertionsDisabled : Z\lIFNE L4\l"];
+690269311 [label="L4\lLINENUMBER 314 L4\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef com/sleepycat/je/dbi/DiskOrderedScanner com/sleepycat/je/dbi/DiskOrderedScanner$DBContext J com/sleepycat/je/tree/BIN] []\lLLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFEQ L5\l"];
+1315118468 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"95444c79-1805-4b58-af0c-bc2264f6aa34\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1948657791 [label="L7\lLINENUMBER 319 L7\lFRAME SAME\lLDC \"95444c79-1805-4b58-af0c-bc2264f6aa34\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
 entry;
 exit;
-373489354 -> 964853320
-964853320 -> exit
-entry -> 1584653993
-1714686255 -> 964853320
-1584653993 -> 993823411
-1584653993 -> 806880222
-993823411 -> 373489354
-993823411 -> 1714686255
-806880222 -> 993823411
-806880222 -> 1464146981
-1464146981 -> exit
-964853320[fontcolor="purple", penwidth=3, color="purple"];
-1584653993[fontcolor="purple", penwidth=3, color="purple"];
-1464146981[fontcolor="purple", penwidth=3, color="purple"];
+1604945038 -> 1948657791
+entry -> 742896541
+1407355984 -> 1948657791
+2123050254 -> 690269311
+2123050254 -> 1315118468
+742896541 -> 2123050254
+742896541 -> 690269311
+690269311 -> 1604945038
+690269311 -> 1407355984
+1315118468 -> exit
+1948657791 -> exit
+742896541[fontcolor="purple", penwidth=3, color="purple"];
+1315118468[fontcolor="purple", penwidth=3, color="purple"];
+1948657791[fontcolor="purple", penwidth=3, color="purple"];
 }

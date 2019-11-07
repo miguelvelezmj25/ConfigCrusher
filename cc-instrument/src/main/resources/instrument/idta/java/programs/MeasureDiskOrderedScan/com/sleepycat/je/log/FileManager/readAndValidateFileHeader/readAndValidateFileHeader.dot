@@ -1,0 +1,9 @@
+digraph readAndValidateFileHeader {
+node [shape=record];
+1345183966 [label="L0\lLINENUMBER 1498 L0\lLDC \"5f8b5a5a-994d-4740-ae61-7e9f90a58bc7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lASTORE 5\lL1\lLINENUMBER 1499 L1\lALOAD 5\lLLOAD 3\lICONST_0\lL2\lLINENUMBER 1500 L2\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.makeLsn (JI)J\lALOAD 1\lICONST_M1\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.getLogEntryAllowChecksumException (JLjava/io/RandomAccessFile;I)Lcom/sleepycat/je/log/entry/LogEntry;\lASTORE 6\lL3\lLINENUMBER 1502 L3\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getMainItem ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/log/FileHeader\lASTORE 7\lL4\lLINENUMBER 1503 L4\lALOAD 7\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 2\lLLOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/FileHeader.validate (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;J)I\lLDC \"5f8b5a5a-994d-4740-ae61-7e9f90a58bc7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL5\l"];
+entry;
+exit;
+entry -> 1345183966
+1345183966 -> exit
+1345183966[fontcolor="purple", penwidth=3, color="purple"];
+}

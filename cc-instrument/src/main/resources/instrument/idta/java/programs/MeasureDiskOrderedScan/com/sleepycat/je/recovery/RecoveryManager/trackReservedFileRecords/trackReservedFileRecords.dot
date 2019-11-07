@@ -1,19 +1,19 @@
 digraph trackReservedFileRecords {
 node [shape=record];
-382732772 [label="ALOAD 1\lL2\lLINENUMBER 2310 L2\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.isDeleted ()Z\lIFEQ L3\l"];
-343638600 [label="L0\lLINENUMBER 2309 L0\lLDC \"ee9f0602-081c-432a-9cdc-9367604a0d87\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_RESERVED_FILE_LN : Lcom/sleepycat/je/log/LogEntryType;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getLogType ()Lcom/sleepycat/je/log/LogEntryType;\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
-1118210437 [label="L3\lLINENUMBER 2314 L3\lFRAME SAME\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lALOAD 1\lL4\lLINENUMBER 2315 L4\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getKey ()[B\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ([B)V\lL5\lLINENUMBER 2314 L5\lINVOKESTATIC com/sleepycat/je/cleaner/ReservedFileInfo.entryToKey (Lcom/sleepycat/je/DatabaseEntry;)Ljava/lang/Long;\lASTORE 2\lL6\lLINENUMBER 2317 L6\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lALOAD 1\lL7\lLINENUMBER 2318 L7\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getData ()[B\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ([B)V\lL8\lLINENUMBER 2317 L8\lINVOKESTATIC com/sleepycat/je/cleaner/ReservedFileInfo.entryToObject (Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/cleaner/ReservedFileInfo;\lASTORE 3\lL9\lLINENUMBER 2320 L9\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFiles : Ljava/util/Set;\lALOAD 2\lINVOKEINTERFACE java/util/Set.add (Ljava/lang/Object;)Z\lPOP\lL10\lLINENUMBER 2321 L10\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFileDbs : Ljava/util/Set;\lALOAD 3\lGETFIELD com/sleepycat/je/cleaner/ReservedFileInfo.dbIds : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z\lPOP\lL11\lLINENUMBER 2322 L11\lLDC \"ee9f0602-081c-432a-9cdc-9367604a0d87\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL12\l"];
-1144862345 [label="L1\lLINENUMBER 2311 L1\lFRAME SAME\lLDC \"ee9f0602-081c-432a-9cdc-9367604a0d87\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1409812218 [label="L0\lLINENUMBER 2309 L0\lLDC \"cc05d9f1-114d-484f-9782-785e3ad1073f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_RESERVED_FILE_LN : Lcom/sleepycat/je/log/LogEntryType;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getLogType ()Lcom/sleepycat/je/log/LogEntryType;\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+749348323 [label="L1\lLINENUMBER 2311 L1\lFRAME SAME\lLDC \"cc05d9f1-114d-484f-9782-785e3ad1073f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1906748457 [label="ALOAD 1\lL2\lLINENUMBER 2310 L2\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.isDeleted ()Z\lIFEQ L3\l"];
+1201909369 [label="L3\lLINENUMBER 2314 L3\lFRAME SAME\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lALOAD 1\lL4\lLINENUMBER 2315 L4\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getKey ()[B\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ([B)V\lL5\lLINENUMBER 2314 L5\lINVOKESTATIC com/sleepycat/je/cleaner/ReservedFileInfo.entryToKey (Lcom/sleepycat/je/DatabaseEntry;)Ljava/lang/Long;\lASTORE 2\lL6\lLINENUMBER 2317 L6\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lALOAD 1\lL7\lLINENUMBER 2318 L7\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getData ()[B\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ([B)V\lL8\lLINENUMBER 2317 L8\lINVOKESTATIC com/sleepycat/je/cleaner/ReservedFileInfo.entryToObject (Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/cleaner/ReservedFileInfo;\lASTORE 3\lL9\lLINENUMBER 2320 L9\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFiles : Ljava/util/Set;\lALOAD 2\lINVOKEINTERFACE java/util/Set.add (Ljava/lang/Object;)Z\lPOP\lL10\lLINENUMBER 2321 L10\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFileDbs : Ljava/util/Set;\lALOAD 3\lGETFIELD com/sleepycat/je/cleaner/ReservedFileInfo.dbIds : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z\lPOP\lL11\lLINENUMBER 2322 L11\lLDC \"cc05d9f1-114d-484f-9782-785e3ad1073f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL12\l"];
 entry;
 exit;
-entry -> 343638600
-382732772 -> 1118210437
-382732772 -> 1144862345
-343638600 -> 382732772
-343638600 -> 1144862345
-1118210437 -> exit
-1144862345 -> exit
-343638600[fontcolor="purple", penwidth=3, color="purple"];
-1118210437[fontcolor="purple", penwidth=3, color="purple"];
-1144862345[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1409812218
+1409812218 -> 749348323
+1409812218 -> 1906748457
+749348323 -> exit
+1906748457 -> 749348323
+1906748457 -> 1201909369
+1201909369 -> exit
+1409812218[fontcolor="purple", penwidth=3, color="purple"];
+749348323[fontcolor="purple", penwidth=3, color="purple"];
+1201909369[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,16 +1,16 @@
 digraph getDiskTotalSpace {
 node [shape=record];
-1912274045 [label="L2\lLINENUMBER 1138 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\lL3\lLINENUMBER 1139 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL4\l"];
-1751044233 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL0\lLINENUMBER 1137 L0\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.fileStoreInfo : Lcom/sleepycat/je/utilint/FileStoreInfo;\lINVOKEVIRTUAL com/sleepycat/je/utilint/FileStoreInfo.getTotalSpace ()J\l"];
-1548259773 [label="L1\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+320982254 [label="L1\lLDC \"8b169214-9b2d-4bd2-adb0-e503d8ccd70d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1794790983 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL0\lLINENUMBER 1137 L0\lLDC \"8b169214-9b2d-4bd2-adb0-e503d8ccd70d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.fileStoreInfo : Lcom/sleepycat/je/utilint/FileStoreInfo;\lINVOKEVIRTUAL com/sleepycat/je/utilint/FileStoreInfo.getTotalSpace ()J\l"];
+685922383 [label="L2\lLINENUMBER 1138 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\lL3\lLINENUMBER 1139 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"8b169214-9b2d-4bd2-adb0-e503d8ccd70d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL4\l"];
 entry;
 exit;
-entry -> 1751044233
-1912274045 -> exit
-1751044233 -> 1912274045 [style=dashed, color=red]
-1751044233 -> 1548259773
-1548259773 -> exit
-1912274045[fontcolor="purple", penwidth=3, color="purple"];
-1751044233[fontcolor="purple", penwidth=3, color="purple"];
-1548259773[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1794790983
+320982254 -> exit
+1794790983 -> 320982254
+1794790983 -> 685922383 [style=dashed, color=red]
+685922383 -> exit
+320982254[fontcolor="purple", penwidth=3, color="purple"];
+1794790983[fontcolor="purple", penwidth=3, color="purple"];
+685922383[fontcolor="purple", penwidth=3, color="purple"];
 }

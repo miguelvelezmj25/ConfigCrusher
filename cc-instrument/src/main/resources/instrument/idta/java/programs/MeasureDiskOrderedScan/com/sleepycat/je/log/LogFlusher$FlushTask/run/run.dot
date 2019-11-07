@@ -1,37 +1,37 @@
 digraph run {
 node [shape=record];
-1929496970 [label="L8\lLINENUMBER 230 L8\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushSync ()V\lGOTO L9\l"];
-657427967 [label="L3\lLINENUMBER 229 L3\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.fsync : Z\lIFEQ L7\l"];
-2079130235 [label="L4\lLINENUMBER 244 L4\lGOTO L11\l"];
-709384024 [label="L7\lLINENUMBER 232 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushNoSync ()V\l"];
-1648250128 [label="L11\lLINENUMBER 245 L11\lFRAME SAME\lLDC \"3e266ff5-5c7c-469d-8fc3-7c90e5dceae9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
-585453628 [label="L1\lLINENUMBER 226 L1\lLDC \"3e266ff5-5c7c-469d-8fc3-7c90e5dceae9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1901291419 [label="L9\lLINENUMBER 235 L9\lFRAME SAME\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lL10\lLINENUMBER 236 L10\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\l"];
-1368461362 [label="L2\lLINENUMBER 238 L2\lFRAME FULL [com/sleepycat/je/log/LogFlusher$FlushTask] [java/lang/Throwable]\lASTORE 1\lL12\lLINENUMBER 239 L12\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L11\l"];
-521045316 [label="L13\lLINENUMBER 240 L13\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL14\lLINENUMBER 241 L14\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogger ()Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lL15\lLINENUMBER 240 L15\lINVOKESTATIC com/sleepycat/je/utilint/StoppableThread.handleUncaughtException (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Thread;Ljava/lang/Throwable;)V\l"];
-1437677044 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Throwable\lTRYCATCHBLOCK L3 L4 L2 java/lang/Throwable\lL0\lLINENUMBER 221 L0\lLDC \"3e266ff5-5c7c-469d-8fc3-7c90e5dceae9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL5\lLINENUMBER 222 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.getNTotalCommits ()J\lLSTORE 1\lL6\lLINENUMBER 225 L6\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lLCMP\lIFGT L3\l"];
+1526888682 [label="L9\lLINENUMBER 235 L9\lFRAME SAME\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lL10\lLINENUMBER 236 L10\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/log/LogFlusher$FlushTask.flushCount : I\l"];
+1864690236 [label="L7\lLINENUMBER 232 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushNoSync ()V\l"];
+429956535 [label="L1\lLINENUMBER 226 L1\lLDC \"f0859d76-c3b7-4791-a53b-f854592ae3d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1739770188 [label="L3\lLINENUMBER 229 L3\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.fsync : Z\lIFEQ L7\l"];
+419531344 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Throwable\lTRYCATCHBLOCK L3 L4 L2 java/lang/Throwable\lL0\lLINENUMBER 221 L0\lLDC \"f0859d76-c3b7-4791-a53b-f854592ae3d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL5\lLINENUMBER 222 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.getNTotalCommits ()J\lLSTORE 1\lL6\lLINENUMBER 225 L6\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.lastNCommits : J\lLCMP\lIFGT L3\l"];
+231177462 [label="L11\lLINENUMBER 245 L11\lFRAME SAME\lLDC \"f0859d76-c3b7-4791-a53b-f854592ae3d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
+1570969911 [label="L2\lLINENUMBER 238 L2\lFRAME FULL [com/sleepycat/je/log/LogFlusher$FlushTask] [java/lang/Throwable]\lASTORE 1\lL12\lLINENUMBER 239 L12\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L11\l"];
+1165623928 [label="L13\lLINENUMBER 240 L13\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL14\lLINENUMBER 241 L14\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogger ()Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lL15\lLINENUMBER 240 L15\lINVOKESTATIC com/sleepycat/je/utilint/StoppableThread.handleUncaughtException (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Thread;Ljava/lang/Throwable;)V\l"];
+705379406 [label="L8\lLINENUMBER 230 L8\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogFlusher$FlushTask.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.flushSync ()V\lGOTO L9\l"];
+1920244960 [label="L4\lLINENUMBER 244 L4\lGOTO L11\l"];
 entry;
 exit;
-657427967 -> 1929496970
-657427967 -> 709384024
-657427967 -> 1368461362 [style=dashed, color=red]
-709384024 -> 1901291419
-709384024 -> 1368461362 [style=dashed, color=red]
-585453628 -> exit
-521045316 -> 1648250128
-1437677044 -> 657427967
-1437677044 -> 585453628
-1437677044 -> 1368461362 [style=dashed, color=red]
-entry -> 1437677044
-1929496970 -> 1901291419
-1929496970 -> 1368461362 [style=dashed, color=red]
-2079130235 -> 1648250128
-1648250128 -> exit
-1901291419 -> 2079130235
-1901291419 -> 1368461362 [style=dashed, color=red]
-1368461362 -> 1648250128
-1368461362 -> 521045316
-1648250128[fontcolor="purple", penwidth=3, color="purple"];
-585453628[fontcolor="purple", penwidth=3, color="purple"];
-1437677044[fontcolor="purple", penwidth=3, color="purple"];
+1526888682 -> 1570969911 [style=dashed, color=red]
+1526888682 -> 1920244960
+1864690236 -> 1526888682
+1864690236 -> 1570969911 [style=dashed, color=red]
+419531344 -> 1739770188
+419531344 -> 429956535
+419531344 -> 1570969911 [style=dashed, color=red]
+231177462 -> exit
+1570969911 -> 231177462
+1570969911 -> 1165623928
+1165623928 -> 231177462
+entry -> 419531344
+429956535 -> exit
+1739770188 -> 1864690236
+1739770188 -> 1570969911 [style=dashed, color=red]
+1739770188 -> 705379406
+705379406 -> 1526888682
+705379406 -> 1570969911 [style=dashed, color=red]
+1920244960 -> 231177462
+429956535[fontcolor="purple", penwidth=3, color="purple"];
+419531344[fontcolor="purple", penwidth=3, color="purple"];
+231177462[fontcolor="purple", penwidth=3, color="purple"];
 }

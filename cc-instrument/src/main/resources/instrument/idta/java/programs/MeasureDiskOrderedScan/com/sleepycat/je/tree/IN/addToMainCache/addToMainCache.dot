@@ -1,0 +1,28 @@
+digraph addToMainCache {
+node [shape=record];
+1606068070 [label="L3\lLINENUMBER 2964 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isUpperIN ()Z\lIFEQ L4\l"];
+1073470519 [label="L4\lLINENUMBER 2973 L4\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.addBack (Lcom/sleepycat/je/tree/IN;)V\l"];
+2122963385 [label="L2\lLINENUMBER 2977 L2\lFRAME SAME\lALOAD 0\lINSTANCEOF com/sleepycat/je/tree/dupConvert/DBIN\lIFNE L5\l"];
+929757543 [label="L0\lLINENUMBER 2961 L0\lLDC \"cfda8919-a081-4e19-9bcd-c6061261c523\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInMemoryINs ()Lcom/sleepycat/je/dbi/INList;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/INList.add (Lcom/sleepycat/je/tree/IN;)V\lL1\lLINENUMBER 2963 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isDIN ()Z\lIFNE L2\l"];
+629979323 [label="L5\lLINENUMBER 2980 L5\lFRAME SAME\lLDC \"cfda8919-a081-4e19-9bcd-c6061261c523\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+368635820 [label="ALOAD 0\lINSTANCEOF com/sleepycat/je/tree/dupConvert/DIN\lIFNE L5\l"];
+789031675 [label="L6\lLINENUMBER 2978 L6\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.lazyCompress (Lcom/sleepycat/je/tree/IN;)V\l"];
+1015207289 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isDBIN ()Z\lIFNE L2\l"];
+entry;
+exit;
+1606068070 -> 1073470519
+1073470519 -> 2122963385
+entry -> 929757543
+2122963385 -> 629979323
+2122963385 -> 368635820
+929757543 -> 2122963385
+929757543 -> 1015207289
+629979323 -> exit
+368635820 -> 629979323
+368635820 -> 789031675
+789031675 -> 629979323
+1015207289 -> 1606068070
+1015207289 -> 2122963385
+929757543[fontcolor="purple", penwidth=3, color="purple"];
+629979323[fontcolor="purple", penwidth=3, color="purple"];
+}

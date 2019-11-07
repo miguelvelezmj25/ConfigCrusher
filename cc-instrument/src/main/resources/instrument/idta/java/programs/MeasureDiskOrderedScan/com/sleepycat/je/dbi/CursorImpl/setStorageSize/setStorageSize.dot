@@ -1,9 +1,9 @@
 digraph setStorageSize {
 node [shape=record];
-2067292131 [label="L0\lLINENUMBER 2447 L0\lLDC \"b445500a-9b8e-41fe-ade9-0a236cb561d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKESTATIC com/sleepycat/je/tree/StorageSize.getStorageSize (Lcom/sleepycat/je/tree/BIN;I)I\lPUTFIELD com/sleepycat/je/dbi/CursorImpl.storageSize : I\lL1\lLINENUMBER 2448 L1\lLDC \"b445500a-9b8e-41fe-ade9-0a236cb561d1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL2\l"];
+329996958 [label="L0\lLINENUMBER 2447 L0\lLDC \"0013a714-28ff-41d4-98a5-4c1ffc842c23\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKESTATIC com/sleepycat/je/tree/StorageSize.getStorageSize (Lcom/sleepycat/je/tree/BIN;I)I\lPUTFIELD com/sleepycat/je/dbi/CursorImpl.storageSize : I\lL1\lLINENUMBER 2448 L1\lLDC \"0013a714-28ff-41d4-98a5-4c1ffc842c23\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL2\l"];
 entry;
 exit;
-entry -> 2067292131
-2067292131 -> exit
-2067292131[fontcolor="purple", penwidth=3, color="purple"];
+329996958 -> exit
+entry -> 329996958
+329996958[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,0 +1,19 @@
+digraph <init> {
+node [shape=record];
+1473653021 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/cleaner/PackedOffsets.getExtraMemorySize ()I\lIFEQ L2\l"];
+997305227 [label="L2\lLINENUMBER 46 L2\lFRAME FULL [com/sleepycat/je/cleaner/PackedOffsets] []\lLDC \"5edf2400-97b0-4840-aa2c-d0affb4696e1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+1026226546 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"5edf2400-97b0-4840-aa2c-d0affb4696e1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1328005196 [label="L0\lLINENUMBER 39 L0\lLDC \"5edf2400-97b0-4840-aa2c-d0affb4696e1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 45 L1\lGETSTATIC com/sleepycat/je/cleaner/PackedOffsets.$assertionsDisabled : Z\lIFNE L2\l"];
+entry;
+exit;
+entry -> 1328005196
+1473653021 -> 997305227
+1473653021 -> 1026226546
+997305227 -> exit
+1026226546 -> exit
+1328005196 -> 1473653021
+1328005196 -> 997305227
+997305227[fontcolor="purple", penwidth=3, color="purple"];
+1026226546[fontcolor="purple", penwidth=3, color="purple"];
+1328005196[fontcolor="purple", penwidth=3, color="purple"];
+}

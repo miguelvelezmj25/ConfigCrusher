@@ -1,0 +1,32 @@
+digraph run {
+node [shape=record];
+639266779 [label="L5\lLINENUMBER 234 L5\lFRAME APPEND [D]\lALOAD 0\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.populate ()V\lL9\lLINENUMBER 235 L9\lGOTO L10\l"];
+531695406 [label="L3\lLINENUMBER 229 L3\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/Database.preload (Lcom/sleepycat/je/PreloadConfig;)Lcom/sleepycat/je/PreloadStats;\lPOP\l"];
+1649998033 [label="L10\lLINENUMBER 245 L10\lFRAME SAME\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lL2D\lDSTORE 3\lL13\lLINENUMBER 246 L13\lDLOAD 3\lDLOAD 1\lDSUB\lLDC 1000.0\lDDIV\lDSTORE 5\lL14\lLINENUMBER 247 L14\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.nRecords : I\lI2D\lDLOAD 5\lDDIV\lDSTORE 7\lL15\lLINENUMBER 248 L15\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"\nTotal seconds: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lDLOAD 5\lINVOKEVIRTUAL java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;\lLDC \" txn/sec: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lDLOAD 7\lINVOKEVIRTUAL java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL16\lLINENUMBER 249 L16\lALOAD 0\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.close ()V\lL17\lLINENUMBER 250 L17\lLDC \"f4169561-b4ff-4faf-b955-76ebec6ed20a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL18\l"];
+677513244 [label="L7\lLINENUMBER 240 L7\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.diskOrderedScan ()V\lL12\lLINENUMBER 241 L12\lGOTO L10\l"];
+6382745 [label="L0\lLINENUMBER 227 L0\lLDC \"f4169561-b4ff-4faf-b955-76ebec6ed20a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.open ()V\lL1\lLINENUMBER 228 L1\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.preload : Z\lIFEQ L2\l"];
+590144844 [label="L6\lLINENUMBER 237 L6\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.dirtyReadScan ()V\lL11\lLINENUMBER 238 L11\lGOTO L10\l"];
+830834354 [label="L8\lLINENUMBER 243 L8\lFRAME SAME\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.action : Lcom/sleepycat/analysis/MeasureDiskOrderedScan$Action;\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.fail (Ljava/lang/Object;)V\l"];
+991186263 [label="L2\lLINENUMBER 231 L2\lFRAME SAME\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lL2D\lDSTORE 1\lL4\lLINENUMBER 232 L4\lGETSTATIC com/sleepycat/analysis/MeasureDiskOrderedScan$1.$SwitchMap$com$sleepycat$analysis$MeasureDiskOrderedScan$Action : [I\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.action : Lcom/sleepycat/analysis/MeasureDiskOrderedScan$Action;\lINVOKEVIRTUAL com/sleepycat/analysis/MeasureDiskOrderedScan$Action.ordinal ()I\lIALOAD\lTABLESWITCH
+      1: L5
+      2: L6
+      3: L7
+      default: L8\l"];
+entry;
+exit;
+639266779 -> 1649998033
+entry -> 6382745
+531695406 -> 991186263
+1649998033 -> exit
+677513244 -> 1649998033
+6382745 -> 531695406
+6382745 -> 991186263
+590144844 -> 1649998033
+830834354 -> 1649998033
+991186263 -> 639266779
+991186263 -> 677513244
+991186263 -> 590144844
+991186263 -> 830834354
+1649998033[fontcolor="purple", penwidth=3, color="purple"];
+6382745[fontcolor="purple", penwidth=3, color="purple"];
+}

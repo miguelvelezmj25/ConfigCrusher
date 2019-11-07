@@ -1,0 +1,22 @@
+digraph diskOrderedScan {
+node [shape=record];
+541207044 [label="L0\lLINENUMBER 356 L0\lLDC \"2347a8ec-c8a9-46d9-9270-b701eb02bdaa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 1\lL1\lLINENUMBER 357 L1\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 2\lL2\lLINENUMBER 358 L2\lNEW com/sleepycat/je/DiskOrderedCursorConfig\lDUP\lINVOKESPECIAL com/sleepycat/je/DiskOrderedCursorConfig.\<init\> ()V\lASTORE 3\lL3\lLINENUMBER 359 L3\lALOAD 3\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.keysOnly : Z\lINVOKEVIRTUAL com/sleepycat/je/DiskOrderedCursorConfig.setKeysOnly (Z)Lcom/sleepycat/je/DiskOrderedCursorConfig;\lPOP\lL4\lLINENUMBER 360 L4\lALOAD 3\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.internalMemoryLimit : J\lINVOKEVIRTUAL com/sleepycat/je/DiskOrderedCursorConfig.setInternalMemoryLimit (J)Lcom/sleepycat/je/DiskOrderedCursorConfig;\lPOP\lL5\lLINENUMBER 361 L5\lALOAD 3\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.lsnBatchSize : J\lINVOKEVIRTUAL com/sleepycat/je/DiskOrderedCursorConfig.setLSNBatchSize (J)Lcom/sleepycat/je/DiskOrderedCursorConfig;\lPOP\lL6\lLINENUMBER 362 L6\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/Database.openCursor (Lcom/sleepycat/je/DiskOrderedCursorConfig;)Lcom/sleepycat/je/DiskOrderedCursor;\lASTORE 4\lL7\lLINENUMBER 363 L7\lICONST_0\lISTORE 5\l"];
+1670468377 [label="L9\lLINENUMBER 371 L9\lFRAME SAME\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/DiskOrderedCursor.close ()V\lL14\lLINENUMBER 372 L14\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.nRecords : I\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lILOAD 5\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkEquals (Ljava/lang/Object;Ljava/lang/Object;)V\lL15\lLINENUMBER 373 L15\lLDC \"2347a8ec-c8a9-46d9-9270-b701eb02bdaa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
+475604009 [label="L13\lLINENUMBER 367 L13\lALOAD 0\lALOAD 2\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkData (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+771373464 [label="L10\lLINENUMBER 365 L10\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.checkAnyKey (Lcom/sleepycat/je/DatabaseEntry;)V\lL11\lLINENUMBER 366 L11\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.keysOnly : Z\lIFNE L12\l"];
+582723546 [label="L8\lLINENUMBER 364 L8\lFRAME FULL [com/sleepycat/analysis/MeasureDiskOrderedScan com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/DiskOrderedCursorConfig com/sleepycat/je/DiskOrderedCursor I] []\lALOAD 4\lALOAD 1\lALOAD 2\lGETSTATIC com/sleepycat/je/LockMode.READ_UNCOMMITTED : Lcom/sleepycat/je/LockMode;\lINVOKEVIRTUAL com/sleepycat/je/DiskOrderedCursor.getNext (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/LockMode;)Lcom/sleepycat/je/OperationStatus;\lGETSTATIC com/sleepycat/je/OperationStatus.SUCCESS : Lcom/sleepycat/je/OperationStatus;\lIF_ACMPNE L9\l"];
+1671677199 [label="L12\lLINENUMBER 369 L12\lFRAME SAME\lIINC 5 1\lGOTO L8\l"];
+entry;
+exit;
+541207044 -> 582723546
+entry -> 541207044
+1670468377 -> exit
+475604009 -> 1671677199
+771373464 -> 475604009
+771373464 -> 1671677199
+582723546 -> 1670468377
+582723546 -> 771373464
+1671677199 -> 582723546
+541207044[fontcolor="purple", penwidth=3, color="purple"];
+1670468377[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,54 @@
+digraph evict {
+node [shape=record];
+897833092 [label="L7\lLINENUMBER 3010 L7\lFRAME SAME\lICONST_0\lISTORE 10\lL11\lLINENUMBER 3011 L11\lLDC -1\lLSTORE 11\lL12\lLINENUMBER 3013 L12\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDirty ()Z\lIFEQ L13\l"];
+1014945584 [label="L13\lLINENUMBER 3033 L13\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getBudgetedMemorySize ()J\lLSTORE 13\lL22\lLINENUMBER 3035 L22\lALOAD 2\lILOAD 3\lILOAD 10\lLLOAD 11\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.detachNode (IZJ)V\lL23\lLINENUMBER 3037 L23\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.nNodesEvicted : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL24\lLINENUMBER 3039 L24\lILOAD 10\lIFEQ L25\l"];
+235983039 [label="L14\lLINENUMBER 3019 L14\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFNE L15\l"];
+386114715 [label="L0\lLINENUMBER 2989 L0\lLDC \"037927ed-2b58-4966-bb9a-09bd146391f4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 6\lL1\lLINENUMBER 2990 L1\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 7\lL2\lLINENUMBER 2991 L2\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getOffHeapCache ()Lcom/sleepycat/je/evictor/OffHeapCache;\lASTORE 8\lL3\lLINENUMBER 2995 L3\lICONST_0\lISTORE 9\lL4\lLINENUMBER 2997 L4\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.useOffHeapCache : Z\lIFEQ L5\l"];
+145688600 [label="L5\lLINENUMBER 3002 L5\lFRAME FULL [com/sleepycat/je/evictor/Evictor com/sleepycat/je/tree/IN com/sleepycat/je/tree/IN I I com/sleepycat/je/evictor/Evictor$EvictionDebugStats com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/evictor/OffHeapCache I] []\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNormalizedLevel ()I\lICONST_2\lIF_ICMPNE L7\l"];
+168407582 [label="L26\lLINENUMBER 3040 L26\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.nDirtyNodesEvicted : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\l"];
+1159526884 [label="L9\lLINENUMBER 3005 L9\lALOAD 0\lALOAD 1\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/evictor/Evictor.skip (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/evictor/Evictor$EvictionDebugStats;)V\lL10\lLINENUMBER 3006 L10\lLCONST_0\lLDC \"037927ed-2b58-4966-bb9a-09bd146391f4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1718378155 [label="ALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDiskLimitViolation ()Ljava/lang/String;\lIFNULL L16\l"];
+236207346 [label="L28\lLINENUMBER 3044 L28\lALOAD 5\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor$EvictionDebugStats.incNumEvicted (Z)V\l"];
+744606528 [label="L15\lLINENUMBER 3020 L15\lFRAME APPEND [I J]\lALOAD 0\lALOAD 1\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/evictor/Evictor.skip (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/evictor/Evictor$EvictionDebugStats;)V\lL17\lLINENUMBER 3021 L17\lLCONST_0\lLDC \"037927ed-2b58-4966-bb9a-09bd146391f4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1044276625 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFEQ L5\l"];
+672159639 [label="L25\lLINENUMBER 3043 L25\lFRAME APPEND [J]\lALOAD 5\lIFNULL L27\l"];
+2027694307 [label="L8\lLINENUMBER 3003 L8\lALOAD 8\lALOAD 1\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.flushAndDiscardBINChildren (Lcom/sleepycat/je/tree/IN;Z)Z\lIFNE L7\l"];
+546176529 [label="L16\lLINENUMBER 3024 L16\lFRAME SAME\lALOAD 7\lALOAD 6\lALOAD 1\lL18\lLINENUMBER 3025 L18\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getLevel ()I\lALOAD 2\lL19\lLINENUMBER 3024 L19\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.coordinateWithCheckpoint (Lcom/sleepycat/je/dbi/DatabaseImpl;ILcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/log/Provisional;\lASTORE 13\lL20\lLINENUMBER 3027 L20\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.allowBinDeltas : Z\lALOAD 13\lILOAD 4\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.log (ZLcom/sleepycat/je/log/Provisional;ZLcom/sleepycat/je/tree/IN;)J\lLSTORE 11\lL21\lLINENUMBER 3030 L21\lICONST_1\lISTORE 10\l"];
+628915052 [label="ILOAD 9\lIFNE L13\l"];
+1920036170 [label="L6\lLINENUMBER 2998 L6\lALOAD 8\lALOAD 1\lCHECKCAST com/sleepycat/je/tree/BIN\lALOAD 2\lILOAD 3\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.storeEvictedBIN (Lcom/sleepycat/je/tree/BIN;Lcom/sleepycat/je/tree/IN;I)Z\lISTORE 9\l"];
+1101411927 [label="L27\lLINENUMBER 3047 L27\lFRAME SAME\lLLOAD 13\lLDC \"037927ed-2b58-4966-bb9a-09bd146391f4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL29\l"];
+entry;
+exit;
+897833092 -> 1014945584
+897833092 -> 628915052
+1014945584 -> 672159639
+1014945584 -> 168407582
+235983039 -> 1718378155
+235983039 -> 744606528
+386114715 -> 1044276625
+386114715 -> 145688600
+145688600 -> 897833092
+145688600 -> 2027694307
+168407582 -> 672159639
+1159526884 -> exit
+1718378155 -> 546176529
+1718378155 -> 744606528
+236207346 -> 1101411927
+744606528 -> exit
+1044276625 -> 145688600
+1044276625 -> 1920036170
+entry -> 386114715
+672159639 -> 236207346
+672159639 -> 1101411927
+2027694307 -> 897833092
+2027694307 -> 1159526884
+546176529 -> 1014945584
+628915052 -> 1014945584
+628915052 -> 235983039
+1920036170 -> 145688600
+1101411927 -> exit
+386114715[fontcolor="purple", penwidth=3, color="purple"];
+1159526884[fontcolor="purple", penwidth=3, color="purple"];
+1101411927[fontcolor="purple", penwidth=3, color="purple"];
+744606528[fontcolor="purple", penwidth=3, color="purple"];
+}

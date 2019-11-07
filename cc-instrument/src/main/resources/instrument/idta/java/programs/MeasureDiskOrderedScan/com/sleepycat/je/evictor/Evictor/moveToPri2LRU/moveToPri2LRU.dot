@@ -1,0 +1,15 @@
+digraph moveToPri2LRU {
+node [shape=record];
+577589254 [label="L1\lLINENUMBER 2922 L1\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/evictor/Evictor.pri2AddFront (Lcom/sleepycat/je/tree/IN;)V\lL3\lLINENUMBER 2924 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.nNodesMovedToPri2LRU : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL4\lLINENUMBER 2925 L4\lLDC \"9b6e26ff-1db0-492d-b2b7-3460882827c2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+928812949 [label="L0\lLINENUMBER 2918 L0\lLDC \"9b6e26ff-1db0-492d-b2b7-3460882827c2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 2\lIFNULL L1\l"];
+2144938047 [label="L2\lLINENUMBER 2919 L2\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor$EvictionDebugStats.incNumMoved (Z)V\l"];
+entry;
+exit;
+entry -> 928812949
+577589254 -> exit
+928812949 -> 577589254
+928812949 -> 2144938047
+2144938047 -> 577589254
+577589254[fontcolor="purple", penwidth=3, color="purple"];
+928812949[fontcolor="purple", penwidth=3, color="purple"];
+}

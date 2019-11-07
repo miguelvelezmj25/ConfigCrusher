@@ -1,22 +1,22 @@
 digraph dumpToString {
 node [shape=record];
-344791346 [label="L0\lLINENUMBER 4004 L0\lLDC \"70aaf3c8-fc14-4289-a8cf-3b3ba06c17c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lASTORE 2\lL1\lLINENUMBER 4006 L1\lALOAD 2\lLDC \"\<Cursor idx=\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL2\lLINENUMBER 4007 L2\lALOAD 2\lLDC \" status=\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.status : B\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.statusToString (B)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL3\lLINENUMBER 4008 L3\lALOAD 2\lLDC \"\>\n\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL4\lLINENUMBER 4009 L4\lILOAD 1\lIFEQ L5\l"];
-1236830682 [label="L5\lLINENUMBER 4012 L5\lFRAME SAME\lALOAD 2\lLDC \"\n\</Cursor\>\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL9\lLINENUMBER 4014 L9\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lLDC \"70aaf3c8-fc14-4289-a8cf-3b3ba06c17c0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL10\l"];
-799140509 [label="L7\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl I java/lang/StringBuilder] [java/lang/StringBuilder]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lICONST_2\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.dumpString (IZ)Ljava/lang/String;\l"];
-768408452 [label="L6\lLINENUMBER 4010 L6\lALOAD 2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNONNULL L7\l"];
-1583519538 [label="L8\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl I java/lang/StringBuilder] [java/lang/StringBuilder java/lang/String]\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
-1394160338 [label="LDC \"\"\lGOTO L8\l"];
+833334330 [label="L5\lLINENUMBER 4012 L5\lFRAME SAME\lALOAD 2\lLDC \"\n\</Cursor\>\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL9\lLINENUMBER 4014 L9\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lLDC \"5f7f2c82-ad8a-4e6f-ab30-312c4c42311f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL10\l"];
+795198468 [label="LDC \"\"\lGOTO L8\l"];
+1845485118 [label="L7\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl I java/lang/StringBuilder] [java/lang/StringBuilder]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lICONST_2\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.dumpString (IZ)Ljava/lang/String;\l"];
+1271805343 [label="L6\lLINENUMBER 4010 L6\lALOAD 2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNONNULL L7\l"];
+1136879534 [label="L8\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl I java/lang/StringBuilder] [java/lang/StringBuilder java/lang/String]\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
+1923489738 [label="L0\lLINENUMBER 4004 L0\lLDC \"5f7f2c82-ad8a-4e6f-ab30-312c4c42311f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lASTORE 2\lL1\lLINENUMBER 4006 L1\lALOAD 2\lLDC \"\<Cursor idx=\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL2\lLINENUMBER 4007 L2\lALOAD 2\lLDC \" status=\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.status : B\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.statusToString (B)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"\\"\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL3\lLINENUMBER 4008 L3\lALOAD 2\lLDC \"\>\n\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\lL4\lLINENUMBER 4009 L4\lILOAD 1\lIFEQ L5\l"];
 entry;
 exit;
-entry -> 344791346
-344791346 -> 1236830682
-344791346 -> 768408452
-1236830682 -> exit
-799140509 -> 1583519538
-768408452 -> 799140509
-768408452 -> 1394160338
-1583519538 -> 1236830682
-1394160338 -> 1583519538
-344791346[fontcolor="purple", penwidth=3, color="purple"];
-1236830682[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1923489738
+833334330 -> exit
+795198468 -> 1136879534
+1845485118 -> 1136879534
+1271805343 -> 795198468
+1271805343 -> 1845485118
+1136879534 -> 833334330
+1923489738 -> 833334330
+1923489738 -> 1271805343
+833334330[fontcolor="purple", penwidth=3, color="purple"];
+1923489738[fontcolor="purple", penwidth=3, color="purple"];
 }

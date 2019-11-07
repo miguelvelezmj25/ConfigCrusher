@@ -1,0 +1,25 @@
+digraph resetSharedCache {
+node [shape=record];
+366111745 [label="ALOAD 4\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/EnvironmentImpl\lASTORE 5\lL3\lLINENUMBER 449 L3\lALOAD 5\lALOAD 3\lIF_ACMPEQ L4\l"];
+2005745650 [label="ALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L4\l"];
+1043223563 [label="L1\lFRAME APPEND [java/util/Iterator]\lALOAD 4\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L2\l"];
+613991589 [label="L0\lLINENUMBER 442 L0\lLDC \"d8bc8168-1ed7-4b5b-83a5-d78ffd6f1144\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbEnvPool.sharedCacheEnvs : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 4\l"];
+1570494854 [label="L2\lLINENUMBER 455 L2\lFRAME CHOP 1\lLDC \"d8bc8168-1ed7-4b5b-83a5-d78ffd6f1144\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+949688850 [label="L5\lLINENUMBER 450 L5\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMemoryBudget ()Lcom/sleepycat/je/dbi/MemoryBudget;\lLLOAD 1\lICONST_0\lALOAD 5\lL6\lLINENUMBER 452 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lL7\lLINENUMBER 450 L7\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.reset (JZLcom/sleepycat/je/dbi/DbConfigManager;)V\l"];
+1003463428 [label="L4\lLINENUMBER 454 L4\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lGOTO L1\l"];
+entry;
+exit;
+entry -> 613991589
+366111745 -> 2005745650
+366111745 -> 1003463428
+2005745650 -> 949688850
+2005745650 -> 1003463428
+1043223563 -> 366111745
+1043223563 -> 1570494854
+613991589 -> 1043223563
+1570494854 -> exit
+949688850 -> 1003463428
+1003463428 -> 1043223563
+613991589[fontcolor="purple", penwidth=3, color="purple"];
+1570494854[fontcolor="purple", penwidth=3, color="purple"];
+}

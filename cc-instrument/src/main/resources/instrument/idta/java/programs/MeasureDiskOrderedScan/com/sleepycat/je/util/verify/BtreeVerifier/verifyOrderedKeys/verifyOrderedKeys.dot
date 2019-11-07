@@ -1,33 +1,33 @@
 digraph verifyOrderedKeys {
 node [shape=record];
-1129865545 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 507 L3\lLDC \"3d79352f-6eb3-4fb0-94c2-bd50f5ac40ce\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 2\lL4\lLINENUMBER 508 L4\lALOAD 0\lALOAD 1\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyOrderedKeysInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)I\lISTORE 3\lL5\lLINENUMBER 509 L5\lILOAD 3\lIFNE L6\l"];
-61159232 [label="L14\lLINENUMBER 530 L14\lFRAME FULL [com/sleepycat/je/util/verify/BtreeVerifier com/sleepycat/je/tree/IN com/sleepycat/je/dbi/DatabaseImpl I com/sleepycat/je/utilint/Pair java/lang/String java/lang/String com/sleepycat/je/tree/IN I] []\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IN keys are out of order. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 7\lICONST_2\lNEWARRAY T_INT\lDUP\lICONST_0\lILOAD 8\lICONST_1\lISUB\lIASTORE\lDUP\lICONST_1\lILOAD 8\lIASTORE\lL18\lLINENUMBER 531 L18\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 9\lL19\lLINENUMBER 534 L19\lNEW com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException\lDUP\lALOAD 0\lALOAD 9\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.persistentMsg (Ljava/lang/String;)Ljava/lang/String;\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException.\<init\> (Ljava/lang/String;)V\lLDC \"3d79352f-6eb3-4fb0-94c2-bd50f5ac40ce\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-496277009 [label="L2\lLINENUMBER 537 L2\lFRAME FULL [com/sleepycat/je/util/verify/BtreeVerifier com/sleepycat/je/tree/IN com/sleepycat/je/dbi/DatabaseImpl I com/sleepycat/je/utilint/Pair java/lang/String java/lang/String com/sleepycat/je/tree/IN] [java/lang/Throwable]\lASTORE 10\l"];
-645885737 [label="L1\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatchIfOwner ()V\lL20\lLINENUMBER 538 L20\lALOAD 10\lLDC \"3d79352f-6eb3-4fb0-94c2-bd50f5ac40ce\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL21\l"];
-976756027 [label="L15\lLINENUMBER 527 L15\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lALOAD 6\lL16\lLINENUMBER 528 L16\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.transientMsg (Ljava/lang/String;)Ljava/lang/String;\lL17\lLINENUMBER 527 L17\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"3d79352f-6eb3-4fb0-94c2-bd50f5ac40ce\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1734644721 [label="L0\lLINENUMBER 523 L0\lALOAD 0\lALOAD 7\lALOAD 2\lL12\lLINENUMBER 524 L12\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyOrderedKeysInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)I\lISTORE 8\lL13\lLINENUMBER 526 L13\lILOAD 8\lIFNE L14\l"];
-491187907 [label="L6\lLINENUMBER 513 L6\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl I]\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getTargetLsns (Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/utilint/Pair;\lASTORE 4\lL8\lLINENUMBER 516 L8\lLDC \"IN keys are out of order. \"\lASTORE 5\lL9\lLINENUMBER 517 L9\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IN keys are out of order. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lICONST_2\lNEWARRAY T_INT\lDUP\lICONST_0\lILOAD 3\lICONST_1\lISUB\lIASTORE\lDUP\lICONST_1\lILOAD 3\lIASTORE\lL10\lLINENUMBER 518 L10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 6\lL11\lLINENUMBER 520 L11\lALOAD 0\lALOAD 4\lALOAD 2\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getINFromFile (Lcom/sleepycat/je/utilint/Pair;Lcom/sleepycat/je/dbi/DatabaseImpl;Ljava/lang/String;)Lcom/sleepycat/je/tree/IN;\lASTORE 7\l"];
-1585323393 [label="L7\lLINENUMBER 510 L7\lLDC \"3d79352f-6eb3-4fb0-94c2-bd50f5ac40ce\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1686048022 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 507 L3\lLDC \"2dc7b50b-9651-4b8f-8b0e-4ccb35ccc384\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 2\lL4\lLINENUMBER 508 L4\lALOAD 0\lALOAD 1\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyOrderedKeysInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)I\lISTORE 3\lL5\lLINENUMBER 509 L5\lILOAD 3\lIFNE L6\l"];
+1409192358 [label="L1\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatchIfOwner ()V\lL20\lLINENUMBER 538 L20\lALOAD 10\lLDC \"2dc7b50b-9651-4b8f-8b0e-4ccb35ccc384\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL21\l"];
+245908739 [label="L14\lLINENUMBER 530 L14\lFRAME FULL [com/sleepycat/je/util/verify/BtreeVerifier com/sleepycat/je/tree/IN com/sleepycat/je/dbi/DatabaseImpl I com/sleepycat/je/utilint/Pair java/lang/String java/lang/String com/sleepycat/je/tree/IN I] []\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IN keys are out of order. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 7\lICONST_2\lNEWARRAY T_INT\lDUP\lICONST_0\lILOAD 8\lICONST_1\lISUB\lIASTORE\lDUP\lICONST_1\lILOAD 8\lIASTORE\lL18\lLINENUMBER 531 L18\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 9\lL19\lLINENUMBER 534 L19\lNEW com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException\lDUP\lALOAD 0\lALOAD 9\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.persistentMsg (Ljava/lang/String;)Ljava/lang/String;\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException.\<init\> (Ljava/lang/String;)V\lLDC \"2dc7b50b-9651-4b8f-8b0e-4ccb35ccc384\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+704418363 [label="L7\lLINENUMBER 510 L7\lLDC \"2dc7b50b-9651-4b8f-8b0e-4ccb35ccc384\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+594552715 [label="L15\lLINENUMBER 527 L15\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lALOAD 6\lL16\lLINENUMBER 528 L16\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.transientMsg (Ljava/lang/String;)Ljava/lang/String;\lL17\lLINENUMBER 527 L17\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"2dc7b50b-9651-4b8f-8b0e-4ccb35ccc384\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+864276171 [label="L2\lLINENUMBER 537 L2\lFRAME FULL [com/sleepycat/je/util/verify/BtreeVerifier com/sleepycat/je/tree/IN com/sleepycat/je/dbi/DatabaseImpl I com/sleepycat/je/utilint/Pair java/lang/String java/lang/String com/sleepycat/je/tree/IN] [java/lang/Throwable]\lASTORE 10\l"];
+789078544 [label="L6\lLINENUMBER 513 L6\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl I]\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getTargetLsns (Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/utilint/Pair;\lASTORE 4\lL8\lLINENUMBER 516 L8\lLDC \"IN keys are out of order. \"\lASTORE 5\lL9\lLINENUMBER 517 L9\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IN keys are out of order. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lICONST_2\lNEWARRAY T_INT\lDUP\lICONST_0\lILOAD 3\lICONST_1\lISUB\lIASTORE\lDUP\lICONST_1\lILOAD 3\lIASTORE\lL10\lLINENUMBER 518 L10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 6\lL11\lLINENUMBER 520 L11\lALOAD 0\lALOAD 4\lALOAD 2\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getINFromFile (Lcom/sleepycat/je/utilint/Pair;Lcom/sleepycat/je/dbi/DatabaseImpl;Ljava/lang/String;)Lcom/sleepycat/je/tree/IN;\lASTORE 7\l"];
+1166573405 [label="L0\lLINENUMBER 523 L0\lALOAD 0\lALOAD 7\lALOAD 2\lL12\lLINENUMBER 524 L12\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyOrderedKeysInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)I\lISTORE 8\lL13\lLINENUMBER 526 L13\lILOAD 8\lIFNE L14\l"];
 entry;
 exit;
-entry -> 1129865545
-1129865545 -> 491187907
-1129865545 -> 1585323393
-61159232 -> exit
-61159232 -> 496277009 [style=dashed, color=red]
-496277009 -> 496277009 [style=dashed, color=red]
-496277009 -> 645885737
-645885737 -> exit
-976756027 -> exit
-976756027 -> 496277009 [style=dashed, color=red]
-1734644721 -> 61159232
-1734644721 -> 496277009 [style=dashed, color=red]
-1734644721 -> 976756027
-491187907 -> 1734644721
-1585323393 -> exit
-1129865545[fontcolor="purple", penwidth=3, color="purple"];
-61159232[fontcolor="purple", penwidth=3, color="purple"];
-645885737[fontcolor="purple", penwidth=3, color="purple"];
-976756027[fontcolor="purple", penwidth=3, color="purple"];
-1585323393[fontcolor="purple", penwidth=3, color="purple"];
+1686048022 -> 704418363
+1686048022 -> 789078544
+entry -> 1686048022
+1409192358 -> exit
+245908739 -> exit
+245908739 -> 864276171 [style=dashed, color=red]
+704418363 -> exit
+594552715 -> exit
+594552715 -> 864276171 [style=dashed, color=red]
+864276171 -> 1409192358
+864276171 -> 864276171 [style=dashed, color=red]
+789078544 -> 1166573405
+1166573405 -> 245908739
+1166573405 -> 594552715
+1166573405 -> 864276171 [style=dashed, color=red]
+1686048022[fontcolor="purple", penwidth=3, color="purple"];
+1409192358[fontcolor="purple", penwidth=3, color="purple"];
+245908739[fontcolor="purple", penwidth=3, color="purple"];
+704418363[fontcolor="purple", penwidth=3, color="purple"];
+594552715[fontcolor="purple", penwidth=3, color="purple"];
 }

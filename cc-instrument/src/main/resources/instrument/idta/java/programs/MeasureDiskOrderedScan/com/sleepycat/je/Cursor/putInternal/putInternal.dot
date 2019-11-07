@@ -1,0 +1,39 @@
+digraph putInternal {
+node [shape=record];
+202492187 [label="L0\lLINENUMBER 2413 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkTxnState ()V\lL8\lLINENUMBER 2415 L8\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L3\l"];
+91792013 [label="L4\lLDC \"5b7a89fc-8635-4a3c-ad18-bcad4107ef3f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+12379474 [label="L2\lLINENUMBER 2427 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lALOAD 6\lMONITOREXIT\l"];
+1877631715 [label="L5\lALOAD 7\lLDC \"5b7a89fc-8635-4a3c-ad18-bcad4107ef3f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL12\l"];
+803540913 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 2410 L6\lLDC \"5b7a89fc-8635-4a3c-ad18-bcad4107ef3f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed (Lcom/sleepycat/je/dbi/ExpirationInfo;)V\lL7\lLINENUMBER 2412 L7\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.getTxnSynchronizer ()Ljava/lang/Object;\lDUP\lASTORE 6\lMONITORENTER\l"];
+136023097 [label="L9\lLINENUMBER 2416 L9\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putHandleDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\l"];
+284364603 [label="L11\lLINENUMBER 2421 L11\lNEW java/lang/UnsupportedOperationException\lDUP\lLDC \"Database is not configured for duplicate data.\"\lINVOKESPECIAL java/lang/UnsupportedOperationException.\<init\> (Ljava/lang/String;)V\lLDC \"5b7a89fc-8635-4a3c-ad18-bcad4107ef3f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+897310825 [label="L1\lLDC \"5b7a89fc-8635-4a3c-ad18-bcad4107ef3f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1356835682 [label="L10\lLINENUMBER 2425 L10\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/Cursor.putNoDups (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;\lALOAD 6\lMONITOREXIT\l"];
+128182899 [label="L3\lLINENUMBER 2420 L3\lFRAME APPEND [java/lang/Object]\lALOAD 5\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_DUP_DATA : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L10\l"];
+entry;
+exit;
+12379474 -> 1877631715
+12379474 -> 12379474 [style=dashed, color=red]
+1877631715 -> exit
+284364603 -> exit
+284364603 -> 12379474 [style=dashed, color=red]
+1356835682 -> 91792013
+1356835682 -> 12379474 [style=dashed, color=red]
+entry -> 803540913
+202492187 -> 136023097
+202492187 -> 12379474 [style=dashed, color=red]
+202492187 -> 128182899
+91792013 -> exit
+803540913 -> 202492187
+136023097 -> 12379474 [style=dashed, color=red]
+136023097 -> 897310825
+897310825 -> exit
+128182899 -> 12379474 [style=dashed, color=red]
+128182899 -> 284364603
+128182899 -> 1356835682
+91792013[fontcolor="purple", penwidth=3, color="purple"];
+1877631715[fontcolor="purple", penwidth=3, color="purple"];
+803540913[fontcolor="purple", penwidth=3, color="purple"];
+284364603[fontcolor="purple", penwidth=3, color="purple"];
+897310825[fontcolor="purple", penwidth=3, color="purple"];
+}

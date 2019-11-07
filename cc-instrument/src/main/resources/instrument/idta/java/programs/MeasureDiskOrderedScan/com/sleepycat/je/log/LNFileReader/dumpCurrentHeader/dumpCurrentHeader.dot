@@ -1,0 +1,9 @@
+digraph dumpCurrentHeader {
+node [shape=record];
+2079343379 [label="L0\lLINENUMBER 209 L0\lLDC \"2390f513-9bbc-4901-b683-ea478bc47608\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LNFileReader.currentEntryHeader : Lcom/sleepycat/je/log/LogEntryHeader;\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryHeader.toString ()Ljava/lang/String;\lLDC \"2390f513-9bbc-4901-b683-ea478bc47608\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL1\l"];
+entry;
+exit;
+entry -> 2079343379
+2079343379 -> exit
+2079343379[fontcolor="purple", penwidth=3, color="purple"];
+}

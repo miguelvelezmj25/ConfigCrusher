@@ -1,9 +1,9 @@
 digraph compareTo {
 node [shape=record];
-1819453317 [label="L0\lLINENUMBER 84 L0\lLDC \"63759e86-32c3-421f-abdf-b83023968c7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/utilint/StatDefinition.toString ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.compareTo (Ljava/lang/String;)I\lLDC \"63759e86-32c3-421f-abdf-b83023968c7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
+1377601327 [label="L0\lLINENUMBER 84 L0\lLDC \"db9f263c-e802-4f04-a20e-3d1499e6fa67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/utilint/StatDefinition.toString ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.compareTo (Ljava/lang/String;)I\lLDC \"db9f263c-e802-4f04-a20e-3d1499e6fa67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
 entry;
 exit;
-entry -> 1819453317
-1819453317 -> exit
-1819453317[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1377601327
+1377601327 -> exit
+1377601327[fontcolor="purple", penwidth=3, color="purple"];
 }

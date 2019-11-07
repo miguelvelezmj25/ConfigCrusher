@@ -1,20 +1,20 @@
 digraph run {
 node [shape=record];
-120309110 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 3293 L3\lLDC \"67d85e44-b40a-4610-b8fa-1b910b131041\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\l"];
-1059614701 [label="L5\lLINENUMBER 3299 L5\lFRAME SAME\lLDC \"67d85e44-b40a-4610-b8fa-1b910b131041\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-1520487047 [label="L1\lLINENUMBER 3297 L1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL4\lLINENUMBER 3298 L4\lGOTO L5\l"];
-1727075888 [label="L2\lLINENUMBER 3297 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL6\lLINENUMBER 3298 L6\lALOAD 1\lLDC \"67d85e44-b40a-4610-b8fa-1b910b131041\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-136198528 [label="L0\lLINENUMBER 3295 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.EVICTORTHREAD : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.backgroundIO : Z\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1762772500 [label="L2\lLINENUMBER 3297 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL6\lLINENUMBER 3298 L6\lALOAD 1\lLDC \"1c5f57a5-85d3-4f70-8969-f3333e7c214b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+674676885 [label="L1\lLINENUMBER 3297 L1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL4\lLINENUMBER 3298 L4\lGOTO L5\l"];
+1048012418 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 3293 L3\lLDC \"1c5f57a5-85d3-4f70-8969-f3333e7c214b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKESTATIC com/sleepycat/je/evictor/Evictor.access$300 (Lcom/sleepycat/je/evictor/Evictor;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\l"];
+1817706178 [label="L5\lLINENUMBER 3299 L5\lFRAME SAME\lLDC \"1c5f57a5-85d3-4f70-8969-f3333e7c214b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+993814892 [label="L0\lLINENUMBER 3295 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.evictor : Lcom/sleepycat/je/evictor/Evictor;\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.EVICTORTHREAD : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor$BackgroundEvictTask.backgroundIO : Z\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
 entry;
 exit;
-entry -> 120309110
-120309110 -> 136198528
-1059614701 -> exit
-1520487047 -> 1059614701
-1727075888 -> exit
-136198528 -> 1520487047
-136198528 -> 1727075888 [style=dashed, color=red]
-120309110[fontcolor="purple", penwidth=3, color="purple"];
-1059614701[fontcolor="purple", penwidth=3, color="purple"];
-1727075888[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1048012418
+1762772500 -> exit
+674676885 -> 1817706178
+1048012418 -> 993814892
+1817706178 -> exit
+993814892 -> 1762772500 [style=dashed, color=red]
+993814892 -> 674676885
+1762772500[fontcolor="purple", penwidth=3, color="purple"];
+1048012418[fontcolor="purple", penwidth=3, color="purple"];
+1817706178[fontcolor="purple", penwidth=3, color="purple"];
 }

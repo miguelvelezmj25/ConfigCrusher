@@ -1,16 +1,16 @@
 digraph getDiskTotalSpace {
 node [shape=record];
-431829741 [label="L2\lLINENUMBER 1138 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\lL3\lLINENUMBER 1139 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"945cfbed-cbce-491d-abae-74630b3d33b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL4\l"];
-1755758500 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL0\lLINENUMBER 1137 L0\lLDC \"945cfbed-cbce-491d-abae-74630b3d33b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.fileStoreInfo : Lcom/sleepycat/je/utilint/FileStoreInfo;\lINVOKEVIRTUAL com/sleepycat/je/utilint/FileStoreInfo.getTotalSpace ()J\l"];
-1104128655 [label="L1\lLDC \"945cfbed-cbce-491d-abae-74630b3d33b2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1912274045 [label="L2\lLINENUMBER 1138 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\lL3\lLINENUMBER 1139 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.env : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL4\l"];
+1751044233 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL0\lLINENUMBER 1137 L0\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/Cleaner.fileStoreInfo : Lcom/sleepycat/je/utilint/FileStoreInfo;\lINVOKEVIRTUAL com/sleepycat/je/utilint/FileStoreInfo.getTotalSpace ()J\l"];
+1548259773 [label="L1\lLDC \"106b9dce-c44e-4924-960a-30066ca200a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
 entry;
 exit;
-entry -> 1755758500
-431829741 -> exit
-1755758500 -> 431829741 [style=dashed, color=red]
-1755758500 -> 1104128655
-1104128655 -> exit
-431829741[fontcolor="purple", penwidth=3, color="purple"];
-1755758500[fontcolor="purple", penwidth=3, color="purple"];
-1104128655[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1751044233
+1912274045 -> exit
+1751044233 -> 1912274045 [style=dashed, color=red]
+1751044233 -> 1548259773
+1548259773 -> exit
+1912274045[fontcolor="purple", penwidth=3, color="purple"];
+1751044233[fontcolor="purple", penwidth=3, color="purple"];
+1548259773[fontcolor="purple", penwidth=3, color="purple"];
 }

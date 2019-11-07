@@ -276,7 +276,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
     AbstractInsnNode lastInstruction =
         block.getInstructions().get(block.getInstructions().size() - 1);
 
-    if (block.isWithReturn()) {
+    if (block.isWithReturn() || block.isWithExplicitThrow() || block.isWithLastInstruction()) {
       lastInstruction = lastInstruction.getPrevious();
     }
 

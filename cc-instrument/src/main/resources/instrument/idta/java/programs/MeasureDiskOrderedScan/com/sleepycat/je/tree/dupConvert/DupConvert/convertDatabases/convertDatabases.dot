@@ -1,50 +1,50 @@
 digraph convertDatabases {
 node [shape=record];
-2136817499 [label="L15\lLINENUMBER 173 L15\lFRAME SAME\lLDC \"7c792aec-0b52-4208-9a1b-ca3ce078f706\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
-591274347 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 157 L6\lLDC \"7c792aec-0b52-4208-9a1b-ca3ce078f706\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.preloadAll : Z\lIFEQ L7\l"];
-921469252 [label="L1\lLINENUMBER 168 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L9\l"];
-881445207 [label="ALOAD 1\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/DatabaseId\lASTORE 2\lL11\lLINENUMBER 161 L11\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDb (Lcom/sleepycat/je/dbi/DatabaseId;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 3\l"];
-390754476 [label="L10\lLINENUMBER 172 L10\lFRAME CHOP 2\lGETSTATIC com/sleepycat/je/tree/dupConvert/DupConvert.$assertionsDisabled : Z\lIFNE L15\l"];
-1809948949 [label="L0\lLINENUMBER 163 L0\lALOAD 3\lINVOKESTATIC com/sleepycat/je/tree/dupConvert/DupConvert.needsConversion (Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFNE L3\l"];
-836078897 [label="L13\lLINENUMBER 170 L13\lFRAME SAME\lGOTO L9\l"];
-1150047922 [label="L8\lLINENUMBER 158 L8\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.preloadAllDatabases ()V\l"];
-1281222565 [label="L7\lLINENUMBER 160 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDbNamesAndIds ()Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.keySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 1\l"];
-2124278371 [label="L4\lLINENUMBER 168 L4\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL12\lLINENUMBER 169 L12\lGOTO L13\l"];
-403835261 [label="L3\lLINENUMBER 166 L3\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseId com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.convertDatabase (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\l"];
-1249201185 [label="L2\lLINENUMBER 168 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
-749314645 [label="L5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL14\lLINENUMBER 169 L14\lALOAD 4\lLDC \"7c792aec-0b52-4208-9a1b-ca3ce078f706\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1106201990 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"7c792aec-0b52-4208-9a1b-ca3ce078f706\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1439920818 [label="L9\lFRAME APPEND [java/util/Iterator]\lALOAD 1\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L10\l"];
-90473110 [label="ALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.noDupNodesPresent ()Z\lIFNE L15\l"];
+81049120 [label="L10\lLINENUMBER 172 L10\lFRAME CHOP 2\lGETSTATIC com/sleepycat/je/tree/dupConvert/DupConvert.$assertionsDisabled : Z\lIFNE L15\l"];
+90630911 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lL6\lLINENUMBER 157 L6\lLDC \"e442eb08-9a33-4dd1-8b97-55a92edf8485\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.preloadAll : Z\lIFEQ L7\l"];
+392633722 [label="L0\lLINENUMBER 163 L0\lALOAD 3\lINVOKESTATIC com/sleepycat/je/tree/dupConvert/DupConvert.needsConversion (Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFNE L3\l"];
+342861025 [label="L4\lLINENUMBER 168 L4\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL12\lLINENUMBER 169 L12\lGOTO L13\l"];
+56106017 [label="ALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.noDupNodesPresent ()Z\lIFNE L15\l"];
+192467157 [label="L5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL14\lLINENUMBER 169 L14\lALOAD 4\lLDC \"e442eb08-9a33-4dd1-8b97-55a92edf8485\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1295668823 [label="L1\lLINENUMBER 168 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L9\l"];
+1239886257 [label="L9\lFRAME APPEND [java/util/Iterator]\lALOAD 1\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L10\l"];
+580705252 [label="L15\lLINENUMBER 173 L15\lFRAME SAME\lLDC \"e442eb08-9a33-4dd1-8b97-55a92edf8485\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL16\l"];
+2085060953 [label="L8\lLINENUMBER 158 L8\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.preloadAllDatabases ()V\l"];
+994894399 [label="L3\lLINENUMBER 166 L3\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseId com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/tree/dupConvert/DupConvert.convertDatabase (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\l"];
+156221691 [label="L2\lLINENUMBER 168 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
+541510132 [label="L7\lLINENUMBER 160 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDbNamesAndIds ()Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.keySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 1\l"];
+1155117738 [label="ALOAD 1\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/DatabaseId\lASTORE 2\lL11\lLINENUMBER 161 L11\lALOAD 0\lGETFIELD com/sleepycat/je/tree/dupConvert/DupConvert.dbTree : Lcom/sleepycat/je/dbi/DbTree;\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDb (Lcom/sleepycat/je/dbi/DatabaseId;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 3\l"];
+1388763820 [label="L13\lLINENUMBER 170 L13\lFRAME SAME\lGOTO L9\l"];
+178106882 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"e442eb08-9a33-4dd1-8b97-55a92edf8485\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
 entry;
 exit;
-2136817499 -> exit
-591274347 -> 1150047922
-591274347 -> 1281222565
-921469252 -> 1439920818
-881445207 -> 1809948949
-390754476 -> 2136817499
-390754476 -> 90473110
-1809948949 -> 921469252
-1809948949 -> 403835261
-1809948949 -> 1249201185 [style=dashed, color=red]
-836078897 -> 1439920818
-entry -> 591274347
-1150047922 -> 1281222565
-1281222565 -> 1439920818
-2124278371 -> 836078897
-403835261 -> 2124278371
-403835261 -> 1249201185 [style=dashed, color=red]
-1249201185 -> 749314645
-1249201185 -> 1249201185 [style=dashed, color=red]
-749314645 -> exit
-1106201990 -> exit
-1439920818 -> 881445207
-1439920818 -> 390754476
-90473110 -> 2136817499
-90473110 -> 1106201990
-2136817499[fontcolor="purple", penwidth=3, color="purple"];
-591274347[fontcolor="purple", penwidth=3, color="purple"];
-749314645[fontcolor="purple", penwidth=3, color="purple"];
-1106201990[fontcolor="purple", penwidth=3, color="purple"];
+81049120 -> 56106017
+81049120 -> 580705252
+90630911 -> 2085060953
+90630911 -> 541510132
+392633722 -> 994894399
+392633722 -> 1295668823
+392633722 -> 156221691 [style=dashed, color=red]
+342861025 -> 1388763820
+56106017 -> 178106882
+56106017 -> 580705252
+192467157 -> exit
+1295668823 -> 1239886257
+1239886257 -> 81049120
+1239886257 -> 1155117738
+580705252 -> exit
+entry -> 90630911
+2085060953 -> 541510132
+994894399 -> 342861025
+994894399 -> 156221691 [style=dashed, color=red]
+156221691 -> 192467157
+156221691 -> 156221691 [style=dashed, color=red]
+541510132 -> 1239886257
+1155117738 -> 392633722
+1388763820 -> 1239886257
+178106882 -> exit
+90630911[fontcolor="purple", penwidth=3, color="purple"];
+192467157[fontcolor="purple", penwidth=3, color="purple"];
+580705252[fontcolor="purple", penwidth=3, color="purple"];
+178106882[fontcolor="purple", penwidth=3, color="purple"];
 }

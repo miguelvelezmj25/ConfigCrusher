@@ -1,0 +1,15 @@
+digraph countExpired {
+node [shape=record];
+1527340515 [label="L1\lLINENUMBER 233 L1\lFRAME SAME\lLDC \"b3c0da3c-8d5f-4813-8bdf-1c3275f4c6fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+13546459 [label="L2\lLINENUMBER 231 L2\lALOAD 0\lGETFIELD com/sleepycat/je/log/CleanerFileReader.expTracker : Lcom/sleepycat/je/cleaner/ExpirationTracker;\lALOAD 0\lGETFIELD com/sleepycat/je/log/CleanerFileReader.targetLogEntry : Lcom/sleepycat/je/log/entry/LogEntry;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/log/CleanerFileReader.getLastEntrySize ()I\lINVOKEVIRTUAL com/sleepycat/je/cleaner/ExpirationTracker.track (Lcom/sleepycat/je/log/entry/LogEntry;I)V\l"];
+485684281 [label="L0\lLINENUMBER 230 L0\lLDC \"b3c0da3c-8d5f-4813-8bdf-1c3275f4c6fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/CleanerFileReader.expTracker : Lcom/sleepycat/je/cleaner/ExpirationTracker;\lIFNULL L1\l"];
+entry;
+exit;
+entry -> 485684281
+1527340515 -> exit
+13546459 -> 1527340515
+485684281 -> 1527340515
+485684281 -> 13546459
+1527340515[fontcolor="purple", penwidth=3, color="purple"];
+485684281[fontcolor="purple", penwidth=3, color="purple"];
+}

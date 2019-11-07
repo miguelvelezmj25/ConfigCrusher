@@ -1,24 +1,24 @@
 digraph finishLock {
 node [shape=record];
-606470221 [label="L0\lLINENUMBER 628 L0\lLDC \"8dc8e4c6-9d7d-4733-9b25-2e3d3ff7b331\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.clearWaitingFor ()V\lL1\lLINENUMBER 630 L1\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L2\l"];
-389340299 [label="L5\lLINENUMBER 635 L5\lGETSTATIC com/sleepycat/je/txn/LockManager.afterLockHook : Lcom/sleepycat/je/utilint/TestHook;\lINVOKEINTERFACE com/sleepycat/je/utilint/TestHook.doHook ()V\l"];
-1150617236 [label="INVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.maybeForceYield ()Z\lIFNE L2\l"];
-59019486 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"8dc8e4c6-9d7d-4733-9b25-2e3d3ff7b331\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-838078445 [label="L4\lLINENUMBER 637 L4\lFRAME SAME\lLDC \"8dc8e4c6-9d7d-4733-9b25-2e3d3ff7b331\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
-1520410407 [label="L2\lLINENUMBER 632 L2\lFRAME SAME\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.addLock (Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;)V\lL3\lLINENUMBER 634 L3\lGETSTATIC com/sleepycat/je/txn/LockManager.afterLockHook : Lcom/sleepycat/je/utilint/TestHook;\lIFNULL L4\l"];
+908001942 [label="L0\lLINENUMBER 628 L0\lLDC \"e093d8e3-05e1-4e64-8c9a-71f0dd5ff75f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.clearWaitingFor ()V\lL1\lLINENUMBER 630 L1\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L2\l"];
+249054775 [label="L4\lLINENUMBER 637 L4\lFRAME SAME\lLDC \"e093d8e3-05e1-4e64-8c9a-71f0dd5ff75f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+2086090479 [label="L2\lLINENUMBER 632 L2\lFRAME SAME\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.addLock (Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;)V\lL3\lLINENUMBER 634 L3\lGETSTATIC com/sleepycat/je/txn/LockManager.afterLockHook : Lcom/sleepycat/je/utilint/TestHook;\lIFNULL L4\l"];
+1075705616 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"e093d8e3-05e1-4e64-8c9a-71f0dd5ff75f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1266547021 [label="L5\lLINENUMBER 635 L5\lGETSTATIC com/sleepycat/je/txn/LockManager.afterLockHook : Lcom/sleepycat/je/utilint/TestHook;\lINVOKEINTERFACE com/sleepycat/je/utilint/TestHook.doHook ()V\l"];
+229066287 [label="INVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.maybeForceYield ()Z\lIFNE L2\l"];
 entry;
 exit;
-entry -> 606470221
-606470221 -> 1150617236
-606470221 -> 1520410407
-389340299 -> 838078445
-1150617236 -> 59019486
-1150617236 -> 1520410407
-59019486 -> exit
-838078445 -> exit
-1520410407 -> 389340299
-1520410407 -> 838078445
-606470221[fontcolor="purple", penwidth=3, color="purple"];
-59019486[fontcolor="purple", penwidth=3, color="purple"];
-838078445[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 908001942
+908001942 -> 2086090479
+908001942 -> 229066287
+249054775 -> exit
+2086090479 -> 249054775
+2086090479 -> 1266547021
+1075705616 -> exit
+1266547021 -> 249054775
+229066287 -> 1075705616
+229066287 -> 2086090479
+908001942[fontcolor="purple", penwidth=3, color="purple"];
+249054775[fontcolor="purple", penwidth=3, color="purple"];
+1075705616[fontcolor="purple", penwidth=3, color="purple"];
 }

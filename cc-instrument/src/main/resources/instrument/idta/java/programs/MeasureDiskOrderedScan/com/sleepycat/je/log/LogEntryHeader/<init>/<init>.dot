@@ -1,39 +1,39 @@
 digraph <init> {
 node [shape=record];
-1672337319 [label="L11\lLINENUMBER 235 L11\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\lGOTO L12\l"];
-185870696 [label="L0\lLINENUMBER 222 L0\lLDC \"01e73ea5-e9dc-45eb-bf09-b0c61adf0c85\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 224 L1\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getLogType ()Lcom/sleepycat/je/log/LogEntryType;\lASTORE 4\lL2\lLINENUMBER 225 L2\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.getTypeNum ()B\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryType : B\lL3\lLINENUMBER 226 L3\lALOAD 0\lBIPUSH 15\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryVersion : I\lL4\lLINENUMBER 227 L4\lALOAD 0\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getSize ()I\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.itemSize : I\lL5\lLINENUMBER 228 L5\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lL6\lLINENUMBER 230 L6\lGETSTATIC com/sleepycat/je/log/LogEntryHeader.$assertionsDisabled : Z\lIFNE L7\l"];
-384845239 [label="L9\lLINENUMBER 230 L9\lNEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lLDC \" should never be replicated.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"01e73ea5-e9dc-45eb-bf09-b0c61adf0c85\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1006986294 [label="ALOAD 3\lL8\lLINENUMBER 231 L8\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lIFEQ L7\l"];
-959071849 [label="L14\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_1\lGOTO L17\l"];
-641725281 [label="L10\lLINENUMBER 237 L10\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\l"];
-442848067 [label="L7\lLINENUMBER 234 L7\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] []\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFEQ L10\l"];
-876064260 [label="L16\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_0\l"];
-829772825 [label="L17\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] [com/sleepycat/je/log/LogEntryHeader I]\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lL18\lLINENUMBER 249 L18\lLDC \"01e73ea5-e9dc-45eb-bf09-b0c61adf0c85\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL19\l"];
-1948134192 [label="L12\lLINENUMBER 239 L12\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.invisible : Z\lL13\lLINENUMBER 247 L13\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.getClientVLSN ()Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L14\l"];
-132663286 [label="ALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFNE L7\l"];
-1616319993 [label="ALOAD 3\lL15\lLINENUMBER 248 L15\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L16\l"];
+1356564440 [label="L11\lLINENUMBER 235 L11\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\lGOTO L12\l"];
+1685761335 [label="L10\lLINENUMBER 237 L10\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\l"];
+53123312 [label="ALOAD 3\lL8\lLINENUMBER 231 L8\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lIFEQ L7\l"];
+868238416 [label="L12\lLINENUMBER 239 L12\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.invisible : Z\lL13\lLINENUMBER 247 L13\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.getClientVLSN ()Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L14\l"];
+968322720 [label="ALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFNE L7\l"];
+875786080 [label="L14\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_1\lGOTO L17\l"];
+1377509717 [label="L9\lLINENUMBER 230 L9\lNEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lLDC \" should never be replicated.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"a0c8deae-a350-4a78-9dd3-97bd36866e93\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+945474292 [label="ALOAD 3\lL15\lLINENUMBER 248 L15\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L16\l"];
+300421401 [label="L0\lLINENUMBER 222 L0\lLDC \"a0c8deae-a350-4a78-9dd3-97bd36866e93\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 224 L1\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getLogType ()Lcom/sleepycat/je/log/LogEntryType;\lASTORE 4\lL2\lLINENUMBER 225 L2\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.getTypeNum ()B\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryType : B\lL3\lLINENUMBER 226 L3\lALOAD 0\lBIPUSH 15\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryVersion : I\lL4\lLINENUMBER 227 L4\lALOAD 0\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getSize ()I\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.itemSize : I\lL5\lLINENUMBER 228 L5\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lL6\lLINENUMBER 230 L6\lGETSTATIC com/sleepycat/je/log/LogEntryHeader.$assertionsDisabled : Z\lIFNE L7\l"];
+85032900 [label="L16\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_0\l"];
+1845181889 [label="L7\lLINENUMBER 234 L7\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] []\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFEQ L10\l"];
+876759538 [label="L17\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] [com/sleepycat/je/log/LogEntryHeader I]\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lL18\lLINENUMBER 249 L18\lLDC \"a0c8deae-a350-4a78-9dd3-97bd36866e93\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL19\l"];
 entry;
 exit;
-1672337319 -> 1948134192
-185870696 -> 442848067
-185870696 -> 132663286
-384845239 -> exit
-1006986294 -> 384845239
-1006986294 -> 442848067
-442848067 -> 1672337319
-442848067 -> 641725281
-829772825 -> exit
-1948134192 -> 959071849
-1948134192 -> 1616319993
-132663286 -> 1006986294
-132663286 -> 442848067
-entry -> 185870696
-959071849 -> 829772825
-641725281 -> 1948134192
-876064260 -> 829772825
-1616319993 -> 959071849
-1616319993 -> 876064260
-185870696[fontcolor="purple", penwidth=3, color="purple"];
-384845239[fontcolor="purple", penwidth=3, color="purple"];
-829772825[fontcolor="purple", penwidth=3, color="purple"];
+1356564440 -> 868238416
+968322720 -> 53123312
+968322720 -> 1845181889
+875786080 -> 876759538
+945474292 -> 875786080
+945474292 -> 85032900
+300421401 -> 968322720
+300421401 -> 1845181889
+1845181889 -> 1356564440
+1845181889 -> 1685761335
+entry -> 300421401
+1685761335 -> 868238416
+53123312 -> 1377509717
+53123312 -> 1845181889
+868238416 -> 875786080
+868238416 -> 945474292
+1377509717 -> exit
+85032900 -> 876759538
+876759538 -> exit
+1377509717[fontcolor="purple", penwidth=3, color="purple"];
+300421401[fontcolor="purple", penwidth=3, color="purple"];
+876759538[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,0 +1,23 @@
+digraph equals {
+node [shape=record];
+1484296061 [label="L4\lFRAME SAME1 I\lLDC \"a6e1363c-e1a8-4762-a22b-8a2e857d9f8f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL5\l"];
+203224549 [label="L0\lLINENUMBER 414 L0\lLDC \"a6e1363c-e1a8-4762-a22b-8a2e857d9f8f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINSTANCEOF com/sleepycat/je/txn/TxnChain$CompareSlot\lIFNE L1\l"];
+1675123779 [label="L1\lLINENUMBER 417 L1\lFRAME SAME\lALOAD 0\lALOAD 1\lCHECKCAST com/sleepycat/je/txn/TxnChain$CompareSlot\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnChain$CompareSlot.compareTo (Lcom/sleepycat/je/txn/TxnChain$CompareSlot;)I\lIFNE L3\l"];
+2044984902 [label="L3\lFRAME SAME\lICONST_0\l"];
+496496285 [label="L2\lLINENUMBER 415 L2\lICONST_0\lLDC \"a6e1363c-e1a8-4762-a22b-8a2e857d9f8f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+305893945 [label="ICONST_1\lGOTO L4\l"];
+entry;
+exit;
+entry -> 203224549
+1484296061 -> exit
+203224549 -> 1675123779
+203224549 -> 496496285
+1675123779 -> 2044984902
+1675123779 -> 305893945
+2044984902 -> 1484296061
+496496285 -> exit
+305893945 -> 1484296061
+1484296061[fontcolor="purple", penwidth=3, color="purple"];
+203224549[fontcolor="purple", penwidth=3, color="purple"];
+496496285[fontcolor="purple", penwidth=3, color="purple"];
+}

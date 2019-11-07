@@ -1,20 +1,20 @@
 digraph run {
 node [shape=record];
-219971951 [label="L5\lLINENUMBER 2881 L5\lFRAME SAME\lLDC \"3cadb6a8-c758-4059-bfc4-27355a4a798f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-1079323136 [label="L1\lLINENUMBER 2879 L1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL4\lLINENUMBER 2880 L4\lGOTO L5\l"];
-794344275 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 2874 L3\lLDC \"3cadb6a8-c758-4059-bfc4-27355a4a798f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\l"];
-687552101 [label="L0\lLINENUMBER 2876 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.EVICTORTHREAD : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lICONST_1\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$500 (Lcom/sleepycat/je/evictor/OffHeapCache;Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1744059617 [label="L2\lLINENUMBER 2879 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL6\lLINENUMBER 2880 L6\lALOAD 1\lLDC \"3cadb6a8-c758-4059-bfc4-27355a4a798f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1620007471 [label="L2\lLINENUMBER 2879 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL6\lLINENUMBER 2880 L6\lALOAD 1\lLDC \"6258ee59-06db-4b41-8a99-2a97b9d8fd79\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+768065551 [label="L0\lLINENUMBER 2876 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.EVICTORTHREAD : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lICONST_1\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$500 (Lcom/sleepycat/je/evictor/OffHeapCache;Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+436555071 [label="L1\lLINENUMBER 2879 L1\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I\lPOP\lL4\lLINENUMBER 2880 L4\lGOTO L5\l"];
+872071276 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 2874 L3\lLDC \"6258ee59-06db-4b41-8a99-2a97b9d8fd79\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/OffHeapCache$2.this$0 : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKESTATIC com/sleepycat/je/evictor/OffHeapCache.access$400 (Lcom/sleepycat/je/evictor/OffHeapCache;)Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I\lPOP\l"];
+85135346 [label="L5\lLINENUMBER 2881 L5\lFRAME SAME\lLDC \"6258ee59-06db-4b41-8a99-2a97b9d8fd79\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
 entry;
 exit;
-219971951 -> exit
-entry -> 794344275
-1079323136 -> 219971951
-794344275 -> 687552101
-687552101 -> 1079323136
-687552101 -> 1744059617 [style=dashed, color=red]
-1744059617 -> exit
-219971951[fontcolor="purple", penwidth=3, color="purple"];
-794344275[fontcolor="purple", penwidth=3, color="purple"];
-1744059617[fontcolor="purple", penwidth=3, color="purple"];
+1620007471 -> exit
+entry -> 872071276
+768065551 -> 1620007471 [style=dashed, color=red]
+768065551 -> 436555071
+436555071 -> 85135346
+872071276 -> 768065551
+85135346 -> exit
+1620007471[fontcolor="purple", penwidth=3, color="purple"];
+872071276[fontcolor="purple", penwidth=3, color="purple"];
+85135346[fontcolor="purple", penwidth=3, color="purple"];
 }

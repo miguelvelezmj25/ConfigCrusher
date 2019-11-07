@@ -1,91 +1,91 @@
 digraph checkSecondaryKeysExist {
 node [shape=record];
-740452239 [label="ALOAD 14\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeleted ()Z\lIFEQ L19\l"];
-267703288 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/Database.getConfig ()Lcom/sleepycat/je/DatabaseConfig;\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReadOnly ()Z\lIFNE L12\l"];
-98568928 [label="L18\lLINENUMBER 1902 L18\lFRAME APPEND [com/sleepycat/je/dbi/DbTree com/sleepycat/je/dbi/DatabaseImpl]\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1473653021 [label="L35\lLINENUMBER 1948 L35\lFRAME APPEND [com/sleepycat/je/DatabaseEntry]\lGOTO L32\l"];
-1297703055 [label="L33\lLINENUMBER 1949 L33\lFRAME CHOP 1\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL37\l"];
-776422297 [label="L25\lLINENUMBER 1920 L25\lFRAME APPEND [com/sleepycat/je/DatabaseEntry]\lALOAD 0\lALOAD 2\lALOAD 14\lALOAD 3\lALOAD 16\lLLOAD 7\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lALOAD 1\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.checkOneSecondaryKeyExists (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;JLjava/lang/String;Lcom/sleepycat/je/Database;Lcom/sleepycat/je/SecondaryAssociation;)Z\lPOP\lL27\lLINENUMBER 1924 L27\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-997305227 [label="L36\lLINENUMBER 1946 L36\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1460182456 [label="L1\lLINENUMBER 1891 L1\lGOTO L13\l"];
-1946818132 [label="L2\lLINENUMBER 1885 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 13\lL14\lLINENUMBER 1890 L14\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1328005196 [label="ALOAD 17\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/DatabaseEntry\lASTORE 18\lL34\lLINENUMBER 1943 L34\lALOAD 0\lALOAD 2\lALOAD 14\lALOAD 3\lALOAD 18\lLLOAD 7\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lALOAD 1\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.checkOneSecondaryKeyExists (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;JLjava/lang/String;Lcom/sleepycat/je/Database;Lcom/sleepycat/je/SecondaryAssociation;)Z\lIFNE L35\l"];
-914231766 [label="L26\lLINENUMBER 1917 L26\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1941067041 [label="L0\lLINENUMBER 1884 L0\lFRAME SAME\lALOAD 2\lINVOKESTATIC com/sleepycat/je/DbInternal.getDbImpl (Lcom/sleepycat/je/Database;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lASTORE 12\l"];
-18091120 [label="ALOAD 11\lIFNULL L23\l"];
-418955238 [label="ALOAD 11\lIFNONNULL L0\l"];
-633197841 [label="L19\lLINENUMBER 1905 L19\lFRAME SAME\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lASTORE 15\lL20\lLINENUMBER 1909 L20\lALOAD 10\lIFNULL L21\l"];
-252816813 [label="L31\lLINENUMBER 1935 L31\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-530643244 [label="L30\lLINENUMBER 1941 L30\lFRAME APPEND [java/util/HashSet]\lALOAD 16\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 17\l"];
-1786010944 [label="L4\lLINENUMBER 1871 L4\lFRAME SAME\lALOAD 2\lL6\lLINENUMBER 1872 L6\lINVOKESTATIC com/sleepycat/je/DbInternal.getPrivateSecondaryConfig (Lcom/sleepycat/je/SecondaryDatabase;)Lcom/sleepycat/je/SecondaryConfig;\lASTORE 9\lL7\lLINENUMBER 1873 L7\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/SecondaryConfig.getKeyCreator ()Lcom/sleepycat/je/SecondaryKeyCreator;\lASTORE 10\lL8\lLINENUMBER 1874 L8\lALOAD 9\lL9\lLINENUMBER 1875 L9\lINVOKEVIRTUAL com/sleepycat/je/SecondaryConfig.getMultiKeyCreator ()Lcom/sleepycat/je/SecondaryMultiKeyCreator;\lASTORE 11\lL10\lLINENUMBER 1877 L10\lALOAD 10\lIFNONNULL L0\l"];
-1271127643 [label="L13\lLINENUMBER 1893 L13\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseId]\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkOpen ()V\lL15\lLINENUMBER 1894 L15\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lASTORE 13\lL16\lLINENUMBER 1895 L16\lALOAD 13\lALOAD 12\lLDC -1\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDb (Lcom/sleepycat/je/dbi/DatabaseId;JLjava/util/Map;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 14\lL17\lLINENUMBER 1897 L17\lALOAD 14\lIFNULL L18\l"];
-1044765831 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-193861234 [label="L5\lLINENUMBER 1868 L5\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1013232155 [label="L11\lLINENUMBER 1878 L11\lGETSTATIC com/sleepycat/je/util/verify/BtreeVerifier.$assertionsDisabled : Z\lIFNE L12\l"];
-1246387573 [label="L23\lLINENUMBER 1913 L23\lFRAME APPEND [java/lang/String]\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 16\lL24\lLINENUMBER 1914 L24\lALOAD 10\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 16\lINVOKEINTERFACE com/sleepycat/je/SecondaryKeyCreator.createSecondaryKey (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Z\lIFNE L25\l"];
-1934468528 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/IllegalStateException\lTRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/OperationFailureException\lL3\lLINENUMBER 1863 L3\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 2\lINVOKESTATIC com/sleepycat/je/DbInternal.isCorrupted (Lcom/sleepycat/je/Database;)Z\lIFEQ L4\l"];
-1503050671 [label="L32\lFRAME APPEND [java/util/Iterator]\lALOAD 17\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L33\l"];
-1949464202 [label="L12\lLINENUMBER 1879 L12\lFRAME APPEND [com/sleepycat/je/SecondaryConfig com/sleepycat/je/SecondaryKeyCreator com/sleepycat/je/SecondaryMultiKeyCreator]\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1378769519 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"58c2b7f1-ea76-4e69-aaaf-e17c55dc4f2e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1884944123 [label="L21\lLINENUMBER 1930 L21\lFRAME CHOP 1\lNEW java/util/HashSet\lDUP\lINVOKESPECIAL java/util/HashSet.\<init\> ()V\lASTORE 16\lL28\lLINENUMBER 1931 L28\lALOAD 11\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 16\lINVOKEINTERFACE com/sleepycat/je/SecondaryMultiKeyCreator.createSecondaryKeys (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Ljava/util/Set;)V\lL29\lLINENUMBER 1933 L29\lALOAD 16\lINVOKEINTERFACE java/util/Set.isEmpty ()Z\lIFEQ L30\l"];
-1341716832 [label="L22\lLINENUMBER 1911 L22\lGETSTATIC com/sleepycat/je/util/verify/BtreeVerifier.$assertionsDisabled : Z\lIFNE L23\l"];
+617480766 [label="L19\lLINENUMBER 1905 L19\lFRAME SAME\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lASTORE 15\lL20\lLINENUMBER 1909 L20\lALOAD 10\lIFNULL L21\l"];
+186222576 [label="ALOAD 11\lIFNULL L23\l"];
+1713179060 [label="L1\lLINENUMBER 1891 L1\lGOTO L13\l"];
+630586773 [label="ALOAD 11\lIFNONNULL L0\l"];
+1461313204 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1908369689 [label="L4\lLINENUMBER 1871 L4\lFRAME SAME\lALOAD 2\lL6\lLINENUMBER 1872 L6\lINVOKESTATIC com/sleepycat/je/DbInternal.getPrivateSecondaryConfig (Lcom/sleepycat/je/SecondaryDatabase;)Lcom/sleepycat/je/SecondaryConfig;\lASTORE 9\lL7\lLINENUMBER 1873 L7\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/SecondaryConfig.getKeyCreator ()Lcom/sleepycat/je/SecondaryKeyCreator;\lASTORE 10\lL8\lLINENUMBER 1874 L8\lALOAD 9\lL9\lLINENUMBER 1875 L9\lINVOKEVIRTUAL com/sleepycat/je/SecondaryConfig.getMultiKeyCreator ()Lcom/sleepycat/je/SecondaryMultiKeyCreator;\lASTORE 11\lL10\lLINENUMBER 1877 L10\lALOAD 10\lIFNONNULL L0\l"];
+237542958 [label="L31\lLINENUMBER 1935 L31\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+924124233 [label="L18\lLINENUMBER 1902 L18\lFRAME APPEND [com/sleepycat/je/dbi/DbTree com/sleepycat/je/dbi/DatabaseImpl]\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+777892346 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/Database.getConfig ()Lcom/sleepycat/je/DatabaseConfig;\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReadOnly ()Z\lIFNE L12\l"];
+565440112 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1946462546 [label="L13\lLINENUMBER 1893 L13\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseId]\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkOpen ()V\lL15\lLINENUMBER 1894 L15\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lASTORE 13\lL16\lLINENUMBER 1895 L16\lALOAD 13\lALOAD 12\lLDC -1\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDb (Lcom/sleepycat/je/dbi/DatabaseId;JLjava/util/Map;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 14\lL17\lLINENUMBER 1897 L17\lALOAD 14\lIFNULL L18\l"];
+63683625 [label="L26\lLINENUMBER 1917 L26\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+13158128 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/IllegalStateException\lTRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/OperationFailureException\lL3\lLINENUMBER 1863 L3\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 2\lINVOKESTATIC com/sleepycat/je/DbInternal.isCorrupted (Lcom/sleepycat/je/Database;)Z\lIFEQ L4\l"];
+1968267724 [label="L21\lLINENUMBER 1930 L21\lFRAME CHOP 1\lNEW java/util/HashSet\lDUP\lINVOKESPECIAL java/util/HashSet.\<init\> ()V\lASTORE 16\lL28\lLINENUMBER 1931 L28\lALOAD 11\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 16\lINVOKEINTERFACE com/sleepycat/je/SecondaryMultiKeyCreator.createSecondaryKeys (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Ljava/util/Set;)V\lL29\lLINENUMBER 1933 L29\lALOAD 16\lINVOKEINTERFACE java/util/Set.isEmpty ()Z\lIFEQ L30\l"];
+901670938 [label="L35\lLINENUMBER 1948 L35\lFRAME APPEND [com/sleepycat/je/DatabaseEntry]\lGOTO L32\l"];
+923194959 [label="L2\lLINENUMBER 1885 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 13\lL14\lLINENUMBER 1890 L14\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+606139334 [label="L11\lLINENUMBER 1878 L11\lGETSTATIC com/sleepycat/je/util/verify/BtreeVerifier.$assertionsDisabled : Z\lIFNE L12\l"];
+1847785762 [label="L32\lFRAME APPEND [java/util/Iterator]\lALOAD 17\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L33\l"];
+879148778 [label="L33\lLINENUMBER 1949 L33\lFRAME CHOP 1\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL37\l"];
+1567291865 [label="L12\lLINENUMBER 1879 L12\lFRAME APPEND [com/sleepycat/je/SecondaryConfig com/sleepycat/je/SecondaryKeyCreator com/sleepycat/je/SecondaryMultiKeyCreator]\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+726335969 [label="L5\lLINENUMBER 1868 L5\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+758050823 [label="L0\lLINENUMBER 1884 L0\lFRAME SAME\lALOAD 2\lINVOKESTATIC com/sleepycat/je/DbInternal.getDbImpl (Lcom/sleepycat/je/Database;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lASTORE 12\l"];
+1277983846 [label="L36\lLINENUMBER 1946 L36\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1035704131 [label="ALOAD 14\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeleted ()Z\lIFEQ L19\l"];
+810951157 [label="L30\lLINENUMBER 1941 L30\lFRAME APPEND [java/util/HashSet]\lALOAD 16\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 17\l"];
+2121635556 [label="ALOAD 17\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/DatabaseEntry\lASTORE 18\lL34\lLINENUMBER 1943 L34\lALOAD 0\lALOAD 2\lALOAD 14\lALOAD 3\lALOAD 18\lLLOAD 7\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lALOAD 1\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.checkOneSecondaryKeyExists (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;JLjava/lang/String;Lcom/sleepycat/je/Database;Lcom/sleepycat/je/SecondaryAssociation;)Z\lIFNE L35\l"];
+1595059039 [label="L23\lLINENUMBER 1913 L23\lFRAME APPEND [java/lang/String]\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 16\lL24\lLINENUMBER 1914 L24\lALOAD 10\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 16\lINVOKEINTERFACE com/sleepycat/je/SecondaryKeyCreator.createSecondaryKey (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Z\lIFNE L25\l"];
+1794708579 [label="L22\lLINENUMBER 1911 L22\lGETSTATIC com/sleepycat/je/util/verify/BtreeVerifier.$assertionsDisabled : Z\lIFNE L23\l"];
+1143643559 [label="L25\lLINENUMBER 1920 L25\lFRAME APPEND [com/sleepycat/je/DatabaseEntry]\lALOAD 0\lALOAD 2\lALOAD 14\lALOAD 3\lALOAD 16\lLLOAD 7\lLDC \"Secondary is corrupt: the primary record contains a key that is not present in this secondary database.\"\lALOAD 1\lALOAD 6\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.checkOneSecondaryKeyExists (Lcom/sleepycat/je/SecondaryDatabase;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;JLjava/lang/String;Lcom/sleepycat/je/Database;Lcom/sleepycat/je/SecondaryAssociation;)Z\lPOP\lL27\lLINENUMBER 1924 L27\lLDC \"6ef80b93-1161-4278-8e21-93c2d09334fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-740452239 -> 98568928
-740452239 -> 633197841
-267703288 -> 1949464202
-267703288 -> 1378769519
-98568928 -> exit
-1473653021 -> 1503050671
-1297703055 -> exit
-776422297 -> exit
-997305227 -> exit
-1460182456 -> 1271127643
-1946818132 -> exit
-1328005196 -> 1473653021
-1328005196 -> 997305227
-914231766 -> exit
-1941067041 -> 1460182456
-1941067041 -> 1946818132 [style=dashed, color=red]
-18091120 -> 1246387573
-18091120 -> 1044765831
-418955238 -> 1013232155
-418955238 -> 1941067041
-633197841 -> 1884944123
-633197841 -> 1341716832
-252816813 -> exit
-530643244 -> 1503050671
-1786010944 -> 1941067041
-1786010944 -> 418955238
-1271127643 -> 740452239
-1271127643 -> 98568928
-1044765831 -> exit
-entry -> 1934468528
-193861234 -> exit
-1013232155 -> 267703288
-1013232155 -> 1949464202
-1246387573 -> 914231766
-1246387573 -> 776422297
-1934468528 -> 193861234
-1934468528 -> 1786010944
-1503050671 -> 1297703055
-1503050671 -> 1328005196
-1949464202 -> exit
-1378769519 -> exit
-1884944123 -> 252816813
-1884944123 -> 530643244
-1341716832 -> 1246387573
-1341716832 -> 18091120
-914231766[fontcolor="purple", penwidth=3, color="purple"];
-252816813[fontcolor="purple", penwidth=3, color="purple"];
-193861234[fontcolor="purple", penwidth=3, color="purple"];
-98568928[fontcolor="purple", penwidth=3, color="purple"];
-1934468528[fontcolor="purple", penwidth=3, color="purple"];
-1949464202[fontcolor="purple", penwidth=3, color="purple"];
-1297703055[fontcolor="purple", penwidth=3, color="purple"];
-1378769519[fontcolor="purple", penwidth=3, color="purple"];
-776422297[fontcolor="purple", penwidth=3, color="purple"];
-997305227[fontcolor="purple", penwidth=3, color="purple"];
-1946818132[fontcolor="purple", penwidth=3, color="purple"];
-1044765831[fontcolor="purple", penwidth=3, color="purple"];
+617480766 -> 1794708579
+617480766 -> 1968267724
+186222576 -> 565440112
+186222576 -> 1595059039
+1713179060 -> 1946462546
+630586773 -> 758050823
+630586773 -> 606139334
+1461313204 -> exit
+1908369689 -> 758050823
+1908369689 -> 630586773
+237542958 -> exit
+924124233 -> exit
+777892346 -> 1461313204
+777892346 -> 1567291865
+565440112 -> exit
+1946462546 -> 1035704131
+1946462546 -> 924124233
+63683625 -> exit
+13158128 -> 1908369689
+13158128 -> 726335969
+1968267724 -> 810951157
+1968267724 -> 237542958
+901670938 -> 1847785762
+923194959 -> exit
+606139334 -> 777892346
+606139334 -> 1567291865
+1847785762 -> 2121635556
+1847785762 -> 879148778
+879148778 -> exit
+1567291865 -> exit
+726335969 -> exit
+entry -> 13158128
+758050823 -> 923194959 [style=dashed, color=red]
+758050823 -> 1713179060
+1277983846 -> exit
+1035704131 -> 617480766
+1035704131 -> 924124233
+810951157 -> 1847785762
+2121635556 -> 901670938
+2121635556 -> 1277983846
+1595059039 -> 63683625
+1595059039 -> 1143643559
+1794708579 -> 186222576
+1794708579 -> 1595059039
+1143643559 -> exit
+565440112[fontcolor="purple", penwidth=3, color="purple"];
+1277983846[fontcolor="purple", penwidth=3, color="purple"];
+63683625[fontcolor="purple", penwidth=3, color="purple"];
+923194959[fontcolor="purple", penwidth=3, color="purple"];
+1461313204[fontcolor="purple", penwidth=3, color="purple"];
+237542958[fontcolor="purple", penwidth=3, color="purple"];
+924124233[fontcolor="purple", penwidth=3, color="purple"];
+13158128[fontcolor="purple", penwidth=3, color="purple"];
+879148778[fontcolor="purple", penwidth=3, color="purple"];
+1567291865[fontcolor="purple", penwidth=3, color="purple"];
+1143643559[fontcolor="purple", penwidth=3, color="purple"];
+726335969[fontcolor="purple", penwidth=3, color="purple"];
 }

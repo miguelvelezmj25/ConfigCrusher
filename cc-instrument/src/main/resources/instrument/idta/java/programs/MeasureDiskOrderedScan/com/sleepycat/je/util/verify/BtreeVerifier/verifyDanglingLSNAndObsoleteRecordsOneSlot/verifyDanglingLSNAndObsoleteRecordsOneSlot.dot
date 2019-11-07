@@ -1,19 +1,19 @@
 digraph verifyDanglingLSNAndObsoleteRecordsOneSlot {
 node [shape=record];
-1528171776 [label="L2\lLINENUMBER 676 L2\lLDC \"2e19edf5-eece-4936-ab61-c6745a8b9066\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
-1264433078 [label="ALOAD 2\lCHECKCAST com/sleepycat/je/tree/BIN\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isDefunct (I)Z\lIFEQ L1\l"];
-184449735 [label="L0\lLINENUMBER 675 L0\lLDC \"2e19edf5-eece-4936-ab61-c6745a8b9066\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 3\lIFEQ L1\l"];
-1127689883 [label="L1\lLINENUMBER 679 L1\lFRAME SAME\lALOAD 0\lILOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyDanglingLSN (ILcom/sleepycat/je/tree/IN;Z)V\lL3\lLINENUMBER 680 L3\lALOAD 0\lILOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyObsoleteRecords (ILcom/sleepycat/je/tree/IN;Z)V\lL4\lLINENUMBER 681 L4\lLDC \"2e19edf5-eece-4936-ab61-c6745a8b9066\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+319779700 [label="ALOAD 2\lCHECKCAST com/sleepycat/je/tree/BIN\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isDefunct (I)Z\lIFEQ L1\l"];
+1130243322 [label="L2\lLINENUMBER 676 L2\lLDC \"57226959-aab8-43a4-af96-780184aaa789\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+224821560 [label="L0\lLINENUMBER 675 L0\lLDC \"57226959-aab8-43a4-af96-780184aaa789\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lILOAD 3\lIFEQ L1\l"];
+1407587654 [label="L1\lLINENUMBER 679 L1\lFRAME SAME\lALOAD 0\lILOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyDanglingLSN (ILcom/sleepycat/je/tree/IN;Z)V\lL3\lLINENUMBER 680 L3\lALOAD 0\lILOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyObsoleteRecords (ILcom/sleepycat/je/tree/IN;Z)V\lL4\lLINENUMBER 681 L4\lLDC \"57226959-aab8-43a4-af96-780184aaa789\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
 entry;
 exit;
-entry -> 184449735
-1528171776 -> exit
-1264433078 -> 1528171776
-1264433078 -> 1127689883
-184449735 -> 1264433078
-184449735 -> 1127689883
-1127689883 -> exit
-1528171776[fontcolor="purple", penwidth=3, color="purple"];
-184449735[fontcolor="purple", penwidth=3, color="purple"];
-1127689883[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 224821560
+319779700 -> 1130243322
+319779700 -> 1407587654
+1130243322 -> exit
+224821560 -> 319779700
+224821560 -> 1407587654
+1407587654 -> exit
+1130243322[fontcolor="purple", penwidth=3, color="purple"];
+224821560[fontcolor="purple", penwidth=3, color="purple"];
+1407587654[fontcolor="purple", penwidth=3, color="purple"];
 }

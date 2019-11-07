@@ -1,9 +1,9 @@
 digraph addCostToMemoryBudget {
 node [shape=record];
-963251486 [label="L0\lLINENUMBER 512 L0\lLDC \"8a60eee6-f1de-447b-80c6-569cf91f36be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/DirtyINMap.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMemoryBudget ()Lcom/sleepycat/je/dbi/MemoryBudget;\lASTORE 1\lL1\lLINENUMBER 513 L1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/DirtyINMap.numEntries : I\lI2L\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.CHECKPOINT_REFERENCE_SIZE : I\lI2L\lLMUL\lLSTORE 2\lL2\lLINENUMBER 515 L2\lALOAD 1\lLLOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateAdminMemoryUsage (J)V\lL3\lLINENUMBER 516 L3\lLDC \"8a60eee6-f1de-447b-80c6-569cf91f36be\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
+1150230639 [label="L0\lLINENUMBER 512 L0\lLDC \"82078e20-461e-4f89-889b-f9660c6d0031\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/DirtyINMap.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMemoryBudget ()Lcom/sleepycat/je/dbi/MemoryBudget;\lASTORE 1\lL1\lLINENUMBER 513 L1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/DirtyINMap.numEntries : I\lI2L\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.CHECKPOINT_REFERENCE_SIZE : I\lI2L\lLMUL\lLSTORE 2\lL2\lLINENUMBER 515 L2\lALOAD 1\lLLOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateAdminMemoryUsage (J)V\lL3\lLINENUMBER 516 L3\lLDC \"82078e20-461e-4f89-889b-f9660c6d0031\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
 entry;
 exit;
-entry -> 963251486
-963251486 -> exit
-963251486[fontcolor="purple", penwidth=3, color="purple"];
+1150230639 -> exit
+entry -> 1150230639
+1150230639[fontcolor="purple", penwidth=3, color="purple"];
 }

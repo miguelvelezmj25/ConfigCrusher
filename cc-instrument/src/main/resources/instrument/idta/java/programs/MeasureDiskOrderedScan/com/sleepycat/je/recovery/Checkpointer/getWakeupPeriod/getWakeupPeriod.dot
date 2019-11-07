@@ -1,25 +1,25 @@
 digraph getWakeupPeriod {
 node [shape=record];
-1860831815 [label="L10\lLINENUMBER 503 L10\lLLOAD 1\lLDC \"980aa4f5-7b19-4015-93cb-7248dfa7ca07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
-56106017 [label="LLOAD 3\lLCONST_0\lLCMP\lIFNE L5\l"];
-720220037 [label="L9\lLINENUMBER 505 L9\lFRAME SAME\lLCONST_0\lLDC \"980aa4f5-7b19-4015-93cb-7248dfa7ca07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL11\l"];
-1388763820 [label="L0\lLINENUMBER 485 L0\lLDC \"980aa4f5-7b19-4015-93cb-7248dfa7ca07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL1\lLINENUMBER 486 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getDuration (Lcom/sleepycat/je/config/DurationConfigParam;)I\lI2L\lLSTORE 1\lL2\lLINENUMBER 487 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL3\lLINENUMBER 488 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLSTORE 3\lL4\lLINENUMBER 491 L4\lLLOAD 1\lLCONST_0\lLCMP\lIFNE L5\l"];
-580705252 [label="L5\lLINENUMBER 502 L5\lFRAME APPEND [J J]\lLLOAD 3\lLCONST_0\lLCMP\lIFNE L9\l"];
-178106882 [label="L6\lLINENUMBER 492 L6\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL7\lLINENUMBER 493 L7\lINVOKEVIRTUAL com/sleepycat/je/config/LongConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" and \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL8\lLINENUMBER 495 L8\lINVOKEVIRTUAL com/sleepycat/je/config/DurationConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" cannot both be 0. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lLDC \"980aa4f5-7b19-4015-93cb-7248dfa7ca07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1999002990 [label="L9\lLINENUMBER 505 L9\lFRAME SAME\lLCONST_0\lLDC \"e1af950a-f468-4d01-bafd-5d4e5f7101de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL11\l"];
+1967809207 [label="LLOAD 3\lLCONST_0\lLCMP\lIFNE L5\l"];
+380031035 [label="L10\lLINENUMBER 503 L10\lLLOAD 1\lLDC \"e1af950a-f468-4d01-bafd-5d4e5f7101de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1154491661 [label="L6\lLINENUMBER 492 L6\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL7\lLINENUMBER 493 L7\lINVOKEVIRTUAL com/sleepycat/je/config/LongConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" and \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL8\lLINENUMBER 495 L8\lINVOKEVIRTUAL com/sleepycat/je/config/DurationConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" cannot both be 0. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lLDC \"e1af950a-f468-4d01-bafd-5d4e5f7101de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+758112613 [label="L0\lLINENUMBER 485 L0\lLDC \"e1af950a-f468-4d01-bafd-5d4e5f7101de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL1\lLINENUMBER 486 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getDuration (Lcom/sleepycat/je/config/DurationConfigParam;)I\lI2L\lLSTORE 1\lL2\lLINENUMBER 487 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL3\lLINENUMBER 488 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLSTORE 3\lL4\lLINENUMBER 491 L4\lLLOAD 1\lLCONST_0\lLCMP\lIFNE L5\l"];
+1440122623 [label="L5\lLINENUMBER 502 L5\lFRAME APPEND [J J]\lLLOAD 3\lLCONST_0\lLCMP\lIFNE L9\l"];
 entry;
 exit;
-entry -> 1388763820
-1860831815 -> exit
-56106017 -> 178106882
-56106017 -> 580705252
-720220037 -> exit
-1388763820 -> 56106017
-1388763820 -> 580705252
-580705252 -> 1860831815
-580705252 -> 720220037
-178106882 -> exit
-1860831815[fontcolor="purple", penwidth=3, color="purple"];
-720220037[fontcolor="purple", penwidth=3, color="purple"];
-1388763820[fontcolor="purple", penwidth=3, color="purple"];
-178106882[fontcolor="purple", penwidth=3, color="purple"];
+1999002990 -> exit
+entry -> 758112613
+1967809207 -> 1154491661
+1967809207 -> 1440122623
+380031035 -> exit
+1154491661 -> exit
+758112613 -> 1967809207
+758112613 -> 1440122623
+1440122623 -> 1999002990
+1440122623 -> 380031035
+1999002990[fontcolor="purple", penwidth=3, color="purple"];
+380031035[fontcolor="purple", penwidth=3, color="purple"];
+1154491661[fontcolor="purple", penwidth=3, color="purple"];
+758112613[fontcolor="purple", penwidth=3, color="purple"];
 }

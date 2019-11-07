@@ -1,19 +1,19 @@
 digraph <init> {
 node [shape=record];
-1139341583 [label="ALOAD 1\lIFNONNULL L2\l"];
-167265445 [label="L2\lLINENUMBER 95 L2\lFRAME FULL [com/sleepycat/je/tree/FileSummaryLN com/sleepycat/je/cleaner/FileSummary] []\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.baseSummary : Lcom/sleepycat/je/cleaner/FileSummary;\lL3\lLINENUMBER 96 L3\lALOAD 0\lNEW com/sleepycat/je/cleaner/PackedOffsets\lDUP\lINVOKESPECIAL com/sleepycat/je/cleaner/PackedOffsets.\<init\> ()V\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.obsoleteOffsets : Lcom/sleepycat/je/cleaner/PackedOffsets;\lL4\lLINENUMBER 97 L4\lALOAD 0\lICONST_M1\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.entryVersion : I\lL5\lLINENUMBER 98 L5\lLDC \"a22566d0-1dce-41f0-b0a5-190d9cc112e5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
-1896284655 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"a22566d0-1dce-41f0-b0a5-190d9cc112e5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1572588043 [label="L0\lLINENUMBER 93 L0\lLDC \"a22566d0-1dce-41f0-b0a5-190d9cc112e5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lNEWARRAY T_BYTE\lINVOKESPECIAL com/sleepycat/je/tree/LN.\<init\> ([B)V\lL1\lLINENUMBER 94 L1\lGETSTATIC com/sleepycat/je/tree/FileSummaryLN.$assertionsDisabled : Z\lIFNE L2\l"];
+956032542 [label="ALOAD 1\lIFNONNULL L2\l"];
+228437142 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"6a2691a7-cbb1-4708-970b-dd6ddda77011\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1592904195 [label="L0\lLINENUMBER 93 L0\lLDC \"6a2691a7-cbb1-4708-970b-dd6ddda77011\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lNEWARRAY T_BYTE\lINVOKESPECIAL com/sleepycat/je/tree/LN.\<init\> ([B)V\lL1\lLINENUMBER 94 L1\lGETSTATIC com/sleepycat/je/tree/FileSummaryLN.$assertionsDisabled : Z\lIFNE L2\l"];
+677399046 [label="L2\lLINENUMBER 95 L2\lFRAME FULL [com/sleepycat/je/tree/FileSummaryLN com/sleepycat/je/cleaner/FileSummary] []\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.baseSummary : Lcom/sleepycat/je/cleaner/FileSummary;\lL3\lLINENUMBER 96 L3\lALOAD 0\lNEW com/sleepycat/je/cleaner/PackedOffsets\lDUP\lINVOKESPECIAL com/sleepycat/je/cleaner/PackedOffsets.\<init\> ()V\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.obsoleteOffsets : Lcom/sleepycat/je/cleaner/PackedOffsets;\lL4\lLINENUMBER 97 L4\lALOAD 0\lICONST_M1\lPUTFIELD com/sleepycat/je/tree/FileSummaryLN.entryVersion : I\lL5\lLINENUMBER 98 L5\lLDC \"6a2691a7-cbb1-4708-970b-dd6ddda77011\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
 entry;
 exit;
-entry -> 1572588043
-1139341583 -> 167265445
-1139341583 -> 1896284655
-167265445 -> exit
-1896284655 -> exit
-1572588043 -> 1139341583
-1572588043 -> 167265445
-167265445[fontcolor="purple", penwidth=3, color="purple"];
-1896284655[fontcolor="purple", penwidth=3, color="purple"];
-1572588043[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1592904195
+956032542 -> 228437142
+956032542 -> 677399046
+228437142 -> exit
+1592904195 -> 956032542
+1592904195 -> 677399046
+677399046 -> exit
+228437142[fontcolor="purple", penwidth=3, color="purple"];
+1592904195[fontcolor="purple", penwidth=3, color="purple"];
+677399046[fontcolor="purple", penwidth=3, color="purple"];
 }

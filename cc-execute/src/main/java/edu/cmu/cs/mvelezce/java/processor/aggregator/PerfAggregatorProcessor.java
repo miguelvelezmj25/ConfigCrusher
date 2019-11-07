@@ -65,17 +65,17 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions =
         this.itersToProcessedPerfExecution.values();
 
-    Map<String, Long> regionsToPerf = this.addRegions(config, allProcessedPerfExecutions, 0L);
+    Map<UUID, Long> regionsToPerf = this.addRegions(config, allProcessedPerfExecutions, 0L);
     this.addAllExecutions(regionsToPerf, config, allProcessedPerfExecutions);
 
-    for (Map.Entry<String, Long> entry : regionsToPerf.entrySet()) {
+    for (Map.Entry<UUID, Long> entry : regionsToPerf.entrySet()) {
       long totalTime = entry.getValue();
       regionsToPerf.put(entry.getKey(), totalTime / this.itersToProcessedPerfExecution.size());
     }
 
-    Map<String, Long> regionsToMin = this.getRegionsToMin(config, allProcessedPerfExecutions);
-    Map<String, Long> regionsToMax = this.getRegionsToMax(config, allProcessedPerfExecutions);
-    Map<String, Long> regionsToDiff = this.getRegionsToDiff(regionsToMin, regionsToMax);
+    Map<UUID, Long> regionsToMin = this.getRegionsToMin(config, allProcessedPerfExecutions);
+    Map<UUID, Long> regionsToMax = this.getRegionsToMax(config, allProcessedPerfExecutions);
+    Map<UUID, Long> regionsToDiff = this.getRegionsToDiff(regionsToMin, regionsToMax);
 
     return new PerformanceEntry(
         config,
@@ -89,15 +89,15 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         this.toHumanReadable(regionsToDiff));
   }
 
-  private Map<String, String> toHumanReadable(Map<String, Long> regionsToData) {
+  private Map<UUID, String> toHumanReadable(Map<UUID, Long> regionsToData) {
 
-    Map<String, String> regionsToHumanReadableData = new HashMap<>();
+    Map<UUID, String> regionsToHumanReadableData = new HashMap<>();
 
-    for (Map.Entry<String, Long> entry : regionsToData.entrySet()) {
+    for (Map.Entry<UUID, Long> entry : regionsToData.entrySet()) {
       regionsToHumanReadableData.put(entry.getKey(), entry.getValue().toString());
     }
 
-    for (Map.Entry<String, String> entry : regionsToHumanReadableData.entrySet()) {
+    for (Map.Entry<UUID, String> entry : regionsToHumanReadableData.entrySet()) {
       double data = Double.parseDouble(entry.getValue());
       data = data / 1E9;
       regionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
@@ -106,9 +106,9 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToHumanReadableData;
   }
 
-  private Map<String, Long> getRegionsToMin(
+  private Map<UUID, Long> getRegionsToMin(
       Set<String> config, Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
-    Map<String, Long> regionsToMin =
+    Map<UUID, Long> regionsToMin =
         this.addRegions(config, allProcessedPerfExecutions, Long.MAX_VALUE);
 
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
@@ -118,7 +118,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         }
 
         for (Map.Entry<String, Long> entry : processedPerfExecution.getRegionsToPerf().entrySet()) {
-          String region = entry.getKey();
+          UUID region = UUID.fromString(entry.getKey());
           long currentMin = regionsToMin.get(region);
           currentMin = Math.min(currentMin, entry.getValue());
           regionsToMin.put(region, currentMin);
@@ -131,9 +131,9 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToMin;
   }
 
-  private Map<String, Long> getRegionsToMax(
+  private Map<UUID, Long> getRegionsToMax(
       Set<String> config, Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
-    Map<String, Long> regionsToMax =
+    Map<UUID, Long> regionsToMax =
         this.addRegions(config, allProcessedPerfExecutions, Long.MIN_VALUE);
 
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
@@ -143,7 +143,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         }
 
         for (Map.Entry<String, Long> entry : processedPerfExecution.getRegionsToPerf().entrySet()) {
-          String region = entry.getKey();
+          UUID region = UUID.fromString(entry.getKey());
           long currentMax = regionsToMax.get(region);
           currentMax = Math.max(currentMax, entry.getValue());
           regionsToMax.put(region, currentMax);
@@ -156,15 +156,15 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToMax;
   }
 
-  private Map<String, Long> getRegionsToDiff(
-      Map<String, Long> regionsToMin, Map<String, Long> regionsToMax) {
-    Map<String, Long> regionsToDiff = new HashMap<>();
+  private Map<UUID, Long> getRegionsToDiff(
+      Map<UUID, Long> regionsToMin, Map<UUID, Long> regionsToMax) {
+    Map<UUID, Long> regionsToDiff = new HashMap<>();
 
-    for (String region : regionsToMin.keySet()) {
+    for (UUID region : regionsToMin.keySet()) {
       regionsToDiff.put(region, 0L);
     }
 
-    for (String region : regionsToDiff.keySet()) {
+    for (UUID region : regionsToDiff.keySet()) {
       long max = regionsToMax.get(region);
       long min = regionsToMin.get(region);
       long diff = max - min;
@@ -183,7 +183,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   }
 
   private void addAllExecutions(
-      Map<String, Long> regionsToPerf,
+      Map<UUID, Long> regionsToPerf,
       Set<String> config,
       Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
@@ -193,7 +193,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         }
 
         for (Map.Entry<String, Long> entry : processedPerfExecution.getRegionsToPerf().entrySet()) {
-          String region = entry.getKey();
+          UUID region = UUID.fromString(entry.getKey());
           long currentTime = regionsToPerf.get(region);
           currentTime += entry.getValue();
           regionsToPerf.put(region, currentTime);
@@ -204,11 +204,11 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     }
   }
 
-  private Map<String, Long> addRegions(
+  private Map<UUID, Long> addRegions(
       Set<String> config,
       Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions,
       long defaultValue) {
-    Map<String, Long> regionsToPerf = new HashMap<>();
+    Map<UUID, Long> regionsToPerf = new HashMap<>();
 
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
       for (ProcessedPerfExecution processedPerfExecution : processedPerfExecutions) {
@@ -217,7 +217,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         }
 
         for (String region : processedPerfExecution.getRegionsToPerf().keySet()) {
-          regionsToPerf.putIfAbsent(region, defaultValue);
+          regionsToPerf.putIfAbsent(UUID.fromString(region), defaultValue);
         }
 
         break;

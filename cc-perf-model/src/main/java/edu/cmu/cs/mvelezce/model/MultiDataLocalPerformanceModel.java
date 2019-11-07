@@ -13,4 +13,12 @@ public class MultiDataLocalPerformanceModel<T> {
     this.region = region;
     this.model = model;
   }
+
+  public UUID getRegion() {
+    return region;
+  }
+
+  public Map<T, Set<Long>> getModel() {
+    return model;
+  }
 }

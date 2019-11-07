@@ -31,13 +31,13 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
     this.mapPerfEntryToExeConstraint();
 
     for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : this.getRegionsToData().entrySet()) {
-      MultiDataLocalPerformanceModel<FeatureExpr> localModel =
+      MultiDataLocalPerformanceModel<FeatureExpr> multiDataLocalModel =
           this.buildEmptyMultiDataLocalModel(entry);
 
-      this.addExecutionTimes(localModel);
+      this.addExecutionTimes(multiDataLocalModel);
 
       throw new UnsupportedOperationException(
-          "loop through the execution entries, adding the execution time of the region based on the config executed");
+          "run statistics and average the entries for the local model");
     }
 
     throw new UnsupportedOperationException("What should the return value be?");
@@ -53,10 +53,50 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
   }
 
   private void addExecutionTimes(MultiDataLocalPerformanceModel<FeatureExpr> localModel) {
+    Map<FeatureExpr, Set<Long>> multiDataModel = localModel.getModel();
+    this.validateOneConfigCoversOneConstraint(multiDataModel.keySet());
+
+    UUID region = localModel.getRegion();
+
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
 
-      throw new UnsupportedOperationException("implement");
+      for (Map.Entry<UUID, Long> regionToTime : entry.getRegionsToPerf().entrySet()) {
+        if (!region.equals(regionToTime.getKey())) {
+          continue;
+        }
+
+        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes : multiDataModel.entrySet()) {
+          if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
+            continue;
+          }
+
+          constraintToTimes.getValue().add(regionToTime.getValue());
+
+          break;
+        }
+
+        break;
+      }
+    }
+  }
+
+  private void validateOneConfigCoversOneConstraint(Set<FeatureExpr> regionConstraints) {
+    for (PerformanceEntry entry : this.getPerformanceEntries()) {
+      FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
+
+      Set<FeatureExpr> coveredConstraints = new HashSet<>();
+
+      for (FeatureExpr regionConstraint : regionConstraints) {
+        if (configConstraint.implies(regionConstraint).isTautology()) {
+          coveredConstraints.add(regionConstraint);
+        }
+      }
+
+      if (coveredConstraints.size() > 1) {
+        throw new RuntimeException(
+            "Expected that one executed configuration would cover at most one region constraint");
+      }
     }
   }
 

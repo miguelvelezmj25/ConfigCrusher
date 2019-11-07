@@ -1,0 +1,48 @@
+digraph performDeadlockDetectionDelay {
+node [shape=record];
+2120141408 [label="ALOAD 2\lL6\lLINENUMBER 818 L6\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.getImportunate ()Z\lIFNE L5\l"];
+790711390 [label="L7\lLINENUMBER 824 L7\lFRAME SAME\lLLOAD 5\lLCONST_0\lLCMP\lIFNE L8\l"];
+1298081530 [label="L14\lLINENUMBER 838 L14\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.isOwner (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;)Z\lIFEQ L16\l"];
+2050125639 [label="LLOAD 9\lLCONST_0\lLCMP\lIFNE L7\l"];
+16119580 [label="L9\lFRAME SAME1 I\lISTORE 11\lL10\lLINENUMBER 826 L10\lILOAD 11\lIFNE L0\l"];
+1778229950 [label="L1\lLINENUMBER 835 L1\lGOTO L14\l"];
+65800114 [label="L17\lLINENUMBER 839 L17\lALOAD 0\lALOAD 2\lALOAD 1\lALOAD 3\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.finishLock (Lcom/sleepycat/je/txn/Locker;Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;)V\lL18\lLINENUMBER 840 L18\lICONST_1\lLDC \"d2f6984c-92f7-4ba9-bcf3-c72777b697bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1632710310 [label="ICONST_1\lGOTO L9\l"];
+1432249329 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 815 L3\lLDC \"d2f6984c-92f7-4ba9-bcf3-c72777b697bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDeadlockDetectionDelay ()J\lLSTORE 9\lL4\lLINENUMBER 817 L4\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDeadlockDetection ()Z\lIFEQ L5\l"];
+724011864 [label="L0\lLINENUMBER 832 L0\lFRAME APPEND [I]\lALOAD 2\lLCONST_1\lLLOAD 9\lINVOKESTATIC java/lang/Math.max (JJ)J\lINVOKEVIRTUAL java/lang/Object.wait (J)V\l"];
+1339245237 [label="L2\lLINENUMBER 833 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 12\lL15\lLINENUMBER 834 L15\lNEW com/sleepycat/je/ThreadInterruptedException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 12\lINVOKESPECIAL com/sleepycat/je/ThreadInterruptedException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Throwable;)V\lLDC \"d2f6984c-92f7-4ba9-bcf3-c72777b697bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1765073237 [label="L5\lLINENUMBER 821 L5\lFRAME APPEND [J]\lICONST_0\lLDC \"d2f6984c-92f7-4ba9-bcf3-c72777b697bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+622004448 [label="L11\lLINENUMBER 827 L11\lLLOAD 9\lLLOAD 5\lLLOAD 7\lL12\lLINENUMBER 828 L12\lINVOKESTATIC com/sleepycat/je/txn/LockManager.timeRemain (JJ)J\lL13\lLINENUMBER 827 L13\lINVOKESTATIC java/lang/Math.min (JJ)J\lLSTORE 9\l"];
+1767175462 [label="L8\lFRAME SAME\lICONST_0\l"];
+739134916 [label="L16\lLINENUMBER 844 L16\lFRAME SAME\lICONST_0\lLDC \"d2f6984c-92f7-4ba9-bcf3-c72777b697bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL19\l"];
+entry;
+exit;
+2120141408 -> 1765073237
+2120141408 -> 2050125639
+790711390 -> 1632710310
+790711390 -> 1767175462
+1298081530 -> 739134916
+1298081530 -> 65800114
+2050125639 -> 790711390
+2050125639 -> 1765073237
+16119580 -> 724011864
+16119580 -> 622004448
+1778229950 -> 1298081530
+65800114 -> exit
+entry -> 1432249329
+1632710310 -> 16119580
+1432249329 -> 2120141408
+1432249329 -> 1765073237
+724011864 -> 1339245237 [style=dashed, color=red]
+724011864 -> 1778229950
+1339245237 -> exit
+1765073237 -> exit
+622004448 -> 724011864
+1767175462 -> 16119580
+739134916 -> exit
+1432249329[fontcolor="purple", penwidth=3, color="purple"];
+1339245237[fontcolor="purple", penwidth=3, color="purple"];
+1765073237[fontcolor="purple", penwidth=3, color="purple"];
+739134916[fontcolor="purple", penwidth=3, color="purple"];
+65800114[fontcolor="purple", penwidth=3, color="purple"];
+}

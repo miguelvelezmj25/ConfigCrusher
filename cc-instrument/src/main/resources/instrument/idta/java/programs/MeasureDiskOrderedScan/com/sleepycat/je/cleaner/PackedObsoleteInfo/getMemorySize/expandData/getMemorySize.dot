@@ -1,10 +1,10 @@
 digraph getMemorySize {
 node [shape=record];
+1346987654 [label="1346987654 - [!JECACHESIZE, JECACHESIZE]"];
 entry [label="entry - []"];
 exit [label="exit - []"];
-1676639331 [label="1676639331 - [!JECACHESIZE, JECACHESIZE]"];
 entry;
 exit;
-entry -> 1676639331;
-1676639331 -> exit;
+1346987654 -> exit;
+entry -> 1346987654;
 }

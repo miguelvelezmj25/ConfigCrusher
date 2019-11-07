@@ -259,7 +259,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
       }
 
       for (MethodNode methodNode : methodsToProcess) {
-        System.out.println("Processing intra " + classNode.name + " - " + methodNode.name);
+        System.out.println("Processing inter " + classNode.name + " - " + methodNode.name);
         long startTime = System.nanoTime();
         propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode, classNode);
         long endTime = System.nanoTime();

@@ -1,0 +1,33 @@
+digraph verifyIdentifierKey {
+node [shape=record];
+425103575 [label="L6\lLINENUMBER 545 L6\lLDC \"5b271be5-7064-4271-a3da-9966bb0338b8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1674864279 [label="L11\lLINENUMBER 558 L11\lALOAD 0\lGETFIELD com/sleepycat/je/util/verify/BtreeVerifier.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lALOAD 5\lL12\lLINENUMBER 559 L12\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.transientMsg (Ljava/lang/String;)Ljava/lang/String;\lL13\lLINENUMBER 558 L13\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"5b271be5-7064-4271-a3da-9966bb0338b8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1455101012 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 543 L3\lLDC \"5b271be5-7064-4271-a3da-9966bb0338b8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 2\lL4\lLINENUMBER 544 L4\lALOAD 0\lALOAD 1\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyIdentifierKeyInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFEQ L5\l"];
+87488716 [label="L0\lLINENUMBER 557 L0\lALOAD 0\lALOAD 6\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.verifyIdentifierKeyInternal (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFEQ L10\l"];
+731184041 [label="L5\lLINENUMBER 548 L5\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getTargetLsns (Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/utilint/Pair;\lASTORE 3\lL7\lLINENUMBER 551 L7\lLDC \"IdentifierKey not present in any slot. \"\lASTORE 4\lL8\lLINENUMBER 552 L8\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IdentifierKey not present in any slot. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 5\lL9\lLINENUMBER 554 L9\lALOAD 0\lALOAD 3\lALOAD 2\lALOAD 5\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.getINFromFile (Lcom/sleepycat/je/utilint/Pair;Lcom/sleepycat/je/dbi/DatabaseImpl;Ljava/lang/String;)Lcom/sleepycat/je/tree/IN;\lASTORE 6\l"];
+398536655 [label="L2\lLINENUMBER 566 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 8\l"];
+2113245617 [label="L10\lLINENUMBER 561 L10\lFRAME FULL [com/sleepycat/je/util/verify/BtreeVerifier com/sleepycat/je/tree/IN com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/utilint/Pair java/lang/String java/lang/String com/sleepycat/je/tree/IN] []\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"IdentifierKey not present in any slot. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 6\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toSafeString ([I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 7\lL14\lLINENUMBER 563 L14\lNEW com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException\lDUP\lALOAD 0\lALOAD 7\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier.persistentMsg (Ljava/lang/String;)Ljava/lang/String;\lINVOKESPECIAL com/sleepycat/je/util/verify/BtreeVerifier$BtreeVerificationException.\<init\> (Ljava/lang/String;)V\lLDC \"5b271be5-7064-4271-a3da-9966bb0338b8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1156729010 [label="L1\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatchIfOwner ()V\lL15\lLINENUMBER 567 L15\lALOAD 8\lLDC \"5b271be5-7064-4271-a3da-9966bb0338b8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL16\l"];
+entry;
+exit;
+entry -> 1455101012
+425103575 -> exit
+1674864279 -> exit
+1674864279 -> 398536655 [style=dashed, color=red]
+1455101012 -> 425103575
+1455101012 -> 731184041
+87488716 -> 1674864279
+87488716 -> 2113245617
+87488716 -> 398536655 [style=dashed, color=red]
+731184041 -> 87488716
+398536655 -> 398536655 [style=dashed, color=red]
+398536655 -> 1156729010
+2113245617 -> exit
+2113245617 -> 398536655 [style=dashed, color=red]
+1156729010 -> exit
+425103575[fontcolor="purple", penwidth=3, color="purple"];
+1674864279[fontcolor="purple", penwidth=3, color="purple"];
+1455101012[fontcolor="purple", penwidth=3, color="purple"];
+2113245617[fontcolor="purple", penwidth=3, color="purple"];
+1156729010[fontcolor="purple", penwidth=3, color="purple"];
+}

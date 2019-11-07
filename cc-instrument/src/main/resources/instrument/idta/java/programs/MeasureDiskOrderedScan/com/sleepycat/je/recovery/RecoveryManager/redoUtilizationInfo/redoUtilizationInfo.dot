@@ -1,0 +1,70 @@
+digraph redoUtilizationInfo {
+node [shape=record];
+80931203 [label="LLOAD 3\lLLOAD 5\lL27\lLINENUMBER 2973 L27\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.compareTo (JJ)I\lIFGT L23\l"];
+2073524540 [label="L1\lLINENUMBER 2781 L1\lFRAME SAME\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isLNImmediatelyObsolete ()Z\lIFEQ L5\l"];
+146013502 [label="L18\lLINENUMBER 2865 L18\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.tracker : Lcom/sleepycat/je/cleaner/RecoveryUtilizationTracker;\lLLOAD 5\lLLOAD 3\lACONST_NULL\lALOAD 12\lILOAD 8\lLLOAD 5\lL19\lLINENUMBER 2867 L19\lINVOKESTATIC com/sleepycat/je/recovery/RecoveryManager.fetchLNSize (Lcom/sleepycat/je/dbi/DatabaseImpl;IJ)I\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lILOAD 11\lL20\lLINENUMBER 2865 L20\lINVOKEVIRTUAL com/sleepycat/je/cleaner/RecoveryUtilizationTracker.countObsoleteIfUncounted (JJLcom/sleepycat/je/log/LogEntryType;ILcom/sleepycat/je/dbi/DatabaseId;Z)Z\lPOP\l"];
+1266327963 [label="ICONST_1\lGOTO L16\l"];
+2083501428 [label="L5\lLINENUMBER 2786 L5\lFRAME SAME\lLLOAD 5\lLDC -1\lLCMP\lIFEQ L7\l"];
+1018264916 [label="L7\lLINENUMBER 2964 L7\lFRAME CHOP 1\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getAbortLsn ()J\lLSTORE 13\lL21\lLINENUMBER 2965 L21\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getAbortKnownDeleted ()Z\lISTORE 15\lL22\lLINENUMBER 2967 L22\lLLOAD 9\lLDC -1\lLCMP\lIFEQ L23\l"];
+1961135756 [label="L25\lLINENUMBER 2972 L25\lLLOAD 5\lLDC -1\lLCMP\lIFEQ L26\l"];
+1429258172 [label="L12\lLINENUMBER 2830 L12\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.tracker : Lcom/sleepycat/je/cleaner/RecoveryUtilizationTracker;\lLLOAD 3\lLLOAD 5\lACONST_NULL\lALOAD 12\lILOAD 2\lLLOAD 3\lL13\lLINENUMBER 2832 L13\lINVOKESTATIC com/sleepycat/je/recovery/RecoveryManager.fetchLNSize (Lcom/sleepycat/je/dbi/DatabaseImpl;IJ)I\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.resurrectedLsns : Ljava/util/Set;\lLLOAD 5\lL14\lLINENUMBER 2833 L14\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Set.contains (Ljava/lang/Object;)Z\lIFNE L15\l"];
+716922796 [label="LLOAD 13\lLDC -1\lLCMP\lIFEQ L23\l"];
+383509450 [label="L23\lLINENUMBER 2980 L23\lFRAME SAME\lLDC \"c1c2b9c7-9df2-46f2-aa4d-8d935be19681\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL31\l"];
+707112239 [label="ILOAD 15\lIFNE L23\l"];
+756966249 [label="L2\lLINENUMBER 2768 L2\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.tracker : Lcom/sleepycat/je/cleaner/RecoveryUtilizationTracker;\lLLOAD 3\lLLOAD 3\lACONST_NULL\lILOAD 2\lALOAD 12\lL3\lLINENUMBER 2769 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lICONST_0\lL4\lLINENUMBER 2768 L4\lINVOKEVIRTUAL com/sleepycat/je/cleaner/RecoveryUtilizationTracker.countObsoleteIfUncounted (JJLcom/sleepycat/je/log/LogEntryType;ILcom/sleepycat/je/dbi/DatabaseId;Z)Z\lPOP\l"];
+1208912463 [label="L16\lLINENUMBER 2830 L16\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager com/sleepycat/je/log/entry/LNLogEntry I J J I I J I com/sleepycat/je/dbi/DatabaseImpl I] [com/sleepycat/je/cleaner/RecoveryUtilizationTracker J J N I com/sleepycat/je/dbi/DatabaseId I]\lINVOKEVIRTUAL com/sleepycat/je/cleaner/RecoveryUtilizationTracker.countObsoleteIfUncounted (JJLcom/sleepycat/je/log/LogEntryType;ILcom/sleepycat/je/dbi/DatabaseId;Z)Z\lPOP\lGOTO L7\l"];
+1699659742 [label="L15\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager com/sleepycat/je/log/entry/LNLogEntry I J J I I J I com/sleepycat/je/dbi/DatabaseImpl I] [com/sleepycat/je/cleaner/RecoveryUtilizationTracker J J N I com/sleepycat/je/dbi/DatabaseId]\lICONST_0\l"];
+1746350482 [label="L0\lLINENUMBER 2767 L0\lLDC \"c1c2b9c7-9df2-46f2-aa4d-8d935be19681\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.isImmediatelyObsolete (Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFEQ L1\l"];
+403902893 [label="L17\lLINENUMBER 2864 L17\lILOAD 7\lIFNE L7\l"];
+2045861367 [label="LLOAD 13\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.checkpointStartLsn : J\lL28\lLINENUMBER 2974 L28\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.compareTo (JJ)I\lIFGE L23\l"];
+51994851 [label="L26\lLINENUMBER 2975 L26\lFRAME APPEND [J I]\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.tracker : Lcom/sleepycat/je/cleaner/RecoveryUtilizationTracker;\lLLOAD 13\lLLOAD 9\lACONST_NULL\lICONST_0\lALOAD 12\lL29\lLINENUMBER 2976 L29\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lICONST_1\lL30\lLINENUMBER 2975 L30\lINVOKEVIRTUAL com/sleepycat/je/cleaner/RecoveryUtilizationTracker.countObsoleteIfUncounted (JJLcom/sleepycat/je/log/LogEntryType;ILcom/sleepycat/je/dbi/DatabaseId;Z)Z\lPOP\l"];
+1651131520 [label="L8\lLINENUMBER 2788 L8\lLLOAD 3\lLLOAD 5\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.compareTo (JJ)I\lISTORE 13\lL9\lLINENUMBER 2790 L9\lILOAD 13\lIFGE L10\l"];
+1675208804 [label="L10\lLINENUMBER 2836 L10\lFRAME SAME\lILOAD 13\lIFLE L7\l"];
+770018043 [label="L6\lLINENUMBER 2782 L6\lLDC \"c1c2b9c7-9df2-46f2-aa4d-8d935be19681\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1030287192 [label="ALOAD 1\lL24\lLINENUMBER 2970 L24\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.getAbortData ()[B\lIFNONNULL L23\l"];
+1650210174 [label="L11\lLINENUMBER 2829 L11\lALOAD 1\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/log/entry/LNLogEntry.isImmediatelyObsolete (Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFNE L7\l"];
+entry;
+exit;
+2073524540 -> 2083501428
+2073524540 -> 770018043
+146013502 -> 1018264916
+1266327963 -> 1208912463
+2083501428 -> 1651131520
+2083501428 -> 1018264916
+1018264916 -> 716922796
+1018264916 -> 383509450
+1429258172 -> 1266327963
+1429258172 -> 1699659742
+383509450 -> exit
+707112239 -> 383509450
+707112239 -> 1030287192
+756966249 -> 2073524540
+1208912463 -> 1018264916
+1746350482 -> 2073524540
+1746350482 -> 756966249
+403902893 -> 146013502
+403902893 -> 1018264916
+2045861367 -> 51994851
+2045861367 -> 383509450
+1675208804 -> 403902893
+1675208804 -> 1018264916
+1030287192 -> 1961135756
+1030287192 -> 383509450
+80931203 -> 2045861367
+80931203 -> 383509450
+1961135756 -> 80931203
+1961135756 -> 51994851
+716922796 -> 707112239
+716922796 -> 383509450
+1699659742 -> 1208912463
+entry -> 1746350482
+51994851 -> 383509450
+1651131520 -> 1675208804
+1651131520 -> 1650210174
+770018043 -> exit
+1650210174 -> 1018264916
+1650210174 -> 1429258172
+1746350482[fontcolor="purple", penwidth=3, color="purple"];
+770018043[fontcolor="purple", penwidth=3, color="purple"];
+383509450[fontcolor="purple", penwidth=3, color="purple"];
+}

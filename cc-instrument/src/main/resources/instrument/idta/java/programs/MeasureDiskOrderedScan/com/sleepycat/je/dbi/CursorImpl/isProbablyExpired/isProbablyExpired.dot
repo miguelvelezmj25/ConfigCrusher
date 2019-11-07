@@ -1,0 +1,18 @@
+digraph isProbablyExpired {
+node [shape=record];
+820856478 [label="L2\lLINENUMBER 501 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL5\lLINENUMBER 502 L5\lALOAD 2\lLDC \"babf9fe7-fcd2-4487-b9db-a150bc78911a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL6\l"];
+1243497471 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 497 L3\lLDC \"babf9fe7-fcd2-4487-b9db-a150bc78911a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.latchBIN ()V\l"];
+971014927 [label="L1\lLINENUMBER 501 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL4\lLINENUMBER 499 L4\lILOAD 1\lLDC \"babf9fe7-fcd2-4487-b9db-a150bc78911a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1237157071 [label="L0\lLINENUMBER 499 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isProbablyExpired (I)Z\lISTORE 1\l"];
+entry;
+exit;
+entry -> 1243497471
+820856478 -> exit
+1243497471 -> 1237157071
+971014927 -> exit
+1237157071 -> 820856478 [style=dashed, color=red]
+1237157071 -> 971014927
+820856478[fontcolor="purple", penwidth=3, color="purple"];
+1243497471[fontcolor="purple", penwidth=3, color="purple"];
+971014927[fontcolor="purple", penwidth=3, color="purple"];
+}

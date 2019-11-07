@@ -1,0 +1,9 @@
+digraph setStorageSize {
+node [shape=record];
+1748440717 [label="L0\lLINENUMBER 2447 L0\lLDC \"80b07407-61a1-4d5b-8d30-af15fcc004b5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKESTATIC com/sleepycat/je/tree/StorageSize.getStorageSize (Lcom/sleepycat/je/tree/BIN;I)I\lPUTFIELD com/sleepycat/je/dbi/CursorImpl.storageSize : I\lL1\lLINENUMBER 2448 L1\lLDC \"80b07407-61a1-4d5b-8d30-af15fcc004b5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL2\l"];
+entry;
+exit;
+entry -> 1748440717
+1748440717 -> exit
+1748440717[fontcolor="purple", penwidth=3, color="purple"];
+}

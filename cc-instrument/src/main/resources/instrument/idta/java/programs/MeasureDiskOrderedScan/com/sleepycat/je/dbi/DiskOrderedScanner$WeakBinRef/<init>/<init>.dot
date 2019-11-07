@@ -1,0 +1,26 @@
+digraph <init> {
+node [shape=record];
+658458969 [label="LLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFNE L4\l"];
+1449426053 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"821eee72-654d-4bd2-b5a4-6d87e1a931f6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+746921978 [label="L4\lLINENUMBER 314 L4\lFRAME FULL [com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef com/sleepycat/je/dbi/DiskOrderedScanner com/sleepycat/je/dbi/DiskOrderedScanner$DBContext J com/sleepycat/je/tree/BIN] []\lLLOAD 3\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lLCMP\lIFEQ L5\l"];
+1600566696 [label="L0\lLINENUMBER 308 L0\lLDC \"821eee72-654d-4bd2-b5a4-6d87e1a931f6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 5\lINVOKESPECIAL java/lang/ref/WeakReference.\<init\> (Ljava/lang/Object;)V\lL1\lLINENUMBER 309 L1\lALOAD 0\lLLOAD 3\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.binLsn : J\lL2\lLINENUMBER 310 L2\lALOAD 0\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastFullLsn ()J\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.fullBinLsn : J\lL3\lLINENUMBER 312 L3\lGETSTATIC com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.$assertionsDisabled : Z\lIFNE L4\l"];
+1695746422 [label="L7\lLINENUMBER 319 L7\lFRAME SAME\lLDC \"821eee72-654d-4bd2-b5a4-6d87e1a931f6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
+1011173396 [label="L5\lLINENUMBER 317 L5\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\l"];
+943450793 [label="L6\lLINENUMBER 315 L6\lALOAD 0\lALOAD 2\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$000 (Lcom/sleepycat/je/dbi/DiskOrderedScanner$DBContext;J)I\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$WeakBinRef.memSize : I\lGOTO L7\l"];
+entry;
+exit;
+entry -> 1600566696
+658458969 -> 1449426053
+658458969 -> 746921978
+1449426053 -> exit
+746921978 -> 1011173396
+746921978 -> 943450793
+1600566696 -> 658458969
+1600566696 -> 746921978
+1695746422 -> exit
+1011173396 -> 1695746422
+943450793 -> 1695746422
+1449426053[fontcolor="purple", penwidth=3, color="purple"];
+1600566696[fontcolor="purple", penwidth=3, color="purple"];
+1695746422[fontcolor="purple", penwidth=3, color="purple"];
+}

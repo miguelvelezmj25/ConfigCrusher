@@ -1,0 +1,16 @@
+digraph promote {
+node [shape=record];
+979097500 [label="L2\lLINENUMBER 334 L2\lALOAD 3\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 4\lL3\lLINENUMBER 336 L3\lALOAD 4\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.addErrorMessage (Ljava/lang/String;)V\lL4\lLINENUMBER 337 L4\lALOAD 4\lLDC \"1dc07907-c281-4d30-8cf0-412c380bdb54\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1546274369 [label="L1\lLINENUMBER 340 L1\lFRAME SAME\lNEW com/sleepycat/je/EnvironmentFailureException\lDUP\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/EnvironmentFailureException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentFailureReason;Ljava/lang/String;Ljava/lang/Throwable;)V\lLDC \"1dc07907-c281-4d30-8cf0-412c380bdb54\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL5\l"];
+594914942 [label="L0\lLINENUMBER 333 L0\lLDC \"1dc07907-c281-4d30-8cf0-412c380bdb54\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 3\lINSTANCEOF com/sleepycat/je/EnvironmentFailureException\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 594914942
+979097500 -> exit
+1546274369 -> exit
+594914942 -> 979097500
+594914942 -> 1546274369
+979097500[fontcolor="purple", penwidth=3, color="purple"];
+1546274369[fontcolor="purple", penwidth=3, color="purple"];
+594914942[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,9 @@
+digraph compare {
+node [shape=record];
+1226960211 [label="L0\lLINENUMBER 233 L0\lLDC \"9f0d1c4f-d730-4cc7-a032-b1d8fbe7b0bc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lCHECKCAST [B\lALOAD 2\lCHECKCAST [B\lINVOKEVIRTUAL com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator.compare ([B[B)I\lLDC \"9f0d1c4f-d730-4cc7-a032-b1d8fbe7b0bc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
+entry;
+exit;
+entry -> 1226960211
+1226960211 -> exit
+1226960211[fontcolor="purple", penwidth=3, color="purple"];
+}

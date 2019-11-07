@@ -2,9 +2,9 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
+import edu.cmu.cs.mvelezce.instrument.region.utils.graphBuilder.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import edu.cmu.cs.mvelezce.instrumenter.graph.builder.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.java.execute.region.RegionsManager;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -36,11 +36,11 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
           classNode.name + " - " + methodNode.name + " does not have any regions");
     }
 
-    if (orderedRegionsInMethod.size() == 1) {
-      this.instrumentEntireMethod(methodNode, orderedRegionsInMethod.iterator().next());
-    } else {
-      this.instrumentMethod(classNode, methodNode, orderedRegionsInMethod);
-    }
+    //        if (orderedRegionsInMethod.size() == 1) {
+    //    this.instrumentEntireMethod(methodNode, orderedRegionsInMethod.iterator().next());
+    //        } else {
+    this.instrumentMethod(classNode, methodNode, orderedRegionsInMethod);
+    //        }
 
     methodNode.visitMaxs(200, 200);
   }
@@ -56,18 +56,18 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
     return orderedRegions;
   }
 
-  private void instrumentEntireMethod(MethodNode methodNode, JavaRegion region) {
-    this.instrumentEntireMethodStart(methodNode, region);
-    this.instrumentEntireMethodEnd(methodNode, region);
-  }
-
-  private void instrumentEntireMethodEnd(MethodNode methodNode, JavaRegion region) {
-    Set<MethodBlock> endBlocks = getEndBlock(region).getPredecessors();
-
-    for (MethodBlock endBlock : endBlocks) {
-      this.instrumentEndBlockWithReturn(methodNode, region, endBlock);
-    }
-  }
+  //  private void instrumentEntireMethod(MethodNode methodNode, JavaRegion region) {
+  //    this.instrumentEntireMethodStart(methodNode, region);
+  //    this.instrumentEntireMethodEnd(methodNode, region);
+  //  }
+  //
+  //  private void instrumentEntireMethodEnd(MethodNode methodNode, JavaRegion region) {
+  //    Set<MethodBlock> endBlocks = getEndBlock(region).getPredecessors();
+  //
+  //    for (MethodBlock endBlock : endBlocks) {
+  //      this.instrumentEndBlockWithReturn(methodNode, region, endBlock);
+  //    }
+  //  }
 
   private boolean isExitMethodInsn(int opcodeLastInsn) {
     return (opcodeLastInsn >= Opcodes.IRETURN && opcodeLastInsn <= Opcodes.RETURN)
@@ -89,13 +89,13 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
     return instructionsEndRegion;
   }
 
-  private void instrumentEntireMethodStart(MethodNode methodNode, JavaRegion region) {
-    InsnList startRegionInsnList = this.getStartRegionInsnList(region);
-
-    InsnList insnList = methodNode.instructions;
-    AbstractInsnNode firstInsn = insnList.getFirst();
-    insnList.insert(firstInsn, startRegionInsnList);
-  }
+  //  private void instrumentEntireMethodStart(MethodNode methodNode, JavaRegion region) {
+  //    InsnList startRegionInsnList = this.getStartRegionInsnList(region);
+  //
+  //    InsnList insnList = methodNode.instructions;
+  //    AbstractInsnNode firstInsn = insnList.getFirst();
+  //    insnList.insert(firstInsn, startRegionInsnList);
+  //  }
 
   private InsnList getStartRegionInsnList(JavaRegion region) {
     InsnList instructionsStartRegion = new InsnList();
@@ -128,6 +128,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
       }
 
       this.instrumentNormalStart(methodNode, region);
+      methodNode.visitMaxs(200, 200);
     }
 
     for (JavaRegion region : orderedRegionsInMethod) {
@@ -136,6 +137,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
       }
 
       this.instrumentNormalEnd(classNode, methodNode, region);
+      methodNode.visitMaxs(200, 200);
     }
   }
 
@@ -161,7 +163,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
 
   private void instrumentEndNormal(
       ClassNode classNode, MethodNode methodNode, JavaRegion region, MethodBlock ipd) {
-    MethodGraph graph = CFGBuilder.getCfg(methodNode, classNode);
+    MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
     Set<MethodBlock> reachables = graph.getReachableBlocks(region.getStartMethodBlock(), ipd);
 
     for (MethodBlock pred : ipd.getPredecessors()) {
@@ -256,6 +258,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
 
       this.instrumentFirstInsn(methodNode, region, region.getStartMethodBlock());
       this.instrumentLastInsn(methodNode, region, region.getStartMethodBlock());
+      methodNode.visitMaxs(200, 200);
     }
   }
 
@@ -283,7 +286,7 @@ public class IDTAExecutionTimeMethodInstrumenter implements IDTAMethodInstrument
 
   private boolean startAndEndInSameBlock(
       ClassNode classNode, MethodNode methodNode, JavaRegion region) {
-    MethodGraph graph = CFGBuilder.getCfg(methodNode, classNode);
+    MethodGraph graph = MethodGraphBuilder.getMethodGraph(methodNode, classNode);
     MethodBlock start = region.getStartMethodBlock();
     MethodBlock end = getEndBlock(region);
 

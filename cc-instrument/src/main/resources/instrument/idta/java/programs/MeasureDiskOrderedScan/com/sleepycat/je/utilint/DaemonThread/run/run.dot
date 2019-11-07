@@ -1,0 +1,188 @@
+digraph run {
+node [shape=record];
+1446867712 [label="L5\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.running : Z\lL24\lLINENUMBER 159 L24\lALOAD 5\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1491853159 [label="L39\lLINENUMBER 191 L39\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.logger : Ljava/util/logging/Logger;\lGETSTATIC java/util/logging/Level.SEVERE : Ljava/util/logging/Level;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 0\lL40\lLINENUMBER 192 L40\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" caught exception, \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lIFEQ L41\l"];
+23867413 [label="L1\lLINENUMBER 158 L1\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.running : Z\lGOTO L19\l"];
+1833656518 [label="L32\lLINENUMBER 175 L32\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.logger : Ljava/util/logging/Logger;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Shutting down \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lLDC \" due to exception: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL33\lLINENUMBER 176 L33\lINVOKEVIRTUAL java/util/logging/Logger.info (Ljava/lang/String;)V\l"];
+1810648995 [label="L31\lLINENUMBER 178 L31\lFRAME APPEND [java/lang/InterruptedException]\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lL34\lLINENUMBER 180 L34\lGETSTATIC com/sleepycat/je/utilint/DaemonThread.$assertionsDisabled : Z\lIFNE L35\l"];
+961355673 [label="L8\lFRAME SAME1 java/lang/Throwable\lASTORE 6\lALOAD 4\lMONITOREXIT\l"];
+1056231430 [label="L14\lLINENUMBER 198 L14\lFRAME FULL [com/sleepycat/je/utilint/DaemonThread] [java/lang/Error]\lASTORE 1\lL45\lLINENUMBER 199 L45\lGETSTATIC com/sleepycat/je/utilint/DaemonThread.$assertionsDisabled : Z\lIFNE L46\l"];
+1846595379 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1444349770 [label="L12\lLINENUMBER 172 L12\lFRAME FULL [com/sleepycat/je/utilint/DaemonThread] [java/lang/InterruptedException]\lASTORE 1\lL29\lLINENUMBER 173 L29\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/utilint/DaemonThread.notifyExceptionListener (Ljava/lang/Exception;)V\lL30\lLINENUMBER 174 L30\lGETSTATIC com/sleepycat/je/utilint/DaemonThread.stifleExceptionChatter : Z\lIFNE L31\l"];
+1133520647 [label="L10\lLINENUMBER 146 L10\lICONST_0\lISTORE 1\lL17\lLINENUMBER 147 L17\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.nDeadlockRetries ()J\lLSTORE 2\l"];
+1819538648 [label="L18\lLINENUMBER 148 L18\lFRAME APPEND [I J]\lILOAD 1\lI2L\lLLOAD 2\lLCMP\lIFGT L19\l"];
+581331925 [label="ALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.checkErrorListener (Ljava/lang/Throwable;)Z\lIFNE L44\l"];
+816549963 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2076847049 [label="L19\lLINENUMBER 163 L19\lFRAME CHOP 1\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lIFNE L11\l"];
+921368356 [label="L27\lLINENUMBER 168 L27\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.synchronizer : Ljava/lang/Object;\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.waitTime : J\lINVOKEVIRTUAL java/lang/Object.wait (J)V\l"];
+209320348 [label="L35\lLINENUMBER 209 L35\lFRAME SAME\lGOTO L15\l"];
+1133066307 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1411008232 [label="L41\lFRAME FULL [com/sleepycat/je/utilint/DaemonThread java/lang/Exception] [java/util/logging/Logger java/util/logging/Level java/lang/StringBuilder]\lLDC \" Continuing\"\l"];
+454912255 [label="L38\lLINENUMBER 197 L38\lFRAME SAME\lGETSTATIC com/sleepycat/je/utilint/DaemonThread.$assertionsDisabled : Z\lIFNE L44\l"];
+1384954859 [label="L42\lFRAME FULL [com/sleepycat/je/utilint/DaemonThread java/lang/Exception] [java/util/logging/Logger java/util/logging/Level java/lang/StringBuilder java/lang/String]\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 1\lL43\lLINENUMBER 191 L43\lINVOKEVIRTUAL java/util/logging/Logger.log (Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+130575730 [label="L7\lGOTO L11\l"];
+45125267 [label="L16\lLINENUMBER 211 L16\lFRAME CHOP 1\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL51\l"];
+1224334107 [label="ALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.paused : Z\lIFEQ L27\l"];
+2044198307 [label="L0\lLINENUMBER 152 L0\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/utilint/DaemonThread.nWakeupRequests : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.nWakeupRequests : I\lL20\lLINENUMBER 153 L20\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.running : Z\lL21\lLINENUMBER 154 L21\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.onWakeup ()V\l"];
+429638453 [label="L6\lLINENUMBER 165 L6\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.waitTime : J\lLCONST_0\lLCMP\lIFEQ L26\l"];
+1736967478 [label="ALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.checkErrorListener (Ljava/lang/Throwable;)Z\lIFNE L35\l"];
+2106123829 [label="ALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.paused : Z\lIFNE L19\l"];
+1694803361 [label="L46\lLINENUMBER 200 L46\lFRAME APPEND [java/lang/Error]\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL47\lLINENUMBER 201 L47\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInvalidatingException ()Lcom/sleepycat/je/EnvironmentFailureException;\lINVOKESPECIAL com/sleepycat/je/utilint/DaemonThread.notifyExceptionListener (Ljava/lang/Exception;)V\lL48\lLINENUMBER 207 L48\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lL49\lLINENUMBER 208 L49\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.logger : Ljava/util/logging/Logger;\lGETSTATIC java/util/logging/Level.SEVERE : Ljava/util/logging/Level;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Error caught in \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL java/util/logging/Logger.log (Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V\lL50\lLINENUMBER 209 L50\lGOTO L15\l"];
+1295010609 [label="L2\lLINENUMBER 156 L2\lFRAME SAME1 com/sleepycat/je/LockConflictException\lASTORE 4\l"];
+1892532244 [label="L3\lLINENUMBER 158 L3\lFRAME SAME1 java/lang/Throwable\lASTORE 5\l"];
+81120963 [label="L9\lALOAD 6\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1210345426 [label="L28\lLINENUMBER 170 L28\lFRAME SAME\lALOAD 4\lMONITOREXIT\l"];
+1671865179 [label="ALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lIFNE L19\l"];
+237897832 [label="L23\lLINENUMBER 160 L23\lFRAME APPEND [com/sleepycat/je/LockConflictException]\lIINC 1 1\lGOTO L18\l"];
+133652986 [label="L11\lLINENUMBER 209 L11\lFRAME CHOP 1\lGOTO L15\l"];
+909181259 [label="L4\lLINENUMBER 158 L4\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/utilint/DaemonThread.running : Z\lL22\lLINENUMBER 159 L22\lGOTO L23\l"];
+1480904333 [label="L25\lLINENUMBER 164 L25\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.synchronizer : Ljava/lang/Object;\lDUP\lASTORE 4\lMONITORENTER\l"];
+722651713 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/LockConflictException\lTRYCATCHBLOCK L0 L1 L3 null\lTRYCATCHBLOCK L2 L4 L3 null\lTRYCATCHBLOCK L3 L5 L3 null\lTRYCATCHBLOCK L6 L7 L8 null\lTRYCATCHBLOCK L8 L9 L8 null\lTRYCATCHBLOCK L10 L11 L12 java/lang/InterruptedException\lTRYCATCHBLOCK L10 L11 L13 java/lang/Exception\lTRYCATCHBLOCK L10 L11 L14 java/lang/Error\lL15\lLINENUMBER 143 L15\lFRAME SAME\lLDC \"f946adb2-04fe-4558-9c6e-4739531d95d8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.shutdownRequest : Z\lIFNE L16\l"];
+2082371741 [label="L13\lLINENUMBER 181 L13\lFRAME FULL [com/sleepycat/je/utilint/DaemonThread] [java/lang/Exception]\lASTORE 1\lL36\lLINENUMBER 182 L36\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/utilint/DaemonThread.notifyExceptionListener (Ljava/lang/Exception;)V\lL37\lLINENUMBER 183 L37\lGETSTATIC com/sleepycat/je/utilint/DaemonThread.stifleExceptionChatter : Z\lIFNE L38\l"];
+1920606767 [label="L26\lLINENUMBER 166 L26\lFRAME APPEND [java/lang/Object]\lALOAD 0\lGETFIELD com/sleepycat/je/utilint/DaemonThread.synchronizer : Ljava/lang/Object;\lINVOKEVIRTUAL java/lang/Object.wait ()V\lGOTO L28\l"];
+1953333306 [label="ALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/utilint/DaemonThread.checkErrorListener (Ljava/lang/Throwable;)Z\lIFNE L46\l"];
+1016819487 [label="LDC \" Exiting\"\lGOTO L42\l"];
+1159858953 [label="L44\lLINENUMBER 209 L44\lFRAME SAME\lGOTO L15\l"];
+entry;
+exit;
+1446867712 -> exit
+1446867712 -> 2082371741 [style=dashed, color=red]
+1446867712 -> 1056231430 [style=dashed, color=red]
+1446867712 -> 1444349770 [style=dashed, color=red]
+1491853159 -> 1411008232
+1491853159 -> 1016819487
+23867413 -> 2076847049
+23867413 -> 2082371741 [style=dashed, color=red]
+23867413 -> 1056231430 [style=dashed, color=red]
+23867413 -> 1444349770 [style=dashed, color=red]
+1833656518 -> 1810648995
+1810648995 -> 1736967478
+1810648995 -> 209320348
+961355673 -> 2082371741 [style=dashed, color=red]
+961355673 -> 81120963
+961355673 -> 961355673 [style=dashed, color=red]
+961355673 -> 1056231430 [style=dashed, color=red]
+961355673 -> 1444349770 [style=dashed, color=red]
+1056231430 -> 1694803361
+1056231430 -> 1953333306
+1846595379 -> exit
+1444349770 -> 1833656518
+1444349770 -> 1810648995
+1133520647 -> 1819538648
+1133520647 -> 2082371741 [style=dashed, color=red]
+1133520647 -> 1056231430 [style=dashed, color=red]
+1133520647 -> 1444349770 [style=dashed, color=red]
+1819538648 -> 2076847049
+1819538648 -> 2082371741 [style=dashed, color=red]
+1819538648 -> 1671865179
+1819538648 -> 1056231430 [style=dashed, color=red]
+1819538648 -> 1444349770 [style=dashed, color=red]
+581331925 -> 1133066307
+581331925 -> 1159858953
+816549963 -> exit
+2076847049 -> 1480904333
+2076847049 -> 2082371741 [style=dashed, color=red]
+2076847049 -> 1056231430 [style=dashed, color=red]
+2076847049 -> 133652986
+2076847049 -> 1444349770 [style=dashed, color=red]
+921368356 -> 2082371741 [style=dashed, color=red]
+921368356 -> 1210345426
+921368356 -> 961355673 [style=dashed, color=red]
+921368356 -> 1056231430 [style=dashed, color=red]
+921368356 -> 1444349770 [style=dashed, color=red]
+209320348 -> 722651713
+1133066307 -> exit
+1411008232 -> 1384954859
+454912255 -> 581331925
+454912255 -> 1159858953
+1384954859 -> 454912255
+130575730 -> 2082371741 [style=dashed, color=red]
+130575730 -> 1056231430 [style=dashed, color=red]
+130575730 -> 133652986
+130575730 -> 1444349770 [style=dashed, color=red]
+45125267 -> exit
+1224334107 -> 921368356
+1224334107 -> 2082371741 [style=dashed, color=red]
+1224334107 -> 1920606767
+1224334107 -> 961355673 [style=dashed, color=red]
+1224334107 -> 1056231430 [style=dashed, color=red]
+1224334107 -> 1444349770 [style=dashed, color=red]
+2044198307 -> 23867413
+2044198307 -> 2082371741 [style=dashed, color=red]
+2044198307 -> 1295010609 [style=dashed, color=red]
+2044198307 -> 1892532244 [style=dashed, color=red]
+2044198307 -> 1056231430 [style=dashed, color=red]
+2044198307 -> 1444349770 [style=dashed, color=red]
+429638453 -> 2082371741 [style=dashed, color=red]
+429638453 -> 1920606767
+429638453 -> 961355673 [style=dashed, color=red]
+429638453 -> 1056231430 [style=dashed, color=red]
+429638453 -> 1224334107
+429638453 -> 1444349770 [style=dashed, color=red]
+1736967478 -> 209320348
+1736967478 -> 1846595379
+2106123829 -> 2044198307
+2106123829 -> 2076847049
+2106123829 -> 2082371741 [style=dashed, color=red]
+2106123829 -> 1056231430 [style=dashed, color=red]
+2106123829 -> 1444349770 [style=dashed, color=red]
+1694803361 -> 722651713
+1295010609 -> 2082371741 [style=dashed, color=red]
+1295010609 -> 1892532244 [style=dashed, color=red]
+1295010609 -> 1056231430 [style=dashed, color=red]
+1295010609 -> 1444349770 [style=dashed, color=red]
+1295010609 -> 909181259
+1892532244 -> 1446867712
+1892532244 -> 2082371741 [style=dashed, color=red]
+1892532244 -> 1892532244 [style=dashed, color=red]
+1892532244 -> 1056231430 [style=dashed, color=red]
+1892532244 -> 1444349770 [style=dashed, color=red]
+81120963 -> exit
+81120963 -> 2082371741 [style=dashed, color=red]
+81120963 -> 1056231430 [style=dashed, color=red]
+81120963 -> 1444349770 [style=dashed, color=red]
+1210345426 -> 2082371741 [style=dashed, color=red]
+1210345426 -> 961355673 [style=dashed, color=red]
+1210345426 -> 1056231430 [style=dashed, color=red]
+1210345426 -> 130575730
+1210345426 -> 1444349770 [style=dashed, color=red]
+1671865179 -> 2106123829
+1671865179 -> 2076847049
+1671865179 -> 2082371741 [style=dashed, color=red]
+1671865179 -> 1056231430 [style=dashed, color=red]
+1671865179 -> 1444349770 [style=dashed, color=red]
+237897832 -> 1819538648
+237897832 -> 2082371741 [style=dashed, color=red]
+237897832 -> 1056231430 [style=dashed, color=red]
+237897832 -> 1444349770 [style=dashed, color=red]
+133652986 -> 722651713
+909181259 -> 2082371741 [style=dashed, color=red]
+909181259 -> 237897832
+909181259 -> 1056231430 [style=dashed, color=red]
+909181259 -> 1444349770 [style=dashed, color=red]
+entry -> 722651713
+1480904333 -> 429638453
+1480904333 -> 2082371741 [style=dashed, color=red]
+1480904333 -> 1056231430 [style=dashed, color=red]
+1480904333 -> 1444349770 [style=dashed, color=red]
+722651713 -> 45125267
+722651713 -> 1133520647
+2082371741 -> 1491853159
+2082371741 -> 454912255
+1920606767 -> 2082371741 [style=dashed, color=red]
+1920606767 -> 1210345426
+1920606767 -> 961355673 [style=dashed, color=red]
+1920606767 -> 1056231430 [style=dashed, color=red]
+1920606767 -> 1444349770 [style=dashed, color=red]
+1953333306 -> 816549963
+1953333306 -> 1694803361
+1016819487 -> 1384954859
+1159858953 -> 722651713
+1446867712[fontcolor="purple", penwidth=3, color="purple"];
+816549963[fontcolor="purple", penwidth=3, color="purple"];
+722651713[fontcolor="purple", penwidth=3, color="purple"];
+1133066307[fontcolor="purple", penwidth=3, color="purple"];
+81120963[fontcolor="purple", penwidth=3, color="purple"];
+1846595379[fontcolor="purple", penwidth=3, color="purple"];
+45125267[fontcolor="purple", penwidth=3, color="purple"];
+}

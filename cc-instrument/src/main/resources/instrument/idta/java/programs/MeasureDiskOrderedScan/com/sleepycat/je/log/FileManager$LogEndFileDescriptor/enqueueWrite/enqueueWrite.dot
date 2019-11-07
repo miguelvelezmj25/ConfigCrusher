@@ -1,0 +1,32 @@
+digraph enqueueWrite {
+node [shape=record];
+1107082670 [label="L5\lFRAME APPEND [I]\lILOAD 8\lICONST_2\lIF_ICMPGE L6\l"];
+257561261 [label="L0\lLINENUMBER 2879 L0\lALOAD 0\lLLOAD 1\lALOAD 3\lLLOAD 4\lILOAD 6\lILOAD 7\lINVOKESPECIAL com/sleepycat/je/log/FileManager$LogEndFileDescriptor.enqueueWrite1 (J[BJII)V\lL7\lLINENUMBER 2881 L7\lICONST_1\l"];
+1112453587 [label="L1\lLDC \"4f60112e-56ac-40ff-904c-08766ce9923d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1473569797 [label="L2\lLINENUMBER 2882 L2\lFRAME SAME1 com/sleepycat/je/utilint/RelatchRequiredException\lASTORE 9\lL8\lLINENUMBER 2883 L8\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/log/FileManager$LogEndFileDescriptor.dequeuePendingWrites ()V\lL9\lLINENUMBER 2877 L9\lIINC 8 1\lGOTO L5\l"];
+101677683 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.fsyncFileSynchronizer : Ljava/util/concurrent/locks/ReentrantLock;\lINVOKEVIRTUAL java/util/concurrent/locks/ReentrantLock.isHeldByCurrentThread ()Z\lIFEQ L4\l"];
+829981512 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"4f60112e-56ac-40ff-904c-08766ce9923d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1503646871 [label="L4\lLINENUMBER 2877 L4\lFRAME SAME\lICONST_0\lISTORE 8\l"];
+1694324487 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/utilint/RelatchRequiredException\lL3\lLINENUMBER 2875 L3\lLDC \"4f60112e-56ac-40ff-904c-08766ce9923d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/log/FileManager$LogEndFileDescriptor.$assertionsDisabled : Z\lIFNE L4\l"];
+1726014058 [label="L6\lLINENUMBER 2888 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/FileManager$LogEndFileDescriptor.this$0 : Lcom/sleepycat/je/log/FileManager;\lGETFIELD com/sleepycat/je/log/FileManager.nWriteQueueOverflowFailures : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL10\lLINENUMBER 2889 L10\lICONST_0\lLDC \"4f60112e-56ac-40ff-904c-08766ce9923d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL11\l"];
+entry;
+exit;
+1107082670 -> 257561261
+1107082670 -> 1726014058
+entry -> 1694324487
+257561261 -> 1112453587
+257561261 -> 1473569797 [style=dashed, color=red]
+1112453587 -> exit
+1473569797 -> 1107082670
+101677683 -> 829981512
+101677683 -> 1503646871
+829981512 -> exit
+1503646871 -> 1107082670
+1694324487 -> 101677683
+1694324487 -> 1503646871
+1726014058 -> exit
+1112453587[fontcolor="purple", penwidth=3, color="purple"];
+829981512[fontcolor="purple", penwidth=3, color="purple"];
+1694324487[fontcolor="purple", penwidth=3, color="purple"];
+1726014058[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,171 @@
+digraph waitForLock {
+node [shape=record];
+1644991391 [label="L0\lLINENUMBER 509 L0\lFRAME SAME\lILOAD 12\lIFEQ L22\l"];
+481809509 [label="L24\lLINENUMBER 518 L24\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isTimedOut ()Z\lISTORE 14\lL26\lLINENUMBER 519 L26\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 15\lL27\lLINENUMBER 521 L27\lILOAD 12\lIFNE L28\l"];
+1853155075 [label="ILOAD 11\lIFNE L11\l"];
+490563513 [label="ICONST_1\lGOTO L38\l"];
+530324997 [label="L60\lLINENUMBER 586 L60\lGOTO L16\l"];
+1855826146 [label="L70\lLINENUMBER 619 L70\lFRAME SAME\lNEW com/sleepycat/je/txn/LockManager$WaitForLockResult\lDUP\lALOAD 13\lALOAD 5\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/txn/LockManager$WaitForLockResult.\<init\> (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockManager$DeadlockChecker;Lcom/sleepycat/je/txn/LockAttemptResult;)V\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL73\l"];
+1495124630 [label="L57\lLINENUMBER 581 L57\lFRAME SAME\lALOAD 0\lALOAD 2\lALOAD 3\lALOAD 4\lICONST_0\lICONST_1\lACONST_NULL\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.validateOwnership (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;ZZLjava/util/Set;Ljava/util/List;)Z\lIFEQ L59\l"];
+1563669770 [label="ILOAD 17\lIFEQ L37\l"];
+20046727 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1660202198 [label="L56\lLINENUMBER 573 L56\lGOTO L16\l"];
+1343756420 [label="L37\lFRAME SAME\lICONST_0\l"];
+577930406 [label="L36\lFRAME APPEND [I java/util/HashSet java/util/ArrayList]\lILOAD 11\lIFNE L37\l"];
+1340622954 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 426 L3\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.getImportunate ()Z\lISTORE 11\lL4\lLINENUMBER 427 L4\lLLOAD 6\lLCONST_0\lLCMP\lIFNE L5\l"];
+1762691846 [label="L10\lLINENUMBER 431 L10\lGETSTATIC com/sleepycat/je/txn/LockManager.simulatePartialDeadlockHook : Lcom/sleepycat/je/utilint/TestHook;\lINVOKEINTERFACE com/sleepycat/je/utilint/TestHook.doHook ()V\l"];
+1734810837 [label="L71\lLINENUMBER 615 L71\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L72\l"];
+1209764201 [label="L58\lLINENUMBER 577 L58\lALOAD 23\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$300 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Lcom/sleepycat/je/txn/LockManager$DeadlockChecker;\lASTORE 5\l"];
+677522970 [label="L61\lLINENUMBER 599 L61\lFRAME SAME\lILOAD 14\lIFEQ L63\l"];
+650736020 [label="L46\lLINENUMBER 552 L46\lALOAD 0\lALOAD 2\lALOAD 3\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.stealLock (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;)Lcom/sleepycat/je/txn/LockAttemptResult;\lASTORE 1\lL47\lLINENUMBER 553 L47\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.success : Z\lIFEQ L9\l"];
+1463176928 [label="L63\lLINENUMBER 606 L63\lFRAME SAME\lALOAD 0\lICONST_1\lALOAD 3\lALOAD 2\lL68\lLINENUMBER 607 L68\lINVOKEVIRTUAL java/lang/Long.longValue ()J\lALOAD 4\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.lockGrant : Lcom/sleepycat/je/txn/LockGrantType;\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.useLock : Lcom/sleepycat/je/txn/Lock;\lLLOAD 6\lLLOAD 8\lLLOAD 15\lALOAD 10\lALOAD 19\lALOAD 20\lL69\lLINENUMBER 606 L69\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.makeTimeoutException (ZLcom/sleepycat/je/txn/Locker;JLcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;Lcom/sleepycat/je/txn/Lock;JJJLcom/sleepycat/je/dbi/DatabaseImpl;Ljava/util/Set;Ljava/util/List;)Lcom/sleepycat/je/LockConflictException;\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1017555646 [label="L62\lLINENUMBER 590 L62\lALOAD 0\lALOAD 5\lALOAD 3\lLLOAD 6\lICONST_0\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.makeDeadlockException (Lcom/sleepycat/je/txn/LockManager$DeadlockChecker;Lcom/sleepycat/je/txn/Locker;JZLcom/sleepycat/je/dbi/DatabaseImpl;)Lcom/sleepycat/je/LockConflictException;\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+613850880 [label="L21\lLINENUMBER 504 L21\lGOTO L16\l"];
+1489603542 [label="L59\lLINENUMBER 589 L59\lFRAME SAME\lALOAD 5\lIFNULL L61\l"];
+1795685512 [label="L40\lFRAME APPEND [I]\lICONST_0\l"];
+1428509561 [label="ICONST_1\lGOTO L32\l"];
+904082996 [label="L43\lLINENUMBER 551 L43\lFRAME APPEND [I]\lILOAD 11\lIFEQ L45\l"];
+1483198823 [label="L11\lLINENUMBER 503 L11\lFRAME CHOP 1\lALOAD 0\lALOAD 2\lALOAD 3\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.isOwner (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;)Z\lIFEQ L0\l"];
+841749404 [label="ICONST_1\lGOTO L29\l"];
+681902535 [label="L64\lLINENUMBER 600 L64\lALOAD 0\lICONST_0\lALOAD 3\lALOAD 2\lL65\lLINENUMBER 601 L65\lINVOKEVIRTUAL java/lang/Long.longValue ()J\lALOAD 4\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.lockGrant : Lcom/sleepycat/je/txn/LockGrantType;\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.useLock : Lcom/sleepycat/je/txn/Lock;\lALOAD 3\lL66\lLINENUMBER 603 L66\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.getTxnTimeout ()J\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.getTxnStartMillis ()J\lLLOAD 15\lALOAD 10\lALOAD 19\lALOAD 20\lL67\lLINENUMBER 600 L67\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.makeTimeoutException (ZLcom/sleepycat/je/txn/Locker;JLcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;Lcom/sleepycat/je/txn/Lock;JJJLcom/sleepycat/je/dbi/DatabaseImpl;Ljava/util/Set;Ljava/util/List;)Lcom/sleepycat/je/LockConflictException;\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+581437724 [label="L28\lFRAME APPEND [I J]\lICONST_0\l"];
+222147899 [label="ICONST_1\lGOTO L41\l"];
+2135810549 [label="L55\lLINENUMBER 576 L55\lFRAME APPEND [com/sleepycat/je/txn/LockManager$DeadlockResult]\lALOAD 23\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$100 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Z\lIFEQ L57\l"];
+909043285 [label="L15\lLINENUMBER 479 L15\lGOTO L16\l"];
+313580603 [label="L18\lLINENUMBER 483 L18\lALOAD 14\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$200 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Lcom/sleepycat/je/txn/Locker;\lASTORE 13\lL19\lLINENUMBER 484 L19\lALOAD 14\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$300 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Lcom/sleepycat/je/txn/LockManager$DeadlockChecker;\lASTORE 5\lL20\lLINENUMBER 485 L20\lGOTO L16\l"];
+933707816 [label="L31\lFRAME APPEND [I]\lICONST_0\l"];
+48872064 [label="L2\lLINENUMBER 514 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 14\lL25\lLINENUMBER 515 L25\lNEW com/sleepycat/je/ThreadInterruptedException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 14\lINVOKESPECIAL com/sleepycat/je/ThreadInterruptedException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Throwable;)V\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+265226671 [label="L5\lFRAME APPEND [I]\lICONST_0\l"];
+1399692406 [label="L17\lLINENUMBER 493 L17\lFRAME SAME\lGOTO L0\l"];
+386625400 [label="L49\lLINENUMBER 565 L49\lFRAME SAME\lILOAD 17\lIFNE L51\l"];
+1699026355 [label="L32\lFRAME SAME1 I\lISTORE 18\lL33\lLINENUMBER 531 L33\lNEW java/util/HashSet\lDUP\lINVOKESPECIAL java/util/HashSet.\<init\> ()V\lASTORE 19\lL34\lLINENUMBER 532 L34\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lASTORE 20\lL35\lLINENUMBER 534 L35\lILOAD 14\lIFNE L36\l"];
+587625055 [label="L22\lLINENUMBER 512 L22\lFRAME SAME\lALOAD 3\lLCONST_1\lLLOAD 6\lLLOAD 8\lINVOKESTATIC com/sleepycat/je/txn/LockManager.timeRemain (JJ)J\lINVOKESTATIC java/lang/Math.max (JJ)J\lINVOKEVIRTUAL java/lang/Object.wait (J)V\l"];
+48796032 [label="ALOAD 0\lALOAD 2\lALOAD 3\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.isOwner (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;)Z\lIFNE L72\l"];
+1261127555 [label="L52\lLINENUMBER 566 L52\lGOTO L9\l"];
+727484172 [label="L38\lFRAME SAME1 I\lISTORE 21\lL39\lLINENUMBER 542 L39\lILOAD 18\lIFEQ L40\l"];
+1733071559 [label="L72\lLINENUMBER 616 L72\lFRAME SAME\lALOAD 0\lALOAD 3\lALOAD 2\lALOAD 4\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.lockGrant : Lcom/sleepycat/je/txn/LockGrantType;\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.finishLock (Lcom/sleepycat/je/txn/Locker;Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;)V\l"];
+1352987934 [label="L14\lLINENUMBER 482 L14\lFRAME APPEND [com/sleepycat/je/txn/LockManager$DeadlockResult]\lALOAD 14\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$100 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Z\lIFEQ L17\l"];
+430005494 [label="L16\lLINENUMBER 614 L16\lFRAME FULL [com/sleepycat/je/txn/LockManager com/sleepycat/je/txn/LockAttemptResult java/lang/Long com/sleepycat/je/txn/Locker com/sleepycat/je/txn/LockType com/sleepycat/je/txn/LockManager$DeadlockChecker J J com/sleepycat/je/dbi/DatabaseImpl I I com/sleepycat/je/txn/Locker] []\lALOAD 13\lIFNONNULL L70\l"];
+1117140855 [label="L41\lFRAME SAME1 I\lISTORE 22\lL42\lLINENUMBER 544 L42\lALOAD 0\lALOAD 2\lALOAD 3\lALOAD 4\lILOAD 21\lILOAD 22\lALOAD 19\lALOAD 20\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.validateOwnership (Ljava/lang/Long;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/LockType;ZZLjava/util/Set;Ljava/util/List;)Z\lIFEQ L43\l"];
+2092502382 [label="L50\lLINENUMBER 562 L50\lGETSTATIC com/sleepycat/je/txn/LockManager.rangeRestartException : Lcom/sleepycat/je/dbi/RangeRestartException;\lLDC \"cb6f87ee-b76a-47f2-b2af-aef9dd28d6e4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+278592832 [label="L29\lFRAME SAME1 I\lISTORE 17\lL30\lLINENUMBER 524 L30\lALOAD 1\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.lockGrant : Lcom/sleepycat/je/txn/LockGrantType;\lGETSTATIC com/sleepycat/je/txn/LockGrantType.WAIT_RESTART : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPNE L31\l"];
+690013831 [label="L1\lLINENUMBER 516 L1\lFRAME SAME\lGOTO L24\l"];
+127371430 [label="ILOAD 14\lIFNE L51\l"];
+2076902740 [label="ILOAD 11\lIFNE L40\l"];
+294753980 [label="L51\lLINENUMBER 569 L51\lFRAME SAME\lALOAD 0\lALOAD 3\lALOAD 2\lALOAD 4\lLLOAD 6\lALOAD 10\lL53\lLINENUMBER 570 L53\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.checkAndHandleDeadlock (Lcom/sleepycat/je/txn/Locker;Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;JLcom/sleepycat/je/dbi/DatabaseImpl;)Lcom/sleepycat/je/txn/LockManager$DeadlockResult;\lASTORE 23\lL54\lLINENUMBER 572 L54\lALOAD 23\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$000 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Z\lIFEQ L55\l"];
+214509164 [label="LLOAD 15\lLLOAD 8\lLSUB\lLLOAD 6\lLCMP\lIFLT L28\l"];
+1436015070 [label="L45\lLINENUMBER 561 L45\lFRAME SAME\lILOAD 18\lIFEQ L49\l"];
+643963120 [label="L6\lFRAME SAME1 I\lISTORE 12\lL7\lLINENUMBER 428 L7\lACONST_NULL\lASTORE 13\lL8\lLINENUMBER 430 L8\lGETSTATIC com/sleepycat/je/txn/LockManager.simulatePartialDeadlockHook : Lcom/sleepycat/je/utilint/TestHook;\lIFNULL L9\l"];
+156885922 [label="ICONST_1\lGOTO L6\l"];
+379678737 [label="L44\lLINENUMBER 548 L44\lGOTO L16\l"];
+1005956260 [label="L48\lLINENUMBER 554 L48\lGOTO L16\l"];
+55642480 [label="L12\lLINENUMBER 475 L12\lALOAD 0\lALOAD 3\lALOAD 2\lALOAD 4\lLLOAD 6\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/txn/LockManager.checkAndHandleDeadlock (Lcom/sleepycat/je/txn/Locker;Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;JLcom/sleepycat/je/dbi/DatabaseImpl;)Lcom/sleepycat/je/txn/LockManager$DeadlockResult;\lASTORE 14\lL13\lLINENUMBER 478 L13\lALOAD 14\lINVOKESTATIC com/sleepycat/je/txn/LockManager$DeadlockResult.access$000 (Lcom/sleepycat/je/txn/LockManager$DeadlockResult;)Z\lIFEQ L14\l"];
+509961722 [label="L9\lLINENUMBER 472 L9\lFRAME APPEND [I N]\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDeadlockDetection ()Z\lIFEQ L11\l"];
+927146376 [label="L23\lLINENUMBER 510 L23\lALOAD 3\lLCONST_0\lINVOKEVIRTUAL java/lang/Object.wait (J)V\lGOTO L1\l"];
+entry;
+exit;
+1644991391 -> 48872064 [style=dashed, color=red]
+1644991391 -> 587625055
+1644991391 -> 927146376
+481809509 -> 214509164
+481809509 -> 581437724
+1853155075 -> 1483198823
+1853155075 -> 55642480
+490563513 -> 727484172
+530324997 -> 430005494
+1855826146 -> exit
+1495124630 -> 1489603542
+1495124630 -> 530324997
+1563669770 -> 1343756420
+1563669770 -> 577930406
+20046727 -> exit
+1660202198 -> 430005494
+1343756420 -> 727484172
+577930406 -> 1343756420
+577930406 -> 490563513
+1340622954 -> 156885922
+1340622954 -> 265226671
+1762691846 -> 509961722
+1734810837 -> 1733071559
+1734810837 -> 48796032
+1209764201 -> 1495124630
+677522970 -> 681902535
+677522970 -> 1463176928
+650736020 -> 1005956260
+650736020 -> 509961722
+1463176928 -> exit
+1017555646 -> exit
+613850880 -> 430005494
+1489603542 -> 1017555646
+1489603542 -> 677522970
+1795685512 -> 1117140855
+1428509561 -> 1699026355
+904082996 -> 1436015070
+904082996 -> 650736020
+1483198823 -> 613850880
+1483198823 -> 1644991391
+841749404 -> 278592832
+681902535 -> exit
+581437724 -> 278592832
+entry -> 1340622954
+222147899 -> 1117140855
+2135810549 -> 1495124630
+2135810549 -> 1209764201
+909043285 -> 430005494
+313580603 -> 430005494
+933707816 -> 1699026355
+48872064 -> exit
+265226671 -> 643963120
+1399692406 -> 1644991391
+386625400 -> 127371430
+386625400 -> 294753980
+1699026355 -> 577930406
+1699026355 -> 1563669770
+587625055 -> 690013831
+587625055 -> 48872064 [style=dashed, color=red]
+48796032 -> 1733071559
+48796032 -> 20046727
+1261127555 -> 509961722
+727484172 -> 1795685512
+727484172 -> 2076902740
+1733071559 -> 1855826146
+1352987934 -> 313580603
+1352987934 -> 1399692406
+430005494 -> 1855826146
+430005494 -> 1734810837
+1117140855 -> 379678737
+1117140855 -> 904082996
+2092502382 -> exit
+278592832 -> 1428509561
+278592832 -> 933707816
+690013831 -> 481809509
+127371430 -> 294753980
+127371430 -> 1261127555
+2076902740 -> 222147899
+2076902740 -> 1795685512
+294753980 -> 2135810549
+294753980 -> 1660202198
+214509164 -> 841749404
+214509164 -> 581437724
+1436015070 -> 2092502382
+1436015070 -> 386625400
+643963120 -> 1762691846
+643963120 -> 509961722
+156885922 -> 643963120
+379678737 -> 430005494
+1005956260 -> 430005494
+55642480 -> 909043285
+55642480 -> 1352987934
+509961722 -> 1853155075
+509961722 -> 1483198823
+927146376 -> 690013831
+927146376 -> 48872064 [style=dashed, color=red]
+1017555646[fontcolor="purple", penwidth=3, color="purple"];
+1855826146[fontcolor="purple", penwidth=3, color="purple"];
+1340622954[fontcolor="purple", penwidth=3, color="purple"];
+48872064[fontcolor="purple", penwidth=3, color="purple"];
+681902535[fontcolor="purple", penwidth=3, color="purple"];
+2092502382[fontcolor="purple", penwidth=3, color="purple"];
+20046727[fontcolor="purple", penwidth=3, color="purple"];
+1463176928[fontcolor="purple", penwidth=3, color="purple"];
+}

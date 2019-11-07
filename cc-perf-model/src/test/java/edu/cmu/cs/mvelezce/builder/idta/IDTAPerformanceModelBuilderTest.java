@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,8 +31,10 @@ public class IDTAPerformanceModelBuilderTest {
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
+    List<String> options = BaseTrivialAdapter.getListOfOptions();
     BasePerformanceModelBuilder<Set<FeatureExpr>> builder =
-        new IDTAPerformanceModelBuilder(programName, regionsToConstraints, performanceEntries);
+        new IDTAPerformanceModelBuilder(
+            programName, options, regionsToConstraints, performanceEntries);
 
     args = new String[2];
     args[0] = "-delres";

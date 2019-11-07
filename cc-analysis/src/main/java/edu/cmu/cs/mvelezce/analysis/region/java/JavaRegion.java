@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class JavaRegion extends Region {
 
@@ -188,19 +189,21 @@ public class JavaRegion extends Region {
     private final String regionClass;
     private final String regionMethodSignature;
 
-    //    private int startBytecodeIndex = Integer.MIN_VALUE;
     private int startIndex = -1;
     private MethodBlock startMethodBlock = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
-    //    private String startBlockID = "";
-    //    private Set<String> endBlocksIDs = new HashSet<>();
 
-    //    public Builder(UUID id, String regionPackage, String regionClass, String regionMethod) {
-    //      super(id);
-    //      this.regionPackage = regionPackage;
-    //      this.regionClass = regionClass;
-    //      this.regionMethod = regionMethod;
-    //    }
+    //    private Set<String> endBlocksIDs = new HashSet<>();
+    //    private String startBlockID = "";
+    //    private int startBytecodeIndex = Integer.MIN_VALUE;
+
+    public Builder(
+        UUID id, String regionPackage, String regionClass, String regionMethodSignature) {
+      super(id);
+      this.regionPackage = regionPackage;
+      this.regionClass = regionClass;
+      this.regionMethodSignature = regionMethodSignature;
+    }
 
     public Builder(String regionPackage, String regionClass, String regionMethodSignature) {
       this.regionPackage = regionPackage;

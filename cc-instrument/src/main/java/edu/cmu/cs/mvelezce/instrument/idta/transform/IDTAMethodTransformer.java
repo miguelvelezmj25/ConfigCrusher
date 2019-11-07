@@ -40,7 +40,8 @@ import java.util.Set;
 
 public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
-  public static final String DEBUG_DIR = Options.DIRECTORY + "/instrument/idta/java/programs";
+  public static final String DEBUG_DIR =
+      "../cc-instrument/" + Options.DIRECTORY + "/instrument/idta/java/programs";
 
   private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;

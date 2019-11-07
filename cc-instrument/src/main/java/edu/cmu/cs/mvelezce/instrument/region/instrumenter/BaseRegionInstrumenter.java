@@ -37,6 +37,7 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
       throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException,
           InterruptedException {
     Options.getCommandLine(args);
+
     if (Options.checkIfDeleteResult()) {
       this.compile();
     }
@@ -61,5 +62,7 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
 
   protected abstract void writeToFile(Map<JavaRegion, T> regionsToData) throws IOException;
 
-  protected abstract Map<JavaRegion, T> readFromFile(File file);
+  protected abstract Map<JavaRegion, T> readFromFile(File file) throws IOException;
+
+  public abstract Map<JavaRegion, T> getProcessedRegionsToData() throws IOException;
 }

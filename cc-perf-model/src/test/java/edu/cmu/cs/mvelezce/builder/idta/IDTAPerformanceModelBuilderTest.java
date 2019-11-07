@@ -4,7 +4,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.builder.PerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.instrument.idta.IDTATimerInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.idta.IDTAPerfAggregatorProcessor;
@@ -30,7 +30,12 @@ public class IDTAPerformanceModelBuilderTest {
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
-    PerformanceModelBuilder<Set<FeatureExpr>> builder =
+    BasePerformanceModelBuilder<Set<FeatureExpr>> builder =
         new IDTAPerformanceModelBuilder(programName, regionsToConstraints, performanceEntries);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
   }
 }

@@ -3,24 +3,28 @@ package edu.cmu.cs.mvelezce.builder;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.model.aggregator.ExecAggregator;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class BasePerformanceModelBuilder<E> extends BaseAnalysis<PerformanceModel>
-    implements PerformanceModelBuilder<PerformanceModel, E> {
+public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<PerformanceModel>
+    implements PerformanceModelBuilder<PerformanceModel, D> {
 
   private final List<String> options;
-  private final Map<JavaRegion, E> regionsToData;
+  private final Map<JavaRegion, D> regionsToData;
   private final Set<PerformanceEntry> performanceEntries;
+  private final ExecAggregator<RD> execAggregator = new ExecAggregator<>();
 
   public BasePerformanceModelBuilder(
       String programName,
       List<String> options,
-      Map<JavaRegion, E> regionsToData,
+      Map<JavaRegion, D> regionsToData,
       Set<PerformanceEntry> performanceEntries) {
     super(programName);
 
@@ -31,12 +35,15 @@ public abstract class BasePerformanceModelBuilder<E> extends BaseAnalysis<Perfor
 
   @Override
   public PerformanceModel analyze() {
-    this.buildLocalModels();
+    Set<MultiEntryLocalPerformanceModel<RD>> multiEntryLocalPerformanceModels =
+        this.buildMultiEntryLocalModels();
+    Set<LocalPerformanceModel<RD>> localPerformanceModels =
+        this.execAggregator.process(multiEntryLocalPerformanceModels);
 
-    throw new UnsupportedOperationException("implement");
+    return new PerformanceModel<RD>(localPerformanceModels);
   }
 
-  protected abstract void buildLocalModels();
+  protected abstract Set<MultiEntryLocalPerformanceModel<RD>> buildMultiEntryLocalModels();
 
   @Override
   public void writeToFile(PerformanceModel results) {
@@ -52,7 +59,7 @@ public abstract class BasePerformanceModelBuilder<E> extends BaseAnalysis<Perfor
     return options;
   }
 
-  protected Map<JavaRegion, E> getRegionsToData() {
+  protected Map<JavaRegion, D> getRegionsToData() {
     return regionsToData;
   }
 

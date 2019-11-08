@@ -6,13 +6,14 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.model.MultiDataLocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.idta.IDTAMultiDataLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.idta.IDTAMultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.*;
 
-class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<FeatureExpr>> {
+class IDTAPerformanceModelBuilder
+    extends BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> {
 
   private static final String OUTPUT_DIR = Options.DIRECTORY + "/model/java/idta/programs";
 
@@ -27,20 +28,21 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
   }
 
   @Override
-  protected void buildLocalModels() {
+  protected Set<MultiEntryLocalPerformanceModel<FeatureExpr>> buildMultiEntryLocalModels() {
     this.mapPerfEntryToExeConstraint();
 
+    Set<MultiEntryLocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+
     for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : this.getRegionsToData().entrySet()) {
-      MultiDataLocalPerformanceModel<FeatureExpr> multiDataLocalModel =
-          this.buildEmptyMultiDataLocalModel(entry);
+      MultiEntryLocalPerformanceModel<FeatureExpr> multiEntryLocalModel =
+          this.buildEmptyMultiEntryLocalModel(entry);
 
-      this.addExecutionTimes(multiDataLocalModel);
+      this.addExecutionTimes(multiEntryLocalModel);
 
-      throw new UnsupportedOperationException(
-          "run statistics and average the entries for the local model");
+      localModels.add(multiEntryLocalModel);
     }
 
-    throw new UnsupportedOperationException("What should the return value be?");
+    return localModels;
   }
 
   private void mapPerfEntryToExeConstraint() {
@@ -52,9 +54,9 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
     }
   }
 
-  private void addExecutionTimes(MultiDataLocalPerformanceModel<FeatureExpr> localModel) {
-    Map<FeatureExpr, Set<Long>> multiDataModel = localModel.getModel();
-    this.validateOneConfigCoversOneConstraint(multiDataModel.keySet());
+  private void addExecutionTimes(MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+    Map<FeatureExpr, Set<Long>> multiEntryModel = localModel.getModel();
+    this.validateOneConfigCoversOneConstraint(multiEntryModel.keySet());
 
     UUID region = localModel.getRegion();
 
@@ -66,7 +68,7 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
           continue;
         }
 
-        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes : multiDataModel.entrySet()) {
+        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes : multiEntryModel.entrySet()) {
           if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
             continue;
           }
@@ -100,11 +102,11 @@ class IDTAPerformanceModelBuilder extends BasePerformanceModelBuilder<Set<Featur
     }
   }
 
-  private MultiDataLocalPerformanceModel<FeatureExpr> buildEmptyMultiDataLocalModel(
+  private MultiEntryLocalPerformanceModel<FeatureExpr> buildEmptyMultiEntryLocalModel(
       Map.Entry<JavaRegion, Set<FeatureExpr>> entry) {
     Map<FeatureExpr, Set<Long>> model = this.addConstraintEntries(entry.getValue());
 
-    return new IDTAMultiDataLocalPerformanceModel(entry.getKey().getId(), model);
+    return new IDTAMultiEntryLocalPerformanceModel(entry.getKey().getId(), model);
   }
 
   private Map<FeatureExpr, Set<Long>> addConstraintEntries(Set<FeatureExpr> constraints) {

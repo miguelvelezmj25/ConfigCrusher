@@ -32,7 +32,7 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseTrivialAdapter.getListOfOptions();
-    BasePerformanceModelBuilder<Set<FeatureExpr>> builder =
+    BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> builder =
         new IDTAPerformanceModelBuilder(
             programName, options, regionsToConstraints, performanceEntries);
 

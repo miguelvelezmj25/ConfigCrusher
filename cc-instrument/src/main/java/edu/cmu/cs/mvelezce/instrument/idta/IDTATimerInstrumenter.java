@@ -1,11 +1,14 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
+import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time.IDTAExecutionTimeMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
@@ -15,13 +18,22 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExpr>> {
 
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
+
+  public IDTATimerInstrumenter(String programName) {
+    this(
+        programName,
+        "",
+        "",
+        "",
+        new HashSet<>(),
+        new HashMap<>(),
+        new IDTAExecutionTimeMethodInstrumenter());
+  }
 
   IDTATimerInstrumenter(
       String programName,
@@ -65,13 +77,7 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   protected void writeToFile(Map<JavaRegion, Set<FeatureExpr>> regionsToData) throws IOException {
     System.err.println(
         "The index of the regions might not be accurate. Not sure at the moment if we need the index for later analysis or understanding");
-    String outputFile =
-        IDTAMethodTransformer.DEBUG_DIR
-            + "/"
-            + this.getProgramName()
-            + "/"
-            + this.getProgramName()
-            + Options.DOT_JSON;
+    String outputFile = this.getOutputFile();
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
@@ -113,7 +119,60 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   }
 
   @Override
-  protected Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) {
-    throw new UnsupportedOperationException("Implemenet");
+  protected Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    Set<RegionConstraintPretty> regionsConstraintPretty =
+        mapper.readValue(file, new TypeReference<Set<RegionConstraintPretty>>() {});
+
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = new HashMap<>();
+
+    for (RegionConstraintPretty regionConstraintPretty : regionsConstraintPretty) {
+      JavaRegion region =
+          new JavaRegion.Builder(
+                  UUID.fromString(regionConstraintPretty.getId()),
+                  regionConstraintPretty.getPackageName(),
+                  regionConstraintPretty.getClassName(),
+                  regionConstraintPretty.getMethodSignature())
+              .build();
+
+      Set<FeatureExpr> constraints =
+          this.getConstraints(regionConstraintPretty.getPrettyConstraints());
+
+      regionsToConstraints.put(region, constraints);
+    }
+
+    return regionsToConstraints;
+  }
+
+  @Override
+  public Map<JavaRegion, Set<FeatureExpr>> getProcessedRegionsToData() throws IOException {
+    String outputDir = this.getOutputFile();
+    File outputFile = new File(outputDir);
+
+    if (!outputFile.exists()) {
+      throw new RuntimeException("There is no data for " + this.getProgramName());
+    }
+
+    return this.readFromFile(outputFile);
+  }
+
+  private Set<FeatureExpr> getConstraints(Set<String> prettyConstraints) {
+    Set<FeatureExpr> constraints = new HashSet<>();
+
+    for (String prettyConstraint : prettyConstraints) {
+      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(prettyConstraint);
+      constraints.add(constraint);
+    }
+
+    return constraints;
+  }
+
+  private String getOutputFile() {
+    return IDTAMethodTransformer.DEBUG_DIR
+        + "/"
+        + this.getProgramName()
+        + "/"
+        + this.getProgramName()
+        + Options.DOT_JSON;
   }
 }

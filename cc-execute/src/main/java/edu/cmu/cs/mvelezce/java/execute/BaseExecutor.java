@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.java.execute;
 
+import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.trivial.TrivialExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -73,6 +75,11 @@ public abstract class BaseExecutor implements Executor {
     switch (this.programName) {
       case TrivialExecutorAdapter.PROGRAM_NAME:
         adapter = new TrivialExecutorAdapter(this);
+        break;
+      case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        adapter = new MeasureDiskOrderedScanAdapter(this);
+        ((BaseMeasureDiskOrderedScanAdapter) adapter)
+            .preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.programName);

@@ -117,6 +117,9 @@ public abstract class BaseExecutor implements Executor {
         + "../cc-analysis/"
         + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
         + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
+        + "../cc-utils/"
+        + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
+        + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
         + "../../producer-consumer-4j/"
         + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
         + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR

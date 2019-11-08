@@ -83,7 +83,8 @@ public abstract class ExecutionProcessor
     Deque<Long> executionRegionsStart = new ArrayDeque<>();
     Deque<Long> nestedRegionsExecTime = new ArrayDeque<>();
 
-    for (String entry : trace) {
+    for (int i = 0; i < trace.size(); i++) {
+      String entry = trace.get(i);
       String[] items = entry.split(RegionsManager.COMMA);
       String action = items[0];
       String region = items[1];
@@ -95,7 +96,7 @@ public abstract class ExecutionProcessor
         nestedRegionsExecTime.push(0L);
       } else {
         if (!region.equals(executingRegions.peek())) {
-          continue;
+          throw new RuntimeException("Exiting a region that we did not expected");
         }
 
         executingRegions.pop();

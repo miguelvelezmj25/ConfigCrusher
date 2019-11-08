@@ -44,46 +44,24 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
     return Arrays.asList(BaseMeasureDiskOrderedScanAdapter.OPTIONS);
   }
 
-  //  public void preProcess() {
-  //    ProcessBuilder builder = new ProcessBuilder();
-  //
-  //    List<String> commandList = new ArrayList<>();
-  //    commandList.add("sudo");
-  //    commandList.add("./clean.sh");
-  //    builder.command(commandList);
-  //    builder.directory(new File(ORIGINAL_ROOT_DIR));
-  //
-  //    try {
-  //      Process process = builder.start();
-  //
-  //      Helper.processOutput(process);
-  //      Helper.processError(process);
-  //
-  //      process.waitFor();
-  //    }
-  //    catch (IOException | InterruptedException e) {
-  //      System.err.println("Could not clear the cache before running " + PROGRAM_NAME);
-  //    }
-  //  }
-
-  public void preProcess() {
+  public void preProcess(String dir) {
     try {
       this.removeDir();
       this.makeDir();
-      this.clean();
+      this.clean(dir);
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME);
+      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME, e);
     }
   }
 
-  private void clean() throws IOException, InterruptedException {
+  private void clean(String dir) throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
     List<String> commandList = new ArrayList<>();
     commandList.add("sudo");
     commandList.add("./clean.sh");
     builder.command(commandList);
-    builder.directory(new File(ORIGINAL_ROOT_DIR));
+    builder.directory(new File(dir));
 
     Process process = builder.start();
 

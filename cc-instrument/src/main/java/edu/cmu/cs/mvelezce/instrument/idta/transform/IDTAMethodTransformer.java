@@ -189,7 +189,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     MemoryMonitor.printMemoryUsage("Memory:");
 
-    this.removeNestedRegionsInter(classNodes);
+    //    this.removeNestedRegionsInter(classNodes);
 
     try {
       GC.gc(5_000);
@@ -249,24 +249,26 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     int processedClassNodesCount = 0;
     boolean propagatedRegions = false;
 
-    for (ClassNode classNode : classNodes) {
-      processedClassNodesCount++;
-      System.out.println(
-          "Class nodes still to propagate inter: " + (classNodesCount - processedClassNodesCount));
-      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-
-      if (methodsToProcess.isEmpty()) {
-        continue;
-      }
-
-      for (MethodNode methodNode : methodsToProcess) {
-        System.out.println("Processing inter " + classNode.name + " - " + methodNode.name);
-        long startTime = System.nanoTime();
-        propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode, classNode);
-        long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-      }
-    }
+    //    for (ClassNode classNode : classNodes) {
+    //      processedClassNodesCount++;
+    //      System.out.println(
+    //          "Class nodes still to propagate inter: " + (classNodesCount -
+    // processedClassNodesCount));
+    //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+    //
+    //      if (methodsToProcess.isEmpty()) {
+    //        continue;
+    //      }
+    //
+    //      for (MethodNode methodNode : methodsToProcess) {
+    //        System.out.println("Processing inter " + classNode.name + " - " + methodNode.name);
+    //        long startTime = System.nanoTime();
+    //        propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode,
+    // classNode);
+    //        long endTime = System.nanoTime();
+    //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+    //      }
+    //    }
 
     return propagatedRegions;
   }

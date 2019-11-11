@@ -1,0 +1,17 @@
+digraph updateCacheUsage {
+node [shape=record];
+1800955941 [label="ICONST_1\lGOTO L2\l"];
+2057073505 [label="L2\lFRAME SAME1 I\lLDC \"faaab379-c377-4ac7-9812-d72ec0ddfe8c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+221798990 [label="L0\lLINENUMBER 1340 L0\lLDC \"faaab379-c377-4ac7-9812-d72ec0ddfe8c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.usage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$SharedTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+194253719 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+entry -> 221798990
+1800955941 -> 2057073505
+2057073505 -> exit
+221798990 -> 1800955941
+221798990 -> 194253719
+194253719 -> 2057073505
+2057073505[fontcolor="purple", penwidth=3, color="purple"];
+221798990[fontcolor="purple", penwidth=3, color="purple"];
+}

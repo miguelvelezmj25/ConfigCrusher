@@ -1,0 +1,17 @@
+digraph isExpirationInHours {
+node [shape=record];
+122712898 [label="L0\lLINENUMBER 995 L0\lLDC \"c08bd629-5a88-4a02-aaa9-ed35d9adaae7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.flags : I\lSIPUSH 1024\lIAND\lIFEQ L1\l"];
+318515248 [label="L2\lFRAME SAME1 I\lLDC \"c08bd629-5a88-4a02-aaa9-ed35d9adaae7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+995924129 [label="ICONST_1\lGOTO L2\l"];
+1418456625 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+122712898 -> 995924129
+122712898 -> 1418456625
+entry -> 122712898
+318515248 -> exit
+995924129 -> 318515248
+1418456625 -> 318515248
+122712898[fontcolor="purple", penwidth=3, color="purple"];
+318515248[fontcolor="purple", penwidth=3, color="purple"];
+}

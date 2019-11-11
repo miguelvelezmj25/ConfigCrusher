@@ -1,9 +1,0 @@
-digraph runOpenTriggers {
-node [shape=record];
-1978100700 [label="L0\lLINENUMBER 46 L0\lLDC \"27642403-a4a8-48ce-9a0a-8920586a0f70\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKESTATIC com/sleepycat/je/DbInternal.getDbImpl (Lcom/sleepycat/je/Database;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lILOAD 2\lINVOKESTATIC com/sleepycat/je/dbi/TriggerManager.runOpenTriggers (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/dbi/DatabaseImpl;Z)V\lL1\lLINENUMBER 47 L1\lLDC \"27642403-a4a8-48ce-9a0a-8920586a0f70\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL2\l"];
-entry;
-exit;
-entry -> 1978100700
-1978100700 -> exit
-1978100700[fontcolor="purple", penwidth=3, color="purple"];
-}

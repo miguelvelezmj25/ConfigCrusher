@@ -1,0 +1,43 @@
+digraph shouldUpdateLsn {
+node [shape=record];
+1067673949 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFEQ L3\l"];
+583532944 [label="L7\lLINENUMBER 1987 L7\lFRAME SAME\lICONST_1\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL16\l"];
+819036740 [label="L2\lLINENUMBER 1965 L2\lICONST_0\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+83231689 [label="L12\lLINENUMBER 1981 L12\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL13\lLINENUMBER 1983 L13\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL14\lLINENUMBER 1984 L14\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL15\lLINENUMBER 1981 L15\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+323964527 [label="L4\lLINENUMBER 1969 L4\lICONST_1\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1709995054 [label="L8\lLINENUMBER 1974 L8\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"DeferredWrite LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL9\lLINENUMBER 1976 L9\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL10\lLINENUMBER 1977 L10\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 1974 L11\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1306885879 [label="L1\lLINENUMBER 1968 L1\lFRAME SAME\lLLOAD 3\lLDC -1\lLCMP\lIFNE L3\l"];
+192762074 [label="L6\lLINENUMBER 1973 L6\lLLOAD 1\lLDC -1\lLCMP\lIFEQ L7\l"];
+1695934696 [label="L0\lLINENUMBER 1964 L0\lLDC \"45851613-370a-433e-a458-48a2e2fd8eb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lLLOAD 1\lLLOAD 3\lLCMP\lIFNE L1\l"];
+1975223529 [label="L3\lLINENUMBER 1972 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFEQ L5\l"];
+791686624 [label="L5\lLINENUMBER 1980 L5\lFRAME SAME\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
+1268584336 [label="LLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
+entry;
+exit;
+819036740 -> exit
+323964527 -> exit
+1695934696 -> 819036740
+1695934696 -> 1306885879
+1975223529 -> 192762074
+1975223529 -> 791686624
+791686624 -> 583532944
+791686624 -> 83231689
+1268584336 -> 583532944
+1268584336 -> 1709995054
+entry -> 1695934696
+1067673949 -> 323964527
+1067673949 -> 1975223529
+583532944 -> exit
+83231689 -> exit
+1709995054 -> exit
+1306885879 -> 1067673949
+1306885879 -> 1975223529
+192762074 -> 583532944
+192762074 -> 1268584336
+583532944[fontcolor="purple", penwidth=3, color="purple"];
+819036740[fontcolor="purple", penwidth=3, color="purple"];
+83231689[fontcolor="purple", penwidth=3, color="purple"];
+323964527[fontcolor="purple", penwidth=3, color="purple"];
+1709995054[fontcolor="purple", penwidth=3, color="purple"];
+1695934696[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,28 @@
+digraph getStorageSize {
+node [shape=record];
+81858337 [label="L7\lLINENUMBER 210 L7\lFRAME APPEND [I]\lILOAD 3\lILOAD 2\lIADD\lBIPUSH 14\lIADD\lLDC \"d2827c88-60a4-458b-9c55-add3c667ffb9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL9\l"];
+828197363 [label="L5\lLINENUMBER 191 L5\lILOAD 2\lICONST_1\lISUB\lBIPUSH 20\lIADD\lLDC \"d2827c88-60a4-458b-9c55-add3c667ffb9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1884482707 [label="L4\lLINENUMBER 205 L4\lFRAME SAME\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastLoggedSize (I)I\lISTORE 3\lL6\lLINENUMBER 206 L6\lILOAD 3\lIFNE L7\l"];
+1436720527 [label="L0\lLINENUMBER 160 L0\lLDC \"d2827c88-60a4-458b-9c55-add3c667ffb9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getStoredKeySize (I)I\lISTORE 2\lL1\lLINENUMBER 174 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getDatabase ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L2\l"];
+1618159634 [label="L8\lLINENUMBER 208 L8\lICONST_0\lLDC \"d2827c88-60a4-458b-9c55-add3c667ffb9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+234692990 [label="L2\lLINENUMBER 190 L2\lFRAME APPEND [I]\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isEmbeddedLN (I)Z\lIFEQ L4\l"];
+935348528 [label="L3\lLINENUMBER 175 L3\lILOAD 2\lICONST_1\lISUB\lBIPUSH 12\lIADD\lLDC \"d2827c88-60a4-458b-9c55-add3c667ffb9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 1436720527
+81858337 -> exit
+828197363 -> exit
+1884482707 -> 81858337
+1884482707 -> 1618159634
+1436720527 -> 234692990
+1436720527 -> 935348528
+1618159634 -> exit
+234692990 -> 828197363
+234692990 -> 1884482707
+935348528 -> exit
+81858337[fontcolor="purple", penwidth=3, color="purple"];
+828197363[fontcolor="purple", penwidth=3, color="purple"];
+1436720527[fontcolor="purple", penwidth=3, color="purple"];
+1618159634[fontcolor="purple", penwidth=3, color="purple"];
+935348528[fontcolor="purple", penwidth=3, color="purple"];
+}

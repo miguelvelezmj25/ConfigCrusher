@@ -1,0 +1,25 @@
+digraph checkUpdatesAllowed {
+node [shape=record];
+83825085 [label="L4\lLINENUMBER 5332 L4\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 5333 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDiskLimitViolation ()Ljava/lang/String;\lASTORE 1\lL6\lLINENUMBER 5335 L6\lALOAD 1\lIFNULL L3\l"];
+990002180 [label="L0\lLINENUMBER 5326 L0\lLDC \"0aff538e-8284-46bf-8b2f-64fd637185eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.updateOperationsProhibited : Z\lIFEQ L1\l"];
+775421754 [label="L3\lLINENUMBER 5340 L3\lFRAME SAME\lLDC \"0aff538e-8284-46bf-8b2f-64fd637185eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL9\l"];
+351297083 [label="L7\lLINENUMBER 5336 L7\lNEW com/sleepycat/je/DiskLimitException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lL8\lLINENUMBER 5337 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/DiskLimitException.\<init\> (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;)V\lLDC \"0aff538e-8284-46bf-8b2f-64fd637185eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+858864014 [label="L1\lLINENUMBER 5330 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbType ()Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.isInternal ()Z\lIFNE L3\l"];
+1421222348 [label="L2\lLINENUMBER 5327 L2\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lINVOKESPECIAL com/sleepycat/je/Cursor.updatesProhibitedException (Lcom/sleepycat/je/txn/Locker;)Ljava/lang/UnsupportedOperationException;\lLDC \"0aff538e-8284-46bf-8b2f-64fd637185eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+entry -> 990002180
+83825085 -> 775421754
+83825085 -> 351297083
+990002180 -> 858864014
+990002180 -> 1421222348
+775421754 -> exit
+351297083 -> exit
+858864014 -> 83825085
+858864014 -> 775421754
+1421222348 -> exit
+990002180[fontcolor="purple", penwidth=3, color="purple"];
+775421754[fontcolor="purple", penwidth=3, color="purple"];
+351297083[fontcolor="purple", penwidth=3, color="purple"];
+1421222348[fontcolor="purple", penwidth=3, color="purple"];
+}

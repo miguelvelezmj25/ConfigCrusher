@@ -43,8 +43,8 @@ public abstract class BaseRegionInstrumenter<T> extends BaseInstrumenter {
     }
 
     if (Options.checkIfSave()) {
-      this.writeToFile(this.regionsToData);
       this.instrument();
+      this.writeToFile(this.regionsToData);
     }
   }
 

@@ -1,0 +1,174 @@
+digraph updateRecordInternal {
+node [shape=record];
+1411995796 [label="L0\lLINENUMBER 1553 L0\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/dbi/CursorImpl.$assertionsDisabled : Z\lIFNE L1\l"];
+760885508 [label="L49\lLINENUMBER 1647 L49\lALOAD 3\lILOAD 22\lILOAD 23\lL50\lLINENUMBER 1648 L50\lINVOKESTATIC com/sleepycat/je/dbi/TTL.expirationToSystemTime (IZ)J\lL51\lLINENUMBER 1647 L51\lINVOKEVIRTUAL com/sleepycat/je/dbi/ExpirationInfo.setOldExpirationTime (J)V\l"];
+578793734 [label="ALOAD 8\lL12\lLINENUMBER 1587 L12\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getCleaner ()Lcom/sleepycat/je/cleaner/Cleaner;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.getFetchObsoleteSize (Lcom/sleepycat/je/dbi/DatabaseImpl;)Z\lIFNE L9\l"];
+743745156 [label="L19\lLINENUMBER 1603 L19\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I T T com/sleepycat/je/tree/LN] []\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.getPartial ()Z\lIFEQ L27\l"];
+229118267 [label="L28\lLINENUMBER 1604 L28\lALOAD 14\lIFNONNULL L29\l"];
+978419354 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+993436116 [label="L73\lFRAME SAME\lICONST_1\lGOTO L76\l"];
+1017729622 [label="ALOAD 14\lIFNULL L37\l"];
+1906594689 [label="L32\lLINENUMBER 1617 L32\lFRAME APPEND [[B]\lALOAD 1\lIFNULL L33\l"];
+1101345072 [label="L36\lLINENUMBER 1620 L36\lNEW com/sleepycat/je/DuplicateDataException\lDUP\lLDC \"Can't replace a duplicate with new data that is not equal to the existing data according to the duplicate  comparator.\"\lINVOKESPECIAL com/sleepycat/je/DuplicateDataException.\<init\> (Ljava/lang/String;)V\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1742695484 [label="L29\lLINENUMBER 1608 L29\lFRAME SAME\lALOAD 2\lALOAD 14\lINVOKESTATIC com/sleepycat/je/tree/LN.resolvePartialEntry (Lcom/sleepycat/je/DatabaseEntry;[B)[B\lASTORE 19\lL31\lGOTO L32\l"];
+307120862 [label="L37\lLINENUMBER 1631 L37\lFRAME SAME\lALOAD 0\lALOAD 19\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.shouldEmbedLN ([B)Z\lISTORE 16\lL40\lLINENUMBER 1635 L40\lALOAD 18\lIFNULL L41\l"];
+1479676662 [label="L75\lFRAME SAME\lICONST_0\l"];
+103249904 [label="L22\lFRAME SAME1 [B\lASTORE 14\lL23\lGOTO L19\l"];
+1019784426 [label="L30\lLINENUMBER 1606 L30\lACONST_NULL\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+893392534 [label="L11\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B T I] []\lALOAD 9\lL13\lLINENUMBER 1588 L13\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.mayCreateUpdatedLN ()Z\lIFNE L14\l"];
+392956067 [label="L42\lLINENUMBER 1636 L42\lALOAD 18\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.getMemorySizeIncludedByParent ()J\lLSTORE 20\lL43\lLINENUMBER 1637 L43\lALOAD 18\lALOAD 19\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.modify ([B)V\lGOTO L44\l"];
+772159060 [label="L62\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I T com/sleepycat/je/tree/LN [B J I I I I com/sleepycat/je/txn/WriteLockInfo] [com/sleepycat/je/tree/LN com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/txn/Locker com/sleepycat/je/txn/WriteLockInfo I [B]\lILOAD 24\lILOAD 25\lILOAD 15\lLLOAD 10\lILOAD 12\lICONST_0\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.optionalLog (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/WriteLockInfo;Z[BIZZJIZLcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/log/LogItem;\lASTORE 17\lL63\lLINENUMBER 1685 L63\lALOAD 5\lIFNULL L64\l"];
+1517271775 [label="ALOAD 3\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expirationInHours : Z\lILOAD 23\lIF_ICMPEQ L55\l"];
+1820566423 [label="L69\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I com/sleepycat/je/log/LogItem com/sleepycat/je/tree/LN [B J I I I I com/sleepycat/je/txn/WriteLockInfo] [com/sleepycat/je/tree/BIN I J J J I [B [B]\lILOAD 24\lILOAD 25\lL70\lLINENUMBER 1693 L70\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.updateRecord (IJJJI[B[BIZ)V\lL71\lLINENUMBER 1712 L71\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL72\lLINENUMBER 1713 L72\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFNE L73\l"];
+1016392180 [label="ALOAD 2\lL10\lLINENUMBER 1584 L10\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.getPartial ()Z\lIFNE L9\l"];
+533736030 [label="L38\lLINENUMBER 1627 L38\lALOAD 4\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.setData ([B)V\lL39\lLINENUMBER 1628 L39\lALOAD 4\lALOAD 14\lINVOKESTATIC com/sleepycat/je/tree/LN.setEntry (Lcom/sleepycat/je/DatabaseEntry;[B)V\l"];
+903199653 [label="ALOAD 3\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.updateExpiration : Z\lIFEQ L52\l"];
+1871478757 [label="L9\lLINENUMBER 1590 L9\lFRAME SAME\lILOAD 15\lIFEQ L15\l"];
+107402540 [label="L14\lLINENUMBER 1598 L14\lFRAME CHOP 3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLN (ILcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/LN;\lASTORE 18\lL24\lLINENUMBER 1599 L24\lALOAD 18\lIFNULL L25\l"];
+1298892345 [label="ALOAD 18\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.getData ()[B\lGOTO L26\l"];
+1469001634 [label="L82\lLINENUMBER 1722 L82\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.evictLN (I)V\l"];
+544841843 [label="L54\lLINENUMBER 1658 L54\lFRAME SAME\lALOAD 3\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/ExpirationInfo.setExpirationUpdated (Z)V\l"];
+854791560 [label="ALOAD 1\lGOTO L62\l"];
+626092313 [label="L78\lLINENUMBER 1721 L78\lFRAME APPEND [I]\lILOAD 27\lIFNE L80\l"];
+1661617742 [label="L76\lFRAME SAME1 I\lISTORE 27\lL77\lLINENUMBER 1716 L77\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getTarget (I)Lcom/sleepycat/je/tree/Node;\lIFNONNULL L78\l"];
+1503835343 [label="L81\lLINENUMBER 1718 L81\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lALOAD 18\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.attachNode (ILcom/sleepycat/je/tree/Node;[B)V\lGOTO L80\l"];
+1608794525 [label="L61\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I T com/sleepycat/je/tree/LN [B J I I I I com/sleepycat/je/txn/WriteLockInfo] [com/sleepycat/je/tree/LN com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/txn/Locker com/sleepycat/je/txn/WriteLockInfo I]\lALOAD 13\l"];
+2114033475 [label="L65\lLINENUMBER 1686 L65\lALOAD 5\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/DatabaseEntry.setData ([B)V\lL66\lLINENUMBER 1687 L66\lALOAD 18\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.setEntry (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+955475256 [label="L33\lLINENUMBER 1626 L33\lFRAME SAME\lALOAD 4\lIFNULL L37\l"];
+359529656 [label="L58\lLINENUMBER 1674 L58\lFRAME APPEND [I I]\lALOAD 6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl$LockStanding.prepareForUpdate (Lcom/sleepycat/je/tree/BIN;I)Lcom/sleepycat/je/txn/WriteLockInfo;\lASTORE 26\lL60\lLINENUMBER 1677 L60\lALOAD 18\lALOAD 8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.locker : Lcom/sleepycat/je/txn/Locker;\lALOAD 26\lILOAD 16\lALOAD 1\lIFNULL L61\l"];
+617693970 [label="ALOAD 13\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL34\lLINENUMBER 1619 L34\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getKeyComparator ()Ljava/util/Comparator;\lL35\lLINENUMBER 1618 L35\lINVOKESTATIC com/sleepycat/je/tree/Key.compareKeys ([B[BLjava/util/Comparator;)I\lIFEQ L33\l"];
+1416922896 [label="L64\lLINENUMBER 1693 L64\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I com/sleepycat/je/log/LogItem com/sleepycat/je/tree/LN [B J I I I I com/sleepycat/je/txn/WriteLockInfo] []\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lLLOAD 20\lALOAD 17\lGETFIELD com/sleepycat/je/log/LogItem.lsn : J\lALOAD 18\lL67\lLINENUMBER 1694 L67\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.getVLSNSequence ()J\lALOAD 17\lGETFIELD com/sleepycat/je/log/LogItem.size : I\lALOAD 1\lILOAD 16\lIFEQ L68\l"];
+702686021 [label="L5\lLINENUMBER 1560 L5\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLastLoggedSize (I)I\lISTORE 12\lL6\lLINENUMBER 1561 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getKey (I)[B\lASTORE 13\lL7\lLINENUMBER 1564 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isEmbeddedLN (I)Z\lISTORE 15\lL8\lLINENUMBER 1583 L8\lALOAD 4\lIFNONNULL L9\l"];
+88784928 [label="LLOAD 10\lLDC -1\lLCMP\lIFNE L5\l"];
+1997841445 [label="L41\lLINENUMBER 1639 L41\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I T com/sleepycat/je/tree/LN [B] []\lLCONST_0\lLSTORE 20\lL45\lLINENUMBER 1640 L45\lALOAD 9\lALOAD 8\lALOAD 19\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.createUpdatedLN (Lcom/sleepycat/je/dbi/EnvironmentImpl;[B)Lcom/sleepycat/je/tree/LN;\lASTORE 18\l"];
+331203797 [label="L21\lFRAME APPEND [T T com/sleepycat/je/tree/LN]\lACONST_NULL\l"];
+1945947772 [label="L15\lLINENUMBER 1594 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.fetchLN (ILcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/LN;\lASTORE 18\lL20\lLINENUMBER 1595 L20\lALOAD 18\lIFNULL L21\l"];
+1841067002 [label="L79\lLINENUMBER 1717 L79\lILOAD 27\lIFEQ L80\l"];
+72617256 [label="ILOAD 12\lIFNE L11\l"];
+946417482 [label="L55\lLINENUMBER 1660 L55\lFRAME SAME\lALOAD 3\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lISTORE 24\lL56\lLINENUMBER 1661 L56\lALOAD 3\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expirationInHours : Z\lISTORE 25\lL57\lGOTO L58\l"];
+516594379 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL74\lLINENUMBER 1714 L74\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFNE L75\l"];
+465163835 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1510219036 [label="L52\lLINENUMBER 1663 L52\lFRAME SAME\lILOAD 22\lISTORE 24\lL59\lLINENUMBER 1664 L59\lILOAD 23\lISTORE 25\l"];
+312483867 [label="L1\lLINENUMBER 1555 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 8\lL2\lLINENUMBER 1556 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbType ()Lcom/sleepycat/je/dbi/DbType;\lASTORE 9\lL3\lLINENUMBER 1558 L3\lALOAD 6\lINVOKESTATIC com/sleepycat/je/dbi/CursorImpl$LockStanding.access$000 (Lcom/sleepycat/je/dbi/CursorImpl$LockStanding;)J\lLSTORE 10\lL4\lLINENUMBER 1559 L4\lGETSTATIC com/sleepycat/je/dbi/CursorImpl.$assertionsDisabled : Z\lIFNE L5\l"];
+482339607 [label="L68\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/dbi/CursorImpl$LockStanding com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/dbi/DbType J I [B [B I I com/sleepycat/je/log/LogItem com/sleepycat/je/tree/LN [B J I I I I com/sleepycat/je/txn/WriteLockInfo] [com/sleepycat/je/tree/BIN I J J J I [B]\lACONST_NULL\l"];
+1702444971 [label="ALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl$LockStanding.recordExists ()Z\lIFNE L1\l"];
+814573613 [label="L26\lFRAME SAME1 [B\lASTORE 14\l"];
+866621392 [label="L16\lLINENUMBER 1591 L16\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getData (I)[B\lASTORE 14\lL17\lLINENUMBER 1592 L17\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getLN (ILcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/LN;\lASTORE 18\lL18\lGOTO L19\l"];
+702319996 [label="ILOAD 16\lIFNE L75\l"];
+1629606906 [label="L44\lLINENUMBER 1643 L44\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getExpiration (I)I\lISTORE 22\lL46\lLINENUMBER 1644 L46\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isExpirationInHours ()Z\lISTORE 23\lL47\lLINENUMBER 1646 L47\lALOAD 3\lIFNULL L48\l"];
+51694007 [label="ALOAD 19\lGOTO L69\l"];
+256803126 [label="L25\lFRAME APPEND [T T com/sleepycat/je/tree/LN]\lACONST_NULL\l"];
+1756080034 [label="L80\lLINENUMBER 1727 L80\lFRAME SAME\lALOAD 0\lALOAD 18\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.getVLSNSequence ()J\lALOAD 17\lGETFIELD com/sleepycat/je/log/LogItem.lsn : J\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.setCurrentVersion (JJ)V\lL83\lLINENUMBER 1728 L83\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.setStorageSize ()V\lL84\lLINENUMBER 1730 L84\lALOAD 0\lGETSTATIC java/util/logging/Level.FINER : Ljava/util/logging/Level;\lLDC \"Mod:\"\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lLLOAD 10\lALOAD 17\lGETFIELD com/sleepycat/je/log/LogItem.lsn : J\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.trace (Ljava/util/logging/Level;Ljava/lang/String;Lcom/sleepycat/je/tree/BIN;IJJ)V\lL85\lLINENUMBER 1732 L85\lILOAD 24\lILOAD 25\lINVOKESTATIC com/sleepycat/je/DbInternal.makeUpdateResult (IZ)Lcom/sleepycat/je/OperationResult;\lLDC \"5811b819-a40b-45c0-a4e1-ba202a83c565\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL86\l"];
+650214674 [label="L53\lLINENUMBER 1656 L53\lALOAD 3\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lILOAD 22\lIF_ICMPNE L54\l"];
+1981048457 [label="L27\lLINENUMBER 1610 L27\lFRAME SAME\lALOAD 2\lINVOKESTATIC com/sleepycat/je/tree/LN.copyEntryData (Lcom/sleepycat/je/DatabaseEntry;)[B\lASTORE 19\l"];
+2143127386 [label="L48\lLINENUMBER 1655 L48\lFRAME APPEND [I I]\lALOAD 3\lIFNULL L52\l"];
+968832140 [label="ILOAD 15\lIFNE L11\l"];
+472631703 [label="ALOAD 18\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.getData ()[B\lGOTO L22\l"];
+entry;
+exit;
+1411995796 -> 312483867
+1411995796 -> 1702444971
+760885508 -> 2143127386
+578793734 -> 1871478757
+578793734 -> 893392534
+743745156 -> 229118267
+743745156 -> 1981048457
+229118267 -> 1019784426
+229118267 -> 1742695484
+978419354 -> exit
+993436116 -> 1661617742
+1017729622 -> 307120862
+1017729622 -> 533736030
+1906594689 -> 955475256
+1906594689 -> 617693970
+1101345072 -> exit
+1742695484 -> 1906594689
+307120862 -> 392956067
+307120862 -> 1997841445
+1479676662 -> 1661617742
+103249904 -> 743745156
+1019784426 -> exit
+893392534 -> 107402540
+893392534 -> 1871478757
+392956067 -> 1629606906
+772159060 -> 2114033475
+772159060 -> 1416922896
+1517271775 -> 544841843
+1517271775 -> 946417482
+1820566423 -> 993436116
+1820566423 -> 516594379
+1016392180 -> 1871478757
+1016392180 -> 72617256
+533736030 -> 307120862
+entry -> 1411995796
+903199653 -> 1510219036
+903199653 -> 650214674
+1871478757 -> 1945947772
+1871478757 -> 866621392
+107402540 -> 256803126
+107402540 -> 1298892345
+1298892345 -> 814573613
+1469001634 -> 1756080034
+544841843 -> 946417482
+854791560 -> 772159060
+626092313 -> 1756080034
+626092313 -> 1469001634
+1661617742 -> 1841067002
+1661617742 -> 626092313
+1503835343 -> 1756080034
+1608794525 -> 772159060
+2114033475 -> 1416922896
+955475256 -> 1017729622
+955475256 -> 307120862
+359529656 -> 854791560
+359529656 -> 1608794525
+617693970 -> 1101345072
+617693970 -> 955475256
+1416922896 -> 51694007
+1416922896 -> 482339607
+702686021 -> 1871478757
+702686021 -> 1016392180
+88784928 -> 978419354
+88784928 -> 702686021
+1997841445 -> 1629606906
+331203797 -> 103249904
+1945947772 -> 472631703
+1945947772 -> 331203797
+1841067002 -> 1756080034
+1841067002 -> 1503835343
+72617256 -> 893392534
+72617256 -> 968832140
+946417482 -> 359529656
+516594379 -> 702319996
+516594379 -> 1479676662
+465163835 -> exit
+1510219036 -> 359529656
+312483867 -> 702686021
+312483867 -> 88784928
+482339607 -> 1820566423
+1702444971 -> 465163835
+1702444971 -> 312483867
+814573613 -> 743745156
+866621392 -> 743745156
+702319996 -> 993436116
+702319996 -> 1479676662
+1629606906 -> 760885508
+1629606906 -> 2143127386
+51694007 -> 1820566423
+256803126 -> 814573613
+1756080034 -> exit
+650214674 -> 544841843
+650214674 -> 1517271775
+1981048457 -> 1906594689
+2143127386 -> 1510219036
+2143127386 -> 903199653
+968832140 -> 578793734
+968832140 -> 893392534
+472631703 -> 103249904
+465163835[fontcolor="purple", penwidth=3, color="purple"];
+1411995796[fontcolor="purple", penwidth=3, color="purple"];
+978419354[fontcolor="purple", penwidth=3, color="purple"];
+1019784426[fontcolor="purple", penwidth=3, color="purple"];
+1756080034[fontcolor="purple", penwidth=3, color="purple"];
+1101345072[fontcolor="purple", penwidth=3, color="purple"];
+}

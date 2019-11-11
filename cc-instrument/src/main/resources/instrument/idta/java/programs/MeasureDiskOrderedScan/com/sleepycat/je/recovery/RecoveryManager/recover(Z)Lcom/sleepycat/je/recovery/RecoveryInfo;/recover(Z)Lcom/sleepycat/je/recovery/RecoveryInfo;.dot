@@ -1,0 +1,174 @@
+digraph recover {
+node [shape=record];
+1674366690 [label="L0\lLINENUMBER 496 L0\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 7\lLDC \"recovery\"\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invokeCheckpoint (Lcom/sleepycat/je/CheckpointConfig;Ljava/lang/String;)V\l"];
+249553131 [label="L11\lLINENUMBER 334 L11\lFRAME APPEND [com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager]\lALOAD 3\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.ENV_RECOVERY_FORCE_CHECKPOINT : Lcom/sleepycat/je/config/BooleanConfigParam;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getBoolean (Lcom/sleepycat/je/config/BooleanConfigParam;)Z\lISTORE 4\l"];
+2122629709 [label="L5\lLINENUMBER 513 L5\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I] [java/io/IOException]\lASTORE 2\lL89\lLINENUMBER 514 L89\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"RecoveryManager\"\lLDC \"recover\"\lLDC \"Couldn't recover\"\lALOAD 2\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\lL90\lLINENUMBER 516 L90\lNEW com/sleepycat/je/EnvironmentFailureException\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC com/sleepycat/je/dbi/EnvironmentFailureReason.LOG_READ : Lcom/sleepycat/je/dbi/EnvironmentFailureReason;\lALOAD 2\lINVOKESPECIAL com/sleepycat/je/EnvironmentFailureException.\<init\> (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentFailureReason;Ljava/lang/Throwable;)V\lLDC \"a361a9ef-ec4d-4e8c-8fee-5596d57ba65e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1482673289 [label="L45\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I I] [java/util/logging/Logger com/sleepycat/je/dbi/EnvironmentImpl java/util/logging/Level java/lang/StringBuilder]\lLDC \"txns.\"\l"];
+1811334627 [label="L43\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I I] [java/util/logging/Logger com/sleepycat/je/dbi/EnvironmentImpl java/util/logging/Level java/lang/StringBuilder]\lLDC \"are \"\l"];
+980041201 [label="ICONST_1\lGOTO L41\l"];
+1901370151 [label="ALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL73\lLINENUMBER 485 L73\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.getLastLsnAtRecovery ()J\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.checkpointEndLsn : J\lLCMP\lIFNE L74\l"];
+890559893 [label="L40\lFRAME APPEND [I]\lICONST_0\l"];
+1942635071 [label="L1\lLINENUMBER 502 L1\lGOTO L79\l"];
+1602140199 [label="L4\lLINENUMBER 519 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.TOTAL_RECOVERY : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.stop (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\lL87\lLINENUMBER 520 L87\lGOTO L88\l"];
+157853977 [label="L15\lLINENUMBER 338 L15\lFRAME APPEND [I]\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/FileManager.filesExist ()Z\lIFEQ L16\l"];
+989385039 [label="L79\lLINENUMBER 503 L79\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.CKPT : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL81\lLINENUMBER 505 L81\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getCheckpointer ()Lcom/sleepycat/je/recovery/Checkpointer;\lGETSTATIC com/sleepycat/je/StatsConfig.DEFAULT : Lcom/sleepycat/je/StatsConfig;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.loadStats (Lcom/sleepycat/je/StatsConfig;)Lcom/sleepycat/je/utilint/StatGroup;\lL82\lLINENUMBER 504 L82\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.setStats (Lcom/sleepycat/je/dbi/StartupTracker$Phase;Lcom/sleepycat/je/utilint/StatGroup;)V\lL83\lLINENUMBER 506 L83\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.CKPT : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.stop (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\lL84\lLINENUMBER 507 L84\lGOTO L4\l"];
+1248339269 [label="LDC \"txn.\"\lGOTO L46\l"];
+1074044245 [label="L72\lLINENUMBER 509 L72\lFRAME CHOP 1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getCheckpointer ()Lcom/sleepycat/je/recovery/Checkpointer;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.checkpointStartLsn : J\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.checkpointEndLsn : J\lL85\lLINENUMBER 511 L85\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lL86\lLINENUMBER 510 L86\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.initIntervals (JJJ)V\l"];
+10025177 [label="L44\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I I] [java/util/logging/Logger com/sleepycat/je/dbi/EnvironmentImpl java/util/logging/Level java/lang/StringBuilder java/lang/String]\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 5\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" prepared but unfinished \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 6\lIFEQ L45\l"];
+1771614543 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/DiskLimitException\lTRYCATCHBLOCK L3 L4 L5 java/io/IOException\lTRYCATCHBLOCK L3 L4 L6 null\lTRYCATCHBLOCK L5 L7 L6 null\lL8\lLINENUMBER 318 L8\lLDC \"a361a9ef-ec4d-4e8c-8fee-5596d57ba65e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.TOTAL_RECOVERY : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.start (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\l"];
+1584532848 [label="L88\lLINENUMBER 522 L88\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I com/sleepycat/je/EnvironmentConfig] []\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lLDC \"a361a9ef-ec4d-4e8c-8fee-5596d57ba65e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL92\l"];
+2072956674 [label="L17\lLINENUMBER 344 L17\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/FileManager.getAllFileNumbers ()[Ljava/lang/Long;\lPOP\lL18\lLINENUMBER 354 L18\lALOAD 0\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/recovery/RecoveryManager.findEndOfLog (Z)V\lL19\lLINENUMBER 356 L19\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Recovery underway, valid end of log = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.nextAvailableLsn : J\lL20\lLINENUMBER 357 L20\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 5\lL21\lLINENUMBER 359 L21\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 5\lINVOKESTATIC com/sleepycat/je/log/Trace.traceLazily (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)V\lL22\lLINENUMBER 365 L22\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/recovery/RecoveryManager.findLastCheckpoint ()V\lL23\lLINENUMBER 367 L23\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lALOAD 2\lL24\lLINENUMBER 368 L24\lINVOKEVIRTUAL com/sleepycat/je/log/FileManager.getLastUsedLsn ()J\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.setLastLsnAtRecovery (J)V\lL25\lLINENUMBER 371 L25\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lGETFIELD com/sleepycat/je/recovery/RecoveryInfo.useRootLsn : J\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.readMapTreeFromLog (J)V\lL26\lLINENUMBER 374 L26\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/recovery/RecoveryManager.buildTree ()V\lL27\lLINENUMBER 375 L27\lGOTO L28\l"];
+518844654 [label="L34\lLINENUMBER 389 L34\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.logMapTreeRoot ()V\l"];
+178088670 [label="L39\lLINENUMBER 405 L39\lILOAD 5\lICONST_1\lIF_ICMPNE L40\l"];
+2023577360 [label="LDC \"is \"\lGOTO L44\l"];
+810562017 [label="L74\lLINENUMBER 489 L74\lFRAME SAME\lNEW com/sleepycat/je/CheckpointConfig\lDUP\lINVOKESPECIAL com/sleepycat/je/CheckpointConfig.\<init\> ()V\lASTORE 7\lL75\lLINENUMBER 490 L75\lALOAD 7\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/CheckpointConfig.setForce (Z)Lcom/sleepycat/je/CheckpointConfig;\lPOP\lL76\lLINENUMBER 491 L76\lALOAD 7\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/CheckpointConfig.setMinimizeRecoveryTime (Z)Lcom/sleepycat/je/CheckpointConfig;\lPOP\lL77\lLINENUMBER 493 L77\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/RecoveryProgress.CKPT : Lcom/sleepycat/je/RecoveryProgress;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.setProgress (Lcom/sleepycat/je/RecoveryProgress;)V\lL78\lLINENUMBER 494 L78\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.CKPT : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.start (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\l"];
+608885701 [label="L7\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.TOTAL_RECOVERY : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.stop (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\lL91\lLINENUMBER 520 L91\lALOAD 9\lLDC \"a361a9ef-ec4d-4e8c-8fee-5596d57ba65e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1872814655 [label="ILOAD 4\lIFEQ L72\l"];
+1522583107 [label="L3\lLINENUMBER 320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getFileManager ()Lcom/sleepycat/je/log/FileManager;\lASTORE 2\lL9\lLINENUMBER 321 L9\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lASTORE 3\lL10\lLINENUMBER 328 L10\lALOAD 3\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.ENV_RECOVERY_FORCE_NEW_FILE : Lcom/sleepycat/je/config/BooleanConfigParam;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getBoolean (Lcom/sleepycat/je/config/BooleanConfigParam;)Z\lIFEQ L11\l"];
+1996358426 [label="L2\lLINENUMBER 497 L2\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I com/sleepycat/je/EnvironmentConfig com/sleepycat/je/CheckpointConfig] [com/sleepycat/je/DiskLimitException]\lASTORE 8\lL80\lLINENUMBER 498 L80\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.logger : Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC java/util/logging/Level.WARNING : Ljava/util/logging/Level;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Recovery checkpoint failed due to disk limit violation but environment can still service reads: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 8\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.logMsg (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/util/logging/Level;Ljava/lang/String;)V\l"];
+320326382 [label="L33\lLINENUMBER 393 L33\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getSharedCache ()Z\lIFEQ L35\l"];
+670077401 [label="L38\lLINENUMBER 418 L38\lFRAME CHOP 1\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL48\lLINENUMBER 419 L48\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getEnvironmentConfig ()Lcom/sleepycat/je/EnvironmentConfig;\lASTORE 6\lL49\lLINENUMBER 422 L49\lALOAD 6\lINVOKESTATIC com/sleepycat/je/DbInternal.getCreateUP (Lcom/sleepycat/je/EnvironmentConfig;)Z\lIFEQ L50\l"];
+392968246 [label="L46\lFRAME FULL [com/sleepycat/je/recovery/RecoveryManager I com/sleepycat/je/log/FileManager com/sleepycat/je/dbi/DbConfigManager I I I] [java/util/logging/Logger com/sleepycat/je/dbi/EnvironmentImpl java/util/logging/Level java/lang/StringBuilder java/lang/String]\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.logMsg (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/util/logging/Level;Ljava/lang/String;)V\lL47\lLINENUMBER 415 L47\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.preparedTxns : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.clear ()V\l"];
+1349866546 [label="L50\lLINENUMBER 441 L50\lFRAME APPEND [com/sleepycat/je/EnvironmentConfig]\lALOAD 6\lINVOKESTATIC com/sleepycat/je/DbInternal.getCreateEP (Lcom/sleepycat/je/EnvironmentConfig;)Z\lIFEQ L58\l"];
+192584382 [label="L58\lLINENUMBER 459 L58\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.tracker : Lcom/sleepycat/je/cleaner/RecoveryUtilizationTracker;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL66\lLINENUMBER 460 L66\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getUtilizationTracker ()Lcom/sleepycat/je/cleaner/UtilizationTracker;\lL67\lLINENUMBER 459 L67\lINVOKEVIRTUAL com/sleepycat/je/cleaner/RecoveryUtilizationTracker.transferToUtilizationTracker (Lcom/sleepycat/je/cleaner/UtilizationTracker;)V\lL68\lLINENUMBER 466 L68\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/recovery/RecoveryManager.removeTempDbs ()V\lL69\lLINENUMBER 472 L69\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/recovery/RecoveryManager.deleteMapLNs ()V\lL70\lLINENUMBER 478 L70\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.preRecoveryCheckpointInit (Lcom/sleepycat/je/recovery/RecoveryInfo;)V\lL71\lLINENUMBER 484 L71\lILOAD 1\lIFNE L72\l"];
+1930403793 [label="L36\lLINENUMBER 394 L36\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.addEnvironment (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\l"];
+2107744436 [label="L59\lLINENUMBER 446 L59\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_EP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.start (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\lL60\lLINENUMBER 448 L60\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/RecoveryProgress.POPULATE_EXPIRATION_PROFILE : Lcom/sleepycat/je/RecoveryProgress;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.setProgress (Lcom/sleepycat/je/RecoveryProgress;)V\lL61\lLINENUMBER 451 L61\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getExpirationProfile ()Lcom/sleepycat/je/cleaner/ExpirationProfile;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_EP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lL62\lLINENUMBER 452 L62\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.getCounter (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)Lcom/sleepycat/je/dbi/StartupTracker$Counter;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL63\lLINENUMBER 453 L63\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getRecoveryProgressListener ()Lcom/sleepycat/je/ProgressListener;\lL64\lLINENUMBER 451 L64\lINVOKEVIRTUAL com/sleepycat/je/cleaner/ExpirationProfile.populateCache (Lcom/sleepycat/je/dbi/StartupTracker$Counter;Lcom/sleepycat/je/ProgressListener;)V\lL65\lLINENUMBER 455 L65\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_EP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.stop (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\l"];
+2019878996 [label="L6\lLINENUMBER 519 L6\lFRAME SAME1 java/lang/Throwable\lASTORE 9\l"];
+1452400087 [label="L12\lLINENUMBER 330 L12\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/log/FileManager.forceNewLogFile ()V\lL13\lLINENUMBER 332 L13\lICONST_1\lISTORE 4\lL14\lGOTO L15\l"];
+1384164294 [label="L28\lLINENUMBER 403 L28\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.preparedTxns : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.size ()I\lISTORE 5\lL37\lLINENUMBER 404 L37\lILOAD 5\lIFLE L38\l"];
+604429836 [label="L35\lLINENUMBER 400 L35\lFRAME SAME\lICONST_1\lISTORE 4\l"];
+1530952696 [label="L41\lFRAME SAME1 I\lISTORE 6\lL42\lLINENUMBER 406 L42\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.logger : Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC java/util/logging/Level.INFO : Ljava/util/logging/Level;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"There \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 6\lIFEQ L43\l"];
+1986584881 [label="L51\lLINENUMBER 429 L51\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_UP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.start (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\lL52\lLINENUMBER 431 L52\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/RecoveryProgress.POPULATE_UTILIZATION_PROFILE : Lcom/sleepycat/je/RecoveryProgress;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.setProgress (Lcom/sleepycat/je/RecoveryProgress;)V\lL53\lLINENUMBER 434 L53\lILOAD 4\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL54\lLINENUMBER 435 L54\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getUtilizationProfile ()Lcom/sleepycat/je/cleaner/UtilizationProfile;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_UP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lL55\lLINENUMBER 436 L55\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.getCounter (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)Lcom/sleepycat/je/dbi/StartupTracker$Counter;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.info : Lcom/sleepycat/je/recovery/RecoveryInfo;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFiles : Ljava/util/Set;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.reservedFileDbs : Ljava/util/Set;\lL56\lLINENUMBER 435 L56\lINVOKEVIRTUAL com/sleepycat/je/cleaner/UtilizationProfile.populateCache (Lcom/sleepycat/je/dbi/StartupTracker$Counter;Lcom/sleepycat/je/recovery/RecoveryInfo;Ljava/util/Set;Ljava/util/Set;)Z\lIOR\lISTORE 4\lL57\lLINENUMBER 439 L57\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.startupTracker : Lcom/sleepycat/je/dbi/StartupTracker;\lGETSTATIC com/sleepycat/je/dbi/StartupTracker$Phase.POPULATE_UP : Lcom/sleepycat/je/dbi/StartupTracker$Phase;\lINVOKEVIRTUAL com/sleepycat/je/dbi/StartupTracker.stop (Lcom/sleepycat/je/dbi/StartupTracker$Phase;)V\l"];
+178757664 [label="L16\lLINENUMBER 381 L16\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.logger : Ljava/util/logging/Logger;\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGETSTATIC java/util/logging/Level.CONFIG : Ljava/util/logging/Level;\lLDC \"Recovery w/no files.\"\lL29\lLINENUMBER 382 L29\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.logMsg (Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/util/logging/Level;Ljava/lang/String;)V\lL30\lLINENUMBER 385 L30\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInMemoryINs ()Lcom/sleepycat/je/dbi/INList;\lINVOKEVIRTUAL com/sleepycat/je/dbi/INList.enable ()V\lL31\lLINENUMBER 386 L31\lALOAD 0\lGETFIELD com/sleepycat/je/recovery/RecoveryManager.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.setEnabled (Z)V\lL32\lLINENUMBER 388 L32\lILOAD 1\lIFNE L33\l"];
+entry;
+exit;
+1674366690 -> 1942635071
+1674366690 -> 2122629709 [style=dashed, color=red]
+1674366690 -> 2019878996 [style=dashed, color=red]
+1674366690 -> 1996358426 [style=dashed, color=red]
+249553131 -> 157853977
+249553131 -> 2122629709 [style=dashed, color=red]
+249553131 -> 2019878996 [style=dashed, color=red]
+2122629709 -> exit
+2122629709 -> 2019878996 [style=dashed, color=red]
+1482673289 -> 392968246
+1482673289 -> 2122629709 [style=dashed, color=red]
+1482673289 -> 2019878996 [style=dashed, color=red]
+1811334627 -> 2122629709 [style=dashed, color=red]
+1811334627 -> 2019878996 [style=dashed, color=red]
+1811334627 -> 10025177
+980041201 -> 2122629709 [style=dashed, color=red]
+980041201 -> 1530952696
+980041201 -> 2019878996 [style=dashed, color=red]
+1901370151 -> 810562017
+1901370151 -> 1872814655
+1901370151 -> 2122629709 [style=dashed, color=red]
+1901370151 -> 2019878996 [style=dashed, color=red]
+890559893 -> 2122629709 [style=dashed, color=red]
+890559893 -> 1530952696
+890559893 -> 2019878996 [style=dashed, color=red]
+1942635071 -> 989385039
+1942635071 -> 2122629709 [style=dashed, color=red]
+1942635071 -> 2019878996 [style=dashed, color=red]
+1602140199 -> 1584532848
+157853977 -> 2122629709 [style=dashed, color=red]
+157853977 -> 2019878996 [style=dashed, color=red]
+157853977 -> 178757664
+157853977 -> 2072956674
+989385039 -> 1602140199
+989385039 -> 2122629709 [style=dashed, color=red]
+989385039 -> 2019878996 [style=dashed, color=red]
+1248339269 -> 392968246
+1248339269 -> 2122629709 [style=dashed, color=red]
+1248339269 -> 2019878996 [style=dashed, color=red]
+1074044245 -> 1602140199
+1074044245 -> 2122629709 [style=dashed, color=red]
+1074044245 -> 2019878996 [style=dashed, color=red]
+10025177 -> 2122629709 [style=dashed, color=red]
+10025177 -> 1248339269
+10025177 -> 2019878996 [style=dashed, color=red]
+10025177 -> 1482673289
+1771614543 -> 1522583107
+1584532848 -> exit
+2072956674 -> 2122629709 [style=dashed, color=red]
+2072956674 -> 1384164294
+2072956674 -> 2019878996 [style=dashed, color=red]
+518844654 -> 2122629709 [style=dashed, color=red]
+518844654 -> 2019878996 [style=dashed, color=red]
+518844654 -> 320326382
+178088670 -> 980041201
+178088670 -> 890559893
+178088670 -> 2122629709 [style=dashed, color=red]
+178088670 -> 2019878996 [style=dashed, color=red]
+2023577360 -> 2122629709 [style=dashed, color=red]
+2023577360 -> 2019878996 [style=dashed, color=red]
+2023577360 -> 10025177
+810562017 -> 1674366690
+810562017 -> 2122629709 [style=dashed, color=red]
+810562017 -> 2019878996 [style=dashed, color=red]
+608885701 -> exit
+1872814655 -> 810562017
+1872814655 -> 2122629709 [style=dashed, color=red]
+1872814655 -> 2019878996 [style=dashed, color=red]
+1872814655 -> 1074044245
+1522583107 -> 249553131
+1522583107 -> 2122629709 [style=dashed, color=red]
+1522583107 -> 1452400087
+1522583107 -> 2019878996 [style=dashed, color=red]
+1996358426 -> 989385039
+1996358426 -> 2122629709 [style=dashed, color=red]
+1996358426 -> 2019878996 [style=dashed, color=red]
+320326382 -> 1930403793
+320326382 -> 2122629709 [style=dashed, color=red]
+320326382 -> 604429836
+320326382 -> 2019878996 [style=dashed, color=red]
+670077401 -> 1349866546
+670077401 -> 2122629709 [style=dashed, color=red]
+670077401 -> 2019878996 [style=dashed, color=red]
+670077401 -> 1986584881
+entry -> 1771614543
+392968246 -> 670077401
+392968246 -> 2122629709 [style=dashed, color=red]
+392968246 -> 2019878996 [style=dashed, color=red]
+1349866546 -> 192584382
+1349866546 -> 2107744436
+1349866546 -> 2122629709 [style=dashed, color=red]
+1349866546 -> 2019878996 [style=dashed, color=red]
+192584382 -> 1901370151
+192584382 -> 2122629709 [style=dashed, color=red]
+192584382 -> 2019878996 [style=dashed, color=red]
+192584382 -> 1074044245
+1930403793 -> 2122629709 [style=dashed, color=red]
+1930403793 -> 604429836
+1930403793 -> 2019878996 [style=dashed, color=red]
+2107744436 -> 192584382
+2107744436 -> 2122629709 [style=dashed, color=red]
+2107744436 -> 2019878996 [style=dashed, color=red]
+2019878996 -> 608885701
+2019878996 -> 2019878996 [style=dashed, color=red]
+1452400087 -> 157853977
+1452400087 -> 2122629709 [style=dashed, color=red]
+1452400087 -> 2019878996 [style=dashed, color=red]
+1384164294 -> 670077401
+1384164294 -> 2122629709 [style=dashed, color=red]
+1384164294 -> 2019878996 [style=dashed, color=red]
+1384164294 -> 178088670
+604429836 -> 2122629709 [style=dashed, color=red]
+604429836 -> 1384164294
+604429836 -> 2019878996 [style=dashed, color=red]
+1530952696 -> 2023577360
+1530952696 -> 2122629709 [style=dashed, color=red]
+1530952696 -> 2019878996 [style=dashed, color=red]
+1530952696 -> 1811334627
+1986584881 -> 1349866546
+1986584881 -> 2122629709 [style=dashed, color=red]
+1986584881 -> 2019878996 [style=dashed, color=red]
+178757664 -> 2122629709 [style=dashed, color=red]
+178757664 -> 2019878996 [style=dashed, color=red]
+178757664 -> 320326382
+178757664 -> 518844654
+608885701[fontcolor="purple", penwidth=3, color="purple"];
+2122629709[fontcolor="purple", penwidth=3, color="purple"];
+1771614543[fontcolor="purple", penwidth=3, color="purple"];
+1584532848[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,9 +1,0 @@
-digraph setTxnSerializableIsolation {
-node [shape=record];
-1048338422 [label="L0\lLINENUMBER 4399 L0\lLDC \"92f19fee-3637-4624-a102-2483a3b72c38\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentConfig.setTxnSerializableIsolationVoid (Z)V\lL1\lLINENUMBER 4400 L1\lALOAD 0\lLDC \"92f19fee-3637-4624-a102-2483a3b72c38\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL2\l"];
-entry;
-exit;
-entry -> 1048338422
-1048338422 -> exit
-1048338422[fontcolor="purple", penwidth=3, color="purple"];
-}

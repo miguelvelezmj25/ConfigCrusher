@@ -1,9 +1,0 @@
-digraph assertPrintMemorySize {
-node [shape=record];
-1539408994 [label="L0\lLINENUMBER 4894 L0\lLDC \"8edb9662-d1fd-4520-9e5b-2138f306f65b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.printMemorySize ()J\lPOP2\lL1\lLINENUMBER 4895 L1\lICONST_1\lLDC \"8edb9662-d1fd-4520-9e5b-2138f306f65b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL2\l"];
-entry;
-exit;
-entry -> 1539408994
-1539408994 -> exit
-1539408994[fontcolor="purple", penwidth=3, color="purple"];
-}

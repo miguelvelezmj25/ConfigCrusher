@@ -1,9 +1,0 @@
-digraph readPrimaryAfterGet {
-node [shape=record];
-23517845 [label="L0\lLINENUMBER 155 L0\lLDC \"062d0780-f245-462c-8161-34d2b6d83252\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 4\lALOAD 5\lILOAD 6\lILOAD 7\lILOAD 8\lALOAD 9\lALOAD 10\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/Cursor.readPrimaryAfterGet (Lcom/sleepycat/je/Database;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/LockMode;ZZZLcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/Database;Lcom/sleepycat/je/SecondaryAssociation;)Z\lLDC \"062d0780-f245-462c-8161-34d2b6d83252\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
-entry;
-exit;
-entry -> 23517845
-23517845 -> exit
-23517845[fontcolor="purple", penwidth=3, color="purple"];
-}

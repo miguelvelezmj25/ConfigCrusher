@@ -1,9 +1,0 @@
-digraph <init> {
-node [shape=record];
-108886662 [label="L0\lLINENUMBER 49 L0\lLDC \"175ac465-3077-464b-ad4f-c73da5ea4857\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETSTATIC com/sleepycat/je/log/LogEntryType.LOG_TRACE : Lcom/sleepycat/je/log/LogEntryType;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/log/entry/SingleItemReplicableEntry.\<init\> (Lcom/sleepycat/je/log/LogEntryType;Lcom/sleepycat/je/log/VersionedWriteLoggable;)V\lL1\lLINENUMBER 50 L1\lLDC \"175ac465-3077-464b-ad4f-c73da5ea4857\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL2\l"];
-entry;
-exit;
-entry -> 108886662
-108886662 -> exit
-108886662[fontcolor="purple", penwidth=3, color="purple"];
-}

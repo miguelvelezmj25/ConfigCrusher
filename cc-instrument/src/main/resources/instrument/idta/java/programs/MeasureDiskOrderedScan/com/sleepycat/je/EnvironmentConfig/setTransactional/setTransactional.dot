@@ -1,9 +1,0 @@
-digraph setTransactional {
-node [shape=record];
-827096794 [label="L0\lLINENUMBER 4234 L0\lLDC \"471c7dd0-a4e2-4613-939f-81be69a5bf24\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentConfig.setTransactionalVoid (Z)V\lL1\lLINENUMBER 4235 L1\lALOAD 0\lLDC \"471c7dd0-a4e2-4613-939f-81be69a5bf24\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL2\l"];
-entry;
-exit;
-entry -> 827096794
-827096794 -> exit
-827096794[fontcolor="purple", penwidth=3, color="purple"];
-}

@@ -1,0 +1,20 @@
+digraph mustGenerateVLSN {
+node [shape=record];
+116204452 [label="ICONST_1\lGOTO L2\l"];
+431356052 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.clientVLSN : Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L1\l"];
+481264957 [label="L0\lLINENUMBER 120 L0\lLDC \"712edbb2-89bd-4256-8f39-3f2124f7f2bc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/ReplicationContext.inReplicationStream : Z\lIFEQ L1\l"];
+529062901 [label="L1\lFRAME SAME\lICONST_0\l"];
+1720440873 [label="L2\lFRAME SAME1 I\lLDC \"712edbb2-89bd-4256-8f39-3f2124f7f2bc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+entry;
+exit;
+entry -> 481264957
+116204452 -> 1720440873
+431356052 -> 116204452
+431356052 -> 529062901
+481264957 -> 431356052
+481264957 -> 529062901
+529062901 -> 1720440873
+1720440873 -> exit
+481264957[fontcolor="purple", penwidth=3, color="purple"];
+1720440873[fontcolor="purple", penwidth=3, color="purple"];
+}

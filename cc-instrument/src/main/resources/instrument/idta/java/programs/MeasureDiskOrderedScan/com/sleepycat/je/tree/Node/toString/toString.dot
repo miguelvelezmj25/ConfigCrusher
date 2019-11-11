@@ -1,9 +1,0 @@
-digraph toString {
-node [shape=record];
-542686687 [label="L0\lLINENUMBER 139 L0\lLDC \"8f8435e6-3fe5-4033-9bd3-7c8e3fee8496\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/Node.dumpString (IZ)Ljava/lang/String;\lLDC \"8f8435e6-3fe5-4033-9bd3-7c8e3fee8496\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL1\l"];
-entry;
-exit;
-entry -> 542686687
-542686687 -> exit
-542686687[fontcolor="purple", penwidth=3, color="purple"];
-}

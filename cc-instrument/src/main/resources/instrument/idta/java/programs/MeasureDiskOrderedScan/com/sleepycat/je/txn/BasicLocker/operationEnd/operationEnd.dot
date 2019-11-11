@@ -1,9 +1,0 @@
-digraph operationEnd {
-node [shape=record];
-899225761 [label="L0\lLINENUMBER 244 L0\lLDC \"ba038d94-ea41-4d43-91fd-d7a1affc9582\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/BasicLocker.releaseNonTxnLocks ()V\lL1\lLINENUMBER 247 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/BasicLocker.close ()V\lL2\lLINENUMBER 248 L2\lLDC \"ba038d94-ea41-4d43-91fd-d7a1affc9582\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
-entry;
-exit;
-entry -> 899225761
-899225761 -> exit
-899225761[fontcolor="purple", penwidth=3, color="purple"];
-}

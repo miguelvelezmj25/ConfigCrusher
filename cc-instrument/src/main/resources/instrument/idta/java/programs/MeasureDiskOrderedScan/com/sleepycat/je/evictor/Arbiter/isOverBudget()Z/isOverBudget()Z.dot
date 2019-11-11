@@ -1,0 +1,17 @@
+digraph isOverBudget {
+node [shape=record];
+1792006604 [label="L0\lLINENUMBER 51 L0\lLDC \"4b872648-fe39-4e51-bba0-566e49726145\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Arbiter.memBudgetTotals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lL1\lLINENUMBER 52 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.getMaxMemory ()J\lLCMP\lIFLE L2\l"];
+1256167163 [label="L2\lFRAME SAME\lICONST_0\l"];
+2122189832 [label="ICONST_1\lGOTO L3\l"];
+946756683 [label="L3\lLINENUMBER 51 L3\lFRAME SAME1 I\lLDC \"4b872648-fe39-4e51-bba0-566e49726145\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+entry;
+exit;
+1792006604 -> 1256167163
+1792006604 -> 2122189832
+entry -> 1792006604
+1256167163 -> 946756683
+2122189832 -> 946756683
+946756683 -> exit
+1792006604[fontcolor="purple", penwidth=3, color="purple"];
+946756683[fontcolor="purple", penwidth=3, color="purple"];
+}

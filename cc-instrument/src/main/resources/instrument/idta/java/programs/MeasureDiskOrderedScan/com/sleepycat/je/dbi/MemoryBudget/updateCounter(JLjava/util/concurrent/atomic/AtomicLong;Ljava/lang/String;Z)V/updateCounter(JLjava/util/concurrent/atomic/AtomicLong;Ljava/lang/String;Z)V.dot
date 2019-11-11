@@ -1,0 +1,37 @@
+digraph updateCounter {
+node [shape=record];
+1259136396 [label="L8\lLINENUMBER 1050 L8\lFRAME SAME\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"-------DEC=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 6\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1874324022 [label="L7\lLINENUMBER 1046 L7\lLLOAD 1\lLCONST_0\lLCMP\lIFLE L8\l"];
+760781131 [label="L1\lLINENUMBER 1059 L1\lFRAME CHOP 1\lLDC \"39caf6c8-9637-492b-b416-f19d8e30aa15\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL11\l"];
+1679957476 [label="L6\lLINENUMBER 1055 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L1\l"];
+146117969 [label="ALOAD 0\lLLOAD 6\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.sizeNotNegative (J)Z\lIFNE L4\l"];
+2128363740 [label="L0\lLINENUMBER 1039 L0\lLDC \"39caf6c8-9637-492b-b416-f19d8e30aa15\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lLLOAD 1\lLCONST_0\lLCMP\lIFEQ L1\l"];
+343141795 [label="L4\lLINENUMBER 1045 L4\lFRAME APPEND [J]\lILOAD 5\lIFEQ L6\l"];
+216841295 [label="L9\lLINENUMBER 1047 L9\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"INC-------- =\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 6\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L6\l"];
+223956933 [label="NEW java/lang/AssertionError\lDUP\lALOAD 0\lALOAD 4\lLLOAD 6\lLLOAD 1\lL5\lLINENUMBER 1043 L5\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.makeErrorMessage (Ljava/lang/String;JJ)Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"39caf6c8-9637-492b-b416-f19d8e30aa15\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2027244811 [label="L10\lLINENUMBER 1056 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+1618784944 [label="L2\lLINENUMBER 1040 L2\lALOAD 3\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lLSTORE 6\lL3\lLINENUMBER 1042 L3\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.$assertionsDisabled : Z\lIFNE L4\l"];
+entry;
+exit;
+146117969 -> 343141795
+146117969 -> 223956933
+2128363740 -> 760781131
+2128363740 -> 1618784944
+223956933 -> exit
+2027244811 -> 760781131
+1618784944 -> 146117969
+1618784944 -> 343141795
+entry -> 2128363740
+1259136396 -> 1679957476
+1874324022 -> 1259136396
+1874324022 -> 216841295
+760781131 -> exit
+1679957476 -> 760781131
+1679957476 -> 2027244811
+343141795 -> 1874324022
+343141795 -> 1679957476
+216841295 -> 1679957476
+760781131[fontcolor="purple", penwidth=3, color="purple"];
+2128363740[fontcolor="purple", penwidth=3, color="purple"];
+223956933[fontcolor="purple", penwidth=3, color="purple"];
+}

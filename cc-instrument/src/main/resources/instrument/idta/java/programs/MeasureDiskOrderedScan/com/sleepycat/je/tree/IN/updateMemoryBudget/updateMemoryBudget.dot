@@ -1,9 +1,0 @@
-digraph updateMemoryBudget {
-node [shape=record];
-1528787332 [label="L0\lLINENUMBER 4828 L0\lLDC \"c25ce238-fc6c-408c-ae88-aa56b94a120e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 1\lL1\lLINENUMBER 4829 L1\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInMemoryINs ()Lcom/sleepycat/je/dbi/INList;\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lI2L\lINVOKEVIRTUAL com/sleepycat/je/dbi/INList.memRecalcUpdate (Lcom/sleepycat/je/tree/IN;J)V\lL2\lLINENUMBER 4830 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMemoryBudget ()Lcom/sleepycat/je/dbi/MemoryBudget;\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lI2L\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateTreeMemoryUsage (J)V\lL3\lLINENUMBER 4831 L3\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lL4\lLINENUMBER 4832 L4\lLDC \"c25ce238-fc6c-408c-ae88-aa56b94a120e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
-entry;
-exit;
-entry -> 1528787332
-1528787332 -> exit
-1528787332[fontcolor="purple", penwidth=3, color="purple"];
-}

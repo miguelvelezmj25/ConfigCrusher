@@ -1,9 +1,0 @@
-digraph newVerifyException {
-node [shape=record];
-807766751 [label="L0\lLINENUMBER 408 L0\lLDC \"16a81e5a-592b-422e-a892-63109c6109eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL java/lang/Throwable.toString ()Ljava/lang/String;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/utilint/LogVerifier.newVerifyException (Ljava/lang/String;Ljava/lang/Throwable;)Lcom/sleepycat/je/util/LogVerificationException;\lLDC \"16a81e5a-592b-422e-a892-63109c6109eb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL1\l"];
-entry;
-exit;
-entry -> 807766751
-807766751 -> exit
-807766751[fontcolor="purple", penwidth=3, color="purple"];
-}

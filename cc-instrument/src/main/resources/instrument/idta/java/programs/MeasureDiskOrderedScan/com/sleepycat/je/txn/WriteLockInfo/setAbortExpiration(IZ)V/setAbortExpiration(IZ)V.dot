@@ -1,0 +1,17 @@
+digraph setAbortExpiration {
+node [shape=record];
+824663326 [label="L0\lLINENUMBER 163 L0\lLDC \"06fc24e5-9f80-4a49-921c-77cbd5f967cb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 2\lIFEQ L1\l"];
+1711507945 [label="ILOAD 1\lINEG\lGOTO L2\l"];
+1822188092 [label="L1\lFRAME SAME1 com/sleepycat/je/txn/WriteLockInfo\lILOAD 1\l"];
+1930278831 [label="L2\lFRAME FULL [com/sleepycat/je/txn/WriteLockInfo I I] [com/sleepycat/je/txn/WriteLockInfo I]\lPUTFIELD com/sleepycat/je/txn/WriteLockInfo.abortExpiration : I\lL3\lLINENUMBER 164 L3\lLDC \"06fc24e5-9f80-4a49-921c-77cbd5f967cb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
+entry;
+exit;
+entry -> 824663326
+824663326 -> 1711507945
+824663326 -> 1822188092
+1711507945 -> 1930278831
+1822188092 -> 1930278831
+1930278831 -> exit
+824663326[fontcolor="purple", penwidth=3, color="purple"];
+1930278831[fontcolor="purple", penwidth=3, color="purple"];
+}

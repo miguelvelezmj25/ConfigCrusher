@@ -1,9 +1,0 @@
-digraph compareTo {
-node [shape=record];
-1898714722 [label="L0\lLINENUMBER 31 L0\lLDC \"e4978223-7a8e-409b-bd5b-cf2c79ba5461\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lCHECKCAST com/sleepycat/je/dbi/DatabaseId\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseId.compareTo (Lcom/sleepycat/je/dbi/DatabaseId;)I\lLDC \"e4978223-7a8e-409b-bd5b-cf2c79ba5461\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL1\l"];
-entry;
-exit;
-entry -> 1898714722
-1898714722 -> exit
-1898714722[fontcolor="purple", penwidth=3, color="purple"];
-}

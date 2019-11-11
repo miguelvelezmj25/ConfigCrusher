@@ -1,9 +1,0 @@
-digraph copyHandlePropsTo {
-node [shape=record];
-1046732155 [label="L0\lLINENUMBER 674 L0\lLDC \"e43f7456-2173-407a-92fc-f97ca96f84bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.txnNoSync : Z\lPUTFIELD com/sleepycat/je/EnvironmentMutableConfig.txnNoSync : Z\lL1\lLINENUMBER 675 L1\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.txnWriteNoSync : Z\lPUTFIELD com/sleepycat/je/EnvironmentMutableConfig.txnWriteNoSync : Z\lL2\lLINENUMBER 676 L2\lALOAD 1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentMutableConfig.getDurability ()Lcom/sleepycat/je/Durability;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentMutableConfig.setDurability (Lcom/sleepycat/je/Durability;)Lcom/sleepycat/je/EnvironmentMutableConfig;\lPOP\lL3\lLINENUMBER 677 L3\lLDC \"e43f7456-2173-407a-92fc-f97ca96f84bd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
-entry;
-exit;
-entry -> 1046732155
-1046732155 -> exit
-1046732155[fontcolor="purple", penwidth=3, color="purple"];
-}

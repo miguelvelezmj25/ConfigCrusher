@@ -1,0 +1,35 @@
+digraph writeToLog {
+node [shape=record];
+1791139259 [label="L5\lLINENUMBER 390 L5\lILOAD 2\lBIPUSH -128\lIOR\lI2B\lISTORE 2\lGOTO L6\l"];
+1749849914 [label="L11\lLINENUMBER 398 L11\lILOAD 2\lBIPUSH 8\lIOR\lI2B\lISTORE 2\l"];
+1888138788 [label="L8\lLINENUMBER 397 L8\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L10\l"];
+698861449 [label="L15\lLINENUMBER 416 L15\lFRAME SAME\lLDC \"8683a1b7-3b46-41d5-bc9f-ac9222149e05\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL17\l"];
+1104154461 [label="L9\lLINENUMBER 395 L9\lILOAD 2\lBIPUSH 32\lIOR\lI2B\lISTORE 2\l"];
+1057055299 [label="L7\lLINENUMBER 392 L7\lILOAD 2\lBIPUSH 64\lIOR\lI2B\lISTORE 2\l"];
+1854144502 [label="L0\lLINENUMBER 384 L0\lLDC \"8683a1b7-3b46-41d5-bc9f-ac9222149e05\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lICONST_4\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\lL1\lLINENUMBER 385 L1\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.entryType : B\lINVOKEVIRTUAL java/nio/ByteBuffer.put (B)Ljava/nio/ByteBuffer;\lPOP\lL2\lLINENUMBER 388 L2\lICONST_0\lISTORE 2\lL3\lLINENUMBER 389 L3\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lGETSTATIC com/sleepycat/je/log/Provisional.YES : Lcom/sleepycat/je/log/Provisional;\lIF_ACMPNE L4\l"];
+205094671 [label="L16\lLINENUMBER 414 L16\lALOAD 1\lALOAD 1\lINVOKEVIRTUAL java/nio/ByteBuffer.position ()I\lBIPUSH 8\lIADD\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\l"];
+1300202121 [label="L4\lLINENUMBER 391 L4\lFRAME APPEND [I]\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lGETSTATIC com/sleepycat/je/log/Provisional.BEFORE_CKPT_END : Lcom/sleepycat/je/log/Provisional;\lIF_ACMPNE L6\l"];
+1309431867 [label="L6\lLINENUMBER 394 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\lIFEQ L8\l"];
+1550574990 [label="L10\lLINENUMBER 400 L10\lFRAME SAME\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL java/nio/ByteBuffer.put (B)Ljava/nio/ByteBuffer;\lPOP\lL12\lLINENUMBER 406 L12\lALOAD 1\lBIPUSH 10\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\lL13\lLINENUMBER 407 L13\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.itemSize : I\lINVOKESTATIC com/sleepycat/je/log/LogUtils.writeInt (Ljava/nio/ByteBuffer;I)V\lL14\lLINENUMBER 413 L14\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L15\l"];
+entry;
+exit;
+1791139259 -> 1309431867
+1749849914 -> 1550574990
+1888138788 -> 1749849914
+1888138788 -> 1550574990
+1104154461 -> 1888138788
+1057055299 -> 1309431867
+1550574990 -> 698861449
+1550574990 -> 205094671
+entry -> 1854144502
+698861449 -> exit
+1854144502 -> 1791139259
+1854144502 -> 1300202121
+205094671 -> 698861449
+1300202121 -> 1057055299
+1300202121 -> 1309431867
+1309431867 -> 1888138788
+1309431867 -> 1104154461
+698861449[fontcolor="purple", penwidth=3, color="purple"];
+1854144502[fontcolor="purple", penwidth=3, color="purple"];
+}

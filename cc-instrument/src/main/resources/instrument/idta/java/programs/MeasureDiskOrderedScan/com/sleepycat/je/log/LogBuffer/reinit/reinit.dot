@@ -1,9 +1,0 @@
-digraph reinit {
-node [shape=record];
-575163914 [label="L0\lLINENUMBER 115 L0\lLDC \"2378d60b-a479-420c-a699-ed656b226702\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBuffer.readLatch : Lcom/sleepycat/je/latch/Latch;\lINVOKEINTERFACE com/sleepycat/je/latch/Latch.acquireExclusive ()V\lL1\lLINENUMBER 116 L1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBuffer.buffer : Ljava/nio/ByteBuffer;\lINVOKEVIRTUAL java/nio/ByteBuffer.clear ()Ljava/nio/Buffer;\lPOP\lL2\lLINENUMBER 117 L2\lALOAD 0\lLDC -1\lPUTFIELD com/sleepycat/je/log/LogBuffer.firstLsn : J\lL3\lLINENUMBER 118 L3\lALOAD 0\lLDC -1\lPUTFIELD com/sleepycat/je/log/LogBuffer.lastLsn : J\lL4\lLINENUMBER 119 L4\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogBuffer.rewriteAllowed : Z\lL5\lLINENUMBER 120 L5\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBuffer.writePinCount : Ljava/util/concurrent/atomic/AtomicInteger;\lICONST_0\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.set (I)V\lL6\lLINENUMBER 121 L6\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBuffer.readLatch : Lcom/sleepycat/je/latch/Latch;\lINVOKEINTERFACE com/sleepycat/je/latch/Latch.release ()V\lL7\lLINENUMBER 122 L7\lLDC \"2378d60b-a479-420c-a699-ed656b226702\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL8\l"];
-entry;
-exit;
-entry -> 575163914
-575163914 -> exit
-575163914[fontcolor="purple", penwidth=3, color="purple"];
-}

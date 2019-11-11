@@ -1,9 +1,0 @@
-digraph close {
-node [shape=record];
-1761589354 [label="L0\lLINENUMBER 300 L0\lLDC \"5f4e8d26-c10f-469e-8de1-1bf22e500293\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lINVOKEVIRTUAL com/sleepycat/je/Database.close ()V\lL1\lLINENUMBER 301 L1\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.env : Lcom/sleepycat/je/Environment;\lINVOKEVIRTUAL com/sleepycat/je/Environment.close ()V\lL2\lLINENUMBER 302 L2\lLDC \"5f4e8d26-c10f-469e-8de1-1bf22e500293\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
-entry;
-exit;
-entry -> 1761589354
-1761589354 -> exit
-1761589354[fontcolor="purple", penwidth=3, color="purple"];
-}

@@ -1,9 +1,0 @@
-digraph addLsn {
-node [shape=record];
-761742160 [label="L0\lLINENUMBER 411 L0\lLDC \"c70e6833-4410-438f-9f0e-1c09d11d72a8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.lsns : Ljava/util/HashSet;\lLLOAD 2\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEVIRTUAL java/util/HashSet.add (Ljava/lang/Object;)Z\lPOP\lL1\lLINENUMBER 413 L1\lGETSTATIC com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.LSN_MEM_OVERHEAD : I\lISTORE 5\lL2\lLINENUMBER 414 L2\lALOAD 1\lILOAD 5\lI2L\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$200 (Lcom/sleepycat/je/dbi/DiskOrderedScanner;J)V\lL3\lLINENUMBER 422 L3\lILOAD 4\lISTORE 6\lL4\lLINENUMBER 425 L4\lIINC 6 8\lL5\lLINENUMBER 431 L5\lILOAD 6\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$300 ()I\lIADD\lISTORE 6\lL6\lLINENUMBER 433 L6\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.memoryUsage : J\lILOAD 5\lILOAD 6\lIADD\lI2L\lLADD\lPUTFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.memoryUsage : J\lL7\lLINENUMBER 435 L7\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.memoryUsage : J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DiskOrderedScanner$DeferredLsnsBatch.lsns : Ljava/util/HashSet;\lINVOKEVIRTUAL java/util/HashSet.size ()I\lI2L\lINVOKESTATIC com/sleepycat/je/dbi/DiskOrderedScanner.access$400 (Lcom/sleepycat/je/dbi/DiskOrderedScanner;JJ)Z\lLDC \"c70e6833-4410-438f-9f0e-1c09d11d72a8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL8\l"];
-entry;
-exit;
-entry -> 761742160
-761742160 -> exit
-761742160[fontcolor="purple", penwidth=3, color="purple"];
-}

@@ -1,9 +1,0 @@
-digraph criticalEviction {
-node [shape=record];
-686554711 [label="L0\lLINENUMBER 3013 L0\lLDC \"43feedfe-4b1a-485f-a1a3-7646dea2ddd6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doCriticalEviction (Z)V\lL1\lLINENUMBER 3014 L1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.doCriticalEviction (Z)V\lL2\lLINENUMBER 3015 L2\lLDC \"43feedfe-4b1a-485f-a1a3-7646dea2ddd6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
-entry;
-exit;
-entry -> 686554711
-686554711 -> exit
-686554711[fontcolor="purple", penwidth=3, color="purple"];
-}

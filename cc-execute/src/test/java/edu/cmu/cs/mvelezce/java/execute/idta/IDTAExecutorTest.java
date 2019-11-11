@@ -34,9 +34,7 @@ public class IDTAExecutorTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
-
     configurations.clear();
-
     configurations.add(new HashSet<>());
 
     Executor executor = new IDTAExecutor(programName, configurations);

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.region.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
@@ -22,6 +23,18 @@ public class IDTACountRegionsPerMethodAnalysisTest {
 
     BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
         new IDTACountRegionsPerMethodAnalysis(regionsToConstraints);
+    Map<String, Integer> methodsToRegionCounts = counter.analyze();
+    counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
+  }
+
+  @Test
+  public void vanillaBerkeleyDB() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
+            new IDTACountRegionsPerMethodAnalysis(regionsToConstraints);
     Map<String, Integer> methodsToRegionCounts = counter.analyze();
     counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
   }

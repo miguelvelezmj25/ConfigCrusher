@@ -36,6 +36,7 @@ public abstract class BaseCountRegionsPerMethodAnalysis<T> {
     return region.getRegionPackage()
         + "."
         + region.getRegionClass()
+        + "."
         + region.getRegionMethodSignature();
   }
 

@@ -7,6 +7,8 @@ import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.BaseCountRegionsPerMethodAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.instrument.idta.IDTATimerInstrumenter;
+import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -34,7 +36,20 @@ public class IDTACountRegionsPerMethodAnalysisTest {
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
-            new IDTACountRegionsPerMethodAnalysis(regionsToConstraints);
+        new IDTACountRegionsPerMethodAnalysis(regionsToConstraints);
+    Map<String, Integer> methodsToRegionCounts = counter.analyze();
+    counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
+  }
+
+  @Test
+  public void expandedBerkeleyDB() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
+        instrumenter.getProcessedRegionsToData();
+
+    BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
+        new IDTACountRegionsPerMethodAnalysis(regionsToConstraints);
     Map<String, Integer> methodsToRegionCounts = counter.analyze();
     counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
   }

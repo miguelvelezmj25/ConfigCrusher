@@ -1,20 +1,20 @@
 digraph refreshTreeAdminMemoryUsage {
 node [shape=record];
-564000176 [label="L0\lLINENUMBER 951 L0\lLDC \"1af9f7e9-20d6-47be-8f9d-2db8766ccb5e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeAdminMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 952 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 954 L2\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_TREEADMIN : Z\lIFEQ L3\l"];
-204102266 [label="L5\lLINENUMBER 960 L5\lFRAME SAME\lLDC \"1af9f7e9-20d6-47be-8f9d-2db8766ccb5e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
-1095911456 [label="L4\lLINENUMBER 955 L4\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"RESET = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-90083251 [label="L3\lLINENUMBER 957 L3\lFRAME APPEND [J J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L5\l"];
-1112804922 [label="L6\lLINENUMBER 958 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+892567300 [label="L5\lLINENUMBER 960 L5\lFRAME SAME\lLDC \"7f606706-52e5-46ed-870f-b77117b1cab3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+987380730 [label="L4\lLINENUMBER 955 L4\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"RESET = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+580964551 [label="L0\lLINENUMBER 951 L0\lLDC \"7f606706-52e5-46ed-870f-b77117b1cab3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeAdminMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 952 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 954 L2\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_TREEADMIN : Z\lIFEQ L3\l"];
+296855437 [label="L6\lLINENUMBER 958 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+738984815 [label="L3\lLINENUMBER 957 L3\lFRAME APPEND [J J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L5\l"];
 entry;
 exit;
-entry -> 564000176
-564000176 -> 1095911456
-564000176 -> 90083251
-204102266 -> exit
-1095911456 -> 90083251
-90083251 -> 204102266
-90083251 -> 1112804922
-1112804922 -> 204102266
-564000176[fontcolor="purple", penwidth=3, color="purple"];
-204102266[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 580964551
+892567300 -> exit
+987380730 -> 738984815
+580964551 -> 987380730
+580964551 -> 738984815
+296855437 -> 892567300
+738984815 -> 892567300
+738984815 -> 296855437
+892567300[fontcolor="purple", penwidth=3, color="purple"];
+580964551[fontcolor="purple", penwidth=3, color="purple"];
 }

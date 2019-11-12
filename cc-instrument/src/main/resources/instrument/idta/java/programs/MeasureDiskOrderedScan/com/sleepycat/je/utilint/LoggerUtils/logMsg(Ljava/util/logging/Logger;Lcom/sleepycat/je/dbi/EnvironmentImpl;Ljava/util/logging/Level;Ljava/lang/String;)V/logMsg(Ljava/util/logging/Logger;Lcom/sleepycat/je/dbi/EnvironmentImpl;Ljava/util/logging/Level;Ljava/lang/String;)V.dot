@@ -1,0 +1,26 @@
+digraph logMsg {
+node [shape=record];
+929337100 [label="L5\lLINENUMBER 360 L5\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+1225842448 [label="L1\lLINENUMBER 366 L1\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL6\lLINENUMBER 367 L6\lGOTO L7\l"];
+460008724 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 359 L4\lLDC \"2c1f5932-7c3a-4fe4-b6e9-0e5c65d74653\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lIFNULL L0\l"];
+1962331104 [label="L3\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL8\lLINENUMBER 367 L8\lALOAD 4\lLDC \"2c1f5932-7c3a-4fe4-b6e9-0e5c65d74653\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+2026061487 [label="L7\lLINENUMBER 368 L7\lFRAME SAME\lLDC \"2c1f5932-7c3a-4fe4-b6e9-0e5c65d74653\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL9\l"];
+894358505 [label="L0\lLINENUMBER 363 L0\lFRAME SAME\lALOAD 0\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL java/util/logging/Logger.log (Ljava/util/logging/Level;Ljava/lang/String;)V\l"];
+917980079 [label="L2\lLINENUMBER 366 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
+entry;
+exit;
+929337100 -> 894358505
+entry -> 460008724
+1225842448 -> 2026061487
+460008724 -> 929337100
+460008724 -> 894358505
+1962331104 -> exit
+2026061487 -> exit
+894358505 -> 1225842448
+894358505 -> 917980079 [style=dashed, color=red]
+917980079 -> 1962331104
+917980079 -> 917980079 [style=dashed, color=red]
+460008724[fontcolor="purple", penwidth=3, color="purple"];
+1962331104[fontcolor="purple", penwidth=3, color="purple"];
+2026061487[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,17 +1,17 @@
 digraph updateCacheUsage {
 node [shape=record];
-2128614699 [label="L1\lFRAME SAME\lICONST_0\l"];
-1279230458 [label="L0\lLINENUMBER 1312 L0\lLDC \"c54d5a91-a0e2-4c82-96dc-5552422e53df\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.parent : Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLocalCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
-1616191673 [label="L2\lFRAME SAME1 I\lLDC \"c54d5a91-a0e2-4c82-96dc-5552422e53df\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
-1169862446 [label="ICONST_1\lGOTO L2\l"];
+275864487 [label="L0\lLINENUMBER 1312 L0\lLDC \"77c27788-41a1-42e0-ac75-862056d9ae8c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.parent : Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLocalCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+1194396506 [label="ICONST_1\lGOTO L2\l"];
+1691252003 [label="L1\lFRAME SAME\lICONST_0\l"];
+1040021220 [label="L2\lFRAME SAME1 I\lLDC \"77c27788-41a1-42e0-ac75-862056d9ae8c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
 entry;
 exit;
-entry -> 1279230458
-2128614699 -> 1616191673
-1279230458 -> 2128614699
-1279230458 -> 1169862446
-1616191673 -> exit
-1169862446 -> 1616191673
-1279230458[fontcolor="purple", penwidth=3, color="purple"];
-1616191673[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 275864487
+275864487 -> 1194396506
+275864487 -> 1691252003
+1194396506 -> 1040021220
+1691252003 -> 1040021220
+1040021220 -> exit
+275864487[fontcolor="purple", penwidth=3, color="purple"];
+1040021220[fontcolor="purple", penwidth=3, color="purple"];
 }

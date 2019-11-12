@@ -1,0 +1,22 @@
+digraph getLsn {
+node [shape=record];
+91908462 [label="L1\lLINENUMBER 1765 L1\lFRAME CHOP 2\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryLsnLongArray : [J\lILOAD 1\lLALOAD\lLDC \"5acff3bf-bbc5-4fad-bc9f-cf9ac3353fcd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\lL9\l"];
+1948177557 [label="L2\lLINENUMBER 1755 L2\lILOAD 1\lICONST_2\lISHL\lISTORE 2\lL3\lLINENUMBER 1756 L3\lALOAD 0\lILOAD 2\lINVOKESPECIAL com/sleepycat/je/tree/IN.getFileOffset (I)I\lISTORE 3\lL4\lLINENUMBER 1757 L4\lILOAD 3\lICONST_M1\lIF_ICMPNE L5\l"];
+162585480 [label="L0\lLINENUMBER 1754 L0\lLDC \"5acff3bf-bbc5-4fad-bc9f-cf9ac3353fcd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryLsnLongArray : [J\lIFNONNULL L1\l"];
+2018491889 [label="L6\lLINENUMBER 1758 L6\lLDC -1\lLDC \"5acff3bf-bbc5-4fad-bc9f-cf9ac3353fcd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1999390187 [label="L5\lLINENUMBER 1760 L5\lFRAME APPEND [I I]\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.baseFileNumber : J\lALOAD 0\lILOAD 2\lL7\lLINENUMBER 1761 L7\lINVOKESPECIAL com/sleepycat/je/tree/IN.getFileNumberOffset (I)B\lI2L\lLADD\lILOAD 3\lL8\lLINENUMBER 1760 L8\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.makeLsn (JI)J\lLDC \"5acff3bf-bbc5-4fad-bc9f-cf9ac3353fcd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lLRETURN\l"];
+entry;
+exit;
+91908462 -> exit
+entry -> 162585480
+1948177557 -> 2018491889
+1948177557 -> 1999390187
+162585480 -> 91908462
+162585480 -> 1948177557
+2018491889 -> exit
+1999390187 -> exit
+91908462[fontcolor="purple", penwidth=3, color="purple"];
+162585480[fontcolor="purple", penwidth=3, color="purple"];
+2018491889[fontcolor="purple", penwidth=3, color="purple"];
+1999390187[fontcolor="purple", penwidth=3, color="purple"];
+}

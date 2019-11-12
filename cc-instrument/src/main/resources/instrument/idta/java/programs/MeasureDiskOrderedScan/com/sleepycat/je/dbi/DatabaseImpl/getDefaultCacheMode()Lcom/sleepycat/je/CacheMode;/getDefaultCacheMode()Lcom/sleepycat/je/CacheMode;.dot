@@ -1,0 +1,22 @@
+digraph getDefaultCacheMode {
+node [shape=record];
+1066641893 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lLDC \"79228d45-809c-4367-b99d-23b258f8cc6e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+293337632 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lLDC \"79228d45-809c-4367-b99d-23b258f8cc6e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL5\l"];
+263490398 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
+1102966637 [label="L0\lLINENUMBER 803 L0\lLDC \"79228d45-809c-4367-b99d-23b258f8cc6e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
+1640473739 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lLDC \"79228d45-809c-4367-b99d-23b258f8cc6e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 1102966637
+1066641893 -> exit
+293337632 -> exit
+263490398 -> 1066641893
+263490398 -> 293337632
+1102966637 -> 263490398
+1102966637 -> 1640473739
+1640473739 -> exit
+1066641893[fontcolor="purple", penwidth=3, color="purple"];
+293337632[fontcolor="purple", penwidth=3, color="purple"];
+1102966637[fontcolor="purple", penwidth=3, color="purple"];
+1640473739[fontcolor="purple", penwidth=3, color="purple"];
+}

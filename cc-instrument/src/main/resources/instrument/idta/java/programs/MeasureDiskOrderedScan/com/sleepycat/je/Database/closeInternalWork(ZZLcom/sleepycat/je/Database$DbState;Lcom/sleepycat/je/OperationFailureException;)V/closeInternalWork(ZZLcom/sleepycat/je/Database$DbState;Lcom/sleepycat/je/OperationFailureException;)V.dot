@@ -1,0 +1,158 @@
+digraph closeInternalWork {
+node [shape=record];
+1416699397 [label="L39\lLINENUMBER 741 L39\lFRAME SAME\lALOAD 3\lGETSTATIC com/sleepycat/je/Database$DbState.CLOSED : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L41\l"];
+1877767208 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.simpleAssocSecondaries : Ljava/util/Collection;\lL27\lLINENUMBER 703 L27\lINVOKEINTERFACE java/util/Collection.size ()I\lIFLE L26\l"];
+788287286 [label="L3\lLINENUMBER 664 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.CLOSED : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPEQ L13\l"];
+885120249 [label="L13\lLINENUMBER 666 L13\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder N T com/sleepycat/je/Database] []\lALOAD 8\lMONITOREXIT\l"];
+1497254991 [label="L15\lLINENUMBER 676 L15\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder N com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/Database] []\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L16\l"];
+1109434692 [label="ALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.noteWriteHandleClose ()I\lIFNE L43\l"];
+1994754481 [label="L4\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+1459183110 [label="L48\lLINENUMBER 772 L48\lFRAME SAME\lALOAD 6\lIFNULL L51\l"];
+584188116 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1226076712 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lIFNONNULL L16\l"];
+446866519 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+926813270 [label="L20\lLINENUMBER 717 L20\lFRAME SAME\lALOAD 0\lGETSTATIC java/util/logging/Level.FINEST : Ljava/util/logging/Level;\lLDC \"Database.close: \"\lACONST_NULL\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/Database.trace (Ljava/util/logging/Level;Ljava/lang/String;Lcom/sleepycat/je/Transaction;Ljava/lang/Object;)V\lL35\lLINENUMBER 719 L35\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.removeReferringAssociations ()V\lL36\lLINENUMBER 721 L36\lALOAD 7\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.removeReferringHandle (Lcom/sleepycat/je/Database;)V\lL37\lLINENUMBER 722 L37\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.releaseDb (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lL38\lLINENUMBER 732 L38\lALOAD 3\lGETSTATIC com/sleepycat/je/Database$DbState.PREEMPTED : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L39\l"];
+1293400000 [label="L21\lLINENUMBER 697 L21\lALOAD 0\lGETFIELD com/sleepycat/je/Database.openCursors : Ljava/util/concurrent/atomic/AtomicInteger;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.get ()I\lIFEQ L22\l"];
+702838073 [label="L51\lLINENUMBER 775 L51\lFRAME SAME\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL53\l"];
+460420984 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/RuntimeException\lTRYCATCHBLOCK L3 L4 L5 null\lTRYCATCHBLOCK L6 L7 L5 null\lTRYCATCHBLOCK L5 L8 L5 null\lL9\lLINENUMBER 642 L9\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L10\l"];
+744087463 [label="L41\lLINENUMBER 751 L41\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder N com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/Database com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 0\lGETFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/txn/HandleLocker.operationEnd (Z)V\l"];
+286586849 [label="L49\lLINENUMBER 768 L49\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Database closed while still referenced by other handles.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 5\lL50\lLINENUMBER 770 L50\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1371802762 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.PREEMPTED : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPEQ L13\l"];
+1717027530 [label="L0\lLINENUMBER 744 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lALOAD 7\lINVOKESTATIC com/sleepycat/je/dbi/TriggerManager.runCloseTriggers (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/dbi/DatabaseImpl;)V\l"];
+531986338 [label="L26\lLINENUMBER 708 L26\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Database.foreignKeySecondaries : Ljava/util/Collection;\lIFNULL L20\l"];
+673067401 [label="L7\lGOTO L46\l"];
+1096419939 [label="L52\lLINENUMBER 773 L52\lALOAD 6\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1707865912 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.INVALID : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPEQ L13\l"];
+632196783 [label="ALOAD 3\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L10\l"];
+687309276 [label="L22\lLINENUMBER 702 L22\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 0\lGETFIELD com/sleepycat/je/Database.simpleAssocSecondaries : Ljava/util/Collection;\lIFNULL L26\l"];
+2028048101 [label="L28\lLINENUMBER 704 L28\lALOAD 5\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.simpleAssocSecondaries : Ljava/util/Collection;\lL29\lLINENUMBER 705 L29\lINVOKEINTERFACE java/util/Collection.size ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" associated SecondaryDatabases.\"\lL30\lLINENUMBER 706 L30\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
+543619648 [label="L45\lLINENUMBER 753 L45\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder java/lang/RuntimeException com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/Database com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 8\lMONITOREXIT\l"];
+2073683031 [label="L10\lLINENUMBER 644 L10\lFRAME SAME\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lASTORE 5\lL11\lLINENUMBER 645 L11\lACONST_NULL\lASTORE 6\lL12\lLINENUMBER 648 L12\lALOAD 0\lDUP\lASTORE 8\lMONITORENTER\l"];
+1800902720 [label="L5\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder java/lang/RuntimeException T com/sleepycat/je/Database] [java/lang/Throwable]\lASTORE 11\lALOAD 8\lMONITOREXIT\l"];
+1139525773 [label="L1\lLINENUMBER 747 L1\lGOTO L43\l"];
+165425472 [label="L46\lLINENUMBER 764 L46\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder java/lang/RuntimeException com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/Database com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 7\lILOAD 1\lILOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.handleClosed (ZZ)V\lL47\lLINENUMBER 767 L47\lALOAD 5\lINVOKEVIRTUAL java/lang/StringBuilder.length ()I\lIFLE L48\l"];
+1624075737 [label="L32\lLINENUMBER 710 L32\lALOAD 5\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.foreignKeySecondaries : Ljava/util/Collection;\lL33\lLINENUMBER 711 L33\lINVOKEINTERFACE java/util/Collection.size ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" associated foreign key SecondaryDatabases.\"\lL34\lLINENUMBER 712 L34\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
+1812732228 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.foreignKeySecondaries : Ljava/util/Collection;\lL31\lLINENUMBER 709 L31\lINVOKEINTERFACE java/util/Collection.size ()I\lIFLE L20\l"];
+661773392 [label="L42\lLINENUMBER 742 L42\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.isWritable ()Z\lIFEQ L43\l"];
+1663201990 [label="ALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lIFNONNULL L6\l"];
+304603855 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+662178168 [label="L23\lLINENUMBER 698 L23\lALOAD 5\lLDC \" \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.openCursors : Ljava/util/concurrent/atomic/AtomicInteger;\lL24\lLINENUMBER 699 L24\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.get ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" open cursors.\"\lL25\lLINENUMBER 700 L25\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lPOP\l"];
+1919720762 [label="L8\lALOAD 11\lLDC \"0cc02393-e3e0-45a3-9df4-567326eb5f5a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1042687293 [label="L2\lLINENUMBER 745 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 10\lL44\lLINENUMBER 746 L44\lALOAD 10\lASTORE 6\l"];
+546514120 [label="L40\lLINENUMBER 733 L40\lALOAD 0\lGETFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/HandleLocker.setOnlyAbortable (Lcom/sleepycat/je/OperationFailureException;)V\l"];
+1691830234 [label="L6\lLINENUMBER 674 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 7\lL14\lLINENUMBER 675 L14\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L15\l"];
+2066513805 [label="L43\lLINENUMBER 749 L43\lFRAME FULL [com/sleepycat/je/Database I I com/sleepycat/je/Database$DbState com/sleepycat/je/OperationFailureException java/lang/StringBuilder java/lang/RuntimeException com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/Database com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 0\lGETFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/txn/HandleLocker.operationEnd (Z)V\lGOTO L45\l"];
+1677066855 [label="ALOAD 7\lIFNONNULL L15\l"];
+1659045391 [label="L16\lLINENUMBER 683 L16\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.checkEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 9\lL17\lLINENUMBER 689 L17\lALOAD 0\lALOAD 3\lPUTFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lL18\lLINENUMBER 690 L18\lALOAD 0\lALOAD 4\lPUTFIELD com/sleepycat/je/Database.preemptedCause : Lcom/sleepycat/je/OperationFailureException;\lL19\lLINENUMBER 696 L19\lALOAD 3\lGETSTATIC com/sleepycat/je/Database$DbState.CLOSED : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L20\l"];
+entry;
+exit;
+1416699397 -> 661773392
+1416699397 -> 744087463
+1416699397 -> 1800902720 [style=dashed, color=red]
+1877767208 -> 2028048101
+1877767208 -> 1800902720 [style=dashed, color=red]
+1877767208 -> 531986338
+788287286 -> 1707865912
+788287286 -> 885120249
+788287286 -> 1800902720 [style=dashed, color=red]
+885120249 -> 1994754481
+885120249 -> 1800902720 [style=dashed, color=red]
+1497254991 -> 1800902720 [style=dashed, color=red]
+1497254991 -> 1659045391
+1497254991 -> 1226076712
+1109434692 -> 1800902720 [style=dashed, color=red]
+1109434692 -> 2066513805
+1109434692 -> 1717027530
+1994754481 -> exit
+1459183110 -> 702838073
+1459183110 -> 1096419939
+584188116 -> exit
+1226076712 -> 1800902720 [style=dashed, color=red]
+1226076712 -> 1659045391
+1226076712 -> 446866519
+446866519 -> exit
+446866519 -> 1800902720 [style=dashed, color=red]
+926813270 -> 1416699397
+926813270 -> 546514120
+926813270 -> 1800902720 [style=dashed, color=red]
+1293400000 -> 687309276
+1293400000 -> 662178168
+1293400000 -> 1800902720 [style=dashed, color=red]
+702838073 -> exit
+460420984 -> 632196783
+460420984 -> 2073683031
+744087463 -> 543619648
+744087463 -> 1800902720 [style=dashed, color=red]
+286586849 -> exit
+1371802762 -> 885120249
+1371802762 -> 1663201990
+1371802762 -> 1800902720 [style=dashed, color=red]
+1717027530 -> 1139525773
+1717027530 -> 1042687293 [style=dashed, color=red]
+1717027530 -> 1800902720 [style=dashed, color=red]
+531986338 -> 1812732228
+531986338 -> 1800902720 [style=dashed, color=red]
+531986338 -> 926813270
+673067401 -> 165425472
+1096419939 -> exit
+1707865912 -> 885120249
+1707865912 -> 1371802762
+1707865912 -> 1800902720 [style=dashed, color=red]
+632196783 -> 2073683031
+632196783 -> 584188116
+687309276 -> 1877767208
+687309276 -> 1800902720 [style=dashed, color=red]
+687309276 -> 531986338
+2028048101 -> 1800902720 [style=dashed, color=red]
+2028048101 -> 531986338
+543619648 -> 1800902720 [style=dashed, color=red]
+543619648 -> 673067401
+2073683031 -> 788287286
+1800902720 -> 1919720762
+1800902720 -> 1800902720 [style=dashed, color=red]
+1139525773 -> 1800902720 [style=dashed, color=red]
+1139525773 -> 2066513805
+165425472 -> 286586849
+165425472 -> 1459183110
+entry -> 460420984
+1624075737 -> 1800902720 [style=dashed, color=red]
+1624075737 -> 926813270
+1812732228 -> 1624075737
+1812732228 -> 1800902720 [style=dashed, color=red]
+1812732228 -> 926813270
+661773392 -> 1109434692
+661773392 -> 1800902720 [style=dashed, color=red]
+661773392 -> 2066513805
+1663201990 -> 885120249
+1663201990 -> 1800902720 [style=dashed, color=red]
+1663201990 -> 1691830234
+304603855 -> exit
+304603855 -> 1800902720 [style=dashed, color=red]
+662178168 -> 687309276
+662178168 -> 1800902720 [style=dashed, color=red]
+1919720762 -> exit
+1042687293 -> 1800902720 [style=dashed, color=red]
+1042687293 -> 2066513805
+546514120 -> 1416699397
+546514120 -> 1800902720 [style=dashed, color=red]
+1691830234 -> 1497254991
+1691830234 -> 1800902720 [style=dashed, color=red]
+1691830234 -> 1677066855
+2066513805 -> 543619648
+2066513805 -> 1800902720 [style=dashed, color=red]
+1677066855 -> 1497254991
+1677066855 -> 304603855
+1677066855 -> 1800902720 [style=dashed, color=red]
+1659045391 -> 1293400000
+1659045391 -> 1800902720 [style=dashed, color=red]
+1659045391 -> 926813270
+702838073[fontcolor="purple", penwidth=3, color="purple"];
+460420984[fontcolor="purple", penwidth=3, color="purple"];
+286586849[fontcolor="purple", penwidth=3, color="purple"];
+304603855[fontcolor="purple", penwidth=3, color="purple"];
+1919720762[fontcolor="purple", penwidth=3, color="purple"];
+1994754481[fontcolor="purple", penwidth=3, color="purple"];
+584188116[fontcolor="purple", penwidth=3, color="purple"];
+446866519[fontcolor="purple", penwidth=3, color="purple"];
+1096419939[fontcolor="purple", penwidth=3, color="purple"];
+}

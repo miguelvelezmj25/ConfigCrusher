@@ -1,0 +1,16 @@
+digraph checkOpen {
+node [shape=record];
+507657993 [label="L0\lLINENUMBER 1759 L0\lLDC \"793ac9b3-15d4-4931-9407-77c230b97ec2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkIfInvalid ()V\lL1\lLINENUMBER 1766 L1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.CLOSED : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPNE L2\l"];
+1742205972 [label="L3\lLINENUMBER 1767 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Attempt to use a Environment that has been closed.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lLDC \"793ac9b3-15d4-4931-9407-77c230b97ec2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+442263053 [label="L2\lLINENUMBER 1770 L2\lFRAME SAME\lLDC \"793ac9b3-15d4-4931-9407-77c230b97ec2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL4\l"];
+entry;
+exit;
+entry -> 507657993
+507657993 -> 1742205972
+507657993 -> 442263053
+1742205972 -> exit
+442263053 -> exit
+507657993[fontcolor="purple", penwidth=3, color="purple"];
+1742205972[fontcolor="purple", penwidth=3, color="purple"];
+442263053[fontcolor="purple", penwidth=3, color="purple"];
+}

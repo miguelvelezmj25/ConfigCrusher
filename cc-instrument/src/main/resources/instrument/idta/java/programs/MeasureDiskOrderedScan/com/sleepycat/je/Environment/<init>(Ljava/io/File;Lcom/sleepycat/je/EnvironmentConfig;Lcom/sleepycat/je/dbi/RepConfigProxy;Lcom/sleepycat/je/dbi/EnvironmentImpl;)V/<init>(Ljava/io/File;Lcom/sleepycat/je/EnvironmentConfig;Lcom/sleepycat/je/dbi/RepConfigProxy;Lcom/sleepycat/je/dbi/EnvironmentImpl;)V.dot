@@ -1,0 +1,17 @@
+digraph <init> {
+node [shape=record];
+1652573751 [label="L0\lLINENUMBER 236 L0\lLDC \"06abb03c-b7ed-404c-a093-16e495cc1457\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 238 L1\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbs : Ljava/util/Map;\lL2\lLINENUMBER 239 L2\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbTxns : Ljava/util/Map;\lL3\lLINENUMBER 241 L3\lALOAD 1\lLDC \"envHome\"\lINVOKESTATIC com/sleepycat/je/utilint/DatabaseUtil.checkForNullParam (Ljava/lang/Object;Ljava/lang/String;)V\lL4\lLINENUMBER 243 L4\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL5\lLINENUMBER 244 L5\lINVOKESPECIAL com/sleepycat/je/Environment.setupHandleConfig (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/EnvironmentConfig;\lPUTFIELD com/sleepycat/je/Environment.appliedFinalConfig : Lcom/sleepycat/je/EnvironmentConfig;\lL6\lLINENUMBER 246 L6\lALOAD 4\lIFNULL L7\l"];
+504724382 [label="L9\lLINENUMBER 254 L9\lFRAME SAME\lLDC \"06abb03c-b7ed-404c-a093-16e495cc1457\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL11\l"];
+935689162 [label="L7\lLINENUMBER 251 L7\lFRAME FULL [com/sleepycat/je/Environment java/io/File com/sleepycat/je/EnvironmentConfig com/sleepycat/je/dbi/RepConfigProxy com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL10\lLINENUMBER 252 L10\lINVOKEVIRTUAL com/sleepycat/je/Environment.makeEnvironmentImpl (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\l"];
+1920309197 [label="L8\lLINENUMBER 248 L8\lALOAD 0\lALOAD 4\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGOTO L9\l"];
+entry;
+exit;
+entry -> 1652573751
+1652573751 -> 935689162
+1652573751 -> 1920309197
+504724382 -> exit
+935689162 -> 504724382
+1920309197 -> 504724382
+1652573751[fontcolor="purple", penwidth=3, color="purple"];
+504724382[fontcolor="purple", penwidth=3, color="purple"];
+}

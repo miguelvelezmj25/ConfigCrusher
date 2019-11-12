@@ -1,29 +1,29 @@
 digraph isBINDelta {
 node [shape=record];
-292234537 [label="L3\lFRAME SAME1 I\lLDC \"697d943d-313c-4ccb-b423-b05c7210e14e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
-1784319323 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isUpperIN ()Z\lIFNE L1\l"];
-405290727 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"697d943d-313c-4ccb-b423-b05c7210e14e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-2104050005 [label="L0\lLINENUMBER 880 L0\lLDC \"697d943d-313c-4ccb-b423-b05c7210e14e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L1\l"];
-1418011095 [label="L1\lLINENUMBER 881 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.flags : I\lBIPUSH 32\lIAND\lIFEQ L2\l"];
-805085604 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFNE L1\l"];
-648435948 [label="L2\lFRAME SAME\lICONST_0\l"];
-1540382326 [label="ICONST_1\lGOTO L3\l"];
+501412306 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"4882e5d9-e67e-49ad-926f-c09771474234\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1378873360 [label="L2\lFRAME SAME\lICONST_0\l"];
+422467711 [label="L0\lLINENUMBER 880 L0\lLDC \"4882e5d9-e67e-49ad-926f-c09771474234\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L1\l"];
+1528228706 [label="ICONST_1\lGOTO L3\l"];
+1841070470 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isUpperIN ()Z\lIFNE L1\l"];
+137865451 [label="L3\lFRAME SAME1 I\lLDC \"4882e5d9-e67e-49ad-926f-c09771474234\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+1619386606 [label="L1\lLINENUMBER 881 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.flags : I\lBIPUSH 32\lIAND\lIFEQ L2\l"];
+1994699473 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFNE L1\l"];
 entry;
 exit;
-292234537 -> exit
-entry -> 2104050005
-1784319323 -> 805085604
-1784319323 -> 1418011095
-405290727 -> exit
-2104050005 -> 1784319323
-2104050005 -> 1418011095
-1418011095 -> 648435948
-1418011095 -> 1540382326
-805085604 -> 405290727
-805085604 -> 1418011095
-648435948 -> 292234537
-1540382326 -> 292234537
-292234537[fontcolor="purple", penwidth=3, color="purple"];
-405290727[fontcolor="purple", penwidth=3, color="purple"];
-2104050005[fontcolor="purple", penwidth=3, color="purple"];
+501412306 -> exit
+1378873360 -> 137865451
+entry -> 422467711
+422467711 -> 1841070470
+422467711 -> 1619386606
+1528228706 -> 137865451
+1841070470 -> 1619386606
+1841070470 -> 1994699473
+137865451 -> exit
+1619386606 -> 1378873360
+1619386606 -> 1528228706
+1994699473 -> 501412306
+1994699473 -> 1619386606
+501412306[fontcolor="purple", penwidth=3, color="purple"];
+422467711[fontcolor="purple", penwidth=3, color="purple"];
+137865451[fontcolor="purple", penwidth=3, color="purple"];
 }

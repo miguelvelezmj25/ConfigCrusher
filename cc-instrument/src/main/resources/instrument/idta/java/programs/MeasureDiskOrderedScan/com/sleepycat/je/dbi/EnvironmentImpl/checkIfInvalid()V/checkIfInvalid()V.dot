@@ -1,0 +1,31 @@
+digraph checkIfInvalid {
+node [shape=record];
+572874744 [label="ALOAD 1\lIFNONNULL L4\l"];
+1590601004 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"e71792c2-bc7f-449b-9a06-bdfc508b7b29\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+734182540 [label="L0\lLINENUMBER 1731 L0\lLDC \"e71792c2-bc7f-449b-9a06-bdfc508b7b29\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.INVALID : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPEQ L1\l"];
+488382841 [label="L2\lLINENUMBER 1732 L2\lLDC \"e71792c2-bc7f-449b-9a06-bdfc508b7b29\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\l"];
+473802287 [label="L4\lLINENUMBER 1742 L4\lFRAME APPEND [com/sleepycat/je/EnvironmentFailureException]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.setAlreadyThrown (Z)V\lL5\lLINENUMBER 1744 L5\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.preallocatedEFE : Lcom/sleepycat/je/EnvironmentFailureException;\lIF_ACMPNE L6\l"];
+1302301306 [label="L1\lLINENUMBER 1735 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.invalidatingEFE : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 1\lL3\lLINENUMBER 1736 L3\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.$assertionsDisabled : Z\lIFNE L4\l"];
+1865623765 [label="L7\lLINENUMBER 1745 L7\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.fillInStackTrace ()Ljava/lang/Throwable;\lPOP\lL8\lLINENUMBER 1747 L8\lALOAD 1\lLDC \"e71792c2-bc7f-449b-9a06-bdfc508b7b29\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+516876226 [label="L6\lLINENUMBER 1750 L6\lFRAME SAME\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Environment must be closed, caused by: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.wrapSelf (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"e71792c2-bc7f-449b-9a06-bdfc508b7b29\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\lL9\l"];
+entry;
+exit;
+572874744 -> 1590601004
+572874744 -> 473802287
+1590601004 -> exit
+entry -> 734182540
+734182540 -> 488382841
+734182540 -> 1302301306
+488382841 -> exit
+473802287 -> 1865623765
+473802287 -> 516876226
+1302301306 -> 572874744
+1302301306 -> 473802287
+1865623765 -> exit
+516876226 -> exit
+1590601004[fontcolor="purple", penwidth=3, color="purple"];
+734182540[fontcolor="purple", penwidth=3, color="purple"];
+488382841[fontcolor="purple", penwidth=3, color="purple"];
+1865623765[fontcolor="purple", penwidth=3, color="purple"];
+516876226[fontcolor="purple", penwidth=3, color="purple"];
+}

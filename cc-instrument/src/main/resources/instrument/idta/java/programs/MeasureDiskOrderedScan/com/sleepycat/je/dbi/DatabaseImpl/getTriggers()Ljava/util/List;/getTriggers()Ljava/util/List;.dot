@@ -1,0 +1,59 @@
+digraph getTriggers {
+node [shape=record];
+237822108 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getNoComparators ()Z\lIFEQ L2\l"];
+295402181 [label="L14\lLINENUMBER 673 L14\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.addAll (Ljava/util/Collection;)Z\lPOP\l"];
+680824177 [label="L7\lLINENUMBER 658 L7\lALOAD 1\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+777354281 [label="L1\lLINENUMBER 647 L1\lFRAME SAME\lACONST_NULL\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1456451550 [label="L6\lLINENUMBER 667 L6\lFRAME APPEND [java/util/List]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getName ()Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL8\lLINENUMBER 668 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lL9\lLINENUMBER 667 L9\lINVOKESTATIC com/sleepycat/je/dbi/TriggerUtils.unmarshallTriggers (Ljava/lang/String;[[BLjava/lang/ClassLoader;)Ljava/util/LinkedList;\lASTORE 1\lL10\lLINENUMBER 669 L10\lALOAD 1\lIFNONNULL L11\l"];
+1646946400 [label="L18\lLINENUMBER 680 L18\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/List] []\lALOAD 1\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL19\l"];
+981566228 [label="L13\lLINENUMBER 675 L13\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lACONST_NULL\lALOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.compareAndSet (Ljava/lang/Object;Ljava/lang/Object;)Z\lIFEQ L15\l"];
+1430882329 [label="L2\lLINENUMBER 651 L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lIFNONNULL L3\l"];
+1457245650 [label="L0\lLINENUMBER 646 L0\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lIFNULL L1\l"];
+1489367436 [label="L3\lLINENUMBER 656 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL5\lLINENUMBER 657 L5\lALOAD 1\lIFNULL L6\l"];
+992500817 [label="L15\lLINENUMBER 678 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL17\lLINENUMBER 679 L17\lGETSTATIC com/sleepycat/je/dbi/DatabaseImpl.$assertionsDisabled : Z\lIFNE L18\l"];
+822399496 [label="L4\lLINENUMBER 652 L4\lACONST_NULL\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+569470234 [label="L12\lLINENUMBER 670 L12\lNEW java/util/LinkedList\lDUP\lINVOKESPECIAL java/util/LinkedList.\<init\> ()V\lASTORE 1\l"];
+463039136 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+682455778 [label="ALOAD 1\lIFNONNULL L18\l"];
+1567914559 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNONNULL L3\l"];
+921862078 [label="L11\lLINENUMBER 672 L11\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/LinkedList] []\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNULL L13\l"];
+511892229 [label="L16\lLINENUMBER 676 L16\lALOAD 1\lLDC \"b6eb7d1d-471a-4b70-998d-5a8b550b20ed\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+237822108 -> 1430882329
+237822108 -> 777354281
+295402181 -> 981566228
+680824177 -> exit
+777354281 -> exit
+1456451550 -> 569470234
+1456451550 -> 921862078
+1646946400 -> exit
+981566228 -> 992500817
+981566228 -> 511892229
+1430882329 -> 1489367436
+1430882329 -> 1567914559
+entry -> 1457245650
+1457245650 -> 237822108
+1457245650 -> 777354281
+1489367436 -> 680824177
+1489367436 -> 1456451550
+992500817 -> 1646946400
+992500817 -> 682455778
+822399496 -> exit
+569470234 -> 921862078
+463039136 -> exit
+682455778 -> 1646946400
+682455778 -> 463039136
+1567914559 -> 1489367436
+1567914559 -> 822399496
+921862078 -> 295402181
+921862078 -> 981566228
+511892229 -> exit
+680824177[fontcolor="purple", penwidth=3, color="purple"];
+1457245650[fontcolor="purple", penwidth=3, color="purple"];
+777354281[fontcolor="purple", penwidth=3, color="purple"];
+1646946400[fontcolor="purple", penwidth=3, color="purple"];
+822399496[fontcolor="purple", penwidth=3, color="purple"];
+463039136[fontcolor="purple", penwidth=3, color="purple"];
+511892229[fontcolor="purple", penwidth=3, color="purple"];
+}

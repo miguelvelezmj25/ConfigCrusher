@@ -1,16 +1,16 @@
 digraph getSize {
 node [shape=record];
-1135635142 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lLDC \"c6de42db-0aaf-40b7-8741-9fb7152d2987\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
-1427877676 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lLDC \"c6de42db-0aaf-40b7-8741-9fb7152d2987\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
-1551138252 [label="L0\lLINENUMBER 341 L0\lLDC \"c6de42db-0aaf-40b7-8741-9fb7152d2987\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
+1278737843 [label="L0\lLINENUMBER 341 L0\lLDC \"5a8fd3f4-7ccf-4d12-832c-f6612c67a85f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L1\l"];
+658686624 [label="L1\lLINENUMBER 344 L1\lFRAME SAME\lBIPUSH 14\lLDC \"5a8fd3f4-7ccf-4d12-832c-f6612c67a85f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+30821060 [label="L2\lLINENUMBER 342 L2\lBIPUSH 22\lLDC \"5a8fd3f4-7ccf-4d12-832c-f6612c67a85f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
 entry;
 exit;
-entry -> 1551138252
-1135635142 -> exit
-1427877676 -> exit
-1551138252 -> 1135635142
-1551138252 -> 1427877676
-1135635142[fontcolor="purple", penwidth=3, color="purple"];
-1427877676[fontcolor="purple", penwidth=3, color="purple"];
-1551138252[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1278737843
+1278737843 -> 658686624
+1278737843 -> 30821060
+658686624 -> exit
+30821060 -> exit
+1278737843[fontcolor="purple", penwidth=3, color="purple"];
+658686624[fontcolor="purple", penwidth=3, color="purple"];
+30821060[fontcolor="purple", penwidth=3, color="purple"];
 }

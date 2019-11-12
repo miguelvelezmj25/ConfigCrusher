@@ -1,0 +1,16 @@
+digraph typeForDbName {
+node [shape=record];
+1439197641 [label="L3\lLINENUMBER 205 L3\lALOAD 1\lLDC \"5c4fd370-3580-4c11-8a83-45c92a566c9b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+280405345 [label="L0\lLINENUMBER 203 L0\lLDC \"5c4fd370-3580-4c11-8a83-45c92a566c9b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/dbi/DbTree.INTERNAL_TYPES_BY_NAME : Ljava/util/Map;\lALOAD 0\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/DbType\lASTORE 1\lL1\lLINENUMBER 204 L1\lALOAD 1\lIFNULL L2\l"];
+1314384338 [label="L2\lLINENUMBER 207 L2\lFRAME APPEND [com/sleepycat/je/dbi/DbType]\lGETSTATIC com/sleepycat/je/dbi/DbType.USER : Lcom/sleepycat/je/dbi/DbType;\lLDC \"5c4fd370-3580-4c11-8a83-45c92a566c9b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL4\l"];
+entry;
+exit;
+entry -> 280405345
+1439197641 -> exit
+280405345 -> 1439197641
+280405345 -> 1314384338
+1314384338 -> exit
+1439197641[fontcolor="purple", penwidth=3, color="purple"];
+280405345[fontcolor="purple", penwidth=3, color="purple"];
+1314384338[fontcolor="purple", penwidth=3, color="purple"];
+}

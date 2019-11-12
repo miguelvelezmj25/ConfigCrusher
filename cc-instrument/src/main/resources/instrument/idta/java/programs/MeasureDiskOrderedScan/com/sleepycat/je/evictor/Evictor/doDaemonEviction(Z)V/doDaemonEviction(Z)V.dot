@@ -1,18 +1,18 @@
 digraph doDaemonEviction {
 node [shape=record];
-1480718620 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lLDC \"6033d7af-fd03-4830-bf3e-7fcadb45a5c9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
-763118545 [label="L0\lLINENUMBER 2080 L0\lLDC \"6033d7af-fd03-4830-bf3e-7fcadb45a5c9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-1914334369 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
-1173222167 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+875766773 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+421103427 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lLDC \"8714b165-e99c-4984-a64a-4e051354bb1f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+623075197 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1077137598 [label="L0\lLINENUMBER 2080 L0\lLDC \"8714b165-e99c-4984-a64a-4e051354bb1f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 763118545
-1480718620 -> exit
-763118545 -> 1480718620
-763118545 -> 1914334369
-1914334369 -> 1480718620
-1914334369 -> 1173222167
-1173222167 -> 1480718620
-1480718620[fontcolor="purple", penwidth=3, color="purple"];
-763118545[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1077137598
+875766773 -> 421103427
+875766773 -> 623075197
+421103427 -> exit
+623075197 -> 421103427
+1077137598 -> 875766773
+1077137598 -> 421103427
+421103427[fontcolor="purple", penwidth=3, color="purple"];
+1077137598[fontcolor="purple", penwidth=3, color="purple"];
 }

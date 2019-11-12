@@ -1,0 +1,20 @@
+digraph isTransientOrNull {
+node [shape=record];
+2116278152 [label="LLOAD 0\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransient (J)Z\lIFEQ L2\l"];
+499367763 [label="L2\lFRAME SAME\lICONST_0\l"];
+1382877901 [label="L0\lLINENUMBER 74 L0\lLDC \"5de5c7d6-4e0e-4996-9ab9-41137d63794e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lLLOAD 0\lLDC -1\lLCMP\lIFEQ L1\l"];
+667088196 [label="L3\lFRAME SAME1 I\lLDC \"5de5c7d6-4e0e-4996-9ab9-41137d63794e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+1866722798 [label="L1\lFRAME SAME\lICONST_1\lGOTO L3\l"];
+entry;
+exit;
+entry -> 1382877901
+2116278152 -> 499367763
+2116278152 -> 1866722798
+499367763 -> 667088196
+1382877901 -> 2116278152
+1382877901 -> 1866722798
+667088196 -> exit
+1866722798 -> 667088196
+1382877901[fontcolor="purple", penwidth=3, color="purple"];
+667088196[fontcolor="purple", penwidth=3, color="purple"];
+}

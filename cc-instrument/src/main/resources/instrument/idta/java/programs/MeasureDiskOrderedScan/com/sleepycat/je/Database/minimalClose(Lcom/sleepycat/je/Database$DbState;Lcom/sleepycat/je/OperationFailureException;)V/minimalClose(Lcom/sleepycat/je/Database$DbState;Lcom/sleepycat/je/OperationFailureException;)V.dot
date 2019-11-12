@@ -1,0 +1,24 @@
+digraph minimalClose {
+node [shape=record];
+1972755204 [label="L3\lLINENUMBER 628 L3\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lL4\lLINENUMBER 629 L4\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/Database.preemptedCause : Lcom/sleepycat/je/OperationFailureException;\l"];
+1904440766 [label="ALOAD 1\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L1\l"];
+1368167014 [label="L0\lLINENUMBER 625 L0\lLDC \"05a9fe6f-6b03-46d2-987e-af1cda74746d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L1\l"];
+1086287575 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"05a9fe6f-6b03-46d2-987e-af1cda74746d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+556575232 [label="L1\lLINENUMBER 627 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L2\l"];
+533823117 [label="L2\lLINENUMBER 632 L2\lFRAME SAME\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 633 L5\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lL6\lLINENUMBER 634 L6\lLDC \"05a9fe6f-6b03-46d2-987e-af1cda74746d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+entry;
+exit;
+entry -> 1368167014
+1972755204 -> 533823117
+1904440766 -> 1086287575
+1904440766 -> 556575232
+1368167014 -> 1904440766
+1368167014 -> 556575232
+1086287575 -> exit
+556575232 -> 1972755204
+556575232 -> 533823117
+533823117 -> exit
+1368167014[fontcolor="purple", penwidth=3, color="purple"];
+1086287575[fontcolor="purple", penwidth=3, color="purple"];
+533823117[fontcolor="purple", penwidth=3, color="purple"];
+}

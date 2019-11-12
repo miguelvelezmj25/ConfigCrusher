@@ -1,0 +1,48 @@
+digraph release {
+node [shape=record];
+736209486 [label="L0\lLINENUMBER 1269 L0\lALOAD 6\lINVOKEVIRTUAL java/lang/Object.notifyAll ()V\lL13\lLINENUMBER 1270 L13\lALOAD 7\lMONITOREXIT\l"];
+1783262991 [label="L14\lLINENUMBER 1272 L14\lFRAME SAME\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L15\l"];
+2117187479 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1253 L4\lLDC \"ebb07ad5-aa78-41df-9963-fddd8c6af1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lLLOAD 1\lALOAD 3\lL5\lLINENUMBER 1254 L5\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.releaseAndFindNotifyTargets (JLcom/sleepycat/je/txn/Locker;)Ljava/util/Set;\lASTORE 4\lL6\lLINENUMBER 1256 L6\lALOAD 4\lIFNONNULL L7\l"];
+517478799 [label="L9\lLINENUMBER 1276 L9\lFRAME CHOP 3\lICONST_1\lLDC \"ebb07ad5-aa78-41df-9963-fddd8c6af1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL16\l"];
+593888896 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"ebb07ad5-aa78-41df-9963-fddd8c6af1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1589393200 [label="L1\lGOTO L14\l"];
+1930921711 [label="L2\lFRAME FULL [com/sleepycat/je/txn/LockManager J com/sleepycat/je/txn/Locker java/util/Set java/util/Iterator com/sleepycat/je/txn/Locker com/sleepycat/je/txn/Locker] [java/lang/Throwable]\lASTORE 8\lALOAD 7\lMONITOREXIT\l"];
+1958379285 [label="ALOAD 5\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Locker\lASTORE 6\lL12\lLINENUMBER 1268 L12\lALOAD 6\lDUP\lASTORE 7\lMONITORENTER\l"];
+1445529837 [label="L10\lLINENUMBER 1266 L10\lALOAD 4\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 5\l"];
+654078860 [label="L8\lLINENUMBER 1257 L8\lICONST_0\lLDC \"ebb07ad5-aa78-41df-9963-fddd8c6af1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+6887957 [label="L3\lALOAD 8\lLDC \"ebb07ad5-aa78-41df-9963-fddd8c6af1d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+1534949835 [label="L11\lFRAME APPEND [java/util/Iterator]\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L9\l"];
+424068564 [label="L7\lLINENUMBER 1260 L7\lFRAME APPEND [java/util/Set]\lALOAD 4\lINVOKEINTERFACE java/util/Set.size ()I\lIFLE L9\l"];
+872421288 [label="INVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.maybeForceYield ()Z\lIFNE L15\l"];
+67339202 [label="L15\lLINENUMBER 1273 L15\lFRAME SAME\lGOTO L11\l"];
+entry;
+exit;
+736209486 -> 1589393200
+736209486 -> 1930921711 [style=dashed, color=red]
+1783262991 -> 872421288
+1783262991 -> 67339202
+2117187479 -> 424068564
+2117187479 -> 654078860
+517478799 -> exit
+593888896 -> exit
+1589393200 -> 1783262991
+1930921711 -> 6887957
+1930921711 -> 1930921711 [style=dashed, color=red]
+1958379285 -> 736209486
+1445529837 -> 1534949835
+654078860 -> exit
+entry -> 2117187479
+6887957 -> exit
+1534949835 -> 517478799
+1534949835 -> 1958379285
+424068564 -> 517478799
+424068564 -> 1445529837
+872421288 -> 593888896
+872421288 -> 67339202
+67339202 -> 1534949835
+6887957[fontcolor="purple", penwidth=3, color="purple"];
+2117187479[fontcolor="purple", penwidth=3, color="purple"];
+517478799[fontcolor="purple", penwidth=3, color="purple"];
+593888896[fontcolor="purple", penwidth=3, color="purple"];
+654078860[fontcolor="purple", penwidth=3, color="purple"];
+}

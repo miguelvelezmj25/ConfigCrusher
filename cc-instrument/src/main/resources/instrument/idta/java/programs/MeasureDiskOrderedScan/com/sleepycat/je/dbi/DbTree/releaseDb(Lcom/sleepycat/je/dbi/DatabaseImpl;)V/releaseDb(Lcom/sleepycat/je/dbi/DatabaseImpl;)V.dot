@@ -1,0 +1,21 @@
+digraph releaseDb {
+node [shape=record];
+1965905629 [label="L1\lLINENUMBER 1687 L1\lFRAME SAME\lLDC \"a610dbaa-6b87-4e7d-a2aa-ec544ca8b70e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL3\l"];
+1376806795 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
+1086177355 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.idDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
+824201485 [label="L2\lLINENUMBER 1685 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.decrementUseCount ()V\l"];
+376350651 [label="L0\lLINENUMBER 1682 L0\lLDC \"a610dbaa-6b87-4e7d-a2aa-ec544ca8b70e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 1\lIFNULL L1\l"];
+entry;
+exit;
+1965905629 -> exit
+entry -> 376350651
+1376806795 -> 1965905629
+1376806795 -> 824201485
+1086177355 -> 1965905629
+1086177355 -> 1376806795
+824201485 -> 1965905629
+376350651 -> 1965905629
+376350651 -> 1086177355
+1965905629[fontcolor="purple", penwidth=3, color="purple"];
+376350651[fontcolor="purple", penwidth=3, color="purple"];
+}

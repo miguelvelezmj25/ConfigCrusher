@@ -1,105 +1,105 @@
 digraph insertEntry1 {
 node [shape=record];
-781485950 [label="L19\lLINENUMBER 3369 L19\lALOAD 0\lL20\lLINENUMBER 3370 L20\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Node \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL21\lLINENUMBER 3371 L21\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNodeId ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" should have been split before calling insertEntry is BIN-delta: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL22\lLINENUMBER 3373 L22\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lINVOKEVIRTUAL java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;\lLDC \" num entries: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" max entries: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL23\lLINENUMBER 3375 L23\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL24\lLINENUMBER 3369 L24\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-997114962 [label="L17\lLINENUMBER 3343 L17\lILOAD 8\lLDC -65537\lIAND\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
-391486041 [label="L32\lLINENUMBER 3397 L32\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lISTORE 9\lL34\lLINENUMBER 3399 L34\lALOAD 3\lIFNULL L35\l"];
-995271840 [label="L26\lLINENUMBER 3390 L26\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/tree/IN.nEntries : I\l"];
-1107599318 [label="L13\lLINENUMBER 3346 L13\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.incBinDeltaBlindOps ()V\l"];
-747034400 [label="L5\lLINENUMBER 3325 L5\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lASTORE 9\lL6\lLINENUMBER 3327 L6\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lIF_ICMPGE L7\l"];
-1993585276 [label="L27\lLINENUMBER 3383 L27\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lISTORE 9\lL28\lLINENUMBER 3386 L28\lALOAD 0\lILOAD 8\lINVOKESPECIAL com/sleepycat/je/tree/IN.shiftEntriesRight (I)V\lL29\lLINENUMBER 3388 L29\lALOAD 0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lILOAD 9\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL30\lLINENUMBER 3389 L30\lGOTO L31\l"];
-1025542712 [label="L49\lLINENUMBER 3430 L49\lFRAME SAME\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\lL51\lLINENUMBER 3432 L51\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L52\l"];
-1926082916 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1434032874 [label="L8\lFRAME SAME1 I\lISTORE 10\lL9\lLINENUMBER 3329 L9\lILOAD 10\lIFEQ L10\l"];
-2132282857 [label="L0\lLINENUMBER 3305 L0\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 2\lICONST_1\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.findEntry ([BZZ)I\lISTORE 8\lL1\lLINENUMBER 3307 L1\lILOAD 8\lIFLT L2\l"];
-1374127036 [label="L2\lLINENUMBER 3323 L2\lFRAME APPEND [I]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lIFEQ L4\l"];
-498801580 [label="L36\lLINENUMBER 3403 L36\lFRAME SAME\lALOAD 0\lILOAD 8\lLLOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setLsnInternal (IJ)V\lL37\lLINENUMBER 3405 L37\lALOAD 0\lILOAD 8\lALOAD 2\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/tree/IN.insertKey (I[B[B)Z\lISTORE 10\lL38\lLINENUMBER 3411 L38\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 8\lILOAD 6\lBASTORE\lL39\lLINENUMBER 3413 L39\lALOAD 3\lIFNULL L40\l"];
-2098068356 [label="L41\lLINENUMBER 3414 L41\lALOAD 0\lILOAD 8\lINVOKESPECIAL com/sleepycat/je/tree/IN.setEmbeddedLN (I)V\lL42\lLINENUMBER 3415 L42\lALOAD 3\lARRAYLENGTH\lIFNE L40\l"];
-732211886 [label="L7\lFRAME APPEND [com/sleepycat/je/tree/BIN]\lICONST_0\l"];
-1996888458 [label="ALOAD 9\lALOAD 2\lL11\lLINENUMBER 3331 L11\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.mayHaveKeyInFullBin ([B)Z\lIFEQ L10\l"];
-638045456 [label="L40\lLINENUMBER 3420 L40\lFRAME APPEND [I]\lALOAD 0\lILOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.adjustCursorsForInsert (I)V\lL44\lLINENUMBER 3422 L44\lALOAD 0\lILOAD 9\lI2L\lALOAD 0\lILOAD 8\lL45\lLINENUMBER 3423 L45\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lALOAD 0\lL46\lLINENUMBER 3424 L46\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lI2L\lLADD\lL47\lLINENUMBER 3422 L47\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\lL48\lLINENUMBER 3426 L48\lILOAD 10\lIFEQ L49\l"];
-1395917657 [label="L52\lLINENUMBER 3434 L52\lFRAME SAME\lILOAD 8\lLDC 131072\lIOR\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL53\l"];
-1100039885 [label="L4\lLINENUMBER 3368 L4\lFRAME CHOP 2\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lIF_ICMPLT L18\l"];
-1587599359 [label="ILOAD 8\lLDC 65536\lIAND\lIFEQ L4\l"];
-957111223 [label="L35\lLINENUMBER 3400 L35\lFRAME APPEND [I]\lALOAD 0\lILOAD 8\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setTarget (ILcom/sleepycat/je/tree/Node;)V\l"];
-430786313 [label="L14\lLINENUMBER 3338 L14\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.mutateToFullBIN (Z)V\lL15\lLINENUMBER 3340 L15\lALOAD 0\lALOAD 2\lICONST_1\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.findEntry ([BZZ)I\lISTORE 8\lL16\lLINENUMBER 3342 L16\lILOAD 8\lIFLT L4\l"];
-924098868 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFNE L52\l"];
-1339848882 [label="L10\lLINENUMBER 3336 L10\lFRAME APPEND [I]\lILOAD 10\lIFNE L13\l"];
-1848730442 [label="L12\lLINENUMBER 3333 L12\lICONST_0\lISTORE 10\l"];
-1561023955 [label="ILOAD 8\lLDC 65536\lIAND\lIFEQ L2\l"];
-1092831805 [label="ILOAD 7\lIFNE L10\l"];
-504692939 [label="ICONST_1\lGOTO L8\l"];
-1994080570 [label="L31\lLINENUMBER 3393 L31\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lIFEQ L32\l"];
-2097055720 [label="L33\lLINENUMBER 3394 L33\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.incFullBinNEntries ()V\l"];
-368185149 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFEQ L36\l"];
-1576142534 [label="L18\lLINENUMBER 3379 L18\lFRAME SAME\lIINC 8 1\lL25\lLINENUMBER 3382 L25\lILOAD 8\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lIF_ICMPGE L26\l"];
-2021886207 [label="L43\lLINENUMBER 3416 L43\lALOAD 0\lILOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setNoDataLN (I)V\l"];
-626503617 [label="L50\lLINENUMBER 3427 L50\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.computeMemorySize ()J\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\l"];
-2128182202 [label="L3\lLINENUMBER 3313 L3\lILOAD 8\lLDC -65537\lIAND\lLDC \"4887bb1c-0cc6-4035-9ee5-c05646006e39\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
-1786524237 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildren ()Z\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildrenFlag ()Z\lIF_ICMPEQ L52\l"];
+2001438335 [label="L50\lLINENUMBER 3427 L50\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.computeMemorySize ()J\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\l"];
+940140016 [label="ILOAD 8\lLDC 65536\lIAND\lIFEQ L2\l"];
+1822853463 [label="L5\lLINENUMBER 3325 L5\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lASTORE 9\lL6\lLINENUMBER 3327 L6\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lIF_ICMPGE L7\l"];
+29067923 [label="L12\lLINENUMBER 3333 L12\lICONST_0\lISTORE 10\l"];
+2097264726 [label="L40\lLINENUMBER 3420 L40\lFRAME APPEND [I]\lALOAD 0\lILOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.adjustCursorsForInsert (I)V\lL44\lLINENUMBER 3422 L44\lALOAD 0\lILOAD 9\lI2L\lALOAD 0\lILOAD 8\lL45\lLINENUMBER 3423 L45\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lALOAD 0\lL46\lLINENUMBER 3424 L46\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lI2L\lLADD\lL47\lLINENUMBER 3422 L47\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (JJ)V\lL48\lLINENUMBER 3426 L48\lILOAD 10\lIFEQ L49\l"];
+552178145 [label="L43\lLINENUMBER 3416 L43\lALOAD 0\lILOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setNoDataLN (I)V\l"];
+535749109 [label="L31\lLINENUMBER 3393 L31\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lIFEQ L32\l"];
+125326280 [label="L52\lLINENUMBER 3434 L52\lFRAME SAME\lILOAD 8\lLDC 131072\lIOR\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL53\l"];
+996645950 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+987969998 [label="L17\lLINENUMBER 3343 L17\lILOAD 8\lLDC -65537\lIAND\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+346629012 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFEQ L36\l"];
+165336054 [label="L14\lLINENUMBER 3338 L14\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.mutateToFullBIN (Z)V\lL15\lLINENUMBER 3340 L15\lALOAD 0\lALOAD 2\lICONST_1\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.findEntry ([BZZ)I\lISTORE 8\lL16\lLINENUMBER 3342 L16\lILOAD 8\lIFLT L4\l"];
+491753230 [label="L32\lLINENUMBER 3397 L32\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lISTORE 9\lL34\lLINENUMBER 3399 L34\lALOAD 3\lIFNULL L35\l"];
+2012882646 [label="ALOAD 9\lALOAD 2\lL11\lLINENUMBER 3331 L11\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.mayHaveKeyInFullBin ([B)Z\lIFEQ L10\l"];
+1741805749 [label="ILOAD 8\lLDC 65536\lIAND\lIFEQ L4\l"];
+2013885424 [label="L18\lLINENUMBER 3379 L18\lFRAME SAME\lIINC 8 1\lL25\lLINENUMBER 3382 L25\lILOAD 8\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lIF_ICMPGE L26\l"];
+92031409 [label="L41\lLINENUMBER 3414 L41\lALOAD 0\lILOAD 8\lINVOKESPECIAL com/sleepycat/je/tree/IN.setEmbeddedLN (I)V\lL42\lLINENUMBER 3415 L42\lALOAD 3\lARRAYLENGTH\lIFNE L40\l"];
+1811065951 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFNE L52\l"];
+2082505900 [label="L35\lLINENUMBER 3400 L35\lFRAME APPEND [I]\lALOAD 0\lILOAD 8\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setTarget (ILcom/sleepycat/je/tree/Node;)V\l"];
+280266793 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildren ()Z\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.hasCachedChildrenFlag ()Z\lIF_ICMPEQ L52\l"];
+194437998 [label="L2\lLINENUMBER 3323 L2\lFRAME APPEND [I]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lIFEQ L4\l"];
+1500127330 [label="ILOAD 7\lIFNE L10\l"];
+1841874803 [label="ICONST_1\lGOTO L8\l"];
+1545765246 [label="L10\lLINENUMBER 3336 L10\lFRAME APPEND [I]\lILOAD 10\lIFNE L13\l"];
+1688899029 [label="L36\lLINENUMBER 3403 L36\lFRAME SAME\lALOAD 0\lILOAD 8\lLLOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setLsnInternal (IJ)V\lL37\lLINENUMBER 3405 L37\lALOAD 0\lILOAD 8\lALOAD 2\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/tree/IN.insertKey (I[B[B)Z\lISTORE 10\lL38\lLINENUMBER 3411 L38\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 8\lILOAD 6\lBASTORE\lL39\lLINENUMBER 3413 L39\lALOAD 3\lIFNULL L40\l"];
+536041430 [label="L7\lFRAME APPEND [com/sleepycat/je/tree/BIN]\lICONST_0\l"];
+743147275 [label="L33\lLINENUMBER 3394 L33\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.incFullBinNEntries ()V\l"];
+1020903953 [label="L3\lLINENUMBER 3313 L3\lILOAD 8\lLDC -65537\lIAND\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1352113592 [label="L4\lLINENUMBER 3368 L4\lFRAME CHOP 2\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lIF_ICMPLT L18\l"];
+270361612 [label="L49\lLINENUMBER 3430 L49\lFRAME SAME\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\lL51\lLINENUMBER 3432 L51\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L52\l"];
+1102809794 [label="L13\lLINENUMBER 3346 L13\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEvictor ()Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.incBinDeltaBlindOps ()V\l"];
+22998319 [label="L8\lFRAME SAME1 I\lISTORE 10\lL9\lLINENUMBER 3329 L9\lILOAD 10\lIFEQ L10\l"];
+1702434823 [label="L19\lLINENUMBER 3369 L19\lALOAD 0\lL20\lLINENUMBER 3370 L20\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Node \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL21\lLINENUMBER 3371 L21\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNodeId ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" should have been split before calling insertEntry is BIN-delta: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL22\lLINENUMBER 3373 L22\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBINDelta ()Z\lINVOKEVIRTUAL java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;\lLDC \" num entries: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" max entries: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL23\lLINENUMBER 3375 L23\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getMaxEntries ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL24\lLINENUMBER 3369 L24\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+846888605 [label="L27\lLINENUMBER 3383 L27\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lISTORE 9\lL28\lLINENUMBER 3386 L28\lALOAD 0\lILOAD 8\lINVOKESPECIAL com/sleepycat/je/tree/IN.shiftEntriesRight (I)V\lL29\lLINENUMBER 3388 L29\lALOAD 0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lILOAD 9\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL30\lLINENUMBER 3389 L30\lGOTO L31\l"];
+292821044 [label="L26\lLINENUMBER 3390 L26\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/tree/IN.nEntries : I\l"];
+1844460104 [label="L0\lLINENUMBER 3305 L0\lLDC \"e18e7fd6-98e4-4a88-8b49-6c46e8cef158\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 2\lICONST_1\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.findEntry ([BZZ)I\lISTORE 8\lL1\lLINENUMBER 3307 L1\lILOAD 8\lIFLT L2\l"];
 entry;
 exit;
-781485950 -> exit
-997114962 -> exit
-391486041 -> 368185149
-391486041 -> 957111223
-995271840 -> 1994080570
-1107599318 -> 1100039885
-747034400 -> 732211886
-747034400 -> 504692939
-1993585276 -> 1994080570
-1025542712 -> 924098868
-1025542712 -> 1395917657
-1926082916 -> exit
-1434032874 -> 1339848882
-1434032874 -> 1092831805
-2132282857 -> 1374127036
-2132282857 -> 1561023955
-1374127036 -> 1100039885
-1374127036 -> 747034400
-498801580 -> 2098068356
-498801580 -> 638045456
-2098068356 -> 2021886207
-2098068356 -> 638045456
-732211886 -> 1434032874
-1996888458 -> 1339848882
-1996888458 -> 1848730442
-638045456 -> 626503617
-638045456 -> 1025542712
-1395917657 -> exit
-1100039885 -> 781485950
-1100039885 -> 1576142534
-1587599359 -> 1100039885
-1587599359 -> 997114962
-957111223 -> 498801580
-430786313 -> 1100039885
-430786313 -> 1587599359
-924098868 -> 1395917657
-924098868 -> 1786524237
-1339848882 -> 430786313
-1339848882 -> 1107599318
-1848730442 -> 1339848882
-1561023955 -> 1374127036
-1561023955 -> 2128182202
-1092831805 -> 1339848882
-1092831805 -> 1996888458
-504692939 -> 1434032874
-1994080570 -> 2097055720
-1994080570 -> 391486041
-entry -> 2132282857
-2097055720 -> 391486041
-368185149 -> 957111223
-368185149 -> 498801580
-1576142534 -> 995271840
-1576142534 -> 1993585276
-2021886207 -> 638045456
-626503617 -> 1025542712
-2128182202 -> exit
-1786524237 -> 1395917657
-1786524237 -> 1926082916
-781485950[fontcolor="purple", penwidth=3, color="purple"];
-997114962[fontcolor="purple", penwidth=3, color="purple"];
-1395917657[fontcolor="purple", penwidth=3, color="purple"];
-1926082916[fontcolor="purple", penwidth=3, color="purple"];
-2128182202[fontcolor="purple", penwidth=3, color="purple"];
-2132282857[fontcolor="purple", penwidth=3, color="purple"];
+2001438335 -> 270361612
+940140016 -> 1020903953
+940140016 -> 194437998
+1822853463 -> 1841874803
+1822853463 -> 536041430
+29067923 -> 1545765246
+2097264726 -> 2001438335
+2097264726 -> 270361612
+552178145 -> 2097264726
+535749109 -> 743147275
+535749109 -> 491753230
+125326280 -> exit
+996645950 -> exit
+987969998 -> exit
+346629012 -> 2082505900
+346629012 -> 1688899029
+165336054 -> 1352113592
+165336054 -> 1741805749
+491753230 -> 2082505900
+491753230 -> 346629012
+2012882646 -> 29067923
+2012882646 -> 1545765246
+1741805749 -> 1352113592
+1741805749 -> 987969998
+2013885424 -> 846888605
+2013885424 -> 292821044
+92031409 -> 552178145
+92031409 -> 2097264726
+1811065951 -> 280266793
+1811065951 -> 125326280
+2082505900 -> 1688899029
+280266793 -> 125326280
+280266793 -> 996645950
+194437998 -> 1352113592
+194437998 -> 1822853463
+1500127330 -> 1545765246
+1500127330 -> 2012882646
+1841874803 -> 22998319
+1545765246 -> 1102809794
+1545765246 -> 165336054
+1688899029 -> 92031409
+1688899029 -> 2097264726
+536041430 -> 22998319
+743147275 -> 491753230
+entry -> 1844460104
+1020903953 -> exit
+1352113592 -> 2013885424
+1352113592 -> 1702434823
+270361612 -> 1811065951
+270361612 -> 125326280
+1102809794 -> 1352113592
+22998319 -> 1500127330
+22998319 -> 1545765246
+1702434823 -> exit
+846888605 -> 535749109
+292821044 -> 535749109
+1844460104 -> 194437998
+1844460104 -> 940140016
+1020903953[fontcolor="purple", penwidth=3, color="purple"];
+125326280[fontcolor="purple", penwidth=3, color="purple"];
+996645950[fontcolor="purple", penwidth=3, color="purple"];
+987969998[fontcolor="purple", penwidth=3, color="purple"];
+1702434823[fontcolor="purple", penwidth=3, color="purple"];
+1844460104[fontcolor="purple", penwidth=3, color="purple"];
 }

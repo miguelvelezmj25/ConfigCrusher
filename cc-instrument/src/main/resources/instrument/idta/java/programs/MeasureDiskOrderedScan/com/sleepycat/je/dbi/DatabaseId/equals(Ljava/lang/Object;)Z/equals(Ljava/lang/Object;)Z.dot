@@ -1,0 +1,29 @@
+digraph equals {
+node [shape=record];
+95226134 [label="L4\lLINENUMBER 85 L4\lICONST_0\lLDC \"df0e9162-e87c-47cf-881f-87abe9fe2ce8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+580609297 [label="L3\lLINENUMBER 88 L3\lFRAME SAME\lALOAD 1\lCHECKCAST com/sleepycat/je/dbi/DatabaseId\lGETFIELD com/sleepycat/je/dbi/DatabaseId.id : J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseId.id : J\lLCMP\lIFNE L5\l"];
+1902273937 [label="L5\lFRAME SAME\lICONST_0\l"];
+1597965775 [label="L0\lLINENUMBER 80 L0\lLDC \"df0e9162-e87c-47cf-881f-87abe9fe2ce8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lIF_ACMPNE L1\l"];
+429475453 [label="L2\lLINENUMBER 81 L2\lICONST_1\lLDC \"df0e9162-e87c-47cf-881f-87abe9fe2ce8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+843584565 [label="L6\lFRAME SAME1 I\lLDC \"df0e9162-e87c-47cf-881f-87abe9fe2ce8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL7\l"];
+1433369723 [label="L1\lLINENUMBER 84 L1\lFRAME SAME\lALOAD 1\lINSTANCEOF com/sleepycat/je/dbi/DatabaseId\lIFNE L3\l"];
+1606435682 [label="ICONST_1\lGOTO L6\l"];
+entry;
+exit;
+entry -> 1597965775
+95226134 -> exit
+580609297 -> 1902273937
+580609297 -> 1606435682
+1902273937 -> 843584565
+1597965775 -> 429475453
+1597965775 -> 1433369723
+429475453 -> exit
+843584565 -> exit
+1433369723 -> 95226134
+1433369723 -> 580609297
+1606435682 -> 843584565
+95226134[fontcolor="purple", penwidth=3, color="purple"];
+1597965775[fontcolor="purple", penwidth=3, color="purple"];
+429475453[fontcolor="purple", penwidth=3, color="purple"];
+843584565[fontcolor="purple", penwidth=3, color="purple"];
+}

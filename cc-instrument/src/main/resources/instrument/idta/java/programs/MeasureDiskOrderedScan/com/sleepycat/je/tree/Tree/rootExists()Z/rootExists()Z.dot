@@ -1,0 +1,25 @@
+digraph rootExists {
+node [shape=record];
+2060973932 [label="L0\lLINENUMBER 420 L0\lLDC \"1832dfa2-4bb0-4479-a5d4-d010683c55c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lIFNONNULL L1\l"];
+1366199370 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lL4\lLINENUMBER 425 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getLsn ()J\lLDC -1\lLCMP\lIFNE L3\l"];
+348618140 [label="L3\lLINENUMBER 429 L3\lFRAME SAME\lICONST_1\lLDC \"1832dfa2-4bb0-4479-a5d4-d010683c55c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL6\l"];
+1674734741 [label="L1\lLINENUMBER 424 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getTarget ()Lcom/sleepycat/je/tree/Node;\lIFNONNULL L3\l"];
+854997347 [label="L2\lLINENUMBER 421 L2\lICONST_0\lLDC \"1832dfa2-4bb0-4479-a5d4-d010683c55c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1686183253 [label="L5\lLINENUMBER 426 L5\lICONST_0\lLDC \"1832dfa2-4bb0-4479-a5d4-d010683c55c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 2060973932
+2060973932 -> 1674734741
+2060973932 -> 854997347
+1366199370 -> 348618140
+1366199370 -> 1686183253
+348618140 -> exit
+1674734741 -> 1366199370
+1674734741 -> 348618140
+854997347 -> exit
+1686183253 -> exit
+2060973932[fontcolor="purple", penwidth=3, color="purple"];
+348618140[fontcolor="purple", penwidth=3, color="purple"];
+854997347[fontcolor="purple", penwidth=3, color="purple"];
+1686183253[fontcolor="purple", penwidth=3, color="purple"];
+}

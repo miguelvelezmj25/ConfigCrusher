@@ -1,0 +1,16 @@
+digraph parseBoolean {
+node [shape=record];
+1525490979 [label="L0\lLINENUMBER 701 L0\lLDC \"1f102898-9042-48df-b397-a9530ea0974a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lIFNONNULL L1\l"];
+251342497 [label="L2\lLINENUMBER 702 L2\lICONST_0\lLDC \"1f102898-9042-48df-b397-a9530ea0974a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\l"];
+992662655 [label="L1\lLINENUMBER 704 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL java/lang/String.trim ()Ljava/lang/String;\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lLDC \"1f102898-9042-48df-b397-a9530ea0974a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lIRETURN\lL3\l"];
+entry;
+exit;
+entry -> 1525490979
+1525490979 -> 251342497
+1525490979 -> 992662655
+251342497 -> exit
+992662655 -> exit
+1525490979[fontcolor="purple", penwidth=3, color="purple"];
+251342497[fontcolor="purple", penwidth=3, color="purple"];
+992662655[fontcolor="purple", penwidth=3, color="purple"];
+}

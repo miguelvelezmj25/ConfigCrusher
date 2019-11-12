@@ -1,22 +1,22 @@
 digraph getKey {
 node [shape=record];
-1060964055 [label="L2\lLINENUMBER 175 L2\lFRAME APPEND [[B]\lILOAD 2\lIFEQ L4\l"];
-115965863 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 3\lLDC \"988b77b1-fd6f-4a3d-9d25-85d801cc0cf1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL6\l"];
-1134313174 [label="L0\lLINENUMBER 171 L0\lLDC \"988b77b1-fd6f-4a3d-9d25-85d801cc0cf1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/INKeyRep$Default.keys : [[B\lILOAD 1\lAALOAD\lASTORE 3\lL1\lLINENUMBER 173 L1\lALOAD 3\lIFNONNULL L2\l"];
-606183291 [label="L5\lLINENUMBER 176 L5\lALOAD 3\lICONST_0\lALOAD 3\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/DupKeyData.getKey ([BII)[B\lLDC \"988b77b1-fd6f-4a3d-9d25-85d801cc0cf1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
-1107659354 [label="L3\lLINENUMBER 174 L3\lGETSTATIC com/sleepycat/je/tree/Key.EMPTY_KEY : [B\lLDC \"988b77b1-fd6f-4a3d-9d25-85d801cc0cf1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1282347221 [label="L3\lLINENUMBER 174 L3\lGETSTATIC com/sleepycat/je/tree/Key.EMPTY_KEY : [B\lLDC \"3a76a802-0ca0-4c27-bf0b-be2f37b33583\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+1010312543 [label="L5\lLINENUMBER 176 L5\lALOAD 3\lICONST_0\lALOAD 3\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/DupKeyData.getKey ([BII)[B\lLDC \"3a76a802-0ca0-4c27-bf0b-be2f37b33583\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\l"];
+745446652 [label="L2\lLINENUMBER 175 L2\lFRAME APPEND [[B]\lILOAD 2\lIFEQ L4\l"];
+210888587 [label="L0\lLINENUMBER 171 L0\lLDC \"3a76a802-0ca0-4c27-bf0b-be2f37b33583\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/tree/INKeyRep$Default.keys : [[B\lILOAD 1\lAALOAD\lASTORE 3\lL1\lLINENUMBER 173 L1\lALOAD 3\lIFNONNULL L2\l"];
+1058414828 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 3\lLDC \"3a76a802-0ca0-4c27-bf0b-be2f37b33583\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL6\l"];
 entry;
 exit;
-entry -> 1134313174
-1060964055 -> 115965863
-1060964055 -> 606183291
-115965863 -> exit
-1134313174 -> 1060964055
-1134313174 -> 1107659354
-606183291 -> exit
-1107659354 -> exit
-115965863[fontcolor="purple", penwidth=3, color="purple"];
-1134313174[fontcolor="purple", penwidth=3, color="purple"];
-606183291[fontcolor="purple", penwidth=3, color="purple"];
-1107659354[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 210888587
+1282347221 -> exit
+1010312543 -> exit
+745446652 -> 1010312543
+745446652 -> 1058414828
+210888587 -> 1282347221
+210888587 -> 745446652
+1058414828 -> exit
+1282347221[fontcolor="purple", penwidth=3, color="purple"];
+1010312543[fontcolor="purple", penwidth=3, color="purple"];
+210888587[fontcolor="purple", penwidth=3, color="purple"];
+1058414828[fontcolor="purple", penwidth=3, color="purple"];
 }

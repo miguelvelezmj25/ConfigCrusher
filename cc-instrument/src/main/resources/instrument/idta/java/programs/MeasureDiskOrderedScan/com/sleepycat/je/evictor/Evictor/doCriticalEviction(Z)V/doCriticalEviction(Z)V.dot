@@ -1,18 +1,18 @@
 digraph doCriticalEviction {
 node [shape=record];
-951967516 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lLDC \"702ed485-b504-49d1-bccd-acc34197ac0e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
-1526830407 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1471755426 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
-1211088255 [label="L0\lLINENUMBER 2056 L0\lLDC \"702ed485-b504-49d1-bccd-acc34197ac0e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+688829898 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1175944890 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lLDC \"b3f2be30-c552-405e-b16b-5507b0046e07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+862363118 [label="L0\lLINENUMBER 2056 L0\lLDC \"b3f2be30-c552-405e-b16b-5507b0046e07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1792577678 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1211088255
-951967516 -> exit
-1526830407 -> 951967516
-1471755426 -> 951967516
-1471755426 -> 1526830407
-1211088255 -> 951967516
-1211088255 -> 1471755426
-951967516[fontcolor="purple", penwidth=3, color="purple"];
-1211088255[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 862363118
+688829898 -> 1175944890
+1175944890 -> exit
+862363118 -> 1175944890
+862363118 -> 1792577678
+1792577678 -> 688829898
+1792577678 -> 1175944890
+1175944890[fontcolor="purple", penwidth=3, color="purple"];
+862363118[fontcolor="purple", penwidth=3, color="purple"];
 }

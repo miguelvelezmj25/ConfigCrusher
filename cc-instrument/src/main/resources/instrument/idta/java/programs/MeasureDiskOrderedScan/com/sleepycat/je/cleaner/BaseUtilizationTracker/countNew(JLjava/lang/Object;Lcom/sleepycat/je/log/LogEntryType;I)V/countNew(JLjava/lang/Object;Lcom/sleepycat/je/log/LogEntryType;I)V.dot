@@ -1,0 +1,52 @@
+digraph countNew {
+node [shape=record];
+24893537 [label="L0\lLINENUMBER 96 L0\lLDC \"7f823bf4-b871-464d-b437-9a986fc75540\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L1\l"];
+1868161246 [label="NEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"No DB for lsn=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL12\lLINENUMBER 108 L12\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" type: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lLDC \"7f823bf4-b871-464d-b437-9a986fc75540\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+479295266 [label="L19\lLINENUMBER 116 L19\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lL20\lLINENUMBER 117 L20\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lGOTO L9\l"];
+1278878313 [label="L9\lLINENUMBER 128 L9\lFRAME CHOP 1\lLDC \"7f823bf4-b871-464d-b437-9a986fc75540\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL25\l"];
+1507888450 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lLDC \"7f823bf4-b871-464d-b437-9a986fc75540\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+451147071 [label="ALOAD 4\lIFNONNULL L1\l"];
+681924949 [label="L8\lLINENUMBER 104 L8\lALOAD 8\lILOAD 5\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\l"];
+1919794742 [label="L16\lLINENUMBER 113 L16\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lL17\lLINENUMBER 114 L17\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lL18\lLINENUMBER 115 L18\lALOAD 10\lIFNULL L9\l"];
+1970424734 [label="L10\lLINENUMBER 107 L10\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L11\l"];
+143684841 [label="L11\lLINENUMBER 110 L11\lFRAME SAME\lALOAD 0\lALOAD 3\lLLOAD 6\lL13\lLINENUMBER 111 L13\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getDbFileSummary (Ljava/lang/Object;J)Lcom/sleepycat/je/cleaner/DbFileSummary;\lASTORE 10\lL14\lLINENUMBER 112 L14\lILOAD 9\lIFEQ L15\l"];
+184412946 [label="ALOAD 3\lIFNONNULL L11\l"];
+397905463 [label="L1\lLINENUMBER 98 L1\lFRAME SAME\lLLOAD 1\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getFileNumber (J)J\lLSTORE 6\lL2\lLINENUMBER 99 L2\lALOAD 0\lLLOAD 6\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getFileSummary (J)Lcom/sleepycat/je/cleaner/TrackedFileSummary;\lASTORE 8\lL3\lLINENUMBER 100 L3\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lL4\lLINENUMBER 101 L4\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lL5\lLINENUMBER 102 L5\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.isLNType (Lcom/sleepycat/je/log/LogEntryType;)Z\lISTORE 9\lL6\lLINENUMBER 103 L6\lILOAD 9\lIFEQ L7\l"];
+109571791 [label="L7\lLINENUMBER 106 L7\lFRAME APPEND [J com/sleepycat/je/cleaner/TrackedFileSummary I]\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.trackObsoleteInfo (Lcom/sleepycat/je/log/LogEntryType;)Z\lIFEQ L9\l"];
+1022241662 [label="L23\lLINENUMBER 123 L23\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lL24\lLINENUMBER 124 L24\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\l"];
+63486253 [label="ALOAD 8\lGETFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\lILOAD 5\lIF_ICMPGE L7\l"];
+388857362 [label="L15\lLINENUMBER 120 L15\lFRAME APPEND [com/sleepycat/je/cleaner/DbFileSummary]\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lL21\lLINENUMBER 121 L21\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lL22\lLINENUMBER 122 L22\lALOAD 10\lIFNULL L9\l"];
+entry;
+exit;
+24893537 -> 397905463
+24893537 -> 451147071
+1868161246 -> exit
+479295266 -> 1278878313
+1278878313 -> exit
+1507888450 -> exit
+451147071 -> 1507888450
+451147071 -> 397905463
+681924949 -> 109571791
+1919794742 -> 479295266
+1919794742 -> 1278878313
+1970424734 -> 143684841
+1970424734 -> 184412946
+entry -> 24893537
+143684841 -> 388857362
+143684841 -> 1919794742
+184412946 -> 1868161246
+184412946 -> 143684841
+397905463 -> 109571791
+397905463 -> 63486253
+109571791 -> 1278878313
+109571791 -> 1970424734
+1022241662 -> 1278878313
+63486253 -> 109571791
+63486253 -> 681924949
+388857362 -> 1278878313
+388857362 -> 1022241662
+24893537[fontcolor="purple", penwidth=3, color="purple"];
+1868161246[fontcolor="purple", penwidth=3, color="purple"];
+1278878313[fontcolor="purple", penwidth=3, color="purple"];
+1507888450[fontcolor="purple", penwidth=3, color="purple"];
+}

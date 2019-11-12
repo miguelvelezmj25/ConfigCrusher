@@ -1,48 +1,48 @@
 digraph getReadableLocker {
 node [shape=record];
-71419626 [label="L8\lLINENUMBER 165 L8\lICONST_1\lISTORE 2\l"];
-1294541698 [label="L10\lFRAME SAME\lICONST_0\l"];
-309687411 [label="ALOAD 1\lL3\lLINENUMBER 148 L3\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isTransactional ()Z\lIFEQ L2\l"];
-1771388511 [label="ALOAD 3\lL11\lLINENUMBER 170 L11\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L10\l"];
-2117157744 [label="L5\lLINENUMBER 164 L5\lFRAME SAME\lALOAD 1\lIFNULL L7\l"];
-1041470612 [label="L0\lLINENUMBER 144 L0\lLDC \"8ca0f948-fb9b-4dc2-aff5-a83ffaf46914\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getDbImpl (Lcom/sleepycat/je/Database;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 3\lL1\lLINENUMBER 146 L1\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isTransactional ()Z\lIFNE L2\l"];
-1088540638 [label="L2\lLINENUMBER 155 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 1\lIFNULL L5\l"];
-2012205126 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isTransactional ()Z\lIFNE L5\l"];
-811656605 [label="L4\lLINENUMBER 149 L4\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the database was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lLDC \"8ca0f948-fb9b-4dc2-aff5-a83ffaf46914\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
-1308681252 [label="L6\lLINENUMBER 156 L6\lACONST_NULL\lASTORE 1\l"];
-2102297387 [label="ALOAD 1\lIFNULL L2\l"];
-1321229199 [label="ICONST_1\lGOTO L12\l"];
-2038148212 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isReadCommittedIsolation ()Z\lIFEQ L7\l"];
-220547816 [label="L7\lLINENUMBER 168 L7\lFRAME SAME\lALOAD 3\lL9\lLINENUMBER 169 L9\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L10\l"];
-1153212971 [label="L12\lFRAME SAME1 I\lISTORE 4\lL13\lLINENUMBER 172 L13\lALOAD 0\lL14\lLINENUMBER 173 L14\lINVOKEVIRTUAL com/sleepycat/je/Database.getEnvironment ()Lcom/sleepycat/je/Environment;\lALOAD 1\lILOAD 4\lILOAD 2\lL15\lLINENUMBER 172 L15\lINVOKESTATIC com/sleepycat/je/txn/LockerFactory.getReadableLocker (Lcom/sleepycat/je/Environment;Lcom/sleepycat/je/txn/Locker;ZZ)Lcom/sleepycat/je/txn/Locker;\lLDC \"8ca0f948-fb9b-4dc2-aff5-a83ffaf46914\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL16\l"];
+15780147 [label="L8\lLINENUMBER 165 L8\lICONST_1\lISTORE 2\l"];
+1943399649 [label="L7\lLINENUMBER 168 L7\lFRAME SAME\lALOAD 3\lL9\lLINENUMBER 169 L9\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L10\l"];
+1827036576 [label="L10\lFRAME SAME\lICONST_0\l"];
+1670689057 [label="L0\lLINENUMBER 144 L0\lLDC \"373e6207-0ab6-497c-86f9-8461a8498d71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getDbImpl (Lcom/sleepycat/je/Database;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 3\lL1\lLINENUMBER 146 L1\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isTransactional ()Z\lIFNE L2\l"];
+1054533771 [label="ALOAD 1\lIFNULL L2\l"];
+419743863 [label="L12\lFRAME SAME1 I\lISTORE 4\lL13\lLINENUMBER 172 L13\lALOAD 0\lL14\lLINENUMBER 173 L14\lINVOKEVIRTUAL com/sleepycat/je/Database.getEnvironment ()Lcom/sleepycat/je/Environment;\lALOAD 1\lILOAD 4\lILOAD 2\lL15\lLINENUMBER 172 L15\lINVOKESTATIC com/sleepycat/je/txn/LockerFactory.getReadableLocker (Lcom/sleepycat/je/Environment;Lcom/sleepycat/je/txn/Locker;ZZ)Lcom/sleepycat/je/txn/Locker;\lLDC \"373e6207-0ab6-497c-86f9-8461a8498d71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lARETURN\lL16\l"];
+1129672093 [label="ALOAD 3\lL11\lLINENUMBER 170 L11\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L10\l"];
+601868531 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isTransactional ()Z\lIFNE L5\l"];
+905500117 [label="L5\lLINENUMBER 164 L5\lFRAME SAME\lALOAD 1\lIFNULL L7\l"];
+112332901 [label="L2\lLINENUMBER 155 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 1\lIFNULL L5\l"];
+217270939 [label="ALOAD 1\lL3\lLINENUMBER 148 L3\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isTransactional ()Z\lIFEQ L2\l"];
+523969522 [label="ICONST_1\lGOTO L12\l"];
+1252585373 [label="L4\lLINENUMBER 149 L4\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the database was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lLDC \"373e6207-0ab6-497c-86f9-8461a8498d71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lATHROW\l"];
+772809088 [label="ALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isReadCommittedIsolation ()Z\lIFEQ L7\l"];
+600438371 [label="L6\lLINENUMBER 156 L6\lACONST_NULL\lASTORE 1\l"];
 entry;
 exit;
-71419626 -> 220547816
-1294541698 -> 1153212971
-309687411 -> 811656605
-309687411 -> 1088540638
-1771388511 -> 1321229199
-1771388511 -> 1294541698
-2117157744 -> 2038148212
-2117157744 -> 220547816
-1041470612 -> 2102297387
-1041470612 -> 1088540638
-1088540638 -> 2012205126
-1088540638 -> 2117157744
-2012205126 -> 1308681252
-2012205126 -> 2117157744
-entry -> 1041470612
-811656605 -> exit
-1308681252 -> 2117157744
-2102297387 -> 309687411
-2102297387 -> 1088540638
-1321229199 -> 1153212971
-2038148212 -> 71419626
-2038148212 -> 220547816
-220547816 -> 1294541698
-220547816 -> 1771388511
-1153212971 -> exit
-811656605[fontcolor="purple", penwidth=3, color="purple"];
-1041470612[fontcolor="purple", penwidth=3, color="purple"];
-1153212971[fontcolor="purple", penwidth=3, color="purple"];
+15780147 -> 1943399649
+1943399649 -> 1827036576
+1943399649 -> 1129672093
+1827036576 -> 419743863
+1670689057 -> 1054533771
+1670689057 -> 112332901
+1054533771 -> 217270939
+1054533771 -> 112332901
+419743863 -> exit
+1129672093 -> 1827036576
+1129672093 -> 523969522
+601868531 -> 905500117
+601868531 -> 600438371
+905500117 -> 1943399649
+905500117 -> 772809088
+112332901 -> 601868531
+112332901 -> 905500117
+entry -> 1670689057
+217270939 -> 1252585373
+217270939 -> 112332901
+523969522 -> 419743863
+1252585373 -> exit
+772809088 -> 15780147
+772809088 -> 1943399649
+600438371 -> 905500117
+1670689057[fontcolor="purple", penwidth=3, color="purple"];
+419743863[fontcolor="purple", penwidth=3, color="purple"];
+1252585373[fontcolor="purple", penwidth=3, color="purple"];
 }

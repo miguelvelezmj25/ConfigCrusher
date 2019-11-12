@@ -1,0 +1,30 @@
+digraph criticalEviction {
+node [shape=record];
+813614661 [label="L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+498590381 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.MAKE_COLD : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+1619239927 [label="L0\lLINENUMBER 730 L0\lLDC \"e9f1309b-de13-441a-a4bd-76200d078f74\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.allowEviction : Z\lIFEQ L1\l"];
+725115043 [label="L1\lLINENUMBER 737 L1\lFRAME SAME\lLDC \"e9f1309b-de13-441a-a4bd-76200d078f74\"\lINVOKESTATIC edu/cmu/cs/mvelezce/java/execute/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL5\l"];
+1479251345 [label="L4\lLINENUMBER 735 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.criticalEviction (Z)V\l"];
+710910196 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.EVICT_BIN : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+1293895690 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lL3\lLINENUMBER 731 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getDirty ()Z\lIFNE L4\l"];
+1975576776 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 1619239927
+813614661 -> 725115043
+813614661 -> 710910196
+498590381 -> 725115043
+498590381 -> 1479251345
+1619239927 -> 725115043
+1619239927 -> 1975576776
+725115043 -> exit
+1479251345 -> 725115043
+710910196 -> 498590381
+710910196 -> 725115043
+1293895690 -> 813614661
+1293895690 -> 1479251345
+1975576776 -> 813614661
+1975576776 -> 1293895690
+1619239927[fontcolor="purple", penwidth=3, color="purple"];
+725115043[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.Executor;
+import edu.cmu.cs.mvelezce.java.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.ExecutorAdapter;
 
 import java.io.IOException;

@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.idta;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.Executor;
+import edu.cmu.cs.mvelezce.java.execute.Executor;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class IDTAExecutorTest {
     List<String> options = BaseTrivialAdapter.getListOfOptions();
     Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
 
-    Executor executor = new IDTAExecutor(programName, configurations);
+    Executor executor = new IDTAInstrumentationExecutor(programName, configurations);
 
     String[] args = new String[3];
     args[0] = "-delres";
@@ -37,7 +37,7 @@ public class IDTAExecutorTest {
     configurations.clear();
     configurations.add(new HashSet<>());
 
-    Executor executor = new IDTAExecutor(programName, configurations);
+    Executor executor = new IDTAInstrumentationExecutor(programName, configurations);
 
     String[] args = new String[3];
     args[0] = "-delres";

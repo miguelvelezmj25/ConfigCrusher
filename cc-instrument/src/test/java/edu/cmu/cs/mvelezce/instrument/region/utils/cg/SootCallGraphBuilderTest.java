@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.cg;
 
-import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
+import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import org.junit.Assert;
 import org.junit.Test;
 import soot.jimple.toolkits.callgraph.CallGraph;

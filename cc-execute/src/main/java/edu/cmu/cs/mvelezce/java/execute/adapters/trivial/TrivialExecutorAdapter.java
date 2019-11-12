@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.adapters.trivial;
 
-import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
+import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 

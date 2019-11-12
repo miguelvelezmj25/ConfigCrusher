@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.adapter.adapters.trivial.BaseTrivialAdapter;
+import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;

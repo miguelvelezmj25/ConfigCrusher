@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.java.processor.execution.sampling.idta;
+package edu.cmu.cs.mvelezce.java.processor.execution.sampling.execution.idta;
 
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.IDTAExecutor;
-import edu.cmu.cs.mvelezce.java.processor.execution.sampling.ExecutionProcessor;
+import edu.cmu.cs.mvelezce.java.processor.execution.sampling.execution.ExecutionProcessor;
 
 public class IDTAExecutionProcessor extends ExecutionProcessor {
 

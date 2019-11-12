@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.processor.execution.sampling;
+package edu.cmu.cs.mvelezce.java.processor.execution.sampling.execution;
 
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 

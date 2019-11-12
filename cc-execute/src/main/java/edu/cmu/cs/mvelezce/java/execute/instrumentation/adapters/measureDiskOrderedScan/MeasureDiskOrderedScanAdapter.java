@@ -1,8 +1,8 @@
-package edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan;
+package edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.measureDiskOrderedScan;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.Executor;
-import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.Executor;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.ExecutorAdapter;
 
 import java.io.IOException;
 import java.util.Set;

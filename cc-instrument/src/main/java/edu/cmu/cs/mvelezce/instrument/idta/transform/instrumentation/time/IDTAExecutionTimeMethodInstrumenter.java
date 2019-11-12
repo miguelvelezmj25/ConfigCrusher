@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodI
 import edu.cmu.cs.mvelezce.instrument.region.utils.graphBuilder.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
-import edu.cmu.cs.mvelezce.java.execute.region.RegionsManager;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.region.RegionsManager;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 

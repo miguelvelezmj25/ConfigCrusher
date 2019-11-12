@@ -1,11 +1,11 @@
-package edu.cmu.cs.mvelezce.java.execute;
+package edu.cmu.cs.mvelezce.java.execute.instrumentation;
 
 import com.mijecu25.meme.utils.gc.GC;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.adapters.trivial.TrivialExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.parser.RawExecutionParser;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial.TrivialExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;

@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.idta;
 
-import edu.cmu.cs.mvelezce.java.execute.idta.IDTAExecutor;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.idta.IDTAExecutor;
 import edu.cmu.cs.mvelezce.java.processor.execution.ExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
 

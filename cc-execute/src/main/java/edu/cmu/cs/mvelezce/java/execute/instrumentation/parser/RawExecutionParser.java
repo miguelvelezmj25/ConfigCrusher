@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.execute.parser;
+package edu.cmu.cs.mvelezce.java.execute.instrumentation.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

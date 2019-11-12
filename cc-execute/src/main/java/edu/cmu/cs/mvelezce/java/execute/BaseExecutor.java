@@ -1,12 +1,12 @@
 package edu.cmu.cs.mvelezce.java.execute;
 
+import com.mijecu25.meme.utils.gc.GC;
 import edu.cmu.cs.mvelezce.adapter.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.trivial.TrivialExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
-import edu.cmu.cs.mvelezce.utils.gc.GC;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,8 +62,8 @@ public abstract class BaseExecutor implements Executor {
 
     Process process = builder.start();
 
-    edu.cmu.cs.mvelezce.utils.execute.Executor.processOutput(process);
-    edu.cmu.cs.mvelezce.utils.execute.Executor.processError(process);
+    com.mijecu25.meme.utils.execute.Executor.processOutput(process);
+    com.mijecu25.meme.utils.execute.Executor.processError(process);
 
     process.waitFor();
   }
@@ -112,17 +112,17 @@ public abstract class BaseExecutor implements Executor {
   }
 
   private String getClassPath(String programClassPath) {
-    return edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
+    return com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
         + "../cc-analysis/"
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
         + "../cc-utils/"
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
         + "../../producer-consumer-4j/"
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.CLASS_PATH
-        + edu.cmu.cs.mvelezce.utils.execute.Executor.PATH_SEPARATOR
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
         + programClassPath;
   }
 

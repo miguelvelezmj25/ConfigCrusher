@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.adapter.adapters.indexFiles;
 
+import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
-import edu.cmu.cs.mvelezce.utils.execute.Executor;
 
 import java.io.IOException;
 import java.util.ArrayList;

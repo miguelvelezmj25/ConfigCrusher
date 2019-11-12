@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.adapter.adapters.prevayler;
 
+import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.adapter.adapters.BaseAdapter;
-import edu.cmu.cs.mvelezce.utils.execute.Executor;
 
 import java.util.Arrays;
 import java.util.List;

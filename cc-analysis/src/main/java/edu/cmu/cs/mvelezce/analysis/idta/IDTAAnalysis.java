@@ -2,11 +2,11 @@ package edu.cmu.cs.mvelezce.analysis.idta;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mijecu25.meme.utils.execute.Executor;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.utils.execute.Executor;
 
 import java.io.File;
 import java.io.IOException;

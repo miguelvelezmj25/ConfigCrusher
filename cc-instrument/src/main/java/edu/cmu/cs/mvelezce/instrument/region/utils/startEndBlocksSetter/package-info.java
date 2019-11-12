@@ -2,6 +2,6 @@
 @ReturnTypesAreNonNullByDefault
 package edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter;
 
-import edu.cmu.cs.mvelezce.utils.annotations.ReturnTypesAreNonNullByDefault;
+import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

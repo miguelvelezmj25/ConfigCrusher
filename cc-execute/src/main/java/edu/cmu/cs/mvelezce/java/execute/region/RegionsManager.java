@@ -35,42 +35,42 @@ public class RegionsManager implements IProducerConsumer {
   }
 
   public static void enter(String id) {
-//    long time = System.nanoTime();
-//    try {
-//      INPUT_QUEUE.put(START + COMMA + id + COMMA + time);
-//    } catch (InterruptedException ie) {
-//      throw new RuntimeException(ie);
-//    }
+    //    long time = System.nanoTime();
+    //    try {
+    //      INPUT_QUEUE.put(START + COMMA + id + COMMA + time);
+    //    } catch (InterruptedException ie) {
+    //      throw new RuntimeException(ie);
+    //    }
   }
 
   public static void exit(String id) {
-//    long time = System.nanoTime();
-//    try {
-//      INPUT_QUEUE.put(END + COMMA + id + COMMA + time);
-//    } catch (InterruptedException ie) {
-//      throw new RuntimeException(ie);
-//    }
+    //    long time = System.nanoTime();
+    //    try {
+    //      INPUT_QUEUE.put(END + COMMA + id + COMMA + time);
+    //    } catch (InterruptedException ie) {
+    //      throw new RuntimeException(ie);
+    //    }
   }
 
   public static void exitProgram() {
-//    try {
-//      while (!INPUT_QUEUE.isEmpty()) {
-//        Thread.sleep(2000);
-//      }
-//
-//      Thread.sleep(2000);
-//    } catch (InterruptedException ie) {
-//      throw new RuntimeException(ie);
-//    }
-//
-//    ((RuntimeProducer) PRODUCER).terminate();
+    //    try {
+    //      while (!INPUT_QUEUE.isEmpty()) {
+    //        Thread.sleep(2000);
+    //      }
+    //
+    //      Thread.sleep(2000);
+    //    } catch (InterruptedException ie) {
+    //      throw new RuntimeException(ie);
+    //    }
+    //
+    //    ((RuntimeProducer) PRODUCER).terminate();
   }
 
   @Override
   public void execute() {
-//    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(PRODUCER);
-//    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(CONSUMER);
-//
-//    PRODUCER_CONSUMER_SETUP.getExecutorService().shutdown();
+    //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(PRODUCER);
+    //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(CONSUMER);
+    //
+    //    PRODUCER_CONSUMER_SETUP.getExecutorService().shutdown();
   }
 }

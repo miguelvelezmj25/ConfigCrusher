@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @ReturnTypesAreNonNullByDefault
-package edu.cmu.cs.mvelezce.model.idta;
+package edu.cmu.cs.mvelezce.analysis.region.java;
 
 import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 

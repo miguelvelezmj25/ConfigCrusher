@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.utils.jar;
 
-import edu.cmu.cs.mvelezce.utils.execute.Executor;
+import com.mijecu25.meme.utils.execute.Executor;
 
 import java.io.File;
 import java.io.IOException;

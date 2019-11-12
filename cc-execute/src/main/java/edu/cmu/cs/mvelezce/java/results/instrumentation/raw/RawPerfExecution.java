@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.results.raw;
+package edu.cmu.cs.mvelezce.java.results.instrumentation.raw;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 

@@ -1,8 +1,8 @@
-package edu.cmu.cs.mvelezce.java.processor.execution.idta;
+package edu.cmu.cs.mvelezce.java.processor.execution.instrumentation.idta;
 
 import edu.cmu.cs.mvelezce.java.execute.instrumentation.idta.IDTAExecutor;
-import edu.cmu.cs.mvelezce.java.processor.execution.ExecutionProcessor;
-import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
+import edu.cmu.cs.mvelezce.java.processor.execution.instrumentation.ExecutionProcessor;
+import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawPerfExecution;
 
 import java.util.HashMap;
 import java.util.Map;

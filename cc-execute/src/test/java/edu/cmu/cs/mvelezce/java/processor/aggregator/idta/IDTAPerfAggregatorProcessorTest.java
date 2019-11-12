@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.java.processor.aggregator.idta;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
-import edu.cmu.cs.mvelezce.java.processor.execution.idta.IDTAExecutionProcessor;
+import edu.cmu.cs.mvelezce.java.processor.execution.instrumentation.idta.IDTAExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import org.junit.Test;
 

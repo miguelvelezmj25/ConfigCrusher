@@ -1,11 +1,11 @@
-package edu.cmu.cs.mvelezce.java.processor.execution;
+package edu.cmu.cs.mvelezce.java.processor.execution.instrumentation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.execute.instrumentation.region.RegionsManager;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
-import edu.cmu.cs.mvelezce.java.results.raw.RawPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 

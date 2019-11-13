@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler;
 
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

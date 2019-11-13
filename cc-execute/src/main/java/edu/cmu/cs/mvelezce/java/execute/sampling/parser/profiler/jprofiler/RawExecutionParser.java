@@ -5,15 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
-import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.Hotspot;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.JProfilerSnapshotEntry;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Node;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution> {
 
@@ -22,6 +21,12 @@ public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution>
   private static final String JPROFILER_SNAPSHOT_NAME = "snapshot";
   private static final String JPROFILER_SNAPSHOT_FILE = JPROFILER_SNAPSHOT_NAME + ".jps";
   private static final String EXPORTED_FILE = JPROFILER_SNAPSHOT_NAME + ".xml";
+
+  private static final String OPEN_NODE = "<node";
+  private static final String OPEN_HOTSPOT = "<hotspot";
+  private static final String CLOSE_NODE = "</node>";
+  private static final String CLOSE_HOTSPOT = "</hotspot>";
+  private static final String CLOSE_TAG = "/>";
 
   public RawExecutionParser(String programName, String outputDir) {
     super(programName, outputDir);
@@ -75,9 +80,65 @@ public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution>
   }
 
   private List<Hotspot> parseHotpots() throws IOException {
-    XmlMapper xmlMapper = new XmlMapper();
+    List<Hotspot> hotspots = new ArrayList<>(1_000);
 
-    return xmlMapper.readValue(new File(EXPORTED_FILE), new TypeReference<List<Hotspot>>() {});
+    XmlMapper xmlMapper = new XmlMapper();
+    BufferedReader reader = new BufferedReader(new FileReader(EXPORTED_FILE));
+    String line;
+    Deque<JProfilerSnapshotEntry> stack = new ArrayDeque<>(10_000);
+
+    while ((line = reader.readLine()) != null) {
+      if (line.contains(OPEN_HOTSPOT)) {
+        Hotspot hotspot =
+            xmlMapper.readValue(line + CLOSE_HOTSPOT, new TypeReference<Hotspot>() {});
+        stack.push(hotspot);
+        hotspots.add(hotspot);
+
+        if (line.contains(CLOSE_TAG)) {
+          stack.pop();
+        }
+      } else if (line.contains(OPEN_NODE)) {
+        Node node = xmlMapper.readValue(line + CLOSE_NODE, new TypeReference<Node>() {});
+        JProfilerSnapshotEntry top = stack.peek();
+
+        if (top == null) {
+          throw new RuntimeException("The stack of nodes and hotpots is empty");
+        }
+
+        top.getNodes().add(node);
+        stack.push(node);
+
+        if (line.contains(CLOSE_TAG)) {
+          stack.pop();
+        }
+      } else if (line.contains(CLOSE_NODE)) {
+        if (stack.isEmpty()) {
+          throw new RuntimeException("The stack of nodes and hotpots is empty");
+        }
+
+        if (!(stack.peek() instanceof Node)) {
+          throw new RuntimeException(
+              "Expected to pop a Node, but popped a " + stack.peek().getClass());
+        }
+
+        stack.pop();
+      } else if (line.contains(CLOSE_HOTSPOT)) {
+        if (stack.isEmpty()) {
+          throw new RuntimeException("The stack of nodes and hotpots is empty");
+        }
+
+        if (!(stack.peek() instanceof Hotspot)) {
+          throw new RuntimeException(
+              "Expected to pop a Hotspot, but popped a " + stack.peek().getClass());
+        }
+
+        stack.pop();
+      }
+    }
+
+    reader.close();
+
+    return hotspots;
   }
 
   private void exportSnapShot() throws IOException, InterruptedException {

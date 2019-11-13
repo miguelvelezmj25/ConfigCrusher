@@ -1,11 +1,11 @@
-package edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler;
+package edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node {
+public class Hotspot implements JProfilerSnapshotEntry {
 
   private final boolean leaf;
   private final String className;
@@ -15,10 +15,10 @@ public class Node {
   private final int count;
   private final int lineNumber;
   private final double percent;
-  private final List<Node> node;
+  private final List<Node> nodes;
 
   // Dummy constructor for jackson xml
-  private Node() {
+  private Hotspot() {
     this.leaf = false;
     this.className = "";
     this.methodName = "";
@@ -27,10 +27,10 @@ public class Node {
     this.count = 0;
     this.lineNumber = 0;
     this.percent = 0.0;
-    this.node = new ArrayList<>();
+    this.nodes = new ArrayList<>();
   }
 
-  public Node(
+  public Hotspot(
       boolean leaf,
       String className,
       String methodName,
@@ -39,7 +39,7 @@ public class Node {
       int count,
       int lineNumber,
       double percent,
-      List<Node> node) {
+      List<Node> nodes) {
     this.leaf = leaf;
     this.className = className;
     this.methodName = methodName;
@@ -48,42 +48,51 @@ public class Node {
     this.count = count;
     this.lineNumber = lineNumber;
     this.percent = percent;
-    this.node = node;
+    this.nodes = nodes;
   }
 
+  @Override
   public boolean getLeaf() {
     return leaf;
   }
 
+  @Override
   public String getMethodName() {
     return methodName;
   }
 
+  @Override
   public String getMethodSignature() {
     return methodSignature;
   }
 
+  @Override
   public long getTime() {
     return time;
   }
 
+  @Override
   public int getCount() {
     return count;
   }
 
+  @Override
   public int getLineNumber() {
     return lineNumber;
   }
 
+  @Override
   public double getPercent() {
     return percent;
   }
 
-  public List<Node> getNode() {
-    return node;
+  @Override
+  public List<Node> getNodes() {
+    return nodes;
   }
 
   @JsonProperty("class")
+  @Override
   public String getClassName() {
     return className;
   }

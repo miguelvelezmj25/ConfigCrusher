@@ -21,7 +21,7 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
       "../performance-mapper-evaluation/instrumented/berkeley-db";
   public static final String INSTRUMENTED_CLASS_PATH =
       "../performance-mapper-evaluation/instrumented/berkeley-db/target/classes";
-  private static final String ORIGINAL_CLASS_PATH =
+  public static final String ORIGINAL_CLASS_PATH =
       "../performance-mapper-evaluation/original/berkeley-db/target/classes";
   private static final String HOME_DIR = "tmp";
   private static final String[] OPTIONS = {

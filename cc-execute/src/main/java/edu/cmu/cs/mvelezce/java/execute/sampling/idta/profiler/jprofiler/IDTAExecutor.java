@@ -1,12 +1,12 @@
-package edu.cmu.cs.mvelezce.java.execute.instrumentation.idta;
+package edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler;
 
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.measureDiskOrderedScan.InstrumentMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial.InstrumentTrivialExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.parser.RawExecutionParser;
+import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.profiler.jprofiler.JProfilerSamplingMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.trivial.profiler.jprofiler.JProfilerSamplingTrivialExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.*;
 public class IDTAExecutor extends BaseExecutor {
 
   public static final String OUTPUT_DIR =
-      "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/instrumentation";
+      "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/sampling";
 
   public IDTAExecutor(String programName) {
     this(programName, new HashSet<>());
@@ -35,11 +35,11 @@ public class IDTAExecutor extends BaseExecutor {
     ExecutorAdapter adapter;
 
     switch (this.getProgramName()) {
-      case InstrumentTrivialExecutorAdapter.PROGRAM_NAME:
-        adapter = new InstrumentTrivialExecutorAdapter(this);
+      case JProfilerSamplingTrivialExecutorAdapter.PROGRAM_NAME:
+        adapter = new JProfilerSamplingTrivialExecutorAdapter(this);
         break;
-      case InstrumentMeasureDiskOrderedScanAdapter.PROGRAM_NAME:
-        adapter = new InstrumentMeasureDiskOrderedScanAdapter(this);
+      case JProfilerSamplingMeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        adapter = new JProfilerSamplingMeasureDiskOrderedScanAdapter(this);
         ((BaseMeasureDiskOrderedScanAdapter) adapter)
             .preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
         break;
@@ -50,11 +50,13 @@ public class IDTAExecutor extends BaseExecutor {
     return adapter;
   }
 
-  public void executeProgram(String programClassPath, String mainClass, String[] configArgs)
-      throws InterruptedException, IOException {
+  public void executeProgram(
+      String programClassPath, String mainClass, String agentPath, String[] configArgs)
+      throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
-    List<String> commandList = this.buildCommandAsList(programClassPath, mainClass, configArgs);
+    List<String> commandList =
+        this.buildCommandAsList(programClassPath, mainClass, agentPath, configArgs);
     builder.command(commandList);
 
     Process process = builder.start();
@@ -66,35 +68,18 @@ public class IDTAExecutor extends BaseExecutor {
   }
 
   private List<String> buildCommandAsList(
-      String programClassPath, String mainClass, String[] configArgs) {
+      String programClassPath, String mainClass, String agentPath, String[] configArgs) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
+    commandList.add(agentPath);
     commandList.add("-Xmx26g");
     commandList.add("-Xms26g");
-    commandList.add("-XX:+UseConcMarkSweepGC");
-    //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
-
-    commandList.add(this.getClassPath(programClassPath));
+    commandList.add(programClassPath);
     commandList.add(mainClass);
     List<String> configList = Arrays.asList(configArgs);
     commandList.addAll(configList);
 
     return commandList;
-  }
-
-  private String getClassPath(String programClassPath) {
-    return Executor.CLASS_PATH
-        + Executor.PATH_SEPARATOR
-        + "../cc-analysis/"
-        + Executor.CLASS_PATH
-        + Executor.PATH_SEPARATOR
-        + "../cc-utils/"
-        + Executor.CLASS_PATH
-        + Executor.PATH_SEPARATOR
-        + "../../producer-consumer-4j/"
-        + Executor.CLASS_PATH
-        + Executor.PATH_SEPARATOR
-        + programClassPath;
   }
 }

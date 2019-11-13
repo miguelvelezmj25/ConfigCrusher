@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.execute.instrumentation.region;
+package edu.cmu.cs.mvelezce.region;
 
 import edu.cmu.cs.mvelezce.analysis.region.Region;
 import edu.cmu.cs.mvelezce.setup.IProducerConsumer;

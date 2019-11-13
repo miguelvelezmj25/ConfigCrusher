@@ -1,35 +1,37 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.sampling;
 
-import edu.cmu.cs.mvelezce.analysis.Analysis;
+import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.java.processor.execution.BaseExecutionProcessor;
+import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.Hotspot;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawPerfExecution;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public abstract class ExecutionProcessor implements Analysis<Object> {
+public abstract class ExecutionProcessor extends BaseExecutionProcessor<RawPerfExecution> {
 
-  private final String outputDir;
+  private final Set<JavaRegion> regions;
 
-  public ExecutionProcessor(String programName) {
-    this.outputDir = this.outputDir() + "/" + programName + "/execution/processed";
+  public ExecutionProcessor(
+      String programName,
+      Map<Integer, Set<RawPerfExecution>> itersToRawPerfExecutions,
+      Set<JavaRegion> regions) {
+    super(programName, itersToRawPerfExecutions);
+
+    this.regions = regions;
   }
 
   @Override
-  public Object analyze() throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("implement");
+  protected ProcessedPerfExecution getProcessedPerfExec(RawPerfExecution rawPerfExecution) {
+    Map<String, Long> regionToPerf = this.process(rawPerfExecution.getHotspots());
+    Set<String> config = rawPerfExecution.getConfiguration();
+
+    return new ProcessedPerfExecution(config, regionToPerf);
   }
 
-  @Override
-  public Object analyze(String[] args) throws IOException, InterruptedException {
-    throw new UnsupportedOperationException("implement");
-  }
-
-  @Override
-  public void writeToFile(Object results) throws IOException {
-    throw new UnsupportedOperationException("implement");
-  }
-
-  @Override
-  public Object readFromFile(File file) throws IOException {
+  private Map<String, Long> process(List<Hotspot> hotspots) {
     throw new UnsupportedOperationException("implement");
   }
 }

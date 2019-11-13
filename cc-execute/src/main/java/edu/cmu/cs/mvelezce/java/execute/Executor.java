@@ -10,8 +10,5 @@ public interface Executor {
 
   void executeIteration(int iteration) throws InterruptedException, IOException;
 
-  void executeProgram(String programClassPath, String mainClass, String[] configuration)
-      throws InterruptedException, IOException;
-
   String outputDir();
 }

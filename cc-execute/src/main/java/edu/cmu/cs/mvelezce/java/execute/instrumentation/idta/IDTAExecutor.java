@@ -8,8 +8,8 @@ import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial.Instrum
 import edu.cmu.cs.mvelezce.java.execute.instrumentation.parser.RawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 public class IDTAExecutor extends BaseExecutor {
 
@@ -47,5 +47,53 @@ public class IDTAExecutor extends BaseExecutor {
     }
 
     return adapter;
+  }
+
+  public void executeProgram(String programClassPath, String mainClass, String[] configArgs)
+      throws InterruptedException, IOException {
+    ProcessBuilder builder = new ProcessBuilder();
+
+    List<String> commandList = this.buildCommandAsList(programClassPath, mainClass, configArgs);
+    builder.command(commandList);
+
+    Process process = builder.start();
+
+    com.mijecu25.meme.utils.execute.Executor.processOutput(process);
+    com.mijecu25.meme.utils.execute.Executor.processError(process);
+
+    process.waitFor();
+  }
+
+  private List<String> buildCommandAsList(
+      String programClassPath, String mainClass, String[] configArgs) {
+    List<String> commandList = new ArrayList<>();
+    commandList.add("java");
+    commandList.add("-Xmx26g");
+    commandList.add("-Xms26g");
+    commandList.add("-XX:+UseConcMarkSweepGC");
+    //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
+    commandList.add("-cp");
+
+    commandList.add(this.getClassPath(programClassPath));
+    commandList.add(mainClass);
+    List<String> configList = Arrays.asList(configArgs);
+    commandList.addAll(configList);
+
+    return commandList;
+  }
+
+  private String getClassPath(String programClassPath) {
+    return com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
+        + "../cc-analysis/"
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
+        + "../cc-utils/"
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
+        + "../../producer-consumer-4j/"
+        + com.mijecu25.meme.utils.execute.Executor.CLASS_PATH
+        + com.mijecu25.meme.utils.execute.Executor.PATH_SEPARATOR
+        + programClassPath;
   }
 }

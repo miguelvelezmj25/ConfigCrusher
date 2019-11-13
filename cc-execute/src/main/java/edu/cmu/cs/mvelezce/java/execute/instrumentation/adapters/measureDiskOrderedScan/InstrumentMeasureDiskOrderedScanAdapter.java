@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.measureDiskOrderedScan;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.idta.IDTAExecutor;
 
 import java.io.IOException;
 import java.util.Set;
@@ -10,9 +10,9 @@ import java.util.Set;
 public class InstrumentMeasureDiskOrderedScanAdapter extends BaseMeasureDiskOrderedScanAdapter
     implements ExecutorAdapter {
 
-  private final Executor executor;
+  private final IDTAExecutor executor;
 
-  public InstrumentMeasureDiskOrderedScanAdapter(Executor executor) {
+  public InstrumentMeasureDiskOrderedScanAdapter(IDTAExecutor executor) {
     this.executor = executor;
   }
 

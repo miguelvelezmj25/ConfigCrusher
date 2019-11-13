@@ -48,4 +48,8 @@ public class IDTAExecutor extends BaseExecutor {
 
     return adapter;
   }
+
+  public void executeProgram(String[] configArgs) {
+    throw new UnsupportedOperationException("Implement");
+  }
 }

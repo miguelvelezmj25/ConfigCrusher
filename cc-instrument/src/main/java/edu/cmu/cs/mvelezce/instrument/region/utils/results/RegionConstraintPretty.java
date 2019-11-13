@@ -12,7 +12,7 @@ public class RegionConstraintPretty extends ControlFlowStatementConstraintsPrett
   private final Set<String> endBlocks;
 
   // Dummy constructor for faster xml
-  public RegionConstraintPretty() {
+  private RegionConstraintPretty() {
     this("", "", "", -1, new HashSet<>(), "", "", new HashSet<>());
   }
 

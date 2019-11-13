@@ -15,7 +15,7 @@ public class PerformanceEntry {
   private final Map<UUID, String> regionsToDiffHumanReadable;
 
   // Dummy constructor for jackson xml
-  public PerformanceEntry() {
+  private PerformanceEntry() {
     this.configuration = new HashSet<>();
     this.regionsToPerf = new HashMap<>();
     this.regionsToMin = new HashMap<>();

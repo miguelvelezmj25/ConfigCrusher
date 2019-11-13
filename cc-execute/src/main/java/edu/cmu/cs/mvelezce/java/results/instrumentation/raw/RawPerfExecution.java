@@ -11,7 +11,7 @@ public class RawPerfExecution {
   private final List<String> trace;
 
   // Dummy constructor for jackson xml
-  public RawPerfExecution() {
+  private RawPerfExecution() {
     this.configuration = new HashSet<>();
     this.trace = new ArrayList<>();
   }

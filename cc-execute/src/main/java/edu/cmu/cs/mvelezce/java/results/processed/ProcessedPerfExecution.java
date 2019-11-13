@@ -11,7 +11,7 @@ public class ProcessedPerfExecution {
   private final Map<String, Long> regionsToPerf;
 
   // Dummy constructor for jackson xml
-  public ProcessedPerfExecution() {
+  private ProcessedPerfExecution() {
     this.configuration = new HashSet<>();
     this.regionsToPerf = new HashMap<>();
   }

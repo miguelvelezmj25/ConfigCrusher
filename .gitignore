@@ -229,3 +229,4 @@ vignettes/*.pdf
 /src/main/resources/evaluation/dta/constraints/java/programs/subtraces/indexFiles/
 */data.ser
 */*.jps
+/cc-execute/snapshot.xml

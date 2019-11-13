@@ -14,7 +14,8 @@ public abstract class BaseRawExecutionParser<T> {
     this.outputDir = outputDir;
   }
 
-  public abstract void logExecution(Set<String> configuration, int iter) throws IOException;
+  public abstract void logExecution(Set<String> configuration, int iter)
+      throws IOException, InterruptedException;
 
   public abstract Map<Integer, Set<T>> readResults() throws IOException;
 

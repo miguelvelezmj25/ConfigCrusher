@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @ReturnTypesAreNonNullByDefault
-package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.export.idta;
+package edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler;
 
 import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 

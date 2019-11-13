@@ -1,9 +1,12 @@
 package edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.Hotspot;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,7 @@ public class RawExecutionParser extends BaseRawExecutionParser<Object> {
       "/Applications/JProfiler 10.app/Contents/Resources/app/bin/jpexport";
   private static final String JPROFILER_SNAPSHOT_NAME = "snapshot";
   private static final String JPROFILER_SNAPSHOT_FILE = JPROFILER_SNAPSHOT_NAME + ".jps";
+  private static final String EXPORTED_FILE = JPROFILER_SNAPSHOT_NAME + ".xml";
 
   public RawExecutionParser(String programName, String outputDir) {
     super(programName, outputDir);
@@ -23,6 +27,8 @@ public class RawExecutionParser extends BaseRawExecutionParser<Object> {
   public void logExecution(Set<String> configuration, int iter)
       throws IOException, InterruptedException {
     this.exportSnapShot();
+    this.fixTreeLevelEntry();
+    List<Hotspot> hotspots = this.parseHotpots();
     //    RawPerfExecution rawPerfExecution = new RawPerfExecution(configuration, trace);
     //
     //    String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() +
@@ -33,6 +39,43 @@ public class RawExecutionParser extends BaseRawExecutionParser<Object> {
     //    ObjectMapper mapper = new ObjectMapper();
     //    mapper.writeValue(file, rawPerfExecution);
     throw new UnsupportedOperationException("implement");
+  }
+
+  private void fixTreeLevelEntry() throws IOException {
+    String tmpFileName = "tmp.xml";
+    this.writeToTmpFile(tmpFileName);
+    this.renameTmpFile(tmpFileName);
+  }
+
+  private void renameTmpFile(String tmpFileName) {
+    File oldFile = new File(EXPORTED_FILE);
+    oldFile.delete();
+
+    File newFile = new File(tmpFileName);
+    newFile.renameTo(oldFile);
+  }
+
+  private void writeToTmpFile(String tmpFileName) throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(EXPORTED_FILE));
+    BufferedWriter writer = new BufferedWriter(new FileWriter(tmpFileName));
+    String line;
+
+    while ((line = reader.readLine()) != null) {
+      if (line.contains("<tree ")) {
+        line = "<tree>";
+      }
+
+      writer.write(line + "\n");
+    }
+
+    reader.close();
+    writer.close();
+  }
+
+  private List<Hotspot> parseHotpots() throws IOException {
+    XmlMapper xmlMapper = new XmlMapper();
+
+    return xmlMapper.readValue(new File(EXPORTED_FILE), new TypeReference<List<Hotspot>>() {});
   }
 
   private void exportSnapShot() throws IOException, InterruptedException {

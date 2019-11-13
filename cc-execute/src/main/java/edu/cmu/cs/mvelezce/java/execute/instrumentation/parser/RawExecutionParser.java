@@ -31,10 +31,6 @@ public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution>
     mapper.writeValue(file, rawPerfExecution);
   }
 
-  private String getRawOutputDir(int iter) {
-    return this.getOutputDir() + "/" + this.getProgramName() + "/execution/raw/" + iter;
-  }
-
   private List<String> parseTrace() throws IOException {
     File dirFile = new File(".");
     Collection<File> serializedFiles = FileUtils.listFiles(dirFile, new String[] {"ser"}, false);

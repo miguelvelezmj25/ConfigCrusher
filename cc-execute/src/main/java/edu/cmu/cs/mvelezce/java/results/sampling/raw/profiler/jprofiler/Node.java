@@ -84,7 +84,7 @@ public class Node {
   }
 
   @JsonProperty("class")
-  public Object getClassName() {
+  public String getClassName() {
     return className;
   }
 }

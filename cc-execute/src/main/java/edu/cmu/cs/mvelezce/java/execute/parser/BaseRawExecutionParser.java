@@ -19,6 +19,10 @@ public abstract class BaseRawExecutionParser<T> {
 
   public abstract Map<Integer, Set<T>> readResults() throws IOException;
 
+  public String getRawOutputDir(int iter) {
+    return this.getOutputDir() + "/" + this.getProgramName() + "/execution/raw/" + iter;
+  }
+
   public String getProgramName() {
     return programName;
   }

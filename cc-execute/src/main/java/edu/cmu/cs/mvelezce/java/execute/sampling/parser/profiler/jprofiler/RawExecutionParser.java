@@ -1,16 +1,16 @@
 package edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.Hotspot;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawPerfExecution;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class RawExecutionParser extends BaseRawExecutionParser<Object> {
 
@@ -28,17 +28,16 @@ public class RawExecutionParser extends BaseRawExecutionParser<Object> {
       throws IOException, InterruptedException {
     this.exportSnapShot();
     this.fixTreeLevelEntry();
+
     List<Hotspot> hotspots = this.parseHotpots();
-    //    RawPerfExecution rawPerfExecution = new RawPerfExecution(configuration, trace);
-    //
-    //    String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() +
-    // Options.DOT_JSON;
-    //    File file = new File(outputFile);
-    //    file.getParentFile().mkdirs();
-    //
-    //    ObjectMapper mapper = new ObjectMapper();
-    //    mapper.writeValue(file, rawPerfExecution);
-    throw new UnsupportedOperationException("implement");
+    RawPerfExecution rawPerfExecution = new RawPerfExecution(configuration, hotspots);
+
+    String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, rawPerfExecution);
   }
 
   private void fixTreeLevelEntry() throws IOException {

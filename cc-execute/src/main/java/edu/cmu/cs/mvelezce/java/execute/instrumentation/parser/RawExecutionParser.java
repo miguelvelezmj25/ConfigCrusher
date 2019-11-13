@@ -57,31 +57,8 @@ public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution>
     return trace;
   }
 
-  public Map<Integer, Set<RawPerfExecution>> readResults() throws IOException {
-    Map<Integer, Set<RawPerfExecution>> itersToPerfExecutions = new HashMap<>();
-
-    int iter = 0;
-    File file = new File(this.getRawOutputDir(iter));
-
-    while (file.exists()) {
-      Set<RawPerfExecution> rawPerfExecutions = new HashSet<>();
-      Collection<File> files = FileUtils.listFiles(file, new String[] {"json"}, true);
-
-      for (File perfFile : files) {
-        RawPerfExecution rawPerfExecution = this.readFromFile(perfFile);
-        rawPerfExecutions.add(rawPerfExecution);
-      }
-
-      itersToPerfExecutions.put(iter, rawPerfExecutions);
-
-      iter++;
-      file = new File(this.getRawOutputDir(iter));
-    }
-
-    return itersToPerfExecutions;
-  }
-
-  private RawPerfExecution readFromFile(File file) throws IOException {
+  @Override
+  public RawPerfExecution readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     return mapper.readValue(file, new TypeReference<RawPerfExecution>() {});
   }

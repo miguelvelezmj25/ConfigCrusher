@@ -2,16 +2,16 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 
 import java.io.IOException;
 import java.util.Set;
 
-public class TrivialExecutorAdapter extends BaseTrivialAdapter implements ExecutorAdapter {
+public class InstrumentTrivialExecutorAdapter extends BaseTrivialAdapter implements ExecutorAdapter {
 
   private final Executor executor;
 
-  public TrivialExecutorAdapter(Executor executor) {
+  public InstrumentTrivialExecutorAdapter(Executor executor) {
     this.executor = executor;
   }
 

@@ -1,12 +1,8 @@
-package edu.cmu.cs.mvelezce.java.execute.instrumentation;
+package edu.cmu.cs.mvelezce.java.execute;
 
 import com.mijecu25.meme.utils.gc.GC;
-import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.Executor;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial.TrivialExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.parser.RawExecutionParser;
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -20,13 +16,15 @@ public abstract class BaseExecutor implements Executor {
 
   private final String programName;
   private final Set<Set<String>> configurations;
-  private final RawExecutionParser rawExecutionParser;
+  private final BaseRawExecutionParser rawExecutionParser;
 
-  public BaseExecutor(String programName, Set<Set<String>> configurations) {
+  public BaseExecutor(
+      String programName,
+      Set<Set<String>> configurations,
+      BaseRawExecutionParser rawExecutionParser) {
     this.programName = programName;
     this.configurations = configurations;
-
-    this.rawExecutionParser = new RawExecutionParser(programName, this.outputDir());
+    this.rawExecutionParser = rawExecutionParser;
   }
 
   @Override
@@ -71,20 +69,7 @@ public abstract class BaseExecutor implements Executor {
 
   @Override
   public void executeIteration(int iteration) throws InterruptedException, IOException {
-    ExecutorAdapter adapter;
-
-    switch (this.programName) {
-      case TrivialExecutorAdapter.PROGRAM_NAME:
-        adapter = new TrivialExecutorAdapter(this);
-        break;
-      case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
-        adapter = new MeasureDiskOrderedScanAdapter(this);
-        ((BaseMeasureDiskOrderedScanAdapter) adapter)
-            .preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
-        break;
-      default:
-        throw new RuntimeException("Could not find an adapter for " + this.programName);
-    }
+    ExecutorAdapter adapter = this.getExecutorAdapter();
 
     for (Set<String> configuration : this.configurations) {
       adapter.execute(configuration);
@@ -93,6 +78,8 @@ public abstract class BaseExecutor implements Executor {
       GC.gc(2000);
     }
   }
+
+  protected abstract ExecutorAdapter getExecutorAdapter();
 
   private List<String> buildCommandAsList(
       String programClassPath, String mainClass, String[] configArgs) {
@@ -127,7 +114,15 @@ public abstract class BaseExecutor implements Executor {
         + programClassPath;
   }
 
-  public RawExecutionParser getRawExecutionParser() {
+  public String getProgramName() {
+    return programName;
+  }
+
+  public Set<Set<String>> getConfigurations() {
+    return configurations;
+  }
+
+  public BaseRawExecutionParser getRawExecutionParser() {
     return rawExecutionParser;
   }
 }

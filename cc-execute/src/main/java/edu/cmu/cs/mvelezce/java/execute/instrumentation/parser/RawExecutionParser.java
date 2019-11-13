@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
@@ -12,14 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public final class RawExecutionParser {
-
-  private final String programName;
-  private final String outputDir;
+public class RawExecutionParser extends BaseRawExecutionParser<RawPerfExecution> {
 
   public RawExecutionParser(String programName, String outputDir) {
-    this.programName = programName;
-    this.outputDir = outputDir;
+    super(programName, outputDir);
   }
 
   public void logExecution(Set<String> configuration, int iter) throws IOException {
@@ -35,7 +32,7 @@ public final class RawExecutionParser {
   }
 
   private String getRawOutputDir(int iter) {
-    return this.outputDir + "/" + this.programName + "/execution/raw/" + iter;
+    return this.getOutputDir() + "/" + this.getProgramName() + "/execution/raw/" + iter;
   }
 
   private List<String> parseTrace() throws IOException {

@@ -20,5 +20,7 @@ public interface JProfilerSnapshotEntry {
 
   List<Node> getNodes();
 
+  boolean getFiltered();
+
   String getClassName();
 }

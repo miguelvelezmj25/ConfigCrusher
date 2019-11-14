@@ -15,6 +15,7 @@ public class Node implements JProfilerSnapshotEntry {
   private final int count;
   private final int lineNumber;
   private final double percent;
+  private final boolean filtered;
   private final List<Node> nodes;
 
   // Dummy constructor for jackson xml
@@ -27,6 +28,7 @@ public class Node implements JProfilerSnapshotEntry {
     this.count = 0;
     this.lineNumber = 0;
     this.percent = 0.0;
+    this.filtered = false;
     this.nodes = new ArrayList<>();
   }
 
@@ -39,6 +41,7 @@ public class Node implements JProfilerSnapshotEntry {
       int count,
       int lineNumber,
       double percent,
+      boolean filtered,
       List<Node> nodes) {
     this.leaf = leaf;
     this.className = className;
@@ -48,6 +51,7 @@ public class Node implements JProfilerSnapshotEntry {
     this.count = count;
     this.lineNumber = lineNumber;
     this.percent = percent;
+    this.filtered = filtered;
     this.nodes = nodes;
   }
 
@@ -89,6 +93,11 @@ public class Node implements JProfilerSnapshotEntry {
   @Override
   public List<Node> getNodes() {
     return nodes;
+  }
+
+  @Override
+  public boolean getFiltered() {
+    return filtered;
   }
 
   @JsonProperty("class")

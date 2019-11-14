@@ -19,6 +19,8 @@ public class JProfilerSamplingMeasureDiskOrderedScanAdapter
 
   @Override
   public void execute(Set<String> configuration) throws IOException, InterruptedException {
+    this.preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
+
     String[] configAsArgs = this.configurationAsMainArguments(configuration);
     this.getExecutor()
         .executeProgram(

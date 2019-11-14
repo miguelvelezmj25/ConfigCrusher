@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler;
 
 import com.mijecu25.meme.utils.execute.Executor;
-import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.profiler.jprofiler.JProfilerSamplingMeasureDiskOrderedScanAdapter;
@@ -40,8 +39,6 @@ public class IDTAExecutor extends BaseExecutor {
         break;
       case JProfilerSamplingMeasureDiskOrderedScanAdapter.PROGRAM_NAME:
         adapter = new JProfilerSamplingMeasureDiskOrderedScanAdapter(this);
-        ((BaseMeasureDiskOrderedScanAdapter) adapter)
-            .preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());

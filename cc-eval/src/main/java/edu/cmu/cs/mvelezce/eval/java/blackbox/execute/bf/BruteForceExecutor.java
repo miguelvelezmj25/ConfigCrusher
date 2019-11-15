@@ -4,12 +4,17 @@ import edu.cmu.cs.mvelezce.eval.java.blackbox.execute.BlackBoxExecutor;
 import edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser.BlackBoxExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class BruteForceExecutor extends BlackBoxExecutor {
 
-  private static final String OUTPUT_DIR =
+  public static final String OUTPUT_DIR =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/bf";
+
+  public BruteForceExecutor(String programName) {
+    this(programName, new HashSet<>());
+  }
 
   BruteForceExecutor(String programName, Set<Set<String>> configurations) {
     super(programName, configurations, new BlackBoxExecutionParser(programName, OUTPUT_DIR));

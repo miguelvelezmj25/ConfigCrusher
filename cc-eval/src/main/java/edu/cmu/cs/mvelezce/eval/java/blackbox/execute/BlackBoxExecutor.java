@@ -3,13 +3,13 @@ package edu.cmu.cs.mvelezce.eval.java.blackbox.execute;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.eval.java.blackbox.execute.adapters.measureDiskOrderedScan.BlackBoxMeasureDiskOrderedScanExecutorAdapter;
 import edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser.BlackBoxExecutionParser;
-import edu.cmu.cs.mvelezce.eval.java.blackbox.results.BlackBoxResult;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.instrumentation.BaseInstrumentExecutor;
+import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 
 import java.util.Set;
 
-public abstract class BlackBoxExecutor extends BaseInstrumentExecutor<BlackBoxResult> {
+public abstract class BlackBoxExecutor extends BaseInstrumentExecutor<ProcessedPerfExecution> {
 
   protected BlackBoxExecutor(
       String programName,

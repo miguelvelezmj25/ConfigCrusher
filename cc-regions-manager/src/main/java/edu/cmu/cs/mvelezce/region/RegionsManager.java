@@ -1,14 +1,13 @@
 package edu.cmu.cs.mvelezce.region;
 
 import edu.cmu.cs.mvelezce.analysis.region.Region;
-import edu.cmu.cs.mvelezce.setup.IProducerConsumer;
 import jdk.internal.org.objectweb.asm.Type;
 
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class RegionsManager implements IProducerConsumer {
+public class RegionsManager /*implements IProducerConsumer*/ {
 
   public static final String INTERNAL_NAME = Type.getInternalName(RegionsManager.class);
   public static final String ENTER_REGION = "enter";
@@ -66,7 +65,7 @@ public class RegionsManager implements IProducerConsumer {
     //    ((RuntimeProducer) PRODUCER).terminate();
   }
 
-  @Override
+//  @Override
   public void execute() {
     //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(PRODUCER);
     //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(CONSUMER);

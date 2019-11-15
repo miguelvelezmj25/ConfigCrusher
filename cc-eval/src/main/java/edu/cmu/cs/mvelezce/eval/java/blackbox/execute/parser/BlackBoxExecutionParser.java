@@ -1,8 +1,9 @@
 package edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.eval.java.blackbox.results.BlackBoxResult;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
+import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -10,11 +11,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-public class BlackBoxExecutionParser extends BaseRawExecutionParser<BlackBoxResult> {
+public class BlackBoxExecutionParser extends BaseRawExecutionParser<ProcessedPerfExecution> {
 
   public BlackBoxExecutionParser(String programName, String outputDir) {
     super(programName, outputDir);
@@ -23,7 +22,11 @@ public class BlackBoxExecutionParser extends BaseRawExecutionParser<BlackBoxResu
   @Override
   public void logExecution(Set<String> configuration, int iter) throws IOException {
     long time = this.getExecutionTime();
-    BlackBoxResult blackBoxResult = new BlackBoxResult(configuration, time);
+    Map<String, Long> regionsToTimes = new HashMap<>();
+    regionsToTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), time);
+
+    ProcessedPerfExecution blackBoxResult =
+        new ProcessedPerfExecution(configuration, regionsToTimes);
 
     String outputFile =
         this.getOutputDir()
@@ -68,7 +71,7 @@ public class BlackBoxExecutionParser extends BaseRawExecutionParser<BlackBoxResu
   }
 
   @Override
-  protected BlackBoxResult readFromFile(File perfFile) throws IOException {
+  protected ProcessedPerfExecution readFromFile(File perfFile) throws IOException {
     throw new UnsupportedOperationException("implement");
   }
 }

@@ -54,6 +54,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Set<Set<String>> configs = this.getConfigs();
 
     for (Set<String> config : configs) {
+      System.out.println("Config " + config);
       PerformanceEntry performanceEntry = this.averageExecs(config);
       perfEntries.add(performanceEntry);
     }
@@ -173,7 +174,8 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         System.err.println(
             "The difference between the min and max executions of region "
                 + region
-                + " is greater than 1 sec.");
+                + " is greater than 1 sec. It is "
+                + (diff / 1E9));
       }
 
       regionsToDiff.put(region, diff);

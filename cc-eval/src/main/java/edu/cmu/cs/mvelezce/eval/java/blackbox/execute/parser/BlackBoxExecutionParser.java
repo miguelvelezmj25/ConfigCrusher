@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.eval.java.blackbox.results.BlackBoxResult;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
@@ -10,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 public class BlackBoxExecutionParser extends BaseRawExecutionParser<BlackBoxResult> {
 
@@ -18,11 +21,24 @@ public class BlackBoxExecutionParser extends BaseRawExecutionParser<BlackBoxResu
   }
 
   @Override
-  public void logExecution(Set<String> configuration, int iter)
-      throws IOException, InterruptedException {
+  public void logExecution(Set<String> configuration, int iter) throws IOException {
     long time = this.getExecutionTime();
+    BlackBoxResult blackBoxResult = new BlackBoxResult(configuration, time);
 
-    throw new UnsupportedOperationException("Implement");
+    String outputFile =
+        this.getOutputDir()
+            + "/"
+            + this.getProgramName()
+            + "/execution/"
+            + iter
+            + "/"
+            + UUID.randomUUID()
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, blackBoxResult);
   }
 
   private long getExecutionTime() throws IOException {

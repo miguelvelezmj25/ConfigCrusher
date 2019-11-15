@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ public class BruteForceExecutorTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
+    configurations.clear();
+    configurations.add(new HashSet<>());
 
     Executor executor = new BruteForceExecutor(programName, configurations);
 

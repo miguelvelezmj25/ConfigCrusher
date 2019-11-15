@@ -9,7 +9,7 @@ import java.util.Set;
 public class BruteForceExecutor extends BlackBoxExecutor {
 
   private static final String OUTPUT_DIR =
-      "../cc-eval/" + Options.DIRECTORY + "/eval/java/idta/programs/bf";
+      "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/bf";
 
   BruteForceExecutor(String programName, Set<Set<String>> configurations) {
     super(programName, configurations, new BlackBoxExecutionParser(programName, OUTPUT_DIR));

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
@@ -28,15 +29,7 @@ public class BlackBoxExecutionParser extends BaseRawExecutionParser<ProcessedPer
     ProcessedPerfExecution blackBoxResult =
         new ProcessedPerfExecution(configuration, regionsToTimes);
 
-    String outputFile =
-        this.getOutputDir()
-            + "/"
-            + this.getProgramName()
-            + "/execution/"
-            + iter
-            + "/"
-            + UUID.randomUUID()
-            + Options.DOT_JSON;
+    String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
@@ -71,7 +64,9 @@ public class BlackBoxExecutionParser extends BaseRawExecutionParser<ProcessedPer
   }
 
   @Override
-  protected ProcessedPerfExecution readFromFile(File perfFile) throws IOException {
-    throw new UnsupportedOperationException("implement");
+  protected ProcessedPerfExecution readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<ProcessedPerfExecution>() {});
   }
 }

@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class IDTAJProfilerSamplingExecutorTest {
+public class IDTAInstrumentExecutorTest {
 
   @Test
   public void trivial() throws IOException, InterruptedException {

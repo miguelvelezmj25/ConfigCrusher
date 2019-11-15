@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedSca
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.SamplingMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 
 import java.io.IOException;
 import java.util.Set;
@@ -13,7 +13,7 @@ public class JProfilerSamplingMeasureDiskOrderedScanAdapter
   private static final String J_PROFILER_AGENT_PATH =
       "-agentpath:/Applications/JProfiler 10.app/Contents/Resources/app/bin/macos/libjprofilerti.jnilib=port=8849,offline,id=116,config=/Users/mvelezce/.jprofiler10/config.xml";
 
-  public JProfilerSamplingMeasureDiskOrderedScanAdapter(IDTAExecutor executor) {
+  public JProfilerSamplingMeasureDiskOrderedScanAdapter(IDTAJProfilerSamplingExecutor executor) {
     super(executor);
   }
 

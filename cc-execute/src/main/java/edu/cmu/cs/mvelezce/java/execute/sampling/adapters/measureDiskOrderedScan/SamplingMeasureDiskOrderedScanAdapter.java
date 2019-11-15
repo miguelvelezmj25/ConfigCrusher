@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedSca
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 
 import java.io.IOException;
 import java.util.Set;
@@ -10,9 +10,9 @@ import java.util.Set;
 public class SamplingMeasureDiskOrderedScanAdapter extends BaseMeasureDiskOrderedScanAdapter
     implements ExecutorAdapter {
 
-  private final IDTAExecutor executor;
+  private final IDTAJProfilerSamplingExecutor executor;
 
-  public SamplingMeasureDiskOrderedScanAdapter(IDTAExecutor executor) {
+  public SamplingMeasureDiskOrderedScanAdapter(IDTAJProfilerSamplingExecutor executor) {
     this.executor = executor;
   }
 
@@ -21,7 +21,7 @@ public class SamplingMeasureDiskOrderedScanAdapter extends BaseMeasureDiskOrdere
     throw new UnsupportedOperationException("Implement");
   }
 
-  public IDTAExecutor getExecutor() {
+  public IDTAJProfilerSamplingExecutor getExecutor() {
     return executor;
   }
 }

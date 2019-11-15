@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.instrumentation.idta.IDTAExecutor;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.idta.IDTAInstrumentExecutor;
 
 import java.io.IOException;
 import java.util.Set;
@@ -10,9 +10,9 @@ import java.util.Set;
 public class InstrumentTrivialExecutorAdapter extends BaseTrivialAdapter
     implements ExecutorAdapter {
 
-  private final IDTAExecutor executor;
+  private final IDTAInstrumentExecutor executor;
 
-  public InstrumentTrivialExecutorAdapter(IDTAExecutor executor) {
+  public InstrumentTrivialExecutorAdapter(IDTAInstrumentExecutor executor) {
     this.executor = executor;
   }
 

@@ -2,16 +2,16 @@ package edu.cmu.cs.mvelezce.java.execute.sampling.adapters.trivial;
 
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 
 import java.io.IOException;
 import java.util.Set;
 
 public class SamplingTrivialExecutorAdapter extends BaseTrivialAdapter implements ExecutorAdapter {
 
-  private final IDTAExecutor executor;
+  private final IDTAJProfilerSamplingExecutor executor;
 
-  public SamplingTrivialExecutorAdapter(IDTAExecutor executor) {
+  public SamplingTrivialExecutorAdapter(IDTAJProfilerSamplingExecutor executor) {
     this.executor = executor;
   }
 
@@ -20,7 +20,7 @@ public class SamplingTrivialExecutorAdapter extends BaseTrivialAdapter implement
     throw new UnsupportedOperationException("Implement");
   }
 
-  public IDTAExecutor getExecutor() {
+  public IDTAJProfilerSamplingExecutor getExecutor() {
     return executor;
   }
 }

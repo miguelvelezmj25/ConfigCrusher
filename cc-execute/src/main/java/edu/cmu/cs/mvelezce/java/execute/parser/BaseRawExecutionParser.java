@@ -45,7 +45,7 @@ public abstract class BaseRawExecutionParser<T> {
 
   protected abstract T readFromFile(File perfFile) throws IOException;
 
-  public String getRawOutputDir(int iter) {
+  protected String getRawOutputDir(int iter) {
     return this.getOutputDir() + "/" + this.getProgramName() + "/execution/raw/" + iter;
   }
 

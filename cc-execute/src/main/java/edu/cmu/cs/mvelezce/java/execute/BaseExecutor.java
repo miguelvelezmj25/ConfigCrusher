@@ -9,16 +9,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
-public abstract class BaseExecutor implements Executor {
+public abstract class BaseExecutor<T> implements Executor {
 
   private final String programName;
   private final Set<Set<String>> configurations;
-  private final BaseRawExecutionParser rawExecutionParser;
+  private final BaseRawExecutionParser<T> rawExecutionParser;
 
   public BaseExecutor(
       String programName,
       Set<Set<String>> configurations,
-      BaseRawExecutionParser rawExecutionParser) {
+      BaseRawExecutionParser<T> rawExecutionParser) {
     this.programName = programName;
     this.configurations = configurations;
     this.rawExecutionParser = rawExecutionParser;
@@ -70,7 +70,7 @@ public abstract class BaseExecutor implements Executor {
     return configurations;
   }
 
-  public BaseRawExecutionParser getRawExecutionParser() {
+  public BaseRawExecutionParser<T> getRawExecutionParser() {
     return rawExecutionParser;
   }
 }

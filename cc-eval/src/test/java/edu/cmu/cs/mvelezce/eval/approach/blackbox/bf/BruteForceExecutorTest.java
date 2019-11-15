@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.eval.approach.bf;
+package edu.cmu.cs.mvelezce.eval.approach.blackbox.bf;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.Executor;

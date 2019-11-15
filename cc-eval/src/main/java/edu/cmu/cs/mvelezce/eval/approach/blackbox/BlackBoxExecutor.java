@@ -1,19 +1,16 @@
-package edu.cmu.cs.mvelezce.eval.approach.bf;
+package edu.cmu.cs.mvelezce.eval.approach.blackbox;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.eval.adapters.blackbox.measureDiskOrderedScan.BlackBoxMeasureDiskOrderedScanExecutorAdapter;
-import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
+import edu.cmu.cs.mvelezce.eval.results.blackbox.BlackBoxResult;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
-import edu.cmu.cs.mvelezce.utils.config.Options;
+import edu.cmu.cs.mvelezce.java.execute.instrumentation.BaseInstrumentExecutor;
 
 import java.util.Set;
 
-public class BruteForceExecutor<T> extends BaseExecutor<T> {
+public abstract class BlackBoxExecutor extends BaseInstrumentExecutor<BlackBoxResult> {
 
-  public static final String OUTPUT_DIR =
-      "../cc-eval/" + Options.DIRECTORY + "/eval/java/idta/programs/bf";
-
-  BruteForceExecutor(String programName, Set<Set<String>> configurations) {
+  protected BlackBoxExecutor(String programName, Set<Set<String>> configurations) {
     super(programName, configurations, null);
   }
 
@@ -23,17 +20,12 @@ public class BruteForceExecutor<T> extends BaseExecutor<T> {
 
     switch (this.getProgramName()) {
       case BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME:
-        adapter = new BlackBoxMeasureDiskOrderedScanExecutorAdapter();
+        adapter = new BlackBoxMeasureDiskOrderedScanExecutorAdapter(this);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());
     }
 
     return adapter;
-  }
-
-  @Override
-  public String outputDir() {
-    return OUTPUT_DIR;
   }
 }

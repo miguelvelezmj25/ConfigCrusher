@@ -27,6 +27,15 @@ public abstract class JProfilerSamplingExecutionProcessor
     this.getSnapshotEntriesToFullyQualifiedMethods();
   }
 
+  @Override
+  protected ProcessedPerfExecution getProcessedPerfExec(
+      RawJProfilerSamplingPerfExecution rawJProfilerSamplingPerfExecution) {
+    Map<String, Long> regionToPerf = this.process(rawJProfilerSamplingPerfExecution.getHotspots());
+    Set<String> config = rawJProfilerSamplingPerfExecution.getConfiguration();
+
+    return new ProcessedPerfExecution(config, regionToPerf);
+  }
+
   private void getSnapshotEntriesToFullyQualifiedMethods() {
     for (Map.Entry<Integer, Set<RawJProfilerSamplingPerfExecution>> entry :
         this.getItersToRawPerfExecutions().entrySet()) {
@@ -75,15 +84,6 @@ public abstract class JProfilerSamplingExecutionProcessor
     return className + "." + methodName + methodSignature;
   }
 
-  @Override
-  protected ProcessedPerfExecution getProcessedPerfExec(
-      RawJProfilerSamplingPerfExecution rawJProfilerSamplingPerfExecution) {
-    Map<String, Long> regionToPerf = this.process(rawJProfilerSamplingPerfExecution.getHotspots());
-    Set<String> config = rawJProfilerSamplingPerfExecution.getConfiguration();
-
-    return new ProcessedPerfExecution(config, regionToPerf);
-  }
-
   private Map<String, Long> process(List<Hotspot> hotspots) {
     Map<String, Long> regionsToPerf = this.addRegions();
     this.addPerfs(regionsToPerf, hotspots);
@@ -109,7 +109,7 @@ public abstract class JProfilerSamplingExecutionProcessor
           }
         } else {
           long currentTime = regionsToPerf.get(region);
-          currentTime += entry.getTime();
+          currentTime += (entry.getTime() * 1_000);
           regionsToPerf.put(region, currentTime);
         }
       }

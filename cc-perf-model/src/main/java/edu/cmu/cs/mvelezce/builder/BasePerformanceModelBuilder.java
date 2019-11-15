@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.builder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
@@ -7,8 +8,10 @@ import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.aggregator.ExecAggregator;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,8 +49,19 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
   protected abstract Set<MultiEntryLocalPerformanceModel<RD>> buildMultiEntryLocalModels();
 
   @Override
-  public void writeToFile(PerformanceModel results) {
-    throw new UnsupportedOperationException("implement");
+  public void writeToFile(PerformanceModel results) throws IOException {
+    String outputFile =
+        this.outputDir()
+            + "/"
+            + this.getProgramName()
+            + "/"
+            + this.getProgramName()
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, results);
   }
 
   @Override

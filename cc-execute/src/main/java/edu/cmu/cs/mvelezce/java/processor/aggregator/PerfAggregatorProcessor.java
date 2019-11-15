@@ -91,7 +91,6 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   }
 
   private Map<UUID, String> toHumanReadable(Map<UUID, Long> regionsToData) {
-
     Map<UUID, String> regionsToHumanReadableData = new HashMap<>();
 
     for (Map.Entry<UUID, Long> entry : regionsToData.entrySet()) {

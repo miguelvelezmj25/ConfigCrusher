@@ -35,4 +35,40 @@ public class LocalPerformanceModel<T> {
     this.modelToMaxHumanReadable = modelToMaxHumanReadable;
     this.modelToDiffHumanReadable = modelToDiffHumanReadable;
   }
+
+  public UUID getRegion() {
+    return region;
+  }
+
+  public Map<T, Long> getModel() {
+    return model;
+  }
+
+  public Map<T, Long> getModelToMin() {
+    return modelToMin;
+  }
+
+  public Map<T, Long> getModelToMax() {
+    return modelToMax;
+  }
+
+  public Map<T, Long> getModelToDiff() {
+    return modelToDiff;
+  }
+
+  public Map<T, String> getModelToPerfHumanReadable() {
+    return modelToPerfHumanReadable;
+  }
+
+  public Map<T, String> getModelToMinHumanReadable() {
+    return modelToMinHumanReadable;
+  }
+
+  public Map<T, String> getModelToMaxHumanReadable() {
+    return modelToMaxHumanReadable;
+  }
+
+  public Map<T, String> getModelToDiffHumanReadable() {
+    return modelToDiffHumanReadable;
+  }
 }

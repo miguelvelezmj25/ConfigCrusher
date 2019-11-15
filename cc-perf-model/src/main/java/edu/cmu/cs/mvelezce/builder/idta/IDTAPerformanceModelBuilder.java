@@ -29,23 +29,21 @@ class IDTAPerformanceModelBuilder
 
   @Override
   protected Set<MultiEntryLocalPerformanceModel<FeatureExpr>> buildMultiEntryLocalModels() {
-    this.mapPerfEntryToExeConstraint();
+    this.mapPerfEntryToExecConstraint();
 
     Set<MultiEntryLocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
 
     for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : this.getRegionsToData().entrySet()) {
       MultiEntryLocalPerformanceModel<FeatureExpr> multiEntryLocalModel =
           this.buildEmptyMultiEntryLocalModel(entry);
-
       this.addExecutionTimes(multiEntryLocalModel);
-
       localModels.add(multiEntryLocalModel);
     }
 
     return localModels;
   }
 
-  private void mapPerfEntryToExeConstraint() {
+  private void mapPerfEntryToExecConstraint() {
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Set<String> config = entry.getConfiguration();
       String configConstraint = ConstraintUtils.parseAsConstraint(config, this.getOptions());

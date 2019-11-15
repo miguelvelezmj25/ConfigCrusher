@@ -199,6 +199,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     MemoryMonitor.printMemoryUsage("Memory:");
 
+    System.out.println(
+        "Update the constraints per region to include potentially missed interactions");
     this.setStartAndEndBlocks(classNodes);
   }
 

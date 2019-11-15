@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.eval.adapters.blackbox.measureDiskOrderedScan;
+package edu.cmu.cs.mvelezce.eval.java.blackbox.execute.adapters.measureDiskOrderedScan;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
-import edu.cmu.cs.mvelezce.eval.approach.blackbox.BlackBoxExecutor;
+import edu.cmu.cs.mvelezce.eval.java.blackbox.execute.BlackBoxExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan.MeasureDiskOrderedScanExecutorAdapter;
 
@@ -13,7 +13,7 @@ public class BlackBoxMeasureDiskOrderedScanExecutorAdapter
 
   private final BlackBoxExecutor executor;
 
-  public <T> BlackBoxMeasureDiskOrderedScanExecutorAdapter(BlackBoxExecutor executor) {
+  public BlackBoxMeasureDiskOrderedScanExecutorAdapter(BlackBoxExecutor executor) {
     this.executor = executor;
   }
 

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @ReturnTypesAreNonNullByDefault
-package edu.cmu.cs.mvelezce.eval.adapters.blackbox.measureDiskOrderedScan;
+package edu.cmu.cs.mvelezce.eval.java.blackbox.results;
 
 import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @ReturnTypesAreNonNullByDefault
-package edu.cmu.cs.mvelezce.eval.results.blackbox;
+package edu.cmu.cs.mvelezce.eval.java.blackbox.execute.parser;
 
 import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 

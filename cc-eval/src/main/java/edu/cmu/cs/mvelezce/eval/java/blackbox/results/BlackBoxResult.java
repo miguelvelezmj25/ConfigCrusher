@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.eval.results.blackbox;
+package edu.cmu.cs.mvelezce.eval.java.blackbox.results;
 
 import java.util.HashSet;
 import java.util.Set;

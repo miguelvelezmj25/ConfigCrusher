@@ -14,7 +14,8 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 import java.io.*;
 import java.util.*;
 
-public class RawJProfilerSamplingExecutionParser extends BaseRawExecutionParser<RawJProfilerSamplingPerfExecution> {
+public class RawJProfilerSamplingExecutionParser
+    extends BaseRawExecutionParser<RawJProfilerSamplingPerfExecution> {
 
   private static final String JPROFILER_EXPORT_CMD =
       "/Applications/JProfiler 10.app/Contents/Resources/app/bin/jpexport";
@@ -38,7 +39,8 @@ public class RawJProfilerSamplingExecutionParser extends BaseRawExecutionParser<
     this.fixTreeLevelEntry();
 
     List<Hotspot> hotspots = this.parseHotpots();
-    RawJProfilerSamplingPerfExecution rawJProfilerSamplingPerfExecution = new RawJProfilerSamplingPerfExecution(configuration, hotspots);
+    RawJProfilerSamplingPerfExecution rawJProfilerSamplingPerfExecution =
+        new RawJProfilerSamplingPerfExecution(configuration, hotspots);
 
     String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() + Options.DOT_JSON;
     File file = new File(outputFile);

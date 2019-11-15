@@ -13,7 +13,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class RawInstrumentExecutionParser extends BaseRawExecutionParser<RawInstrumentPerfExecution> {
+public class RawInstrumentExecutionParser
+    extends BaseRawExecutionParser<RawInstrumentPerfExecution> {
 
   public RawInstrumentExecutionParser(String programName, String outputDir) {
     super(programName, outputDir);
@@ -21,7 +22,8 @@ public class RawInstrumentExecutionParser extends BaseRawExecutionParser<RawInst
 
   public void logExecution(Set<String> configuration, int iter) throws IOException {
     List<String> trace = this.parseTrace();
-    RawInstrumentPerfExecution rawInstrumentPerfExecution = new RawInstrumentPerfExecution(configuration, trace);
+    RawInstrumentPerfExecution rawInstrumentPerfExecution =
+        new RawInstrumentPerfExecution(configuration, trace);
 
     String outputFile = this.getRawOutputDir(iter) + "/" + UUID.randomUUID() + Options.DOT_JSON;
     File file = new File(outputFile);

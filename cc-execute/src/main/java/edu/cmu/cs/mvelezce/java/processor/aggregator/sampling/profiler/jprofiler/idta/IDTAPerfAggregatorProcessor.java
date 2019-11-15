@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.idta;
+package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta;
 
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
@@ -23,7 +23,6 @@ public class IDTAPerfAggregatorProcessor extends PerfAggregatorProcessor {
 
   @Override
   public String outputDir() {
-    throw new UnsupportedOperationException("implement");
-    //    return OUTPUT_DIR;
+    return OUTPUT_DIR;
   }
 }

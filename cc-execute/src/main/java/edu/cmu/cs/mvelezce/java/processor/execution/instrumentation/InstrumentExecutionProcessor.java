@@ -7,7 +7,8 @@ import edu.cmu.cs.mvelezce.region.RegionsManager;
 
 import java.util.*;
 
-public abstract class InstrumentExecutionProcessor extends BaseExecutionProcessor<RawInstrumentPerfExecution> {
+public abstract class InstrumentExecutionProcessor
+    extends BaseExecutionProcessor<RawInstrumentPerfExecution> {
 
   public InstrumentExecutionProcessor(
       String programName, Map<Integer, Set<RawInstrumentPerfExecution>> itersToRawPerfExecutions) {
@@ -15,7 +16,8 @@ public abstract class InstrumentExecutionProcessor extends BaseExecutionProcesso
   }
 
   @Override
-  protected ProcessedPerfExecution getProcessedPerfExec(RawInstrumentPerfExecution rawInstrumentPerfExecution) {
+  protected ProcessedPerfExecution getProcessedPerfExec(
+      RawInstrumentPerfExecution rawInstrumentPerfExecution) {
     Map<String, Long> regionToPerf = this.process(rawInstrumentPerfExecution.getTrace());
     Set<String> config = rawInstrumentPerfExecution.getConfiguration();
 

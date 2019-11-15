@@ -19,7 +19,8 @@ public class IDTASamplingInstrumentSamplingExecutionProcessorTest {
     //    Map<Integer, Set<RawInstrumentPerfExecution>> itersToRawPerfExecutions =
     //        executor.getRawExecutionParser().readResults();
     //
-    //    Analysis processor = new IDTAJProfilerSamplingExecutionProcessor(programName, itersToRawPerfExecutions);
+    //    Analysis processor = new IDTAJProfilerSamplingExecutionProcessor(programName,
+    // itersToRawPerfExecutions);
     //
     //    String[] args = new String[2];
     //    args[0] = "-delres";
@@ -37,7 +38,8 @@ public class IDTASamplingInstrumentSamplingExecutionProcessorTest {
     //    Map<Integer, Set<RawInstrumentPerfExecution>> itersToRawPerfExecutions =
     //        executor.getRawExecutionParser().readResults();
     //
-    //    Analysis processor = new IDTAJProfilerSamplingExecutionProcessor(programName, itersToRawPerfExecutions);
+    //    Analysis processor = new IDTAJProfilerSamplingExecutionProcessor(programName,
+    // itersToRawPerfExecutions);
     //
     //    String[] args = new String[2];
     //    args[0] = "-delres";

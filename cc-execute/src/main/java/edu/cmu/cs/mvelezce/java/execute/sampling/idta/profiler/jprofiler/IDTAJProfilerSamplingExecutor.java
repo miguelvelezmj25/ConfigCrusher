@@ -22,7 +22,10 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
   }
 
   IDTAJProfilerSamplingExecutor(String programName, Set<Set<String>> configurations) {
-    super(programName, configurations, new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR));
+    super(
+        programName,
+        configurations,
+        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR));
   }
 
   @Override

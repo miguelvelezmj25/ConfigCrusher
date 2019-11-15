@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.idta;
+package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;

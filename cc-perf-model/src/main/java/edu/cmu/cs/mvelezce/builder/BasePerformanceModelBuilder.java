@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,7 +47,24 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
     return new PerformanceModel<RD>(localPerformanceModels);
   }
 
-  protected abstract Set<MultiEntryLocalPerformanceModel<RD>> buildMultiEntryLocalModels();
+  protected abstract void addExecutionTimes(
+      MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel);
+
+  protected abstract MultiEntryLocalPerformanceModel<RD> buildEmptyMultiEntryLocalModel(
+      Map.Entry<JavaRegion, D> entry);
+
+  protected Set<MultiEntryLocalPerformanceModel<RD>> buildMultiEntryLocalModels() {
+    Set<MultiEntryLocalPerformanceModel<RD>> localModels = new HashSet<>();
+
+    for (Map.Entry<JavaRegion, D> entry : this.regionsToData.entrySet()) {
+      MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel =
+          this.buildEmptyMultiEntryLocalModel(entry);
+      this.addExecutionTimes(multiEntryLocalModel);
+      localModels.add(multiEntryLocalModel);
+    }
+
+    return localModels;
+  }
 
   @Override
   public void writeToFile(PerformanceModel results) throws IOException {
@@ -71,10 +89,6 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
   protected List<String> getOptions() {
     return options;
-  }
-
-  protected Map<JavaRegion, D> getRegionsToData() {
-    return regionsToData;
   }
 
   protected Set<PerformanceEntry> getPerformanceEntries() {

@@ -205,6 +205,10 @@ public class JavaRegion extends Region {
       this.regionMethodSignature = regionMethodSignature;
     }
 
+    public Builder(UUID id) {
+      this(id, "", "", "");
+    }
+
     public Builder(String regionPackage, String regionClass, String regionMethodSignature) {
       this.regionPackage = regionPackage;
       this.regionClass = regionClass;

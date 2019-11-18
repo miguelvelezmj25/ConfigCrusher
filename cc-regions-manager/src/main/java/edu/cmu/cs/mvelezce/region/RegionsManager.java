@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.region;
 
-import edu.cmu.cs.mvelezce.analysis.region.Region;
+import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.Type;
 
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class RegionsManager /*implements IProducerConsumer*/ {
   public static final String START = "s";
   public static final String END = "e";
   public static final String COMMA = ",";
-  private static final Region PROGRAM_REGION = new Region.Builder(PROGRAM_REGION_ID).build();
+  public static final JavaRegion PROGRAM_REGION = new JavaRegion.Builder(PROGRAM_REGION_ID).build();
   private static final BlockingQueue<String> INPUT_QUEUE = new ArrayBlockingQueue<>(1_000_000);
   //  private static final ProducerConsumerSetup<String> PRODUCER_CONSUMER_SETUP;
   //  private static final Runnable PRODUCER;
@@ -65,7 +65,7 @@ public class RegionsManager /*implements IProducerConsumer*/ {
     //    ((RuntimeProducer) PRODUCER).terminate();
   }
 
-//  @Override
+  //  @Override
   public void execute() {
     //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(PRODUCER);
     //    PRODUCER_CONSUMER_SETUP.getExecutorService().execute(CONSUMER);

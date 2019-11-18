@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PerformanceModel<T> {
+public class PerformanceModel<T> implements IPerformanceModel<T> {
 
   private final Set<LocalPerformanceModel<T>> localModels;
 
@@ -18,5 +18,10 @@ public class PerformanceModel<T> {
 
   public Set<LocalPerformanceModel<T>> getLocalModels() {
     return localModels;
+  }
+
+  @Override
+  public double evaluate(String config) {
+    throw new UnsupportedOperationException("Implement");
   }
 }

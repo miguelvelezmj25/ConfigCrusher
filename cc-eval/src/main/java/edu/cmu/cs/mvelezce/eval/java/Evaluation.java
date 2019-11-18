@@ -57,73 +57,20 @@ public abstract class Evaluation<T> {
 
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
-    //    for (LocalPerformanceModel<T> localModel : model.getLocalModels()) {
-    //      for (Map.Entry<T, Long> dataToTime : localModel.getModel().entrySet()) {}
-    //
-    //      System.out.println();
-    //      //      result.append("true");
-    //      //      result.append(",");
-    //      //      result.append('"');
-    //      //      result.append(localModel.getConfiguration());
-    //      //      result.append('"');
-    //      //      result.append(",");
-    //      //      double performance =
-    //      //          performanceEntry
-    //      //              .getRegionsToProcessedPerformanceHumanReadable()
-    //      //              .values()
-    //      //              .iterator()
-    //      //              .next();
-    //      //      result.append(decimalFormat.format(performance));
-    //      //      result.append(",");
-    //      //      double std =
-    //      //
-    //      // performanceEntry.getRegionsToProcessedStdHumanReadable().values().iterator().next();
-    //      //      result.append(decimalFormat.format(std));
-    //      //      result.append(",");
-    //      //      List<Double> ci =
-    //      //
-    //      // performanceEntry.getRegionsToProcessedCIHumanReadable().values().iterator().next();
-    //      //      double minCI = ci.get(0);
-    //      //      double maxCI = ci.get(1);
-    //      //      result.append(decimalFormat.format(minCI));
-    //      //      result.append(",");
-    //      //      result.append(decimalFormat.format(maxCI));
-    //      //      result.append("\n");
-    //    }
-
-    //        for (PerformanceEntryStatistic performanceEntry : performanceEntries) {
-    //          if (performanceEntry.getRegionsToProcessedPerformanceHumanReadable().size() != 1) {
-    //            throw new RuntimeException("This method can only handle approaches that measure 1
-    //     region" +
-    //                    " (e.g. Brute force)");
-    //          }
-    //
-    //          result.append("true");
-    //          result.append(",");
-    //          result.append('"');
-    //          result.append(performanceEntry.getConfiguration());
-    //          result.append('"');
-    //          result.append(",");
-    //          double performance =
-    //     performanceEntry.getRegionsToProcessedPerformanceHumanReadable().values()
-    //                  .iterator().next();
-    //          result.append(decimalFormat.format(performance));
-    //          result.append(",");
-    //          double std =
-    //     performanceEntry.getRegionsToProcessedStdHumanReadable().values().iterator()
-    //                  .next();
-    //          result.append(decimalFormat.format(std));
-    //          result.append(",");
-    //          List<Double> ci =
-    //     performanceEntry.getRegionsToProcessedCIHumanReadable().values().iterator()
-    //                  .next();
-    //          double minCI = ci.get(0);
-    //          double maxCI = ci.get(1);
-    //          result.append(decimalFormat.format(minCI));
-    //          result.append(",");
-    //          result.append(decimalFormat.format(maxCI));
-    //          result.append("\n");
-    //        }
+    for (Map.Entry<Set<String>, Long> entry : configsToTime.entrySet()) {
+      result.append("true");
+      result.append(",");
+      result.append('"');
+      result.append(entry.getKey());
+      result.append('"');
+      result.append(",");
+      double performance = entry.getValue() / 1E9;
+      result.append(decimalFormat.format(performance));
+      result.append(",");
+      result.append(",");
+      result.append(",");
+      result.append("\n");
+    }
 
     outputFile.getParentFile().mkdirs();
     PrintWriter writer = new PrintWriter(outputFile);

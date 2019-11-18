@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PerformanceModel<T> implements IPerformanceModel<T> {
@@ -21,34 +22,13 @@ public class PerformanceModel<T> implements IPerformanceModel<T> {
   }
 
   @Override
-  public double evaluate(String config) {
-    throw new UnsupportedOperationException("Implement");
-    //    double performance = this.baseTimeHumanReadable;
-    //
-    //    for(Map.Entry<Region, Map<Set<String>, Double>> entry :
-    // this.regionsToPerformanceTablesHumanReadable.entrySet()) {
-    //      Set<String> optionsInRegion = new HashSet<>();
-    //
-    //      for(Set<String> options : entry.getValue().keySet()) {
-    //        optionsInRegion.addAll(options);
-    //      }
-    //
-    //      Set<String> configurationValueInRegion = new HashSet<>(configuration);
-    //      configurationValueInRegion.retainAll(optionsInRegion);
-    //
-    //      for(Map.Entry<Set<String>, Double> configurationToPerformance :
-    // entry.getValue().entrySet()) {
-    //        if(configurationToPerformance.getKey().equals(configurationValueInRegion)) {
-    //          performance += configurationToPerformance.getValue();
-    //        }
-    //      }
-    //    }
-    //
-    //    DecimalFormat decimalFormat = new DecimalFormat("#.###");
-    //    String perfString = decimalFormat.format(performance);
-    //    performance = Double.valueOf(perfString);
-    //
-    //    return performance;
+  public double evaluate(Set<String> config, List<String> options) {
+    double time = 0.0;
 
+    for (LocalPerformanceModel<T> localModel : this.localModels) {
+      time += localModel.evaluate(config, options);
+    }
+
+    return time;
   }
 }

@@ -11,7 +11,8 @@ import java.util.Set;
 
 public class BruteForcePerformanceModelBuilder extends BlackBoxPerformanceModelBuilder {
 
-  private static final String OUTPUT_DIR = Options.DIRECTORY + "/model/java/programs/bf";
+  private static final String OUTPUT_DIR =
+      "../cc-execute-blackbox/" + Options.DIRECTORY + "/model/java/programs/bf";
 
   public BruteForcePerformanceModelBuilder(String programName) {
     this(programName, new ArrayList<>(), new HashSet<>());

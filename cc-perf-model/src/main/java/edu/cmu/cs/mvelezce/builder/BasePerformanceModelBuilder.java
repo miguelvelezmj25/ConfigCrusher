@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.builder;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
@@ -18,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<PerformanceModel>
-    implements PerformanceModelBuilder<PerformanceModel, D> {
+public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<PerformanceModel<RD>>
+    implements PerformanceModelBuilder<PerformanceModel<RD>, D> {
 
   private final List<String> options;
   private final Map<JavaRegion, D> regionsToData;
@@ -39,13 +38,13 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
   }
 
   @Override
-  public PerformanceModel analyze() {
+  public PerformanceModel<RD> analyze() {
     Set<MultiEntryLocalPerformanceModel<RD>> multiEntryLocalPerformanceModels =
         this.buildMultiEntryLocalModels();
     Set<LocalPerformanceModel<RD>> localPerformanceModels =
         this.execAggregator.process(multiEntryLocalPerformanceModels);
 
-    return new PerformanceModel<RD>(localPerformanceModels);
+    return new PerformanceModel<>(localPerformanceModels);
   }
 
   protected abstract void addExecutionTimes(
@@ -68,7 +67,7 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
   }
 
   @Override
-  public void writeToFile(PerformanceModel results) throws IOException {
+  public void writeToFile(PerformanceModel<RD> results) throws IOException {
     String outputFile =
         this.outputDir()
             + "/"
@@ -81,13 +80,6 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.writeValue(file, results);
-  }
-
-  @Override
-  public PerformanceModel readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-
-    return mapper.readValue(file, new TypeReference<PerformanceModel>() {});
   }
 
   protected List<String> getOptions() {

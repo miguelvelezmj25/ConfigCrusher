@@ -1,18 +1,27 @@
 package edu.cmu.cs.mvelezce.builder.constraint;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.idta.IDTAMultiEntryLocalPerformanceModel;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public abstract class BaseConstraintPerformanceModelBuilder
     extends BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> {
+
+  private static final Map<String, FeatureExpr> STRINGS_TO_CONSTRAINTS = new HashMap<>();
 
   private final Map<PerformanceEntry, FeatureExpr> perfEntryToExecConstraint = new HashMap<>();
 
@@ -22,6 +31,17 @@ public abstract class BaseConstraintPerformanceModelBuilder
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
       Set<PerformanceEntry> performanceEntries) {
     super(programName, options, regionsToData, performanceEntries);
+  }
+
+  private static FeatureExpr getConstraint(String string) {
+    FeatureExpr constraint = STRINGS_TO_CONSTRAINTS.get(string);
+
+    if (constraint == null) {
+      constraint = MinConfigsGenerator.parseAsFeatureExpr(string);
+      STRINGS_TO_CONSTRAINTS.put(string, constraint);
+    }
+
+    return constraint;
   }
 
   @Override
@@ -106,5 +126,56 @@ public abstract class BaseConstraintPerformanceModelBuilder
     }
 
     return model;
+  }
+
+  @Override
+  public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    PerformanceModel<String> readModel =
+        mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
+    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+
+    for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
+      LocalPerformanceModel<FeatureExpr> localModel =
+          new IDTALocalPerformanceModel(
+              readLocalModel.getRegion(),
+              this.parseConstraintsToData(readLocalModel.getModel()),
+              this.parseConstraintsToData(readLocalModel.getModelToMin()),
+              this.parseConstraintsToData(readLocalModel.getModelToMax()),
+              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
+              this.parseConstraintsToHumanReadableData(
+                  readLocalModel.getModelToPerfHumanReadable()),
+              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parseConstraintsToHumanReadableData(
+                  readLocalModel.getModelToDiffHumanReadable()));
+      localModels.add(localModel);
+    }
+
+    return new PerformanceModel<>(localModels);
+  }
+
+  private Map<FeatureExpr, String> parseConstraintsToHumanReadableData(
+      Map<String, String> localHumanReadableData) {
+    Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<String, String> entry : localHumanReadableData.entrySet()) {
+      FeatureExpr constraint = getConstraint(entry.getKey());
+      constraintsToHumanReadableData.put(constraint, entry.getValue());
+    }
+
+    return constraintsToHumanReadableData;
+  }
+
+  private Map<FeatureExpr, Long> parseConstraintsToData(Map<String, Long> localModel) {
+    Map<FeatureExpr, Long> constraintsToData = new HashMap<>();
+
+    for (Map.Entry<String, Long> entry : localModel.entrySet()) {
+      FeatureExpr constraint = getConstraint(entry.getKey());
+      constraintsToData.put(constraint, entry.getValue());
+    }
+
+    return constraintsToData;
   }
 }

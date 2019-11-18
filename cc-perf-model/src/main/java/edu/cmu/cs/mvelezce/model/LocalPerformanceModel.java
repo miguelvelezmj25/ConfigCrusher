@@ -1,8 +1,6 @@
 package edu.cmu.cs.mvelezce.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class LocalPerformanceModel<T> {
 
@@ -48,6 +46,11 @@ public class LocalPerformanceModel<T> {
     this.modelToMinHumanReadable = modelToMinHumanReadable;
     this.modelToMaxHumanReadable = modelToMaxHumanReadable;
     this.modelToDiffHumanReadable = modelToDiffHumanReadable;
+  }
+
+  public double evaluate(Set<String> config, List<String> options) {
+    throw new UnsupportedOperationException(
+        "Cannot call evaluate on this object since we do not know the type used for the regions");
   }
 
   public UUID getRegion() {

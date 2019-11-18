@@ -23,5 +23,32 @@ public class PerformanceModel<T> implements IPerformanceModel<T> {
   @Override
   public double evaluate(String config) {
     throw new UnsupportedOperationException("Implement");
+    //    double performance = this.baseTimeHumanReadable;
+    //
+    //    for(Map.Entry<Region, Map<Set<String>, Double>> entry :
+    // this.regionsToPerformanceTablesHumanReadable.entrySet()) {
+    //      Set<String> optionsInRegion = new HashSet<>();
+    //
+    //      for(Set<String> options : entry.getValue().keySet()) {
+    //        optionsInRegion.addAll(options);
+    //      }
+    //
+    //      Set<String> configurationValueInRegion = new HashSet<>(configuration);
+    //      configurationValueInRegion.retainAll(optionsInRegion);
+    //
+    //      for(Map.Entry<Set<String>, Double> configurationToPerformance :
+    // entry.getValue().entrySet()) {
+    //        if(configurationToPerformance.getKey().equals(configurationValueInRegion)) {
+    //          performance += configurationToPerformance.getValue();
+    //        }
+    //      }
+    //    }
+    //
+    //    DecimalFormat decimalFormat = new DecimalFormat("#.###");
+    //    String perfString = decimalFormat.format(performance);
+    //    performance = Double.valueOf(perfString);
+    //
+    //    return performance;
+
   }
 }

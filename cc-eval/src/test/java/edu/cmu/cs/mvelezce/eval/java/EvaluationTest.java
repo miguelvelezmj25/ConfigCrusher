@@ -17,6 +17,7 @@ public class EvaluationTest {
     String[] args = new String[0];
     PerformanceModel model = builder.analyze(args);
 
-    System.out.println();
+    Evaluation eval = new Evaluation(programName);
+    eval.saveConfigsToPerformance(Evaluation.BF, model);
   }
 }

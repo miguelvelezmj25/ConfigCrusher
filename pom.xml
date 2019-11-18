@@ -17,6 +17,7 @@
         <module>cc-perf-model</module>
         <module>cc-regions-manager</module>
         <module>cc-eval</module>
+        <module>cc-execute-blackbox</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.model;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,6 +15,19 @@ public class LocalPerformanceModel<T> {
   private final Map<T, String> modelToMinHumanReadable;
   private final Map<T, String> modelToMaxHumanReadable;
   private final Map<T, String> modelToDiffHumanReadable;
+
+  // Private constructor for jackson xml
+  private LocalPerformanceModel() {
+    this.region = UUID.randomUUID();
+    this.model = new HashMap<>();
+    this.modelToMin = new HashMap<>();
+    this.modelToMax = new HashMap<>();
+    this.modelToDiff = new HashMap<>();
+    this.modelToPerfHumanReadable = new HashMap<>();
+    this.modelToMinHumanReadable = new HashMap<>();
+    this.modelToMaxHumanReadable = new HashMap<>();
+    this.modelToDiffHumanReadable = new HashMap<>();
+  }
 
   public LocalPerformanceModel(
       UUID region,

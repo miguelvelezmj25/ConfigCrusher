@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.builder;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
@@ -83,8 +84,10 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
   }
 
   @Override
-  public PerformanceModel readFromFile(File file) {
-    throw new UnsupportedOperationException("implement");
+  public PerformanceModel readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<PerformanceModel>() {});
   }
 
   protected List<String> getOptions() {

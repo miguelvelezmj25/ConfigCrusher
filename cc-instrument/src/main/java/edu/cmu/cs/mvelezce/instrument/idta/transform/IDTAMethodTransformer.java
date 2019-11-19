@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInte
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.idta.IDTAInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.cg.SootCallGraphBuilder;
+import edu.cmu.cs.mvelezce.instrument.region.utils.data.propcessor.idta.GlobalConstraintImplicationCleaner;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.BaseInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.idta.BaseIDTAInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
@@ -43,6 +44,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   public static final String DEBUG_DIR =
       "../cc-instrument/" + Options.DIRECTORY + "/instrument/idta/java/programs";
 
+  private final BaseIDTAExpander baseIDTAExpander;
   private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
   private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
   private final BaseInterExpander<Set<FeatureExpr>> interExpander;
@@ -51,6 +53,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
   private final CallGraph callGraph;
   private final SootAsmMethodMatcher sootAsmMethodMatcher;
+  private final GlobalConstraintImplicationCleaner globalConstraintImplicationCleaner;
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
@@ -64,8 +67,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     Options.checkIfDeleteResult(new File(DEBUG_DIR + "/" + builder.programName));
 
-    BaseIDTAExpander baseIDTAExpander = BaseIDTAExpander.getInstance();
-    baseIDTAExpander.init(this.getRegionsToData().values());
+    this.baseIDTAExpander = BaseIDTAExpander.getInstance();
+    this.baseIDTAExpander.init(this.getRegionsToData().values());
 
     this.upIntraExpander =
         new IDTAUpIntraExpander(
@@ -74,7 +77,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             builder.options,
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
-            baseIDTAExpander);
+            this.baseIDTAExpander);
     this.downIntraExpander =
         new IDTADownIntraExpander(
             builder.programName,
@@ -82,7 +85,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             builder.options,
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
-            baseIDTAExpander);
+            this.baseIDTAExpander);
 
     BaseRemoveNestedRegionsIntra<Set<FeatureExpr>> idtaRemoveNestedRegionsIntra =
         new IDTARemoveNestedRegionsIntra(
@@ -91,7 +94,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             builder.options,
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
-            baseIDTAExpander);
+            this.baseIDTAExpander);
     this.startEndRegionBlocksSetter =
         new IDTAStartEndRegionBlocksSetter(
             builder.programName,
@@ -100,7 +103,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getBlockRegionMatcher(),
             this.getRegionsToData(),
             idtaRemoveNestedRegionsIntra,
-            baseIDTAExpander);
+            this.baseIDTAExpander);
 
     this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
     this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
@@ -113,7 +116,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getRegionsToData(),
             this.callGraph,
             this.sootAsmMethodMatcher,
-            baseIDTAExpander);
+            this.baseIDTAExpander);
 
     this.removeNestedRegionsInter =
         new IDTARemoveNestedRegionsInter(
@@ -125,7 +128,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.sootAsmMethodMatcher,
             this.callGraph,
             baseInterAnalysisUtils,
-            baseIDTAExpander);
+            this.baseIDTAExpander);
 
     this.interExpander =
         new BaseIDTAInterExpander(
@@ -136,9 +139,18 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getRegionsToData(),
             baseInterAnalysisUtils,
             this.sootAsmMethodMatcher,
-            baseIDTAExpander);
+            this.baseIDTAExpander);
 
     this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
+
+    this.globalConstraintImplicationCleaner =
+        new GlobalConstraintImplicationCleaner(
+            builder.programName,
+            DEBUG_DIR,
+            builder.options,
+            this.getBlockRegionMatcher(),
+            this.getRegionsToData(),
+            this.baseIDTAExpander);
   }
 
   @Override
@@ -199,9 +211,37 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     MemoryMonitor.printMemoryUsage("Memory:");
 
-    System.out.println(
-        "Update the constraints per region to include potentially missed interactions");
     this.setStartAndEndBlocks(classNodes);
+    this.cleanImpliedConstraints(classNodes);
+  }
+
+  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
+
+    for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to clean implied constraints: "
+              + (classNodesCount - processedClassNodesCount));
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
+        System.out.println("Cleaning constraints " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
+        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+
+        if (this.debug()) {
+          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
+        }
+      }
+    }
   }
 
   private void removeNestedRegionsInter(Set<ClassNode> classNodes) {

@@ -181,4 +181,8 @@ public final class BaseIDTAExpander {
   //
   //    return disjunction;
   //  }
+
+  public Set<FeatureExpr> getGlobalConstraints() {
+    return globalConstraints;
+  }
 }

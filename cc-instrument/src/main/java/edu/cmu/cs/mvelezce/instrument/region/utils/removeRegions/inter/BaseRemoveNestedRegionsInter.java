@@ -47,8 +47,8 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
   protected abstract boolean coversAll(T coveringData, @Nullable T regionData);
 
   @Override
-  protected String debugFileName(String methodName) {
-    return "removeNestedRegionsInter/" + methodName;
+  protected String getAnalysisName() {
+    return "removeNestedRegionsInter";
   }
 
   @Override

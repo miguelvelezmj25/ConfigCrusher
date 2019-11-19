@@ -35,7 +35,7 @@ public abstract class BaseRemoveNestedRegionsIntra<T> extends BlockRegionAnalyze
   }
 
   @Override
-  protected String debugFileName(String methodName) {
+  protected String getAnalysisName() {
     throw new UnsupportedOperationException("Method should not be called");
   }
 

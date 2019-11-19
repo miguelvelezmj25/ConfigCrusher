@@ -98,20 +98,20 @@ public abstract class BlockRegionAnalyzer<T> {
     String dotString = this.debugBlockData(methodNode, graph, blocksToRegions);
 
     try {
-      String debugFileName = this.debugFileName(methodNode.name + methodNode.desc);
+      String analysis = this.getAnalysisName();
       PrettyMethodGraph.saveDotFile(
           dotString,
           this.debugDir,
           this.programName,
           classNode.name,
           methodNode.name + methodNode.desc,
-          debugFileName);
+          analysis);
       PrettyMethodGraph.savePdfFile(
           this.debugDir,
           this.programName,
           classNode.name,
           methodNode.name + methodNode.desc,
-          debugFileName);
+          analysis);
     } catch (FileNotFoundException fnfe) {
       throw new RuntimeException(fnfe);
     } catch (InterruptedException | IOException ieioe) {
@@ -119,7 +119,7 @@ public abstract class BlockRegionAnalyzer<T> {
     }
   }
 
-  protected abstract String debugFileName(String methodName);
+  protected abstract String getAnalysisName();
 
   private String debugBlockData(
       MethodNode methodNode,

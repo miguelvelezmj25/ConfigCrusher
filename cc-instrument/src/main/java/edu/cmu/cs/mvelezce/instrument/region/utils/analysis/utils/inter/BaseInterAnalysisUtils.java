@@ -43,7 +43,7 @@ public abstract class BaseInterAnalysisUtils<T> extends BlockRegionAnalyzer<T> {
   }
 
   @Override
-  protected String debugFileName(String methodName) {
+  protected String getAnalysisName() {
     throw new UnsupportedOperationException("Implement");
   }
 

@@ -56,7 +56,7 @@ public abstract class BaseInterExpander<T> extends BlockRegionAnalyzer<T> {
   }
 
   @Override
-  protected String debugFileName(String methodName) {
+  protected String getAnalysisName() {
     throw new UnsupportedOperationException("Implement");
     //    return "expandData/" + methodName;
   }

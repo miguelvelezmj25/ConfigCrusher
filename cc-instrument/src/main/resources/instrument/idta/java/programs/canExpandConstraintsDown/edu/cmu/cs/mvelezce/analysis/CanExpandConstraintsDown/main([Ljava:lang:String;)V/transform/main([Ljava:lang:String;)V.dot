@@ -1,0 +1,23 @@
+digraph main {
+node [shape=record];
+2117891478 [label="L5\lLINENUMBER 16 L5\lFRAME SAME\lLDC \"278b598e-2510-44f4-a042-432c1139897e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/region/RegionsManager.exit (Ljava/lang/String;)V\lRETURN\lL7\l"];
+630972471 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1364803474 [label="L6\lLINENUMBER 14 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"time\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+741375836 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lIFEQ L5\l"];
+298971104 [label="ILOAD 2\lIFEQ L3\l"];
+1675036015 [label="L0\lLINENUMBER 6 L0\lLDC \"278b598e-2510-44f4-a042-432c1139897e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/region/RegionsManager.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 1675036015
+2117891478 -> exit
+630972471 -> 741375836
+1364803474 -> 2117891478
+741375836 -> 2117891478
+741375836 -> 1364803474
+298971104 -> 630972471
+298971104 -> 741375836
+1675036015 -> 741375836
+1675036015 -> 298971104
+2117891478[fontcolor="purple", penwidth=3, color="purple"];
+1675036015[fontcolor="purple", penwidth=3, color="purple"];
+}

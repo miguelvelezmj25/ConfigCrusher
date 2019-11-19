@@ -29,8 +29,8 @@ public abstract class BaseStartEndRegionBlocksSetter<T> extends BlockRegionAnaly
   }
 
   @Override
-  protected String debugFileName(String methodName) {
-    return "setStartEndRegion/" + methodName;
+  protected String getAnalysisName() {
+    return "setStartEndRegion";
   }
 
   @Override

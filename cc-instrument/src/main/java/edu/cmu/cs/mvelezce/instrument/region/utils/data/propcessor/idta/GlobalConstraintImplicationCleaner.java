@@ -56,8 +56,8 @@ public final class GlobalConstraintImplicationCleaner
   }
 
   @Override
-  protected String debugFileName(String methodName) {
-    return "cleanImpliedConstraints/" + methodName;
+  protected String getAnalysisName() {
+    return "cleanImpliedConstraints";
   }
 
   @Override

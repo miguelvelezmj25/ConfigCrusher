@@ -25,8 +25,8 @@ public abstract class BaseIntraExpander<T> extends BlockRegionAnalyzer<T> {
   }
 
   @Override
-  protected String debugFileName(String methodName) {
-    return "expandData/" + methodName;
+  protected String getAnalysisName() {
+    return "expandData";
   }
 
   public void validateAllBlocksHaveRegions(MethodNode methodNode, ClassNode classNode) {

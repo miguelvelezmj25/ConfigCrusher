@@ -1,45 +1,45 @@
 digraph releaseAndFindNotifyTargetsInternal {
 node [shape=record];
-1125682491 [label="L11\lLINENUMBER 1340 L11\lFRAME SAME\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.isThin ()Z\lIFEQ L20\l"];
-688604763 [label="L13\lLINENUMBER 1320 L13\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL14\lLINENUMBER 1322 L14\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.isThin ()Z\lIFEQ L15\l"];
-1474697154 [label="L15\lLINENUMBER 1326 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.REMOVE_TOTAL_LOCKIMPL_OVERHEAD : J\lILOAD 4\lL19\lLINENUMBER 1327 L19\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\lGOTO L18\l"];
-117615407 [label="L10\lLINENUMBER 1313 L10\lACONST_NULL\lARETURN\l"];
-41935887 [label="L4\lLINENUMBER 1300 L4\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Lock\lASTORE 6\l"];
-2057332828 [label="L9\lLINENUMBER 1317 L9\lFRAME APPEND [java/util/Set]\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.nWaiters ()I\lIFNE L11\l"];
-994236879 [label="ALOAD 6\lL12\lLINENUMBER 1318 L12\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.nOwners ()I\lIFNE L11\l"];
-2116680384 [label="L0\lLINENUMBER 1297 L0\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.lockTables : [Ljava/util/Map;\lILOAD 4\lAALOAD\lASTORE 5\lL1\lLINENUMBER 1298 L1\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Lock\lASTORE 6\lL2\lLINENUMBER 1299 L2\lALOAD 6\lIFNONNULL L3\l"];
-1069439438 [label="L22\lLINENUMBER 1346 L22\lFRAME FULL [com/sleepycat/je/txn/LockManager J com/sleepycat/je/txn/Locker I java/util/Map java/lang/Object java/util/Set] []\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lALOAD 6\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
-1155513288 [label="L5\lLINENUMBER 1308 L5\lFRAME SAME\lALOAD 6\lALOAD 3\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lILOAD 4\lL7\lLINENUMBER 1309 L7\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.release (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/dbi/MemoryBudget;I)Ljava/util/Set;\lASTORE 7\lL8\lLINENUMBER 1311 L8\lALOAD 7\lIFNONNULL L9\l"];
-1964095081 [label="L6\lLINENUMBER 1305 L6\lACONST_NULL\lARETURN\l"];
-151881933 [label="L20\lLINENUMBER 1343 L20\lFRAME SAME\lNEW com/sleepycat/je/txn/LockImpl\lDUP\lALOAD 6\lCHECKCAST com/sleepycat/je/txn/LockImpl\lINVOKESPECIAL com/sleepycat/je/txn/LockImpl.\<init\> (Lcom/sleepycat/je/txn/LockImpl;)V\lASTORE 6\l"];
-1551221398 [label="L3\lLINENUMBER 1303 L3\lFRAME APPEND [java/util/Map com/sleepycat/je/txn/Lock]\lALOAD 6\lIFNONNULL L5\l"];
-1476463883 [label="L21\lLINENUMBER 1341 L21\lNEW com/sleepycat/je/txn/ThinLockImpl\lDUP\lALOAD 6\lCHECKCAST com/sleepycat/je/txn/ThinLockImpl\lINVOKESPECIAL com/sleepycat/je/txn/ThinLockImpl.\<init\> (Lcom/sleepycat/je/txn/ThinLockImpl;)V\lASTORE 6\lGOTO L22\l"];
-1343240622 [label="L16\lLINENUMBER 1323 L16\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.REMOVE_TOTAL_THINLOCKIMPL_OVERHEAD : J\lILOAD 4\lL17\lLINENUMBER 1324 L17\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\lGOTO L18\l"];
-2059870288 [label="L18\lLINENUMBER 1349 L18\lFRAME SAME\lALOAD 7\lARETURN\lL23\l"];
+315063126 [label="L21\lLINENUMBER 1341 L21\lNEW com/sleepycat/je/txn/ThinLockImpl\lDUP\lALOAD 6\lCHECKCAST com/sleepycat/je/txn/ThinLockImpl\lINVOKESPECIAL com/sleepycat/je/txn/ThinLockImpl.\<init\> (Lcom/sleepycat/je/txn/ThinLockImpl;)V\lASTORE 6\lGOTO L22\l"];
+1528339187 [label="L20\lLINENUMBER 1343 L20\lFRAME SAME\lNEW com/sleepycat/je/txn/LockImpl\lDUP\lALOAD 6\lCHECKCAST com/sleepycat/je/txn/LockImpl\lINVOKESPECIAL com/sleepycat/je/txn/LockImpl.\<init\> (Lcom/sleepycat/je/txn/LockImpl;)V\lASTORE 6\l"];
+3561903 [label="L13\lLINENUMBER 1320 L13\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL14\lLINENUMBER 1322 L14\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.isThin ()Z\lIFEQ L15\l"];
+488303494 [label="ALOAD 6\lL12\lLINENUMBER 1318 L12\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.nOwners ()I\lIFNE L11\l"];
+1016321657 [label="L22\lLINENUMBER 1346 L22\lFRAME FULL [com/sleepycat/je/txn/LockManager J com/sleepycat/je/txn/Locker I java/util/Map java/lang/Object java/util/Set] []\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lALOAD 6\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+546219465 [label="L18\lLINENUMBER 1349 L18\lFRAME SAME\lALOAD 7\lARETURN\lL23\l"];
+815802282 [label="L5\lLINENUMBER 1308 L5\lFRAME SAME\lALOAD 6\lALOAD 3\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lILOAD 4\lL7\lLINENUMBER 1309 L7\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.release (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/dbi/MemoryBudget;I)Ljava/util/Set;\lASTORE 7\lL8\lLINENUMBER 1311 L8\lALOAD 7\lIFNONNULL L9\l"];
+281823908 [label="L0\lLINENUMBER 1297 L0\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.lockTables : [Ljava/util/Map;\lILOAD 4\lAALOAD\lASTORE 5\lL1\lLINENUMBER 1298 L1\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Lock\lASTORE 6\lL2\lLINENUMBER 1299 L2\lALOAD 6\lIFNONNULL L3\l"];
+741737693 [label="L10\lLINENUMBER 1313 L10\lACONST_NULL\lARETURN\l"];
+524566945 [label="L4\lLINENUMBER 1300 L4\lALOAD 5\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Lock\lASTORE 6\l"];
+1454779218 [label="L15\lLINENUMBER 1326 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.REMOVE_TOTAL_LOCKIMPL_OVERHEAD : J\lILOAD 4\lL19\lLINENUMBER 1327 L19\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\lGOTO L18\l"];
+2134891217 [label="L9\lLINENUMBER 1317 L9\lFRAME APPEND [java/util/Set]\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.nWaiters ()I\lIFNE L11\l"];
+481994136 [label="L16\lLINENUMBER 1323 L16\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.REMOVE_TOTAL_THINLOCKIMPL_OVERHEAD : J\lILOAD 4\lL17\lLINENUMBER 1324 L17\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\lGOTO L18\l"];
+2131074032 [label="L3\lLINENUMBER 1303 L3\lFRAME APPEND [java/util/Map com/sleepycat/je/txn/Lock]\lALOAD 6\lIFNONNULL L5\l"];
+1112261232 [label="L6\lLINENUMBER 1305 L6\lACONST_NULL\lARETURN\l"];
+31384087 [label="L11\lLINENUMBER 1340 L11\lFRAME SAME\lALOAD 6\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.isThin ()Z\lIFEQ L20\l"];
 entry;
 exit;
-1125682491 -> 151881933
-1125682491 -> 1476463883
-688604763 -> 1474697154
-688604763 -> 1343240622
-1474697154 -> 2059870288
-117615407 -> exit
-41935887 -> 1551221398
-2057332828 -> 1125682491
-2057332828 -> 994236879
-994236879 -> 1125682491
-994236879 -> 688604763
-2116680384 -> 1551221398
-2116680384 -> 41935887
-1069439438 -> 2059870288
-1155513288 -> 117615407
-1155513288 -> 2057332828
-1964095081 -> exit
-entry -> 2116680384
-151881933 -> 1069439438
-1551221398 -> 1155513288
-1551221398 -> 1964095081
-1476463883 -> 1069439438
-1343240622 -> 2059870288
-2059870288 -> exit
+315063126 -> 1016321657
+1528339187 -> 1016321657
+3561903 -> 1454779218
+3561903 -> 481994136
+488303494 -> 3561903
+488303494 -> 31384087
+1016321657 -> 546219465
+546219465 -> exit
+815802282 -> 2134891217
+815802282 -> 741737693
+281823908 -> 524566945
+281823908 -> 2131074032
+741737693 -> exit
+524566945 -> 2131074032
+entry -> 281823908
+1454779218 -> 546219465
+2134891217 -> 488303494
+2134891217 -> 31384087
+481994136 -> 546219465
+2131074032 -> 815802282
+2131074032 -> 1112261232
+1112261232 -> exit
+31384087 -> 315063126
+31384087 -> 1528339187
 }

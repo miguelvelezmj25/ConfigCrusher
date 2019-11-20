@@ -1,43 +1,43 @@
 digraph release {
 node [shape=record];
-333364498 [label="L1\lGOTO L14\l"];
-208049131 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1253 L4\lALOAD 0\lLLOAD 1\lALOAD 3\lL5\lLINENUMBER 1254 L5\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.releaseAndFindNotifyTargets (JLcom/sleepycat/je/txn/Locker;)Ljava/util/Set;\lASTORE 4\lL6\lLINENUMBER 1256 L6\lALOAD 4\lIFNONNULL L7\l"];
-660133305 [label="L3\lALOAD 8\lATHROW\l"];
-575576020 [label="INVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.maybeForceYield ()Z\lIFNE L15\l"];
-593930928 [label="L11\lFRAME APPEND [java/util/Iterator]\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L9\l"];
-667519466 [label="L14\lLINENUMBER 1272 L14\lFRAME SAME\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L15\l"];
-1522866216 [label="L0\lLINENUMBER 1269 L0\lALOAD 6\lINVOKEVIRTUAL java/lang/Object.notifyAll ()V\lL13\lLINENUMBER 1270 L13\lALOAD 7\lMONITOREXIT\l"];
-1689971128 [label="ALOAD 5\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Locker\lASTORE 6\lL12\lLINENUMBER 1268 L12\lALOAD 6\lDUP\lASTORE 7\lMONITORENTER\l"];
-33615951 [label="L10\lLINENUMBER 1266 L10\lALOAD 4\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 5\l"];
-1437502754 [label="L7\lLINENUMBER 1260 L7\lFRAME APPEND [java/util/Set]\lALOAD 4\lINVOKEINTERFACE java/util/Set.size ()I\lIFLE L9\l"];
-1662256265 [label="L9\lLINENUMBER 1276 L9\lFRAME CHOP 3\lICONST_1\lIRETURN\lL16\l"];
-120537611 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-887855623 [label="L15\lLINENUMBER 1273 L15\lFRAME SAME\lGOTO L11\l"];
-872320168 [label="L8\lLINENUMBER 1257 L8\lICONST_0\lIRETURN\l"];
-521794682 [label="L2\lFRAME FULL [com/sleepycat/je/txn/LockManager J com/sleepycat/je/txn/Locker java/util/Set java/util/Iterator com/sleepycat/je/txn/Locker com/sleepycat/je/txn/Locker] [java/lang/Throwable]\lASTORE 8\lALOAD 7\lMONITOREXIT\l"];
+149137615 [label="L3\lALOAD 8\lATHROW\l"];
+1371582821 [label="L7\lLINENUMBER 1260 L7\lFRAME APPEND [java/util/Set]\lALOAD 4\lINVOKEINTERFACE java/util/Set.size ()I\lIFLE L9\l"];
+1188205885 [label="L11\lFRAME APPEND [java/util/Iterator]\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L9\l"];
+546177504 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1253 L4\lALOAD 0\lLLOAD 1\lALOAD 3\lL5\lLINENUMBER 1254 L5\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.releaseAndFindNotifyTargets (JLcom/sleepycat/je/txn/Locker;)Ljava/util/Set;\lASTORE 4\lL6\lLINENUMBER 1256 L6\lALOAD 4\lIFNONNULL L7\l"];
+861082062 [label="L15\lLINENUMBER 1273 L15\lFRAME SAME\lGOTO L11\l"];
+434371728 [label="L14\lLINENUMBER 1272 L14\lFRAME SAME\lGETSTATIC com/sleepycat/je/txn/LockManager.$assertionsDisabled : Z\lIFNE L15\l"];
+1310716384 [label="L8\lLINENUMBER 1257 L8\lICONST_0\lIRETURN\l"];
+134029432 [label="L10\lLINENUMBER 1266 L10\lALOAD 4\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 5\l"];
+1635392417 [label="INVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.maybeForceYield ()Z\lIFNE L15\l"];
+374420023 [label="L1\lGOTO L14\l"];
+315446680 [label="L9\lLINENUMBER 1276 L9\lFRAME CHOP 3\lICONST_1\lIRETURN\lL16\l"];
+526963268 [label="L0\lLINENUMBER 1269 L0\lALOAD 6\lINVOKEVIRTUAL java/lang/Object.notifyAll ()V\lL13\lLINENUMBER 1270 L13\lALOAD 7\lMONITOREXIT\l"];
+1479684904 [label="L2\lFRAME FULL [com/sleepycat/je/txn/LockManager J com/sleepycat/je/txn/Locker java/util/Set java/util/Iterator com/sleepycat/je/txn/Locker com/sleepycat/je/txn/Locker] [java/lang/Throwable]\lASTORE 8\lALOAD 7\lMONITOREXIT\l"];
+1529863950 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+2012474614 [label="ALOAD 5\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Locker\lASTORE 6\lL12\lLINENUMBER 1268 L12\lALOAD 6\lDUP\lASTORE 7\lMONITORENTER\l"];
 entry;
 exit;
-333364498 -> 667519466
-208049131 -> 1437502754
-208049131 -> 872320168
-660133305 -> exit
-575576020 -> 120537611
-575576020 -> 887855623
-593930928 -> 1662256265
-593930928 -> 1689971128
-667519466 -> 887855623
-667519466 -> 575576020
-1522866216 -> 333364498
-1522866216 -> 521794682 [style=dashed, color=red]
-1689971128 -> 1522866216
-entry -> 208049131
-33615951 -> 593930928
-1437502754 -> 33615951
-1437502754 -> 1662256265
-1662256265 -> exit
-120537611 -> exit
-887855623 -> 593930928
-872320168 -> exit
-521794682 -> 660133305
-521794682 -> 521794682 [style=dashed, color=red]
+149137615 -> exit
+1371582821 -> 134029432
+1371582821 -> 315446680
+1188205885 -> 315446680
+1188205885 -> 2012474614
+546177504 -> 1371582821
+546177504 -> 1310716384
+861082062 -> 1188205885
+434371728 -> 1635392417
+434371728 -> 861082062
+1310716384 -> exit
+entry -> 546177504
+134029432 -> 1188205885
+1635392417 -> 861082062
+1635392417 -> 1529863950
+374420023 -> 434371728
+315446680 -> exit
+526963268 -> 374420023
+526963268 -> 1479684904 [style=dashed, color=red]
+1479684904 -> 149137615
+1479684904 -> 1479684904 [style=dashed, color=red]
+1529863950 -> exit
+2012474614 -> 526963268
 }

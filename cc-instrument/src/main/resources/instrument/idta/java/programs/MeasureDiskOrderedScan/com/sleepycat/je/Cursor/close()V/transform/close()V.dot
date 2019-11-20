@@ -1,25 +1,25 @@
 digraph close {
 node [shape=record];
-1436791351 [label="L9\lLINENUMBER 550 L9\lFRAME SAME\lRETURN\lL12\l"];
-946984601 [label="L7\lLINENUMBER 543 L7\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.removeCursor (Lcom/sleepycat/je/ForwardCursor;)V\lL8\lLINENUMBER 544 L8\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\l"];
-652311011 [label="L1\lLINENUMBER 533 L1\lRETURN\l"];
-647901962 [label="L3\lLINENUMBER 540 L3\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Cursor.checkEnv ()V\lL5\lLINENUMBER 541 L5\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\lL6\lLINENUMBER 542 L6\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lIFNULL L4\l"];
-260541215 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lTRYCATCHBLOCK L3 L4 L2 java/lang/Error\lL0\lLINENUMBER 532 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.isClosed ()Z\lIFEQ L3\l"];
-207371388 [label="L2\lLINENUMBER 546 L2\lFRAME SAME1 java/lang/Error\lASTORE 1\lL10\lLINENUMBER 547 L10\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL11\lLINENUMBER 548 L11\lALOAD 1\lATHROW\l"];
-359832501 [label="L4\lLINENUMBER 549 L4\lFRAME SAME\lGOTO L9\l"];
+1485138591 [label="L3\lLINENUMBER 540 L3\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Cursor.checkEnv ()V\lL5\lLINENUMBER 541 L5\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\lL6\lLINENUMBER 542 L6\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lIFNULL L4\l"];
+1964865002 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lTRYCATCHBLOCK L3 L4 L2 java/lang/Error\lL0\lLINENUMBER 532 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.isClosed ()Z\lIFEQ L3\l"];
+1687785739 [label="L1\lLINENUMBER 533 L1\lRETURN\l"];
+1177155136 [label="L4\lLINENUMBER 549 L4\lFRAME SAME\lGOTO L9\l"];
+1854940743 [label="L7\lLINENUMBER 543 L7\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.removeCursor (Lcom/sleepycat/je/ForwardCursor;)V\lL8\lLINENUMBER 544 L8\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Cursor.dbHandle : Lcom/sleepycat/je/Database;\l"];
+1560966118 [label="L9\lLINENUMBER 550 L9\lFRAME SAME\lRETURN\lL12\l"];
+1017245970 [label="L2\lLINENUMBER 546 L2\lFRAME SAME1 java/lang/Error\lASTORE 1\lL10\lLINENUMBER 547 L10\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL11\lLINENUMBER 548 L11\lALOAD 1\lATHROW\l"];
 entry;
 exit;
-1436791351 -> exit
-entry -> 260541215
-946984601 -> 207371388 [style=dashed, color=red]
-946984601 -> 359832501
-652311011 -> exit
-647901962 -> 946984601
-647901962 -> 207371388 [style=dashed, color=red]
-647901962 -> 359832501
-260541215 -> 652311011
-260541215 -> 647901962
-260541215 -> 207371388 [style=dashed, color=red]
-207371388 -> exit
-359832501 -> 1436791351
+1485138591 -> 1177155136
+1485138591 -> 1854940743
+1485138591 -> 1017245970 [style=dashed, color=red]
+entry -> 1964865002
+1964865002 -> 1485138591
+1964865002 -> 1687785739
+1964865002 -> 1017245970 [style=dashed, color=red]
+1687785739 -> exit
+1177155136 -> 1560966118
+1854940743 -> 1177155136
+1854940743 -> 1017245970 [style=dashed, color=red]
+1560966118 -> exit
+1017245970 -> exit
 }

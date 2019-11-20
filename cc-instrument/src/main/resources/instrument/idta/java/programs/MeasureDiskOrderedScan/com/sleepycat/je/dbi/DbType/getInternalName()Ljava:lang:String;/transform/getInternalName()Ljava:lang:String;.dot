@@ -1,13 +1,13 @@
 digraph getInternalName {
 node [shape=record];
-440102690 [label="L0\lLINENUMBER 118 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbType.internalName : Ljava/lang/String;\lIFNONNULL L1\l"];
-761219923 [label="L2\lLINENUMBER 119 L2\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState ()Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
-1161924648 [label="L1\lLINENUMBER 121 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbType.internalName : Ljava/lang/String;\lARETURN\lL3\l"];
+1229839557 [label="L1\lLINENUMBER 121 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbType.internalName : Ljava/lang/String;\lARETURN\lL3\l"];
+842143063 [label="L2\lLINENUMBER 119 L2\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState ()Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+260787943 [label="L0\lLINENUMBER 118 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbType.internalName : Ljava/lang/String;\lIFNONNULL L1\l"];
 entry;
 exit;
-entry -> 440102690
-440102690 -> 761219923
-440102690 -> 1161924648
-761219923 -> exit
-1161924648 -> exit
+entry -> 260787943
+1229839557 -> exit
+842143063 -> exit
+260787943 -> 1229839557
+260787943 -> 842143063
 }

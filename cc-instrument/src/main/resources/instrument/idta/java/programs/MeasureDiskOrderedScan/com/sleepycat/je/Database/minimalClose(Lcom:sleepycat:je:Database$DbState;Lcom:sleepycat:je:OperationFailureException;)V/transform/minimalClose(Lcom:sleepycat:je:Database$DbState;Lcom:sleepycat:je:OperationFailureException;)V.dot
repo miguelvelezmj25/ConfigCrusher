@@ -1,21 +1,21 @@
 digraph minimalClose {
 node [shape=record];
-87304986 [label="L1\lLINENUMBER 627 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L2\l"];
-1065615223 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-39819040 [label="L3\lLINENUMBER 628 L3\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lL4\lLINENUMBER 629 L4\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/Database.preemptedCause : Lcom/sleepycat/je/OperationFailureException;\l"];
-639041674 [label="L2\lLINENUMBER 632 L2\lFRAME SAME\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 633 L5\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lL6\lLINENUMBER 634 L6\lRETURN\lL7\l"];
-1003537961 [label="L0\lLINENUMBER 625 L0\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L1\l"];
-2076266541 [label="ALOAD 1\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L1\l"];
+802184336 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+419160268 [label="ALOAD 1\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L1\l"];
+2077297953 [label="L1\lLINENUMBER 627 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lGETSTATIC com/sleepycat/je/Database$DbState.OPEN : Lcom/sleepycat/je/Database$DbState;\lIF_ACMPNE L2\l"];
+1453991722 [label="L2\lLINENUMBER 632 L2\lFRAME SAME\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL5\lLINENUMBER 633 L5\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/Database.handleLocker : Lcom/sleepycat/je/txn/HandleLocker;\lL6\lLINENUMBER 634 L6\lRETURN\lL7\l"];
+499414849 [label="L0\lLINENUMBER 625 L0\lGETSTATIC com/sleepycat/je/Database.$assertionsDisabled : Z\lIFNE L1\l"];
+294672468 [label="L3\lLINENUMBER 628 L3\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lL4\lLINENUMBER 629 L4\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/Database.preemptedCause : Lcom/sleepycat/je/OperationFailureException;\l"];
 entry;
 exit;
-entry -> 1003537961
-87304986 -> 39819040
-87304986 -> 639041674
-1065615223 -> exit
-39819040 -> 639041674
-639041674 -> exit
-1003537961 -> 87304986
-1003537961 -> 2076266541
-2076266541 -> 87304986
-2076266541 -> 1065615223
+802184336 -> exit
+entry -> 499414849
+419160268 -> 802184336
+419160268 -> 2077297953
+2077297953 -> 1453991722
+2077297953 -> 294672468
+1453991722 -> exit
+499414849 -> 419160268
+499414849 -> 2077297953
+294672468 -> 1453991722
 }

@@ -1,13 +1,13 @@
 digraph setSortedDuplicatesVoid {
 node [shape=record];
-921440896 [label="L2\lLINENUMBER 265 L2\lFRAME SAME\lRETURN\lL4\l"];
-2061725966 [label="L3\lLINENUMBER 263 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.setKeyPrefixingVoid (Z)V\l"];
-14742223 [label="L0\lLINENUMBER 261 L0\lALOAD 0\lILOAD 1\lPUTFIELD com/sleepycat/je/DatabaseConfig.sortedDuplicates : Z\lL1\lLINENUMBER 262 L1\lILOAD 1\lIFEQ L2\l"];
+1047956581 [label="L2\lLINENUMBER 265 L2\lFRAME SAME\lRETURN\lL4\l"];
+1406512770 [label="L3\lLINENUMBER 263 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.setKeyPrefixingVoid (Z)V\l"];
+683913492 [label="L0\lLINENUMBER 261 L0\lALOAD 0\lILOAD 1\lPUTFIELD com/sleepycat/je/DatabaseConfig.sortedDuplicates : Z\lL1\lLINENUMBER 262 L1\lILOAD 1\lIFEQ L2\l"];
 entry;
 exit;
-entry -> 14742223
-921440896 -> exit
-2061725966 -> 921440896
-14742223 -> 921440896
-14742223 -> 2061725966
+entry -> 683913492
+1047956581 -> exit
+1406512770 -> 1047956581
+683913492 -> 1047956581
+683913492 -> 1406512770
 }

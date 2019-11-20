@@ -1,16 +1,16 @@
 digraph doCriticalEviction {
 node [shape=record];
-1163242158 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1086148515 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
-563313965 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
-199450263 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+966955036 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1662352169 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
+1949315170 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+2103766396 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
 entry;
 exit;
-entry -> 199450263
-1163242158 -> 563313965
-1086148515 -> 1163242158
-1086148515 -> 563313965
-563313965 -> exit
-199450263 -> 1086148515
-199450263 -> 563313965
+entry -> 966955036
+966955036 -> 1662352169
+966955036 -> 1949315170
+1662352169 -> exit
+1949315170 -> 1662352169
+1949315170 -> 2103766396
+2103766396 -> 1662352169
 }

@@ -1,21 +1,21 @@
 digraph rootExists {
 node [shape=record];
-1939338233 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lL4\lLINENUMBER 425 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getLsn ()J\lLDC -1\lLCMP\lIFNE L3\l"];
-1221077146 [label="L3\lLINENUMBER 429 L3\lFRAME SAME\lICONST_1\lIRETURN\lL6\l"];
-1378320589 [label="L2\lLINENUMBER 421 L2\lICONST_0\lIRETURN\l"];
-1409762006 [label="L1\lLINENUMBER 424 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getTarget ()Lcom/sleepycat/je/tree/Node;\lIFNONNULL L3\l"];
-1458413872 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lIFNONNULL L1\l"];
-638052518 [label="L5\lLINENUMBER 426 L5\lICONST_0\lIRETURN\l"];
+156943304 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lIFNONNULL L1\l"];
+486737602 [label="L2\lLINENUMBER 421 L2\lICONST_0\lIRETURN\l"];
+1388514371 [label="L1\lLINENUMBER 424 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getTarget ()Lcom/sleepycat/je/tree/Node;\lIFNONNULL L3\l"];
+86563749 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lL4\lLINENUMBER 425 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getLsn ()J\lLDC -1\lLCMP\lIFNE L3\l"];
+1521686456 [label="L3\lLINENUMBER 429 L3\lFRAME SAME\lICONST_1\lIRETURN\lL6\l"];
+1329823319 [label="L5\lLINENUMBER 426 L5\lICONST_0\lIRETURN\l"];
 entry;
 exit;
-entry -> 1458413872
-1939338233 -> 1221077146
-1939338233 -> 638052518
-1221077146 -> exit
-1378320589 -> exit
-1409762006 -> 1939338233
-1409762006 -> 1221077146
-1458413872 -> 1378320589
-1458413872 -> 1409762006
-638052518 -> exit
+entry -> 156943304
+156943304 -> 486737602
+156943304 -> 1388514371
+486737602 -> exit
+1388514371 -> 86563749
+1388514371 -> 1521686456
+86563749 -> 1329823319
+86563749 -> 1521686456
+1521686456 -> exit
+1329823319 -> exit
 }

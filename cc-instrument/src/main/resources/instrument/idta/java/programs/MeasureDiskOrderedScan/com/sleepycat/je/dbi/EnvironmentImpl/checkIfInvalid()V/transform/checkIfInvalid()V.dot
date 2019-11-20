@@ -1,26 +1,26 @@
 digraph checkIfInvalid {
 node [shape=record];
-1177025059 [label="L2\lLINENUMBER 1732 L2\lRETURN\l"];
-1324783587 [label="L7\lLINENUMBER 1745 L7\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.fillInStackTrace ()Ljava/lang/Throwable;\lPOP\lL8\lLINENUMBER 1747 L8\lALOAD 1\lATHROW\l"];
-497517789 [label="ALOAD 1\lIFNONNULL L4\l"];
-1667128692 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1876325260 [label="L6\lLINENUMBER 1750 L6\lFRAME SAME\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Environment must be closed, caused by: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.wrapSelf (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\lL9\l"];
-605322410 [label="L0\lLINENUMBER 1731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.INVALID : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPEQ L1\l"];
-1750645695 [label="L1\lLINENUMBER 1735 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.invalidatingEFE : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 1\lL3\lLINENUMBER 1736 L3\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.$assertionsDisabled : Z\lIFNE L4\l"];
-449923823 [label="L4\lLINENUMBER 1742 L4\lFRAME APPEND [com/sleepycat/je/EnvironmentFailureException]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.setAlreadyThrown (Z)V\lL5\lLINENUMBER 1744 L5\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.preallocatedEFE : Lcom/sleepycat/je/EnvironmentFailureException;\lIF_ACMPNE L6\l"];
+1885573433 [label="L0\lLINENUMBER 1731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.INVALID : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPEQ L1\l"];
+2116612452 [label="L1\lLINENUMBER 1735 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.invalidatingEFE : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 1\lL3\lLINENUMBER 1736 L3\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.$assertionsDisabled : Z\lIFNE L4\l"];
+2136523522 [label="L6\lLINENUMBER 1750 L6\lFRAME SAME\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Environment must be closed, caused by: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.wrapSelf (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\lL9\l"];
+640253614 [label="L2\lLINENUMBER 1732 L2\lRETURN\l"];
+737373857 [label="ALOAD 1\lIFNONNULL L4\l"];
+384646635 [label="L7\lLINENUMBER 1745 L7\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.fillInStackTrace ()Ljava/lang/Throwable;\lPOP\lL8\lLINENUMBER 1747 L8\lALOAD 1\lATHROW\l"];
+1178777983 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+1207289151 [label="L4\lLINENUMBER 1742 L4\lFRAME APPEND [com/sleepycat/je/EnvironmentFailureException]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.setAlreadyThrown (Z)V\lL5\lLINENUMBER 1744 L5\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.preallocatedEFE : Lcom/sleepycat/je/EnvironmentFailureException;\lIF_ACMPNE L6\l"];
 entry;
 exit;
-1177025059 -> exit
-entry -> 605322410
-1324783587 -> exit
-497517789 -> 1667128692
-497517789 -> 449923823
-1667128692 -> exit
-1876325260 -> exit
-605322410 -> 1177025059
-605322410 -> 1750645695
-1750645695 -> 497517789
-1750645695 -> 449923823
-449923823 -> 1324783587
-449923823 -> 1876325260
+entry -> 1885573433
+1885573433 -> 2116612452
+1885573433 -> 640253614
+2116612452 -> 737373857
+2116612452 -> 1207289151
+2136523522 -> exit
+640253614 -> exit
+737373857 -> 1178777983
+737373857 -> 1207289151
+384646635 -> exit
+1178777983 -> exit
+1207289151 -> 2136523522
+1207289151 -> 384646635
 }

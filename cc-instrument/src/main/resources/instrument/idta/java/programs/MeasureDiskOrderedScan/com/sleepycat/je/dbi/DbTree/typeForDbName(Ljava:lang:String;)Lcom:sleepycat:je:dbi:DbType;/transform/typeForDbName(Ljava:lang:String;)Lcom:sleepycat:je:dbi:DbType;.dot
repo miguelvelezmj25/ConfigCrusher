@@ -1,13 +1,13 @@
 digraph typeForDbName {
 node [shape=record];
-155420750 [label="L3\lLINENUMBER 205 L3\lALOAD 1\lARETURN\l"];
-598221097 [label="L2\lLINENUMBER 207 L2\lFRAME APPEND [com/sleepycat/je/dbi/DbType]\lGETSTATIC com/sleepycat/je/dbi/DbType.USER : Lcom/sleepycat/je/dbi/DbType;\lARETURN\lL4\l"];
-607850827 [label="L0\lLINENUMBER 203 L0\lGETSTATIC com/sleepycat/je/dbi/DbTree.INTERNAL_TYPES_BY_NAME : Ljava/util/Map;\lALOAD 0\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/DbType\lASTORE 1\lL1\lLINENUMBER 204 L1\lALOAD 1\lIFNULL L2\l"];
+1530304716 [label="L3\lLINENUMBER 205 L3\lALOAD 1\lARETURN\l"];
+744711861 [label="L0\lLINENUMBER 203 L0\lGETSTATIC com/sleepycat/je/dbi/DbTree.INTERNAL_TYPES_BY_NAME : Ljava/util/Map;\lALOAD 0\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/dbi/DbType\lASTORE 1\lL1\lLINENUMBER 204 L1\lALOAD 1\lIFNULL L2\l"];
+442575067 [label="L2\lLINENUMBER 207 L2\lFRAME APPEND [com/sleepycat/je/dbi/DbType]\lGETSTATIC com/sleepycat/je/dbi/DbType.USER : Lcom/sleepycat/je/dbi/DbType;\lARETURN\lL4\l"];
 entry;
 exit;
-entry -> 607850827
-155420750 -> exit
-598221097 -> exit
-607850827 -> 155420750
-607850827 -> 598221097
+entry -> 744711861
+1530304716 -> exit
+744711861 -> 1530304716
+744711861 -> 442575067
+442575067 -> exit
 }

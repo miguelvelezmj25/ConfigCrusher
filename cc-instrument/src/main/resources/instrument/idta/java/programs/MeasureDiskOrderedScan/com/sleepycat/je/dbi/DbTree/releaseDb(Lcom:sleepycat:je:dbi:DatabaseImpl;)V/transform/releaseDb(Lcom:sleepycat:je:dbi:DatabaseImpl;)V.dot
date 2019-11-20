@@ -1,19 +1,19 @@
 digraph releaseDb {
 node [shape=record];
-1546859156 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
-1209228750 [label="L0\lLINENUMBER 1682 L0\lALOAD 1\lIFNULL L1\l"];
-1151576908 [label="L1\lLINENUMBER 1687 L1\lFRAME SAME\lRETURN\lL3\l"];
-245164529 [label="L2\lLINENUMBER 1685 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.decrementUseCount ()V\l"];
-1334248696 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.idDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
+1076410717 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
+287152541 [label="ALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.idDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lIF_ACMPEQ L1\l"];
+776308455 [label="L0\lLINENUMBER 1682 L0\lALOAD 1\lIFNULL L1\l"];
+1121479937 [label="L2\lLINENUMBER 1685 L2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.decrementUseCount ()V\l"];
+463198114 [label="L1\lLINENUMBER 1687 L1\lFRAME SAME\lRETURN\lL3\l"];
 entry;
 exit;
-1546859156 -> 1151576908
-1546859156 -> 245164529
-entry -> 1209228750
-1209228750 -> 1151576908
-1209228750 -> 1334248696
-1151576908 -> exit
-245164529 -> 1151576908
-1334248696 -> 1546859156
-1334248696 -> 1151576908
+entry -> 776308455
+1076410717 -> 1121479937
+1076410717 -> 463198114
+287152541 -> 1076410717
+287152541 -> 463198114
+776308455 -> 287152541
+776308455 -> 463198114
+1121479937 -> 463198114
+463198114 -> exit
 }

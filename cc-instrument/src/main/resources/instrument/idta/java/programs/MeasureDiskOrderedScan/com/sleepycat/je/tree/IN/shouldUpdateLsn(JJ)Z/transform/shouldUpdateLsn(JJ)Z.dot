@@ -1,37 +1,37 @@
 digraph shouldUpdateLsn {
 node [shape=record];
-336594423 [label="L7\lLINENUMBER 1987 L7\lFRAME SAME\lICONST_1\lIRETURN\lL16\l"];
-1308361441 [label="L4\lLINENUMBER 1969 L4\lICONST_1\lIRETURN\l"];
-2073871397 [label="L1\lLINENUMBER 1968 L1\lFRAME SAME\lLLOAD 3\lLDC -1\lLCMP\lIFNE L3\l"];
-689155385 [label="L8\lLINENUMBER 1974 L8\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"DeferredWrite LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL9\lLINENUMBER 1976 L9\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL10\lLINENUMBER 1977 L10\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 1974 L11\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
-578440293 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFEQ L3\l"];
-1356613939 [label="L3\lLINENUMBER 1972 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFEQ L5\l"];
-66991436 [label="L0\lLINENUMBER 1964 L0\lLLOAD 1\lLLOAD 3\lLCMP\lIFNE L1\l"];
-793872967 [label="L12\lLINENUMBER 1981 L12\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL13\lLINENUMBER 1983 L13\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL14\lLINENUMBER 1984 L14\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL15\lLINENUMBER 1981 L15\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
-200386218 [label="L6\lLINENUMBER 1973 L6\lLLOAD 1\lLDC -1\lLCMP\lIFEQ L7\l"];
-961995574 [label="LLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
-2065220808 [label="L5\lLINENUMBER 1980 L5\lFRAME SAME\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
-1618658571 [label="L2\lLINENUMBER 1965 L2\lICONST_0\lIRETURN\l"];
+2091195342 [label="L4\lLINENUMBER 1969 L4\lICONST_1\lIRETURN\l"];
+1282139800 [label="L7\lLINENUMBER 1987 L7\lFRAME SAME\lICONST_1\lIRETURN\lL16\l"];
+23740427 [label="L3\lLINENUMBER 1972 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDeferredWriteMode ()Z\lIFEQ L5\l"];
+2125290071 [label="L5\lLINENUMBER 1980 L5\lFRAME SAME\lLLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
+407168309 [label="LLOAD 3\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.isTransientOrNull (J)Z\lIFEQ L7\l"];
+1726778569 [label="L1\lLINENUMBER 1968 L1\lFRAME SAME\lLLOAD 3\lLDC -1\lLCMP\lIFNE L3\l"];
+1420066462 [label="L12\lLINENUMBER 1981 L12\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL13\lLINENUMBER 1983 L13\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL14\lLINENUMBER 1984 L14\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL15\lLINENUMBER 1981 L15\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+1958948835 [label="L2\lLINENUMBER 1965 L2\lICONST_0\lIRETURN\l"];
+756299665 [label="L6\lLINENUMBER 1973 L6\lLLOAD 1\lLDC -1\lLCMP\lIFEQ L7\l"];
+1970060382 [label="L0\lLINENUMBER 1964 L0\lLLOAD 1\lLLOAD 3\lLCMP\lIFNE L1\l"];
+1484808864 [label="L8\lLINENUMBER 1974 L8\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"DeferredWrite LSN update not allowed oldLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL9\lLINENUMBER 1976 L9\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" newLsn = \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL10\lLINENUMBER 1977 L10\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 1974 L11\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+292852276 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFEQ L3\l"];
 entry;
 exit;
-336594423 -> exit
-2073871397 -> 578440293
-2073871397 -> 1356613939
-689155385 -> exit
-578440293 -> 1308361441
-578440293 -> 1356613939
-1356613939 -> 200386218
-1356613939 -> 2065220808
-66991436 -> 2073871397
-66991436 -> 1618658571
-200386218 -> 336594423
-200386218 -> 961995574
-2065220808 -> 336594423
-2065220808 -> 793872967
-1308361441 -> exit
-entry -> 66991436
-793872967 -> exit
-961995574 -> 336594423
-961995574 -> 689155385
-1618658571 -> exit
+2091195342 -> exit
+23740427 -> 2125290071
+23740427 -> 756299665
+2125290071 -> 1282139800
+2125290071 -> 1420066462
+407168309 -> 1282139800
+407168309 -> 1484808864
+1726778569 -> 23740427
+1726778569 -> 292852276
+1958948835 -> exit
+756299665 -> 1282139800
+756299665 -> 407168309
+1970060382 -> 1726778569
+1970060382 -> 1958948835
+292852276 -> 2091195342
+292852276 -> 23740427
+1282139800 -> exit
+entry -> 1970060382
+1420066462 -> exit
+1484808864 -> exit
 }

@@ -1,158 +1,158 @@
 digraph putNoNotify {
 node [shape=record];
-2080098646 [label="ICONST_1\lGOTO L37\l"];
-1434712394 [label="L52\lLINENUMBER 2937 L52\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
-1622941025 [label="L6\lLINENUMBER 2955 L6\lFRAME SAME\lGOTO L54\l"];
-211275563 [label="ICONST_1\lGOTO L50\l"];
-1049061246 [label="ALOAD 3\lIFNONNULL L10\l"];
-356474934 [label="L37\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker com/sleepycat/je/OperationResult] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl I]\lINVOKESPECIAL com/sleepycat/je/Cursor.endMoveCursor (Lcom/sleepycat/je/dbi/CursorImpl;Z)V\l"];
-1071018732 [label="L10\lLINENUMBER 2866 L10\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L11\l"];
-1734314566 [label="L51\lLINENUMBER 2941 L51\lFRAME SAME\lALOAD 10\lIFNULL L6\l"];
-2085662476 [label="L32\lLINENUMBER 2919 L32\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incInsertOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L29\l"];
-1400041292 [label="L3\lLINENUMBER 2876 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 15\lL17\lLINENUMBER 2884 L17\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lASTORE 16\lL18\lLINENUMBER 2886 L18\lALOAD 15\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lALOAD 16\lL19\lLINENUMBER 2887 L19\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.areOtherSerializableTransactionsActive (Lcom/sleepycat/je/txn/Locker;)Z\lIFEQ L20\l"];
-1986554267 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-509781160 [label="L30\lLINENUMBER 2915 L30\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incInsertFailOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L29\l"];
-2119949069 [label="L49\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I T T T T java/lang/Throwable] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl]\lICONST_0\l"];
-288818371 [label="L47\lLINENUMBER 2936 L47\lFRAME SAME\lALOAD 11\lIFNULL L51\l"];
-1170999874 [label="L29\lLINENUMBER 2926 L29\lFRAME SAME\lICONST_1\lISTORE 14\lL33\lLINENUMBER 2927 L33\lALOAD 13\lASTORE 17\l"];
-44704234 [label="L36\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker com/sleepycat/je/OperationResult] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl]\lICONST_0\l"];
-157380727 [label="L48\lLINENUMBER 2933 L48\lALOAD 0\lALOAD 12\lALOAD 13\lIFNULL L49\l"];
-675602955 [label="L27\lLINENUMBER 2918 L27\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lALOAD 13\lINVOKEVIRTUAL com/sleepycat/je/OperationResult.isUpdate ()Z\lIFNE L31\l"];
-214079281 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1151198660 [label="L57\lLINENUMBER 2946 L57\lALOAD 20\lATHROW\l"];
-1594575531 [label="L56\lLINENUMBER 2952 L56\lFRAME APPEND [java/lang/Exception]\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL58\lLINENUMBER 2953 L58\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Cursor\"\lLDC \"putNoNotify\"\lLDC \"\"\lALOAD 20\lL59\lLINENUMBER 2952 L59\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
-329474709 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lTRYCATCHBLOCK L3 L0 L4 null\lTRYCATCHBLOCK L5 L6 L7 java/lang/Exception\lTRYCATCHBLOCK L4 L5 L4 null\lL8\lLINENUMBER 2864 L8\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L9\l"];
-1781938286 [label="L21\lLINENUMBER 2896 L21\lALOAD 15\lALOAD 16\lINVOKESTATIC com/sleepycat/je/txn/BuddyLocker.createBuddyLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)Lcom/sleepycat/je/txn/BuddyLocker;\lASTORE 10\lL22\lLINENUMBER 2899 L22\lNEW com/sleepycat/je/dbi/CursorImpl\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;)V\lASTORE 11\lL23\lLINENUMBER 2902 L23\lALOAD 11\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.setAllowEviction (Z)V\lL24\lLINENUMBER 2903 L24\lALOAD 11\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.lockNextKeyForInsert (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
-2142038527 [label="L0\lLINENUMBER 2932 L0\lALOAD 12\lIFNULL L34\l"];
-1846219640 [label="L20\lLINENUMBER 2906 L20\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl N N I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lALOAD 0\lICONST_0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.beginMoveCursor (ZLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/dbi/CursorImpl;\lASTORE 12\lL25\lLINENUMBER 2909 L25\lALOAD 12\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 5\lALOAD 6\lALOAD 7\lALOAD 8\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.insertOrUpdateRecord (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;\lASTORE 13\lL26\lLINENUMBER 2913 L26\lALOAD 13\lIFNONNULL L27\l"];
-1199355411 [label="L53\lLINENUMBER 2942 L53\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd ()V\l"];
-1612858255 [label="L44\lLINENUMBER 2946 L44\lALOAD 18\lATHROW\l"];
-509775657 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1315593792 [label="L1\lLINENUMBER 2955 L1\lFRAME SAME\lGOTO L41\l"];
-977784792 [label="ALOAD 6\lGETSTATIC com/sleepycat/je/dbi/PutMode.CURRENT : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L12\l"];
-1588152377 [label="L39\lLINENUMBER 2937 L39\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
-500524187 [label="L28\lLINENUMBER 2914 L28\lALOAD 6\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_OVERWRITE : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L29\l"];
-619742901 [label="L7\lLINENUMBER 2944 L7\lFRAME SAME1 java/lang/Exception\lASTORE 20\lL55\lLINENUMBER 2945 L55\lILOAD 14\lIFEQ L56\l"];
-2076020577 [label="L38\lLINENUMBER 2941 L38\lFRAME SAME\lALOAD 10\lIFNULL L1\l"];
-9422046 [label="L11\lLINENUMBER 2867 L11\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L12\l"];
-1661958202 [label="L41\lLINENUMBER 2927 L41\lFRAME CHOP 1\lALOAD 17\lARETURN\l"];
-1531812218 [label="L2\lLINENUMBER 2944 L2\lFRAME SAME1 java/lang/Exception\lASTORE 18\lL42\lLINENUMBER 2945 L42\lILOAD 14\lIFEQ L43\l"];
-2006717386 [label="L34\lLINENUMBER 2936 L34\lFRAME SAME\lALOAD 11\lIFNULL L38\l"];
-254227099 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1460521139 [label="L5\lLINENUMBER 2932 L5\lALOAD 12\lIFNULL L47\l"];
-506842779 [label="L9\lLINENUMBER 2865 L9\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L10\l"];
-146793830 [label="L12\lLINENUMBER 2869 L12\lFRAME SAME\lACONST_NULL\lASTORE 10\lL13\lLINENUMBER 2870 L13\lACONST_NULL\lASTORE 11\lL14\lLINENUMBER 2871 L14\lACONST_NULL\lASTORE 12\lL15\lLINENUMBER 2872 L15\lACONST_NULL\lASTORE 13\lL16\lLINENUMBER 2873 L16\lICONST_0\lISTORE 14\l"];
-1930125276 [label="L31\lLINENUMBER 2921 L31\lFRAME SAME\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incUpdateOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\l"];
-224364407 [label="L40\lLINENUMBER 2942 L40\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd ()V\l"];
-1386715489 [label="L35\lLINENUMBER 2933 L35\lALOAD 0\lALOAD 12\lALOAD 13\lIFNULL L36\l"];
-245241076 [label="L54\lLINENUMBER 2956 L54\lFRAME CHOP 1\lALOAD 19\lATHROW\lL60\l"];
-667206272 [label="ALOAD 1\lIFNONNULL L9\l"];
-1466161433 [label="L50\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I T T T T java/lang/Throwable] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl I]\lINVOKESPECIAL com/sleepycat/je/Cursor.endMoveCursor (Lcom/sleepycat/je/dbi/CursorImpl;Z)V\l"];
-1258883020 [label="L4\lLINENUMBER 2931 L4\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I] [java/lang/Throwable]\lASTORE 19\l"];
-87486353 [label="ALOAD 6\lIFNONNULL L11\l"];
-1952327101 [label="L43\lLINENUMBER 2952 L43\lFRAME APPEND [java/lang/Exception]\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL45\lLINENUMBER 2953 L45\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Cursor\"\lLDC \"putNoNotify\"\lLDC \"\"\lALOAD 18\lL46\lLINENUMBER 2952 L46\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+98727991 [label="ICONST_1\lGOTO L37\l"];
+1083991338 [label="L51\lLINENUMBER 2941 L51\lFRAME SAME\lALOAD 10\lIFNULL L6\l"];
+894960640 [label="L1\lLINENUMBER 2955 L1\lFRAME SAME\lGOTO L41\l"];
+896378510 [label="L56\lLINENUMBER 2952 L56\lFRAME APPEND [java/lang/Exception]\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL58\lLINENUMBER 2953 L58\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Cursor\"\lLDC \"putNoNotify\"\lLDC \"\"\lALOAD 20\lL59\lLINENUMBER 2952 L59\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+1940207865 [label="L39\lLINENUMBER 2937 L39\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+1470886982 [label="L3\lLINENUMBER 2876 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 15\lL17\lLINENUMBER 2884 L17\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.cursorImpl : Lcom/sleepycat/je/dbi/CursorImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lASTORE 16\lL18\lLINENUMBER 2886 L18\lALOAD 15\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lALOAD 16\lL19\lLINENUMBER 2887 L19\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.areOtherSerializableTransactionsActive (Lcom/sleepycat/je/txn/Locker;)Z\lIFEQ L20\l"];
+1307072463 [label="L36\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker com/sleepycat/je/OperationResult] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl]\lICONST_0\l"];
+1987114794 [label="L44\lLINENUMBER 2946 L44\lALOAD 18\lATHROW\l"];
+1092278228 [label="ALOAD 6\lGETSTATIC com/sleepycat/je/dbi/PutMode.CURRENT : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L12\l"];
+1816306190 [label="L53\lLINENUMBER 2942 L53\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd ()V\l"];
+752706309 [label="L49\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I T T T T java/lang/Throwable] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl]\lICONST_0\l"];
+405290727 [label="L30\lLINENUMBER 2915 L30\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incInsertFailOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L29\l"];
+2104050005 [label="L20\lLINENUMBER 2906 L20\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl N N I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lALOAD 0\lICONST_0\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/Cursor.beginMoveCursor (ZLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/dbi/CursorImpl;\lASTORE 12\lL25\lLINENUMBER 2909 L25\lALOAD 12\lALOAD 1\lALOAD 2\lALOAD 3\lALOAD 5\lALOAD 6\lALOAD 7\lALOAD 8\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.insertOrUpdateRecord (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;\lASTORE 13\lL26\lLINENUMBER 2913 L26\lALOAD 13\lIFNONNULL L27\l"];
+1791598632 [label="L40\lLINENUMBER 2942 L40\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd ()V\l"];
+1418011095 [label="L27\lLINENUMBER 2918 L27\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker] []\lALOAD 13\lINVOKEVIRTUAL com/sleepycat/je/OperationResult.isUpdate ()Z\lIFNE L31\l"];
+805085604 [label="L28\lLINENUMBER 2914 L28\lALOAD 6\lGETSTATIC com/sleepycat/je/dbi/PutMode.NO_OVERWRITE : Lcom/sleepycat/je/dbi/PutMode;\lIF_ACMPNE L29\l"];
+832698375 [label="L12\lLINENUMBER 2869 L12\lFRAME SAME\lACONST_NULL\lASTORE 10\lL13\lLINENUMBER 2870 L13\lACONST_NULL\lASTORE 11\lL14\lLINENUMBER 2871 L14\lACONST_NULL\lASTORE 12\lL15\lLINENUMBER 2872 L15\lACONST_NULL\lASTORE 13\lL16\lLINENUMBER 2873 L16\lICONST_0\lISTORE 14\l"];
+1792381505 [label="L37\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/txn/Locker com/sleepycat/je/OperationResult] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl I]\lINVOKESPECIAL com/sleepycat/je/Cursor.endMoveCursor (Lcom/sleepycat/je/dbi/CursorImpl;Z)V\l"];
+843578854 [label="L47\lLINENUMBER 2936 L47\lFRAME SAME\lALOAD 11\lIFNULL L51\l"];
+1540382326 [label="L32\lLINENUMBER 2919 L32\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incInsertOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lGOTO L29\l"];
+690878702 [label="L5\lLINENUMBER 2932 L5\lALOAD 12\lIFNULL L47\l"];
+30233516 [label="L10\lLINENUMBER 2866 L10\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L11\l"];
+1916737490 [label="L50\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I T T T T java/lang/Throwable] [com/sleepycat/je/Cursor com/sleepycat/je/dbi/CursorImpl I]\lINVOKESPECIAL com/sleepycat/je/Cursor.endMoveCursor (Lcom/sleepycat/je/dbi/CursorImpl;Z)V\l"];
+1509834217 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+1554030462 [label="L4\lLINENUMBER 2931 L4\lFRAME FULL [com/sleepycat/je/Cursor com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/tree/LN com/sleepycat/je/CacheMode com/sleepycat/je/dbi/ExpirationInfo com/sleepycat/je/dbi/PutMode com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry com/sleepycat/je/log/ReplicationContext com/sleepycat/je/txn/BuddyLocker com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/OperationResult I] [java/lang/Throwable]\lASTORE 19\l"];
+286912965 [label="L6\lLINENUMBER 2955 L6\lFRAME SAME\lGOTO L54\l"];
+1535930382 [label="L2\lLINENUMBER 2944 L2\lFRAME SAME1 java/lang/Exception\lASTORE 18\lL42\lLINENUMBER 2945 L42\lILOAD 14\lIFEQ L43\l"];
+1737817734 [label="ALOAD 6\lIFNONNULL L11\l"];
+204442780 [label="L11\lLINENUMBER 2867 L11\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L12\l"];
+1566905892 [label="L48\lLINENUMBER 2933 L48\lALOAD 0\lALOAD 12\lALOAD 13\lIFNULL L49\l"];
+292234537 [label="L31\lLINENUMBER 2921 L31\lFRAME SAME\lALOAD 15\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.incUpdateOps (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\l"];
+1895907451 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+429407844 [label="L7\lLINENUMBER 2944 L7\lFRAME SAME1 java/lang/Exception\lASTORE 20\lL55\lLINENUMBER 2945 L55\lILOAD 14\lIFEQ L56\l"];
+1784319323 [label="L21\lLINENUMBER 2896 L21\lALOAD 15\lALOAD 16\lINVOKESTATIC com/sleepycat/je/txn/BuddyLocker.createBuddyLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)Lcom/sleepycat/je/txn/BuddyLocker;\lASTORE 10\lL22\lLINENUMBER 2899 L22\lNEW com/sleepycat/je/dbi/CursorImpl\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 10\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;)V\lASTORE 11\lL23\lLINENUMBER 2902 L23\lALOAD 11\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.setAllowEviction (Z)V\lL24\lLINENUMBER 2903 L24\lALOAD 11\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.lockNextKeyForInsert (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+648435948 [label="L29\lLINENUMBER 2926 L29\lFRAME SAME\lICONST_1\lISTORE 14\lL33\lLINENUMBER 2927 L33\lALOAD 13\lASTORE 17\l"];
+2140826890 [label="ICONST_1\lGOTO L50\l"];
+363386779 [label="L43\lLINENUMBER 2952 L43\lFRAME APPEND [java/lang/Exception]\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL45\lLINENUMBER 2953 L45\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Cursor\"\lLDC \"putNoNotify\"\lLDC \"\"\lALOAD 18\lL46\lLINENUMBER 2952 L46\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+1223556837 [label="L34\lLINENUMBER 2936 L34\lFRAME SAME\lALOAD 11\lIFNULL L38\l"];
+411417594 [label="ALOAD 3\lIFNONNULL L10\l"];
+1724492243 [label="L54\lLINENUMBER 2956 L54\lFRAME CHOP 1\lALOAD 19\lATHROW\lL60\l"];
+742944938 [label="L41\lLINENUMBER 2927 L41\lFRAME CHOP 1\lALOAD 17\lARETURN\l"];
+119466887 [label="L52\lLINENUMBER 2937 L52\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+377173086 [label="L57\lLINENUMBER 2946 L57\lALOAD 20\lATHROW\l"];
+605486210 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+1389087773 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lTRYCATCHBLOCK L3 L0 L4 null\lTRYCATCHBLOCK L5 L6 L7 java/lang/Exception\lTRYCATCHBLOCK L4 L5 L4 null\lL8\lLINENUMBER 2864 L8\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L9\l"];
+1737331132 [label="L0\lLINENUMBER 2932 L0\lALOAD 12\lIFNULL L34\l"];
+1092294982 [label="L9\lLINENUMBER 2865 L9\lFRAME SAME\lGETSTATIC com/sleepycat/je/Cursor.$assertionsDisabled : Z\lIFNE L10\l"];
+129463043 [label="ALOAD 1\lIFNONNULL L9\l"];
+1545121324 [label="L35\lLINENUMBER 2933 L35\lALOAD 0\lALOAD 12\lALOAD 13\lIFNULL L36\l"];
+1703990650 [label="L38\lLINENUMBER 2941 L38\lFRAME SAME\lALOAD 10\lIFNULL L1\l"];
+1392231397 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
 entry;
 exit;
-2080098646 -> 356474934
-2080098646 -> 1531812218 [style=dashed, color=red]
-1434712394 -> 1734314566
-1434712394 -> 619742901 [style=dashed, color=red]
-1622941025 -> 245241076
-211275563 -> 619742901 [style=dashed, color=red]
-211275563 -> 1466161433
-1049061246 -> 1071018732
-1049061246 -> 254227099
-356474934 -> 1531812218 [style=dashed, color=red]
-356474934 -> 2006717386
-1071018732 -> 9422046
-1071018732 -> 87486353
-1734314566 -> 619742901 [style=dashed, color=red]
-1734314566 -> 1199355411
-1734314566 -> 1622941025
-2085662476 -> 1170999874
-2085662476 -> 1258883020 [style=dashed, color=red]
-1400041292 -> 1781938286
-1400041292 -> 1846219640
-1400041292 -> 1258883020 [style=dashed, color=red]
-1986554267 -> exit
-509781160 -> 1170999874
-509781160 -> 1258883020 [style=dashed, color=red]
-2119949069 -> 619742901 [style=dashed, color=red]
-2119949069 -> 1466161433
-288818371 -> 1734314566
-288818371 -> 1434712394
-288818371 -> 619742901 [style=dashed, color=red]
-1170999874 -> 2142038527
-1170999874 -> 1258883020 [style=dashed, color=red]
-44704234 -> 356474934
-44704234 -> 1531812218 [style=dashed, color=red]
-157380727 -> 2119949069
-157380727 -> 619742901 [style=dashed, color=red]
-157380727 -> 211275563
-675602955 -> 2085662476
-675602955 -> 1930125276
-675602955 -> 1258883020 [style=dashed, color=red]
-214079281 -> exit
-1151198660 -> exit
-1594575531 -> 245241076
-entry -> 329474709
-329474709 -> 667206272
-329474709 -> 506842779
-1781938286 -> 1846219640
-1781938286 -> 1258883020 [style=dashed, color=red]
-2142038527 -> 1531812218 [style=dashed, color=red]
-2142038527 -> 1386715489
-2142038527 -> 2006717386
-1846219640 -> 500524187
-1846219640 -> 675602955
-1846219640 -> 1258883020 [style=dashed, color=red]
-1199355411 -> 619742901 [style=dashed, color=red]
-1199355411 -> 1622941025
-1612858255 -> exit
-509775657 -> exit
-1315593792 -> 1661958202
-977784792 -> 1986554267
-977784792 -> 146793830
-1588152377 -> 1531812218 [style=dashed, color=red]
-1588152377 -> 2076020577
-500524187 -> 1170999874
-500524187 -> 509781160
-500524187 -> 1258883020 [style=dashed, color=red]
-619742901 -> 1151198660
-619742901 -> 1594575531
-2076020577 -> 1531812218 [style=dashed, color=red]
-2076020577 -> 1315593792
-2076020577 -> 224364407
-9422046 -> 977784792
-9422046 -> 146793830
-1661958202 -> exit
-1531812218 -> 1952327101
-1531812218 -> 1612858255
-2006717386 -> 1588152377
-2006717386 -> 1531812218 [style=dashed, color=red]
-2006717386 -> 2076020577
-254227099 -> exit
-1460521139 -> 157380727
-1460521139 -> 288818371
-1460521139 -> 619742901 [style=dashed, color=red]
-506842779 -> 1049061246
-506842779 -> 1071018732
-146793830 -> 1400041292
-1930125276 -> 1170999874
-1930125276 -> 1258883020 [style=dashed, color=red]
-224364407 -> 1531812218 [style=dashed, color=red]
-224364407 -> 1315593792
-1386715489 -> 2080098646
-1386715489 -> 44704234
-1386715489 -> 1531812218 [style=dashed, color=red]
-245241076 -> exit
-667206272 -> 509775657
-667206272 -> 506842779
-1466161433 -> 288818371
-1466161433 -> 619742901 [style=dashed, color=red]
-1258883020 -> 1460521139
-1258883020 -> 1258883020 [style=dashed, color=red]
-87486353 -> 9422046
-87486353 -> 214079281
-1952327101 -> 1661958202
+98727991 -> 1535930382 [style=dashed, color=red]
+98727991 -> 1792381505
+1083991338 -> 286912965
+1083991338 -> 429407844 [style=dashed, color=red]
+1083991338 -> 1816306190
+894960640 -> 742944938
+896378510 -> 1724492243
+1940207865 -> 1535930382 [style=dashed, color=red]
+1940207865 -> 1703990650
+1470886982 -> 1784319323
+1470886982 -> 2104050005
+1470886982 -> 1554030462 [style=dashed, color=red]
+1307072463 -> 1535930382 [style=dashed, color=red]
+1307072463 -> 1792381505
+1987114794 -> exit
+1092278228 -> 1895907451
+1092278228 -> 832698375
+1816306190 -> 286912965
+1816306190 -> 429407844 [style=dashed, color=red]
+752706309 -> 1916737490
+752706309 -> 429407844 [style=dashed, color=red]
+405290727 -> 648435948
+405290727 -> 1554030462 [style=dashed, color=red]
+2104050005 -> 1418011095
+2104050005 -> 805085604
+2104050005 -> 1554030462 [style=dashed, color=red]
+1791598632 -> 894960640
+1791598632 -> 1535930382 [style=dashed, color=red]
+1418011095 -> 292234537
+1418011095 -> 1540382326
+1418011095 -> 1554030462 [style=dashed, color=red]
+805085604 -> 405290727
+805085604 -> 648435948
+805085604 -> 1554030462 [style=dashed, color=red]
+832698375 -> 1470886982
+1792381505 -> 1223556837
+1792381505 -> 1535930382 [style=dashed, color=red]
+843578854 -> 1083991338
+843578854 -> 429407844 [style=dashed, color=red]
+843578854 -> 119466887
+1540382326 -> 648435948
+1540382326 -> 1554030462 [style=dashed, color=red]
+690878702 -> 429407844 [style=dashed, color=red]
+690878702 -> 1566905892
+690878702 -> 843578854
+30233516 -> 1737817734
+30233516 -> 204442780
+1916737490 -> 429407844 [style=dashed, color=red]
+1916737490 -> 843578854
+1509834217 -> exit
+1554030462 -> 690878702
+1554030462 -> 1554030462 [style=dashed, color=red]
+286912965 -> 1724492243
+entry -> 1389087773
+1535930382 -> 1987114794
+1535930382 -> 363386779
+1737817734 -> 204442780
+1737817734 -> 1392231397
+204442780 -> 1092278228
+204442780 -> 832698375
+1566905892 -> 752706309
+1566905892 -> 429407844 [style=dashed, color=red]
+1566905892 -> 2140826890
+292234537 -> 648435948
+292234537 -> 1554030462 [style=dashed, color=red]
+1895907451 -> exit
+429407844 -> 377173086
+429407844 -> 896378510
+1784319323 -> 2104050005
+1784319323 -> 1554030462 [style=dashed, color=red]
+648435948 -> 1737331132
+648435948 -> 1554030462 [style=dashed, color=red]
+2140826890 -> 1916737490
+2140826890 -> 429407844 [style=dashed, color=red]
+363386779 -> 742944938
+1223556837 -> 1535930382 [style=dashed, color=red]
+1223556837 -> 1940207865
+1223556837 -> 1703990650
+411417594 -> 30233516
+411417594 -> 605486210
+1724492243 -> exit
+742944938 -> exit
+119466887 -> 1083991338
+119466887 -> 429407844 [style=dashed, color=red]
+377173086 -> exit
+605486210 -> exit
+1389087773 -> 1092294982
+1389087773 -> 129463043
+1737331132 -> 1223556837
+1737331132 -> 1535930382 [style=dashed, color=red]
+1737331132 -> 1545121324
+1092294982 -> 411417594
+1092294982 -> 30233516
+129463043 -> 1092294982
+129463043 -> 1509834217
+1545121324 -> 98727991
+1545121324 -> 1535930382 [style=dashed, color=red]
+1545121324 -> 1307072463
+1703990650 -> 894960640
+1703990650 -> 1535930382 [style=dashed, color=red]
+1703990650 -> 1791598632
+1392231397 -> exit
 }

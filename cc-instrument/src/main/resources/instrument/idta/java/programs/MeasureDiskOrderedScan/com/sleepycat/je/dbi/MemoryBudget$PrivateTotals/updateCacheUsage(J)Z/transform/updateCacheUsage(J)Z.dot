@@ -1,15 +1,15 @@
 digraph updateCacheUsage {
 node [shape=record];
-1844052218 [label="ICONST_1\lGOTO L2\l"];
-651118564 [label="L1\lFRAME SAME\lICONST_0\l"];
-1511405419 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
-1069433964 [label="L0\lLINENUMBER 1312 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.parent : Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLocalCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+1081451141 [label="L0\lLINENUMBER 1312 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.parent : Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLocalCacheUsage ()J\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget$PrivateTotals.maxMemory : J\lLCMP\lIFLE L1\l"];
+904784539 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+1940543062 [label="L1\lFRAME SAME\lICONST_0\l"];
+1311475602 [label="ICONST_1\lGOTO L2\l"];
 entry;
 exit;
-1844052218 -> 1511405419
-entry -> 1069433964
-651118564 -> 1511405419
-1511405419 -> exit
-1069433964 -> 1844052218
-1069433964 -> 651118564
+entry -> 1081451141
+1081451141 -> 1940543062
+1081451141 -> 1311475602
+904784539 -> exit
+1940543062 -> 904784539
+1311475602 -> 904784539
 }

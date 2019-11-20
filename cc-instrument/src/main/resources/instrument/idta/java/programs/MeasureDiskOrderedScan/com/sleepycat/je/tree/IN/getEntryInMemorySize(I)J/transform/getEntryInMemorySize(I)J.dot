@@ -1,21 +1,21 @@
 digraph getEntryInMemorySize {
 node [shape=record];
-931434887 [label="L8\lLINENUMBER 4706 L8\lLLOAD 2\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Node.getMemorySizeIncludedByParent ()J\lLADD\lLSTORE 2\l"];
-1252346782 [label="L7\lLINENUMBER 4708 L7\lFRAME APPEND [com/sleepycat/je/tree/Node]\lLLOAD 2\lLRETURN\lL9\l"];
-1693657637 [label="L0\lLINENUMBER 4686 L0\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 4692 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.accountsForKeyByteMemUsage ()Z\lIFNE L2\l"];
-648344199 [label="L3\lLINENUMBER 4698 L3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.get (I)Ljava/lang/Object;\lCHECKCAST [B\lASTORE 4\lL4\lLINENUMBER 4699 L4\lALOAD 4\lIFNULL L2\l"];
-1235652434 [label="L2\lLINENUMBER 4704 L2\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Node\lASTORE 4\lL6\lLINENUMBER 4705 L6\lALOAD 4\lIFNULL L7\l"];
-939191622 [label="L5\lLINENUMBER 4700 L5\lLLOAD 2\lALOAD 4\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 2\l"];
+264926282 [label="L0\lLINENUMBER 4686 L0\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 4692 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.accountsForKeyByteMemUsage ()Z\lIFNE L2\l"];
+1104491121 [label="L7\lLINENUMBER 4708 L7\lFRAME APPEND [com/sleepycat/je/tree/Node]\lLLOAD 2\lLRETURN\lL9\l"];
+492928435 [label="L5\lLINENUMBER 4700 L5\lLLOAD 2\lALOAD 4\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 2\l"];
+463236824 [label="L2\lLINENUMBER 4704 L2\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Node\lASTORE 4\lL6\lLINENUMBER 4705 L6\lALOAD 4\lIFNULL L7\l"];
+38322033 [label="L8\lLINENUMBER 4706 L8\lLLOAD 2\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Node.getMemorySizeIncludedByParent ()J\lLADD\lLSTORE 2\l"];
+1229014001 [label="L3\lLINENUMBER 4698 L3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.get (I)Ljava/lang/Object;\lCHECKCAST [B\lASTORE 4\lL4\lLINENUMBER 4699 L4\lALOAD 4\lIFNULL L2\l"];
 entry;
 exit;
-entry -> 1693657637
-931434887 -> 1252346782
-1252346782 -> exit
-1693657637 -> 648344199
-1693657637 -> 1235652434
-648344199 -> 1235652434
-648344199 -> 939191622
-1235652434 -> 931434887
-1235652434 -> 1252346782
-939191622 -> 1235652434
+264926282 -> 463236824
+264926282 -> 1229014001
+entry -> 264926282
+1104491121 -> exit
+492928435 -> 463236824
+463236824 -> 1104491121
+463236824 -> 38322033
+38322033 -> 1104491121
+1229014001 -> 492928435
+1229014001 -> 463236824
 }

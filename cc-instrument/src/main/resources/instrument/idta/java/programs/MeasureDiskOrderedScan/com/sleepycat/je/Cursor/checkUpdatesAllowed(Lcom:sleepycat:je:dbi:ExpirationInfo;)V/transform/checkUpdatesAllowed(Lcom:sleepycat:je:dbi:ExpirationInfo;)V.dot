@@ -1,19 +1,19 @@
 digraph checkUpdatesAllowed {
 node [shape=record];
-1341776342 [label="L0\lLINENUMBER 5314 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L2\l"];
-458987313 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
-188353358 [label="L2\lLINENUMBER 5322 L2\lFRAME SAME\lRETURN\lL4\l"];
-455881427 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
-1351905426 [label="ALOAD 1\lIFNULL L2\l"];
+1506087285 [label="L0\lLINENUMBER 5314 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L2\l"];
+346692839 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
+923420933 [label="ALOAD 1\lIFNULL L2\l"];
+1704322969 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
+1991827553 [label="L2\lLINENUMBER 5322 L2\lFRAME SAME\lRETURN\lL4\l"];
 entry;
 exit;
-1341776342 -> 188353358
-1341776342 -> 1351905426
-458987313 -> 188353358
-entry -> 1341776342
-188353358 -> exit
-455881427 -> 458987313
-455881427 -> 188353358
-1351905426 -> 188353358
-1351905426 -> 455881427
+1506087285 -> 923420933
+1506087285 -> 1991827553
+entry -> 1506087285
+346692839 -> 1991827553
+923420933 -> 1704322969
+923420933 -> 1991827553
+1704322969 -> 346692839
+1704322969 -> 1991827553
+1991827553 -> exit
 }

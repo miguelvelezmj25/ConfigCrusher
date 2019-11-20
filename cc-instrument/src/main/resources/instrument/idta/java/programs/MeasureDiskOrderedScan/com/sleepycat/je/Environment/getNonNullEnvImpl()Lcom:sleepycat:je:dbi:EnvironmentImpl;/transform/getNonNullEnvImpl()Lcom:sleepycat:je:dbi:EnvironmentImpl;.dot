@@ -1,13 +1,13 @@
 digraph getNonNullEnvImpl {
 node [shape=record];
-1759046869 [label="L2\lLINENUMBER 2517 L2\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 1\lARETURN\lL4\l"];
-551448898 [label="L0\lLINENUMBER 2511 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 1\lL1\lLINENUMBER 2513 L1\lALOAD 1\lIFNONNULL L2\l"];
-1685661450 [label="L3\lLINENUMBER 2514 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Environment is closed.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1577765509 [label="L0\lLINENUMBER 2511 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 1\lL1\lLINENUMBER 2513 L1\lALOAD 1\lIFNONNULL L2\l"];
+810524362 [label="L2\lLINENUMBER 2517 L2\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 1\lARETURN\lL4\l"];
+381720068 [label="L3\lLINENUMBER 2514 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Environment is closed.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
 entry;
 exit;
-entry -> 551448898
-1759046869 -> exit
-551448898 -> 1759046869
-551448898 -> 1685661450
-1685661450 -> exit
+entry -> 1577765509
+1577765509 -> 810524362
+1577765509 -> 381720068
+810524362 -> exit
+381720068 -> exit
 }

@@ -1,0 +1,18 @@
+digraph openDatabase {
+node [shape=record];
+1460610931 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lL3\lLINENUMBER 648 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.checkOpen ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 4\lL4\lLINENUMBER 650 L4\lALOAD 3\lIFNONNULL L0\l"];
+1126512071 [label="L0\lLINENUMBER 655 L0\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lNEW com/sleepycat/je/Database\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Database.\<init\> (Lcom/sleepycat/je/Environment;)V\lASTORE 5\lL6\lLINENUMBER 657 L6\lALOAD 0\lALOAD 4\lALOAD 1\lALOAD 5\lALOAD 2\lALOAD 3\lICONST_0\lINVOKESPECIAL com/sleepycat/je/Environment.setupDatabase (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V\lL7\lLINENUMBER 661 L7\lALOAD 5\l"];
+688121169 [label="L1\lARETURN\l"];
+2119919451 [label="L2\lLINENUMBER 662 L2\lFRAME SAME1 java/lang/Error\lASTORE 5\lL8\lLINENUMBER 663 L8\lALOAD 4\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL9\lLINENUMBER 664 L9\lALOAD 5\lATHROW\lL10\l"];
+1354883932 [label="L5\lLINENUMBER 651 L5\lGETSTATIC com/sleepycat/je/DatabaseConfig.DEFAULT : Lcom/sleepycat/je/DatabaseConfig;\lASTORE 3\l"];
+entry;
+exit;
+entry -> 1460610931
+1460610931 -> 1126512071
+1460610931 -> 1354883932
+1126512071 -> 688121169
+1126512071 -> 2119919451 [style=dashed, color=red]
+688121169 -> exit
+2119919451 -> exit
+1354883932 -> 1126512071
+}

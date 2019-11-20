@@ -1,0 +1,35 @@
+digraph updateMemorySize {
+node [shape=record];
+80199268 [label="L1\lLINENUMBER 4798 L1\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lLLOAD 1\lLADD\lPUTFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lL3\lLINENUMBER 4800 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getInListResident ()Z\lIFEQ L4\l"];
+1161783030 [label="L2\lLINENUMBER 4795 L2\lRETURN\l"];
+1784839431 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lALOAD 0\lL7\lLINENUMBER 4809 L7\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getFixedMemoryOverhead ()J\lLCMP\lIFGE L6\l"];
+2000660450 [label="L14\lLINENUMBER 4819 L14\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemoryBudget ()V\l"];
+1160382464 [label="L4\lLINENUMBER 4822 L4\lFRAME SAME\lRETURN\lL15\l"];
+146021867 [label="L0\lLINENUMBER 4794 L0\lLLOAD 1\lLCONST_0\lLCMP\lIFNE L1\l"];
+1408224640 [label="L6\lLINENUMBER 4816 L6\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lI2L\lLLOAD 1\lLADD\lL2I\lPUTFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lL13\lLINENUMBER 4817 L13\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lGETSTATIC com/sleepycat/je/tree/IN.ACCUMULATED_LIMIT : I\lIF_ICMPGT L14\l"];
+248276551 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.accumulatedDelta : I\lGETSTATIC com/sleepycat/je/tree/IN.ACCUMULATED_LIMIT : I\lINEG\lIF_ICMPGE L4\l"];
+1834556939 [label="L5\lLINENUMBER 4808 L5\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L6\l"];
+2132611651 [label="ALOAD 0\lL8\lLINENUMBER 4810 L8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isValid ()Z\lIFEQ L6\l"];
+1511125741 [label="L9\lLINENUMBER 4808 L9\lNEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"delta: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" inMemorySize: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.inMemorySize : J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" overhead: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL10\lLINENUMBER 4812 L10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getFixedMemoryOverhead ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" computed: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL11\lLINENUMBER 4813 L11\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.computeMemorySize ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" dump: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lL12\lLINENUMBER 4814 L12\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.assertPrintMemorySize ()Z\lINVOKEVIRTUAL java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
+entry;
+exit;
+1834556939 -> 1784839431
+1834556939 -> 1408224640
+2132611651 -> 1408224640
+2132611651 -> 1511125741
+entry -> 146021867
+80199268 -> 1160382464
+80199268 -> 1834556939
+1161783030 -> exit
+1784839431 -> 1408224640
+1784839431 -> 2132611651
+2000660450 -> 1160382464
+1160382464 -> exit
+146021867 -> 80199268
+146021867 -> 1161783030
+1408224640 -> 2000660450
+1408224640 -> 248276551
+248276551 -> 2000660450
+248276551 -> 1160382464
+1511125741 -> exit
+}

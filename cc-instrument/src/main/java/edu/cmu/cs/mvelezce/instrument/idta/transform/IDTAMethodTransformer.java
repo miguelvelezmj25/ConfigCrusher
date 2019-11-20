@@ -25,7 +25,6 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.idta.IDTA
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
-import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -35,7 +34,6 @@ import soot.jimple.toolkits.callgraph.CallGraph;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -160,9 +158,9 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
-        this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
-    this.idtaMethodInstrumenter.instrument(methodNode, classNode, blocksToRegions);
+    //    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
+    //        this.getBlockRegionMatcher().getMethodNodesToRegionsInBlocks().get(methodNode);
+    //    this.idtaMethodInstrumenter.instrument(methodNode, classNode, blocksToRegions);
   }
 
   @Override

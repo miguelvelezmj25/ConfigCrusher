@@ -1,0 +1,39 @@
+digraph populate {
+node [shape=record];
+1482608321 [label="L3\lFRAME APPEND [com/sleepycat/je/DatabaseEntry com/sleepycat/je/DatabaseEntry J]\lLLOAD 3\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.nRecords : I\lI2L\lLCMP\lIFGE L4\l"];
+260890535 [label="L5\lLINENUMBER 308 L5\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.sequentialWrites : Z\lIFEQ L6\l"];
+1820570936 [label="L8\lLINENUMBER 313 L8\lFRAME SAME\lALOAD 0\lALOAD 2\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.makeData (Lcom/sleepycat/je/DatabaseEntry;)V\lL9\lLINENUMBER 316 L9\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.dupDb : Z\lIFEQ L10\l"];
+926694214 [label="L11\lLINENUMBER 317 L11\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lACONST_NULL\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/Database.putNoDupData (Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;\lASTORE 5\lL12\lGOTO L13\l"];
+1978082632 [label="L17\lLINENUMBER 307 L17\lFRAME SAME\lLLOAD 3\lLCONST_1\lLADD\lLSTORE 3\lGOTO L3\l"];
+1062296625 [label="L0\lLINENUMBER 305 L0\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 1\lL1\lLINENUMBER 306 L1\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ()V\lASTORE 2\lL2\lLINENUMBER 307 L2\lLCONST_0\lLSTORE 3\l"];
+1596194632 [label="L15\lLINENUMBER 322 L15\lALOAD 0\lALOAD 5\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.fail (Ljava/lang/Object;)V\l"];
+517605451 [label="L18\lLINENUMBER 327 L18\lALOAD 0\lALOAD 5\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.fail (Ljava/lang/Object;)V\l"];
+160635361 [label="L14\lLINENUMBER 325 L14\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lACONST_NULL\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/Database.put (Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;\lASTORE 5\lL16\lLINENUMBER 326 L16\lALOAD 5\lGETSTATIC com/sleepycat/je/OperationStatus.SUCCESS : Lcom/sleepycat/je/OperationStatus;\lIF_ACMPEQ L17\l"];
+731760831 [label="L6\lLINENUMBER 311 L6\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.makeRandomKey (Lcom/sleepycat/je/DatabaseEntry;)V\l"];
+94057419 [label="L7\lLINENUMBER 309 L7\lALOAD 0\lALOAD 1\lLLOAD 3\lINVOKESPECIAL com/sleepycat/analysis/MeasureDiskOrderedScan.makeLongKey (Lcom/sleepycat/je/DatabaseEntry;J)V\lGOTO L8\l"];
+1923204398 [label="L10\lLINENUMBER 319 L10\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/analysis/MeasureDiskOrderedScan.db : Lcom/sleepycat/je/Database;\lACONST_NULL\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/Database.putNoOverwrite (Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;\lASTORE 5\l"];
+788051418 [label="L13\lLINENUMBER 321 L13\lFRAME APPEND [com/sleepycat/je/OperationStatus]\lALOAD 5\lGETSTATIC com/sleepycat/je/OperationStatus.SUCCESS : Lcom/sleepycat/je/OperationStatus;\lIF_ACMPEQ L14\l"];
+504938393 [label="L4\lLINENUMBER 330 L4\lFRAME CHOP 1\lRETURN\lL19\l"];
+entry;
+exit;
+1482608321 -> 260890535
+1482608321 -> 504938393
+260890535 -> 731760831
+260890535 -> 94057419
+1820570936 -> 1923204398
+1820570936 -> 926694214
+926694214 -> 788051418
+1978082632 -> 1482608321
+1062296625 -> 1482608321
+1596194632 -> 160635361
+517605451 -> 1978082632
+160635361 -> 1978082632
+160635361 -> 517605451
+entry -> 1062296625
+731760831 -> 1820570936
+94057419 -> 1820570936
+1923204398 -> 788051418
+788051418 -> 160635361
+788051418 -> 1596194632
+504938393 -> exit
+}

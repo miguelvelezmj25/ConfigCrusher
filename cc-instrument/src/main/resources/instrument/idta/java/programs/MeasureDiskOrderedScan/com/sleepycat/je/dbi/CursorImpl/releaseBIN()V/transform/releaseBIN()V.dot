@@ -1,0 +1,13 @@
+digraph releaseBIN {
+node [shape=record];
+92790059 [label="L0\lLINENUMBER 407 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L1\l"];
+2086776809 [label="L2\lLINENUMBER 408 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatchIfOwner ()V\l"];
+1374226973 [label="L1\lLINENUMBER 410 L1\lFRAME SAME\lRETURN\lL3\l"];
+entry;
+exit;
+entry -> 92790059
+92790059 -> 2086776809
+92790059 -> 1374226973
+2086776809 -> 1374226973
+1374226973 -> exit
+}

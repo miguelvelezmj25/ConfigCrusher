@@ -1,0 +1,15 @@
+digraph isTemporary {
+node [shape=record];
+154826662 [label="ICONST_1\lGOTO L2\l"];
+1969191225 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+1482103003 [label="L1\lFRAME SAME\lICONST_0\l"];
+1852200983 [label="L0\lLINENUMBER 539 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.flags : B\lICONST_2\lIAND\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 1852200983
+154826662 -> 1969191225
+1969191225 -> exit
+1482103003 -> 1969191225
+1852200983 -> 154826662
+1852200983 -> 1482103003
+}

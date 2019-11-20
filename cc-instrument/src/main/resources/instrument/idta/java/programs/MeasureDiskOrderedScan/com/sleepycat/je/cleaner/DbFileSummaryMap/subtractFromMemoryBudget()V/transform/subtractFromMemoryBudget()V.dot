@@ -1,0 +1,13 @@
+digraph subtractFromMemoryBudget {
+node [shape=record];
+1018940992 [label="L0\lLINENUMBER 154 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lIFNULL L1\l"];
+1153275466 [label="L2\lLINENUMBER 155 L2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateTreeAdminMemoryUsage (J)V\lL3\lLINENUMBER 156 L3\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\l"];
+575892640 [label="L1\lLINENUMBER 158 L1\lFRAME SAME\lRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1018940992
+1018940992 -> 1153275466
+1018940992 -> 575892640
+1153275466 -> 575892640
+575892640 -> exit
+}

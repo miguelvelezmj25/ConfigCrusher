@@ -20,7 +20,9 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void vanillaTrivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    String workloadSize = "small";
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
@@ -32,7 +34,9 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void vanillaBerkeleyDB() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    String workloadSize = "small";
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> counter =
@@ -44,6 +48,7 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void expandedBerkeleyDB() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
     BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
         instrumenter.getProcessedRegionsToData();

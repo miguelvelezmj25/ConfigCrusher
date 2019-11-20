@@ -1,0 +1,30 @@
+digraph shutdownDaemons {
+node [shape=record];
+643273498 [label="L1\lGOTO L16\l"];
+691164661 [label="L16\lLINENUMBER 2373 L16\lFRAME SAME\lRETURN\lL17\l"];
+1909794638 [label="L12\lLINENUMBER 2370 L12\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.logFlusher : Lcom/sleepycat/je/log/LogFlusher;\lINVOKEVIRTUAL com/sleepycat/je/log/LogFlusher.shutdown ()V\lL14\lLINENUMBER 2371 L14\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.dataVerifier : Lcom/sleepycat/je/util/verify/DataVerifier;\lINVOKEVIRTUAL com/sleepycat/je/util/verify/DataVerifier.shutdown ()V\lL15\lLINENUMBER 2372 L15\lALOAD 1\lMONITOREXIT\l"];
+1491612382 [label="L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lMONITOREXIT\l"];
+1260253160 [label="L0\lLINENUMBER 2335 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.inCompressor : Lcom/sleepycat/je/incomp/INCompressor;\lINVOKEVIRTUAL com/sleepycat/je/incomp/INCompressor.shutdown ()V\lL6\lLINENUMBER 2341 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.shutdown ()V\lL7\lLINENUMBER 2342 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.checkpointer : Lcom/sleepycat/je/recovery/Checkpointer;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.shutdown ()V\lL8\lLINENUMBER 2351 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.sharedCache : Z\lIFEQ L9\l"];
+1927746641 [label="L9\lLINENUMBER 2366 L9\lFRAME APPEND [java/lang/Object]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.shutdown ()V\lL13\lLINENUMBER 2367 L13\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.shutdown ()V\l"];
+1445053394 [label="L3\lALOAD 2\lATHROW\l"];
+1748145748 [label="L10\lLINENUMBER 2363 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.removeSharedCacheEnv (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL11\lLINENUMBER 2364 L11\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.clearCache (Lcom/sleepycat/je/dbi/EnvironmentImpl;)J\lPOP2\lGOTO L12\l"];
+2024721724 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2331 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statCapture : Lcom/sleepycat/je/statcap/StatCapture;\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.shutdown ()V\lL5\lLINENUMBER 2333 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statSynchronizer : Ljava/lang/Object;\lDUP\lASTORE 1\lMONITORENTER\l"];
+entry;
+exit;
+entry -> 2024721724
+643273498 -> 691164661
+691164661 -> exit
+1909794638 -> 643273498
+1909794638 -> 1491612382 [style=dashed, color=red]
+1491612382 -> 1491612382 [style=dashed, color=red]
+1491612382 -> 1445053394
+1260253160 -> 1491612382 [style=dashed, color=red]
+1260253160 -> 1927746641
+1260253160 -> 1748145748
+1927746641 -> 1909794638
+1927746641 -> 1491612382 [style=dashed, color=red]
+1445053394 -> exit
+1748145748 -> 1909794638
+1748145748 -> 1491612382 [style=dashed, color=red]
+2024721724 -> 1260253160
+}

@@ -15,7 +15,8 @@ public class IDTAAnalysisTest {
   @Test
   public void trivial() throws IOException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    IDTAAnalysis analysis = new IDTAAnalysis(programName);
+    String workloadSize = "small";
+    IDTAAnalysis analysis = new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> results = analysis.analyze();
 
     Assert.assertFalse(results.isEmpty());

@@ -18,8 +18,12 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
       Executor.USER_HOME
           + "/Documents/Programming/Java/Projects/subtrace-explorer/src/main/resources/idta/analysis";
 
-  public IDTAAnalysis(String programName) {
+  private final String workloadSize;
+
+  public IDTAAnalysis(String programName, String workloadSize) {
     super(programName);
+
+    this.workloadSize = workloadSize;
   }
 
   @Override
@@ -60,7 +64,9 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
             IDTAAnalysis.IDTA_OUTPUT_DIR
                 + "/"
                 + this.getProgramName()
-                + "/cc/dataFlowConstraints/"
+                + "/cc/"
+                + this.workloadSize
+                + "/dataFlowConstraints/"
                 + this.getProgramName()
                 + ".json");
 

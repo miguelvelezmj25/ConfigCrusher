@@ -1,0 +1,33 @@
+digraph writeToLog {
+node [shape=record];
+1329207917 [label="L15\lLINENUMBER 416 L15\lFRAME SAME\lRETURN\lL17\l"];
+1967978139 [label="L8\lLINENUMBER 397 L8\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L10\l"];
+187842648 [label="L16\lLINENUMBER 414 L16\lALOAD 1\lALOAD 1\lINVOKEVIRTUAL java/nio/ByteBuffer.position ()I\lBIPUSH 8\lIADD\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\l"];
+995326375 [label="L5\lLINENUMBER 390 L5\lILOAD 2\lBIPUSH -128\lIOR\lI2B\lISTORE 2\lGOTO L6\l"];
+433620438 [label="L10\lLINENUMBER 400 L10\lFRAME SAME\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL java/nio/ByteBuffer.put (B)Ljava/nio/ByteBuffer;\lPOP\lL12\lLINENUMBER 406 L12\lALOAD 1\lBIPUSH 10\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\lL13\lLINENUMBER 407 L13\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.itemSize : I\lINVOKESTATIC com/sleepycat/je/log/LogUtils.writeInt (Ljava/nio/ByteBuffer;I)V\lL14\lLINENUMBER 413 L14\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lIFEQ L15\l"];
+1441933268 [label="L9\lLINENUMBER 395 L9\lILOAD 2\lBIPUSH 32\lIOR\lI2B\lISTORE 2\l"];
+500511694 [label="L0\lLINENUMBER 384 L0\lALOAD 1\lICONST_4\lINVOKEVIRTUAL java/nio/ByteBuffer.position (I)Ljava/nio/Buffer;\lPOP\lL1\lLINENUMBER 385 L1\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.entryType : B\lINVOKEVIRTUAL java/nio/ByteBuffer.put (B)Ljava/nio/ByteBuffer;\lPOP\lL2\lLINENUMBER 388 L2\lICONST_0\lISTORE 2\lL3\lLINENUMBER 389 L3\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lGETSTATIC com/sleepycat/je/log/Provisional.YES : Lcom/sleepycat/je/log/Provisional;\lIF_ACMPNE L4\l"];
+1087080454 [label="L4\lLINENUMBER 391 L4\lFRAME APPEND [I]\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lGETSTATIC com/sleepycat/je/log/Provisional.BEFORE_CKPT_END : Lcom/sleepycat/je/log/Provisional;\lIF_ACMPNE L6\l"];
+1767626766 [label="L7\lLINENUMBER 392 L7\lILOAD 2\lBIPUSH 64\lIOR\lI2B\lISTORE 2\l"];
+1562692391 [label="L6\lLINENUMBER 394 L6\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\lIFEQ L8\l"];
+779396030 [label="L11\lLINENUMBER 398 L11\lILOAD 2\lBIPUSH 8\lIOR\lI2B\lISTORE 2\l"];
+entry;
+exit;
+1967978139 -> 433620438
+1967978139 -> 779396030
+187842648 -> 1329207917
+995326375 -> 1562692391
+433620438 -> 1329207917
+433620438 -> 187842648
+1562692391 -> 1967978139
+1562692391 -> 1441933268
+779396030 -> 433620438
+1329207917 -> exit
+entry -> 500511694
+1441933268 -> 1967978139
+500511694 -> 995326375
+500511694 -> 1087080454
+1087080454 -> 1767626766
+1087080454 -> 1562692391
+1767626766 -> 1562692391
+}

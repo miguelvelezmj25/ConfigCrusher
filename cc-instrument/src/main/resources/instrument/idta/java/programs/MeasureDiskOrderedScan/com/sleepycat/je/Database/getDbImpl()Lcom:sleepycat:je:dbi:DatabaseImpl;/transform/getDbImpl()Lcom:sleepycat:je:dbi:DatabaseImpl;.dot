@@ -1,0 +1,13 @@
+digraph getDbImpl {
+node [shape=record];
+594146356 [label="L2\lLINENUMBER 2328 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.checkOpen ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lPOP\lL4\lLINENUMBER 2334 L4\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Database is closed. State=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\lL5\l"];
+207103923 [label="L3\lLINENUMBER 2325 L3\lALOAD 1\lARETURN\l"];
+351446006 [label="L0\lLINENUMBER 2322 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 1\lL1\lLINENUMBER 2324 L1\lALOAD 1\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 351446006
+594146356 -> exit
+207103923 -> exit
+351446006 -> 594146356
+351446006 -> 207103923
+}

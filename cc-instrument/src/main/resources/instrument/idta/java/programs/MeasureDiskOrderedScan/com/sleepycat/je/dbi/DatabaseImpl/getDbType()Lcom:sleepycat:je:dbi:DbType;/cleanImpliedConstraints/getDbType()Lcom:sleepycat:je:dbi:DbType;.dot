@@ -1,0 +1,15 @@
+digraph getDbType {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+989666631 [label="989666631 - [(DUPLICATES && !JECACHESIZE), (!DUPLICATES && !JECACHESIZE), (!DUPLICATES && JECACHESIZE), (DUPLICATES && JECACHESIZE)]"];
+1548448224 [label="1548448224 - []"];
+1835001799 [label="1835001799 - []"];
+entry;
+exit;
+entry -> 989666631;
+989666631 -> 1548448224;
+989666631 -> 1835001799;
+1548448224 -> exit;
+1835001799 -> exit;
+}

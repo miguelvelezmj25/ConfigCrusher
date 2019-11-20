@@ -1,0 +1,18 @@
+digraph getDefaultCacheMode {
+node [shape=record];
+739335812 [label="L0\lLINENUMBER 803 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
+19195491 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+470848042 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+986910346 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lARETURN\lL5\l"];
+74557916 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
+entry;
+exit;
+739335812 -> 19195491
+739335812 -> 74557916
+entry -> 739335812
+19195491 -> exit
+470848042 -> exit
+986910346 -> exit
+74557916 -> 470848042
+74557916 -> 986910346
+}

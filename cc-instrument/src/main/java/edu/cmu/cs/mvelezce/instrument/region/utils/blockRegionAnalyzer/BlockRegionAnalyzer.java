@@ -104,13 +104,15 @@ public abstract class BlockRegionAnalyzer<T> {
           this.debugDir,
           this.programName,
           classNode.name,
-          methodNode.name + methodNode.desc,
+          methodNode.name,
+          methodNode.desc,
           analysis);
       PrettyMethodGraph.savePdfFile(
           this.debugDir,
           this.programName,
           classNode.name,
-          methodNode.name + methodNode.desc,
+          methodNode.name,
+          methodNode.desc,
           analysis);
     } catch (FileNotFoundException fnfe) {
       throw new RuntimeException(fnfe);

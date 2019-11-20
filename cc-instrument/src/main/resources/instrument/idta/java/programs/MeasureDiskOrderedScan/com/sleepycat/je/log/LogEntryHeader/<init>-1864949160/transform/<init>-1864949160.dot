@@ -1,0 +1,36 @@
+digraph <init> {
+node [shape=record];
+1565679021 [label="ALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFNE L7\l"];
+1211381801 [label="L10\lLINENUMBER 237 L10\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\l"];
+593128668 [label="L17\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] [com/sleepycat/je/log/LogEntryHeader I]\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.vlsnPresent : Z\lL18\lLINENUMBER 249 L18\lRETURN\lL19\l"];
+2009778344 [label="L0\lLINENUMBER 222 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 224 L1\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getLogType ()Lcom/sleepycat/je/log/LogEntryType;\lASTORE 4\lL2\lLINENUMBER 225 L2\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.getTypeNum ()B\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryType : B\lL3\lLINENUMBER 226 L3\lALOAD 0\lBIPUSH 15\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.entryVersion : I\lL4\lLINENUMBER 227 L4\lALOAD 0\lALOAD 1\lINVOKEINTERFACE com/sleepycat/je/log/entry/LogEntry.getSize ()I\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.itemSize : I\lL5\lLINENUMBER 228 L5\lALOAD 0\lALOAD 2\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.provisional : Lcom/sleepycat/je/log/Provisional;\lL6\lLINENUMBER 230 L6\lGETSTATIC com/sleepycat/je/log/LogEntryHeader.$assertionsDisabled : Z\lIFNE L7\l"];
+1104771646 [label="L9\lLINENUMBER 230 L9\lNEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lLDC \" should never be replicated.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
+1626829056 [label="ALOAD 3\lL8\lLINENUMBER 231 L8\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lIFEQ L7\l"];
+824364905 [label="L16\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_0\l"];
+71848555 [label="L7\lLINENUMBER 234 L7\lFRAME FULL [com/sleepycat/je/log/LogEntryHeader com/sleepycat/je/log/entry/LogEntry com/sleepycat/je/log/Provisional com/sleepycat/je/log/ReplicationContext com/sleepycat/je/log/LogEntryType] []\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogEntryType.isReplicationPossible ()Z\lIFEQ L10\l"];
+429043608 [label="ALOAD 3\lL15\lLINENUMBER 248 L15\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.mustGenerateVLSN ()Z\lIFEQ L16\l"];
+1480479031 [label="L14\lFRAME SAME1 com/sleepycat/je/log/LogEntryHeader\lICONST_1\lGOTO L17\l"];
+246016157 [label="L11\lLINENUMBER 235 L11\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.inReplicationStream ()Z\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.replicated : Z\lGOTO L12\l"];
+328220510 [label="L12\lLINENUMBER 239 L12\lFRAME SAME\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogEntryHeader.invisible : Z\lL13\lLINENUMBER 247 L13\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/log/ReplicationContext.getClientVLSN ()Lcom/sleepycat/je/utilint/VLSN;\lIFNONNULL L14\l"];
+entry;
+exit;
+1211381801 -> 328220510
+2009778344 -> 1565679021
+2009778344 -> 71848555
+1626829056 -> 1104771646
+1626829056 -> 71848555
+824364905 -> 593128668
+71848555 -> 1211381801
+71848555 -> 246016157
+429043608 -> 824364905
+429043608 -> 1480479031
+1480479031 -> 593128668
+246016157 -> 328220510
+1565679021 -> 1626829056
+1565679021 -> 71848555
+entry -> 2009778344
+593128668 -> exit
+1104771646 -> exit
+328220510 -> 429043608
+328220510 -> 1480479031
+}

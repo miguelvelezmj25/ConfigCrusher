@@ -1,0 +1,55 @@
+digraph reset {
+node [shape=record];
+1645399687 [label="LLOAD 5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.logBufferBudget : J\lLCMP\lIFEQ L42\l"];
+387961130 [label="L42\lLINENUMBER 928 L42\lFRAME APPEND [J J J]\lRETURN\lL44\l"];
+494348671 [label="L26\lLINENUMBER 893 L26\lFRAME SAME\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL29\lLINENUMBER 895 L29\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.EVICTOR_CRITICAL_PERCENTAGE : Lcom/sleepycat/je/config/IntConfigParam;\lL30\lLINENUMBER 896 L30\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lI2L\lLMUL\lLDC 100\lLDIV\lLSTORE 15\lL31\lLINENUMBER 898 L31\lLLOAD 7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL32\lLINENUMBER 900 L32\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CLEANER_DETAIL_MAX_MEMORY_PERCENTAGE : Lcom/sleepycat/je/config/IntConfigParam;\lL33\lLINENUMBER 901 L33\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lI2L\lLMUL\lLDC 100\lLDIV\lLSTORE 17\lL34\lLINENUMBER 903 L34\lALOAD 4\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.MIN_TREE_MEMORY : Lcom/sleepycat/je/config/LongConfigParam;\lL35\lLINENUMBER 904 L35\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLLOAD 7\lLLOAD 9\lLSUB\lINVOKESTATIC java/lang/Math.min (JJ)J\lLSTORE 19\lL36\lLINENUMBER 912 L36\lALOAD 0\lLLOAD 9\lPUTFIELD com/sleepycat/je/dbi/MemoryBudget.logBufferBudget : J\lL37\lLINENUMBER 913 L37\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 15\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget$Totals.access$300 (Lcom/sleepycat/je/dbi/MemoryBudget$Totals;J)V\lL38\lLINENUMBER 914 L38\lALOAD 0\lLLOAD 17\lPUTFIELD com/sleepycat/je/dbi/MemoryBudget.trackerBudget : J\lL39\lLINENUMBER 915 L39\lALOAD 0\lLLOAD 19\lPUTFIELD com/sleepycat/je/dbi/MemoryBudget.minTreeMemoryUsage : J\lL40\lLINENUMBER 918 L40\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.logBufferBudget : J\lLLOAD 5\lLSUB\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lPOP\lL41\lLINENUMBER 925 L41\lILOAD 3\lIFNE L42\l"];
+1278473694 [label="L3\lLINENUMBER 825 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getMaxMemory ()J\lLSTORE 1\lGOTO L4\l"];
+1054154432 [label="L14\lLINENUMBER 870 L14\lFRAME APPEND [J]\lLLOAD 9\lLLOAD 7\lLDC 2\lLDIV\lLCMP\lIFLE L16\l"];
+2005549325 [label="L0\lLINENUMBER 819 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.logBufferBudget : J\lLSTORE 5\lL1\lLINENUMBER 824 L1\lLLOAD 1\lLCONST_0\lLCMP\lIFGE L2\l"];
+1492634186 [label="L15\lLINENUMBER 869 L15\lLLOAD 7\lICONST_4\lLSHR\lLSTORE 9\lGOTO L16\l"];
+422053560 [label="L11\lLINENUMBER 866 L11\lFRAME APPEND [J]\lALOAD 4\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.LOG_MEM_SIZE : Lcom/sleepycat/je/config/LongConfigParam;\lL12\lLINENUMBER 867 L12\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLSTORE 9\lL13\lLINENUMBER 868 L13\lLLOAD 9\lLCONST_0\lLCMP\lIFNE L14\l"];
+1100050024 [label="L24\lLINENUMBER 885 L24\lILOAD 14\lI2L\lLSTORE 12\lL25\lLINENUMBER 886 L25\lILOAD 11\lI2L\lLLOAD 12\lLMUL\lLSTORE 9\lGOTO L26\l"];
+22864655 [label="L8\lLINENUMBER 852 L8\lFRAME APPEND [T T I]\lLLOAD 1\lILOAD 9\lI2L\lLDIV\lLSTORE 7\lL10\lLINENUMBER 853 L10\lGOTO L11\l"];
+668095810 [label="L17\lLINENUMBER 871 L17\lLLOAD 7\lLDC 2\lLDIV\lLSTORE 9\l"];
+856112743 [label="L43\lLINENUMBER 926 L43\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getLogManager ()Lcom/sleepycat/je/log/LogManager;\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/log/LogManager.resetPool (Lcom/sleepycat/je/dbi/DbConfigManager;)V\l"];
+1471565465 [label="L2\lLINENUMBER 827 L2\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 1\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget$Totals.access$200 (Lcom/sleepycat/je/dbi/MemoryBudget$Totals;J)V\l"];
+311597593 [label="L4\lLINENUMBER 847 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getSharedCache ()Z\lIFEQ L5\l"];
+683280342 [label="L27\lLINENUMBER 889 L27\lLDC 2048\lLSTORE 12\lL28\lLINENUMBER 890 L28\lILOAD 11\lI2L\lLLOAD 12\lLMUL\lLSTORE 9\l"];
+934617967 [label="L6\lLINENUMBER 848 L6\lINVOKESTATIC com/sleepycat/je/dbi/DbEnvPool.getInstance ()Lcom/sleepycat/je/dbi/DbEnvPool;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbEnvPool.getNSharedCacheEnvironments ()I\lISTORE 9\lL7\lLINENUMBER 849 L7\lILOAD 3\lIFEQ L8\l"];
+2123792878 [label="L16\lLINENUMBER 879 L16\lFRAME SAME\lALOAD 4\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.NUM_LOG_BUFFERS : Lcom/sleepycat/je/config/IntConfigParam;\lL18\lLINENUMBER 880 L18\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lISTORE 11\lL19\lLINENUMBER 881 L19\lLLOAD 9\lILOAD 11\lI2L\lLDIV\lLSTORE 12\lL20\lLINENUMBER 882 L20\lALOAD 4\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.LOG_BUFFER_MAX_SIZE : Lcom/sleepycat/je/config/IntConfigParam;\lL21\lLINENUMBER 883 L21\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lISTORE 14\lL22\lLINENUMBER 884 L22\lLLOAD 12\lILOAD 14\lI2L\lLCMP\lIFLE L23\l"];
+119071599 [label="L9\lLINENUMBER 850 L9\lIINC 9 1\l"];
+1385324934 [label="L5\lLINENUMBER 854 L5\lFRAME CHOP 3\lLLOAD 1\lLSTORE 7\l"];
+1461996420 [label="L23\lLINENUMBER 887 L23\lFRAME APPEND [I J I]\lLLOAD 12\lLDC 2048\lLCMP\lIFGE L26\l"];
+entry;
+exit;
+1645399687 -> 387961130
+1645399687 -> 856112743
+387961130 -> exit
+494348671 -> 1645399687
+494348671 -> 387961130
+1278473694 -> 311597593
+1054154432 -> 668095810
+1054154432 -> 2123792878
+2005549325 -> 1471565465
+2005549325 -> 1278473694
+1492634186 -> 2123792878
+entry -> 2005549325
+422053560 -> 1054154432
+422053560 -> 1492634186
+1100050024 -> 494348671
+22864655 -> 422053560
+668095810 -> 2123792878
+856112743 -> 387961130
+1471565465 -> 311597593
+311597593 -> 934617967
+311597593 -> 1385324934
+683280342 -> 494348671
+934617967 -> 22864655
+934617967 -> 119071599
+2123792878 -> 1100050024
+2123792878 -> 1461996420
+119071599 -> 22864655
+1385324934 -> 422053560
+1461996420 -> 494348671
+1461996420 -> 683280342
+}

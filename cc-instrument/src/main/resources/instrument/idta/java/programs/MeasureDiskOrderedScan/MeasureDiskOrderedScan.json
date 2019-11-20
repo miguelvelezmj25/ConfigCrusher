@@ -1,168 +1,18 @@
 [
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Database",
-    "methodSignature": "putNoDupData(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "LoggerUtils",
+    "methodSignature": "logMsg(Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/util/logging/Level;Ljava/lang/String;)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "0b3d25c9-ae0f-40c8-86e0-38e4f1c9ad80",
-    "startBlock": "279508645",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DbConfigManager",
-    "methodSignature": "parseBoolean(Ljava/lang/String;)Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "1f102898-9042-48df-b397-a9530ea0974a",
-    "startBlock": "1139622246",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.util",
-    "className": "PackedInteger",
-    "methodSignature": "readReverseInt([BI)I",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)"
-    ],
-    "id": "3b7e17f3-7f5b-4a28-9400-0cc69a5715c1",
-    "startBlock": "1037266283",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl",
-    "methodSignature": "insertRecordInternal([BLcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;ZLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/utilint/Pair;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "91e25413-63bd-420c-84ef-8ba59259b6e8",
-    "startBlock": "1077289561",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "INKeyRep$Default",
-    "methodSignature": "getKey(IZ)[B",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "3a76a802-0ca0-4c27-bf0b-be2f37b33583",
-    "startBlock": "1242459151",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "<init>(Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "06abb03c-b7ed-404c-a093-16e495cc1457",
-    "startBlock": "1159820699",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.txn",
-    "className": "LockerFactory",
-    "methodSignature": "getReadableLocker(Lcom/sleepycat/je/Database;Lcom/sleepycat/je/txn/Locker;Z)Lcom/sleepycat/je/txn/Locker;",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "373e6207-0ab6-497c-86f9-8461a8498d71",
-    "startBlock": "1914205029",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "Tree",
-    "methodSignature": "searchSplitsAllowed(Lcom/sleepycat/je/tree/IN;[BLcom/sleepycat/je/CacheMode;Ljava/util/Comparator;)Lcom/sleepycat/je/tree/BIN;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "f07e314d-4ed4-44e8-b7b4-3c921dce31bc",
-    "startBlock": "324432720",
+    "id": "26f83757-f646-4ffe-a80e-a984582ff354",
+    "startBlock": "104118961",
     "endBlocks": [
       "exit"
     ]
@@ -179,52 +29,30 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "1832dfa2-4bb0-4479-a5d4-d010683c55c3",
-    "startBlock": "1568033341",
+    "id": "b542c973-6c1b-4001-9413-1beb6abe4040",
+    "startBlock": "1879194486",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.tree",
-    "className": "BIN",
-    "methodSignature": "isLastLoggedSizeStored(I)Z",
-    "decisionIndex": -1,
+    "className": "IN",
+    "methodSignature": "haveEmbeddedData(I)Z",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "8fa514eb-88b4-4d28-b94c-6bf8416322b0",
-    "startBlock": "2079423749",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "INTargetRep$Sparse",
-    "methodSignature": "set(ILcom/sleepycat/je/tree/Node;Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INTargetRep;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "06cbcd8e-4e48-472c-80ee-686c7e3f78e2",
-    "startBlock": "2088754632",
+    "id": "978cc8e7-2175-4c21-9565-0c6b5e3e1fb0",
+    "startBlock": "748553359",
     "endBlocks": [
       "exit"
     ]
@@ -239,8 +67,34 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "5c4fd370-3580-4c11-8a83-45c92a566c9b",
-    "startBlock": "1010930639",
+    "id": "013f56e9-3f4d-4a59-b130-b59a2c89a4f3",
+    "startBlock": "362874275",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "MemoryBudget",
+    "methodSignature": "refreshTreeAdminMemoryUsage(J)V",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
+    ],
+    "id": "f88d9280-7ec6-46bd-85c0-02d6551bf960",
+    "startBlock": "662523333",
     "endBlocks": [
       "exit"
     ]
@@ -257,84 +111,52 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "b7f0781b-f4a0-40a0-94c7-406c45dc376d",
-    "startBlock": "908616285",
+    "id": "814898a0-91df-4676-a473-64e642e151c3",
+    "startBlock": "1493242028",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "getLsn(I)J",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "5acff3bf-bbc5-4fad-bc9f-cf9ac3353fcd",
-    "startBlock": "1748542844",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "close()V",
+    "packageName": "com.sleepycat.je.txn",
+    "className": "LockManager",
+    "methodSignature": "release(JLcom/sleepycat/je/txn/Locker;)Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "682c8a92-3970-4ad8-8f7e-a862a5bed064",
-    "startBlock": "647830316",
+    "id": "a14cccb6-4be0-46c4-bd68-0cfe1ce86539",
+    "startBlock": "1493524052",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.txn",
+    "className": "WriteLockInfo",
+    "methodSignature": "setAbortExpiration(IZ)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "5a117086-a65f-4c6c-b09c-280cd6a4ce39",
+    "startBlock": "187129143",
     "endBlocks": [
       "exit"
     ]
@@ -351,52 +173,110 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "c02f107d-a1ef-4dc8-9ba5-b210c8649177",
-    "startBlock": "19734133",
+    "id": "591b7a30-81b8-49b6-8e8a-d6802c8bcc5b",
+    "startBlock": "1204361427",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.evictor",
+    "className": "OffHeapCache",
+    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "06a175d9-a35c-43de-9f0e-f1124605dc58",
+    "startBlock": "98573989",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget",
-    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DbConfigManager;)V",
+    "className": "DupKeyData$TwoPartKeyComparator",
+    "methodSignature": "compare([B[B)I",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "e6ad886b-9169-43f4-961f-780e6edd1b31",
-    "startBlock": "229587267",
+    "id": "4f880306-23b1-455c-93f8-611fbe5081f2",
+    "startBlock": "1868898049",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.tree",
-    "className": "BIN",
-    "methodSignature": "getLastLoggedSize(I)I",
+    "className": "IN",
+    "methodSignature": "get3ByteInt(I)I",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "1ff562f2-3af3-4d0e-bbae-f202db0ecb17",
-    "startBlock": "735581185",
+    "id": "4c2b66b9-2955-40a2-b5c9-f0acd783ee0a",
+    "startBlock": "2027245719",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "isClosed()Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "59d5f2ca-b542-41ce-b5f4-8d2c38fde639",
+    "startBlock": "1206271441",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "fetchINWithNoLatch(I[BLcom/sleepycat/je/tree/SearchResult;Lcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/IN;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "f61180f3-ce5c-4c46-b5fd-9c80d622a30e",
+    "startBlock": "686889100",
     "endBlocks": [
       "exit"
     ]
@@ -411,78 +291,110 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "05a9fe6f-6b03-46d2-987e-af1cda74746d",
-    "startBlock": "1101388620",
+    "id": "09c806d1-5655-4cf6-98c3-4a17bbc7c4b7",
+    "startBlock": "581709425",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "INArrayRep",
-    "methodSignature": "noteRepChange(Lcom/sleepycat/je/tree/INArrayRep;Lcom/sleepycat/je/tree/IN;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "cf49288c-897d-4ade-899b-e444c27c9b4b",
-    "startBlock": "1308260005",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "isExpirationInHours()Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "b7c08a8a-cfc1-4a16-9e0e-303f8e02157f",
-    "startBlock": "1324695881",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "updateLNSlotKey(I[B[B)Z",
+    "packageName": "com.sleepycat.je.txn",
+    "className": "LockManager",
+    "methodSignature": "releaseAndFindNotifyTargetsInternal(JLcom/sleepycat/je/txn/Locker;I)Ljava/util/Set;",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "ee8d747a-3c12-4650-a2e5-be54c7a24b34",
-    "startBlock": "1594470927",
+    "id": "406e94d1-a99b-4749-8173-8f51bedc259a",
+    "startBlock": "1026677681",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.util",
+    "className": "PackedInteger",
+    "methodSignature": "readReverseInt([BI)I",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "240e6633-139a-46d9-9b6f-2ff2ba97b1a8",
+    "startBlock": "997342845",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Database",
+    "methodSignature": "getDbImpl()Lcom/sleepycat/je/dbi/DatabaseImpl;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "4c3a4567-f77e-4b03-baa7-a5c6bbe2f92d",
+    "startBlock": "1024349333",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbEnvPool",
+    "methodSignature": "finishAdditionOfSharedCacheEnv(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "9de7ce66-31b9-4aa7-8474-5ed9d2213b12",
+    "startBlock": "888398523",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "BIN",
+    "methodSignature": "getLastLoggedSize(I)I",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "d8da5ce9-e997-45e0-b901-967c59e621d5",
+    "startBlock": "725901869",
     "endBlocks": [
       "exit"
     ]
@@ -497,34 +409,8 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "a9c00333-c683-42f6-a669-72c13968503f",
-    "startBlock": "1050207164",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "BIN",
-    "methodSignature": "setTarget(ILcom/sleepycat/je/tree/Node;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "db54eab4-56f5-4b06-9792-7c26cf69e26c",
-    "startBlock": "2060981913",
+    "id": "c0ff0578-9072-4ed5-9500-dd8eabf8ef16",
+    "startBlock": "1662430509",
     "endBlocks": [
       "exit"
     ]
@@ -536,115 +422,13 @@
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "edf78acc-9f36-489b-9298-0bbdecb4f7c5",
-    "startBlock": "1401819868",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "get3ByteInt(I)I",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
       "(DUPLICATES && !JECACHESIZE)",
       "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
       "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "2a36a2e5-65fd-451c-bfa7-30f5223a2dcd",
-    "startBlock": "1589223906",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "INTargetRep$None",
-    "methodSignature": "set(ILcom/sleepycat/je/tree/Node;Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INTargetRep;",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "7590dbf6-2dac-40a4-837e-c2fd2115db84",
-    "startBlock": "13223",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "Tree",
-    "methodSignature": "findBinForInsert([BLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/BIN;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "36ef3a8a-f3af-42dd-a607-272134b552ab",
-    "startBlock": "147339532",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "EnvironmentImpl",
-    "methodSignature": "checkOpen()V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "793ac9b3-15d4-4931-9407-77c230b97ec2",
-    "startBlock": "1942988401",
+    "id": "028fef4f-acb5-40d2-b419-19970912ca81",
+    "startBlock": "1412123125",
     "endBlocks": [
       "exit"
     ]
@@ -652,51 +436,133 @@
   {
     "packageName": "com.sleepycat.je",
     "className": "Database",
-    "methodSignature": "getDbImpl()Lcom/sleepycat/je/dbi/DatabaseImpl;",
+    "methodSignature": "putNoOverwrite(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
     ],
-    "id": "1bb2d675-e416-436b-ad21-a41fabbbe7f6",
-    "startBlock": "903680673",
+    "id": "b2f25248-5e17-42f3-8e13-29315d488c85",
+    "startBlock": "553709707",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl",
-    "methodSignature": "releaseBIN()V",
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INTargetRep$Sparse",
+    "methodSignature": "set(ILcom/sleepycat/je/tree/Node;Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INTargetRep;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
+    ],
+    "id": "81d116fe-2df4-4dde-bb81-c428521ce96b",
+    "startBlock": "404551849",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "putNotify(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "2f28e517-48ba-4720-8b20-3473190378d0",
+    "startBlock": "46312498",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "init(Lcom/sleepycat/je/Database;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/CursorConfig;Z)V",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "70286433-afbd-4816-b486-2d68d74a3988",
+    "startBlock": "229298332",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.txn",
+    "className": "LockerFactory",
+    "methodSignature": "getWritableLocker(Lcom/sleepycat/je/Environment;Lcom/sleepycat/je/Transaction;ZZZLcom/sleepycat/je/TransactionConfig;)Lcom/sleepycat/je/txn/Locker;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "33790872-44d0-440e-839d-9459ce3834fd",
+    "startBlock": "982530445",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INArrayRep",
+    "methodSignature": "noteRepChange(Lcom/sleepycat/je/tree/INArrayRep;Lcom/sleepycat/je/tree/IN;)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
     ],
-    "id": "e79196de-2d22-4930-8b69-63109c04fceb",
-    "startBlock": "1065200170",
+    "id": "9bb1ab95-2d1d-402f-bc8f-f28bf094c1cc",
+    "startBlock": "1403513037",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "isEmbeddedLN(I)Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "e280803b-9264-4114-b96b-c463472d4bfd",
+    "startBlock": "1459541940",
     "endBlocks": [
       "exit"
     ]
@@ -713,8 +579,8 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "44e3a075-5144-4a82-87b2-9ad8fd3125c7",
-    "startBlock": "1731574431",
+    "id": "1e95d4e3-c49d-4220-9cfa-0d25b6843168",
+    "startBlock": "798845051",
     "endBlocks": [
       "exit"
     ]
@@ -722,101 +588,61 @@
   {
     "packageName": "com.sleepycat.je",
     "className": "Cursor",
-    "methodSignature": "putNotify(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "0d2cae27-41cd-46da-95de-daa1905defed",
-    "startBlock": "1580841412",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "putInternal(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/Put;Lcom/sleepycat/je/WriteOptions;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!DUPLICATES && !SEQUENTIAL)",
-      "(DUPLICATES && !SEQUENTIAL)",
-      "(!DUPLICATES && SEQUENTIAL)",
-      "SEQUENTIAL",
-      "(DUPLICATES && SEQUENTIAL)",
-      "!SEQUENTIAL"
-    ],
-    "id": "1087de0a-c452-4b66-89e3-fc8c82f786e7",
-    "startBlock": "632407030",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.evictor",
-    "className": "Arbiter",
-    "methodSignature": "isOverBudget()Z",
+    "methodSignature": "checkUpdatesAllowed(Lcom/sleepycat/je/dbi/ExpirationInfo;)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "fe0e2c52-fdb3-4e63-b286-cf63d040e2ad",
-    "startBlock": "610839694",
+    "id": "e348f62a-cbe4-43f7-ba1f-67cf1cb76bdf",
+    "startBlock": "856513388",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.recovery",
-    "className": "RecoveryManager",
-    "methodSignature": "recover(Z)Lcom/sleepycat/je/recovery/RecoveryInfo;",
+    "packageName": "com.sleepycat.je.tree",
+    "className": "Tree",
+    "methodSignature": "searchSplitsAllowed(Lcom/sleepycat/je/tree/IN;[BLcom/sleepycat/je/CacheMode;Ljava/util/Comparator;)Lcom/sleepycat/je/tree/BIN;",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "8691abfb-4f45-46c5-b98e-05feb9a62d07",
-    "startBlock": "336010901",
+    "id": "7137dc19-521b-4eb7-bfb6-b60c131d89fa",
+    "startBlock": "53730399",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Database",
+    "methodSignature": "put(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/Put;Lcom/sleepycat/je/WriteOptions;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "1ec56259-91d6-4281-98be-3b43cc1eded1",
+    "startBlock": "630729430",
     "endBlocks": [
       "exit"
     ]
@@ -833,48 +659,56 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "8f5202ac-514c-4ba3-b2dd-52dc8642c79f",
-    "startBlock": "1872598591",
+    "id": "f2288541-5bda-4249-9526-578bd425cbf3",
+    "startBlock": "611336222",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "insertEntry1(Lcom/sleepycat/je/tree/Node;[B[BJBZ)I",
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "getDbType()Lcom/sleepycat/je/dbi/DbType;",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "e18e7fd6-98e4-4a88-8b49-6c46e8cef158",
-    "startBlock": "962397251",
+    "id": "1c02ab51-e7fc-4d4c-a98c-6f0e321e121c",
+    "startBlock": "989666631",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.util",
-    "className": "PackedInteger",
-    "methodSignature": "getWriteIntLength(I)I",
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "close()V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "261a6466-b2e6-418b-a7b4-f5e03f6b9bbe",
-    "startBlock": "642067900",
+    "id": "dea31fa8-4a97-42cd-a8ac-8cf2a785f1d5",
+    "startBlock": "1486509563",
     "endBlocks": [
       "exit"
     ]
@@ -889,26 +723,26 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "2f4ea023-ff77-4391-bece-69caa9241a48",
-    "startBlock": "218071092",
+    "id": "9f867422-7a19-4004-9918-b8a26e47d5ef",
+    "startBlock": "1781690036",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.utilint",
-    "className": "DbLsn",
-    "methodSignature": "isTransientOrNull(J)Z",
-    "decisionIndex": 1,
+    "packageName": "com.sleepycat.je.evictor",
+    "className": "Evictor",
+    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "5de5c7d6-4e0e-4996-9ab9-41137d63794e",
-    "startBlock": "675430123",
+    "id": "6e0191d7-7662-4940-b051-1ef4e26d725c",
+    "startBlock": "497697491",
     "endBlocks": [
       "exit"
     ]
@@ -925,198 +759,30 @@
       "(JECACHESIZE && !REPLICATED)",
       "(JECACHESIZE && REPLICATED)"
     ],
-    "id": "1bf06e4c-3788-4694-8031-691c10ba53a5",
-    "startBlock": "491069125",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.cleaner",
-    "className": "BaseUtilizationTracker",
-    "methodSignature": "getFileSummary(J)Lcom/sleepycat/je/cleaner/TrackedFileSummary;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "21a602ea-3924-4b57-9b8f-3f866aae44eb",
-    "startBlock": "1668337890",
+    "id": "6b608353-4935-404a-a769-fb7241e7c8c2",
+    "startBlock": "1293718088",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.tree",
-    "className": "INTargetRep$Sparse",
-    "methodSignature": "get(I)Lcom/sleepycat/je/tree/Node;",
+    "className": "IN",
+    "methodSignature": "updateRecord(IJJJI[B[BIZ)V",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "cfb27da0-3292-408a-b676-44b57dc9c888",
-    "startBlock": "1614142579",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DbTree",
-    "methodSignature": "releaseDb(Lcom/sleepycat/je/dbi/DatabaseImpl;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "a610dbaa-6b87-4e7d-a2aa-ec544ca8b70e",
-    "startBlock": "1738409732",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DupKeyData$TwoPartKeyComparator",
-    "methodSignature": "compare([B[B)I",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)"
-    ],
-    "id": "b4ab8feb-871e-4a01-9a63-7cb34526f66d",
-    "startBlock": "1447645817",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "EnvironmentImpl",
-    "methodSignature": "requestShutdownDaemons()V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
-    ],
-    "id": "263ac8df-a48f-4f0c-a646-ad9b1880a313",
-    "startBlock": "1906509245",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "init(Lcom/sleepycat/je/Database;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/CursorConfig;Z)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "213c5911-d3ee-4556-b7f0-510e03e85133",
-    "startBlock": "977037567",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.txn",
-    "className": "WriteLockInfo",
-    "methodSignature": "setAbortExpiration(IZ)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "ad2da6a6-40d0-429f-9c63-51448d6442d4",
-    "startBlock": "1005213234",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl",
-    "methodSignature": "insertOrUpdateRecord(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "9d4276fc-048f-48d5-bde5-bcef03fefd3e",
-    "startBlock": "1746544743",
+    "id": "34fc90fd-896f-4893-9c3e-231517db3193",
+    "startBlock": "631046438",
     "endBlocks": [
       "exit"
     ]
@@ -1124,25 +790,21 @@
   {
     "packageName": "com.sleepycat.je.dbi",
     "className": "CursorImpl$LockStanding",
-    "methodSignature": "recordExists()Z",
+    "methodSignature": "prepareForUpdate(Lcom/sleepycat/je/tree/BIN;I)Lcom/sleepycat/je/txn/WriteLockInfo;",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "dd9642e9-225b-4052-88aa-d0676c34abb2",
-    "startBlock": "300109389",
+    "id": "cde38c87-8e9b-442b-a241-311c2a838e6a",
+    "startBlock": "1030181036",
     "endBlocks": [
       "exit"
     ]
@@ -1150,27 +812,43 @@
   {
     "packageName": "com.sleepycat.je",
     "className": "Database",
-    "methodSignature": "put(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/Put;Lcom/sleepycat/je/WriteOptions;)Lcom/sleepycat/je/OperationResult;",
+    "methodSignature": "put(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "505109e9-6abc-4de8-961b-cae928191643",
+    "startBlock": "966277073",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "EnvironmentImpl",
+    "methodSignature": "shutdownDaemons()V",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "JECACHESIZE",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "131632ed-9778-4cba-a042-aef161b8b184",
-    "startBlock": "723697678",
+    "id": "f11da0be-9ff7-44d2-801e-34fbc665f705",
+    "startBlock": "998260037",
     "endBlocks": [
       "exit"
     ]
@@ -1187,80 +865,66 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "5a8fd3f4-7ccf-4d12-832c-f6612c67a85f",
-    "startBlock": "977804132",
+    "id": "0d12de5d-043d-44f2-8eee-9c9a744e5f1c",
+    "startBlock": "1095391056",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.txn",
-    "className": "LockerFactory",
-    "methodSignature": "getWritableLocker(Lcom/sleepycat/je/Environment;Lcom/sleepycat/je/Transaction;ZZZLcom/sleepycat/je/TransactionConfig;)Lcom/sleepycat/je/txn/Locker;",
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "putInternal(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
       "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
       "(!DUPLICATES && !JECACHESIZE)",
       "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "e82a75d4-ccbc-4450-9813-ef4af1ae0434",
-    "startBlock": "848894196",
+    "id": "0f9ebfc4-5b80-4473-951e-db7c39c6ff58",
+    "startBlock": "931638021",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "setTarget(ILcom/sleepycat/je/tree/Node;)V",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "8f9d927b-7f3f-4d0f-b9c5-4eb4d58e44df",
+    "startBlock": "807370772",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "DbConfigManager",
-    "methodSignature": "getVal(Ljava/util/Properties;Lcom/sleepycat/je/config/ConfigParam;)Ljava/lang/String;",
+    "className": "DbEnvPool",
+    "methodSignature": "addToSharedCacheEnvs(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "50774738-f0da-4863-bbc7-0f5b94ca76c4",
-    "startBlock": "401510888",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget",
-    "methodSignature": "refreshTreeMemoryUsage(J)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
-    ],
-    "id": "138241ee-4ae8-4815-99bc-4d848a3e705d",
-    "startBlock": "584551156",
+    "id": "e5b31bb5-b228-4591-94ac-d357e99ac355",
+    "startBlock": "1561305765",
     "endBlocks": [
       "exit"
     ]
@@ -1275,144 +939,8 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "422b954e-c21e-476f-9f9d-76f5fea790aa",
-    "startBlock": "1742601878",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget",
-    "methodSignature": "updateCounter(JLjava/util/concurrent/atomic/AtomicLong;Ljava/lang/String;Z)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
-    ],
-    "id": "ff7c6407-0d0f-41e6-8bfc-39b821d55ad4",
-    "startBlock": "51198743",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "getEntryInMemorySize(I)J",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "6e4769b2-85f4-42b3-9f50-723e9a32438f",
-    "startBlock": "1233924094",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DbEnvPool",
-    "methodSignature": "getEnvironment(Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;ZLcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "d786277e-b934-4d5b-b1e6-b2dd08538f11",
-    "startBlock": "1286359933",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DatabaseId",
-    "methodSignature": "equals(Ljava/lang/Object;)Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "JECACHESIZE",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "df0e9162-e87c-47cf-881f-87abe9fe2ce8",
-    "startBlock": "175201680",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "LN",
-    "methodSignature": "logInternal(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/WriteLockInfo;Z[BIZZJIZZLcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/log/LogItem;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "be9ac76f-e42e-40a8-8399-dab1b629652b",
-    "startBlock": "313849351",
+    "id": "82fa0da5-2a8f-42e3-b5cd-dab2bbbd1915",
+    "startBlock": "1446114221",
     "endBlocks": [
       "exit"
     ]
@@ -1427,206 +955,70 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "0cc02393-e3e0-45a3-9df4-567326eb5f5a",
-    "startBlock": "2105254353",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "EnvironmentImpl",
-    "methodSignature": "checkIfInvalid()V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "e71792c2-bc7f-449b-9a06-bdfc508b7b29",
-    "startBlock": "1991046568",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DatabaseImpl",
-    "methodSignature": "replicatedBitSet()Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "6c7b3408-29e4-4748-b82a-a2ad28683180",
-    "startBlock": "1998068394",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "Key",
-    "methodSignature": "compareUnsignedBytes([BII[BII)I",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "d6829cb4-8722-46e9-94e9-12a60093b38b",
-    "startBlock": "819846320",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget",
-    "methodSignature": "updateLockMemoryUsage(JI)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
-    ],
-    "id": "ee666433-b7af-4477-9219-27aa0856ad36",
-    "startBlock": "2130784262",
+    "id": "006e5d46-681d-462d-8d5d-f123ea69c234",
+    "startBlock": "285980188",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.cleaner",
-    "className": "DbFileSummaryMap",
-    "methodSignature": "subtractFromMemoryBudget()V",
-    "decisionIndex": 1,
+    "className": "BaseUtilizationTracker",
+    "methodSignature": "countNew(JLjava/lang/Object;Lcom/sleepycat/je/log/LogEntryType;I)V",
+    "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
     ],
-    "id": "9121bee1-ad21-429d-86c9-0981df066906",
-    "startBlock": "1954056145",
+    "id": "8d5155d0-69f3-4b27-8efb-9b59077cdc2c",
+    "startBlock": "1670227987",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget$SharedTotals",
+    "className": "MemoryBudget$PrivateTotals",
     "methodSignature": "updateCacheUsage(J)Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "26863715-c79c-4f83-a85e-c1ef1a5ab963",
-    "startBlock": "1138836827",
+    "id": "74816284-6815-462e-a2e2-01241d4a3632",
+    "startBlock": "1083251246",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "StorageSize",
-    "methodSignature": "getStorageSize(Lcom/sleepycat/je/tree/BIN;I)I",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbConfigManager",
+    "methodSignature": "getBooleanVal(Ljava/util/Properties;Lcom/sleepycat/je/config/BooleanConfigParam;)Z",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "68c18acc-f6f7-459c-ad51-4e85002ae055",
-    "startBlock": "1853517786",
+    "id": "2f4a6174-b385-4150-9e2f-ad384d75fdd4",
+    "startBlock": "396908586",
     "endBlocks": [
       "exit"
     ]
@@ -1643,34 +1035,8 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "39a7faa4-13ad-4f85-9e1e-5ed5143664e0",
-    "startBlock": "2110739053",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "updateMemorySize(J)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "ad31e47c-85c4-42cd-80a4-a205b8ecb65e",
-    "startBlock": "379464642",
+    "id": "cd111244-8a4d-49cd-848d-3401e28e11fe",
+    "startBlock": "1959131523",
     "endBlocks": [
       "exit"
     ]
@@ -1687,34 +1053,30 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "25448134-b83a-4557-bc7e-02702d852d0d",
-    "startBlock": "406950309",
+    "id": "e583e5bb-4569-43f0-8645-ccd5ff2f0808",
+    "startBlock": "624560547",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl",
-    "methodSignature": "updateRecordInternal([BLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/CursorImpl$LockStanding;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INTargetRep$None",
+    "methodSignature": "set(ILcom/sleepycat/je/tree/Node;Lcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INTargetRep;",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "0abdf38a-1bc8-4f24-a213-c27ea59673c5",
-    "startBlock": "1538479159",
+    "id": "da16a55a-2f5a-4470-b0f7-ba6e92630a62",
+    "startBlock": "276070556",
     "endBlocks": [
       "exit"
     ]
@@ -1731,94 +1093,52 @@
       "SEQUENTIAL",
       "!SEQUENTIAL"
     ],
-    "id": "ef098c8d-746a-4914-b181-29e5d2e26ecb",
-    "startBlock": "155700911",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.utilint",
-    "className": "LoggerUtils",
-    "methodSignature": "logMsg(Ljava/util/logging/Logger;Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/util/logging/Level;Ljava/lang/String;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "2c1f5932-7c3a-4fe4-b6e9-0e5c65d74653",
-    "startBlock": "156480473",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "putNoNotify(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "d79511d4-76aa-44a3-ad75-e8dbcd7804ee",
-    "startBlock": "969836656",
+    "id": "257b3c7e-4b73-4f06-885b-1aae57396bdf",
+    "startBlock": "864960522",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "DatabaseImpl",
-    "methodSignature": "getDbType()Lcom/sleepycat/je/dbi/DbType;",
+    "className": "EnvironmentImpl",
+    "methodSignature": "checkOpen()V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
       "(DUPLICATES && !JECACHESIZE)",
       "(!DUPLICATES && !JECACHESIZE)",
       "(!DUPLICATES && JECACHESIZE)",
-      "!DUPLICATES",
-      "(DUPLICATES && JECACHESIZE)",
-      "DUPLICATES"
+      "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "7fa86083-df18-4a69-905e-8eae0dc5a8ec",
-    "startBlock": "1868942163",
+    "id": "b43f432f-d3aa-469b-a0ea-eab266bb1b32",
+    "startBlock": "142719891",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "close()V",
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "EnvironmentImpl",
+    "methodSignature": "requestShutdownDaemons()V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "22f2c43d-44c2-406a-bac6-d131b4063089",
-    "startBlock": "706912302",
+    "id": "a17d1bfb-901f-459e-b256-0bf42f85de1b",
+    "startBlock": "144031546",
     "endBlocks": [
       "exit"
     ]
@@ -1826,25 +1146,135 @@
   {
     "packageName": "com.sleepycat.je.tree",
     "className": "IN",
-    "methodSignature": "setLsn(IJZ)V",
+    "methodSignature": "shouldUpdateLsn(JJ)Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "4b17dd43-38e5-4e5d-82a5-a827d1c626cb",
+    "startBlock": "785886818",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "BIN",
+    "methodSignature": "setTarget(ILcom/sleepycat/je/tree/Node;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "ac3cc08e-a09a-4ce8-830a-4c172b10071e",
+    "startBlock": "1459829419",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "getEntryInMemorySize(I)J",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "2e5fa56d-743a-4eb3-ab09-5ac9d00d87ea",
-    "startBlock": "790228711",
+    "id": "5ff8fb21-7bb3-4a4b-9f9b-b280459b92dc",
+    "startBlock": "689635289",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbConfigManager",
+    "methodSignature": "parseBoolean(Ljava/lang/String;)Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "67b42f49-0976-4c8d-850e-b2e61d219966",
+    "startBlock": "2128795868",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "getNonNullEnvImpl()Lcom/sleepycat/je/dbi/EnvironmentImpl;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
+    ],
+    "id": "7f93f9dd-bdb6-4b7c-abad-9bf44e7cbfa4",
+    "startBlock": "551153202",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "insertEntry1(Lcom/sleepycat/je/tree/Node;[B[BJBZ)I",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "c4732a68-8995-406a-ba24-b00453ca0c51",
+    "startBlock": "1889129913",
     "endBlocks": [
       "exit"
     ]
@@ -1861,84 +1291,52 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "a91bd4d4-e71f-4473-99ab-ee7ff1b6d673",
-    "startBlock": "1899561112",
+    "id": "3eec1903-c7c1-44eb-ae81-bccd9b7a305f",
+    "startBlock": "1745658593",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl",
-    "methodSignature": "isClosed()Z",
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "isExpirationInHours()Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "10d96058-34d6-4f90-9d1d-f09a1228356f",
-    "startBlock": "591486302",
+    "id": "f4378ce8-d3e4-46ae-bab4-10f92d879d21",
+    "startBlock": "1149673624",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Environment",
-    "methodSignature": "getNonNullEnvImpl()Lcom/sleepycat/je/dbi/EnvironmentImpl;",
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DatabaseUtil",
+    "methodSignature": "checkForNullDbt(Lcom/sleepycat/je/DatabaseEntry;Ljava/lang/String;Z)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "04736e8d-f5bd-413b-9433-2f866c8e403b",
-    "startBlock": "1119857960",
+    "id": "baa132f7-deb1-4725-ac94-f724fec2acb3",
+    "startBlock": "1452163328",
     "endBlocks": [
       "exit"
     ]
@@ -1955,96 +1353,26 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "24cf74a5-2aed-4533-ba29-f6ff1c5fa889",
-    "startBlock": "1625584869",
+    "id": "46381dee-7dd2-41a9-b636-74e923637011",
+    "startBlock": "1944072370",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.cleaner",
-    "className": "BaseUtilizationTracker",
-    "methodSignature": "countNew(JLjava/lang/Object;Lcom/sleepycat/je/log/LogEntryType;I)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "7f823bf4-b871-464d-b437-9a986fc75540",
-    "startBlock": "1558119231",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "isBINDelta()Z",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "4882e5d9-e67e-49ad-926f-c09771474234",
-    "startBlock": "75294202",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "haveEmbeddedData(I)Z",
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "MemoryBudget",
+    "methodSignature": "reset(JZLcom/sleepycat/je/dbi/DbConfigManager;)V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "7e3cfe9f-79eb-42cc-9154-9da04f6eb3a9",
-    "startBlock": "451275887",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "findEntry([BZZLjava/util/Comparator;)I",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "e5029cf4-b065-48c4-b643-4c7d2f9d9264",
-    "startBlock": "843965014",
+    "id": "6ba479fa-63cf-490a-a8cc-11121c5c7cf3",
+    "startBlock": "1948824080",
     "endBlocks": [
       "exit"
     ]
@@ -2052,17 +1380,29 @@
   {
     "packageName": "com.sleepycat.je.dbi",
     "className": "DatabaseImpl",
-    "methodSignature": "getUtilizationRepairDone()Z",
+    "methodSignature": "getTriggers()Ljava/util/List;",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "1e741746-d511-462a-95fc-6de2e7cae8f9",
-    "startBlock": "2090246553",
+    "id": "ce401aa3-946b-47e3-bff9-aa7e577c751f",
+    "startBlock": "532532918",
     "endBlocks": [
       "exit"
     ]
@@ -2079,8 +1419,8 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "a779d735-ae76-4526-ad2b-2d070b074705",
-    "startBlock": "744765933",
+    "id": "1fd3c685-040b-43be-8f19-e05b2f49735d",
+    "startBlock": "1143416481",
     "endBlocks": [
       "exit"
     ]
@@ -2088,53 +1428,155 @@
   {
     "packageName": "com.sleepycat.je.dbi",
     "className": "DatabaseImpl",
-    "methodSignature": "getTriggers()Ljava/util/List;",
+    "methodSignature": "getUtilizationRepairDone()Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
       "(DUPLICATES && !JECACHESIZE)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
       "(!DUPLICATES && !JECACHESIZE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "b6eb7d1d-471a-4b70-998d-5a8b550b20ed",
-    "startBlock": "718702834",
+    "id": "f143e325-55bc-4ff9-b0da-3650ee5f8c0e",
+    "startBlock": "860435933",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "UtilizationTracker",
+    "methodSignature": "getDbFileSummary(Ljava/lang/Object;J)Lcom/sleepycat/je/cleaner/DbFileSummary;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
+    ],
+    "id": "4e9601d9-d4c3-4bc9-8667-c5fd204194fc",
+    "startBlock": "1193545371",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "putInternal(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/Put;Lcom/sleepycat/je/WriteOptions;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(!DUPLICATES && !SEQUENTIAL)",
+      "(DUPLICATES && !SEQUENTIAL)",
+      "(!DUPLICATES && SEQUENTIAL)",
+      "(DUPLICATES && SEQUENTIAL)"
+    ],
+    "id": "49cb847f-22be-4216-8227-08d2e63931ee",
+    "startBlock": "1968581099",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "Tree",
+    "methodSignature": "findBinForInsert([BLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/BIN;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "87e7a80d-1368-43ac-903e-6da07cf89781",
+    "startBlock": "8794501",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "EnvironmentFailureException",
+    "methodSignature": "assertState(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "c3bb77ac-ab6d-4803-8ff7-c8c48b150a40",
+    "startBlock": "706957010",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INKeyRep$Default",
+    "methodSignature": "getKey(IZ)[B",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "e264ffbd-83cb-49a7-95dd-d2bcd731eedc",
+    "startBlock": "2138033759",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbConfigManager",
+    "methodSignature": "getVal(Ljava/util/Properties;Lcom/sleepycat/je/config/ConfigParam;)Ljava/lang/String;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "9350e971-f26b-4048-b98f-0968778df67c",
+    "startBlock": "2108908208",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "findEntry([BZZLjava/util/Comparator;)I",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "4436c9e1-00d0-4620-8562-49bbf7041aa1",
+    "startBlock": "1573737872",
     "endBlocks": [
       "exit"
     ]
@@ -2149,8 +1591,8 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "b06080f8-f9f4-4f98-8e42-b7938bf82522",
-    "startBlock": "2059862587",
+    "id": "87a69b5f-69c6-49d8-ab92-ca8e969a0fc5",
+    "startBlock": "1443194611",
     "endBlocks": [
       "exit"
     ]
@@ -2167,76 +1609,84 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "95f193b1-9fec-4ee9-8b1d-44a7996ac95f",
-    "startBlock": "325003823",
+    "id": "7854b777-89d4-4beb-8561-f122c5b824cd",
+    "startBlock": "733891426",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.evictor",
+    "className": "Evictor",
+    "methodSignature": "doDaemonEviction(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "8d50b491-35ed-47e1-aca6-8de113881388",
+    "startBlock": "845948299",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "DatabaseImpl",
-    "methodSignature": "getSortedDuplicates()Z",
+    "className": "DatabaseId",
+    "methodSignature": "equals(Ljava/lang/Object;)Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "74eca0c9-c4b0-4867-a820-bea19d57d4c0",
-    "startBlock": "1267832957",
+    "id": "19bf8201-e31f-443b-8ab6-565456a0fba4",
+    "startBlock": "1175350585",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.txn",
-    "className": "LockManager",
-    "methodSignature": "releaseAndFindNotifyTargetsInternal(JLcom/sleepycat/je/txn/Locker;I)Ljava/util/Set;",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.util",
+    "className": "PackedInteger",
+    "methodSignature": "getWriteIntLength(I)I",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "f9a96634-9585-43e3-a3a0-a5d41e8a3c12",
-    "startBlock": "1621596176",
+    "id": "bb3f4a13-e8ec-4c83-b553-1b401d269bab",
+    "startBlock": "1105362882",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "Tree",
-    "methodSignature": "searchSplitsAllowed([BLcom/sleepycat/je/CacheMode;Ljava/util/Comparator;)Lcom/sleepycat/je/tree/BIN;",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.je",
+    "className": "Database",
+    "methodSignature": "putNoDupData(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "02c11286-9255-4a07-8510-ab5b383801ce",
-    "startBlock": "260785637",
+    "id": "87c6447b-9fb7-41a1-8efe-47ddb687976f",
+    "startBlock": "1220944022",
     "endBlocks": [
       "exit"
     ]
@@ -2253,52 +1703,30 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "c7227833-a58b-4025-aa76-2b8a749c6666",
-    "startBlock": "1335235448",
+    "id": "380613db-3bae-4132-bdee-eda0fac3e243",
+    "startBlock": "1172937469",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "isEmbeddedLN(I)Z",
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "releaseBIN()V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "4819ce17-073d-4171-acf6-5c5f63fb574b",
-    "startBlock": "450861375",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.evictor",
-    "className": "Evictor",
-    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "0752826c-854c-461e-baa8-716a2c375e6e",
-    "startBlock": "1020848293",
+    "id": "3f74dcb6-95cb-48c4-8ac7-bb9064750583",
+    "startBlock": "731958908",
     "endBlocks": [
       "exit"
     ]
@@ -2315,68 +1743,8 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "cfab78b4-c0c4-48c0-a2ed-947f1211791f",
-    "startBlock": "200225775",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "putInternal(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "0ed2eba6-4749-406a-8962-20fc4a70530e",
-    "startBlock": "1711802318",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.log",
-    "className": "LogManager",
-    "methodSignature": "serialLogWork(Lcom/sleepycat/je/log/LogItem;Lcom/sleepycat/je/log/LogParams;Lcom/sleepycat/je/cleaner/UtilizationTracker;)Lcom/sleepycat/je/log/LogManager$LogWriteInfo;",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "15e9f4c2-41e0-48dd-a6c6-36e710d38321",
-    "startBlock": "275109104",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.cleaner",
-    "className": "UtilizationTracker",
-    "methodSignature": "getDbFileSummary(Ljava/lang/Object;J)Lcom/sleepycat/je/cleaner/DbFileSummary;",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "c81238bd-20e9-4e99-bd6f-d97029248690",
-    "startBlock": "387553985",
+    "id": "b3fb0807-59f2-4d61-9bb9-c253ea4d33e6",
+    "startBlock": "768714715",
     "endBlocks": [
       "exit"
     ]
@@ -2388,33 +1756,113 @@
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "b3f2be30-c552-405e-b16b-5507b0046e07",
-    "startBlock": "2002074163",
+    "id": "77cffb29-6806-498a-82c8-2da6039c2855",
+    "startBlock": "954649070",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.txn",
+    "className": "LockerFactory",
+    "methodSignature": "getReadableLocker(Lcom/sleepycat/je/Database;Lcom/sleepycat/je/txn/Locker;Z)Lcom/sleepycat/je/txn/Locker;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "f8f8da90-cbfb-4d38-924a-01f12480676d",
+    "startBlock": "1167861306",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Environment",
+    "methodSignature": "<init>(Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "a0e40949-defc-4739-85c0-3e998d0b7b6f",
+    "startBlock": "1861259927",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.recovery",
+    "className": "RecoveryManager",
+    "methodSignature": "recover(Z)Lcom/sleepycat/je/recovery/RecoveryInfo;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "ce3e6240-2ba9-4223-a03d-f2a63c1e95c0",
+    "startBlock": "1008715868",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "EnvironmentImpl",
+    "methodSignature": "checkIfInvalid()V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "662200da-a444-4268-b971-00e975a34ddd",
+    "startBlock": "335751871",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.log",
+    "className": "LogManager",
+    "methodSignature": "serialLogWork(Lcom/sleepycat/je/log/LogItem;Lcom/sleepycat/je/log/LogParams;Lcom/sleepycat/je/cleaner/UtilizationTracker;)Lcom/sleepycat/je/log/LogManager$LogWriteInfo;",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(DUPLICATES && !JECACHESIZE)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(DUPLICATES && JECACHESIZE)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
+    ],
+    "id": "79c9691d-c9c1-4cfe-beae-0b25628b1c93",
+    "startBlock": "91993803",
     "endBlocks": [
       "exit"
     ]
@@ -2429,8 +1877,92 @@
       "!DUPLICATES",
       "DUPLICATES"
     ],
-    "id": "98b7dbad-a4d7-4e8c-88f6-bdeacf84f536",
-    "startBlock": "1018920409",
+    "id": "1419648a-cd7f-43bf-8442-95213e3ce456",
+    "startBlock": "696655659",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "insertRecordInternal([BLcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;ZLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/utilint/Pair;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "a844eed7-dd46-435a-9c3d-7ec0bded5256",
+    "startBlock": "45851929",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "replicatedBitSet()Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
+    ],
+    "id": "b99793d4-a9d9-4687-8a95-76e761cafb24",
+    "startBlock": "154754468",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "isBINDelta()Z",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "524d4fc6-4301-43b8-8905-f4e4c32f3eb5",
+    "startBlock": "1516871912",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "updateLNSlotKey(I[B[B)Z",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "0d12548e-3407-4828-b1f3-085dc8fadf8e",
+    "startBlock": "1214079841",
     "endBlocks": [
       "exit"
     ]
@@ -2447,182 +1979,284 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "79228d45-809c-4367-b99d-23b258f8cc6e",
-    "startBlock": "204582405",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.util",
-    "className": "PackedInteger",
-    "methodSignature": "writeReverseInt([BII)I",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)"
-    ],
-    "id": "2e238e30-aa0b-41f5-8980-38f0cc7c8682",
-    "startBlock": "435393425",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "shouldUpdateLsn(JJ)Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "60349242-c0a1-4a5a-aa64-c721a283e81a",
-    "startBlock": "1024246659",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DbConfigManager",
-    "methodSignature": "getBooleanVal(Ljava/util/Properties;Lcom/sleepycat/je/config/BooleanConfigParam;)Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "78294f01-474d-4578-af57-676b113576a9",
-    "startBlock": "1731519000",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "fetchINWithNoLatch(I[BLcom/sleepycat/je/tree/SearchResult;Lcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/IN;",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "d05750e7-4e6f-4762-8b35-e84bd2a9abb6",
-    "startBlock": "416742822",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je",
-    "className": "EnvironmentFailureException",
-    "methodSignature": "assertState(Z)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
-    ],
-    "id": "cb46cbce-892b-4efe-99e3-9381d5c61eca",
-    "startBlock": "1363682795",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.txn",
-    "className": "LockManager",
-    "methodSignature": "release(JLcom/sleepycat/je/txn/Locker;)Z",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "ebb07ad5-aa78-41df-9963-fddd8c6af1d7",
-    "startBlock": "906631510",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "CursorImpl$LockStanding",
-    "methodSignature": "prepareForUpdate(Lcom/sleepycat/je/tree/BIN;I)Lcom/sleepycat/je/txn/WriteLockInfo;",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "8cf4c508-4d85-424e-9ba0-193b3fe63445",
-    "startBlock": "2009955309",
+    "id": "7337ccdd-0f40-476f-a07c-840342ffe9eb",
+    "startBlock": "1614550766",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.evictor",
-    "className": "Evictor",
-    "methodSignature": "doDaemonEviction(Z)V",
+    "className": "Arbiter",
+    "methodSignature": "isOverBudget()Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "8714b165-e99c-4984-a64a-4e051354bb1f",
-    "startBlock": "1978356742",
+    "id": "e844cf2a-a114-48ad-99fe-a752243de579",
+    "startBlock": "723445429",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "putNoNotify(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "8b013494-3e21-440c-9d62-8d17efb670f1",
+    "startBlock": "332365373",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "insertOrUpdateRecord(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "a0c4fc6d-f0fc-414b-be33-97eddbe0b3a6",
+    "startBlock": "203779535",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "close()V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "f9c870fd-3e90-46d2-b697-db4b2a6a5f16",
+    "startBlock": "1808204221",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "INTargetRep$Sparse",
+    "methodSignature": "get(I)Lcom/sleepycat/je/tree/Node;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "d0166b3c-bf65-4eea-91b8-591a8deb9477",
+    "startBlock": "106589145",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "getLsn(I)J",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "fd6c3aff-81e3-4a47-9f5b-dc99bd1ab829",
+    "startBlock": "673709464",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "BIN",
+    "methodSignature": "isLastLoggedSizeStored(I)Z",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "e8098dae-4777-436a-b9b0-c065a6dd6b7d",
+    "startBlock": "926453180",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbTree",
+    "methodSignature": "releaseDb(Lcom/sleepycat/je/dbi/DatabaseImpl;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "fde73824-a540-4ffa-a13d-b2f7b2fb0ab1",
+    "startBlock": "1650807121",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "MemoryBudget",
+    "methodSignature": "refreshTreeMemoryUsage(J)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
+    ],
+    "id": "64f02278-adac-414c-bd42-5d0cdd4c8070",
+    "startBlock": "750305328",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "MemoryBudget$SharedTotals",
+    "methodSignature": "updateCacheUsage(J)Z",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
+    ],
+    "id": "3410bdc7-6234-4298-85e8-7d2b8801816b",
+    "startBlock": "437778947",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "Key",
+    "methodSignature": "compareUnsignedBytes([BII[BII)I",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "9a238c2c-62d6-4b1a-af02-7699bb1b127b",
+    "startBlock": "455904091",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "LN",
+    "methodSignature": "logInternal(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/txn/WriteLockInfo;Z[BIZZJIZZLcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/log/LogItem;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "3d6be701-aed4-490c-b48f-095f704d5b90",
+    "startBlock": "78344864",
     "endBlocks": [
       "exit"
     ]
@@ -2639,78 +2273,48 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "94579fc6-5f5b-4ce6-9299-5c168edb3977",
-    "startBlock": "1986909683",
+    "id": "50bf27a9-e563-4e17-8068-99240f9c79e6",
+    "startBlock": "1037238926",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.evictor",
-    "className": "OffHeapCache",
-    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "getSortedDuplicates()Z",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && !JECACHESIZE)",
+      "(!DUPLICATES && JECACHESIZE)",
+      "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "fcb0ef97-9735-4ab2-9d1e-ba1535f09270",
-    "startBlock": "179648626",
+    "id": "a778f802-dac2-4545-9a36-676effd0c421",
+    "startBlock": "1705644966",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "updateRecord(IJJJI[B[BIZ)V",
+    "className": "Tree",
+    "methodSignature": "searchSplitsAllowed([BLcom/sleepycat/je/CacheMode;Ljava/util/Comparator;)Lcom/sleepycat/je/tree/BIN;",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "1415c243-48fb-4383-abf9-17d00e7dc1ed",
-    "startBlock": "570485143",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.tree",
-    "className": "IN",
-    "methodSignature": "setTarget(ILcom/sleepycat/je/tree/Node;)V",
-    "decisionIndex": -1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "9afc53dd-9dd8-42f5-af76-b9afbe9a78f3",
-    "startBlock": "1178848191",
+    "id": "d0ab5581-d169-4259-8cf5-8f5085c8d8be",
+    "startBlock": "1179955337",
     "endBlocks": [
       "exit"
     ]
@@ -2718,33 +2322,35 @@
   {
     "packageName": "com.sleepycat.je.dbi",
     "className": "MemoryBudget",
-    "methodSignature": "refreshTreeAdminMemoryUsage(J)V",
+    "methodSignature": "<init>(Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/dbi/DbConfigManager;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
+    ],
+    "id": "0cd71a8c-5e74-48e3-b4cc-4197ec216838",
+    "startBlock": "1361275776",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbEnvPool",
+    "methodSignature": "getEnvironment(Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;ZLcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;",
     "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(!SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && JECACHESIZE)",
+      "(SHAREDCACHE && !JECACHESIZE)",
+      "(!SHAREDCACHE && !JECACHESIZE)"
     ],
-    "id": "7f606706-52e5-46ed-870f-b77117b1cab3",
-    "startBlock": "726551971",
+    "id": "4a48cc44-594a-497f-9ccd-a39d44694425",
+    "startBlock": "1063409861",
     "endBlocks": [
       "exit"
     ]
@@ -2761,116 +2367,122 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "8424681e-5c4d-4af6-a619-5609c14395fa",
-    "startBlock": "1818788379",
+    "id": "dba5e37a-d787-45a6-a88b-213f23b262f1",
+    "startBlock": "870517377",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "setLsn(IJZ)V",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "3ea0bfe3-42e8-4cf8-b382-784bbfd34bee",
+    "startBlock": "1414550972",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.util",
+    "className": "PackedInteger",
+    "methodSignature": "writeReverseInt([BII)I",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "4b78c231-8b3b-4cce-a176-7a48bf2031e8",
+    "startBlock": "1571525326",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "DbEnvPool",
-    "methodSignature": "addToSharedCacheEnvs(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "className": "CursorImpl$LockStanding",
+    "methodSignature": "recordExists()Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "5bade0fe-d020-4a08-a487-a41a726ef487",
-    "startBlock": "304994791",
+    "id": "78f89ffe-68a8-4de5-a1c5-eac70209bad7",
+    "startBlock": "1165804506",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Database",
-    "methodSignature": "put(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "DbFileSummaryMap",
+    "methodSignature": "subtractFromMemoryBudget()V",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "507e1f21-5f1a-4c67-91d3-a1c3d506aeea",
-    "startBlock": "190121396",
+    "id": "76710e44-635c-4f53-b8eb-415644513bda",
+    "startBlock": "755042639",
     "endBlocks": [
       "exit"
     ]
   },
   {
     "packageName": "com.sleepycat.je.dbi",
-    "className": "MemoryBudget$PrivateTotals",
-    "methodSignature": "updateCacheUsage(J)Z",
-    "decisionIndex": 1,
+    "className": "MemoryBudget",
+    "methodSignature": "updateLockMemoryUsage(JI)V",
+    "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "77c27788-41a1-42e0-ac75-862056d9ae8c",
-    "startBlock": "52913471",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.utilint",
-    "className": "DatabaseUtil",
-    "methodSignature": "checkForNullDbt(Lcom/sleepycat/je/DatabaseEntry;Ljava/lang/String;Z)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(!SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "(!DUPLICATES && !SEQUENTIAL)",
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !SEQUENTIAL)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && SEQUENTIAL)",
-      "(!SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(SEQUENTIAL && JECACHESIZE && DUPLICATES)",
-      "(DUPLICATES && SEQUENTIAL)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(DUPLICATES && JECACHESIZE)",
-      "SEQUENTIAL",
-      "(SEQUENTIAL && !JECACHESIZE && DUPLICATES)",
-      "!SEQUENTIAL",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)"
-    ],
-    "id": "abaf17fc-bd53-41be-bd52-7aea90a636d1",
-    "startBlock": "1717945185",
+    "id": "2b6887a2-b7b3-4a14-beb2-212aff6a65d3",
+    "startBlock": "1478261920",
     "endBlocks": [
       "exit"
     ]
@@ -2887,38 +2499,30 @@
       "(!DUPLICATES && JECACHESIZE)",
       "(DUPLICATES && JECACHESIZE)"
     ],
-    "id": "e9f1309b-de13-441a-a4bd-76200d078f74",
-    "startBlock": "1477648159",
+    "id": "3fac84fd-c490-49e1-a76b-39e9e6bec944",
+    "startBlock": "1980785359",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "EnvironmentImpl",
-    "methodSignature": "shutdownDaemons()V",
-    "decisionIndex": -1,
+    "packageName": "com.sleepycat.je.tree",
+    "className": "IN",
+    "methodSignature": "updateMemorySize(J)V",
+    "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && !DUPLICATES)",
-      "(JECACHESIZE && SHAREDCACHE && SEQUENTIAL && !DUPLICATES)",
-      "(!JECACHESIZE && !SHAREDCACHE && !DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !SEQUENTIAL && DUPLICATES)",
-      "(!JECACHESIZE && SHAREDCACHE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "453918d6-aa4e-416c-a64f-ab1c7b9ffcbf",
-    "startBlock": "38335261",
+    "id": "6e3e9279-93ee-4e54-8f4a-d5e4c8d1ab14",
+    "startBlock": "1657687988",
     "endBlocks": [
       "exit"
     ]
@@ -2926,55 +2530,43 @@
   {
     "packageName": "com.sleepycat.je.dbi",
     "className": "MemoryBudget",
-    "methodSignature": "reset(JZLcom/sleepycat/je/dbi/DbConfigManager;)V",
-    "decisionIndex": 1,
+    "methodSignature": "updateCounter(JLjava/util/concurrent/atomic/AtomicLong;Ljava/lang/String;Z)V",
+    "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && !SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && SHAREDCACHE && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !SHAREDCACHE && DUPLICATES)"
     ],
-    "id": "32da2760-5c2a-4ef5-9320-8d2fcb10b157",
-    "startBlock": "2002510648",
+    "id": "e091dd2f-bce2-4f43-bf58-0b22190c2773",
+    "startBlock": "514393212",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Database",
-    "methodSignature": "putNoOverwrite(Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;)Lcom/sleepycat/je/OperationStatus;",
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DbLsn",
+    "methodSignature": "isTransientOrNull(J)Z",
     "decisionIndex": 1,
     "info": [],
     "prettyConstraints": [
-      "(!SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(SEQUENTIAL && !JECACHESIZE && !DUPLICATES)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "(SEQUENTIAL && JECACHESIZE && !DUPLICATES)",
-      "(!SEQUENTIAL && !JECACHESIZE && !DUPLICATES)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
     ],
-    "id": "09dab5d1-3a69-42d5-bd10-98f48474fdf2",
-    "startBlock": "2062866805",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.sleepycat.je.dbi",
-    "className": "DbEnvPool",
-    "methodSignature": "finishAdditionOfSharedCacheEnv(Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
-    "decisionIndex": 1,
-    "info": [],
-    "prettyConstraints": [
-      "(JECACHESIZE && SHAREDCACHE)",
-      "(!JECACHESIZE && !SHAREDCACHE)",
-      "(!JECACHESIZE && SHAREDCACHE)",
-      "(JECACHESIZE && !SHAREDCACHE)"
-    ],
-    "id": "522fee74-3589-4702-83fc-db9765360910",
-    "startBlock": "257575783",
+    "id": "a584e73a-a611-40da-b2aa-1c50c2100901",
+    "startBlock": "1584885137",
     "endBlocks": [
       "exit"
     ]
@@ -2989,28 +2581,70 @@
       "!JECACHESIZE",
       "JECACHESIZE"
     ],
-    "id": "29f20f27-6464-4097-a7ce-b31c02b62c2c",
-    "startBlock": "113305326",
+    "id": "c4d77dd3-5be1-4630-a385-254d02897ce8",
+    "startBlock": "548729888",
     "endBlocks": [
       "exit"
     ]
   },
   {
-    "packageName": "com.sleepycat.je",
-    "className": "Cursor",
-    "methodSignature": "checkUpdatesAllowed(Lcom/sleepycat/je/dbi/ExpirationInfo;)V",
-    "decisionIndex": 1,
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "updateRecordInternal([BLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/CursorImpl$LockStanding;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": -1,
     "info": [],
     "prettyConstraints": [
-      "(DUPLICATES && !JECACHESIZE)",
-      "!JECACHESIZE",
-      "(!DUPLICATES && !JECACHESIZE)",
-      "(!DUPLICATES && JECACHESIZE)",
-      "JECACHESIZE",
-      "(DUPLICATES && JECACHESIZE)"
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
     ],
-    "id": "3ef5f481-1d08-47f2-943c-11d50baec22c",
-    "startBlock": "2123458139",
+    "id": "e409b99c-e76c-459b-91ed-6fa6d3309977",
+    "startBlock": "955778038",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.tree",
+    "className": "StorageSize",
+    "methodSignature": "getStorageSize(Lcom/sleepycat/je/tree/BIN;I)I",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && DUPLICATES)"
+    ],
+    "id": "3719df16-32dc-480c-97f5-4ce6f6e8c796",
+    "startBlock": "2002383502",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "BaseUtilizationTracker",
+    "methodSignature": "getFileSummary(J)Lcom/sleepycat/je/cleaner/TrackedFileSummary;",
+    "decisionIndex": -1,
+    "info": [],
+    "prettyConstraints": [
+      "(JECACHESIZE && SEQUENTIAL && !DUPLICATES)",
+      "(JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && !SEQUENTIAL && !DUPLICATES)",
+      "(!JECACHESIZE && SEQUENTIAL && !DUPLICATES)"
+    ],
+    "id": "ba11a5ed-a0e4-478b-894f-a33eefc5fd74",
+    "startBlock": "2033772597",
     "endBlocks": [
       "exit"
     ]

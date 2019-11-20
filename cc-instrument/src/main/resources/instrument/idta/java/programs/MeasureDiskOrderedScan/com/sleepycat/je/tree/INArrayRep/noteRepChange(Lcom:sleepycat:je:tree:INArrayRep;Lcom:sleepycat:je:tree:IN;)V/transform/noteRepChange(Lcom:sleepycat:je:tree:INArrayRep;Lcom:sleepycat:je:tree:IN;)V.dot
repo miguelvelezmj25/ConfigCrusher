@@ -1,0 +1,13 @@
+digraph noteRepChange {
+node [shape=record];
+327845207 [label="L2\lLINENUMBER 150 L2\lRETURN\l"];
+1483902690 [label="L1\lLINENUMBER 153 L1\lFRAME SAME\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lALOAD 0\lL3\lLINENUMBER 154 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lLSUB\lL4\lLINENUMBER 153 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL5\lLINENUMBER 155 L5\lALOAD 0\lICONST_0\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL6\lLINENUMBER 156 L6\lALOAD 1\lICONST_1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL7\lLINENUMBER 157 L7\lRETURN\lL8\l"];
+1176982401 [label="L0\lLINENUMBER 148 L0\lALOAD 2\lIFNONNULL L1\l"];
+entry;
+exit;
+327845207 -> exit
+entry -> 1176982401
+1483902690 -> exit
+1176982401 -> 327845207
+1176982401 -> 1483902690
+}

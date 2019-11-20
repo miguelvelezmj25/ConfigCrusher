@@ -34,8 +34,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseTrivialAdapter.MAIN_CLASS;
@@ -64,8 +66,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseStaticMethodCallAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseStaticMethodCallAdapter.MAIN_CLASS;
@@ -94,8 +98,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCannotRemoveNestedRegionsAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseCannotRemoveNestedRegionsAdapter.MAIN_CLASS;
@@ -124,8 +130,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseMethodCallAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseMethodCallAdapter.MAIN_CLASS;
@@ -154,8 +162,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseSubtracesAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseSubtracesAdapter.MAIN_CLASS;
@@ -184,8 +194,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.MAIN_CLASS;
@@ -217,8 +229,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseIGenAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseIGenAdapter.MAIN_CLASS;
@@ -247,8 +261,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     Set<JavaRegion> regionsToRemove = new HashSet<>();
@@ -290,8 +306,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseIndexFilesAdapter.MAIN_CLASS;
@@ -320,8 +338,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BasePngtasticAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BasePngtasticAdapter.MAIN_CLASS;
@@ -350,8 +370,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCannotExpandConstraintsDownAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseCannotExpandConstraintsDownAdapter.MAIN_CLASS;
@@ -380,8 +402,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseCanExpandConstraintsDownAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseCanExpandConstraintsDownAdapter.MAIN_CLASS;
@@ -410,8 +434,10 @@ public class IDTATimerInstrumenterTest {
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
     String programName = BaseMultipleReturnsAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis = new IDTAAnalysis(programName);
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
 
     String mainClass = BaseMultipleReturnsAdapter.MAIN_CLASS;

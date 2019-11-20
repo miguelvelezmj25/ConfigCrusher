@@ -47,6 +47,8 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
     System.err.println(
         "Remember that we are instrumenting blocks. Therefore, we might not need to know the start index of a region; only the start and end blocks");
     System.err.println("We are not deleting the .dot and .pdf files");
+    System.err.println(
+        "If we are using a profiler and not instrumenting for perf measurement, then we do not need to have this logic in instrumenting, but rather just propagation of regions intra.");
 
     this.idtaMethodInstrumenter = idtaMethodInstrumenter;
   }

@@ -1,0 +1,13 @@
+digraph getDbFileSummary {
+node [shape=record];
+825522000 [label="L3\lLINENUMBER 225 L3\lALOAD 4\lLLOAD 2\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbFileSummary (Ljava/lang/Long;Z)Lcom/sleepycat/je/cleaner/DbFileSummary;\lARETURN\l"];
+759875220 [label="L0\lLINENUMBER 223 L0\lALOAD 1\lCHECKCAST com/sleepycat/je/dbi/DatabaseImpl\lASTORE 4\lL1\lLINENUMBER 224 L1\lALOAD 4\lIFNULL L2\l"];
+1216962025 [label="L2\lLINENUMBER 227 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lACONST_NULL\lARETURN\lL4\l"];
+entry;
+exit;
+825522000 -> exit
+entry -> 759875220
+759875220 -> 825522000
+759875220 -> 1216962025
+1216962025 -> exit
+}

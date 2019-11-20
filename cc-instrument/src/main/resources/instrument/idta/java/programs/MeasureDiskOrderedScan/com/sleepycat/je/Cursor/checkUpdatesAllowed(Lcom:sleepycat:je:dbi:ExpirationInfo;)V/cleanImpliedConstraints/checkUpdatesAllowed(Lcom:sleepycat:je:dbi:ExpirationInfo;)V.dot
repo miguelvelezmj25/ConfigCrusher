@@ -1,0 +1,21 @@
+digraph checkUpdatesAllowed {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+856513388 [label="856513388 - [(DUPLICATES && !JECACHESIZE), (!DUPLICATES && !JECACHESIZE), (!DUPLICATES && JECACHESIZE), (DUPLICATES && JECACHESIZE)]"];
+1298610833 [label="1298610833 - []"];
+24987262 [label="24987262 - []"];
+539031448 [label="539031448 - []"];
+2041513466 [label="2041513466 - []"];
+entry;
+exit;
+entry -> 856513388;
+856513388 -> 1298610833;
+856513388 -> 24987262;
+1298610833 -> 24987262;
+1298610833 -> 2041513466;
+24987262 -> exit;
+539031448 -> 24987262;
+2041513466 -> 24987262;
+2041513466 -> 539031448;
+}

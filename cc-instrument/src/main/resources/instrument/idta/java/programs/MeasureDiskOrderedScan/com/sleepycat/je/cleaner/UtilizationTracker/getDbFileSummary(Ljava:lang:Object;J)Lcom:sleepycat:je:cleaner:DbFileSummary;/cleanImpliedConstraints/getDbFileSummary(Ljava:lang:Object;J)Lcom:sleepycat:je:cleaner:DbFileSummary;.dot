@@ -1,0 +1,15 @@
+digraph getDbFileSummary {
+node [shape=record];
+entry [label="entry - []"];
+exit [label="exit - []"];
+1621787911 [label="1621787911 - []"];
+1084686950 [label="1084686950 - []"];
+1193545371 [label="1193545371 - [(JECACHESIZE && SEQUENTIAL && !DUPLICATES), (JECACHESIZE && !SEQUENTIAL && !DUPLICATES), (!JECACHESIZE && !SEQUENTIAL && !DUPLICATES), (!JECACHESIZE && SEQUENTIAL && !DUPLICATES)]"];
+entry;
+exit;
+entry -> 1193545371;
+1621787911 -> exit;
+1084686950 -> exit;
+1193545371 -> 1621787911;
+1193545371 -> 1084686950;
+}

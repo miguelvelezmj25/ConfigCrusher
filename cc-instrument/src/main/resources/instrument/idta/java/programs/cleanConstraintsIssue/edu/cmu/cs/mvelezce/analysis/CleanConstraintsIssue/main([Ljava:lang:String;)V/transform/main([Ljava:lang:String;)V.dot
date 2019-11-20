@@ -1,0 +1,13 @@
+digraph main {
+node [shape=record];
+1475752141 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 8 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 3\lL3\lLINENUMBER 10 L3\lILOAD 1\lIFEQ L4\l"];
+487681105 [label="L5\lLINENUMBER 11 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CleanConstraintsIssue.foo (Z)V\lL6\lLINENUMBER 12 L6\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CleanConstraintsIssue.bar (Z)V\l"];
+43756939 [label="L4\lLINENUMBER 14 L4\lFRAME APPEND [I I I]\lRETURN\lL7\l"];
+entry;
+exit;
+entry -> 1475752141
+1475752141 -> 487681105
+1475752141 -> 43756939
+487681105 -> 43756939
+43756939 -> exit
+}

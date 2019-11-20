@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.adapters.canRemoveNestedConstraintsMultipleCallSites.
 import edu.cmu.cs.mvelezce.adapters.cannotExpandConstraintsDown.BaseCannotExpandConstraintsDownAdapter;
 import edu.cmu.cs.mvelezce.adapters.cannotRemoveNestedRegions.BaseCannotRemoveNestedRegionsAdapter;
 import edu.cmu.cs.mvelezce.adapters.cleanConstraints.BaseCleanConstraintsAdapter;
+import edu.cmu.cs.mvelezce.adapters.cleanConstraintsIssue.BaseCleanConstraintsIssueAdapter;
 import edu.cmu.cs.mvelezce.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -477,6 +478,38 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseCleanConstraintsAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseCleanConstraintsAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseCleanConstraintsAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void cleanConstraintsIssue()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseCleanConstraintsIssueAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BaseCleanConstraintsIssueAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseCleanConstraintsIssueAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = "../" + BaseCleanConstraintsIssueAdapter.INSTRUMENTED_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseCleanConstraintsIssueAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

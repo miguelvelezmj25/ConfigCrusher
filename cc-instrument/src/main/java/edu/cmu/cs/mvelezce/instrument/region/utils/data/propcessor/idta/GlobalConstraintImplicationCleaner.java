@@ -9,10 +9,7 @@ import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class will update the sets of constraints of a region. It will remove implied constraints by
@@ -24,6 +21,7 @@ public final class GlobalConstraintImplicationCleaner
     extends BlockRegionAnalyzer<Set<FeatureExpr>> {
 
   private final BaseIDTAExpander baseIDTAExpander;
+  private final Set<FeatureExpr> cleanedGlobalConstraints;
 
   public GlobalConstraintImplicationCleaner(
       String programName,
@@ -35,6 +33,9 @@ public final class GlobalConstraintImplicationCleaner
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
 
     this.baseIDTAExpander = baseIDTAExpander;
+    this.cleanedGlobalConstraints = new HashSet<>(this.baseIDTAExpander.getGlobalConstraints());
+
+    this.removeImpliedConstraints(this.cleanedGlobalConstraints);
   }
 
   @Override
@@ -70,8 +71,8 @@ public final class GlobalConstraintImplicationCleaner
 
   private void clean(Set<FeatureExpr> constraints) {
     this.removeImpliedConstraints(constraints);
-    //    this.addImplyingConstraints(constraints);
-    //    this.removeImpliedConstraints(constraints);
+    this.addImplyingConstraints(constraints);
+    this.removeImpliedConstraints(constraints);
   }
 
   private void removeImpliedConstraints(Set<FeatureExpr> constraints) {
@@ -99,15 +100,109 @@ public final class GlobalConstraintImplicationCleaner
   }
 
   private void addImplyingConstraints(Set<FeatureExpr> constraints) {
-    for (FeatureExpr globalConstraint : this.baseIDTAExpander.getGlobalConstraints()) {
-      for (FeatureExpr constraint : constraints) {
+    Map<FeatureExpr, Set<FeatureExpr>> constraintsToImplyingConstraints =
+        this.getEmptyConstraintsToImplyingConstraints(constraints);
+    this.calculateImplyingConstraints(constraintsToImplyingConstraints);
+
+    Map<FeatureExpr, Set<FeatureExpr>> constraintsToReplace =
+        this.getConstraintsToReplace(constraintsToImplyingConstraints);
+    this.replaceConstraints(constraints, constraintsToReplace);
+  }
+
+  private void replaceConstraints(
+      Set<FeatureExpr> constraints, Map<FeatureExpr, Set<FeatureExpr>> constraintsToReplace) {
+    for (Map.Entry<FeatureExpr, Set<FeatureExpr>> entry : constraintsToReplace.entrySet()) {
+      if (entry.getValue().isEmpty()) {
+        continue;
+      }
+
+      constraints.remove(entry.getKey());
+      constraints.addAll(entry.getValue());
+    }
+  }
+
+  private Map<FeatureExpr, Set<FeatureExpr>> getConstraintsToReplace(
+      Map<FeatureExpr, Set<FeatureExpr>> constraintsToImplyingConstraints) {
+    Map<FeatureExpr, Set<FeatureExpr>> constraintsToReplace = new HashMap<>();
+
+    for (FeatureExpr constraint : constraintsToImplyingConstraints.keySet()) {
+      constraintsToReplace.put(constraint, new HashSet<>());
+    }
+
+    for (Map.Entry<FeatureExpr, Set<FeatureExpr>> entry :
+        constraintsToImplyingConstraints.entrySet()) {
+      FeatureExpr constraint = entry.getKey();
+      Set<FeatureExpr> implyingConstraints = entry.getValue();
+
+      if (implyingConstraints.isEmpty()) {
+        continue;
+      }
+
+      if (implyingConstraints.size() == 1) {
+        constraintsToReplace.get(constraint).addAll(implyingConstraints);
+      } else if (this.areAllMex(implyingConstraints)) {
+        constraintsToReplace.get(constraint).addAll(implyingConstraints);
+      } else {
+        Set<FeatureExpr> oneConstraint = new HashSet<>();
+        oneConstraint.add(constraint);
+
+        System.err.println(
+            "Constraint "
+                + this.baseIDTAExpander.prettyPrintConstraints(oneConstraint, this.getOptions())
+                + " is implied by multiple mutually inclusive global constraints "
+                + this.baseIDTAExpander.prettyPrintConstraints(
+                    implyingConstraints, this.getOptions())
+                + ". Therefore, it is not clear which constraints to add in this region");
+      }
+    }
+
+    return constraintsToReplace;
+  }
+
+  private boolean areAllMex(Set<FeatureExpr> implyingConstraints) {
+    for (FeatureExpr constraint1 : implyingConstraints) {
+      for (FeatureExpr constraint2 : implyingConstraints) {
+        if (constraint1 == constraint2) {
+          continue;
+        }
+
+        if (!constraint1.mex(constraint2).isTautology()) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  private void calculateImplyingConstraints(
+      Map<FeatureExpr, Set<FeatureExpr>> constraintsToImplyingConstraints) {
+    for (FeatureExpr globalConstraint : this.cleanedGlobalConstraints) {
+      for (Map.Entry<FeatureExpr, Set<FeatureExpr>> entry :
+          constraintsToImplyingConstraints.entrySet()) {
+        FeatureExpr constraint = entry.getKey();
+
+        if (globalConstraint == constraint) {
+          continue;
+        }
+
         if (!globalConstraint.implies(constraint).isTautology()) {
           continue;
         }
 
-        constraints.add(globalConstraint);
-        break;
+        constraintsToImplyingConstraints.get(constraint).add(globalConstraint);
       }
     }
+  }
+
+  private Map<FeatureExpr, Set<FeatureExpr>> getEmptyConstraintsToImplyingConstraints(
+      Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, Set<FeatureExpr>> constraintsToImplyingConstraints = new HashMap<>();
+
+    for (FeatureExpr constraint : constraints) {
+      constraintsToImplyingConstraints.put(constraint, new HashSet<>());
+    }
+
+    return constraintsToImplyingConstraints;
   }
 }

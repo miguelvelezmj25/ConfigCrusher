@@ -1,0 +1,13 @@
+digraph foo {
+node [shape=record];
+659885503 [label="L0\lLINENUMBER 17 L0\lILOAD 0\lIFEQ L1\l"];
+468810134 [label="L1\lLINENUMBER 20 L1\lFRAME SAME\lRETURN\lL3\l"];
+252887214 [label="L2\lLINENUMBER 18 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+entry -> 659885503
+659885503 -> 468810134
+659885503 -> 252887214
+468810134 -> exit
+252887214 -> 468810134
+}

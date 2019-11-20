@@ -1,0 +1,50 @@
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CleanConstraintsIssue",
+    "methodSignature": "main([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!A",
+      "A"
+    ],
+    "id": "b5ed95e7-4ae6-45f7-8806-c1f9b1fa12f1",
+    "startBlock": "342378534",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CleanConstraintsIssue",
+    "methodSignature": "bar(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(A && C)",
+      "(A && !C)"
+    ],
+    "id": "576c0caf-6341-429f-851e-258b3db925d1",
+    "startBlock": "1024030325",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "CleanConstraintsIssue",
+    "methodSignature": "foo(Z)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(A && B)",
+      "(A && !B)"
+    ],
+    "id": "95945780-0d36-452f-939e-be9b6c790a25",
+    "startBlock": "313468529",
+    "endBlocks": [
+      "exit"
+    ]
+  }
+]

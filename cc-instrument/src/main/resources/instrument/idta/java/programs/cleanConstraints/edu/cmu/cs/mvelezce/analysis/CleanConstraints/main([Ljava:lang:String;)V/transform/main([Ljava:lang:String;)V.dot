@@ -1,13 +1,13 @@
 digraph main {
 node [shape=record];
-359681625 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CleanConstraints.foo (ZZ)V\lL5\lLINENUMBER 14 L5\lRETURN\lL6\l"];
-1025183522 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
-1468114495 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1088496529 [label="L4\lLINENUMBER 10 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1821895845 [label="L0\lLINENUMBER 6 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 1\lL1\lLINENUMBER 7 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.parseBoolean (Ljava/lang/String;)Z\lISTORE 2\lL2\lLINENUMBER 9 L2\lILOAD 1\lIFEQ L3\l"];
+471224529 [label="L3\lLINENUMBER 13 L3\lFRAME APPEND [I I]\lILOAD 1\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/CleanConstraints.foo (ZZ)V\lL5\lLINENUMBER 14 L5\lRETURN\lL6\l"];
 entry;
 exit;
-entry -> 1025183522
-359681625 -> exit
-1025183522 -> 359681625
-1025183522 -> 1468114495
-1468114495 -> 359681625
+1088496529 -> 471224529
+entry -> 1821895845
+1821895845 -> 1088496529
+1821895845 -> 471224529
+471224529 -> exit
 }

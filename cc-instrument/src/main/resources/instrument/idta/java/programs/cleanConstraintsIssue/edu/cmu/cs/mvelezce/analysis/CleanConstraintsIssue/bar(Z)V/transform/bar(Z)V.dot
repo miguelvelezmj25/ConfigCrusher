@@ -1,0 +1,13 @@
+digraph bar {
+node [shape=record];
+1455420222 [label="L0\lLINENUMBER 23 L0\lILOAD 0\lIFEQ L1\l"];
+1304624659 [label="L1\lLINENUMBER 26 L1\lFRAME SAME\lRETURN\lL3\l"];
+905090420 [label="L2\lLINENUMBER 24 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+entry -> 1455420222
+1455420222 -> 1304624659
+1455420222 -> 905090420
+1304624659 -> exit
+905090420 -> 1304624659
+}

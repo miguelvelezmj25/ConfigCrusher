@@ -56,7 +56,7 @@ public abstract class BaseExecutor<T> implements Executor {
       adapter.execute(configuration);
       this.rawExecutionParser.logExecution(configuration, iteration);
 
-      GC.gc(10000);
+      GC.gc(10_000);
     }
   }
 

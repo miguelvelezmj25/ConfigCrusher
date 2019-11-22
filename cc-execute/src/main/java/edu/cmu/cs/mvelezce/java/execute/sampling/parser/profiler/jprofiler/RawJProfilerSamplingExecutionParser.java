@@ -78,6 +78,7 @@ public class RawJProfilerSamplingExecutionParser
     }
 
     reader.close();
+    writer.flush();
     writer.close();
   }
 

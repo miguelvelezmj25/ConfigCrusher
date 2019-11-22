@@ -7,5 +7,5 @@ public interface IPerformanceModel<T> {
 
   Set<LocalPerformanceModel<T>> getLocalModels();
 
-  double evaluate(Set<String> config, List<String> options);
+  long evaluate(Set<String> config, List<String> options);
 }

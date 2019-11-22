@@ -48,7 +48,7 @@ public class LocalPerformanceModel<T> {
     this.modelToDiffHumanReadable = modelToDiffHumanReadable;
   }
 
-  public double evaluate(Set<String> config, List<String> options) {
+  public long evaluate(Set<String> config, List<String> options) {
     throw new UnsupportedOperationException(
         "Cannot call evaluate on this object since we do not know the type used for the regions");
   }

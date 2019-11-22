@@ -45,4 +45,11 @@ public class EvaluationTest {
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
     eval.saveConfigsToPerformance(Evaluation.IDTA, configs, model);
   }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_BF() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.BF);
+  }
 }

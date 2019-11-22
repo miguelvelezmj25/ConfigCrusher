@@ -22,8 +22,8 @@ public class PerformanceModel<T> implements IPerformanceModel<T> {
   }
 
   @Override
-  public double evaluate(Set<String> config, List<String> options) {
-    double time = 0.0;
+  public long evaluate(Set<String> config, List<String> options) {
+    long time = 0;
 
     for (LocalPerformanceModel<T> localModel : this.localModels) {
       time += localModel.evaluate(config, options);

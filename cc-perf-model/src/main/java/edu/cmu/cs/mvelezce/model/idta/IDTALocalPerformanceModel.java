@@ -45,9 +45,9 @@ public class IDTALocalPerformanceModel extends LocalPerformanceModel<FeatureExpr
     return configAsConstraint;
   }
 
-  public double evaluate(Set<String> config, List<String> options) {
+  public long evaluate(Set<String> config, List<String> options) {
     FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    double time = 0.0;
+    long time = 0;
     int entriesCovered = 0;
 
     for (Map.Entry<FeatureExpr, Long> entry : this.getModel().entrySet()) {

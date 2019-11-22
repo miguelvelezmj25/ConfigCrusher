@@ -4,6 +4,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.blackbox.perfmodel.bf.BruteForcePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
@@ -28,5 +29,20 @@ public class EvaluationTest {
 
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
     eval.saveConfigsToPerformance(Evaluation.BF, configs, model);
+  }
+
+  @Test
+  public void berkeleyDB_IDTA_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new IDTAPerformanceModelBuilder(programName);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, configs, model);
   }
 }

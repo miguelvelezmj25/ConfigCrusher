@@ -48,20 +48,21 @@ public class IDTALocalPerformanceModel extends LocalPerformanceModel<FeatureExpr
   public double evaluate(Set<String> config, List<String> options) {
     FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
     double time = 0.0;
+    int entriesCovered = 0;
 
     for (Map.Entry<FeatureExpr, Long> entry : this.getModel().entrySet()) {
       if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
         continue;
       }
 
-      if (time != 0.0) {
-        throw new RuntimeException(
-            "The config " + config + " covers multiple entries in " + this.getRegion());
-      }
-
       time += entry.getValue();
+      entriesCovered++;
     }
 
-    return time;
+    if (entriesCovered == 0) {
+      return time;
+    }
+
+    return time / entriesCovered;
   }
 }

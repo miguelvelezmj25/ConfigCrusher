@@ -6,13 +6,16 @@ import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuil
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
+public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
 
-  private static final String OUTPUT_DIR = Options.DIRECTORY + "/model/java/idta/programs";
+  private static final String OUTPUT_DIR =
+      "../cc-perf-model/" + Options.DIRECTORY + "/model/java/idta/programs";
+
+  public IDTAPerformanceModelBuilder(String programName) {
+    this(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>());
+  }
 
   IDTAPerformanceModelBuilder(
       String programName,

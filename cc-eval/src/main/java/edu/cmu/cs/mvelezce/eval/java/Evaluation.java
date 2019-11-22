@@ -18,6 +18,7 @@ public abstract class Evaluation<T> {
   public static final String DOT_CSV = ".csv";
 
   public static final String CC = "CC";
+  public static final String IDTA = "IDTA";
   public static final String GT = "GT";
   public static final String FW = "FW";
   public static final String PW = "PW";

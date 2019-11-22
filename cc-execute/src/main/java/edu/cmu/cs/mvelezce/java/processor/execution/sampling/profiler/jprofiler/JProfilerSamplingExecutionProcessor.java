@@ -13,6 +13,9 @@ import java.util.*;
 public abstract class JProfilerSamplingExecutionProcessor
     extends BaseExecutionProcessor<RawJProfilerSamplingPerfExecution> {
 
+//  private static final double J_PROFILER_OVERHEAD = 0.15;
+  private static final double J_PROFILER_OVERHEAD = 0.0;
+
   private final Map<String, String> fullyQualifiedMethodsToRegionIds = new HashMap<>();
   private final Map<JProfilerSnapshotEntry, String> snapshotEntriesToFullyQualifiedMethods =
       new HashMap<>();
@@ -109,7 +112,7 @@ public abstract class JProfilerSamplingExecutionProcessor
           }
         } else {
           long currentTime = regionsToPerf.get(region);
-          currentTime += (entry.getTime() * 1_000);
+          currentTime += (entry.getTime() * 1_000 * (1 - J_PROFILER_OVERHEAD));
           regionsToPerf.put(region, currentTime);
         }
       }

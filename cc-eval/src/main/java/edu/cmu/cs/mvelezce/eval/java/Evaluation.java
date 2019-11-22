@@ -46,7 +46,7 @@ public abstract class Evaluation<T> {
     }
 
     StringBuilder result = new StringBuilder();
-    result.append("measured,configuration,performance,std,minci,maxci");
+    result.append("configuration,measured,performance,std,minci,maxci");
     result.append("\n");
 
     for (Map.Entry<Set<String>, Long> entry : configsToTime.entrySet()) {
@@ -103,23 +103,18 @@ public abstract class Evaluation<T> {
 
     StringBuilder result = new StringBuilder();
     result.append(
-        "measured,configuration,"
+        "configuration,measured,"
             + approach1
             + ","
-            + approach1
-            + "_std,"
             + approach2
-            + ","
-            + approach2
-            + "_std,"
-            + approach2
-            + "_minci,"
-            + approach2
-            + "_maxci,1withinci,absolute error,relative error,squared error");
+            + ",absolute error,relative error,squared error");
     result.append("\n");
 
+    double sumAbsoluteError = 0;
+    double sumRelativeError = 0;
     double sumSquaredError = 0;
-    double sumAbsolutePercentError = 0;
+    double minAbsoluteError = Double.MAX_VALUE;
+    double maxAbsoluteError = Double.MIN_VALUE;
 
     for (Set<String> configuration : configurations) {
       List<String> entries1 = data1.get(configuration);
@@ -140,20 +135,23 @@ public abstract class Evaluation<T> {
       result.append(time1);
       result.append(",");
       //      result.append(entries1.get(2));
-      result.append(",");
+      //      result.append(",");
 
       double time2 = Double.parseDouble(entries2.get(1));
       result.append(time2);
       result.append(",");
       //      result.append(entries2.get(2));
-      result.append(",");
+      //      result.append(",");
 
       double absoluteError = Math.abs(time1 - time2);
       double relativeError = absoluteError / time2;
       double squaredError = Math.pow(absoluteError, 2);
 
+      minAbsoluteError = Math.min(minAbsoluteError, absoluteError);
+      maxAbsoluteError = Math.max(maxAbsoluteError, absoluteError);
+      sumAbsoluteError += absoluteError;
+      sumRelativeError += relativeError;
       sumSquaredError += squaredError;
-      sumAbsolutePercentError += relativeError;
 
       result.append(DECIMAL_FORMAT.format(absoluteError));
       result.append(",");
@@ -167,15 +165,34 @@ public abstract class Evaluation<T> {
     result.append("Total: ");
     result.append(configurations.size());
     result.append("\n");
+    result.append("\n");
+    result.append("Min AE: ");
+    result.append(DECIMAL_FORMAT.format(minAbsoluteError));
+    result.append("\n");
+    result.append("Max AE: ");
+    result.append(DECIMAL_FORMAT.format(maxAbsoluteError));
+    result.append("\n");
+    result.append("MAE: ");
+    double mae = sumAbsoluteError / configurations.size();
+    result.append(DECIMAL_FORMAT.format(mae));
+    result.append("\n");
+    result.append("\n");
+    result.append("MRE: ");
+    double mre = sumRelativeError / configurations.size();
+    result.append(DECIMAL_FORMAT.format(mre));
+    result.append("\n");
+    result.append("\n");
     result.append("MSE: ");
     double mse = sumSquaredError / configurations.size();
     result.append(DECIMAL_FORMAT.format(mse));
     result.append("\n");
+    result.append("\n");
     result.append("RMSE: ");
     result.append(DECIMAL_FORMAT.format(Math.sqrt(mse)));
     result.append("\n");
+    result.append("\n");
     result.append("MAPE: ");
-    double mape = sumAbsolutePercentError / configurations.size() * 100;
+    double mape = sumRelativeError / configurations.size() * 100;
     result.append(DECIMAL_FORMAT.format(mape));
     result.append("\n");
 

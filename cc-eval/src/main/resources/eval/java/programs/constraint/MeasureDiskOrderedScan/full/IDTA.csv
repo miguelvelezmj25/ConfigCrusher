@@ -1,4 +1,4 @@
-measured,configuration,performance,std,minci,maxci
+configuration,measured,performance,std,minci,maxci
 "[DUPLICATES, REPLICATED]",unclear,10.83,,,
 "[]",unclear,12.515,,,
 "[JECACHESIZE, SHAREDCACHE, SEQUENTIAL]",unclear,5.66,,,

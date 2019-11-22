@@ -14,7 +14,7 @@ import java.util.Set;
 public class IDTANaiveCompression extends IDTACompression {
 
   private static final String OUTPUT_DIR =
-      "../cc-compression/" + Options.DIRECTORY + "/compression/java/programs/idta/naive";
+      "../cc-compress/" + Options.DIRECTORY + "/compression/java/programs/idta/naive";
 
   IDTANaiveCompression(
       String programName, List<String> options, Collection<Set<FeatureExpr>> allConstraints) {

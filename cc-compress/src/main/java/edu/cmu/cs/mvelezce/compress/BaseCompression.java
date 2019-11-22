@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.compress;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
+import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,18 @@ public abstract class BaseCompression extends BaseAnalysis<Set<Set<String>>> {
 
   @Override
   public void writeToFile(Set<Set<String>> results) throws IOException {
-    throw new UnsupportedOperationException("implement");
+    String outputFile =
+        this.outputDir()
+            + "/"
+            + this.getProgramName()
+            + "/"
+            + this.getProgramName()
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, results);
   }
 
   @Override
@@ -27,7 +40,7 @@ public abstract class BaseCompression extends BaseAnalysis<Set<Set<String>>> {
     throw new UnsupportedOperationException("implement");
   }
 
-  public List<String> getOptions() {
+  protected List<String> getOptions() {
     return options;
   }
 }

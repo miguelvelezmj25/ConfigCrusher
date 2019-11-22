@@ -18,6 +18,7 @@
         <module>cc-regions-manager</module>
         <module>cc-eval</module>
         <module>cc-execute-blackbox</module>
+        <module>cc-compress</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

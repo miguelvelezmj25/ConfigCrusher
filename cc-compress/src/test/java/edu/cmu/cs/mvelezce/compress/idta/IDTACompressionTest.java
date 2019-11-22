@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,13 +19,14 @@ public class IDTACompressionTest {
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    String workloadSize = "small";
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
 
+    String workloadSize = "small";
     Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
         new IDTAAnalysis(programName, workloadSize);
     Collection<Set<FeatureExpr>> allConstraints = analysis.analyze().values();
 
-    BaseCompression compression = new IDTACompression(programName, allConstraints);
+    BaseCompression compression = new IDTACompression(programName, options, allConstraints);
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";

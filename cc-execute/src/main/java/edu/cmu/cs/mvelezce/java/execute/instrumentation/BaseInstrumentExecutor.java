@@ -40,7 +40,7 @@ public abstract class BaseInstrumentExecutor<T> extends BaseExecutor<T> {
     commandList.add("java");
     commandList.add("-Xmx12g");
     commandList.add("-Xms12g");
-    commandList.add("-XX:+UseConcMarkSweepGC");
+    //    commandList.add("-XX:+UseConcMarkSweepGC");
     //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 

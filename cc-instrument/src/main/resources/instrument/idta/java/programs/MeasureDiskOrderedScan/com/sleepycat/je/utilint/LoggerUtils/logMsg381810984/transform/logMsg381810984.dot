@@ -1,23 +1,23 @@
 digraph logMsg {
 node [shape=record];
-494891437 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 359 L4\lALOAD 1\lIFNULL L0\l"];
-823879442 [label="L7\lLINENUMBER 368 L7\lFRAME SAME\lRETURN\lL9\l"];
-739633090 [label="L2\lLINENUMBER 366 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
-1249974772 [label="L3\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL8\lLINENUMBER 367 L8\lALOAD 4\lATHROW\l"];
-603307994 [label="L0\lLINENUMBER 363 L0\lFRAME SAME\lALOAD 0\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL java/util/logging/Logger.log (Ljava/util/logging/Level;Ljava/lang/String;)V\l"];
-1141138449 [label="L5\lLINENUMBER 360 L5\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
-1592095202 [label="L1\lLINENUMBER 366 L1\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL6\lLINENUMBER 367 L6\lGOTO L7\l"];
+336140016 [label="L1\lLINENUMBER 366 L1\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL6\lLINENUMBER 367 L6\lGOTO L7\l"];
+1361679711 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 359 L4\lALOAD 1\lIFNULL L0\l"];
+1347458015 [label="L5\lLINENUMBER 360 L5\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lALOAD 1\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+499992373 [label="L0\lLINENUMBER 363 L0\lFRAME SAME\lALOAD 0\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL java/util/logging/Logger.log (Ljava/util/logging/Level;Ljava/lang/String;)V\l"];
+668175615 [label="L3\lGETSTATIC com/sleepycat/je/utilint/LoggerUtils.envMap : Ljava/util/Map;\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lINVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL8\lLINENUMBER 367 L8\lALOAD 4\lATHROW\l"];
+213037491 [label="L7\lLINENUMBER 368 L7\lFRAME SAME\lRETURN\lL9\l"];
+978150788 [label="L2\lLINENUMBER 366 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\l"];
 entry;
 exit;
-494891437 -> 603307994
-494891437 -> 1141138449
-823879442 -> exit
-entry -> 494891437
-739633090 -> 739633090 [style=dashed, color=red]
-739633090 -> 1249974772
-1249974772 -> exit
-603307994 -> 739633090 [style=dashed, color=red]
-603307994 -> 1592095202
-1141138449 -> 603307994
-1592095202 -> 823879442
+entry -> 1361679711
+336140016 -> 213037491
+1361679711 -> 1347458015
+1361679711 -> 499992373
+1347458015 -> 499992373
+499992373 -> 336140016
+499992373 -> 978150788 [style=dashed, color=red]
+668175615 -> exit
+213037491 -> exit
+978150788 -> 668175615
+978150788 -> 978150788 [style=dashed, color=red]
 }

@@ -1,15 +1,15 @@
 digraph <init> {
 node [shape=record];
-537930312 [label="L9\lLINENUMBER 254 L9\lFRAME SAME\lRETURN\lL11\l"];
-972487802 [label="L8\lLINENUMBER 248 L8\lALOAD 0\lALOAD 4\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGOTO L9\l"];
-1499835371 [label="L7\lLINENUMBER 251 L7\lFRAME FULL [com/sleepycat/je/Environment java/io/File com/sleepycat/je/EnvironmentConfig com/sleepycat/je/dbi/RepConfigProxy com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL10\lLINENUMBER 252 L10\lINVOKEVIRTUAL com/sleepycat/je/Environment.makeEnvironmentImpl (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\l"];
-918408488 [label="L0\lLINENUMBER 236 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 238 L1\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbs : Ljava/util/Map;\lL2\lLINENUMBER 239 L2\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbTxns : Ljava/util/Map;\lL3\lLINENUMBER 241 L3\lALOAD 1\lLDC \"envHome\"\lINVOKESTATIC com/sleepycat/je/utilint/DatabaseUtil.checkForNullParam (Ljava/lang/Object;Ljava/lang/String;)V\lL4\lLINENUMBER 243 L4\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL5\lLINENUMBER 244 L5\lINVOKESPECIAL com/sleepycat/je/Environment.setupHandleConfig (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/EnvironmentConfig;\lPUTFIELD com/sleepycat/je/Environment.appliedFinalConfig : Lcom/sleepycat/je/EnvironmentConfig;\lL6\lLINENUMBER 246 L6\lALOAD 4\lIFNULL L7\l"];
+1193889772 [label="L0\lLINENUMBER 236 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 238 L1\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbs : Ljava/util/Map;\lL2\lLINENUMBER 239 L2\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD com/sleepycat/je/Environment.referringDbTxns : Ljava/util/Map;\lL3\lLINENUMBER 241 L3\lALOAD 1\lLDC \"envHome\"\lINVOKESTATIC com/sleepycat/je/utilint/DatabaseUtil.checkForNullParam (Ljava/lang/Object;Ljava/lang/String;)V\lL4\lLINENUMBER 243 L4\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL5\lLINENUMBER 244 L5\lINVOKESPECIAL com/sleepycat/je/Environment.setupHandleConfig (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/EnvironmentConfig;\lPUTFIELD com/sleepycat/je/Environment.appliedFinalConfig : Lcom/sleepycat/je/EnvironmentConfig;\lL6\lLINENUMBER 246 L6\lALOAD 4\lIFNULL L7\l"];
+844889076 [label="L7\lLINENUMBER 251 L7\lFRAME FULL [com/sleepycat/je/Environment java/io/File com/sleepycat/je/EnvironmentConfig com/sleepycat/je/dbi/RepConfigProxy com/sleepycat/je/dbi/EnvironmentImpl] []\lALOAD 0\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lL10\lLINENUMBER 252 L10\lINVOKEVIRTUAL com/sleepycat/je/Environment.makeEnvironmentImpl (Ljava/io/File;Lcom/sleepycat/je/EnvironmentConfig;Lcom/sleepycat/je/dbi/RepConfigProxy;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\l"];
+456317443 [label="L9\lLINENUMBER 254 L9\lFRAME SAME\lRETURN\lL11\l"];
+872338284 [label="L8\lLINENUMBER 248 L8\lALOAD 0\lALOAD 4\lPUTFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lGOTO L9\l"];
 entry;
 exit;
-537930312 -> exit
-entry -> 918408488
-972487802 -> 537930312
-1499835371 -> 537930312
-918408488 -> 972487802
-918408488 -> 1499835371
+entry -> 1193889772
+1193889772 -> 844889076
+1193889772 -> 872338284
+844889076 -> 456317443
+456317443 -> exit
+872338284 -> 456317443
 }

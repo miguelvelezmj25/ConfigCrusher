@@ -62,8 +62,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
 
   @Override
   protected void addExecutionTimes(MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-    Map<FeatureExpr, Set<Long>> multiEntryModel = localModel.getModel();
-    this.validateOneConfigCoversOneConstraint(multiEntryModel.keySet());
+    //    this.validateOneConfigCoversOneConstraint(localModel);
 
     UUID region = localModel.getRegion();
 
@@ -75,39 +74,41 @@ public abstract class BaseConstraintPerformanceModelBuilder
           continue;
         }
 
-        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes : multiEntryModel.entrySet()) {
+        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes :
+            localModel.getModel().entrySet()) {
           if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
             continue;
           }
 
           constraintToTimes.getValue().add(regionToTime.getValue());
-
-          break;
+          //          break;
         }
 
-        break;
+        //        break;
       }
     }
   }
 
-  private void validateOneConfigCoversOneConstraint(Set<FeatureExpr> regionConstraints) {
-    for (PerformanceEntry entry : this.getPerformanceEntries()) {
-      FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
-
-      Set<FeatureExpr> coveredConstraints = new HashSet<>();
-
-      for (FeatureExpr regionConstraint : regionConstraints) {
-        if (configConstraint.implies(regionConstraint).isTautology()) {
-          coveredConstraints.add(regionConstraint);
-        }
-      }
-
-      if (coveredConstraints.size() > 1) {
-        throw new RuntimeException(
-            "Expected that one executed configuration would cover at most one region constraint");
-      }
-    }
-  }
+  //  private void validateOneConfigCoversOneConstraint(
+  //      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+  //    for (PerformanceEntry entry : this.getPerformanceEntries()) {
+  //      FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
+  //      Set<FeatureExpr> coveredConstraints = new HashSet<>();
+  //
+  //      for (FeatureExpr regionConstraint : localModel.getModel().keySet()) {
+  //        if (configConstraint.implies(regionConstraint).isTautology()) {
+  //          coveredConstraints.add(regionConstraint);
+  //        }
+  //      }
+  //
+  //      if (coveredConstraints.size() > 1) {
+  //        throw new RuntimeException(
+  //            "Expected that one executed configuration would cover at most one region constraint
+  // "
+  //                + localModel.getRegion());
+  //      }
+  //    }
+  //  }
 
   @Override
   protected MultiEntryLocalPerformanceModel<FeatureExpr> buildEmptyMultiEntryLocalModel(

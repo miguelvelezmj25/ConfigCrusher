@@ -1,13 +1,13 @@
 digraph subtractFromMemoryBudget {
 node [shape=record];
-863832061 [label="L2\lLINENUMBER 155 L2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateTreeAdminMemoryUsage (J)V\lL3\lLINENUMBER 156 L3\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\l"];
-1252938731 [label="L1\lLINENUMBER 158 L1\lFRAME SAME\lRETURN\lL4\l"];
-1634910017 [label="L0\lLINENUMBER 154 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lIFNULL L1\l"];
+1851220173 [label="L1\lLINENUMBER 158 L1\lFRAME SAME\lRETURN\lL4\l"];
+475760103 [label="L0\lLINENUMBER 154 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lIFNULL L1\l"];
+1751925803 [label="L2\lLINENUMBER 155 L2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.budget : Lcom/sleepycat/je/dbi/MemoryBudget;\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\lISUB\lI2L\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateTreeAdminMemoryUsage (J)V\lL3\lLINENUMBER 156 L3\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummaryMap.memSize : I\l"];
 entry;
 exit;
-entry -> 1634910017
-863832061 -> 1252938731
-1252938731 -> exit
-1634910017 -> 863832061
-1634910017 -> 1252938731
+1851220173 -> exit
+entry -> 475760103
+475760103 -> 1851220173
+475760103 -> 1751925803
+1751925803 -> 1851220173
 }

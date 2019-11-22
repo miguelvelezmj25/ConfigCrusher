@@ -1,13 +1,13 @@
 digraph getNonNullEnvImpl {
 node [shape=record];
-1577765509 [label="L0\lLINENUMBER 2511 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 1\lL1\lLINENUMBER 2513 L1\lALOAD 1\lIFNONNULL L2\l"];
-810524362 [label="L2\lLINENUMBER 2517 L2\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 1\lARETURN\lL4\l"];
-381720068 [label="L3\lLINENUMBER 2514 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Environment is closed.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1237785633 [label="L0\lLINENUMBER 2511 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Environment.environmentImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 1\lL1\lLINENUMBER 2513 L1\lALOAD 1\lIFNONNULL L2\l"];
+162624026 [label="L3\lLINENUMBER 2514 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Environment is closed.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+300250547 [label="L2\lLINENUMBER 2517 L2\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lALOAD 1\lARETURN\lL4\l"];
 entry;
 exit;
-entry -> 1577765509
-1577765509 -> 810524362
-1577765509 -> 381720068
-810524362 -> exit
-381720068 -> exit
+1237785633 -> 162624026
+1237785633 -> 300250547
+entry -> 1237785633
+162624026 -> exit
+300250547 -> exit
 }

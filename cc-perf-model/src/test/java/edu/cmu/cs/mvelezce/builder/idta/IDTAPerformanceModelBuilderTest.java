@@ -52,7 +52,6 @@ public class IDTAPerformanceModelBuilderTest {
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName);
-
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 

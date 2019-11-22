@@ -1,18 +1,18 @@
 digraph getFileSummary {
 node [shape=record];
-1977213879 [label="L1\lLINENUMBER 303 L1\lFRAME SAME\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lASTORE 3\lL3\lLINENUMBER 304 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\lALOAD 3\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/cleaner/TrackedFileSummary\lASTORE 4\lL4\lLINENUMBER 305 L4\lALOAD 4\lIFNONNULL L5\l"];
-1384150920 [label="L6\lLINENUMBER 307 L6\lNEW com/sleepycat/je/cleaner/TrackedFileSummary\lDUP\lALOAD 0\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lGETFIELD com/sleepycat/je/cleaner/Cleaner.trackDetail : Z\lINVOKESPECIAL com/sleepycat/je/cleaner/TrackedFileSummary.\<init\> (Lcom/sleepycat/je/cleaner/BaseUtilizationTracker;JZ)V\lASTORE 4\lL7\lLINENUMBER 308 L7\lNEW java/util/HashMap\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\lINVOKESPECIAL java/util/HashMap.\<init\> (Ljava/util/Map;)V\lASTORE 5\lL8\lLINENUMBER 310 L8\lALOAD 5\lALOAD 3\lALOAD 4\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL9\lLINENUMBER 311 L9\lALOAD 0\lALOAD 5\lPUTFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\l"];
-966174109 [label="L5\lLINENUMBER 313 L5\lFRAME APPEND [java/lang/Long com/sleepycat/je/cleaner/TrackedFileSummary]\lALOAD 4\lARETURN\lL10\l"];
-568981972 [label="L2\lLINENUMBER 301 L2\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.activeFile : J\l"];
-2060596720 [label="L0\lLINENUMBER 300 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.activeFile : J\lLLOAD 1\lLCMP\lIFGE L1\l"];
+359026485 [label="L1\lLINENUMBER 303 L1\lFRAME SAME\lLLOAD 1\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lASTORE 3\lL3\lLINENUMBER 304 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\lALOAD 3\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/cleaner/TrackedFileSummary\lASTORE 4\lL4\lLINENUMBER 305 L4\lALOAD 4\lIFNONNULL L5\l"];
+1865476924 [label="L0\lLINENUMBER 300 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.activeFile : J\lLLOAD 1\lLCMP\lIFGE L1\l"];
+1372241754 [label="L2\lLINENUMBER 301 L2\lALOAD 0\lLLOAD 1\lPUTFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.activeFile : J\l"];
+127198662 [label="L6\lLINENUMBER 307 L6\lNEW com/sleepycat/je/cleaner/TrackedFileSummary\lDUP\lALOAD 0\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lGETFIELD com/sleepycat/je/cleaner/Cleaner.trackDetail : Z\lINVOKESPECIAL com/sleepycat/je/cleaner/TrackedFileSummary.\<init\> (Lcom/sleepycat/je/cleaner/BaseUtilizationTracker;JZ)V\lASTORE 4\lL7\lLINENUMBER 308 L7\lNEW java/util/HashMap\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\lINVOKESPECIAL java/util/HashMap.\<init\> (Ljava/util/Map;)V\lASTORE 5\lL8\lLINENUMBER 310 L8\lALOAD 5\lALOAD 3\lALOAD 4\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL9\lLINENUMBER 311 L9\lALOAD 0\lALOAD 5\lPUTFIELD com/sleepycat/je/cleaner/BaseUtilizationTracker.fileSummaries : Ljava/util/Map;\l"];
+1863681795 [label="L5\lLINENUMBER 313 L5\lFRAME APPEND [java/lang/Long com/sleepycat/je/cleaner/TrackedFileSummary]\lALOAD 4\lARETURN\lL10\l"];
 entry;
 exit;
-entry -> 2060596720
-1977213879 -> 1384150920
-1977213879 -> 966174109
-1384150920 -> 966174109
-966174109 -> exit
-568981972 -> 1977213879
-2060596720 -> 1977213879
-2060596720 -> 568981972
+entry -> 1865476924
+359026485 -> 127198662
+359026485 -> 1863681795
+1865476924 -> 359026485
+1865476924 -> 1372241754
+1372241754 -> 359026485
+127198662 -> 1863681795
+1863681795 -> exit
 }

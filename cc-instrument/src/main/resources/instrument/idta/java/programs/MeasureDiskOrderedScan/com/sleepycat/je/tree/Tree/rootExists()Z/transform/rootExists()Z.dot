@@ -1,21 +1,21 @@
 digraph rootExists {
 node [shape=record];
-156943304 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lIFNONNULL L1\l"];
-486737602 [label="L2\lLINENUMBER 421 L2\lICONST_0\lIRETURN\l"];
-1388514371 [label="L1\lLINENUMBER 424 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getTarget ()Lcom/sleepycat/je/tree/Node;\lIFNONNULL L3\l"];
-86563749 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lL4\lLINENUMBER 425 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getLsn ()J\lLDC -1\lLCMP\lIFNE L3\l"];
-1521686456 [label="L3\lLINENUMBER 429 L3\lFRAME SAME\lICONST_1\lIRETURN\lL6\l"];
-1329823319 [label="L5\lLINENUMBER 426 L5\lICONST_0\lIRETURN\l"];
+586383156 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lIFNONNULL L1\l"];
+111675288 [label="L1\lLINENUMBER 424 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getTarget ()Lcom/sleepycat/je/tree/Node;\lIFNONNULL L3\l"];
+485488900 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.root : Lcom/sleepycat/je/tree/ChildReference;\lL4\lLINENUMBER 425 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/ChildReference.getLsn ()J\lLDC -1\lLCMP\lIFNE L3\l"];
+616719450 [label="L2\lLINENUMBER 421 L2\lICONST_0\lIRETURN\l"];
+626796612 [label="L3\lLINENUMBER 429 L3\lFRAME SAME\lICONST_1\lIRETURN\lL6\l"];
+725139063 [label="L5\lLINENUMBER 426 L5\lICONST_0\lIRETURN\l"];
 entry;
 exit;
-entry -> 156943304
-156943304 -> 486737602
-156943304 -> 1388514371
-486737602 -> exit
-1388514371 -> 86563749
-1388514371 -> 1521686456
-86563749 -> 1329823319
-86563749 -> 1521686456
-1521686456 -> exit
-1329823319 -> exit
+entry -> 586383156
+586383156 -> 111675288
+586383156 -> 616719450
+111675288 -> 485488900
+111675288 -> 626796612
+485488900 -> 626796612
+485488900 -> 725139063
+616719450 -> exit
+626796612 -> exit
+725139063 -> exit
 }

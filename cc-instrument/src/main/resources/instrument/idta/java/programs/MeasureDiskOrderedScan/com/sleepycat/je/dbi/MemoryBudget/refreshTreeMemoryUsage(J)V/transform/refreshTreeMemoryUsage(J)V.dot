@@ -1,13 +1,13 @@
 digraph refreshTreeMemoryUsage {
 node [shape=record];
-1020856283 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
-1549226897 [label="L0\lLINENUMBER 966 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
-172661959 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lRETURN\lL5\l"];
+1945327972 [label="L0\lLINENUMBER 966 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.treeMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.getAndSet (J)J\lLSTORE 3\lL1\lLINENUMBER 967 L1\lLLOAD 1\lLLOAD 3\lLSUB\lLSTORE 5\lL2\lLINENUMBER 969 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L3\l"];
+515498154 [label="L3\lLINENUMBER 972 L3\lFRAME APPEND [J J]\lRETURN\lL5\l"];
+118597690 [label="L4\lLINENUMBER 970 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
 entry;
 exit;
-entry -> 1549226897
-1020856283 -> 172661959
-1549226897 -> 1020856283
-1549226897 -> 172661959
-172661959 -> exit
+entry -> 1945327972
+1945327972 -> 515498154
+1945327972 -> 118597690
+515498154 -> exit
+118597690 -> 515498154
 }

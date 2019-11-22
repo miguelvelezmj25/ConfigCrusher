@@ -1,13 +1,13 @@
 digraph getDbImpl {
 node [shape=record];
-786171394 [label="L2\lLINENUMBER 2328 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.checkOpen ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lPOP\lL4\lLINENUMBER 2334 L4\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Database is closed. State=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\lL5\l"];
-119881247 [label="L0\lLINENUMBER 2322 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 1\lL1\lLINENUMBER 2324 L1\lALOAD 1\lIFNULL L2\l"];
-2086086392 [label="L3\lLINENUMBER 2325 L3\lALOAD 1\lARETURN\l"];
+1400473065 [label="L2\lLINENUMBER 2328 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Database.checkOpen ()Lcom/sleepycat/je/dbi/DatabaseImpl;\lPOP\lL4\lLINENUMBER 2334 L4\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Database is closed. State=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/Database.state : Lcom/sleepycat/je/Database$DbState;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\lL5\l"];
+215184991 [label="L0\lLINENUMBER 2322 L0\lALOAD 0\lGETFIELD com/sleepycat/je/Database.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lASTORE 1\lL1\lLINENUMBER 2324 L1\lALOAD 1\lIFNULL L2\l"];
+1157113196 [label="L3\lLINENUMBER 2325 L3\lALOAD 1\lARETURN\l"];
 entry;
 exit;
-entry -> 119881247
-786171394 -> exit
-119881247 -> 786171394
-119881247 -> 2086086392
-2086086392 -> exit
+entry -> 215184991
+1400473065 -> exit
+215184991 -> 1400473065
+215184991 -> 1157113196
+1157113196 -> exit
 }

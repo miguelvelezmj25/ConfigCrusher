@@ -1,13 +1,13 @@
 digraph getDbFileSummary {
 node [shape=record];
-614311416 [label="L0\lLINENUMBER 223 L0\lALOAD 1\lCHECKCAST com/sleepycat/je/dbi/DatabaseImpl\lASTORE 4\lL1\lLINENUMBER 224 L1\lALOAD 4\lIFNULL L2\l"];
-1712490213 [label="L2\lLINENUMBER 227 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lACONST_NULL\lARETURN\lL4\l"];
-1594829645 [label="L3\lLINENUMBER 225 L3\lALOAD 4\lLLOAD 2\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbFileSummary (Ljava/lang/Long;Z)Lcom/sleepycat/je/cleaner/DbFileSummary;\lARETURN\l"];
+1041972504 [label="L0\lLINENUMBER 223 L0\lALOAD 1\lCHECKCAST com/sleepycat/je/dbi/DatabaseImpl\lASTORE 4\lL1\lLINENUMBER 224 L1\lALOAD 4\lIFNULL L2\l"];
+1076359470 [label="L2\lLINENUMBER 227 L2\lFRAME APPEND [com/sleepycat/je/dbi/DatabaseImpl]\lACONST_NULL\lARETURN\lL4\l"];
+1921466797 [label="L3\lLINENUMBER 225 L3\lALOAD 4\lLLOAD 2\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbFileSummary (Ljava/lang/Long;Z)Lcom/sleepycat/je/cleaner/DbFileSummary;\lARETURN\l"];
 entry;
 exit;
-entry -> 614311416
-614311416 -> 1712490213
-614311416 -> 1594829645
-1712490213 -> exit
-1594829645 -> exit
+entry -> 1041972504
+1041972504 -> 1076359470
+1041972504 -> 1921466797
+1076359470 -> exit
+1921466797 -> exit
 }

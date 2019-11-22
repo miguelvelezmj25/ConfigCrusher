@@ -1,25 +1,25 @@
 digraph resetKeyComparator {
 node [shape=record];
-565963380 [label="L2\lLINENUMBER 1079 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL3\lLINENUMBER 1080 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
-1938484907 [label="L8\lLINENUMBER 1089 L8\lALOAD 0\lNEW com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINVOKESPECIAL com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator.\<init\> (Ljava/util/Comparator;Ljava/util/Comparator;)V\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\lGOTO L9\l"];
-228196473 [label="L4\lLINENUMBER 1088 L4\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L7\l"];
-1066718262 [label="L7\lLINENUMBER 1092 L7\lFRAME SAME\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\l"];
-2112239242 [label="L1\lLINENUMBER 1082 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L4\l"];
-1657832053 [label="L9\lLINENUMBER 1094 L9\lFRAME SAME\lRETURN\lL10\l"];
-995588662 [label="L0\lLINENUMBER 1078 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L1\l"];
-219958582 [label="L5\lLINENUMBER 1083 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL6\lLINENUMBER 1084 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
+281825845 [label="L1\lLINENUMBER 1082 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L4\l"];
+61395616 [label="L9\lLINENUMBER 1094 L9\lFRAME SAME\lRETURN\lL10\l"];
+95896401 [label="L2\lLINENUMBER 1079 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL3\lLINENUMBER 1080 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
+1933700482 [label="L4\lLINENUMBER 1088 L4\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFEQ L7\l"];
+1474150173 [label="L0\lLINENUMBER 1078 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L1\l"];
+1239320307 [label="L5\lLINENUMBER 1083 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL6\lLINENUMBER 1084 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
+32392229 [label="L8\lLINENUMBER 1089 L8\lALOAD 0\lNEW com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINVOKESPECIAL com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator.\<init\> (Ljava/util/Comparator;Ljava/util/Comparator;)V\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\lGOTO L9\l"];
+1048326786 [label="L7\lLINENUMBER 1092 L7\lFRAME SAME\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\l"];
 entry;
 exit;
-565963380 -> 2112239242
-1938484907 -> 1657832053
-entry -> 995588662
-228196473 -> 1938484907
-228196473 -> 1066718262
-1066718262 -> 1657832053
-2112239242 -> 228196473
-2112239242 -> 219958582
-1657832053 -> exit
-995588662 -> 565963380
-995588662 -> 2112239242
-219958582 -> 228196473
+281825845 -> 1933700482
+281825845 -> 1239320307
+entry -> 1474150173
+61395616 -> exit
+95896401 -> 281825845
+1933700482 -> 32392229
+1933700482 -> 1048326786
+1474150173 -> 281825845
+1474150173 -> 95896401
+1239320307 -> 1933700482
+32392229 -> 61395616
+1048326786 -> 61395616
 }

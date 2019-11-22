@@ -1,52 +1,52 @@
 digraph getTriggers {
 node [shape=record];
-393633610 [label="L4\lLINENUMBER 652 L4\lACONST_NULL\lARETURN\l"];
-992713709 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getNoComparators ()Z\lIFEQ L2\l"];
-308212195 [label="L2\lLINENUMBER 651 L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lIFNONNULL L3\l"];
-1114371304 [label="L14\lLINENUMBER 673 L14\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.addAll (Ljava/util/Collection;)Z\lPOP\l"];
-456898250 [label="L1\lLINENUMBER 647 L1\lFRAME SAME\lACONST_NULL\lARETURN\l"];
-1309495074 [label="L16\lLINENUMBER 676 L16\lALOAD 1\lARETURN\l"];
-220211550 [label="L11\lLINENUMBER 672 L11\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/LinkedList] []\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNULL L13\l"];
-1710051082 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1371356753 [label="L3\lLINENUMBER 656 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL5\lLINENUMBER 657 L5\lALOAD 1\lIFNULL L6\l"];
-1233634309 [label="L13\lLINENUMBER 675 L13\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lACONST_NULL\lALOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.compareAndSet (Ljava/lang/Object;Ljava/lang/Object;)Z\lIFEQ L15\l"];
-1102937152 [label="ALOAD 1\lIFNONNULL L18\l"];
-733757711 [label="L15\lLINENUMBER 678 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL17\lLINENUMBER 679 L17\lGETSTATIC com/sleepycat/je/dbi/DatabaseImpl.$assertionsDisabled : Z\lIFNE L18\l"];
-772884666 [label="L0\lLINENUMBER 646 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lIFNULL L1\l"];
-1550589841 [label="L18\lLINENUMBER 680 L18\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/List] []\lALOAD 1\lARETURN\lL19\l"];
-909000586 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNONNULL L3\l"];
-1916954030 [label="L7\lLINENUMBER 658 L7\lALOAD 1\lARETURN\l"];
-903333379 [label="L6\lLINENUMBER 667 L6\lFRAME APPEND [java/util/List]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getName ()Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL8\lLINENUMBER 668 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lL9\lLINENUMBER 667 L9\lINVOKESTATIC com/sleepycat/je/dbi/TriggerUtils.unmarshallTriggers (Ljava/lang/String;[[BLjava/lang/ClassLoader;)Ljava/util/LinkedList;\lASTORE 1\lL10\lLINENUMBER 669 L10\lALOAD 1\lIFNONNULL L11\l"];
-671722431 [label="L12\lLINENUMBER 670 L12\lNEW java/util/LinkedList\lDUP\lINVOKESPECIAL java/util/LinkedList.\<init\> ()V\lASTORE 1\l"];
+1460830194 [label="L6\lLINENUMBER 667 L6\lFRAME APPEND [java/util/List]\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getName ()Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL8\lLINENUMBER 668 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lL9\lLINENUMBER 667 L9\lINVOKESTATIC com/sleepycat/je/dbi/TriggerUtils.unmarshallTriggers (Ljava/lang/String;[[BLjava/lang/ClassLoader;)Ljava/util/LinkedList;\lASTORE 1\lL10\lLINENUMBER 669 L10\lALOAD 1\lIFNONNULL L11\l"];
+818550598 [label="L18\lLINENUMBER 680 L18\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/List] []\lALOAD 1\lARETURN\lL19\l"];
+151077553 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+428475485 [label="L16\lLINENUMBER 676 L16\lALOAD 1\lARETURN\l"];
+1216911543 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getNoComparators ()Z\lIFEQ L2\l"];
+423146896 [label="L2\lLINENUMBER 651 L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggerBytes : [[B\lIFNONNULL L3\l"];
+1945327381 [label="ALOAD 1\lIFNONNULL L18\l"];
+1457458597 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNONNULL L3\l"];
+882830473 [label="L13\lLINENUMBER 675 L13\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lACONST_NULL\lALOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.compareAndSet (Ljava/lang/Object;Ljava/lang/Object;)Z\lIFEQ L15\l"];
+593298955 [label="L12\lLINENUMBER 670 L12\lNEW java/util/LinkedList\lDUP\lINVOKESPECIAL java/util/LinkedList.\<init\> ()V\lASTORE 1\l"];
+2134432079 [label="L15\lLINENUMBER 678 L15\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL17\lLINENUMBER 679 L17\lGETSTATIC com/sleepycat/je/dbi/DatabaseImpl.$assertionsDisabled : Z\lIFNE L18\l"];
+973734698 [label="L14\lLINENUMBER 673 L14\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.addAll (Ljava/util/Collection;)Z\lPOP\l"];
+127644232 [label="L3\lLINENUMBER 656 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.triggers : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST java/util/List\lASTORE 1\lL5\lLINENUMBER 657 L5\lALOAD 1\lIFNULL L6\l"];
+2098565142 [label="L1\lLINENUMBER 647 L1\lFRAME SAME\lACONST_NULL\lARETURN\l"];
+2124615395 [label="L11\lLINENUMBER 672 L11\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl java/util/LinkedList] []\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.transientTriggers : Ljava/util/List;\lIFNULL L13\l"];
+198889260 [label="L4\lLINENUMBER 652 L4\lACONST_NULL\lARETURN\l"];
+2031022736 [label="L7\lLINENUMBER 658 L7\lALOAD 1\lARETURN\l"];
+1869876113 [label="L0\lLINENUMBER 646 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lIFNULL L1\l"];
 entry;
 exit;
-393633610 -> exit
-992713709 -> 308212195
-992713709 -> 456898250
-308212195 -> 1371356753
-308212195 -> 909000586
-1114371304 -> 1233634309
-456898250 -> exit
-1309495074 -> exit
-entry -> 772884666
-220211550 -> 1233634309
-220211550 -> 1114371304
-1710051082 -> exit
-1371356753 -> 1916954030
-1371356753 -> 903333379
-1233634309 -> 733757711
-1233634309 -> 1309495074
-1102937152 -> 1710051082
-1102937152 -> 1550589841
-733757711 -> 1102937152
-733757711 -> 1550589841
-772884666 -> 992713709
-772884666 -> 456898250
-1550589841 -> exit
-909000586 -> 1371356753
-909000586 -> 393633610
-1916954030 -> exit
-903333379 -> 220211550
-903333379 -> 671722431
-671722431 -> 220211550
+1460830194 -> 2124615395
+1460830194 -> 593298955
+818550598 -> exit
+151077553 -> exit
+428475485 -> exit
+1216911543 -> 423146896
+1216911543 -> 2098565142
+423146896 -> 127644232
+423146896 -> 1457458597
+1945327381 -> 151077553
+1945327381 -> 818550598
+1457458597 -> 127644232
+1457458597 -> 198889260
+882830473 -> 428475485
+882830473 -> 2134432079
+593298955 -> 2124615395
+2134432079 -> 818550598
+2134432079 -> 1945327381
+973734698 -> 882830473
+entry -> 1869876113
+127644232 -> 1460830194
+127644232 -> 2031022736
+2098565142 -> exit
+2124615395 -> 882830473
+2124615395 -> 973734698
+198889260 -> exit
+2031022736 -> exit
+1869876113 -> 1216911543
+1869876113 -> 2098565142
 }

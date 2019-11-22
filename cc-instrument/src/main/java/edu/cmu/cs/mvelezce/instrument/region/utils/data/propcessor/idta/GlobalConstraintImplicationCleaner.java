@@ -71,8 +71,8 @@ public final class GlobalConstraintImplicationCleaner
 
   private void clean(Set<FeatureExpr> constraints) {
     this.removeImpliedConstraints(constraints);
-    this.addImplyingConstraints(constraints);
-    this.removeImpliedConstraints(constraints);
+    //    this.addImplyingConstraints(constraints);
+    //    this.removeImpliedConstraints(constraints);
   }
 
   private void removeImpliedConstraints(Set<FeatureExpr> constraints) {

@@ -1,18 +1,18 @@
 digraph getDefaultCacheMode {
 node [shape=record];
-740692435 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
-1407816704 [label="L0\lLINENUMBER 803 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
-645266392 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
-1864508590 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lARETURN\lL5\l"];
-1895102244 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+217428568 [label="L0\lLINENUMBER 803 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
+980089553 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+455932086 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lARETURN\lL5\l"];
+13239027 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
+261041678 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
 entry;
 exit;
-entry -> 1407816704
-740692435 -> 1864508590
-740692435 -> 1895102244
-1407816704 -> 740692435
-1407816704 -> 645266392
-645266392 -> exit
-1864508590 -> exit
-1895102244 -> exit
+entry -> 217428568
+217428568 -> 13239027
+217428568 -> 261041678
+980089553 -> exit
+455932086 -> exit
+13239027 -> 980089553
+13239027 -> 455932086
+261041678 -> exit
 }

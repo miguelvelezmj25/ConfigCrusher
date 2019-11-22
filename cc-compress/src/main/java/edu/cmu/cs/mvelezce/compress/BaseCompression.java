@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.compress;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -37,7 +38,9 @@ public abstract class BaseCompression extends BaseAnalysis<Set<Set<String>>> {
 
   @Override
   public Set<Set<String>> readFromFile(File file) throws IOException {
-    throw new UnsupportedOperationException("implement");
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<Set<Set<String>>>() {});
   }
 
   protected List<String> getOptions() {

@@ -6,15 +6,16 @@ import edu.cmu.cs.mvelezce.compress.idta.utils.simplify.ImpliedConstraintsRemove
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class IDTANaiveCompression extends IDTACompression {
 
   private static final String OUTPUT_DIR =
       "../cc-compress/" + Options.DIRECTORY + "/compression/java/programs/idta/naive";
+
+  public IDTANaiveCompression(String programName) {
+    this(programName, new ArrayList<>(), new HashSet<>());
+  }
 
   IDTANaiveCompression(
       String programName, List<String> options, Collection<Set<FeatureExpr>> allConstraints) {

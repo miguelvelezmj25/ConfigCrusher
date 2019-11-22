@@ -73,8 +73,8 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
     commandList.add(agentPath);
-    commandList.add("-Xmx26g");
-    commandList.add("-Xms26g");
+    commandList.add("-Xmx12g");
+    commandList.add("-Xms12g");
     commandList.add("-cp");
     commandList.add(programClassPath);
     commandList.add(mainClass);

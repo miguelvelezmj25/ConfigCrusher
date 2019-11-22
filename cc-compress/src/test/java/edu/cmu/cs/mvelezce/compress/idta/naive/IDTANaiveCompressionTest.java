@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.compress.idta;
+package edu.cmu.cs.mvelezce.compress.idta.naive;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTACompressionTest {
+public class IDTANaiveCompressionTest {
 
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {
@@ -26,7 +26,7 @@ public class IDTACompressionTest {
         new IDTAAnalysis(programName, workloadSize);
     Collection<Set<FeatureExpr>> allConstraints = analysis.analyze().values();
 
-    BaseCompression compression = new IDTACompression(programName, options, allConstraints);
+    BaseCompression compression = new IDTANaiveCompression(programName, options, allConstraints);
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";

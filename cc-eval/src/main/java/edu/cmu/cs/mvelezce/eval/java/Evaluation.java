@@ -115,6 +115,8 @@ public abstract class Evaluation<T> {
     double sumSquaredError = 0;
     double minAbsoluteError = Double.MAX_VALUE;
     double maxAbsoluteError = Double.MIN_VALUE;
+    double minRelativeError = Double.MAX_VALUE;
+    double maxRelativeError = Double.MIN_VALUE;
 
     for (Set<String> configuration : configurations) {
       List<String> entries1 = data1.get(configuration);
@@ -149,6 +151,8 @@ public abstract class Evaluation<T> {
 
       minAbsoluteError = Math.min(minAbsoluteError, absoluteError);
       maxAbsoluteError = Math.max(maxAbsoluteError, absoluteError);
+      minRelativeError = Math.min(minRelativeError, relativeError);
+      maxRelativeError = Math.max(maxRelativeError, relativeError);
       sumAbsoluteError += absoluteError;
       sumRelativeError += relativeError;
       sumSquaredError += squaredError;
@@ -176,6 +180,12 @@ public abstract class Evaluation<T> {
     double mae = sumAbsoluteError / configurations.size();
     result.append(DECIMAL_FORMAT.format(mae));
     result.append("\n");
+    result.append("\n");
+    result.append("Min RE: ");
+    result.append(DECIMAL_FORMAT.format(minRelativeError));
+    result.append("\n");
+    result.append("Max RE: ");
+    result.append(DECIMAL_FORMAT.format(maxRelativeError));
     result.append("\n");
     result.append("MRE: ");
     double mre = sumRelativeError / configurations.size();

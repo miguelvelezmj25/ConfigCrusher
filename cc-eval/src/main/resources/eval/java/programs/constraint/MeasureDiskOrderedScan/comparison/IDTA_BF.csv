@@ -38,6 +38,8 @@ Min AE: 0.343
 Max AE: 1.701
 MAE: 1.071
 
+Min RE: 0.099
+Max RE: 0.33
 MRE: 0.2
 
 MSE: 1.344

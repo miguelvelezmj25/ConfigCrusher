@@ -13,10 +13,10 @@ public class IDTALocalPerformanceModel extends LocalPerformanceModel<FeatureExpr
 
   public IDTALocalPerformanceModel(
       UUID region,
-      Map<FeatureExpr, Long> model,
-      Map<FeatureExpr, Long> modelToMin,
-      Map<FeatureExpr, Long> modelToMax,
-      Map<FeatureExpr, Long> modelToDiff,
+      Map<FeatureExpr, Double> model,
+      Map<FeatureExpr, Double> modelToMin,
+      Map<FeatureExpr, Double> modelToMax,
+      Map<FeatureExpr, Double> modelToDiff,
       Map<FeatureExpr, String> modelToPerfHumanReadable,
       Map<FeatureExpr, String> modelToMinHumanReadable,
       Map<FeatureExpr, String> modelToMaxHumanReadable,
@@ -45,12 +45,12 @@ public class IDTALocalPerformanceModel extends LocalPerformanceModel<FeatureExpr
     return configAsConstraint;
   }
 
-  public long evaluate(Set<String> config, List<String> options) {
+  public double evaluate(Set<String> config, List<String> options) {
     FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    long time = 0;
+    double time = 0;
     int entriesCovered = 0;
 
-    for (Map.Entry<FeatureExpr, Long> entry : this.getModel().entrySet()) {
+    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
       if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
         continue;
       }

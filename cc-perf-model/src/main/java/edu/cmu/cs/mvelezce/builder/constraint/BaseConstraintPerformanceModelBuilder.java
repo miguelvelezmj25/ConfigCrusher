@@ -61,7 +61,8 @@ public abstract class BaseConstraintPerformanceModelBuilder
   }
 
   @Override
-  protected void addExecutionTimes(MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+  protected void populateMultiEntryLocalModel(
+      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
     //    this.validateOneConfigCoversOneConstraint(localModel);
 
     UUID region = localModel.getRegion();
@@ -69,12 +70,12 @@ public abstract class BaseConstraintPerformanceModelBuilder
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
 
-      for (Map.Entry<UUID, Long> regionToTime : entry.getRegionsToPerf().entrySet()) {
+      for (Map.Entry<UUID, Double> regionToTime : entry.getRegionsToPerf().entrySet()) {
         if (!region.equals(regionToTime.getKey())) {
           continue;
         }
 
-        for (Map.Entry<FeatureExpr, Set<Long>> constraintToTimes :
+        for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
             localModel.getModel().entrySet()) {
           if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
             continue;
@@ -113,14 +114,37 @@ public abstract class BaseConstraintPerformanceModelBuilder
   @Override
   protected MultiEntryLocalPerformanceModel<FeatureExpr> buildEmptyMultiEntryLocalModel(
       Map.Entry<JavaRegion, Set<FeatureExpr>> entry) {
-    Map<FeatureExpr, Set<Long>> model = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<Double>> model = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<Double>> modelToMins = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<Double>> modelToMaxs = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<Double>> modelToDiffs = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<Double>> modelToSampleVariances =
+        this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Set<List<Double>>> modelToConfidenceIntervals =
+        this.addConstraintEntriesCI(entry.getValue());
 
-    return new IDTAMultiEntryLocalPerformanceModel(entry.getKey().getId(), model);
+    return new IDTAMultiEntryLocalPerformanceModel(
+        entry.getKey().getId(),
+        model,
+        modelToMins,
+        modelToMaxs,
+        modelToDiffs,
+        modelToSampleVariances,
+        modelToConfidenceIntervals);
   }
 
-  private Map<FeatureExpr, Set<Long>> addConstraintEntries(Set<FeatureExpr> constraints) {
-    System.err.println("What about redundant constraints?");
-    Map<FeatureExpr, Set<Long>> model = new HashMap<>();
+  private Map<FeatureExpr, Set<List<Double>>> addConstraintEntriesCI(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, Set<List<Double>>> model = new HashMap<>();
+
+    for (FeatureExpr constraint : constraints) {
+      model.put(constraint, new HashSet<>());
+    }
+
+    return model;
+  }
+
+  private Map<FeatureExpr, Set<Double>> addConstraintEntries(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, Set<Double>> model = new HashMap<>();
 
     for (FeatureExpr constraint : constraints) {
       model.put(constraint, new HashSet<>());
@@ -169,10 +193,10 @@ public abstract class BaseConstraintPerformanceModelBuilder
     return constraintsToHumanReadableData;
   }
 
-  private Map<FeatureExpr, Long> parseConstraintsToData(Map<String, Long> localModel) {
-    Map<FeatureExpr, Long> constraintsToData = new HashMap<>();
+  private Map<FeatureExpr, Double> parseConstraintsToData(Map<String, Double> localModel) {
+    Map<FeatureExpr, Double> constraintsToData = new HashMap<>();
 
-    for (Map.Entry<String, Long> entry : localModel.entrySet()) {
+    for (Map.Entry<String, Double> entry : localModel.entrySet()) {
       FeatureExpr constraint = getConstraint(entry.getKey());
       constraintsToData.put(constraint, entry.getValue());
     }

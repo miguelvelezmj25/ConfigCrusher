@@ -47,7 +47,7 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
     return new PerformanceModel<>(localPerformanceModels);
   }
 
-  protected abstract void addExecutionTimes(
+  protected abstract void populateMultiEntryLocalModel(
       MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel);
 
   protected abstract MultiEntryLocalPerformanceModel<RD> buildEmptyMultiEntryLocalModel(
@@ -59,7 +59,7 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
     for (Map.Entry<JavaRegion, D> entry : this.regionsToData.entrySet()) {
       MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel =
           this.buildEmptyMultiEntryLocalModel(entry);
-      this.addExecutionTimes(multiEntryLocalModel);
+      this.populateMultiEntryLocalModel(multiEntryLocalModel);
       localModels.add(multiEntryLocalModel);
     }
 

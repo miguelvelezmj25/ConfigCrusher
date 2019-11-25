@@ -5,14 +5,18 @@ import java.util.*;
 public class LocalPerformanceModel<T> {
 
   private final UUID region;
-  private final Map<T, Long> model;
-  private final Map<T, Long> modelToMin;
-  private final Map<T, Long> modelToMax;
-  private final Map<T, Long> modelToDiff;
+  private final Map<T, Double> model;
+  private final Map<T, Double> modelToMin;
+  private final Map<T, Double> modelToMax;
+  private final Map<T, Double> modelToDiff;
+  //  private final Map<T, Double> modelToSampleVariance;
+  //  private final Map<T, Pair<Double, Double>> modelToConfidenceInterval;
   private final Map<T, String> modelToPerfHumanReadable;
   private final Map<T, String> modelToMinHumanReadable;
   private final Map<T, String> modelToMaxHumanReadable;
   private final Map<T, String> modelToDiffHumanReadable;
+  //  private final Map<T, String> modelToSampleVarianceHumanReadble;
+  //  private final Map<T, Pair<String, String>> modelToConfidenceIntervalHumanReadable;
 
   // Private constructor for jackson xml
   private LocalPerformanceModel() {
@@ -29,10 +33,10 @@ public class LocalPerformanceModel<T> {
 
   public LocalPerformanceModel(
       UUID region,
-      Map<T, Long> model,
-      Map<T, Long> modelToMin,
-      Map<T, Long> modelToMax,
-      Map<T, Long> modelToDiff,
+      Map<T, Double> model,
+      Map<T, Double> modelToMin,
+      Map<T, Double> modelToMax,
+      Map<T, Double> modelToDiff,
       Map<T, String> modelToPerfHumanReadable,
       Map<T, String> modelToMinHumanReadable,
       Map<T, String> modelToMaxHumanReadable,
@@ -48,7 +52,7 @@ public class LocalPerformanceModel<T> {
     this.modelToDiffHumanReadable = modelToDiffHumanReadable;
   }
 
-  public long evaluate(Set<String> config, List<String> options) {
+  public double evaluate(Set<String> config, List<String> options) {
     throw new UnsupportedOperationException(
         "Cannot call evaluate on this object since we do not know the type used for the regions");
   }
@@ -57,19 +61,19 @@ public class LocalPerformanceModel<T> {
     return region;
   }
 
-  public Map<T, Long> getModel() {
+  public Map<T, Double> getModel() {
     return model;
   }
 
-  public Map<T, Long> getModelToMin() {
+  public Map<T, Double> getModelToMin() {
     return modelToMin;
   }
 
-  public Map<T, Long> getModelToMax() {
+  public Map<T, Double> getModelToMax() {
     return modelToMax;
   }
 
-  public Map<T, Long> getModelToDiff() {
+  public Map<T, Double> getModelToDiff() {
     return modelToDiff;
   }
 

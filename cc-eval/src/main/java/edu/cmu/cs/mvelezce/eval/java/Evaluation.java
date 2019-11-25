@@ -1,5 +1,9 @@
 package edu.cmu.cs.mvelezce.eval.java;
 
+import edu.cmu.cs.mvelezce.eval.metrics.Metric;
+import edu.cmu.cs.mvelezce.eval.metrics.error.absolute.AbsoluteError;
+import edu.cmu.cs.mvelezce.eval.metrics.error.relative.RelativeError;
+import edu.cmu.cs.mvelezce.eval.metrics.error.squared.MeanSquaredError;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
@@ -54,7 +58,7 @@ public abstract class Evaluation<T> {
       result.append(entry.getKey());
       result.append('"');
       result.append(",");
-      result.append("unclear");
+      result.append("TODO");
       result.append(",");
       double performance = entry.getValue() / 1E9;
       result.append(DECIMAL_FORMAT.format(performance));
@@ -110,13 +114,9 @@ public abstract class Evaluation<T> {
             + ",absolute error,relative error,squared error");
     result.append("\n");
 
-    double sumAbsoluteError = 0;
-    double sumRelativeError = 0;
-    double sumSquaredError = 0;
-    double minAbsoluteError = Double.MAX_VALUE;
-    double maxAbsoluteError = Double.MIN_VALUE;
-    double minRelativeError = Double.MAX_VALUE;
-    double maxRelativeError = Double.MIN_VALUE;
+    Metric<Double> absoluteErrorMetric = new AbsoluteError();
+    Metric<Double> relativeErrorMetric = new RelativeError();
+    MeanSquaredError meanSquaredErrorMetric = new MeanSquaredError();
 
     for (Set<String> configuration : configurations) {
       List<String> entries1 = data1.get(configuration);
@@ -149,13 +149,9 @@ public abstract class Evaluation<T> {
       double relativeError = absoluteError / time2;
       double squaredError = Math.pow(absoluteError, 2);
 
-      minAbsoluteError = Math.min(minAbsoluteError, absoluteError);
-      maxAbsoluteError = Math.max(maxAbsoluteError, absoluteError);
-      minRelativeError = Math.min(minRelativeError, relativeError);
-      maxRelativeError = Math.max(maxRelativeError, relativeError);
-      sumAbsoluteError += absoluteError;
-      sumRelativeError += relativeError;
-      sumSquaredError += squaredError;
+      absoluteErrorMetric.getEntries().add(absoluteError);
+      relativeErrorMetric.getEntries().add(relativeError);
+      meanSquaredErrorMetric.getEntries().add(absoluteError);
 
       result.append(DECIMAL_FORMAT.format(absoluteError));
       result.append(",");
@@ -171,38 +167,35 @@ public abstract class Evaluation<T> {
     result.append("\n");
     result.append("\n");
     result.append("Min AE: ");
-    result.append(DECIMAL_FORMAT.format(minAbsoluteError));
+    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()));
     result.append("\n");
     result.append("Max AE: ");
-    result.append(DECIMAL_FORMAT.format(maxAbsoluteError));
+    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()));
     result.append("\n");
     result.append("MAE: ");
-    double mae = sumAbsoluteError / configurations.size();
-    result.append(DECIMAL_FORMAT.format(mae));
+    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
     result.append("Min RE: ");
-    result.append(DECIMAL_FORMAT.format(minRelativeError));
+    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
     result.append("\n");
     result.append("Max RE: ");
-    result.append(DECIMAL_FORMAT.format(maxRelativeError));
+    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMax()));
     result.append("\n");
     result.append("MRE: ");
-    double mre = sumRelativeError / configurations.size();
-    result.append(DECIMAL_FORMAT.format(mre));
+    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
     result.append("MSE: ");
-    double mse = sumSquaredError / configurations.size();
-    result.append(DECIMAL_FORMAT.format(mse));
-    result.append("\n");
-    result.append("\n");
-    result.append("RMSE: ");
-    result.append(DECIMAL_FORMAT.format(Math.sqrt(mse)));
+    result.append(DECIMAL_FORMAT.format(meanSquaredErrorMetric.getError()));
+    //    result.append("\n");
+    //    result.append("\n");
+    //    result.append("RMSE: ");
+    //    result.append(DECIMAL_FORMAT.format(Math.sqrt(mse)));
     result.append("\n");
     result.append("\n");
     result.append("MAPE: ");
-    double mape = sumRelativeError / configurations.size() * 100;
+    double mape = relativeErrorMetric.getArithmeticMean() * 100;
     result.append(DECIMAL_FORMAT.format(mape));
     result.append("\n");
 

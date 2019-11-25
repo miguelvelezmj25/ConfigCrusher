@@ -5,6 +5,8 @@ import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrdere
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.blackbox.perfmodel.bf.BruteForcePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.compress.BaseCompression;
+import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
@@ -28,22 +30,26 @@ public class EvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(Evaluation.BF, configs, model);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
   }
 
   @Test
   public void berkeleyDB_IDTA_Data() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+    BaseCompression compression = new IDTANaiveCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = compression.analyze(args);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
         new IDTAPerformanceModelBuilder(programName);
-    String[] args = new String[0];
+    args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(Evaluation.IDTA, configs, model);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
   }
 
   @Test

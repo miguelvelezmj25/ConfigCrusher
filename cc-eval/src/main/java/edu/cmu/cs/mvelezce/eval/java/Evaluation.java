@@ -33,38 +33,83 @@ public abstract class Evaluation<T> {
     this.options = options;
   }
 
-  void saveConfigsToPerformance(
+  void saveConfigsToPerformanceExhaustive(
       String approach, Set<Set<String>> configs, PerformanceModel<T> model) throws IOException {
+    throw new UnsupportedOperationException("implement");
+    //    File outputFile = this.getApproachOutputFile(approach);
+    //
+    //    if (outputFile.exists()) {
+    //      FileUtils.forceDelete(outputFile);
+    //    }
+    //
+    //    Map<Set<String>, Long> configsToTime = this.getEmptyConfigsToTime(configs);
+    //
+    //    for (Set<String> config : configs) {
+    //      long currentTime = configsToTime.get(config);
+    //      currentTime += model.evaluate(config, this.options);
+    //      configsToTime.put(config, currentTime);
+    //    }
+    //
+    //    StringBuilder result = new StringBuilder();
+    //    result.append("configuration,measured,performance,std,minci,maxci");
+    //    result.append("\n");
+    //
+    //    for (Map.Entry<Set<String>, Long> entry : configsToTime.entrySet()) {
+    //      result.append('"');
+    //      result.append(entry.getKey());
+    //      result.append('"');
+    //      result.append(",");
+    //      result.append("TODO");
+    //      result.append(",");
+    //      double performance = entry.getValue() / 1E9;
+    //      result.append(DECIMAL_FORMAT.format(performance));
+    //      result.append(",");
+    //      result.append(",");
+    //      result.append(",");
+    //      result.append("\n");
+    //    }
+    //
+    //    outputFile.getParentFile().mkdirs();
+    //    PrintWriter writer = new PrintWriter(outputFile);
+    //    writer.write(result.toString());
+    //    writer.flush();
+    //    writer.close();
+  }
+
+  void saveConfigsToPerformance(
+      String approach,
+      Set<Set<String>> executedConfigs,
+      Set<Set<String>> configsToPredict,
+      PerformanceModel<T> model)
+      throws IOException {
     File outputFile = this.getApproachOutputFile(approach);
 
     if (outputFile.exists()) {
       FileUtils.forceDelete(outputFile);
     }
 
-    Map<Set<String>, Long> configsToTime = this.getEmptyConfigsToTime(configs);
+    Map<Set<String>, Long> configsToTime = this.getEmptyConfigsToTime(configsToPredict);
 
-    for (Set<String> config : configs) {
+    for (Set<String> config : configsToPredict) {
       long currentTime = configsToTime.get(config);
       currentTime += model.evaluate(config, this.options);
       configsToTime.put(config, currentTime);
     }
 
     StringBuilder result = new StringBuilder();
-    result.append("configuration,measured,performance,std,minci,maxci");
+    result.append("configuration,measured,performance");
     result.append("\n");
 
     for (Map.Entry<Set<String>, Long> entry : configsToTime.entrySet()) {
+      Set<String> config = entry.getKey();
       result.append('"');
-      result.append(entry.getKey());
+      result.append(config);
       result.append('"');
       result.append(",");
-      result.append("TODO");
+      result.append(executedConfigs.contains(config));
       result.append(",");
       double performance = entry.getValue() / 1E9;
       result.append(DECIMAL_FORMAT.format(performance));
-      result.append(",");
-      result.append(",");
-      result.append(",");
       result.append("\n");
     }
 

@@ -1,7 +1,5 @@
 package edu.cmu.cs.mvelezce.java.results.processed;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.*;
 
 public class PerformanceEntry {
@@ -12,13 +10,13 @@ public class PerformanceEntry {
   private final Map<UUID, Double> regionsToMax;
   private final Map<UUID, Double> regionsToDiff;
   private final Map<UUID, Double> regionsToSampleVariance;
-  private final Map<UUID, Pair<Double, Double>> regionsToConfidenceInterval;
+  private final Map<UUID, List<Double>> regionsToConfidenceInterval;
   private final Map<UUID, String> regionsToPerfHumanReadable;
   private final Map<UUID, String> regionsToMinHumanReadable;
   private final Map<UUID, String> regionsToMaxHumanReadable;
   private final Map<UUID, String> regionsToDiffHumanReadable;
   private final Map<UUID, String> regionsToSampleVarianceHumanReadable;
-  private final Map<UUID, Pair<String, String>> regionsToConfidenceIntervalsHumanReadable;
+  private final Map<UUID, List<String>> regionsToConfidenceIntervalsHumanReadable;
 
   // Dummy constructor for jackson xml
   private PerformanceEntry() {
@@ -44,13 +42,13 @@ public class PerformanceEntry {
       Map<UUID, Double> regionsToMax,
       Map<UUID, Double> regionsToDiff,
       Map<UUID, Double> regionsToSampleVariance,
-      Map<UUID, Pair<Double, Double>> regionsToConfidenceInterval,
+      Map<UUID, List<Double>> regionsToConfidenceInterval,
       Map<UUID, String> regionsToPerfHumanReadable,
       Map<UUID, String> regionsToMinHumanReadable,
       Map<UUID, String> regionsToMaxHumanReadable,
       Map<UUID, String> regionsToDiffHumanReadable,
       Map<UUID, String> regionsToSampleVarianceHumanReadable,
-      Map<UUID, Pair<String, String>> regionsToConfidenceIntervalsHumanReadable) {
+      Map<UUID, List<String>> regionsToConfidenceIntervalsHumanReadable) {
     this.configuration = configuration;
     this.regionsToPerf = regionsToPerf;
     this.regionsToMin = regionsToMin;
@@ -90,7 +88,7 @@ public class PerformanceEntry {
     return regionsToSampleVariance;
   }
 
-  public Map<UUID, Pair<Double, Double>> getRegionsToConfidenceInterval() {
+  public Map<UUID, List<Double>> getRegionsToConfidenceInterval() {
     return regionsToConfidenceInterval;
   }
 
@@ -114,7 +112,7 @@ public class PerformanceEntry {
     return regionsToSampleVarianceHumanReadable;
   }
 
-  public Map<UUID, Pair<String, String>> getRegionsToConfidenceIntervalsHumanReadable() {
+  public Map<UUID, List<String>> getRegionsToConfidenceIntervalsHumanReadable() {
     return regionsToConfidenceIntervalsHumanReadable;
   }
 }

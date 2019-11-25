@@ -7,7 +7,6 @@ import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
@@ -78,7 +77,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Map<UUID, Double> regionsToMax = this.getRegionsToMax(regionsToStats);
     Map<UUID, Double> regionsToDiff = this.getRegionsToDiff(regionsToMin, regionsToMax);
     Map<UUID, Double> regionsToSampleVariance = this.getRegionsToSampleVariance(regionsToStats);
-    Map<UUID, Pair<Double, Double>> regionsToConfidenceInterval =
+    Map<UUID, List<Double>> regionsToConfidenceInterval =
         this.getRegionsToConfidenceInterval(regionsToStats);
 
     return new PerformanceEntry(
@@ -97,10 +96,9 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         this.toHumanReadableCI(regionsToConfidenceInterval));
   }
 
-  private Map<UUID, Pair<Double, Double>> getRegionsToConfidenceInterval(
+  private Map<UUID, List<Double>> getRegionsToConfidenceInterval(
       Map<UUID, SummaryStatistics> regionsToStats) {
-
-    Map<UUID, Pair<Double, Double>> regionsToConfidenceInterval = new HashMap<>();
+    Map<UUID, List<Double>> regionsToConfidenceInterval = new HashMap<>();
 
     for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
       SummaryStatistics stats = entry.getValue();
@@ -108,7 +106,19 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
       double critVal = tDist.inverseCumulativeProbability(1.0 - (1 - 0.95) / 2);
       double ciValue = critVal * Math.sqrt(stats.getVariance()) / Math.sqrt(stats.getN());
       double lowerCI = Math.max(0, stats.getMean() - ciValue);
-      Pair<Double, Double> confidenceInterval = Pair.of(lowerCI, stats.getMean() + ciValue);
+      double higherCI = stats.getMean() + ciValue;
+
+      if ((higherCI - lowerCI) >= 1E9) {
+        System.err.println(
+            "The difference between the lower and higher confidence interval bounds of region "
+                + entry.getKey()
+                + " is greater than 1 sec. It is "
+                + ((higherCI - lowerCI) / 1E9));
+      }
+
+      List<Double> confidenceInterval = new ArrayList<>();
+      confidenceInterval.add(lowerCI);
+      confidenceInterval.add(higherCI);
       regionsToConfidenceInterval.put(entry.getKey(), confidenceInterval);
     }
 
@@ -138,17 +148,18 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToHumanReadableData;
   }
 
-  private Map<UUID, Pair<String, String>> toHumanReadableCI(
-      Map<UUID, Pair<Double, Double>> regionsToConfidenceIntervals) {
-    Map<UUID, Pair<String, String>> regionsToHumanReadableCI = new HashMap<>();
+  private Map<UUID, List<String>> toHumanReadableCI(
+      Map<UUID, List<Double>> regionsToConfidenceIntervals) {
+    Map<UUID, List<String>> regionsToHumanReadableCI = new HashMap<>();
 
-    for (Map.Entry<UUID, Pair<Double, Double>> entry : regionsToConfidenceIntervals.entrySet()) {
-      Pair<Double, Double> confidenceInterval = entry.getValue();
-      double lower = confidenceInterval.getLeft() / 1E9;
-      double higher = confidenceInterval.getRight() / 1E9;
-      Pair<String, String> confidenceIntervalHumandReadable =
-          Pair.of(DECIMAL_FORMAT.format(lower), DECIMAL_FORMAT.format(higher));
-      regionsToHumanReadableCI.put(entry.getKey(), confidenceIntervalHumandReadable);
+    for (Map.Entry<UUID, List<Double>> entry : regionsToConfidenceIntervals.entrySet()) {
+      List<Double> confidenceInterval = entry.getValue();
+      double lower = confidenceInterval.get(0) / 1E9;
+      double higher = confidenceInterval.get(1) / 1E9;
+      List<String> confidenceIntervalHumanReadable = new ArrayList<>();
+      confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(lower));
+      confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(higher));
+      regionsToHumanReadableCI.put(entry.getKey(), confidenceIntervalHumanReadable);
     }
 
     return regionsToHumanReadableCI;

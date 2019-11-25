@@ -38,8 +38,8 @@ public abstract class BaseInstrumentExecutor<T> extends BaseExecutor<T> {
       String programClassPath, String mainClass, String[] configArgs) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
-    commandList.add("-Xmx12g");
-    commandList.add("-Xms12g");
+    commandList.add("-Xmx26g");
+    commandList.add("-Xms26g");
     //    commandList.add("-XX:+UseConcMarkSweepGC");
     //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");

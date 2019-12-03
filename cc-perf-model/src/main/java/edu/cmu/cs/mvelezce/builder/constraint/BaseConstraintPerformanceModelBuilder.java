@@ -63,8 +63,6 @@ public abstract class BaseConstraintPerformanceModelBuilder
   @Override
   protected void populateMultiEntryLocalModel(
       MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-    //    this.validateOneConfigCoversOneConstraint(localModel);
-
     UUID region = localModel.getRegion();
 
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
@@ -89,27 +87,6 @@ public abstract class BaseConstraintPerformanceModelBuilder
       }
     }
   }
-
-  //  private void validateOneConfigCoversOneConstraint(
-  //      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-  //    for (PerformanceEntry entry : this.getPerformanceEntries()) {
-  //      FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
-  //      Set<FeatureExpr> coveredConstraints = new HashSet<>();
-  //
-  //      for (FeatureExpr regionConstraint : localModel.getModel().keySet()) {
-  //        if (configConstraint.implies(regionConstraint).isTautology()) {
-  //          coveredConstraints.add(regionConstraint);
-  //        }
-  //      }
-  //
-  //      if (coveredConstraints.size() > 1) {
-  //        throw new RuntimeException(
-  //            "Expected that one executed configuration would cover at most one region constraint
-  // "
-  //                + localModel.getRegion());
-  //      }
-  //    }
-  //  }
 
   @Override
   protected MultiEntryLocalPerformanceModel<FeatureExpr> buildEmptyMultiEntryLocalModel(
@@ -202,5 +179,9 @@ public abstract class BaseConstraintPerformanceModelBuilder
     }
 
     return constraintsToData;
+  }
+
+  protected Map<PerformanceEntry, FeatureExpr> getPerfEntryToExecConstraint() {
+    return perfEntryToExecConstraint;
   }
 }

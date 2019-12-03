@@ -2,11 +2,19 @@ package edu.cmu.cs.mvelezce.learning.model.matlab;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.utils.config.Options;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Set;
 
-public class StepWiseLinearModelBuilder {
+class StepWiseLinearModelBuilder {
+
+  private static final String OUTPUT_DIR = "../cc-perf-model-learning/" + Options.DIRECTORY;
 
   private final String programName;
   private final List<String> options;
@@ -27,20 +35,19 @@ public class StepWiseLinearModelBuilder {
     this.samplingApproach = samplingApproach;
   }
 
-  public void generateCSVFile() {
-    throw new UnsupportedOperationException("Implement");
-    //    StringBuilder result = new StringBuilder();
-    //
-    //    for(String option : options) {
-    //      result.append(option);
-    //      result.append(",");
-    //    }
-    //
-    //    result.append("time");
-    //    result.append("\n");
-    //
-    //    DecimalFormat decimalFormat = new DecimalFormat("#.###");
-    //
+  public void generateCSVFile() throws IOException {
+    StringBuilder result = new StringBuilder();
+
+    for (String option : this.options) {
+      result.append(option);
+      result.append(",");
+    }
+
+    result.append("time");
+    result.append("\n");
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
     //    for(PerformanceEntryStatistic statistic : performanceEntries) {
     //      Set<String> configuration = statistic.getConfiguration();
     //
@@ -61,19 +68,26 @@ public class StepWiseLinearModelBuilder {
     //      result.append("\n");
     //    }
     //
-    //    String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Approach.DATA_DIR
-    // + "/"
-    //            + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
-    //    File outputFile = new File(outputDir);
-    //
-    //    if(outputFile.exists()) {
-    //      FileUtils.forceDelete(outputFile);
-    //    }
-    //
-    //    outputFile.getParentFile().mkdirs();
-    //    FileWriter writer = new FileWriter(outputFile);
-    //    writer.write(result.toString());
-    //    writer.flush();
-    //    writer.close();
+
+    String outputDir =
+        OUTPUT_DIR
+            + "/data/java/programs/"
+            + this.programName
+            + "/"
+            + this.samplingApproach.getName()
+            + "/"
+            + this.samplingApproach.getName()
+            + Options.DOT_CSV;
+    File outputFile = new File(outputDir);
+
+    if (outputFile.exists()) {
+      FileUtils.forceDelete(outputFile);
+    }
+
+    outputFile.getParentFile().mkdirs();
+    PrintWriter writer = new PrintWriter(outputFile);
+    writer.write(result.toString());
+    writer.flush();
+    writer.close();
   }
 }

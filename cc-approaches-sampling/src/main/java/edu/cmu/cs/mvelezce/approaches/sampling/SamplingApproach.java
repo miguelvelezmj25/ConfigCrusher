@@ -6,4 +6,6 @@ import java.util.Set;
 public interface SamplingApproach {
 
   Set<Set<String>> getConfigs(List<String> options);
+
+  String getName();
 }

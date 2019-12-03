@@ -9,6 +9,7 @@ import java.util.Set;
 public final class FeatureWiseSampling implements SamplingApproach {
 
   private static final FeatureWiseSampling INSTANCE = new FeatureWiseSampling();
+  private static final String NAME = "feature_wise";
 
   private FeatureWiseSampling() {}
 
@@ -27,5 +28,10 @@ public final class FeatureWiseSampling implements SamplingApproach {
     }
 
     return configs;
+  }
+
+  @Override
+  public String getName() {
+    return NAME;
   }
 }

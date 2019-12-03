@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.learning.model.matlab;
+package edu.cmu.cs.mvelezce.learning.generate.data;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public class StepWiseLinearModelBuilderTest {
+public class CSVDataGeneratorTest {
 
   @Test
   public void berkeleyDB_generateCSVFile_FW() throws IOException, InterruptedException {
@@ -26,8 +26,8 @@ public class StepWiseLinearModelBuilderTest {
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
 
-    StepWiseLinearModelBuilder builder =
-        new StepWiseLinearModelBuilder(programName, options, performanceEntries, samplingApproach);
-    builder.generateCSVFile();
+    CSVDataGenerator generator =
+        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+    generator.generateCSVFile();
   }
 }

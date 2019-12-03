@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.learning.model.matlab;
+package edu.cmu.cs.mvelezce.learning.generate.data;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Set;
 
-class StepWiseLinearModelBuilder {
+class CSVDataGenerator {
 
   private static final String OUTPUT_DIR = "../cc-perf-model-learning/" + Options.DIRECTORY;
 
@@ -21,7 +21,7 @@ class StepWiseLinearModelBuilder {
   private final Set<PerformanceEntry> performanceEntries;
   private final SamplingApproach samplingApproach;
 
-  StepWiseLinearModelBuilder(
+  CSVDataGenerator(
       String programName,
       List<String> options,
       Set<PerformanceEntry> performanceEntries,

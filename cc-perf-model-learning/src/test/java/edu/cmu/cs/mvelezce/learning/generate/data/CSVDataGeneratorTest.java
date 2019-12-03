@@ -15,7 +15,7 @@ import java.util.Set;
 public class CSVDataGeneratorTest {
 
   @Test
-  public void berkeleyDB_generateCSVFile_FW() throws IOException, InterruptedException {
+  public void berkeleyDB_FW() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
 

@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.learning.generate.data;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.learning.ModelBuilder;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -13,8 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 class CSVDataGenerator {
-
-  private static final String OUTPUT_DIR = "../cc-perf-model-learning/" + Options.DIRECTORY;
 
   private final String programName;
   private final List<String> options;
@@ -65,7 +64,7 @@ class CSVDataGenerator {
     }
 
     String outputDir =
-        OUTPUT_DIR
+        ModelBuilder.OUTPUT_DIR
             + "/data/java/programs/"
             + this.programName
             + "/"

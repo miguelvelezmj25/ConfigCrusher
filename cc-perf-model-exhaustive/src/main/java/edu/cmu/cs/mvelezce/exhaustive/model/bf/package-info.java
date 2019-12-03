@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @ReturnTypesAreNonNullByDefault
-package edu.cmu.cs.mvelezce.e2e.perfmodel.bf;
+package edu.cmu.cs.mvelezce.exhaustive.model.bf;
 
 import com.mijecu25.meme.utils.annotations.ReturnTypesAreNonNullByDefault;
 

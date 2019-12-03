@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.e2e.perfmodel;
+package edu.cmu.cs.mvelezce.exhaustive.model;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
@@ -11,11 +11,11 @@ import edu.cmu.cs.mvelezce.region.RegionsManager;
 
 import java.util.*;
 
-public abstract class E2EPerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
+public abstract class PerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
 
   private static final Map<JavaRegion, Set<FeatureExpr>> REGIONS_TO_DATA = new HashMap<>();
 
-  public E2EPerformanceModelBuilder(
+  public PerformanceModelBuilder(
       String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
     super(programName, options, REGIONS_TO_DATA, performanceEntries);
 

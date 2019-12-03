@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.e2e.execute.parser.E2EExecutionParser;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class FeatureWiseExecutor extends E2EExecutor {
@@ -19,18 +18,6 @@ public class FeatureWiseExecutor extends E2EExecutor {
 
   FeatureWiseExecutor(String programName, Set<Set<String>> configurations) {
     super(programName, configurations, new E2EExecutionParser(programName, OUTPUT_DIR));
-  }
-
-  static Set<Set<String>> getConfigs(List<String> options) {
-    Set<Set<String>> configs = new HashSet<>();
-
-    for (String option : options) {
-      Set<String> config = new HashSet<>();
-      config.add(option);
-      configs.add(config);
-    }
-
-    return configs;
   }
 
   @Override

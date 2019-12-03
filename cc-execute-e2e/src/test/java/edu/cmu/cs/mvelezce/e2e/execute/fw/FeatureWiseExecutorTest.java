@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.e2e.execute.fw;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class FeatureWiseExecutorTest {
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configurations = FeatureWiseExecutor.getConfigs(options);
+    Set<Set<String>> configurations = FeatureWiseSampling.getInstance().getConfigs(options);
     Executor executor = new FeatureWiseExecutor(programName, configurations);
 
     String[] args = new String[3];

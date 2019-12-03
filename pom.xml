@@ -20,6 +20,8 @@
         <module>cc-execute-e2e</module>
         <module>cc-compress</module>
         <module>cc-perf-model-exhaustive</module>
+        <module>cc-perf-model-learning</module>
+        <module>cc-approaches-sampling</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

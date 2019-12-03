@@ -17,7 +17,7 @@
         <module>cc-perf-model</module>
         <module>cc-regions-manager</module>
         <module>cc-eval</module>
-        <module>cc-execute-blackbox</module>
+        <module>cc-execute-e2e</module>
         <module>cc-compress</module>
     </modules>
     <packaging>pom</packaging>

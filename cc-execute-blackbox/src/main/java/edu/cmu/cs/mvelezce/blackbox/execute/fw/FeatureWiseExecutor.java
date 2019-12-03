@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class FeatureWiseExecutor extends BlackBoxExecutor {
 
-  private static final String OUTPUT_DIR =
+  public static final String OUTPUT_DIR =
       "../cc-execute-blackbox/" + Options.DIRECTORY + "/execute/java/programs/fw";
 
   public FeatureWiseExecutor(String programName) {

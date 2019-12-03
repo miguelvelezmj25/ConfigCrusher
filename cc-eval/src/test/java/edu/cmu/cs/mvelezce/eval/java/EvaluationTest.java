@@ -4,6 +4,7 @@ import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.blackbox.perfmodel.bf.BruteForcePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.blackbox.perfmodel.gt.GroundTruthPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
@@ -17,6 +18,21 @@ import java.util.List;
 import java.util.Set;
 
 public class EvaluationTest {
+
+  @Test
+  public void berkeleyDB_GT_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthPerformanceModelBuilder(programName);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
+  }
 
   @Test
   public void berkeleyDB_BF_Data() throws IOException, InterruptedException {

@@ -19,18 +19,15 @@ public class StepWiseLinearModelBuilderTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
 
-    SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
-    Set<Set<String>> configs = FeatureWiseSampling.getInstance().getConfigs(options);
-
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new FeatureWisePerfAggregatorProcessor(programName);
-
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
+    SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
+
     StepWiseLinearModelBuilder builder =
-        new StepWiseLinearModelBuilder(
-            programName, options, configs, performanceEntries, samplingApproach);
+        new StepWiseLinearModelBuilder(programName, options, performanceEntries, samplingApproach);
     builder.generateCSVFile();
   }
 }

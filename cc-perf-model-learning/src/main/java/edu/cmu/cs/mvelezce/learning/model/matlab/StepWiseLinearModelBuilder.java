@@ -18,24 +18,21 @@ class StepWiseLinearModelBuilder {
 
   private final String programName;
   private final List<String> options;
-  private final Set<Set<String>> configs;
   private final Set<PerformanceEntry> performanceEntries;
   private final SamplingApproach samplingApproach;
 
   StepWiseLinearModelBuilder(
       String programName,
       List<String> options,
-      Set<Set<String>> configs,
       Set<PerformanceEntry> performanceEntries,
       SamplingApproach samplingApproach) {
     this.programName = programName;
     this.options = options;
-    this.configs = configs;
     this.performanceEntries = performanceEntries;
     this.samplingApproach = samplingApproach;
   }
 
-  public void generateCSVFile() throws IOException {
+  void generateCSVFile() throws IOException {
     StringBuilder result = new StringBuilder();
 
     for (String option : this.options) {
@@ -48,26 +45,24 @@ class StepWiseLinearModelBuilder {
 
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
-    //    for(PerformanceEntryStatistic statistic : performanceEntries) {
-    //      Set<String> configuration = statistic.getConfiguration();
-    //
-    //      for(String option : options) {
-    //        if(configuration.contains(option)) {
-    //          result.append("1");
-    //        }
-    //        else {
-    //          result.append("0");
-    //        }
-    //
-    //        result.append(",");
-    //      }
-    //
-    //      double performance =
-    // statistic.getRegionsToProcessedPerformanceHumanReadable().values().iterator().next();
-    //      result.append(decimalFormat.format(performance));
-    //      result.append("\n");
-    //    }
-    //
+    for (PerformanceEntry entry : this.performanceEntries) {
+      Set<String> configuration = entry.getConfiguration();
+
+      for (String option : options) {
+        if (configuration.contains(option)) {
+          result.append("1");
+        } else {
+          result.append("0");
+        }
+
+        result.append(",");
+      }
+
+      double time =
+          Double.parseDouble(entry.getRegionsToPerfHumanReadable().values().iterator().next());
+      result.append(decimalFormat.format(time));
+      result.append("\n");
+    }
 
     String outputDir =
         OUTPUT_DIR

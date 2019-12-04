@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.learning.generate.matlab.script;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
-import edu.cmu.cs.mvelezce.learning.ModelBuilder;
+import edu.cmu.cs.mvelezce.learning.LearnedModelBuilder;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -47,7 +47,7 @@ class StepWiseLinearLearner {
 
   void generateLearningScript() throws IOException {
     String outputDir =
-        ModelBuilder.OUTPUT_DIR
+        LearnedModelBuilder.OUTPUT_DIR
             + "/matlab/script/java/programs/"
             + this.programName
             + "/"

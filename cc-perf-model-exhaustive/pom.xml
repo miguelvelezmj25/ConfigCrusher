@@ -69,24 +69,6 @@
         </dependency>
 
         <dependency>
-            <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>subtrace-explorer</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>min-configs</artifactId>
-            <version>0.2.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>
-                ${project.basedir}/../lib/min-configs-0.2.0-SNAPSHOT-jar-with-dependencies.jar
-            </systemPath>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
             <groupId>de.fosd.typechef</groupId>
             <artifactId>featureexpr</artifactId>
             <version>0.1.1-SNAPSHOT</version>
@@ -117,13 +99,6 @@
 
         <dependency>
             <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>cc-regions-manager</artifactId>
-            <version>0.2.0-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>edu.cmu.cs.mvelezce</groupId>
             <artifactId>cc-adapters</artifactId>
             <version>0.2.0-SNAPSHOT</version>
             <optional>true</optional>
@@ -140,6 +115,13 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.cmu.cs.mvelezce</groupId>
+            <artifactId>cc-perf-model-e2e</artifactId>
+            <version>0.2.0-SNAPSHOT</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

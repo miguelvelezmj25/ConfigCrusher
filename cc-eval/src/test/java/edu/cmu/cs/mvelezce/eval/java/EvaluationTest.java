@@ -7,8 +7,8 @@ import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
-import edu.cmu.cs.mvelezce.exhaustive.model.bf.BruteForcePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.exhaustive.model.gt.GroundTruthPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.exhaustive.model.bf.BruteForceExhaustiveModelBuilder;
+import edu.cmu.cs.mvelezce.exhaustive.model.gt.GroundTruthExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class EvaluationTest {
     Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
-        new GroundTruthPerformanceModelBuilder(programName);
+        new GroundTruthExhaustiveModelBuilder(programName);
     String[] args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
@@ -41,7 +41,7 @@ public class EvaluationTest {
     Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
-        new BruteForcePerformanceModelBuilder(programName);
+        new BruteForceExhaustiveModelBuilder(programName);
     String[] args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 

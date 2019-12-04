@@ -11,8 +11,8 @@ import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.idta.IDTAMultiEntryLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.constraint.ConstraintMultiEntryLocalPerformanceModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +63,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
   @Override
   protected void populateMultiEntryLocalModel(
       MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+    System.out.println("Only adding mean performance, not min, max, etc");
     UUID region = localModel.getRegion();
 
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
@@ -100,7 +101,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
     Map<FeatureExpr, Set<List<Double>>> modelToConfidenceIntervals =
         this.addConstraintEntriesCI(entry.getValue());
 
-    return new IDTAMultiEntryLocalPerformanceModel(
+    return new ConstraintMultiEntryLocalPerformanceModel(
         entry.getKey().getId(),
         model,
         modelToMins,
@@ -140,7 +141,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
       LocalPerformanceModel<FeatureExpr> localModel =
-          new IDTALocalPerformanceModel(
+          new ConstraintLocalPerformanceModel(
               readLocalModel.getRegion(),
               this.parseConstraintsToData(readLocalModel.getModel()),
               this.parseConstraintsToData(readLocalModel.getModelToMin()),

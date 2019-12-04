@@ -32,6 +32,11 @@ public final class FeatureWiseSampling implements SamplingApproach {
   }
 
   @Override
+  public Set<FeatureExpr> getLinearModelConstraints(List<String> options) {
+    return this.getConfigsAsConstraints(options);
+  }
+
+  @Override
   public Set<Set<String>> getConfigs(List<String> options) {
     Set<Set<String>> configs = new HashSet<>();
 

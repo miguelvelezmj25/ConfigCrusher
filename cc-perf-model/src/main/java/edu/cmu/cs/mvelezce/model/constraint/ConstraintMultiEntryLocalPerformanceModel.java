@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.model.idta;
+package edu.cmu.cs.mvelezce.model.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public class IDTAMultiEntryLocalPerformanceModel
+public class ConstraintMultiEntryLocalPerformanceModel
     extends MultiEntryLocalPerformanceModel<FeatureExpr> {
 
-  public IDTAMultiEntryLocalPerformanceModel(
+  public ConstraintMultiEntryLocalPerformanceModel(
       UUID region,
       Map<FeatureExpr, Set<Double>> model,
       Map<FeatureExpr, Set<Double>> modelToMins,

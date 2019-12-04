@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.model.idta;
+package edu.cmu.cs.mvelezce.model.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
@@ -7,11 +7,11 @@ import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 
 import java.util.*;
 
-public class IDTALocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
+public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
 
   private static final Map<Set<String>, FeatureExpr> CONFIG_TO_CONSTRAINT = new HashMap<>();
 
-  public IDTALocalPerformanceModel(
+  public ConstraintLocalPerformanceModel(
       UUID region,
       Map<FeatureExpr, Double> model,
       Map<FeatureExpr, Double> modelToMin,

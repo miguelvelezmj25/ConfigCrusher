@@ -105,7 +105,13 @@ public class ExecAggregator<T> {
     Map<T, Double> regionsToMax = new HashMap<>();
 
     for (Map.Entry<T, SummaryStatistics> entry : localStats.entrySet()) {
-      regionsToMax.put(entry.getKey(), entry.getValue().getMean());
+      double max = entry.getValue().getMax();
+
+      if (entry.getValue().getN() == 0) {
+        max = 0.0;
+      }
+
+      regionsToMax.put(entry.getKey(), max);
     }
 
     return regionsToMax;
@@ -115,7 +121,13 @@ public class ExecAggregator<T> {
     Map<T, Double> regionsToPerf = new HashMap<>();
 
     for (Map.Entry<T, SummaryStatistics> entry : localStats.entrySet()) {
-      regionsToPerf.put(entry.getKey(), entry.getValue().getMean());
+      double mean = entry.getValue().getMean();
+
+      if (entry.getValue().getN() == 0) {
+        mean = 0.0;
+      }
+
+      regionsToPerf.put(entry.getKey(), mean);
     }
 
     return regionsToPerf;
@@ -167,7 +179,13 @@ public class ExecAggregator<T> {
     Map<T, Double> regionsToMin = new HashMap<>();
 
     for (Map.Entry<T, SummaryStatistics> entry : localStats.entrySet()) {
-      regionsToMin.put(entry.getKey(), entry.getValue().getMean());
+      double min = entry.getValue().getMin();
+
+      if (entry.getValue().getN() == 0) {
+        min = 0.0;
+      }
+
+      regionsToMin.put(entry.getKey(), min);
     }
 
     return regionsToMin;

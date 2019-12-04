@@ -9,6 +9,8 @@ public interface SamplingApproach {
 
   Set<FeatureExpr> getConfigsAsConstraints(List<String> options);
 
+  Set<FeatureExpr> getLinearModelConstraints(List<String> options);
+
   Set<Set<String>> getConfigs(List<String> options);
 
   String getName();

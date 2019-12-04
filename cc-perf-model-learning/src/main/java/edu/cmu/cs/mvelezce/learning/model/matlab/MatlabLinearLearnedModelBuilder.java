@@ -1,20 +1,20 @@
 package edu.cmu.cs.mvelezce.learning.model.matlab;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
-import edu.cmu.cs.mvelezce.learning.BaseLearnedModelBuilder;
+import edu.cmu.cs.mvelezce.learning.BaseLinearLearnedModelBuilder;
 
 import java.util.List;
 
-public class MatlabLearnedModelBuilder extends BaseLearnedModelBuilder {
+public class MatlabLinearLearnedModelBuilder extends BaseLinearLearnedModelBuilder {
 
-  MatlabLearnedModelBuilder(
+  MatlabLinearLearnedModelBuilder(
       String programName, List<String> options, SamplingApproach samplingApproach) {
     super(programName, options, samplingApproach);
   }
 
   @Override
   public String outputDir() {
-    return BaseLearnedModelBuilder.OUTPUT_DIR
+    return BaseLinearLearnedModelBuilder.OUTPUT_DIR
         + "/matlab/model/java/programs/"
         + this.getSamplingApproach().getName()
         + "/"

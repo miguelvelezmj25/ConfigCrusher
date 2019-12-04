@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
-public class MatlabLearnedModelBuilderTest {
+public class MatlabLinearLearnedModelBuilderTest {
 
   @Test
   public void berkeleyDB_FW() throws IOException, InterruptedException {
@@ -18,7 +18,7 @@ public class MatlabLearnedModelBuilderTest {
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
 
     String[] args = new String[2];
     args[0] = "-delres";

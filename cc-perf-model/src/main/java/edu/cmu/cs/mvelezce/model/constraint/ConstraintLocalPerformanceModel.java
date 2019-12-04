@@ -33,7 +33,7 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
         modelToDiffHumanReadable);
   }
 
-  private static FeatureExpr getConfigAsConstraint(Set<String> config, List<String> options) {
+  protected static FeatureExpr getConfigAsConstraint(Set<String> config, List<String> options) {
     FeatureExpr configAsConstraint = CONFIG_TO_CONSTRAINT.get(config);
 
     if (configAsConstraint == null) {
@@ -48,7 +48,6 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
   public double evaluate(Set<String> config, List<String> options) {
     FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
     double time = 0;
-    int entriesCovered = 0;
 
     for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
       if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
@@ -56,13 +55,8 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
       }
 
       time += entry.getValue();
-      entriesCovered++;
     }
 
-    if (entriesCovered == 0) {
-      return time;
-    }
-
-    return time / entriesCovered;
+    return time;
   }
 }

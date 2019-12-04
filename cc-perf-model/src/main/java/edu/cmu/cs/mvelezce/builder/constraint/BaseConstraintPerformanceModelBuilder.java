@@ -159,7 +159,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
     return new PerformanceModel<>(localModels);
   }
 
-  private Map<FeatureExpr, String> parseConstraintsToHumanReadableData(
+  protected Map<FeatureExpr, String> parseConstraintsToHumanReadableData(
       Map<String, String> localHumanReadableData) {
     Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
 
@@ -171,7 +171,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
     return constraintsToHumanReadableData;
   }
 
-  private Map<FeatureExpr, Double> parseConstraintsToData(Map<String, Double> localModel) {
+  protected Map<FeatureExpr, Double> parseConstraintsToData(Map<String, Double> localModel) {
     Map<FeatureExpr, Double> constraintsToData = new HashMap<>();
 
     for (Map.Entry<String, Double> entry : localModel.entrySet()) {

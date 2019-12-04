@@ -3,12 +3,15 @@ package edu.cmu.cs.mvelezce.eval.java;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
+import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.model.bf.BruteForceExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.exhaustive.model.gt.GroundTruthExhaustiveModelBuilder;
+import edu.cmu.cs.mvelezce.learning.model.matlab.MatlabLinearLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
@@ -69,9 +72,26 @@ public class EvaluationTest {
   }
 
   @Test
-  public void berkeleyDB_Compare_IDTA_BF() throws IOException {
+  public void berkeleyDB_FW_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(Evaluation.FW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
-    eval.compareApproaches(Evaluation.IDTA, Evaluation.BF);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
   }
 }

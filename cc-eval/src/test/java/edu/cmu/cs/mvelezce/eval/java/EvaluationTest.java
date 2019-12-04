@@ -96,6 +96,13 @@ public class EvaluationTest {
   }
 
   @Test
+  public void berkeleyDB_Compare_BF_GT() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.BF, Evaluation.GT);
+  }
+
+  @Test
   public void berkeleyDB_Compare_FW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);

@@ -18,6 +18,11 @@ public final class PairWiseSampling implements SamplingApproach {
   }
 
   @Override
+  public String getLinearModelType() {
+    return "interactions";
+  }
+
+  @Override
   public Set<FeatureExpr> getConfigsAsConstraints(List<String> options) {
     throw new UnsupportedOperationException("implement");
     //    Set<FeatureExpr> configsAsConstraints = new HashSet<>();

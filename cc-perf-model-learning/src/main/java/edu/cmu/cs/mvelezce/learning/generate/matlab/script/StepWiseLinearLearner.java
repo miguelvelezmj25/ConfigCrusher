@@ -98,7 +98,9 @@ public class StepWiseLinearLearner {
             + (this.options.size() + 1)
             + "));"
             + "\n"
-            + "model = stepwiselm(x_train, y_train, 'linear');"
+            + "model = stepwiselm(x_train, y_train, '"
+            + this.samplingApproach.getLinearModelType()
+            + "');"
             + "\n"
             + "\n"
             + "mkdir(\'"

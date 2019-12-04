@@ -7,6 +7,8 @@ import java.util.Set;
 
 public interface SamplingApproach {
 
+  String getLinearModelType();
+
   Set<FeatureExpr> getConfigsAsConstraints(List<String> options);
 
   Set<FeatureExpr> getLinearModelConstraints(List<String> options);

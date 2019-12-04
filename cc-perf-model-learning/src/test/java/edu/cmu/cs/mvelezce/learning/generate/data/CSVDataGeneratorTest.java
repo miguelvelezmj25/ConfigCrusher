@@ -4,7 +4,9 @@ import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrdere
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
+import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.fw.FeatureWisePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.pw.PairWisePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -25,6 +27,23 @@ public class CSVDataGeneratorTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
+
+    CSVDataGenerator generator =
+        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void berkeleyDB_PW() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new PairWisePerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
 
     CSVDataGenerator generator =
         new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);

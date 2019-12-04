@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.fw;
 
+import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 
 import java.util.HashSet;
@@ -15,6 +17,18 @@ public final class FeatureWiseSampling implements SamplingApproach {
 
   public static FeatureWiseSampling getInstance() {
     return INSTANCE;
+  }
+
+  @Override
+  public Set<FeatureExpr> getConfigsAsConstraints(List<String> options) {
+    Set<FeatureExpr> configsAsConstraints = new HashSet<>();
+
+    for (String option : options) {
+      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
+      configsAsConstraints.add(constraint);
+    }
+
+    return configsAsConstraints;
   }
 
   @Override

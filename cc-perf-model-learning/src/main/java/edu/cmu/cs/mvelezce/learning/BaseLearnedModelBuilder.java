@@ -1,19 +1,43 @@
 package edu.cmu.cs.mvelezce.learning;
 
+import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
-import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LearnedModelBuilder extends E2EModelBuilder {
+public abstract class BaseLearnedModelBuilder extends E2EModelBuilder {
 
   public static final String OUTPUT_DIR = "../cc-perf-model-learning/" + Options.DIRECTORY;
 
-  public LearnedModelBuilder(
-      String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, performanceEntries);
+  private final SamplingApproach samplingApproach;
+
+  public BaseLearnedModelBuilder(
+      String programName, List<String> options, SamplingApproach samplingApproach) {
+    super(programName, options, new HashSet<>());
+
+    this.samplingApproach = samplingApproach;
+    this.addProgramRegionToData();
+  }
+
+  private void addProgramRegionToData() {
+    Set<FeatureExpr> constraints = this.samplingApproach.getConfigsAsConstraints(this.getOptions());
+    E2EModelBuilder.REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, constraints);
+  }
+
+  @Override
+  protected void populateMultiEntryLocalModel(
+      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+    throw new UnsupportedOperationException("implement");
+  }
+
+  protected SamplingApproach getSamplingApproach() {
+    return samplingApproach;
   }
 
   //  public static void model() {
@@ -57,9 +81,4 @@ public class LearnedModelBuilder extends E2EModelBuilder {
   //    //
   //    //        return learnedModel;
   //  }
-
-  @Override
-  public String outputDir() {
-    throw new UnsupportedOperationException("pick output based on using matlab? maybe this class should be abstract?");
-  }
 }

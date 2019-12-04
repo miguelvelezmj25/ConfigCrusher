@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.learning.generate.data;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.learning.LearnedModelBuilder;
+import edu.cmu.cs.mvelezce.learning.BaseLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -64,7 +64,7 @@ class CSVDataGenerator {
     }
 
     String outputDir =
-        LearnedModelBuilder.OUTPUT_DIR
+        BaseLearnedModelBuilder.OUTPUT_DIR
             + "/data/java/programs/"
             + this.programName
             + "/"

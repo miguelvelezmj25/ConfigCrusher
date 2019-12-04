@@ -12,7 +12,7 @@ import java.util.*;
 
 public abstract class E2EModelBuilder extends BaseConstraintPerformanceModelBuilder {
 
-  private static final Map<JavaRegion, Set<FeatureExpr>> REGIONS_TO_DATA = new HashMap<>();
+  protected static final Map<JavaRegion, Set<FeatureExpr>> REGIONS_TO_DATA = new HashMap<>();
 
   public E2EModelBuilder(
       String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {

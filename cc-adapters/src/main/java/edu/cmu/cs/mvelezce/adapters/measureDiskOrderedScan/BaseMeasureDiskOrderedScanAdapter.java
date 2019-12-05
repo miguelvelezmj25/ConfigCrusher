@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.adapters.BaseAdapter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,20 +54,20 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
   }
 
   private void clean(String dir) throws IOException, InterruptedException {
-    ProcessBuilder builder = new ProcessBuilder();
-
-    List<String> commandList = new ArrayList<>();
-    commandList.add("sudo");
-    commandList.add("./clean.sh");
-    builder.command(commandList);
-    builder.directory(new File(dir));
-
-    Process process = builder.start();
-
-    Executor.processOutput(process);
-    Executor.processError(process);
-
-    process.waitFor();
+    //    ProcessBuilder builder = new ProcessBuilder();
+    //
+    //    List<String> commandList = new ArrayList<>();
+    //    commandList.add("sudo");
+    //    commandList.add("./clean.sh");
+    //    builder.command(commandList);
+    //    builder.directory(new File(dir));
+    //
+    //    Process process = builder.start();
+    //
+    //    Executor.processOutput(process);
+    //    Executor.processError(process);
+    //
+    //    process.waitFor();
   }
 
   private void makeDir() throws IOException, InterruptedException {

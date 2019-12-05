@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.pw;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import org.apache.commons.math3.util.Combinations;
 
@@ -37,8 +38,33 @@ public final class PairWiseSampling implements SamplingApproach {
 
   @Override
   public Set<FeatureExpr> getLinearModelConstraints(List<String> options) {
-    throw new UnsupportedOperationException("implement");
-    //    return this.getConfigsAsConstraints(options);
+    Set<FeatureExpr> constraints = new HashSet<>();
+
+    for (String option : options) {
+      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
+      constraints.add(constraint);
+    }
+
+    Set<List<String>> pairs = this.getPairs(options);
+
+    for (List<String> pair : pairs) {
+      Iterator<String> pairIter = pair.iterator();
+      StringBuilder stringBuilder = new StringBuilder();
+
+      while (pairIter.hasNext()) {
+        String term = pairIter.next();
+        stringBuilder.append(term);
+
+        if (pairIter.hasNext()) {
+          stringBuilder.append(" && ");
+        }
+      }
+
+      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(stringBuilder.toString());
+      constraints.add(constraint);
+    }
+
+    return constraints;
   }
 
   @Override

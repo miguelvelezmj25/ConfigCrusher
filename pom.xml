@@ -23,6 +23,7 @@
         <module>cc-perf-model-learning</module>
         <module>cc-approaches-sampling</module>
         <module>cc-perf-model-e2e</module>
+        <module>cc-scripts</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

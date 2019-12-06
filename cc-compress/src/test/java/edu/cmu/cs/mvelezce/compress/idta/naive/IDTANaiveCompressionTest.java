@@ -30,6 +30,8 @@ public class IDTANaiveCompressionTest {
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
-    compression.analyze(args);
+    Set<Set<String>> configs = compression.analyze(args);
+
+    System.out.println(configs.size() + " to sample");
   }
 }

@@ -63,6 +63,10 @@ public class ConfigHelper {
   //        }
   //    }
 
+  public static Set<Set<String>> getRandomConfigs(List<String> options, int size) {
+    return getRandomConfigs(options, size, new HashSet<>());
+  }
+
   public static Set<Set<String>> getRandomConfigs(
       List<String> options, int size, Set<Set<String>> excludeConfigs) {
     Set<Set<String>> configs = new HashSet<>(size);

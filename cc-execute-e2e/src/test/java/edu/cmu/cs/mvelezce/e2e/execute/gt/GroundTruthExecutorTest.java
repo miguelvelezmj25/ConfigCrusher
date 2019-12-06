@@ -15,7 +15,8 @@ public class GroundTruthExecutorTest {
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
+    Set<Set<String>> configurations = ConfigHelper.getRandomConfigs(options, 1_000);
+    System.out.println("Sampling " + configurations.size() + " configs");
     Executor executor = new GroundTruthExecutor(programName, configurations);
 
     String[] args = new String[3];

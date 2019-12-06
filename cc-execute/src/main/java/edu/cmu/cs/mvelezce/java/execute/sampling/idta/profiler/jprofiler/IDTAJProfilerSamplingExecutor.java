@@ -14,6 +14,9 @@ import java.util.*;
 
 public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamplingPerfExecution> {
 
+  public static final String MAC_OS_X = "Mac OS X";
+  public static final String LINUX = "Linux";
+
   public static final String OUTPUT_DIR =
       "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/sampling/jprofiler";
 
@@ -26,6 +29,10 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
         programName,
         configurations,
         new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR));
+  }
+
+  public static String getOS() {
+    return System.getProperty("os.name");
   }
 
   @Override

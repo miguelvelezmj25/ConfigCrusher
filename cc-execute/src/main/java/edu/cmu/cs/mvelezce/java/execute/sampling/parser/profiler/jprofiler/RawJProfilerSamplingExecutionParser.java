@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
+import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.JProfilerSnapshotEntry;
@@ -17,7 +18,8 @@ import java.util.*;
 public class RawJProfilerSamplingExecutionParser
     extends BaseRawExecutionParser<RawJProfilerSamplingPerfExecution> {
 
-  private static final String JPROFILER_EXPORT_CMD =
+  private static final String JPROFILER_EXPORT_CMD_UBUNTU = "/home/miguel/jprofiler10/bin/jpexport";
+  private static final String JPROFILER_EXPORT_CMD_OSX =
       "/Applications/JProfiler 10.app/Contents/Resources/app/bin/jpexport";
   private static final String JPROFILER_SNAPSHOT_NAME = "snapshot";
   private static final String JPROFILER_SNAPSHOT_FILE = JPROFILER_SNAPSHOT_NAME + ".jps";
@@ -162,7 +164,7 @@ public class RawJProfilerSamplingExecutionParser
     List<String> commandList = new ArrayList<>();
 
     new ArrayList<>();
-    commandList.add(JPROFILER_EXPORT_CMD);
+    commandList.add(this.getExportCmd());
     commandList.add(JPROFILER_SNAPSHOT_FILE);
     commandList.add("HotSpots");
     commandList.add("-expandbacktraces=true");
@@ -170,6 +172,19 @@ public class RawJProfilerSamplingExecutionParser
     commandList.add(JPROFILER_SNAPSHOT_NAME + ".xml");
 
     return commandList;
+  }
+
+  private String getExportCmd() {
+    String os = IDTAJProfilerSamplingExecutor.getOS();
+
+    switch (os) {
+      case IDTAJProfilerSamplingExecutor.LINUX:
+        return JPROFILER_EXPORT_CMD_UBUNTU;
+      case IDTAJProfilerSamplingExecutor.MAC_OS_X:
+        return JPROFILER_EXPORT_CMD_OSX;
+      default:
+        throw new RuntimeException("Do not have an agent path for " + os);
+    }
   }
 
   @Override

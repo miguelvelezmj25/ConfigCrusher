@@ -75,11 +75,13 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
 
         for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
             localModel.getModel().entrySet()) {
-          if (!constraint.implies(constraintToTimes.getKey()).isTautology()) {
+          if (!constraint.equiv(constraintToTimes.getKey()).isTautology()) {
             continue;
           }
 
           constraintToTimes.getValue().add(Double.parseDouble(coefs.get(i)) * 1E9);
+
+          break;
         }
       }
     } catch (IOException ioe) {

@@ -40,6 +40,10 @@ public final class PairWiseSampling implements SamplingApproach {
   public Set<FeatureExpr> getLinearModelConstraints(List<String> options) {
     Set<FeatureExpr> constraints = new HashSet<>();
 
+    if (options.isEmpty()) {
+      return constraints;
+    }
+
     for (String option : options) {
       FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
       constraints.add(constraint);

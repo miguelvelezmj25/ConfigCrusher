@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrdere
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
+import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
@@ -89,6 +90,23 @@ public class EvaluationTest {
   }
 
   @Test
+  public void berkeleyDB_PW_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
@@ -107,5 +125,12 @@ public class EvaluationTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
     eval.compareApproaches(Evaluation.FW, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_PW_GT() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
   }
 }

@@ -28,9 +28,11 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
   @Override
   protected void populateMultiEntryLocalModel(
       MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-    this.validateOneConfigCoversOneConstraint(localModel);
-
-    super.populateMultiEntryLocalModel(localModel);
+    throw new UnsupportedOperationException(
+        "Separate these steps into two executions. Otherwise, it takes too long");
+    //    this.validateOneConfigCoversOneConstraint(localModel);
+    //
+    //    super.populateMultiEntryLocalModel(localModel);
   }
 
   @Override

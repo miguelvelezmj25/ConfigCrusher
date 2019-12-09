@@ -55,6 +55,8 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
       }
 
       time += entry.getValue();
+
+      break;
     }
 
     return time;

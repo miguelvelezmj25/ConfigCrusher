@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
+import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.model.bf.BruteForceExhaustiveModelBuilder;
@@ -26,14 +27,16 @@ public class EvaluationTest {
   @Test
   public void berkeleyDB_GT_Data() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
         new GroundTruthExhaustiveModelBuilder(programName);
-    String[] args = new String[0];
+    args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
     eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }

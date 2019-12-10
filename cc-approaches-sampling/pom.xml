@@ -34,13 +34,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
             <groupId>de.fosd.typechef</groupId>
             <artifactId>featureexpr</artifactId>
             <version>0.1.1-SNAPSHOT</version>

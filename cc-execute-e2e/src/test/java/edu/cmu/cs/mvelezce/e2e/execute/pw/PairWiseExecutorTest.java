@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.e2e.execute.pw;
 
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
-import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
+import edu.cmu.cs.mvelezce.compress.pw.PWCompression;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class PairWiseExecutorTest {
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseCompression compression = new GTCompression(programName);
+    BaseCompression compression = new PWCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
     Executor executor = new PairWiseExecutor(programName, configs);

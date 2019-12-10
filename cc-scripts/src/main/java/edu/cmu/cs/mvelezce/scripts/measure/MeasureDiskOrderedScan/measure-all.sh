@@ -27,17 +27,17 @@ CC_ROOT=$(pwd)
 #echo ""
 #sleep 60s
 #cd ../ || exit
-
-cd ./cc-execute-e2e/ || exit
-echo ""
-echo "Running Berkeley DB FW"
-echo ""
-mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.fw.FeatureWiseExecutorTest#berkeleyDb
-echo ""
-echo "Done with Berkeley DB FW"
-echo ""
-sleep 60s
-cd ../ || exit
+#
+#cd ./cc-execute-e2e/ || exit
+#echo ""
+#echo "Running Berkeley DB FW"
+#echo ""
+#mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.fw.FeatureWiseExecutorTest#berkeleyDb
+#echo ""
+#echo "Done with Berkeley DB FW"
+#echo ""
+#sleep 60s
+#cd ../ || exit
 
 cd ./cc-execute-e2e/ || exit
 echo ""

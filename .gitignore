@@ -230,3 +230,4 @@ vignettes/*.pdf
 */data.ser
 */*.jps
 /cc-execute/snapshot.xml
+/cc-execute-e2e/index/

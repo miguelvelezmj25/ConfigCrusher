@@ -21,7 +21,7 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
   public static final String INSTRUMENTED_CLASS_PATH =
       "../performance-mapper-evaluation/instrumented/lucene/lucene/target/classes";
   public static final String ORIGINAL_CLASS_PATH =
-      "./performance-mapper-evaluation/original/lucene/lucene/target/classes";
+      "../performance-mapper-evaluation/original/lucene/lucene/target/classes";
 
   private static final String INDEX_DIR = "index";
   private static final String[] OPTIONS = {
@@ -41,6 +41,8 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
         BaseIndexFilesAdapter.PROGRAM_NAME,
         BaseIndexFilesAdapter.MAIN_CLASS,
         BaseIndexFilesAdapter.getListOfOptions());
+
+    System.err.println("Try other analyzer");
   }
 
   public static List<String> getListOfOptions() {

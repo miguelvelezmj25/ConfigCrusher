@@ -1,6 +1,6 @@
 train = readtable('../../../../../../data/java/programs/MeasureDiskOrderedScan/feature_wise/feature_wise.csv');
-x_train = table2array(train(:,1:5));
-y_train = table2array(train(:,6:6));
+x_train = table2array(train(:,1:15));
+y_train = table2array(train(:,16:16));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise');

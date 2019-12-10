@@ -22,13 +22,7 @@ public abstract class BaseCompression extends BaseAnalysis<Set<Set<String>>> {
 
   @Override
   public void writeToFile(Set<Set<String>> results) throws IOException {
-    String outputFile =
-        this.outputDir()
-            + "/"
-            + this.getProgramName()
-            + "/"
-            + this.getProgramName()
-            + Options.DOT_JSON;
+    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 

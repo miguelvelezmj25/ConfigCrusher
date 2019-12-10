@@ -11,20 +11,27 @@ import java.util.List;
 // https://cwiki.apache.org/confluence/display/LUCENE/ImproveIndexingSpeed
 public class BaseIndexFilesAdapter extends BaseAdapter {
 
-  public static final String PROGRAM_NAME = "indexFiles";
+  public static final String PROGRAM_NAME = "IndexFiles";
   public static final String MAIN_CLASS = "org.apache.lucene.demo.IndexFiles";
-  //  public static final String ROOT_PACKAGE = "org.apache.lucene";
-  //  public static final String ORIGINAL_CLASS_PATH =
-  // "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+  public static final String ROOT_PACKAGE = "org.apache.lucene";
+  public static final String ORIGINAL_ROOT_DIR =
+      "../performance-mapper-evaluation/original/lucene/lucene";
   public static final String INSTRUMENTED_DIR_PATH =
       "../performance-mapper-evaluation/instrumented/lucene/lucene";
   public static final String INSTRUMENTED_CLASS_PATH =
       "../performance-mapper-evaluation/instrumented/lucene/lucene/target/classes";
+  public static final String ORIGINAL_CLASS_PATH =
+      "./performance-mapper-evaluation/original/lucene/lucene/target/classes";
 
   private static final String INDEX_DIR = "index";
   private static final String[] OPTIONS = {
-    //    "MAX_BUFFERED_DOCS", "MERGE_SCHEDULER", "MERGE_POLICY", "COMMIT_ON_CLOSE"
-    "CHECK_PENDING_FLUSH_UPDATE", "MERGE_SCHEDULER", "READER_POOLING", "COMMIT_ON_CLOSE"
+    "RAM_BUFFER_SIZE_MB",
+    "MERGE_POLICY",
+    "MERGE_SCHEDULER",
+    "COMMIT_ON_CLOSE",
+    "CHECK_PENDING_FLUSH_UPDATE",
+    "READER_POOLING",
+    "MAX_BUFFERED_DOCS"
   };
 
   public BaseIndexFilesAdapter() {

@@ -51,6 +51,7 @@ public abstract class BaseExecutor<T> implements Executor {
   @Override
   public void executeIteration(int iteration) throws InterruptedException, IOException {
     ExecutorAdapter adapter = this.getExecutorAdapter();
+    System.out.println("Executing " + this.configurations.size() + " configs");
 
     for (Set<String> configuration : this.configurations) {
       adapter.execute(configuration);

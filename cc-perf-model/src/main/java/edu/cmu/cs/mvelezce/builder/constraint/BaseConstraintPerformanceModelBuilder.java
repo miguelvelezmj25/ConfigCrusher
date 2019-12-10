@@ -1,21 +1,14 @@
 package edu.cmu.cs.mvelezce.builder.constraint;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.constraint.ConstraintMultiEntryLocalPerformanceModel;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public abstract class BaseConstraintPerformanceModelBuilder
@@ -129,34 +122,6 @@ public abstract class BaseConstraintPerformanceModelBuilder
     }
 
     return model;
-  }
-
-  @Override
-  public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-
-    PerformanceModel<String> readModel =
-        mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
-    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
-
-    for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
-          new ConstraintLocalPerformanceModel(
-              readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()));
-      localModels.add(localModel);
-    }
-
-    return new PerformanceModel<>(localModels);
   }
 
   protected Map<FeatureExpr, String> parseConstraintsToHumanReadableData(

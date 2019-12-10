@@ -7,7 +7,7 @@ import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 
 import java.util.*;
 
-public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
+public abstract class ConstraintLocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
 
   private static final Map<Set<String>, FeatureExpr> CONFIG_TO_CONSTRAINT = new HashMap<>();
 
@@ -43,22 +43,5 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
     }
 
     return configAsConstraint;
-  }
-
-  public double evaluate(Set<String> config, List<String> options) {
-    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    double time = 0;
-
-    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
-      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-        continue;
-      }
-
-      time += entry.getValue();
-
-      break;
-    }
-
-    return time;
   }
 }

@@ -1,16 +1,15 @@
-package edu.cmu.cs.mvelezce.model.idta;
+package edu.cmu.cs.mvelezce.learning.model.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.MinConfigsGenerator;
+import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-public class IDTALocalPerformanceModel extends ConstraintLocalPerformanceModel {
+public class LearnedLocalPerformanceModel extends ConstraintLocalPerformanceModel {
 
-  public IDTALocalPerformanceModel(
+  public LearnedLocalPerformanceModel(
       UUID region,
       Map<FeatureExpr, Double> model,
       Map<FeatureExpr, Double> modelToMin,
@@ -34,10 +33,8 @@ public class IDTALocalPerformanceModel extends ConstraintLocalPerformanceModel {
 
   @Override
   public double evaluate(Set<String> config, List<String> options) {
-    FeatureExpr configAsConstraint =
-        ConstraintLocalPerformanceModel.getConfigAsConstraint(config, options);
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
     double time = 0;
-    int entriesCovered = 0;
 
     for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
       if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
@@ -45,13 +42,8 @@ public class IDTALocalPerformanceModel extends ConstraintLocalPerformanceModel {
       }
 
       time += entry.getValue();
-      entriesCovered++;
     }
 
-    if (entriesCovered == 0) {
-      return time;
-    }
-
-    return time / entriesCovered;
+    return Math.max(time, 0.0);
   }
 }

@@ -11,9 +11,8 @@ import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
 import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
-import edu.cmu.cs.mvelezce.exhaustive.model.bf.BruteForceExhaustiveModelBuilder;
-import edu.cmu.cs.mvelezce.exhaustive.model.gt.GroundTruthExhaustiveModelBuilder;
-import edu.cmu.cs.mvelezce.learning.model.matlab.MatlabLinearLearnedModelBuilder;
+import edu.cmu.cs.mvelezce.exhaustive.builder.gt.GroundTruthExhaustiveModelBuilder;
+import edu.cmu.cs.mvelezce.learning.builder.model.matlab.MatlabLinearLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
@@ -43,17 +42,18 @@ public class EvaluationTest {
 
   @Test
   public void berkeleyDB_BF_Data() throws IOException, InterruptedException {
-    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
-
-    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
-        new BruteForceExhaustiveModelBuilder(programName);
-    String[] args = new String[0];
-    PerformanceModel<FeatureExpr> model = builder.analyze(args);
-
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
+    throw new UnsupportedOperationException("Get the gt configs to predict");
+//    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+//    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+//    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+//
+//    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+//        new BruteForceExhaustiveModelBuilder(programName);
+//    String[] args = new String[0];
+//    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+//
+//    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+//    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
   }
 
   @Test
@@ -81,11 +81,14 @@ public class EvaluationTest {
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
     Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
-    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
         new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
-    String[] args = new String[0];
+    args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
@@ -98,11 +101,14 @@ public class EvaluationTest {
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
     Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
-    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
         new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
-    String[] args = new String[0];
+    args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);

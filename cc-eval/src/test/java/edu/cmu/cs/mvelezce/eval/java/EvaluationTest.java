@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.eval.java;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
@@ -43,17 +44,17 @@ public class EvaluationTest {
   @Test
   public void berkeleyDB_BF_Data() throws IOException, InterruptedException {
     throw new UnsupportedOperationException("Get the gt configs to predict");
-//    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-//    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-//    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
-//
-//    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
-//        new BruteForceExhaustiveModelBuilder(programName);
-//    String[] args = new String[0];
-//    PerformanceModel<FeatureExpr> model = builder.analyze(args);
-//
-//    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-//    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
+    //    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    //    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    //    Set<Set<String>> configs = ConfigHelper.getConfigurations(options);
+    //
+    //    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+    //        new BruteForceExhaustiveModelBuilder(programName);
+    //    String[] args = new String[0];
+    //    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+    //
+    //    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    //    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
   }
 
   @Test
@@ -141,5 +142,22 @@ public class EvaluationTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
     eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+  }
+
+  @Test
+  public void lucene_GT_Data() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }
 }

@@ -37,9 +37,9 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
       MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
     throw new UnsupportedOperationException(
         "Separate these steps into two executions. Otherwise, it takes too long");
-    //    this.validateOneConfigCoversOneConstraint(localModel);
+    //        this.validateOneConfigCoversOneConstraint(localModel);
     //
-    //    super.populateMultiEntryLocalModel(localModel);
+    //        super.populateMultiEntryLocalModel(localModel);
   }
 
   @Override
@@ -72,6 +72,6 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR + "/" + this.getProgramName();
   }
 }

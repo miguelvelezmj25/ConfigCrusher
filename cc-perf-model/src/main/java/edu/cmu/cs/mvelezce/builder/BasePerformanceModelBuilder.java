@@ -68,13 +68,7 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
   @Override
   public void writeToFile(PerformanceModel<RD> results) throws IOException {
-    String outputFile =
-        this.outputDir()
-            + "/"
-            + this.getProgramName()
-            + "/"
-            + this.getProgramName()
-            + Options.DOT_JSON;
+    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 

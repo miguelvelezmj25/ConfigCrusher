@@ -62,6 +62,6 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR + "/" + this.getProgramName();
   }
 }

@@ -1,4 +1,4 @@
-ConfigCrusher: White-Box Performance Analysis for Configurable Systems
+ConfigCrusher: Towards White-Box Performance Analysis for Configurable Systems
 =========
 
 This repo contains all material (implementations of ConfigCrusher and state-of-the-art black-box and white-box approaches, data, scripts, results, etc.) of our novel white-box performance analysis and empirical evaluation to state-of-the-art approaches.
@@ -6,12 +6,13 @@ This research shows the benefits and potential of our white-box analysis to effi
 
 ## Abstract
 
-In modern configurable systems, we are often interested in knowing how configuration options influence the performance of the system.
-Several approaches exist to obtain this information, but they usually require a large number of samples to make accurate predictions, and some impose limitations on the systems that they can analyze.
-This paper proposes ConfigCrusher, a new white-box performance analysis approach for configurable systems.
-ConfigCrusher employs a static taint analysis to identify how configuration options may influence control-flow decisions (considering control-flow and data-flow dependencies) and instruments code regions corresponding to these decisions to dynamically analyze the influence of options on the regions’ performance.
-Our evaluation using 10 real-world configurable systems shows that ConfigCrusher is more efficient at building performance models that are similar to or more accurate than current state-of-the-art black-box and white-box approaches.
-Overall, this paper showcases the benefits and potential of our white-box performance analysis to outperform other approaches.
+In configurable software systems, stakeholders are often interested in knowing how configuration options influence the performance of a system to facilitate, for example, the debugging and optimization processes of these systems.
+There are several black-box approaches to obtain this information, but they either sample the system end-to-end with a large number of configurations to make accurate predictions or miss important performance-influencing interactions when sampling few configurations.
+In addition, these approaches cannot pinpoint the parts of a program that are responsible for performance differences among configurations.
+This paper proposes ConfigCrusher, a white-box performance analysis that inspects the implementation of a system to guide the performance analysis and exploits several insights about configurable systems in the process.
+ConfigCrusher employs a static data-flow analysis to identify how configuration options may influence control-flow decisions and instruments code regions corresponding to these decisions to dynamically analyze the influence of configuration options on the regions' performance.
+Our evaluation shows the feasibility of our white-box approach to more efficiently build performance models that are similar to or more accurate than current state-of-the-art approaches on 10 configurable systems.
+Overall, we showcase the benefits of white-box performance analyses and their potential to outperform black-box approaches and provide additional information for analyzing configurable systems.
  
 ## Supplementary material
 

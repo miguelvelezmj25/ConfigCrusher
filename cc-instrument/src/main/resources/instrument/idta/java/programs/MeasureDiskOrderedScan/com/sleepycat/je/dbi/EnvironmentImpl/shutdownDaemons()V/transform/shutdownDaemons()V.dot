@@ -1,30 +1,30 @@
 digraph shutdownDaemons {
 node [shape=record];
-529141716 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2331 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statCapture : Lcom/sleepycat/je/statcap/StatCapture;\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.shutdown ()V\lL5\lLINENUMBER 2333 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statSynchronizer : Ljava/lang/Object;\lDUP\lASTORE 1\lMONITORENTER\l"];
-1877392777 [label="L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lMONITOREXIT\l"];
-551418638 [label="L3\lALOAD 2\lATHROW\l"];
-1125601031 [label="L9\lLINENUMBER 2366 L9\lFRAME APPEND [java/lang/Object]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.shutdown ()V\lL13\lLINENUMBER 2367 L13\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.shutdown ()V\l"];
-1443702180 [label="L16\lLINENUMBER 2373 L16\lFRAME SAME\lRETURN\lL17\l"];
-855552737 [label="L0\lLINENUMBER 2335 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.inCompressor : Lcom/sleepycat/je/incomp/INCompressor;\lINVOKEVIRTUAL com/sleepycat/je/incomp/INCompressor.shutdown ()V\lL6\lLINENUMBER 2341 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.shutdown ()V\lL7\lLINENUMBER 2342 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.checkpointer : Lcom/sleepycat/je/recovery/Checkpointer;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.shutdown ()V\lL8\lLINENUMBER 2351 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.sharedCache : Z\lIFEQ L9\l"];
-1136459672 [label="L1\lGOTO L16\l"];
-1735601230 [label="L10\lLINENUMBER 2363 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.removeSharedCacheEnv (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL11\lLINENUMBER 2364 L11\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.clearCache (Lcom/sleepycat/je/dbi/EnvironmentImpl;)J\lPOP2\lGOTO L12\l"];
-432515097 [label="L12\lLINENUMBER 2370 L12\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.logFlusher : Lcom/sleepycat/je/log/LogFlusher;\lINVOKEVIRTUAL com/sleepycat/je/log/LogFlusher.shutdown ()V\lL14\lLINENUMBER 2371 L14\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.dataVerifier : Lcom/sleepycat/je/util/verify/DataVerifier;\lINVOKEVIRTUAL com/sleepycat/je/util/verify/DataVerifier.shutdown ()V\lL15\lLINENUMBER 2372 L15\lALOAD 1\lMONITOREXIT\l"];
+281557871 [label="L1\lGOTO L16\l"];
+1841277070 [label="L0\lLINENUMBER 2335 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.inCompressor : Lcom/sleepycat/je/incomp/INCompressor;\lINVOKEVIRTUAL com/sleepycat/je/incomp/INCompressor.shutdown ()V\lL6\lLINENUMBER 2341 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.cleaner : Lcom/sleepycat/je/cleaner/Cleaner;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/Cleaner.shutdown ()V\lL7\lLINENUMBER 2342 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.checkpointer : Lcom/sleepycat/je/recovery/Checkpointer;\lINVOKEVIRTUAL com/sleepycat/je/recovery/Checkpointer.shutdown ()V\lL8\lLINENUMBER 2351 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.sharedCache : Z\lIFEQ L9\l"];
+560949853 [label="L3\lALOAD 2\lATHROW\l"];
+94700876 [label="L16\lLINENUMBER 2373 L16\lFRAME SAME\lRETURN\lL17\l"];
+822365478 [label="L10\lLINENUMBER 2363 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.removeSharedCacheEnv (Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\lL11\lLINENUMBER 2364 L11\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.clearCache (Lcom/sleepycat/je/dbi/EnvironmentImpl;)J\lPOP2\lGOTO L12\l"];
+1615203114 [label="L9\lLINENUMBER 2366 L9\lFRAME APPEND [java/lang/Object]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.evictor : Lcom/sleepycat/je/evictor/Evictor;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.shutdown ()V\lL13\lLINENUMBER 2367 L13\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.offHeapCache : Lcom/sleepycat/je/evictor/OffHeapCache;\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.shutdown ()V\l"];
+919678276 [label="L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lMONITOREXIT\l"];
+1606590827 [label="L12\lLINENUMBER 2370 L12\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.logFlusher : Lcom/sleepycat/je/log/LogFlusher;\lINVOKEVIRTUAL com/sleepycat/je/log/LogFlusher.shutdown ()V\lL14\lLINENUMBER 2371 L14\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.dataVerifier : Lcom/sleepycat/je/util/verify/DataVerifier;\lINVOKEVIRTUAL com/sleepycat/je/util/verify/DataVerifier.shutdown ()V\lL15\lLINENUMBER 2372 L15\lALOAD 1\lMONITOREXIT\l"];
+1915527355 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 2331 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statCapture : Lcom/sleepycat/je/statcap/StatCapture;\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.shutdown ()V\lL5\lLINENUMBER 2333 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.statSynchronizer : Ljava/lang/Object;\lDUP\lASTORE 1\lMONITORENTER\l"];
 entry;
 exit;
-529141716 -> 855552737
-entry -> 529141716
-1877392777 -> 551418638
-1877392777 -> 1877392777 [style=dashed, color=red]
-551418638 -> exit
-1125601031 -> 1877392777 [style=dashed, color=red]
-1125601031 -> 432515097
-1443702180 -> exit
-855552737 -> 1877392777 [style=dashed, color=red]
-855552737 -> 1125601031
-855552737 -> 1735601230
-1136459672 -> 1443702180
-1735601230 -> 1877392777 [style=dashed, color=red]
-1735601230 -> 432515097
-432515097 -> 1877392777 [style=dashed, color=red]
-432515097 -> 1136459672
+281557871 -> 94700876
+entry -> 1915527355
+1841277070 -> 822365478
+1841277070 -> 1615203114
+1841277070 -> 919678276 [style=dashed, color=red]
+560949853 -> exit
+94700876 -> exit
+822365478 -> 919678276 [style=dashed, color=red]
+822365478 -> 1606590827
+1615203114 -> 919678276 [style=dashed, color=red]
+1615203114 -> 1606590827
+919678276 -> 560949853
+919678276 -> 919678276 [style=dashed, color=red]
+1606590827 -> 281557871
+1606590827 -> 919678276 [style=dashed, color=red]
+1915527355 -> 1841277070
 }

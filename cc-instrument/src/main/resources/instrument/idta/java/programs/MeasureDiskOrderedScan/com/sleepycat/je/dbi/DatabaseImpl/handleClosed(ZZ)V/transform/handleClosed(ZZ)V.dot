@@ -1,57 +1,57 @@
 digraph handleClosed {
 node [shape=record];
-1230117303 [label="L12\lLINENUMBER 1213 L12\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.clearTransientTriggers ()V\lL13\lLINENUMBER 1233 L13\lILOAD 2\lIFEQ L14\l"];
-526839366 [label="L11\lLINENUMBER 1270 L11\lFRAME SAME\lRETURN\lL27\l"];
-1939397672 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isTemporary ()Z\lIFEQ L14\l"];
-1009736898 [label="L4\lLINENUMBER 1246 L4\lFRAME SAME1 com/sleepycat/je/LockConflictException\lASTORE 5\l"];
-208331134 [label="L6\lLINENUMBER 1257 L6\lFRAME SAME1 java/lang/Throwable\lASTORE 6\l"];
-398006661 [label="L3\lLINENUMBER 1244 L3\lFRAME SAME1 com/sleepycat/je/DatabaseNotFoundException\lASTORE 5\l"];
-468945519 [label="L5\lLINENUMBER 1253 L5\lFRAME SAME1 java/lang/Error\lASTORE 5\lL23\lLINENUMBER 1254 L23\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL24\lLINENUMBER 1255 L24\lALOAD 5\lATHROW\l"];
-442100202 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/dbi/DbTree$NeedRepLockerException\lTRYCATCHBLOCK L0 L1 L3 com/sleepycat/je/DatabaseNotFoundException\lTRYCATCHBLOCK L0 L1 L4 com/sleepycat/je/LockConflictException\lTRYCATCHBLOCK L0 L1 L5 java/lang/Error\lTRYCATCHBLOCK L0 L1 L6 null\lTRYCATCHBLOCK L2 L7 L6 null\lTRYCATCHBLOCK L4 L8 L6 null\lTRYCATCHBLOCK L5 L9 L6 null\lL10\lLINENUMBER 1207 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.referringHandles : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.isEmpty ()Z\lIFEQ L11\l"];
-1401412267 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDurableDeferredWrite ()Z\lIFEQ L11\l"];
-357510049 [label="L8\lLINENUMBER 1257 L8\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL22\lLINENUMBER 1258 L22\lGOTO L14\l"];
-587019533 [label="L14\lLINENUMBER 1266 L14\lFRAME CHOP 2\lILOAD 1\lIFEQ L11\l"];
-1396745287 [label="L7\lLINENUMBER 1257 L7\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL21\lLINENUMBER 1258 L21\lGOTO L14\l"];
-1580149394 [label="L1\lLINENUMBER 1257 L1\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL19\lLINENUMBER 1258 L19\lGOTO L14\l"];
-2075860804 [label="L15\lLINENUMBER 1234 L15\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lICONST_1\lL16\lLINENUMBER 1235 L16\lINVOKESTATIC com/sleepycat/je/txn/BasicLocker.createBasicLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Z)Lcom/sleepycat/je/txn/BasicLocker;\lASTORE 3\lL17\lLINENUMBER 1236 L17\lICONST_0\lISTORE 4\l"];
-1383021146 [label="L0\lLINENUMBER 1238 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getName ()Ljava/lang/String;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.dbRemove (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lPOP\lL18\lLINENUMBER 1239 L18\lICONST_1\lISTORE 4\l"];
-1123724937 [label="L2\lLINENUMBER 1240 L2\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl I I com/sleepycat/je/txn/BasicLocker I] [com/sleepycat/je/dbi/DbTree$NeedRepLockerException]\lASTORE 5\lL20\lLINENUMBER 1242 L20\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 5\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
-1724593519 [label="L26\lLINENUMBER 1267 L26\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.sync (Z)V\l"];
-308833173 [label="L9\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL25\lLINENUMBER 1258 L25\lALOAD 6\lATHROW\l"];
+1975169169 [label="TRYCATCHBLOCK L0 L1 L2 com/sleepycat/je/dbi/DbTree$NeedRepLockerException\lTRYCATCHBLOCK L0 L1 L3 com/sleepycat/je/DatabaseNotFoundException\lTRYCATCHBLOCK L0 L1 L4 com/sleepycat/je/LockConflictException\lTRYCATCHBLOCK L0 L1 L5 java/lang/Error\lTRYCATCHBLOCK L0 L1 L6 null\lTRYCATCHBLOCK L2 L7 L6 null\lTRYCATCHBLOCK L4 L8 L6 null\lTRYCATCHBLOCK L5 L9 L6 null\lL10\lLINENUMBER 1207 L10\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.referringHandles : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.isEmpty ()Z\lIFEQ L11\l"];
+1886190653 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isTemporary ()Z\lIFEQ L14\l"];
+1288016374 [label="L8\lLINENUMBER 1257 L8\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL22\lLINENUMBER 1258 L22\lGOTO L14\l"];
+2019538796 [label="L26\lLINENUMBER 1267 L26\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.sync (Z)V\l"];
+1943424260 [label="L2\lLINENUMBER 1240 L2\lFRAME FULL [com/sleepycat/je/dbi/DatabaseImpl I I com/sleepycat/je/txn/BasicLocker I] [com/sleepycat/je/dbi/DbTree$NeedRepLockerException]\lASTORE 5\lL20\lLINENUMBER 1242 L20\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 5\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+327887864 [label="L6\lLINENUMBER 1257 L6\lFRAME SAME1 java/lang/Throwable\lASTORE 6\l"];
+1595535890 [label="L0\lLINENUMBER 1238 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDbTree ()Lcom/sleepycat/je/dbi/DbTree;\lALOAD 3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getName ()Ljava/lang/String;\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.dbRemove (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lPOP\lL18\lLINENUMBER 1239 L18\lICONST_1\lISTORE 4\l"];
+281445874 [label="L12\lLINENUMBER 1213 L12\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.clearTransientTriggers ()V\lL13\lLINENUMBER 1233 L13\lILOAD 2\lIFEQ L14\l"];
+1397249495 [label="L3\lLINENUMBER 1244 L3\lFRAME SAME1 com/sleepycat/je/DatabaseNotFoundException\lASTORE 5\l"];
+1137816782 [label="L4\lLINENUMBER 1246 L4\lFRAME SAME1 com/sleepycat/je/LockConflictException\lASTORE 5\l"];
+1383396063 [label="L5\lLINENUMBER 1253 L5\lFRAME SAME1 java/lang/Error\lASTORE 5\lL23\lLINENUMBER 1254 L23\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL24\lLINENUMBER 1255 L24\lALOAD 5\lATHROW\l"];
+304116369 [label="L1\lLINENUMBER 1257 L1\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL19\lLINENUMBER 1258 L19\lGOTO L14\l"];
+1875190717 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isDurableDeferredWrite ()Z\lIFEQ L11\l"];
+1267254827 [label="L15\lLINENUMBER 1234 L15\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lICONST_1\lL16\lLINENUMBER 1235 L16\lINVOKESTATIC com/sleepycat/je/txn/BasicLocker.createBasicLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Z)Lcom/sleepycat/je/txn/BasicLocker;\lASTORE 3\lL17\lLINENUMBER 1236 L17\lICONST_0\lISTORE 4\l"];
+1934383250 [label="L11\lLINENUMBER 1270 L11\lFRAME SAME\lRETURN\lL27\l"];
+970088635 [label="L9\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL25\lLINENUMBER 1258 L25\lALOAD 6\lATHROW\l"];
+41689779 [label="L7\lLINENUMBER 1257 L7\lALOAD 3\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\lL21\lLINENUMBER 1258 L21\lGOTO L14\l"];
+1511103795 [label="L14\lLINENUMBER 1266 L14\lFRAME CHOP 2\lILOAD 1\lIFEQ L11\l"];
 entry;
 exit;
-1230117303 -> 1939397672
-1230117303 -> 587019533
-526839366 -> exit
-1939397672 -> 2075860804
-1939397672 -> 587019533
-1009736898 -> 208331134 [style=dashed, color=red]
-1009736898 -> 357510049
-208331134 -> 208331134 [style=dashed, color=red]
-208331134 -> 308833173
-398006661 -> 208331134 [style=dashed, color=red]
-398006661 -> 1396745287
-468945519 -> exit
-468945519 -> 208331134 [style=dashed, color=red]
-442100202 -> 1230117303
-442100202 -> 526839366
-1401412267 -> 526839366
-1401412267 -> 1724593519
-357510049 -> 587019533
-587019533 -> 526839366
-587019533 -> 1401412267
-1396745287 -> 587019533
-1580149394 -> 587019533
-2075860804 -> 1383021146
-entry -> 442100202
-1383021146 -> 1123724937 [style=dashed, color=red]
-1383021146 -> 1009736898 [style=dashed, color=red]
-1383021146 -> 208331134 [style=dashed, color=red]
-1383021146 -> 398006661 [style=dashed, color=red]
-1383021146 -> 468945519 [style=dashed, color=red]
-1383021146 -> 1580149394
-1123724937 -> exit
-1123724937 -> 208331134 [style=dashed, color=red]
-1724593519 -> 526839366
-308833173 -> exit
+1975169169 -> 1934383250
+1975169169 -> 281445874
+1886190653 -> 1267254827
+1886190653 -> 1511103795
+1288016374 -> 1511103795
+2019538796 -> 1934383250
+1943424260 -> exit
+1943424260 -> 327887864 [style=dashed, color=red]
+327887864 -> 327887864 [style=dashed, color=red]
+327887864 -> 970088635
+1595535890 -> 304116369
+1595535890 -> 1943424260 [style=dashed, color=red]
+1595535890 -> 327887864 [style=dashed, color=red]
+1595535890 -> 1397249495 [style=dashed, color=red]
+1595535890 -> 1137816782 [style=dashed, color=red]
+1595535890 -> 1383396063 [style=dashed, color=red]
+281445874 -> 1886190653
+281445874 -> 1511103795
+1397249495 -> 327887864 [style=dashed, color=red]
+1397249495 -> 41689779
+1137816782 -> 1288016374
+1137816782 -> 327887864 [style=dashed, color=red]
+1383396063 -> exit
+1383396063 -> 327887864 [style=dashed, color=red]
+304116369 -> 1511103795
+entry -> 1975169169
+1875190717 -> 2019538796
+1875190717 -> 1934383250
+1267254827 -> 1595535890
+1934383250 -> exit
+970088635 -> exit
+41689779 -> 1511103795
+1511103795 -> 1875190717
+1511103795 -> 1934383250
 }

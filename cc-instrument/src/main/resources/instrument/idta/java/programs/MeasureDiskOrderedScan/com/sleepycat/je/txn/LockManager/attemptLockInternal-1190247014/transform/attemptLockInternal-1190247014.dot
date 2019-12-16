@@ -1,0 +1,38 @@
+digraph attemptLockInternal {
+node [shape=record];
+1837303192 [label="ALOAD 10\lGETSTATIC com/sleepycat/je/txn/LockGrantType.PROMOTION : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPNE L18\l"];
+384715868 [label="L17\lLINENUMBER 782 L17\lFRAME APPEND [com/sleepycat/je/txn/LockGrantType I]\lALOAD 2\lALOAD 1\lALOAD 3\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.addLock (Ljava/lang/Long;Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/LockGrantType;)V\lL19\lLINENUMBER 783 L19\lICONST_1\lISTORE 11\lGOTO L20\l"];
+585552070 [label="L21\lLINENUMBER 786 L21\lFRAME SAME\lALOAD 10\lGETSTATIC com/sleepycat/je/txn/LockGrantType.DENIED : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPNE L23\l"];
+633328771 [label="L11\lLINENUMBER 770 L11\lALOAD 9\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.useLock : Lcom/sleepycat/je/txn/Lock;\lASTORE 8\lL12\lLINENUMBER 771 L12\lALOAD 7\lALOAD 1\lALOAD 8\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL13\lLINENUMBER 773 L13\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.THINLOCK_MUTATE_OVERHEAD : J\lILOAD 6\lL14\lLINENUMBER 774 L14\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\l"];
+1746164907 [label="L18\lLINENUMBER 784 L18\lFRAME SAME\lALOAD 10\lGETSTATIC com/sleepycat/je/txn/LockGrantType.EXISTING : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPNE L21\l"];
+630378006 [label="L4\lLINENUMBER 765 L4\lFRAME APPEND [java/util/Map com/sleepycat/je/txn/Lock]\lALOAD 8\lALOAD 3\lALOAD 2\lILOAD 4\lILOAD 5\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lILOAD 6\lL8\lLINENUMBER 766 L8\lINVOKEINTERFACE com/sleepycat/je/txn/Lock.lock (Lcom/sleepycat/je/txn/LockType;Lcom/sleepycat/je/txn/Locker;ZZLcom/sleepycat/je/dbi/MemoryBudget;I)Lcom/sleepycat/je/txn/LockAttemptResult;\lASTORE 9\lL9\lLINENUMBER 768 L9\lALOAD 9\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.useLock : Lcom/sleepycat/je/txn/Lock;\lALOAD 8\lIF_ACMPEQ L10\l"];
+1759326517 [label="GOTO L20\l"];
+1523294952 [label="L0\lLINENUMBER 749 L0\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.nRequests : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\lL1\lLINENUMBER 752 L1\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.lockTables : [Ljava/util/Map;\lILOAD 6\lAALOAD\lASTORE 7\lL2\lLINENUMBER 753 L2\lALOAD 7\lALOAD 1\lINVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/txn/Lock\lASTORE 8\lL3\lLINENUMBER 754 L3\lALOAD 8\lIFNONNULL L4\l"];
+585432789 [label="L10\lLINENUMBER 776 L10\lFRAME APPEND [com/sleepycat/je/txn/LockAttemptResult]\lALOAD 9\lGETFIELD com/sleepycat/je/txn/LockAttemptResult.lockGrant : Lcom/sleepycat/je/txn/LockGrantType;\lASTORE 10\lL15\lLINENUMBER 777 L15\lICONST_0\lISTORE 11\lL16\lLINENUMBER 780 L16\lALOAD 10\lGETSTATIC com/sleepycat/je/txn/LockGrantType.NEW : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPEQ L17\l"];
+869566182 [label="L20\lLINENUMBER 791 L20\lFRAME SAME\lNEW com/sleepycat/je/txn/LockAttemptResult\lDUP\lALOAD 8\lALOAD 10\lILOAD 11\lINVOKESPECIAL com/sleepycat/je/txn/LockAttemptResult.\<init\> (Lcom/sleepycat/je/txn/Lock;Lcom/sleepycat/je/txn/LockGrantType;Z)V\lARETURN\lL24\l"];
+477949268 [label="L5\lLINENUMBER 755 L5\lNEW com/sleepycat/je/txn/ThinLockImpl\lDUP\lINVOKESPECIAL com/sleepycat/je/txn/ThinLockImpl.\<init\> ()V\lASTORE 8\lL6\lLINENUMBER 756 L6\lALOAD 7\lALOAD 1\lALOAD 8\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL7\lLINENUMBER 757 L7\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.memoryBudget : Lcom/sleepycat/je/dbi/MemoryBudget;\lGETSTATIC com/sleepycat/je/txn/LockManager.TOTAL_THINLOCKIMPL_OVERHEAD : J\lILOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.updateLockMemoryUsage (JI)V\l"];
+1471983724 [label="L22\lLINENUMBER 785 L22\lICONST_1\lISTORE 11\lGOTO L20\l"];
+2133420414 [label="L23\lLINENUMBER 789 L23\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/LockManager.nWaits : Lcom/sleepycat/je/utilint/LongStat;\lINVOKEVIRTUAL com/sleepycat/je/utilint/LongStat.increment ()V\l"];
+entry;
+exit;
+1837303192 -> 384715868
+1837303192 -> 1746164907
+384715868 -> 869566182
+585552070 -> 2133420414
+585552070 -> 1759326517
+633328771 -> 585432789
+1746164907 -> 585552070
+1746164907 -> 1471983724
+630378006 -> 633328771
+630378006 -> 585432789
+1759326517 -> 869566182
+1523294952 -> 477949268
+1523294952 -> 630378006
+585432789 -> 1837303192
+585432789 -> 384715868
+869566182 -> exit
+entry -> 1523294952
+477949268 -> 630378006
+1471983724 -> 869566182
+2133420414 -> 869566182
+}

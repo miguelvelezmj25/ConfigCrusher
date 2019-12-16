@@ -1,0 +1,52 @@
+digraph setKey {
+node [shape=record];
+356292630 [label="L21\lLINENUMBER 1549 L21\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.getType ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/INKeyRep$Type\lASTORE 5\lL24\lLINENUMBER 1550 L24\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lALOAD 2\lALOAD 3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.set (I[B[BLcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INKeyRep;\lPUTFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lL25\lLINENUMBER 1551 L25\lALOAD 5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.getType ()Ljava/lang/Object;\lIF_ACMPEQ L26\l"];
+1977272502 [label="L27\lFRAME SAME1 I\lIRETURN\lL28\l"];
+342092369 [label="L3\lLINENUMBER 1539 L3\lFRAME CHOP 3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lIFNULL L21\l"];
+746921978 [label="L6\lLINENUMBER 1531 L6\lFRAME CHOP 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.getType ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/INKeyRep$Type\lASTORE 6\lL16\lLINENUMBER 1533 L16\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lALOAD 2\lINVOKESTATIC com/sleepycat/je/tree/IN.computeKeySuffix ([B[B)[B\lASTORE 7\lL17\lLINENUMBER 1534 L17\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lALOAD 7\lALOAD 3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.set (I[B[BLcom/sleepycat/je/tree/IN;)Lcom/sleepycat/je/tree/INKeyRep;\lPUTFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lL18\lLINENUMBER 1536 L18\lALOAD 6\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.getType ()Ljava/lang/Object;\lIF_ACMPEQ L19\l"];
+1600566696 [label="L4\lLINENUMBER 1508 L4\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lARRAYLENGTH\lALOAD 2\lINVOKESTATIC com/sleepycat/je/tree/Key.getKeyPrefixLength ([BI[B)I\lISTORE 5\lL5\lLINENUMBER 1511 L5\lILOAD 5\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lARRAYLENGTH\lIF_ICMPGE L6\l"];
+1695746422 [label="L14\lLINENUMBER 1523 L14\lALOAD 6\lALOAD 2\lINVOKESTATIC com/sleepycat/je/tree/Key.createKeyPrefix ([B[B)[B\lASTORE 6\l"];
+1011173396 [label="L8\lFRAME APPEND [I]\lALOAD 0\lILOAD 1\lL11\lLINENUMBER 1519 L11\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeKeyPrefix (I)[B\l"];
+943450793 [label="L10\lFRAME SAME1 [B\lASTORE 6\lL12\lLINENUMBER 1521 L12\lALOAD 6\lIFNULL L13\l"];
+108347109 [label="ICONST_1\lGOTO L20\l"];
+1635578400 [label="L19\lFRAME APPEND [com/sleepycat/je/tree/INKeyRep$Type [B]\lICONST_0\l"];
+658458969 [label="L7\lLINENUMBER 1517 L7\lILOAD 4\lIFEQ L8\l"];
+1449426053 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lALOAD 2\lL9\lLINENUMBER 1518 L9\lINVOKESTATIC com/sleepycat/je/tree/Key.createKeyPrefix ([B[B)[B\lGOTO L10\l"];
+283558149 [label="L13\lLINENUMBER 1526 L13\lFRAME APPEND [[B]\lALOAD 0\lALOAD 6\lALOAD 2\lALOAD 3\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/tree/IN.recalcSuffixes ([B[B[BI)V\lL15\lLINENUMBER 1527 L15\lICONST_1\lIRETURN\l"];
+974199719 [label="L22\lLINENUMBER 1545 L22\lALOAD 0\lACONST_NULL\lALOAD 2\lALOAD 3\lILOAD 1\lINVOKESPECIAL com/sleepycat/je/tree/IN.recalcSuffixes ([B[B[BI)V\lL23\lLINENUMBER 1546 L23\lICONST_1\lIRETURN\l"];
+475602880 [label="L20\lFRAME SAME1 I\lIRETURN\l"];
+836262175 [label="L0\lLINENUMBER 1499 L0\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lILOAD 1\lDUP2\lBALOAD\lICONST_2\lIOR\lI2B\lBASTORE\lL1\lLINENUMBER 1500 L1\lALOAD 0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.setDirty (Z)V\lL2\lLINENUMBER 1506 L2\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.databaseImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getKeyPrefixing ()Z\lIFEQ L3\l"];
+324502883 [label="ICONST_1\lGOTO L27\l"];
+1193553878 [label="L26\lFRAME APPEND [com/sleepycat/je/tree/INKeyRep$Type]\lICONST_0\l"];
+1240927152 [label="ALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lIFNULL L3\l"];
+entry;
+exit;
+356292630 -> 324502883
+356292630 -> 1193553878
+1977272502 -> exit
+342092369 -> 356292630
+342092369 -> 974199719
+746921978 -> 108347109
+746921978 -> 1635578400
+1600566696 -> 658458969
+1600566696 -> 746921978
+1695746422 -> 283558149
+1011173396 -> 943450793
+943450793 -> 1695746422
+943450793 -> 283558149
+entry -> 836262175
+108347109 -> 475602880
+1635578400 -> 475602880
+658458969 -> 1449426053
+658458969 -> 1011173396
+1449426053 -> 943450793
+283558149 -> exit
+974199719 -> exit
+475602880 -> exit
+836262175 -> 342092369
+836262175 -> 1240927152
+324502883 -> 1977272502
+1193553878 -> 1977272502
+1240927152 -> 342092369
+1240927152 -> 1600566696
+}

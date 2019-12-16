@@ -1,0 +1,13 @@
+digraph addCursor {
+node [shape=record];
+355239858 [label="L2\lLINENUMBER 424 L2\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.addCursor (Lcom/sleepycat/je/tree/BIN;)V\l"];
+1036557886 [label="L0\lLINENUMBER 423 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L1\l"];
+477405394 [label="L1\lLINENUMBER 426 L1\lFRAME SAME\lRETURN\lL3\l"];
+entry;
+exit;
+355239858 -> 477405394
+entry -> 1036557886
+1036557886 -> 355239858
+1036557886 -> 477405394
+477405394 -> exit
+}

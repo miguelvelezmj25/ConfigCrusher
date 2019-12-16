@@ -1,0 +1,55 @@
+digraph performCacheModeEviction {
+node [shape=record];
+2072385342 [label="L4\lLINENUMBER 774 L4\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lALOAD 1\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIF_ACMPEQ L5\l"];
+1450337091 [label="ICONST_1\lGOTO L6\l"];
+492166435 [label="L3\lLINENUMBER 777 L3\lFRAME CHOP 1\lICONST_1\lISTORE 2\lL13\lLINENUMBER 778 L13\lICONST_1\lISTORE 3\l"];
+1803612914 [label="L5\lFRAME SAME\lICONST_0\l"];
+1060124968 [label="L19\lLINENUMBER 791 L19\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.performCacheModeBINEviction (Lcom/sleepycat/je/tree/BIN;)V\l"];
+324845540 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.KEEP_HOT : Lcom/sleepycat/je/CacheMode;\lIF_ACMPNE L2\l"];
+406134964 [label="L15\lLINENUMBER 782 L15\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.performCacheModeLNEviction ()V\l"];
+486977876 [label="L6\lFRAME SAME1 I\lISTORE 2\lL7\lLINENUMBER 775 L7\lILOAD 2\lIFNE L8\l"];
+1861294237 [label="L1\lLINENUMBER 767 L1\lFRAME SAME\lRETURN\l"];
+1653728527 [label="L14\lLINENUMBER 786 L14\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.EVICT_LN : Lcom/sleepycat/je/CacheMode;\lIF_ACMPNE L16\l"];
+246515914 [label="L16\lLINENUMBER 790 L16\lFRAME SAME\lILOAD 2\lIFEQ L18\l"];
+1390676572 [label="L18\lLINENUMBER 793 L18\lFRAME SAME\lRETURN\lL20\l"];
+64475906 [label="L2\lLINENUMBER 773 L2\lFRAME SAME\lALOAD 1\lIFNULL L3\l"];
+132100133 [label="L9\lFRAME SAME\lICONST_0\l"];
+780782354 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lALOAD 1\lGETFIELD com/sleepycat/je/dbi/CursorImpl.index : I\lIF_ICMPEQ L9\l"];
+342891315 [label="L17\lLINENUMBER 787 L17\lRETURN\l"];
+1568978347 [label="L0\lLINENUMBER 765 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+1338679869 [label="L12\lLINENUMBER 781 L12\lFRAME APPEND [I I]\lILOAD 3\lIFEQ L14\l"];
+796601755 [label="L10\lFRAME SAME1 I\lISTORE 3\lL11\lGOTO L12\l"];
+1114815315 [label="L8\lFRAME APPEND [I]\lICONST_1\lGOTO L10\l"];
+entry;
+exit;
+2072385342 -> 1450337091
+2072385342 -> 1803612914
+1450337091 -> 486977876
+492166435 -> 1338679869
+1803612914 -> 486977876
+1060124968 -> 1390676572
+324845540 -> 64475906
+324845540 -> 1861294237
+406134964 -> 1653728527
+486977876 -> 780782354
+486977876 -> 1114815315
+1861294237 -> exit
+1653728527 -> 246515914
+1653728527 -> 342891315
+246515914 -> 1390676572
+246515914 -> 1060124968
+1390676572 -> exit
+entry -> 1568978347
+64475906 -> 2072385342
+64475906 -> 492166435
+132100133 -> 796601755
+780782354 -> 132100133
+780782354 -> 1114815315
+342891315 -> exit
+1568978347 -> 324845540
+1568978347 -> 1861294237
+1338679869 -> 406134964
+1338679869 -> 1653728527
+796601755 -> 1338679869
+1114815315 -> 796601755
+}

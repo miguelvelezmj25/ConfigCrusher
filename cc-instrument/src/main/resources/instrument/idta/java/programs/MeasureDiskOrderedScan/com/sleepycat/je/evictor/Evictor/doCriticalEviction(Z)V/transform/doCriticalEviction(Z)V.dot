@@ -1,16 +1,16 @@
 digraph doCriticalEviction {
 node [shape=record];
-706963154 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-628141224 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
-1976419003 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-1490769838 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+194392166 [label="L0\lLINENUMBER 2056 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1910111816 [label="L1\lLINENUMBER 2073 L1\lFRAME SAME\lRETURN\lL5\l"];
+503682311 [label="L4\lLINENUMBER 2070 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.CRITICAL : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
+1915976116 [label="L2\lLINENUMBER 2062 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2069 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 706963154
-706963154 -> 628141224
-706963154 -> 1490769838
-628141224 -> exit
-1976419003 -> 628141224
-1490769838 -> 628141224
-1490769838 -> 1976419003
+entry -> 194392166
+194392166 -> 1910111816
+194392166 -> 1915976116
+1910111816 -> exit
+503682311 -> 1910111816
+1915976116 -> 1910111816
+1915976116 -> 503682311
 }

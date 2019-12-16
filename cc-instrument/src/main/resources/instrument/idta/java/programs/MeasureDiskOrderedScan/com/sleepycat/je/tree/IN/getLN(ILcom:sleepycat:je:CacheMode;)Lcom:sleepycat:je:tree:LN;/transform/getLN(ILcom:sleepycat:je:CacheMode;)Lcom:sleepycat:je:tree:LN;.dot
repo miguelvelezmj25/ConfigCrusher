@@ -1,0 +1,34 @@
+digraph getLN {
+node [shape=record];
+1844825324 [label="L4\lLINENUMBER 2881 L4\lACONST_NULL\lARETURN\l"];
+1538380911 [label="L6\lLINENUMBER 2886 L6\lALOAD 3\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/tree/LN.setFetchedCold (Z)V\l"];
+1973423837 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+742821094 [label="L1\lLINENUMBER 2878 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/LN\lASTORE 3\lL2\lLINENUMBER 2880 L2\lALOAD 3\lIFNONNULL L3\l"];
+1573988402 [label="ALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFNE L1\l"];
+1976327951 [label="L3\lLINENUMBER 2884 L3\lFRAME APPEND [com/sleepycat/je/tree/LN]\lALOAD 2\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L5\l"];
+417390937 [label="L9\lLINENUMBER 2892 L9\lALOAD 4\lALOAD 0\lCHECKCAST com/sleepycat/je/tree/BIN\lILOAD 1\lALOAD 3\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.freeRedundantLN (Lcom/sleepycat/je/tree/BIN;ILcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/CacheMode;)V\l"];
+347245509 [label="L0\lLINENUMBER 2876 L0\lGETSTATIC com/sleepycat/je/tree/IN.$assertionsDisabled : Z\lIFNE L1\l"];
+1284689621 [label="L5\lLINENUMBER 2889 L5\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getOffHeapCache ()Lcom/sleepycat/je/evictor/OffHeapCache;\lASTORE 4\lL7\lLINENUMBER 2891 L7\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/evictor/OffHeapCache.isEnabled ()Z\lIFEQ L8\l"];
+774448308 [label="L8\lLINENUMBER 2895 L8\lFRAME APPEND [com/sleepycat/je/evictor/OffHeapCache]\lALOAD 3\lARETURN\lL10\l"];
+967961048 [label="ALOAD 2\lGETSTATIC com/sleepycat/je/CacheMode.MAKE_COLD : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L5\l"];
+entry;
+exit;
+742821094 -> 1844825324
+742821094 -> 1976327951
+entry -> 347245509
+1844825324 -> exit
+1538380911 -> 1284689621
+1973423837 -> exit
+1573988402 -> 1973423837
+1573988402 -> 742821094
+1976327951 -> 1284689621
+1976327951 -> 967961048
+417390937 -> 774448308
+347245509 -> 742821094
+347245509 -> 1573988402
+1284689621 -> 417390937
+1284689621 -> 774448308
+774448308 -> exit
+967961048 -> 1538380911
+967961048 -> 1284689621
+}

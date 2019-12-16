@@ -1,0 +1,21 @@
+digraph shouldEmbedLN {
+node [shape=record];
+2005095440 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL3\lLINENUMBER 874 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getDbType ()Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.isInternal ()Z\lIFNE L1\l"];
+1061494345 [label="L0\lLINENUMBER 872 L0\lALOAD 1\lARRAYLENGTH\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMaxEmbeddedLN ()I\lIF_ICMPGT L1\l"];
+686016782 [label="L1\lFRAME SAME\lICONST_0\l"];
+1612950527 [label="ICONST_1\lGOTO L4\l"];
+1455334732 [label="L4\lLINENUMBER 872 L4\lFRAME SAME1 I\lIRETURN\lL5\l"];
+1602427099 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL2\lLINENUMBER 873 L2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lIFNE L1\l"];
+entry;
+exit;
+entry -> 1061494345
+2005095440 -> 686016782
+2005095440 -> 1612950527
+1061494345 -> 686016782
+1061494345 -> 1602427099
+686016782 -> 1455334732
+1612950527 -> 1455334732
+1455334732 -> exit
+1602427099 -> 2005095440
+1602427099 -> 686016782
+}

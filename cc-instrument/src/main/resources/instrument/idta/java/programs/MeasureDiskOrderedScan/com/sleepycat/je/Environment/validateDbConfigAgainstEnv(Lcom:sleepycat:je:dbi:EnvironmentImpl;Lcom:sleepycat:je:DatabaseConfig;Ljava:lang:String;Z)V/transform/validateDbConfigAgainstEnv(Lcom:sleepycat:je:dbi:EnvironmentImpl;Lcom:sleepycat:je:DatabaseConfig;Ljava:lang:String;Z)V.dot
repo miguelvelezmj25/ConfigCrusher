@@ -1,0 +1,41 @@
+digraph validateDbConfigAgainstEnv {
+node [shape=record];
+583354435 [label="ALOAD 1\lL8\lLINENUMBER 926 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isTransactional ()Z\lIFNE L6\l"];
+559462476 [label="ALOAD 2\lL3\lLINENUMBER 915 L3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReadOnly ()Z\lIFNE L1\l"];
+661857726 [label="L5\lLINENUMBER 917 L5\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Read/Write Database instances for replicated database \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" must be transactional.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1829444709 [label="ALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReadOnly ()Z\lIFNE L10\l"];
+21699955 [label="ALOAD 2\lL2\lLINENUMBER 914 L2\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReplicated ()Z\lIFEQ L1\l"];
+211646494 [label="L6\lLINENUMBER 934 L6\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFEQ L10\l"];
+2114588553 [label="L4\lLINENUMBER 916 L4\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTransactional ()Z\lIFNE L1\l"];
+480626544 [label="L9\lLINENUMBER 927 L9\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Attempted to open Database \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" transactionally, but parent Environment is not transactional\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1926734095 [label="L1\lLINENUMBER 924 L1\lFRAME SAME\lILOAD 4\lIFNE L6\l"];
+179422290 [label="L10\lLINENUMBER 939 L10\lFRAME SAME\lRETURN\lL12\l"];
+1751332742 [label="ALOAD 2\lL7\lLINENUMBER 925 L7\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTransactional ()Z\lIFEQ L6\l"];
+117124800 [label="L0\lLINENUMBER 913 L0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L1\l"];
+37618199 [label="L11\lLINENUMBER 935 L11\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Attempted to open Database \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" as writable but parent Environment is read only \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+583354435 -> 480626544
+583354435 -> 211646494
+559462476 -> 1926734095
+559462476 -> 2114588553
+661857726 -> exit
+1829444709 -> 179422290
+1829444709 -> 37618199
+21699955 -> 559462476
+21699955 -> 1926734095
+211646494 -> 179422290
+211646494 -> 1829444709
+2114588553 -> 661857726
+2114588553 -> 1926734095
+entry -> 117124800
+480626544 -> exit
+1926734095 -> 1751332742
+1926734095 -> 211646494
+179422290 -> exit
+1751332742 -> 583354435
+1751332742 -> 211646494
+117124800 -> 1926734095
+117124800 -> 21699955
+37618199 -> exit
+}

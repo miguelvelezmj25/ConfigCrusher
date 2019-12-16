@@ -1,18 +1,18 @@
 digraph openDatabase {
 node [shape=record];
-947323724 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lL3\lLINENUMBER 648 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.checkOpen ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 4\lL4\lLINENUMBER 650 L4\lALOAD 3\lIFNONNULL L0\l"];
-1652736271 [label="L5\lLINENUMBER 651 L5\lGETSTATIC com/sleepycat/je/DatabaseConfig.DEFAULT : Lcom/sleepycat/je/DatabaseConfig;\lASTORE 3\l"];
-310592751 [label="L1\lARETURN\l"];
-1500653925 [label="L0\lLINENUMBER 655 L0\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lNEW com/sleepycat/je/Database\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Database.\<init\> (Lcom/sleepycat/je/Environment;)V\lASTORE 5\lL6\lLINENUMBER 657 L6\lALOAD 0\lALOAD 4\lALOAD 1\lALOAD 5\lALOAD 2\lALOAD 3\lICONST_0\lINVOKESPECIAL com/sleepycat/je/Environment.setupDatabase (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V\lL7\lLINENUMBER 661 L7\lALOAD 5\l"];
-1651495789 [label="L2\lLINENUMBER 662 L2\lFRAME SAME1 java/lang/Error\lASTORE 5\lL8\lLINENUMBER 663 L8\lALOAD 4\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL9\lLINENUMBER 664 L9\lALOAD 5\lATHROW\lL10\l"];
+220654037 [label="L5\lLINENUMBER 651 L5\lGETSTATIC com/sleepycat/je/DatabaseConfig.DEFAULT : Lcom/sleepycat/je/DatabaseConfig;\lASTORE 3\l"];
+288644733 [label="L0\lLINENUMBER 655 L0\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl]\lNEW com/sleepycat/je/Database\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Database.\<init\> (Lcom/sleepycat/je/Environment;)V\lASTORE 5\lL6\lLINENUMBER 657 L6\lALOAD 0\lALOAD 4\lALOAD 1\lALOAD 5\lALOAD 2\lALOAD 3\lICONST_0\lINVOKESPECIAL com/sleepycat/je/Environment.setupDatabase (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/Transaction;Lcom/sleepycat/je/Database;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Z)V\lL7\lLINENUMBER 661 L7\lALOAD 5\l"];
+93589315 [label="L2\lLINENUMBER 662 L2\lFRAME SAME1 java/lang/Error\lASTORE 5\lL8\lLINENUMBER 663 L8\lALOAD 4\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.invalidate (Ljava/lang/Error;)V\lL9\lLINENUMBER 664 L9\lALOAD 5\lATHROW\lL10\l"];
+1087966312 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Error\lL3\lLINENUMBER 648 L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.checkOpen ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 4\lL4\lLINENUMBER 650 L4\lALOAD 3\lIFNONNULL L0\l"];
+1385439785 [label="L1\lARETURN\l"];
 entry;
 exit;
-entry -> 947323724
-947323724 -> 1652736271
-947323724 -> 1500653925
-1652736271 -> 1500653925
-310592751 -> exit
-1500653925 -> 310592751
-1500653925 -> 1651495789 [style=dashed, color=red]
-1651495789 -> exit
+entry -> 1087966312
+220654037 -> 288644733
+288644733 -> 93589315 [style=dashed, color=red]
+288644733 -> 1385439785
+93589315 -> exit
+1087966312 -> 220654037
+1087966312 -> 288644733
+1385439785 -> exit
 }

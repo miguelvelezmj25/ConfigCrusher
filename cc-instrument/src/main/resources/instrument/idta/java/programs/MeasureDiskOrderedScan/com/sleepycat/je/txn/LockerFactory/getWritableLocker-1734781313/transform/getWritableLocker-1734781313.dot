@@ -1,59 +1,59 @@
 digraph getWritableLocker {
 node [shape=record];
-1260709478 [label="L11\lFRAME FULL [com/sleepycat/je/Environment com/sleepycat/je/Transaction I I I com/sleepycat/je/TransactionConfig com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/TransactionConfig]\lGETSTATIC com/sleepycat/je/log/ReplicationContext.NO_REPLICATE : Lcom/sleepycat/je/log/ReplicationContext;\l"];
-1989721121 [label="L3\lLINENUMBER 73 L3\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl I]\lILOAD 3\lIFEQ L7\l"];
-389167895 [label="L22\lLINENUMBER 119 L22\lFRAME APPEND [com/sleepycat/je/txn/Locker]\lALOAD 8\lARETURN\lL24\l"];
-479163651 [label="L18\lLINENUMBER 98 L18\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the environment was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-535275988 [label="L4\lLINENUMBER 67 L4\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.getThreadTransaction ()Lcom/sleepycat/je/Transaction;\lASTORE 8\lL5\lLINENUMBER 68 L5\lALOAD 8\lIFNULL L3\l"];
-1776061010 [label="L10\lLINENUMBER 76 L10\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getDefaultTxnConfig (Lcom/sleepycat/je/Environment;)Lcom/sleepycat/je/TransactionConfig;\lASTORE 5\l"];
-216077283 [label="GETSTATIC com/sleepycat/je/log/ReplicationContext.MASTER : Lcom/sleepycat/je/log/ReplicationContext;\lGOTO L12\l"];
-1894937503 [label="L23\lLINENUMBER 115 L23\lALOAD 6\lALOAD 8\lINVOKESTATIC com/sleepycat/je/txn/ReadCommittedLocker.createReadCommittedLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)Lcom/sleepycat/je/txn/ReadCommittedLocker;\lARETURN\l"];
-772875556 [label="L14\lLINENUMBER 89 L14\lALOAD 6\lILOAD 4\lL15\lLINENUMBER 90 L15\lINVOKESTATIC com/sleepycat/je/txn/ThreadLocker.createThreadLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Z)Lcom/sleepycat/je/txn/ThreadLocker;\lL16\lLINENUMBER 89 L16\lARETURN\l"];
-874219698 [label="L9\lLINENUMBER 79 L9\lFRAME SAME\lALOAD 6\lALOAD 5\lILOAD 4\lIFEQ L11\l"];
-1183875555 [label="ILOAD 7\lIFNE L17\l"];
-999317328 [label="L17\lLINENUMBER 102 L17\lFRAME SAME\lILOAD 3\lIFNE L19\l"];
-1878335231 [label="L8\lLINENUMBER 75 L8\lALOAD 5\lIFNONNULL L9\l"];
-720061710 [label="L13\lLINENUMBER 97 L13\lFRAME SAME\lILOAD 2\lIFNE L17\l"];
-1815908521 [label="L20\lLINENUMBER 103 L20\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the database was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-1225698243 [label="L0\lLINENUMBER 63 L0\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getNonNullEnvImpl (Lcom/sleepycat/je/Environment;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 6\lL1\lLINENUMBER 64 L1\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isTransactional ()Z\lISTORE 7\lL2\lLINENUMBER 66 L2\lALOAD 1\lIFNONNULL L3\l"];
-1121492709 [label="L6\lLINENUMBER 69 L6\lALOAD 8\lINVOKESTATIC com/sleepycat/je/DbInternal.getLocker (Lcom/sleepycat/je/Transaction;)Lcom/sleepycat/je/txn/Locker;\lARETURN\l"];
-2117363150 [label="L7\lLINENUMBER 87 L7\lFRAME SAME\lALOAD 1\lIFNONNULL L13\l"];
-1176992586 [label="L12\lFRAME FULL [com/sleepycat/je/Environment com/sleepycat/je/Transaction I I I com/sleepycat/je/TransactionConfig com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/TransactionConfig com/sleepycat/je/log/ReplicationContext]\lINVOKESTATIC com/sleepycat/je/txn/Txn.createAutoTxn (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/TransactionConfig;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/txn/Txn;\lARETURN\l"];
-1308534685 [label="ALOAD 1\lIFNONNULL L7\l"];
-778144596 [label="L19\lLINENUMBER 113 L19\lFRAME SAME\lALOAD 1\lINVOKESTATIC com/sleepycat/je/DbInternal.getLocker (Lcom/sleepycat/je/Transaction;)Lcom/sleepycat/je/txn/Locker;\lASTORE 8\lL21\lLINENUMBER 114 L21\lALOAD 8\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isReadCommittedIsolation ()Z\lIFEQ L22\l"];
+1921608461 [label="ILOAD 7\lIFNE L17\l"];
+848722628 [label="L3\lLINENUMBER 73 L3\lFRAME APPEND [com/sleepycat/je/dbi/EnvironmentImpl I]\lILOAD 3\lIFEQ L7\l"];
+1614009936 [label="L14\lLINENUMBER 89 L14\lALOAD 6\lILOAD 4\lL15\lLINENUMBER 90 L15\lINVOKESTATIC com/sleepycat/je/txn/ThreadLocker.createThreadLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Z)Lcom/sleepycat/je/txn/ThreadLocker;\lL16\lLINENUMBER 89 L16\lARETURN\l"];
+1938570626 [label="L0\lLINENUMBER 63 L0\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getNonNullEnvImpl (Lcom/sleepycat/je/Environment;)Lcom/sleepycat/je/dbi/EnvironmentImpl;\lASTORE 6\lL1\lLINENUMBER 64 L1\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isTransactional ()Z\lISTORE 7\lL2\lLINENUMBER 66 L2\lALOAD 1\lIFNONNULL L3\l"];
+1078769519 [label="L20\lLINENUMBER 103 L20\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the database was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+150752603 [label="L4\lLINENUMBER 67 L4\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/Environment.getThreadTransaction ()Lcom/sleepycat/je/Transaction;\lASTORE 8\lL5\lLINENUMBER 68 L5\lALOAD 8\lIFNULL L3\l"];
+1076759987 [label="GETSTATIC com/sleepycat/je/log/ReplicationContext.MASTER : Lcom/sleepycat/je/log/ReplicationContext;\lGOTO L12\l"];
+396436098 [label="L23\lLINENUMBER 115 L23\lALOAD 6\lALOAD 8\lINVOKESTATIC com/sleepycat/je/txn/ReadCommittedLocker.createReadCommittedLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/txn/Locker;)Lcom/sleepycat/je/txn/ReadCommittedLocker;\lARETURN\l"];
+186196710 [label="L8\lLINENUMBER 75 L8\lALOAD 5\lIFNONNULL L9\l"];
+200588511 [label="L10\lLINENUMBER 76 L10\lALOAD 0\lINVOKESTATIC com/sleepycat/je/DbInternal.getDefaultTxnConfig (Lcom/sleepycat/je/Environment;)Lcom/sleepycat/je/TransactionConfig;\lASTORE 5\l"];
+181938467 [label="ALOAD 1\lIFNONNULL L7\l"];
+1926653196 [label="L6\lLINENUMBER 69 L6\lALOAD 8\lINVOKESTATIC com/sleepycat/je/DbInternal.getLocker (Lcom/sleepycat/je/Transaction;)Lcom/sleepycat/je/txn/Locker;\lARETURN\l"];
+2130465578 [label="L12\lFRAME FULL [com/sleepycat/je/Environment com/sleepycat/je/Transaction I I I com/sleepycat/je/TransactionConfig com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/TransactionConfig com/sleepycat/je/log/ReplicationContext]\lINVOKESTATIC com/sleepycat/je/txn/Txn.createAutoTxn (Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/TransactionConfig;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/txn/Txn;\lARETURN\l"];
+1354766958 [label="L13\lLINENUMBER 97 L13\lFRAME SAME\lILOAD 2\lIFNE L17\l"];
+48367938 [label="L11\lFRAME FULL [com/sleepycat/je/Environment com/sleepycat/je/Transaction I I I com/sleepycat/je/TransactionConfig com/sleepycat/je/dbi/EnvironmentImpl I] [com/sleepycat/je/dbi/EnvironmentImpl com/sleepycat/je/TransactionConfig]\lGETSTATIC com/sleepycat/je/log/ReplicationContext.NO_REPLICATE : Lcom/sleepycat/je/log/ReplicationContext;\l"];
+839561686 [label="L22\lLINENUMBER 119 L22\lFRAME APPEND [com/sleepycat/je/txn/Locker]\lALOAD 8\lARETURN\lL24\l"];
+1621370617 [label="L7\lLINENUMBER 87 L7\lFRAME SAME\lALOAD 1\lIFNONNULL L13\l"];
+1861223285 [label="L17\lLINENUMBER 102 L17\lFRAME SAME\lILOAD 3\lIFNE L19\l"];
+1043560367 [label="L18\lLINENUMBER 98 L18\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"A Transaction cannot be used because the environment was opened non-transactionally\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1244059788 [label="L9\lLINENUMBER 79 L9\lFRAME SAME\lALOAD 6\lALOAD 5\lILOAD 4\lIFEQ L11\l"];
+2040819048 [label="L19\lLINENUMBER 113 L19\lFRAME SAME\lALOAD 1\lINVOKESTATIC com/sleepycat/je/DbInternal.getLocker (Lcom/sleepycat/je/Transaction;)Lcom/sleepycat/je/txn/Locker;\lASTORE 8\lL21\lLINENUMBER 114 L21\lALOAD 8\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.isReadCommittedIsolation ()Z\lIFEQ L22\l"];
 entry;
 exit;
-1260709478 -> 1176992586
-1989721121 -> 2117363150
-1989721121 -> 1308534685
-389167895 -> exit
-479163651 -> exit
-535275988 -> 1989721121
-535275988 -> 1121492709
-1776061010 -> 874219698
-216077283 -> 1176992586
-1894937503 -> exit
-772875556 -> exit
-874219698 -> 1260709478
-874219698 -> 216077283
-1183875555 -> 479163651
-1183875555 -> 999317328
-999317328 -> 1815908521
-999317328 -> 778144596
-1878335231 -> 1776061010
-1878335231 -> 874219698
-entry -> 1225698243
-720061710 -> 1183875555
-720061710 -> 999317328
-1815908521 -> exit
-1225698243 -> 1989721121
-1225698243 -> 535275988
-1121492709 -> exit
-2117363150 -> 720061710
-2117363150 -> 772875556
-1176992586 -> exit
-1308534685 -> 1878335231
-1308534685 -> 2117363150
-778144596 -> 389167895
-778144596 -> 1894937503
+1921608461 -> 1861223285
+1921608461 -> 1043560367
+848722628 -> 181938467
+848722628 -> 1621370617
+1614009936 -> exit
+1938570626 -> 848722628
+1938570626 -> 150752603
+1078769519 -> exit
+150752603 -> 848722628
+150752603 -> 1926653196
+1076759987 -> 2130465578
+entry -> 1938570626
+396436098 -> exit
+186196710 -> 200588511
+186196710 -> 1244059788
+200588511 -> 1244059788
+181938467 -> 186196710
+181938467 -> 1621370617
+1926653196 -> exit
+2130465578 -> exit
+1354766958 -> 1921608461
+1354766958 -> 1861223285
+48367938 -> 2130465578
+839561686 -> exit
+1621370617 -> 1614009936
+1621370617 -> 1354766958
+1861223285 -> 1078769519
+1861223285 -> 2040819048
+1043560367 -> exit
+1244059788 -> 48367938
+1244059788 -> 1076759987
+2040819048 -> 396436098
+2040819048 -> 839561686
 }

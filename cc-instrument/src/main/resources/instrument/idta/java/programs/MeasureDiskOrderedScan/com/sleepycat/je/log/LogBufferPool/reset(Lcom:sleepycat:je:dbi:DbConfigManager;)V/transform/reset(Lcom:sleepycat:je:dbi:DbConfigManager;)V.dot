@@ -1,0 +1,33 @@
+digraph reset {
+node [shape=record];
+186980957 [label="L15\lFRAME APPEND [I]\lILOAD 9\lILOAD 2\lIF_ICMPGE L16\l"];
+1151464371 [label="L0\lLINENUMBER 190 L0\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.runInMemory : Z\lIFEQ L1\l"];
+1557407386 [label="L1\lLINENUMBER 198 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.currentWriteBuffer : Lcom/sleepycat/je/log/LogBuffer;\lIFNULL L3\l"];
+133102195 [label="L4\lLINENUMBER 199 L4\lALOAD 0\lICONST_0\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/log/LogBufferPool.bumpAndWriteDirty (IZ)V\l"];
+1637349986 [label="L13\lLINENUMBER 227 L13\lFRAME FULL [com/sleepycat/je/log/LogBufferPool com/sleepycat/je/dbi/DbConfigManager I J J I java/util/LinkedList] []\lICONST_0\lISTORE 9\l"];
+624557113 [label="L3\lLINENUMBER 206 L3\lFRAME SAME\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.NUM_LOG_BUFFERS : Lcom/sleepycat/je/config/IntConfigParam;\lL5\lLINENUMBER 207 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lISTORE 2\lL6\lLINENUMBER 208 L6\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getMemoryBudget ()Lcom/sleepycat/je/dbi/MemoryBudget;\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.getLogBufferBudget ()J\lLSTORE 3\lL7\lLINENUMBER 210 L7\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.LOG_FILE_MAX : Lcom/sleepycat/je/config/LongConfigParam;\lL8\lLINENUMBER 211 L8\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLSTORE 5\lL9\lLINENUMBER 213 L9\lLLOAD 3\lL2I\lILOAD 2\lIDIV\lISTORE 7\lL10\lLINENUMBER 215 L10\lILOAD 7\lLLOAD 5\lL2I\lINVOKESTATIC java/lang/Math.min (II)I\lISTORE 7\lL11\lLINENUMBER 217 L11\lNEW java/util/LinkedList\lDUP\lINVOKESPECIAL java/util/LinkedList.\<init\> ()V\lASTORE 8\lL12\lLINENUMBER 223 L12\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.runInMemory : Z\lIFEQ L13\l"];
+513352539 [label="L17\lLINENUMBER 228 L17\lALOAD 8\lNEW com/sleepycat/je/log/LogBuffer\lDUP\lILOAD 7\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKESPECIAL com/sleepycat/je/log/LogBuffer.\<init\> (ILcom/sleepycat/je/dbi/EnvironmentImpl;)V\lINVOKEVIRTUAL java/util/LinkedList.add (Ljava/lang/Object;)Z\lPOP\lL18\lLINENUMBER 227 L18\lIINC 9 1\lGOTO L15\l"];
+1850652200 [label="L2\lLINENUMBER 191 L2\lRETURN\l"];
+1808349066 [label="ALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.bufferPool : Ljava/util/LinkedList;\lIFNULL L1\l"];
+2062806242 [label="L14\lLINENUMBER 224 L14\lICONST_1\lISTORE 2\l"];
+2070430760 [label="L16\lLINENUMBER 244 L16\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.bufferPoolLatch : Lcom/sleepycat/je/latch/Latch;\lINVOKEINTERFACE com/sleepycat/je/latch/Latch.acquireExclusive ()V\lL19\lLINENUMBER 245 L19\lALOAD 0\lALOAD 8\lPUTFIELD com/sleepycat/je/log/LogBufferPool.bufferPool : Ljava/util/LinkedList;\lL20\lLINENUMBER 246 L20\lALOAD 0\lILOAD 2\lPUTFIELD com/sleepycat/je/log/LogBufferPool.nLogBuffers : I\lL21\lLINENUMBER 247 L21\lALOAD 0\lILOAD 7\lPUTFIELD com/sleepycat/je/log/LogBufferPool.logBufferSize : I\lL22\lLINENUMBER 249 L22\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.bufferPool : Ljava/util/LinkedList;\lINVOKEVIRTUAL java/util/LinkedList.getFirst ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/log/LogBuffer\lPUTFIELD com/sleepycat/je/log/LogBufferPool.currentWriteBuffer : Lcom/sleepycat/je/log/LogBuffer;\lL23\lLINENUMBER 250 L23\lALOAD 0\lICONST_0\lPUTFIELD com/sleepycat/je/log/LogBufferPool.currentWriteBufferIndex : I\lL24\lLINENUMBER 251 L24\lALOAD 0\lGETFIELD com/sleepycat/je/log/LogBufferPool.bufferPoolLatch : Lcom/sleepycat/je/latch/Latch;\lINVOKEINTERFACE com/sleepycat/je/latch/Latch.release ()V\lL25\lLINENUMBER 252 L25\lRETURN\lL26\l"];
+entry;
+exit;
+186980957 -> 513352539
+186980957 -> 2070430760
+133102195 -> 624557113
+1637349986 -> 186980957
+513352539 -> 186980957
+2070430760 -> exit
+entry -> 1151464371
+1151464371 -> 1557407386
+1151464371 -> 1808349066
+1557407386 -> 624557113
+1557407386 -> 133102195
+624557113 -> 1637349986
+624557113 -> 2062806242
+1850652200 -> exit
+1808349066 -> 1557407386
+1808349066 -> 1850652200
+2062806242 -> 1637349986
+}

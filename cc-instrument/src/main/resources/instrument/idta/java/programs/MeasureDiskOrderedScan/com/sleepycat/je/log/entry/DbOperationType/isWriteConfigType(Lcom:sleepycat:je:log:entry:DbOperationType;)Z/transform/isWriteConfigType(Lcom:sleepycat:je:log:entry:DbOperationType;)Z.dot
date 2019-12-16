@@ -1,0 +1,18 @@
+digraph isWriteConfigType {
+node [shape=record];
+495382332 [label="L2\lFRAME SAME\lICONST_0\l"];
+1415226693 [label="L0\lLINENUMBER 151 L0\lALOAD 0\lGETSTATIC com/sleepycat/je/log/entry/DbOperationType.CREATE : Lcom/sleepycat/je/log/entry/DbOperationType;\lIF_ACMPEQ L1\l"];
+624484900 [label="L1\lFRAME SAME\lICONST_1\lGOTO L3\l"];
+477561156 [label="L3\lFRAME SAME1 I\lIRETURN\lL4\l"];
+991517939 [label="ALOAD 0\lGETSTATIC com/sleepycat/je/log/entry/DbOperationType.UPDATE_CONFIG : Lcom/sleepycat/je/log/entry/DbOperationType;\lIF_ACMPNE L2\l"];
+entry;
+exit;
+entry -> 1415226693
+495382332 -> 477561156
+1415226693 -> 624484900
+1415226693 -> 991517939
+624484900 -> 477561156
+477561156 -> exit
+991517939 -> 495382332
+991517939 -> 624484900
+}

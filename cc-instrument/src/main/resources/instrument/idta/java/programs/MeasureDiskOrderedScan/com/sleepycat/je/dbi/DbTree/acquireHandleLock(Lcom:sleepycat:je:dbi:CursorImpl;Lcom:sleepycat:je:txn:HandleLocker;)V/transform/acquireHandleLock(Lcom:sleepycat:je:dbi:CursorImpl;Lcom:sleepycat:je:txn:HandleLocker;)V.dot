@@ -1,0 +1,24 @@
+digraph acquireHandleLock {
+node [shape=record];
+1442508500 [label="L3\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL14\lLINENUMBER 724 L14\lALOAD 6\lATHROW\l"];
+1728821176 [label="L2\lLINENUMBER 723 L2\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/txn/HandleLocker] [java/lang/Throwable]\lASTORE 6\l"];
+75719767 [label="L1\lLINENUMBER 723 L1\lFRAME APPEND [J com/sleepycat/je/txn/LockResult]\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL12\lLINENUMBER 724 L12\lGOTO L13\l"];
+146235019 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 708 L4\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.latchBIN ()V\l"];
+219608879 [label="L8\lLINENUMBER 717 L8\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getLocker ()Lcom/sleepycat/je/txn/Locker;\lACONST_NULL\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.checkPreempted (Lcom/sleepycat/je/txn/Locker;)V\lL9\lLINENUMBER 718 L9\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"No contention is possible with HandleLocker: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lL10\lLINENUMBER 720 L10\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 719 L11\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+567230307 [label="L0\lLINENUMBER 710 L0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getCurrentLsn ()J\lLSTORE 3\lL5\lLINENUMBER 712 L5\lALOAD 2\lLLOAD 3\lGETSTATIC com/sleepycat/je/txn/LockType.READ : Lcom/sleepycat/je/txn/LockType;\lICONST_1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL6\lLINENUMBER 713 L6\lINVOKEVIRTUAL com/sleepycat/je/txn/HandleLocker.nonBlockingLock (JLcom/sleepycat/je/txn/LockType;ZLcom/sleepycat/je/dbi/DatabaseImpl;)Lcom/sleepycat/je/txn/LockResult;\lASTORE 5\lL7\lLINENUMBER 716 L7\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/txn/LockResult.getLockGrant ()Lcom/sleepycat/je/txn/LockGrantType;\lGETSTATIC com/sleepycat/je/txn/LockGrantType.DENIED : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPNE L1\l"];
+304651014 [label="L13\lLINENUMBER 725 L13\lFRAME APPEND [J com/sleepycat/je/txn/LockResult]\lRETURN\lL15\l"];
+entry;
+exit;
+1442508500 -> exit
+entry -> 146235019
+1728821176 -> 1442508500
+1728821176 -> 1728821176 [style=dashed, color=red]
+75719767 -> 304651014
+146235019 -> 567230307
+219608879 -> exit
+219608879 -> 1728821176 [style=dashed, color=red]
+567230307 -> 1728821176 [style=dashed, color=red]
+567230307 -> 75719767
+567230307 -> 219608879
+304651014 -> exit
+}

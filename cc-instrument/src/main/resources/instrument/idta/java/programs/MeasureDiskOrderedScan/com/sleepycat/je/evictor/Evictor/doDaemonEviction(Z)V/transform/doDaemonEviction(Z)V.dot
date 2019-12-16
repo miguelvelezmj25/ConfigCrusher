@@ -1,16 +1,16 @@
 digraph doDaemonEviction {
 node [shape=record];
-263792236 [label="L0\lLINENUMBER 2080 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
-1184220843 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
-48891676 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
-247171914 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lRETURN\lL5\l"];
+574225372 [label="L1\lLINENUMBER 2099 L1\lFRAME SAME\lRETURN\lL5\l"];
+2081574228 [label="L2\lLINENUMBER 2086 L2\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.alert ()V\lL3\lLINENUMBER 2095 L3\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.needCriticalEviction ()Z\lIFEQ L1\l"];
+1491428580 [label="L0\lLINENUMBER 2080 L0\lALOAD 0\lGETFIELD com/sleepycat/je/evictor/Evictor.arbiter : Lcom/sleepycat/je/evictor/Arbiter;\lINVOKEVIRTUAL com/sleepycat/je/evictor/Arbiter.isOverBudget ()Z\lIFEQ L1\l"];
+1286415320 [label="L4\lLINENUMBER 2096 L4\lALOAD 0\lGETSTATIC com/sleepycat/je/evictor/Evictor$EvictionSource.DAEMON : Lcom/sleepycat/je/evictor/Evictor$EvictionSource;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/evictor/Evictor.doEvict (Lcom/sleepycat/je/evictor/Evictor$EvictionSource;Z)V\l"];
 entry;
 exit;
-entry -> 263792236
-263792236 -> 48891676
-263792236 -> 247171914
-1184220843 -> 247171914
-48891676 -> 1184220843
-48891676 -> 247171914
-247171914 -> exit
+574225372 -> exit
+entry -> 1491428580
+2081574228 -> 574225372
+2081574228 -> 1286415320
+1491428580 -> 574225372
+1491428580 -> 2081574228
+1286415320 -> 574225372
 }

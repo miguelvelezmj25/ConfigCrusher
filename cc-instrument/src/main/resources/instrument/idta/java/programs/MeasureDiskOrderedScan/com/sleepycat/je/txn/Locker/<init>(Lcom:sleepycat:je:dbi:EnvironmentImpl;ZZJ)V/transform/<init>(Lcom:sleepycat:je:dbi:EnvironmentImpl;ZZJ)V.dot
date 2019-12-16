@@ -1,0 +1,15 @@
+digraph <init> {
+node [shape=record];
+1401878430 [label="L17\lLINENUMBER 145 L17\lFRAME SAME\lALOAD 0\lINVOKESTATIC java/lang/Thread.currentThread ()Ljava/lang/Thread;\lPUTFIELD com/sleepycat/je/txn/Locker.thread : Ljava/lang/Thread;\lL18\lLINENUMBER 148 L18\lRETURN\lL19\l"];
+496404196 [label="L0\lLINENUMBER 117 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 86 L1\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/txn/Locker.isOpen : Z\lL2\lLINENUMBER 91 L2\lALOAD 0\lICONST_1\lPUTFIELD com/sleepycat/je/txn/Locker.preemptable : Z\lL3\lLINENUMBER 119 L3\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnManager ()Lcom/sleepycat/je/txn/TxnManager;\lASTORE 6\lL4\lLINENUMBER 120 L4\lALOAD 0\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/txn/TxnManager.getLockManager ()Lcom/sleepycat/je/txn/LockManager;\lPUTFIELD com/sleepycat/je/txn/Locker.lockManager : Lcom/sleepycat/je/txn/LockManager;\lL5\lLINENUMBER 121 L5\lALOAD 0\lALOAD 0\lALOAD 6\lLLOAD 4\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.generateId (Lcom/sleepycat/je/txn/TxnManager;J)J\lPUTFIELD com/sleepycat/je/txn/Locker.id : J\lL6\lLINENUMBER 122 L6\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/txn/Locker.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL7\lLINENUMBER 123 L7\lALOAD 0\lILOAD 2\lPUTFIELD com/sleepycat/je/txn/Locker.readUncommittedDefault : Z\lL8\lLINENUMBER 124 L8\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/txn/Locker.waitingFor : Ljava/lang/Long;\lL9\lLINENUMBER 125 L9\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/txn/Locker.waitingForType : Lcom/sleepycat/je/txn/LockType;\lL10\lLINENUMBER 126 L10\lALOAD 0\lLDC -1\lPUTFIELD com/sleepycat/je/txn/Locker.waiterThreadId : J\lL11\lLINENUMBER 129 L11\lALOAD 0\lILOAD 3\lPUTFIELD com/sleepycat/je/txn/Locker.defaultNoWait : Z\lL12\lLINENUMBER 130 L12\lALOAD 0\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.getInitialLockTimeout ()J\lPUTFIELD com/sleepycat/je/txn/Locker.lockTimeoutMillis : J\lL13\lLINENUMBER 136 L13\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getTxnTimeout ()J\lPUTFIELD com/sleepycat/je/txn/Locker.txnTimeoutMillis : J\lL14\lLINENUMBER 138 L14\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Locker.txnTimeoutMillis : J\lLCONST_0\lLCMP\lIFEQ L15\l"];
+2012362998 [label="L16\lLINENUMBER 139 L16\lALOAD 0\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lPUTFIELD com/sleepycat/je/txn/Locker.txnStartMillis : J\lGOTO L17\l"];
+1727848335 [label="L15\lLINENUMBER 141 L15\lFRAME FULL [com/sleepycat/je/txn/Locker com/sleepycat/je/dbi/EnvironmentImpl I I J com/sleepycat/je/txn/TxnManager] []\lALOAD 0\lLCONST_0\lPUTFIELD com/sleepycat/je/txn/Locker.txnStartMillis : J\l"];
+entry;
+exit;
+entry -> 496404196
+1401878430 -> exit
+496404196 -> 2012362998
+496404196 -> 1727848335
+2012362998 -> 1401878430
+1727848335 -> 1401878430
+}

@@ -1,13 +1,13 @@
 digraph releaseBIN {
 node [shape=record];
-604004329 [label="L0\lLINENUMBER 407 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L1\l"];
-521174666 [label="L2\lLINENUMBER 408 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatchIfOwner ()V\l"];
-1791296084 [label="L1\lLINENUMBER 410 L1\lFRAME SAME\lRETURN\lL3\l"];
+1019244969 [label="L1\lLINENUMBER 410 L1\lFRAME SAME\lRETURN\lL3\l"];
+508767264 [label="L2\lLINENUMBER 408 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatchIfOwner ()V\l"];
+851466669 [label="L0\lLINENUMBER 407 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 604004329
-604004329 -> 521174666
-604004329 -> 1791296084
-521174666 -> 1791296084
-1791296084 -> exit
+entry -> 851466669
+1019244969 -> exit
+508767264 -> 1019244969
+851466669 -> 1019244969
+851466669 -> 508767264
 }

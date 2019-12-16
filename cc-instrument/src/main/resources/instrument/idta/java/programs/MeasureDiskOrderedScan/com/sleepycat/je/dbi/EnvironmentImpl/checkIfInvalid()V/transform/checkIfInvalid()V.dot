@@ -1,26 +1,26 @@
 digraph checkIfInvalid {
 node [shape=record];
-238350269 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1306072611 [label="L1\lLINENUMBER 1735 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.invalidatingEFE : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 1\lL3\lLINENUMBER 1736 L3\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.$assertionsDisabled : Z\lIFNE L4\l"];
-1447267876 [label="ALOAD 1\lIFNONNULL L4\l"];
-2144429107 [label="L6\lLINENUMBER 1750 L6\lFRAME SAME\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Environment must be closed, caused by: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.wrapSelf (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\lL9\l"];
-807250780 [label="L0\lLINENUMBER 1731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.INVALID : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPEQ L1\l"];
-1053863617 [label="L2\lLINENUMBER 1732 L2\lRETURN\l"];
-190421243 [label="L4\lLINENUMBER 1742 L4\lFRAME APPEND [com/sleepycat/je/EnvironmentFailureException]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.setAlreadyThrown (Z)V\lL5\lLINENUMBER 1744 L5\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.preallocatedEFE : Lcom/sleepycat/je/EnvironmentFailureException;\lIF_ACMPNE L6\l"];
-891944476 [label="L7\lLINENUMBER 1745 L7\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.fillInStackTrace ()Ljava/lang/Throwable;\lPOP\lL8\lLINENUMBER 1747 L8\lALOAD 1\lATHROW\l"];
+525802508 [label="L1\lLINENUMBER 1735 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.invalidatingEFE : Ljava/util/concurrent/atomic/AtomicReference;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/EnvironmentFailureException\lASTORE 1\lL3\lLINENUMBER 1736 L3\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.$assertionsDisabled : Z\lIFNE L4\l"];
+1476355756 [label="L7\lLINENUMBER 1745 L7\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.fillInStackTrace ()Ljava/lang/Throwable;\lPOP\lL8\lLINENUMBER 1747 L8\lALOAD 1\lATHROW\l"];
+427468837 [label="L0\lLINENUMBER 1731 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envState : Lcom/sleepycat/je/dbi/DbEnvState;\lGETSTATIC com/sleepycat/je/dbi/DbEnvState.INVALID : Lcom/sleepycat/je/dbi/DbEnvState;\lIF_ACMPEQ L1\l"];
+1475702323 [label="ALOAD 1\lIFNONNULL L4\l"];
+461557608 [label="L4\lLINENUMBER 1742 L4\lFRAME APPEND [com/sleepycat/je/EnvironmentFailureException]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.setAlreadyThrown (Z)V\lL5\lLINENUMBER 1744 L5\lALOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.preallocatedEFE : Lcom/sleepycat/je/EnvironmentFailureException;\lIF_ACMPNE L6\l"];
+885782960 [label="L2\lLINENUMBER 1732 L2\lRETURN\l"];
+1886364625 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+721886870 [label="L6\lLINENUMBER 1750 L6\lFRAME SAME\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Environment must be closed, caused by: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL com/sleepycat/je/EnvironmentFailureException.wrapSelf (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\lL9\l"];
 entry;
 exit;
-entry -> 807250780
-238350269 -> exit
-1306072611 -> 1447267876
-1306072611 -> 190421243
-1447267876 -> 238350269
-1447267876 -> 190421243
-2144429107 -> exit
-807250780 -> 1306072611
-807250780 -> 1053863617
-1053863617 -> exit
-190421243 -> 2144429107
-190421243 -> 891944476
-891944476 -> exit
+525802508 -> 1475702323
+525802508 -> 461557608
+entry -> 427468837
+1476355756 -> exit
+427468837 -> 525802508
+427468837 -> 885782960
+1475702323 -> 461557608
+1475702323 -> 1886364625
+461557608 -> 1476355756
+461557608 -> 721886870
+885782960 -> exit
+1886364625 -> exit
+721886870 -> exit
 }

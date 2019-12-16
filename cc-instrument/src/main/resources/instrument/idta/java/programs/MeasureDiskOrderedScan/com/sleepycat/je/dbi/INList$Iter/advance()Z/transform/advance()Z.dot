@@ -1,0 +1,18 @@
+digraph advance {
+node [shape=record];
+564576230 [label="L1\lLINENUMBER 305 L1\lFRAME CHOP 1\lICONST_0\lIRETURN\lL7\l"];
+1775540886 [label="L5\lLINENUMBER 301 L5\lALOAD 0\lALOAD 1\lPUTFIELD com/sleepycat/je/dbi/INList$Iter.next : Lcom/sleepycat/je/tree/IN;\lL6\lLINENUMBER 302 L6\lICONST_1\lIRETURN\l"];
+1947658463 [label="L2\lLINENUMBER 299 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/INList$Iter.baseIter : Ljava/util/Iterator;\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/IN\lASTORE 1\lL3\lLINENUMBER 300 L3\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getInListResident ()Z\lIFEQ L4\l"];
+567771286 [label="L4\lLINENUMBER 304 L4\lFRAME APPEND [com/sleepycat/je/tree/IN]\lGOTO L0\l"];
+799861990 [label="L0\lLINENUMBER 298 L0\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/INList$Iter.baseIter : Ljava/util/Iterator;\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 799861990
+564576230 -> exit
+1775540886 -> exit
+1947658463 -> 1775540886
+1947658463 -> 567771286
+567771286 -> 799861990
+799861990 -> 564576230
+799861990 -> 1947658463
+}

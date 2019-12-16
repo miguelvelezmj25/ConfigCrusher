@@ -1,48 +1,48 @@
 digraph countNew {
 node [shape=record];
-268094633 [label="NEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"No DB for lsn=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL12\lLINENUMBER 108 L12\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" type: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
-1175607961 [label="L9\lLINENUMBER 128 L9\lFRAME CHOP 1\lRETURN\lL25\l"];
-797596506 [label="L0\lLINENUMBER 96 L0\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L1\l"];
-1779474184 [label="L10\lLINENUMBER 107 L10\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L11\l"];
-1643964225 [label="L11\lLINENUMBER 110 L11\lFRAME SAME\lALOAD 0\lALOAD 3\lLLOAD 6\lL13\lLINENUMBER 111 L13\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getDbFileSummary (Ljava/lang/Object;J)Lcom/sleepycat/je/cleaner/DbFileSummary;\lASTORE 10\lL14\lLINENUMBER 112 L14\lILOAD 9\lIFEQ L15\l"];
-1541970269 [label="L16\lLINENUMBER 113 L16\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lL17\lLINENUMBER 114 L17\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lL18\lLINENUMBER 115 L18\lALOAD 10\lIFNULL L9\l"];
-1979271870 [label="L1\lLINENUMBER 98 L1\lFRAME SAME\lLLOAD 1\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getFileNumber (J)J\lLSTORE 6\lL2\lLINENUMBER 99 L2\lALOAD 0\lLLOAD 6\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getFileSummary (J)Lcom/sleepycat/je/cleaner/TrackedFileSummary;\lASTORE 8\lL3\lLINENUMBER 100 L3\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lL4\lLINENUMBER 101 L4\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lL5\lLINENUMBER 102 L5\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.isLNType (Lcom/sleepycat/je/log/LogEntryType;)Z\lISTORE 9\lL6\lLINENUMBER 103 L6\lILOAD 9\lIFEQ L7\l"];
-1431909369 [label="L8\lLINENUMBER 104 L8\lALOAD 8\lILOAD 5\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\l"];
-2108085751 [label="ALOAD 3\lIFNONNULL L11\l"];
-1449086517 [label="ALOAD 8\lGETFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\lILOAD 5\lIF_ICMPGE L7\l"];
-1328338145 [label="L23\lLINENUMBER 123 L23\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lL24\lLINENUMBER 124 L24\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\l"];
-728924298 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
-1791633572 [label="L7\lLINENUMBER 106 L7\lFRAME APPEND [J com/sleepycat/je/cleaner/TrackedFileSummary I]\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.trackObsoleteInfo (Lcom/sleepycat/je/log/LogEntryType;)Z\lIFEQ L9\l"];
-893463823 [label="ALOAD 4\lIFNONNULL L1\l"];
-376102145 [label="L19\lLINENUMBER 116 L19\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lL20\lLINENUMBER 117 L20\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lGOTO L9\l"];
-279635642 [label="L15\lLINENUMBER 120 L15\lFRAME APPEND [com/sleepycat/je/cleaner/DbFileSummary]\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lL21\lLINENUMBER 121 L21\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lL22\lLINENUMBER 122 L22\lALOAD 10\lIFNULL L9\l"];
+1955255365 [label="ALOAD 8\lGETFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\lILOAD 5\lIF_ICMPGE L7\l"];
+1921336498 [label="ALOAD 4\lIFNONNULL L1\l"];
+2017649346 [label="NEW java/lang/AssertionError\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"No DB for lsn=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lL12\lLINENUMBER 108 L12\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getNoFormatString (J)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" type: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
+1664941087 [label="L7\lLINENUMBER 106 L7\lFRAME APPEND [J com/sleepycat/je/cleaner/TrackedFileSummary I]\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.trackObsoleteInfo (Lcom/sleepycat/je/log/LogEntryType;)Z\lIFEQ L9\l"];
+622742578 [label="L0\lLINENUMBER 96 L0\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L1\l"];
+700641778 [label="L9\lLINENUMBER 128 L9\lFRAME CHOP 1\lRETURN\lL25\l"];
+27481805 [label="L19\lLINENUMBER 116 L19\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNCount : I\lL20\lLINENUMBER 117 L20\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalLNSize : I\lGOTO L9\l"];
+597849055 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+1813997516 [label="L1\lLINENUMBER 98 L1\lFRAME SAME\lLLOAD 1\lINVOKESTATIC com/sleepycat/je/utilint/DbLsn.getFileNumber (J)J\lLSTORE 6\lL2\lLINENUMBER 99 L2\lALOAD 0\lLLOAD 6\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getFileSummary (J)Lcom/sleepycat/je/cleaner/TrackedFileSummary;\lASTORE 8\lL3\lLINENUMBER 100 L3\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalCount : I\lL4\lLINENUMBER 101 L4\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lL5\lLINENUMBER 102 L5\lALOAD 4\lINVOKESTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.isLNType (Lcom/sleepycat/je/log/LogEntryType;)Z\lISTORE 9\lL6\lLINENUMBER 103 L6\lILOAD 9\lIFEQ L7\l"];
+1002738718 [label="L8\lLINENUMBER 104 L8\lALOAD 8\lILOAD 5\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.maxLNSize : I\l"];
+1847128265 [label="L23\lLINENUMBER 123 L23\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINCount : I\lL24\lLINENUMBER 124 L24\lALOAD 10\lDUP\lGETFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/DbFileSummary.totalINSize : I\l"];
+197669938 [label="L10\lLINENUMBER 107 L10\lGETSTATIC com/sleepycat/je/cleaner/BaseUtilizationTracker.$assertionsDisabled : Z\lIFNE L11\l"];
+1186058585 [label="L16\lLINENUMBER 113 L16\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNCount : I\lL17\lLINENUMBER 114 L17\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lL18\lLINENUMBER 115 L18\lALOAD 10\lIFNULL L9\l"];
+976327146 [label="L15\lLINENUMBER 120 L15\lFRAME APPEND [com/sleepycat/je/cleaner/DbFileSummary]\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lICONST_1\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lL21\lLINENUMBER 121 L21\lALOAD 8\lDUP\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lILOAD 5\lIADD\lPUTFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lL22\lLINENUMBER 122 L22\lALOAD 10\lIFNULL L9\l"];
+853616904 [label="ALOAD 3\lIFNONNULL L11\l"];
+756694225 [label="L11\lLINENUMBER 110 L11\lFRAME SAME\lALOAD 0\lALOAD 3\lLLOAD 6\lL13\lLINENUMBER 111 L13\lINVOKEVIRTUAL com/sleepycat/je/cleaner/BaseUtilizationTracker.getDbFileSummary (Ljava/lang/Object;J)Lcom/sleepycat/je/cleaner/DbFileSummary;\lASTORE 10\lL14\lLINENUMBER 112 L14\lILOAD 9\lIFEQ L15\l"];
 entry;
 exit;
-268094633 -> exit
-1175607961 -> exit
-797596506 -> 1979271870
-797596506 -> 893463823
-1779474184 -> 2108085751
-1779474184 -> 1643964225
-1643964225 -> 1541970269
-1643964225 -> 279635642
-1541970269 -> 1175607961
-1541970269 -> 376102145
-1979271870 -> 1449086517
-1979271870 -> 1791633572
-1431909369 -> 1791633572
-2108085751 -> 268094633
-2108085751 -> 1643964225
-entry -> 797596506
-1449086517 -> 1431909369
-1449086517 -> 1791633572
-1328338145 -> 1175607961
-728924298 -> exit
-1791633572 -> 1175607961
-1791633572 -> 1779474184
-893463823 -> 1979271870
-893463823 -> 728924298
-376102145 -> 1175607961
-279635642 -> 1175607961
-279635642 -> 1328338145
+1955255365 -> 1664941087
+1955255365 -> 1002738718
+1921336498 -> 1813997516
+1921336498 -> 597849055
+2017649346 -> exit
+1664941087 -> 197669938
+1664941087 -> 700641778
+622742578 -> 1921336498
+622742578 -> 1813997516
+700641778 -> exit
+27481805 -> 700641778
+597849055 -> exit
+entry -> 622742578
+1813997516 -> 1955255365
+1813997516 -> 1664941087
+1002738718 -> 1664941087
+1847128265 -> 700641778
+197669938 -> 853616904
+197669938 -> 756694225
+1186058585 -> 700641778
+1186058585 -> 27481805
+976327146 -> 1847128265
+976327146 -> 700641778
+853616904 -> 2017649346
+853616904 -> 756694225
+756694225 -> 1186058585
+756694225 -> 976327146
 }

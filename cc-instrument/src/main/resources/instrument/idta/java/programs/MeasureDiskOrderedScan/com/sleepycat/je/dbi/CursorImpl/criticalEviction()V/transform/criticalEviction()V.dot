@@ -1,28 +1,28 @@
 digraph criticalEviction {
 node [shape=record];
-807910849 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lL3\lLINENUMBER 731 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getDirty ()Z\lIFNE L4\l"];
-1363809560 [label="L1\lLINENUMBER 737 L1\lFRAME SAME\lRETURN\lL5\l"];
-1912691231 [label="L0\lLINENUMBER 730 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.allowEviction : Z\lIFEQ L1\l"];
-1621247236 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.MAKE_COLD : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
-2108366984 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L2\l"];
-1217316984 [label="L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
-1835410652 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.EVICT_BIN : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
-1820659329 [label="L4\lLINENUMBER 735 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.criticalEviction (Z)V\l"];
+2070705875 [label="L4\lLINENUMBER 735 L4\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lICONST_0\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.criticalEviction (Z)V\l"];
+1602403324 [label="L1\lLINENUMBER 737 L1\lFRAME SAME\lRETURN\lL5\l"];
+2128022558 [label="L2\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+290636572 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIFNULL L2\l"];
+2090930296 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lL3\lLINENUMBER 731 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.getDirty ()Z\lIFNE L4\l"];
+1997152964 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.MAKE_COLD : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
+2005839691 [label="L0\lLINENUMBER 730 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.allowEviction : Z\lIFEQ L1\l"];
+838561561 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.EVICT_BIN : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L1\l"];
 entry;
 exit;
-807910849 -> 1217316984
-807910849 -> 1820659329
-entry -> 1912691231
-1363809560 -> exit
-1912691231 -> 1363809560
-1912691231 -> 2108366984
-1621247236 -> 1363809560
-1621247236 -> 1820659329
-2108366984 -> 807910849
-2108366984 -> 1217316984
-1217316984 -> 1363809560
-1217316984 -> 1835410652
-1835410652 -> 1363809560
-1835410652 -> 1621247236
-1820659329 -> 1363809560
+entry -> 2005839691
+2070705875 -> 1602403324
+1602403324 -> exit
+2128022558 -> 1602403324
+2128022558 -> 838561561
+290636572 -> 2128022558
+290636572 -> 2090930296
+2090930296 -> 2070705875
+2090930296 -> 2128022558
+1997152964 -> 2070705875
+1997152964 -> 1602403324
+2005839691 -> 1602403324
+2005839691 -> 290636572
+838561561 -> 1602403324
+838561561 -> 1997152964
 }

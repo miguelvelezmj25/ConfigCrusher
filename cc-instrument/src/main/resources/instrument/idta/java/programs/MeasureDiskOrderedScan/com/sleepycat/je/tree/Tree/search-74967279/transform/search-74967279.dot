@@ -1,0 +1,203 @@
+digraph search {
+node [shape=record];
+1879585266 [label="L2\lLINENUMBER 2307 L2\lFRAME SAME1 java/lang/Exception\lASTORE 13\lL61\lLINENUMBER 2308 L61\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.database : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL62\lLINENUMBER 2309 L62\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Tree\"\lLDC \"searchSubTreeInternal\"\lLDC \"\"\lALOAD 13\lL63\lLINENUMBER 2308 L63\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+1367814834 [label="L42\lLINENUMBER 2259 L42\lALOAD 3\lICONST_0\lPUTFIELD com/sleepycat/je/tree/BINBoundary.isFirstBin : Z\l"];
+671895300 [label="L31\lLINENUMBER 2244 L31\lFRAME SAME\lALOAD 2\lGETSTATIC com/sleepycat/je/tree/Tree$SearchType.RIGHT : Lcom/sleepycat/je/tree/Tree$SearchType;\lIF_ACMPNE L34\l"];
+31059258 [label="L38\lLINENUMBER 2263 L38\lFRAME SAME\lALOAD 9\lILOAD 8\lALOAD 1\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.fetchINWithNoLatch (I[BLcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/IN;\lASTORE 10\lL43\lLINENUMBER 2265 L43\lALOAD 10\lIFNONNULL L44\l"];
+1354662941 [label="L0\lLINENUMBER 2300 L0\lALOAD 10\lIFNULL L58\l"];
+1792891306 [label="L15\lFRAME SAME\lALOAD 1\lIFNULL L14\l"];
+810362772 [label="L47\lLINENUMBER 2268 L47\lFRAME SAME\lALOAD 11\lIFNULL L48\l"];
+1769018646 [label="L13\lLINENUMBER 2208 L13\lACONST_NULL\lARETURN\l"];
+1488428178 [label="ALOAD 9\lIFNONNULL L47\l"];
+1570573786 [label="L49\lLINENUMBER 2269 L49\lALOAD 9\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.accumulateStats (Lcom/sleepycat/je/tree/TreeWalkerStatsAccumulator;)V\lGOTO L48\l"];
+1617606215 [label="L64\lLINENUMBER 2313 L64\lFRAME SAME\lALOAD 14\lATHROW\lL71\l"];
+1989158552 [label="L41\lLINENUMBER 2256 L41\lALOAD 3\lICONST_0\lPUTFIELD com/sleepycat/je/tree/BINBoundary.isLastBin : Z\l"];
+90141835 [label="L1\lLINENUMBER 2311 L1\lFRAME SAME\lGOTO L57\l"];
+970305688 [label="L55\lLINENUMBER 2287 L55\lICONST_1\lISTORE 7\lL56\lLINENUMBER 2288 L56\lALOAD 9\lCHECKCAST com/sleepycat/je/tree/BIN\lASTORE 12\l"];
+740107086 [label="ALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFEQ L1\l"];
+1882572759 [label="L16\lLINENUMBER 2219 L16\lFRAME SAME\lICONST_0\lISTORE 7\lL19\lLINENUMBER 2221 L19\lALOAD 6\lASTORE 9\lL20\lLINENUMBER 2222 L20\lACONST_NULL\lASTORE 10\lL21\lLINENUMBER 2224 L21\lALOAD 0\lL22\lLINENUMBER 2225 L22\lINVOKESPECIAL com/sleepycat/je/tree/Tree.getTreeStatsAccumulator ()Lcom/sleepycat/je/tree/TreeWalkerStatsAccumulator;\lASTORE 11\l"];
+1882403950 [label="L35\lLINENUMBER 2245 L35\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNEntries ()I\lICONST_1\lISUB\lISTORE 8\lL36\lGOTO L30\l"];
+1178134950 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lTRYCATCHBLOCK L3 L4 L5 null\lTRYCATCHBLOCK L6 L7 L8 java/lang/Exception\lTRYCATCHBLOCK L5 L9 L5 null\lL10\lLINENUMBER 2205 L10\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Tree.getRootIN (Lcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/IN;\lASTORE 6\lL11\lLINENUMBER 2207 L11\lALOAD 6\lIFNONNULL L12\l"];
+1619179713 [label="L51\lLINENUMBER 2281 L51\lFRAME SAME\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\lL53\lLINENUMBER 2282 L53\lALOAD 10\lASTORE 9\lL54\lLINENUMBER 2283 L54\lACONST_NULL\lASTORE 10\l"];
+2108499888 [label="L44\lLINENUMBER 2275 L44\lFRAME SAME\lALOAD 9\lALOAD 10\lALOAD 4\lINVOKESTATIC com/sleepycat/je/tree/Tree.latchChildShared (Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/tree/IN;Lcom/sleepycat/je/CacheMode;)V\lL50\lLINENUMBER 2277 L50\lALOAD 11\lIFNULL L51\l"];
+1390126004 [label="L57\lLINENUMBER 2288 L57\lFRAME SAME\lALOAD 12\lARETURN\l"];
+560744507 [label="L65\lLINENUMBER 2304 L65\lFRAME APPEND [T T java/lang/Throwable]\lALOAD 9\lALOAD 10\lIF_ACMPEQ L7\l"];
+1903989644 [label="L3\lLINENUMBER 2228 L3\lALOAD 11\lIFNULL L23\l"];
+764726609 [label="ALOAD 2\lGETSTATIC com/sleepycat/je/tree/Tree$SearchType.RIGHT : Lcom/sleepycat/je/tree/Tree$SearchType;\lIF_ACMPNE L14\l"];
+2067821253 [label="L17\lLINENUMBER 2215 L17\lALOAD 3\lICONST_1\lPUTFIELD com/sleepycat/je/tree/BINBoundary.isLastBin : Z\lL18\lLINENUMBER 2216 L18\lALOAD 3\lICONST_1\lPUTFIELD com/sleepycat/je/tree/BINBoundary.isFirstBin : Z\l"];
+1509139214 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+1638539518 [label="L26\lLINENUMBER 2234 L26\lLDC \"Upper IN with 0 entries\"\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+536460362 [label="L40\lLINENUMBER 2258 L40\lFRAME SAME\lILOAD 8\lIFEQ L38\l"];
+1597855142 [label="L9\lILOAD 7\lIFNE L64\l"];
+1628194670 [label="L27\lLINENUMBER 2241 L27\lFRAME SAME\lALOAD 2\lGETSTATIC com/sleepycat/je/tree/Tree$SearchType.LEFT : Lcom/sleepycat/je/tree/Tree$SearchType;\lIF_ACMPNE L31\l"];
+339106758 [label="L30\lLINENUMBER 2252 L30\lFRAME FULL [com/sleepycat/je/tree/Tree [B com/sleepycat/je/tree/Tree$SearchType com/sleepycat/je/tree/BINBoundary com/sleepycat/je/CacheMode java/util/Comparator com/sleepycat/je/tree/IN I I com/sleepycat/je/tree/IN com/sleepycat/je/tree/IN com/sleepycat/je/tree/TreeWalkerStatsAccumulator] []\lGETSTATIC com/sleepycat/je/tree/Tree.$assertionsDisabled : Z\lIFNE L37\l"];
+452297190 [label="L6\lLINENUMBER 2300 L6\lALOAD 10\lIFNULL L65\l"];
+1277999207 [label="L14\lLINENUMBER 2214 L14\lFRAME SAME\lALOAD 3\lIFNULL L16\l"];
+1767786266 [label="L8\lLINENUMBER 2307 L8\lFRAME SAME1 java/lang/Exception\lASTORE 15\lL68\lLINENUMBER 2308 L68\lALOAD 0\lGETFIELD com/sleepycat/je/tree/Tree.database : Lcom/sleepycat/je/dbi/DatabaseImpl;\lL69\lLINENUMBER 2309 L69\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lLDC \"Tree\"\lLDC \"searchSubTreeInternal\"\lLDC \"\"\lALOAD 15\lL70\lLINENUMBER 2308 L70\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.traceAndLogException (Lcom/sleepycat/je/dbi/EnvironmentImpl;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V\l"];
+428126292 [label="L25\lLINENUMBER 2238 L25\lFRAME SAME\lALOAD 2\lGETSTATIC com/sleepycat/je/tree/Tree$SearchType.NORMAL : Lcom/sleepycat/je/tree/Tree$SearchType;\lIF_ACMPNE L27\l"];
+1500417534 [label="L60\lLINENUMBER 2305 L60\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
+1451076876 [label="L34\lLINENUMBER 2248 L34\lFRAME SAME\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Invalid value of searchType: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedState (Ljava/lang/String;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\l"];
+606810733 [label="L28\lLINENUMBER 2239 L28\lALOAD 9\lALOAD 1\lICONST_0\lICONST_0\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.findEntry ([BZZLjava/util/Comparator;)I\lISTORE 8\lL29\lGOTO L30\l"];
+1401874100 [label="L37\lLINENUMBER 2254 L37\lFRAME SAME\lALOAD 3\lIFNULL L38\l"];
+2030654085 [label="ALOAD 2\lGETSTATIC com/sleepycat/je/tree/Tree$SearchType.LEFT : Lcom/sleepycat/je/tree/Tree$SearchType;\lIF_ACMPEQ L15\l"];
+669670814 [label="L58\lLINENUMBER 2304 L58\lFRAME APPEND [com/sleepycat/je/tree/BIN]\lALOAD 9\lALOAD 10\lIF_ACMPEQ L1\l"];
+176061051 [label="L45\lLINENUMBER 2266 L45\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Tree.getRootIN (Lcom/sleepycat/je/CacheMode;)Lcom/sleepycat/je/tree/IN;\lASTORE 9\lL46\lLINENUMBER 2267 L46\lGETSTATIC com/sleepycat/je/tree/Tree.$assertionsDisabled : Z\lIFNE L47\l"];
+2068870158 [label="L24\lLINENUMBER 2229 L24\lALOAD 9\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.accumulateStats (Lcom/sleepycat/je/tree/TreeWalkerStatsAccumulator;)V\l"];
+725109340 [label="L32\lLINENUMBER 2242 L32\lICONST_0\lISTORE 8\lL33\lGOTO L30\l"];
+973938947 [label="ILOAD 8\lIFGE L37\l"];
+205529237 [label="L66\lLINENUMBER 2301 L66\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
+211001101 [label="L52\lLINENUMBER 2278 L52\lALOAD 10\lALOAD 11\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.accumulateStats (Lcom/sleepycat/je/tree/TreeWalkerStatsAccumulator;)V\l"];
+1430679506 [label="L4\lLINENUMBER 2291 L4\lILOAD 7\lIFNE L57\l"];
+959076855 [label="L48\lLINENUMBER 2285 L48\lFRAME SAME\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isBIN ()Z\lIFEQ L23\l"];
+1065309113 [label="L23\lLINENUMBER 2233 L23\lFRAME FULL [com/sleepycat/je/tree/Tree [B com/sleepycat/je/tree/Tree$SearchType com/sleepycat/je/tree/BINBoundary com/sleepycat/je/CacheMode java/util/Comparator com/sleepycat/je/tree/IN I T com/sleepycat/je/tree/IN com/sleepycat/je/tree/IN com/sleepycat/je/tree/TreeWalkerStatsAccumulator] []\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNEntries ()I\lIFNE L25\l"];
+260084167 [label="L7\lLINENUMBER 2311 L7\lFRAME SAME\lGOTO L64\l"];
+1755325444 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+608765578 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+967665620 [label="ALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFEQ L7\l"];
+923911577 [label="ALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFEQ L58\l"];
+592769683 [label="L59\lLINENUMBER 2301 L59\lALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
+764597210 [label="L67\lLINENUMBER 2305 L67\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.releaseLatch ()V\l"];
+1385156923 [label="L39\lLINENUMBER 2255 L39\lILOAD 8\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getNEntries ()I\lICONST_1\lISUB\lIF_ICMPEQ L40\l"];
+725852893 [label="L5\lLINENUMBER 2291 L5\lFRAME FULL [com/sleepycat/je/tree/Tree [B com/sleepycat/je/tree/Tree$SearchType com/sleepycat/je/tree/BINBoundary com/sleepycat/je/CacheMode java/util/Comparator com/sleepycat/je/tree/IN I T com/sleepycat/je/tree/IN com/sleepycat/je/tree/IN com/sleepycat/je/tree/TreeWalkerStatsAccumulator] [java/lang/Throwable]\lASTORE 14\l"];
+1660202838 [label="L12\lLINENUMBER 2211 L12\lFRAME APPEND [com/sleepycat/je/tree/IN]\lGETSTATIC com/sleepycat/je/tree/Tree.$assertionsDisabled : Z\lIFNE L14\l"];
+1689129139 [label="ALOAD 10\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.isLatchOwner ()Z\lIFEQ L65\l"];
+entry;
+exit;
+1879585266 -> 1390126004
+1367814834 -> 31059258
+1367814834 -> 725852893 [style=dashed, color=red]
+671895300 -> 1882403950
+671895300 -> 1451076876
+671895300 -> 725852893 [style=dashed, color=red]
+31059258 -> 176061051
+31059258 -> 2108499888
+31059258 -> 725852893 [style=dashed, color=red]
+1354662941 -> 669670814
+1354662941 -> 1879585266 [style=dashed, color=red]
+1354662941 -> 923911577
+1792891306 -> 1277999207
+1792891306 -> 1509139214
+810362772 -> 959076855
+810362772 -> 1570573786
+810362772 -> 725852893 [style=dashed, color=red]
+1769018646 -> exit
+1488428178 -> 725852893 [style=dashed, color=red]
+1488428178 -> 810362772
+1488428178 -> 608765578
+1570573786 -> 959076855
+1570573786 -> 725852893 [style=dashed, color=red]
+1617606215 -> exit
+1989158552 -> 536460362
+1989158552 -> 725852893 [style=dashed, color=red]
+90141835 -> 1390126004
+970305688 -> 1430679506
+970305688 -> 725852893 [style=dashed, color=red]
+740107086 -> 1879585266 [style=dashed, color=red]
+740107086 -> 1500417534
+740107086 -> 90141835
+1882572759 -> 1903989644
+1882403950 -> 339106758
+1882403950 -> 725852893 [style=dashed, color=red]
+1178134950 -> 1769018646
+1178134950 -> 1660202838
+1619179713 -> 959076855
+1619179713 -> 725852893 [style=dashed, color=red]
+2108499888 -> 1619179713
+2108499888 -> 725852893 [style=dashed, color=red]
+2108499888 -> 211001101
+1390126004 -> exit
+entry -> 1178134950
+560744507 -> 967665620
+560744507 -> 1767786266 [style=dashed, color=red]
+560744507 -> 260084167
+1903989644 -> 2068870158
+1903989644 -> 1065309113
+1903989644 -> 725852893 [style=dashed, color=red]
+764726609 -> 1277999207
+764726609 -> 1792891306
+2067821253 -> 1882572759
+1509139214 -> exit
+1638539518 -> exit
+1638539518 -> 725852893 [style=dashed, color=red]
+536460362 -> 1367814834
+536460362 -> 31059258
+536460362 -> 725852893 [style=dashed, color=red]
+1597855142 -> 452297190
+1597855142 -> 1617606215
+1628194670 -> 671895300
+1628194670 -> 725109340
+1628194670 -> 725852893 [style=dashed, color=red]
+339106758 -> 973938947
+339106758 -> 1401874100
+339106758 -> 725852893 [style=dashed, color=red]
+452297190 -> 560744507
+452297190 -> 1767786266 [style=dashed, color=red]
+452297190 -> 1689129139
+1277999207 -> 2067821253
+1277999207 -> 1882572759
+1767786266 -> 1617606215
+428126292 -> 1628194670
+428126292 -> 606810733
+428126292 -> 725852893 [style=dashed, color=red]
+1500417534 -> 1879585266 [style=dashed, color=red]
+1500417534 -> 90141835
+1451076876 -> exit
+1451076876 -> 725852893 [style=dashed, color=red]
+606810733 -> 339106758
+606810733 -> 725852893 [style=dashed, color=red]
+1401874100 -> 31059258
+1401874100 -> 1385156923
+1401874100 -> 725852893 [style=dashed, color=red]
+2030654085 -> 764726609
+2030654085 -> 1792891306
+669670814 -> 1879585266 [style=dashed, color=red]
+669670814 -> 90141835
+669670814 -> 740107086
+176061051 -> 1488428178
+176061051 -> 725852893 [style=dashed, color=red]
+176061051 -> 810362772
+2068870158 -> 1065309113
+2068870158 -> 725852893 [style=dashed, color=red]
+725109340 -> 339106758
+725109340 -> 725852893 [style=dashed, color=red]
+973938947 -> 1401874100
+973938947 -> 725852893 [style=dashed, color=red]
+973938947 -> 1755325444
+205529237 -> 560744507
+205529237 -> 1767786266 [style=dashed, color=red]
+211001101 -> 1619179713
+211001101 -> 725852893 [style=dashed, color=red]
+1430679506 -> 1354662941
+1430679506 -> 1390126004
+959076855 -> 1065309113
+959076855 -> 970305688
+959076855 -> 725852893 [style=dashed, color=red]
+1065309113 -> 428126292
+1065309113 -> 1638539518
+1065309113 -> 725852893 [style=dashed, color=red]
+260084167 -> 1617606215
+1755325444 -> exit
+1755325444 -> 725852893 [style=dashed, color=red]
+608765578 -> exit
+608765578 -> 725852893 [style=dashed, color=red]
+967665620 -> 1767786266 [style=dashed, color=red]
+967665620 -> 764597210
+967665620 -> 260084167
+923911577 -> 669670814
+923911577 -> 1879585266 [style=dashed, color=red]
+923911577 -> 592769683
+592769683 -> 669670814
+592769683 -> 1879585266 [style=dashed, color=red]
+764597210 -> 1767786266 [style=dashed, color=red]
+764597210 -> 260084167
+1385156923 -> 1989158552
+1385156923 -> 536460362
+1385156923 -> 725852893 [style=dashed, color=red]
+725852893 -> 725852893 [style=dashed, color=red]
+725852893 -> 1597855142
+1660202838 -> 1277999207
+1660202838 -> 2030654085
+1689129139 -> 560744507
+1689129139 -> 1767786266 [style=dashed, color=red]
+1689129139 -> 205529237
+}

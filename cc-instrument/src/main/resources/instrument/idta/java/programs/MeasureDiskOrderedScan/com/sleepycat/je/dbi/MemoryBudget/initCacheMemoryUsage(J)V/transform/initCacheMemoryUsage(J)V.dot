@@ -1,0 +1,15 @@
+digraph initCacheMemoryUsage {
+node [shape=record];
+289804514 [label="L3\lFRAME APPEND [J J java/util/Iterator]\lALOAD 7\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L4\l"];
+465135046 [label="ALOAD 7\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/IN\lASTORE 8\lL5\lLINENUMBER 940 L5\lLLOAD 3\lALOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getBudgetedMemorySize ()J\lLADD\lLSTORE 3\lL6\lLINENUMBER 941 L6\lLLOAD 5\lALOAD 8\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getTreeAdminMemorySize ()J\lLADD\lLSTORE 5\lL7\lLINENUMBER 942 L7\lGOTO L3\l"];
+1306184223 [label="L4\lLINENUMBER 943 L4\lFRAME SAME\lALOAD 0\lLLOAD 3\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.refreshTreeMemoryUsage (J)V\lL8\lLINENUMBER 944 L8\lALOAD 0\lLLOAD 5\lLLOAD 1\lLADD\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget.refreshTreeAdminMemoryUsage (J)V\lL9\lLINENUMBER 945 L9\lRETURN\lL10\l"];
+1380697338 [label="L0\lLINENUMBER 937 L0\lLCONST_0\lLSTORE 3\lL1\lLINENUMBER 938 L1\lLCONST_0\lLSTORE 5\lL2\lLINENUMBER 939 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getInMemoryINs ()Lcom/sleepycat/je/dbi/INList;\lINVOKEVIRTUAL com/sleepycat/je/dbi/INList.iterator ()Ljava/util/Iterator;\lASTORE 7\l"];
+entry;
+exit;
+entry -> 1380697338
+289804514 -> 465135046
+289804514 -> 1306184223
+465135046 -> 289804514
+1306184223 -> exit
+1380697338 -> 289804514
+}

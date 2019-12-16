@@ -1,0 +1,22 @@
+digraph getRootINRootAlreadyLatched {
+node [shape=record];
+1069186098 [label="1069186098 - []"];
+1488195645 [label="1488195645 - []"];
+entry [label="entry - []"];
+exit [label="exit - []"];
+1063282493 [label="1063282493 - []"];
+1691475353 [label="1691475353 - []"];
+897208954 [label="897208954 - [(MAX_MEMORY && !ENV_IS_LOCKING), (MAX_MEMORY && ENV_IS_LOCKING), (!MAX_MEMORY && ENV_IS_LOCKING), (!MAX_MEMORY && !ENV_IS_LOCKING)]"];
+1694793295 [label="1694793295 - []"];
+entry;
+exit;
+1069186098 -> 1691475353;
+1488195645 -> 1691475353;
+entry -> 897208954;
+1063282493 -> exit;
+1691475353 -> exit;
+897208954 -> 1063282493;
+897208954 -> 1694793295;
+1694793295 -> 1069186098;
+1694793295 -> 1488195645;
+}

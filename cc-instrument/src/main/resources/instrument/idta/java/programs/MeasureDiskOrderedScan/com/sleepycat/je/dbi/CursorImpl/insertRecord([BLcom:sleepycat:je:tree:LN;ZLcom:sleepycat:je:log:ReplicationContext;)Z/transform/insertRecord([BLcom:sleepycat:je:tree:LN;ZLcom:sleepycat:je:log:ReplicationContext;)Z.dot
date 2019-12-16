@@ -1,0 +1,39 @@
+digraph insertRecord {
+node [shape=record];
+1107106068 [label="L3\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL12\lLINENUMBER 1137 L12\lALOAD 7\lATHROW\lL13\l"];
+1819810556 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1122 L4\lGETSTATIC com/sleepycat/je/dbi/CursorImpl.$assertionsDisabled : Z\lIFNE L5\l"];
+119045778 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+577898914 [label="L0\lLINENUMBER 1129 L0\lFRAME SAME\lALOAD 0\lALOAD 1\lALOAD 2\lACONST_NULL\lILOAD 3\lACONST_NULL\lALOAD 4\lL7\lLINENUMBER 1130 L7\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.insertRecordInternal ([BLcom/sleepycat/je/tree/LN;Lcom/sleepycat/je/dbi/ExpirationInfo;ZLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/utilint/Pair;\lASTORE 5\lL8\lLINENUMBER 1134 L8\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/utilint/Pair.second ()Ljava/lang/Object;\lIFNULL L9\l"];
+1936734096 [label="L5\lLINENUMBER 1124 L5\lFRAME SAME\lGETSTATIC com/sleepycat/je/latch/LatchSupport.TRACK_LATCHES : Z\lIFEQ L0\l"];
+780460764 [label="L6\lLINENUMBER 1125 L6\lICONST_0\lINVOKESTATIC com/sleepycat/je/latch/LatchSupport.expectBtreeLatchesHeld (I)V\l"];
+1547344939 [label="L9\lFRAME APPEND [com/sleepycat/je/utilint/Pair]\lICONST_0\l"];
+1973672343 [label="L1\lLINENUMBER 1136 L1\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL11\lLINENUMBER 1134 L11\lILOAD 6\lIRETURN\l"];
+568832534 [label="L10\lFRAME SAME1 I\lISTORE 6\l"];
+1699724483 [label="ICONST_1\lGOTO L10\l"];
+410265352 [label="ALOAD 0\lICONST_0\lICONST_1\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.assertCursorState (ZZ)Z\lIFNE L5\l"];
+1845383597 [label="L2\lLINENUMBER 1136 L2\lFRAME FULL [com/sleepycat/je/dbi/CursorImpl [B com/sleepycat/je/tree/LN I com/sleepycat/je/log/ReplicationContext] [java/lang/Throwable]\lASTORE 7\l"];
+entry;
+exit;
+1973672343 -> exit
+568832534 -> 1973672343
+568832534 -> 1845383597 [style=dashed, color=red]
+1699724483 -> 568832534
+1699724483 -> 1845383597 [style=dashed, color=red]
+1845383597 -> 1107106068
+1845383597 -> 1845383597 [style=dashed, color=red]
+1107106068 -> exit
+entry -> 1819810556
+1819810556 -> 1936734096
+1819810556 -> 410265352
+119045778 -> exit
+577898914 -> 1547344939
+577898914 -> 1699724483
+577898914 -> 1845383597 [style=dashed, color=red]
+1936734096 -> 577898914
+1936734096 -> 780460764
+780460764 -> 577898914
+1547344939 -> 568832534
+1547344939 -> 1845383597 [style=dashed, color=red]
+410265352 -> 119045778
+410265352 -> 1936734096
+}

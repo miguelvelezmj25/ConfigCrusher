@@ -1,0 +1,113 @@
+digraph doCreateDb {
+node [shape=record];
+917151706 [label="L43\lLINENUMBER 623 L43\lFRAME SAME\lALOAD 16\lIFNULL L45\l"];
+346105198 [label="L1\lLINENUMBER 615 L1\lALOAD 13\lIFNULL L41\l"];
+300958043 [label="L23\lLINENUMBER 581 L23\lALOAD 12\lGETSTATIC com/sleepycat/je/log/entry/DbOperationType.CREATE : Lcom/sleepycat/je/log/entry/DbOperationType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getOperationRepContext (Lcom/sleepycat/je/log/entry/DbOperationType;)Lcom/sleepycat/je/log/DbOpReplicationContext;\lASTORE 17\l"];
+737859697 [label="L34\lLINENUMBER 600 L34\lALOAD 0\lALOAD 14\lALOAD 4\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.acquireHandleLock (Lcom/sleepycat/je/dbi/CursorImpl;Lcom/sleepycat/je/txn/HandleLocker;)V\l"];
+1428366118 [label="L63\lLINENUMBER 640 L63\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.lastAllocatedReplicatedDbId : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 10\lLLOAD 10\lLCONST_1\lLADD\lL64\lLINENUMBER 641 L64\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.compareAndSet (JJ)Z\lPOP\l"];
+940817585 [label="L29\lLINENUMBER 594 L29\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl N com/sleepycat/je/dbi/CursorImpl I N com/sleepycat/je/log/ReplicationContext com/sleepycat/je/tree/NameLN] []\lALOAD 14\lALOAD 2\lL30\lLINENUMBER 595 L30\lINVOKESTATIC com/sleepycat/utilint/StringUtils.toUTF8 (Ljava/lang/String;)[B\lALOAD 18\lICONST_0\lALOAD 17\lL31\lLINENUMBER 594 L31\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.insertRecord ([BLcom/sleepycat/je/tree/LN;ZLcom/sleepycat/je/log/ReplicationContext;)Z\lPOP\lL32\lLINENUMBER 599 L32\lALOAD 4\lIFNULL L33\l"];
+89726591 [label="L47\lLINENUMBER 650 L47\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl I com/sleepycat/je/txn/BasicLocker com/sleepycat/je/log/ReplicationContext com/sleepycat/je/tree/NameLN] []\lALOAD 12\lARETURN\lL67\l"];
+1474881087 [label="L52\lLINENUMBER 644 L52\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.lastAllocatedLocalDbId : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 8\lLLOAD 8\lLCONST_1\lLSUB\lL53\lLINENUMBER 645 L53\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.compareAndSet (JJ)Z\lPOP\lGOTO L47\l"];
+1717876169 [label="L57\lLINENUMBER 620 L57\lALOAD 14\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+2020069613 [label="L61\lLINENUMBER 639 L61\lLLOAD 10\lLCONST_0\lLCMP\lIFEQ L62\l"];
+1213233539 [label="L50\lLINENUMBER 640 L50\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.lastAllocatedReplicatedDbId : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 10\lLLOAD 10\lLCONST_1\lLADD\lL51\lLINENUMBER 641 L51\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.compareAndSet (JJ)Z\lPOP\l"];
+445620315 [label="L55\lLINENUMBER 616 L55\lALOAD 13\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+649063890 [label="L59\lLINENUMBER 624 L59\lALOAD 16\lILOAD 15\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\l"];
+346318306 [label="L49\lLINENUMBER 643 L49\lFRAME SAME\lLLOAD 8\lLCONST_0\lLCMP\lIFEQ L47\l"];
+1953100354 [label="L9\lLINENUMBER 552 L9\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/tree/NameLN.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lASTORE 7\lGOTO L10\l"];
+1493040645 [label="L10\lLINENUMBER 569 L10\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J] []\lACONST_NULL\lASTORE 12\lL16\lLINENUMBER 570 L16\lACONST_NULL\lASTORE 13\lL17\lLINENUMBER 571 L17\lACONST_NULL\lASTORE 14\lL18\lLINENUMBER 572 L18\lICONST_0\lISTORE 15\lL19\lLINENUMBER 573 L19\lACONST_NULL\lASTORE 16\l"];
+1116007425 [label="L28\lLINENUMBER 589 L28\lALOAD 5\lASTORE 18\lGOTO L29\l"];
+2015918816 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 543 L4\lACONST_NULL\lASTORE 7\lL5\lLINENUMBER 544 L5\lLCONST_0\lLSTORE 8\lL6\lLINENUMBER 545 L6\lLCONST_0\lLSTORE 10\lL7\lLINENUMBER 546 L7\lALOAD 5\lIFNULL L8\l"];
+853775890 [label="L3\lALOAD 13\lIFNULL L54\l"];
+153555628 [label="L2\lLINENUMBER 615 L2\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl I com/sleepycat/je/txn/BasicLocker] [java/lang/Throwable]\lASTORE 19\l"];
+209741320 [label="L41\lLINENUMBER 619 L41\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/CursorImpl I com/sleepycat/je/txn/BasicLocker com/sleepycat/je/log/ReplicationContext com/sleepycat/je/tree/NameLN] []\lALOAD 14\lIFNULL L43\l"];
+213615917 [label="L62\lLINENUMBER 643 L62\lFRAME SAME\lLLOAD 8\lLCONST_0\lLCMP\lIFEQ L60\l"];
+1770089437 [label="L33\lLINENUMBER 604 L33\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKESTATIC com/sleepycat/je/txn/BasicLocker.createBasicLocker (Lcom/sleepycat/je/dbi/EnvironmentImpl;)Lcom/sleepycat/je/txn/BasicLocker;\lASTORE 16\lL35\lLINENUMBER 605 L35\lNEW com/sleepycat/je/dbi/CursorImpl\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.idDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 16\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;)V\lASTORE 13\lL36\lLINENUMBER 607 L36\lALOAD 13\lALOAD 7\lL37\lLINENUMBER 608 L37\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseId.getBytes ()[B\lNEW com/sleepycat/je/tree/MapLN\lDUP\lALOAD 12\lINVOKESPECIAL com/sleepycat/je/tree/MapLN.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;)V\lICONST_0\lGETSTATIC com/sleepycat/je/log/ReplicationContext.NO_REPLICATE : Lcom/sleepycat/je/log/ReplicationContext;\lL38\lLINENUMBER 607 L38\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.insertRecord ([BLcom/sleepycat/je/tree/LN;ZLcom/sleepycat/je/log/ReplicationContext;)Z\lPOP\lL39\lLINENUMBER 612 L39\lALOAD 12\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.incrementUseCount ()V\lL40\lLINENUMBER 613 L40\lICONST_1\lISTORE 15\l"];
+1991081508 [label="L56\lLINENUMBER 623 L56\lFRAME SAME\lALOAD 16\lIFNULL L58\l"];
+224018003 [label="L45\lLINENUMBER 638 L45\lFRAME SAME\lILOAD 15\lIFNE L47\l"];
+766725533 [label="L54\lLINENUMBER 619 L54\lFRAME APPEND [T T java/lang/Throwable]\lALOAD 14\lIFNULL L56\l"];
+966074145 [label="L46\lLINENUMBER 624 L46\lALOAD 16\lILOAD 15\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.operationEnd (Z)V\l"];
+1497591644 [label="L27\lLINENUMBER 591 L27\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl N com/sleepycat/je/dbi/CursorImpl I N com/sleepycat/je/log/ReplicationContext N] []\lNEW com/sleepycat/je/tree/NameLN\lDUP\lALOAD 7\lINVOKESPECIAL com/sleepycat/je/tree/NameLN.\<init\> (Lcom/sleepycat/je/dbi/DatabaseId;)V\lASTORE 18\l"];
+298288594 [label="L58\lLINENUMBER 638 L58\lFRAME SAME\lILOAD 15\lIFNE L60\l"];
+1438244001 [label="L13\lLINENUMBER 561 L13\lNEW com/sleepycat/je/dbi/DatabaseId\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.getNextReplicatedDbId ()J\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseId.\<init\> (J)V\lASTORE 7\lL14\lLINENUMBER 562 L14\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseId.getId ()J\lLSTORE 10\lGOTO L10\l"];
+1410849030 [label="L44\lLINENUMBER 620 L44\lALOAD 14\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+1743722775 [label="L48\lLINENUMBER 639 L48\lLLOAD 10\lLCONST_0\lLCMP\lIFEQ L49\l"];
+1697046067 [label="L60\lLINENUMBER 648 L60\lFRAME SAME\lALOAD 19\lATHROW\l"];
+800931362 [label="L0\lLINENUMBER 575 L0\lNEW com/sleepycat/je/dbi/DatabaseImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.\<init\> (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/DatabaseConfig;)V\lASTORE 12\lL20\lLINENUMBER 579 L20\lALOAD 6\lASTORE 17\lL21\lLINENUMBER 580 L21\lALOAD 6\lIFNONNULL L22\l"];
+701740317 [label="L42\lLINENUMBER 616 L42\lALOAD 13\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+1597965775 [label="L65\lLINENUMBER 644 L65\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.lastAllocatedLocalDbId : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 8\lLLOAD 8\lLCONST_1\lLSUB\lL66\lLINENUMBER 645 L66\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.compareAndSet (JJ)Z\lPOP\l"];
+1988141070 [label="L11\lLINENUMBER 564 L11\lFRAME SAME\lNEW com/sleepycat/je/dbi/DatabaseId\lDUP\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.getNextLocalDbId ()J\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseId.\<init\> (J)V\lASTORE 7\lL15\lLINENUMBER 565 L15\lALOAD 7\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseId.getId ()J\lLSTORE 8\l"];
+1304475518 [label="ALOAD 3\lL12\lLINENUMBER 560 L12\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReplicated ()Z\lIFEQ L11\l"];
+1644367301 [label="L22\lLINENUMBER 583 L22\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/DatabaseConfig com/sleepycat/je/txn/HandleLocker com/sleepycat/je/tree/NameLN com/sleepycat/je/log/ReplicationContext com/sleepycat/je/dbi/DatabaseId J J com/sleepycat/je/dbi/DatabaseImpl N N I N com/sleepycat/je/log/ReplicationContext] []\lALOAD 0\lALOAD 1\lALOAD 17\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.checkReplicaWrite (Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/log/ReplicationContext;)V\lL24\lLINENUMBER 586 L24\lNEW com/sleepycat/je/dbi/CursorImpl\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;)V\lASTORE 14\lL25\lLINENUMBER 587 L25\lACONST_NULL\lASTORE 18\lL26\lLINENUMBER 588 L26\lALOAD 5\lIFNULL L27\l"];
+1769878516 [label="L8\lLINENUMBER 559 L8\lFRAME APPEND [N J J]\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L11\l"];
+entry;
+exit;
+917151706 -> 224018003
+917151706 -> 966074145
+346105198 -> 701740317
+346105198 -> 209741320
+300958043 -> 1644367301
+300958043 -> 153555628 [style=dashed, color=red]
+737859697 -> 1770089437
+737859697 -> 153555628 [style=dashed, color=red]
+1428366118 -> 213615917
+940817585 -> 1770089437
+940817585 -> 737859697
+940817585 -> 153555628 [style=dashed, color=red]
+89726591 -> exit
+1474881087 -> 89726591
+1717876169 -> 1991081508
+2020069613 -> 1428366118
+2020069613 -> 213615917
+1213233539 -> 346318306
+445620315 -> 766725533
+649063890 -> 298288594
+346318306 -> 89726591
+346318306 -> 1474881087
+1953100354 -> 1493040645
+1493040645 -> 800931362
+1116007425 -> 940817585
+1116007425 -> 153555628 [style=dashed, color=red]
+2015918816 -> 1953100354
+2015918816 -> 1769878516
+853775890 -> 445620315
+853775890 -> 766725533
+153555628 -> 853775890
+153555628 -> 153555628 [style=dashed, color=red]
+209741320 -> 1410849030
+209741320 -> 917151706
+213615917 -> 1697046067
+213615917 -> 1597965775
+1770089437 -> 346105198
+1770089437 -> 153555628 [style=dashed, color=red]
+1991081508 -> 298288594
+1991081508 -> 649063890
+224018003 -> 1743722775
+224018003 -> 89726591
+766725533 -> 1991081508
+766725533 -> 1717876169
+966074145 -> 224018003
+1497591644 -> 940817585
+1497591644 -> 153555628 [style=dashed, color=red]
+298288594 -> 1697046067
+298288594 -> 2020069613
+entry -> 2015918816
+1438244001 -> 1493040645
+1410849030 -> 917151706
+1743722775 -> 1213233539
+1743722775 -> 346318306
+1697046067 -> exit
+800931362 -> 300958043
+800931362 -> 1644367301
+800931362 -> 153555628 [style=dashed, color=red]
+701740317 -> 209741320
+1597965775 -> 1697046067
+1988141070 -> 1493040645
+1304475518 -> 1438244001
+1304475518 -> 1988141070
+1644367301 -> 1497591644
+1644367301 -> 1116007425
+1644367301 -> 153555628 [style=dashed, color=red]
+1769878516 -> 1988141070
+1769878516 -> 1304475518
+}

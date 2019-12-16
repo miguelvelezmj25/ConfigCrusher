@@ -1,0 +1,37 @@
+digraph initFileHandler {
+node [shape=record];
+216082297 [label="L7\lLINENUMBER 1562 L7\lFRAME SAME\lLDC Lcom/sleepycat/je/util/FileHandler;.class\lINVOKEVIRTUAL java/lang/Class.getName ()Ljava/lang/String;\lASTORE 2\lL8\lLINENUMBER 1563 L8\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envHome : Ljava/io/File;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lLDC \"/\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"je.info\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 3\lL9\lLINENUMBER 1566 L9\lLDC 10000000\lISTORE 4\lL10\lLINENUMBER 1567 L10\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \".limit\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL11\lLINENUMBER 1568 L11\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.getLoggerProperty (Ljava/lang/String;)Ljava/lang/String;\lASTORE 5\lL12\lLINENUMBER 1569 L12\lALOAD 5\lIFNULL L13\l"];
+392669344 [label="L13\lLINENUMBER 1574 L13\lFRAME FULL [com/sleepycat/je/dbi/EnvironmentImpl I java/lang/String java/lang/String I java/lang/String] []\lBIPUSH 10\lISTORE 6\lL15\lLINENUMBER 1575 L15\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \".count\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL16\lLINENUMBER 1576 L16\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.getLoggerProperty (Ljava/lang/String;)Ljava/lang/String;\lASTORE 7\lL17\lLINENUMBER 1577 L17\lALOAD 7\lIFNULL L0\l"];
+2032548533 [label="L18\lLINENUMBER 1578 L18\lALOAD 7\lINVOKESTATIC java/lang/Integer.parseInt (Ljava/lang/String;)I\lISTORE 6\l"];
+32815559 [label="L1\lARETURN\l"];
+1207535583 [label="L2\lLINENUMBER 1587 L2\lFRAME SAME1 java/io/IOException\lASTORE 8\lL19\lLINENUMBER 1588 L19\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Problem creating output files in: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 8\lL20\lLINENUMBER 1589 L20\lINVOKESTATIC com/sleepycat/je/EnvironmentFailureException.unexpectedException (Ljava/lang/String;Ljava/lang/Exception;)Lcom/sleepycat/je/EnvironmentFailureException;\lATHROW\lL21\l"];
+768685219 [label="ILOAD 1\lIFNE L7\l"];
+726112503 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL3\lLINENUMBER 1549 L3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.configManager : Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.ENV_SETUP_LOGGER : Lcom/sleepycat/je/config/BooleanConfigParam;\lL4\lLINENUMBER 1550 L4\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getBoolean (Lcom/sleepycat/je/config/BooleanConfigParam;)Z\lISTORE 1\lL5\lLINENUMBER 1551 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envHome : Ljava/io/File;\lIFNULL L6\l"];
+33760214 [label="L6\lLINENUMBER 1559 L6\lFRAME APPEND [I]\lACONST_NULL\lARETURN\l"];
+1568041364 [label="L14\lLINENUMBER 1570 L14\lALOAD 5\lINVOKESTATIC java/lang/Integer.parseInt (Ljava/lang/String;)I\lISTORE 4\l"];
+647858384 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly : Z\lIFEQ L7\l"];
+1357787127 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.envHome : Ljava/io/File;\lINVOKEVIRTUAL java/io/File.isDirectory ()Z\lIFEQ L6\l"];
+1253245333 [label="L0\lLINENUMBER 1582 L0\lFRAME APPEND [I java/lang/String]\lNEW com/sleepycat/je/util/FileHandler\lDUP\lALOAD 3\lILOAD 4\lILOAD 6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/EnvironmentImpl.formatter : Ljava/util/logging/Formatter;\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/util/FileHandler.\<init\> (Ljava/lang/String;IILjava/util/logging/Formatter;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V\l"];
+entry;
+exit;
+216082297 -> 392669344
+216082297 -> 1568041364
+768685219 -> 216082297
+768685219 -> 33760214
+726112503 -> 33760214
+726112503 -> 1357787127
+33760214 -> exit
+1357787127 -> 33760214
+1357787127 -> 647858384
+1253245333 -> 32815559
+1253245333 -> 1207535583 [style=dashed, color=red]
+392669344 -> 2032548533
+392669344 -> 1253245333
+entry -> 726112503
+2032548533 -> 1253245333
+32815559 -> exit
+1207535583 -> exit
+1568041364 -> 392669344
+647858384 -> 216082297
+647858384 -> 768685219
+}

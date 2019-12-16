@@ -1,0 +1,18 @@
+digraph isLastLoggedSizeStored {
+node [shape=record];
+1251270328 [label="ALOAD 0\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.isEmbeddedLN (I)Z\lIFNE L1\l"];
+1788428256 [label="ICONST_1\lGOTO L2\l"];
+1366419627 [label="L2\lFRAME SAME1 I\lIRETURN\lL3\l"];
+337156258 [label="L1\lFRAME SAME\lICONST_0\l"];
+1666912513 [label="L0\lLINENUMBER 478 L0\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.mayHaveLastLoggedSizeStored ()Z\lIFEQ L1\l"];
+entry;
+exit;
+1251270328 -> 1788428256
+1251270328 -> 337156258
+entry -> 1666912513
+1788428256 -> 1366419627
+1366419627 -> exit
+337156258 -> 1366419627
+1666912513 -> 1251270328
+1666912513 -> 337156258
+}

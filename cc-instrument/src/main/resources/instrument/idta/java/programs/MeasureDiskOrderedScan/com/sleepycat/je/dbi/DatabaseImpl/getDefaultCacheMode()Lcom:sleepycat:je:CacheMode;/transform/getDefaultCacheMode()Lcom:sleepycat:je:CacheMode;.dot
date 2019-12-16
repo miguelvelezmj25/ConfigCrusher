@@ -1,18 +1,18 @@
 digraph getDefaultCacheMode {
 node [shape=record];
-217428568 [label="L0\lLINENUMBER 803 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
-980089553 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
-455932086 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lARETURN\lL5\l"];
-13239027 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
-261041678 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+1799471662 [label="L0\lLINENUMBER 803 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lIFNULL L1\l"];
+377766574 [label="L1\lLINENUMBER 806 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isInternalDb ()Z\lIFEQ L3\l"];
+65843817 [label="L4\lLINENUMBER 807 L4\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+1809481334 [label="L2\lLINENUMBER 804 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lARETURN\l"];
+1717128254 [label="L3\lLINENUMBER 809 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getDefaultCacheMode ()Lcom/sleepycat/je/CacheMode;\lARETURN\lL5\l"];
 entry;
 exit;
-entry -> 217428568
-217428568 -> 13239027
-217428568 -> 261041678
-980089553 -> exit
-455932086 -> exit
-13239027 -> 980089553
-13239027 -> 455932086
-261041678 -> exit
+entry -> 1799471662
+1799471662 -> 377766574
+1799471662 -> 1809481334
+377766574 -> 65843817
+377766574 -> 1717128254
+65843817 -> exit
+1809481334 -> exit
+1717128254 -> exit
 }

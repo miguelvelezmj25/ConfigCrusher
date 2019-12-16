@@ -1,0 +1,13 @@
+digraph nonBlockingLock {
+node [shape=record];
+329937275 [label="L4\lLINENUMBER 540 L4\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/txn/Locker.closingLocker : Lcom/sleepycat/je/txn/Locker;\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.checkPreempted (Lcom/sleepycat/je/txn/Locker;)V\l"];
+376086114 [label="L0\lLINENUMBER 537 L0\lALOAD 0\lLLOAD 1\lALOAD 3\lICONST_1\lILOAD 4\lALOAD 5\lL1\lLINENUMBER 538 L1\lINVOKEVIRTUAL com/sleepycat/je/txn/Locker.lockInternal (JLcom/sleepycat/je/txn/LockType;ZZLcom/sleepycat/je/dbi/DatabaseImpl;)Lcom/sleepycat/je/txn/LockResult;\lASTORE 6\lL2\lLINENUMBER 539 L2\lALOAD 6\lINVOKEVIRTUAL com/sleepycat/je/txn/LockResult.getLockGrant ()Lcom/sleepycat/je/txn/LockGrantType;\lGETSTATIC com/sleepycat/je/txn/LockGrantType.DENIED : Lcom/sleepycat/je/txn/LockGrantType;\lIF_ACMPEQ L3\l"];
+1456742291 [label="L3\lLINENUMBER 542 L3\lFRAME APPEND [com/sleepycat/je/txn/LockResult]\lALOAD 6\lARETURN\lL5\l"];
+entry;
+exit;
+entry -> 376086114
+329937275 -> 1456742291
+376086114 -> 329937275
+376086114 -> 1456742291
+1456742291 -> exit
+}

@@ -1,19 +1,19 @@
 digraph checkUpdatesAllowed {
 node [shape=record];
-1746350482 [label="L0\lLINENUMBER 5314 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L2\l"];
-2073524540 [label="L2\lLINENUMBER 5322 L2\lFRAME SAME\lRETURN\lL4\l"];
-2083501428 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
-770018043 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
-756966249 [label="ALOAD 1\lIFNULL L2\l"];
+710781887 [label="L3\lLINENUMBER 5320 L3\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getEnv ()Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.checkTTLAvailable ()V\l"];
+866263357 [label="ALOAD 1\lIFNULL L2\l"];
+538122303 [label="ALOAD 1\lGETFIELD com/sleepycat/je/dbi/ExpirationInfo.expiration : I\lIFLE L2\l"];
+1369140193 [label="L0\lLINENUMBER 5314 L0\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/Cursor.checkUpdatesAllowed ()V\lL1\lLINENUMBER 5316 L1\lALOAD 0\lGETFIELD com/sleepycat/je/Cursor.dbImpl : Lcom/sleepycat/je/dbi/DatabaseImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.isReplicated ()Z\lIFEQ L2\l"];
+1228787231 [label="L2\lLINENUMBER 5322 L2\lFRAME SAME\lRETURN\lL4\l"];
 entry;
 exit;
-1746350482 -> 2073524540
-1746350482 -> 756966249
-entry -> 1746350482
-2073524540 -> exit
-2083501428 -> 2073524540
-770018043 -> 2073524540
-770018043 -> 2083501428
-756966249 -> 2073524540
-756966249 -> 770018043
+entry -> 1369140193
+710781887 -> 1228787231
+866263357 -> 538122303
+866263357 -> 1228787231
+538122303 -> 710781887
+538122303 -> 1228787231
+1369140193 -> 866263357
+1369140193 -> 1228787231
+1228787231 -> exit
 }

@@ -1,0 +1,30 @@
+digraph computeMemorySize {
+node [shape=record];
+1919512767 [label="L9\lLINENUMBER 4645 L9\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 1\l"];
+468407430 [label="L8\lLINENUMBER 4648 L8\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.provisionalObsolete : Lcom/sleepycat/je/cleaner/PackedObsoleteInfo;\lIFNULL L10\l"];
+74549913 [label="L10\lLINENUMBER 4652 L10\lFRAME SAME\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.calculateMemorySize ()J\lLADD\lLSTORE 1\lL12\lLINENUMBER 4653 L12\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.calculateMemorySize ()J\lLADD\lLSTORE 1\lL13\lLINENUMBER 4655 L13\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.offHeapBINIds : Lcom/sleepycat/je/tree/INLongRep;\lIFNULL L14\l"];
+2091565686 [label="L14\lLINENUMBER 4659 L14\lFRAME SAME\lLLOAD 1\lLRETURN\lL16\l"];
+2099554315 [label="L6\lLINENUMBER 4641 L6\lLLOAD 1\lALOAD 0\lILOAD 3\lINVOKESPECIAL com/sleepycat/je/tree/IN.getEntryInMemorySize (I)J\lLADD\lLSTORE 1\lL7\lLINENUMBER 4640 L7\lIINC 3 1\lGOTO L4\l"];
+104344355 [label="L5\lLINENUMBER 4644 L5\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.keyPrefix : [B\lIFNULL L8\l"];
+1548551659 [label="L11\lLINENUMBER 4649 L11\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.provisionalObsolete : Lcom/sleepycat/je/cleaner/PackedObsoleteInfo;\lINVOKEVIRTUAL com/sleepycat/je/cleaner/PackedObsoleteInfo.getMemorySize ()I\lI2L\lLADD\lLSTORE 1\l"];
+1520855477 [label="L4\lFRAME APPEND [J I]\lILOAD 3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.nEntries : I\lIF_ICMPGE L5\l"];
+2058272133 [label="L0\lLINENUMBER 4634 L0\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.getFixedMemoryOverhead ()J\lLSTORE 1\lL1\lLINENUMBER 4636 L1\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryStates : [B\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 1\lL2\lLINENUMBER 4638 L2\lLLOAD 1\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/tree/IN.computeLsnOverhead ()I\lI2L\lLADD\lLSTORE 1\lL3\lLINENUMBER 4640 L3\lICONST_0\lISTORE 3\l"];
+1034223136 [label="L15\lLINENUMBER 4656 L15\lLLOAD 1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.offHeapBINIds : Lcom/sleepycat/je/tree/INLongRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INLongRep.getMemorySize ()J\lLADD\lLSTORE 1\l"];
+entry;
+exit;
+2099554315 -> 1520855477
+104344355 -> 1919512767
+104344355 -> 468407430
+1520855477 -> 2099554315
+1520855477 -> 104344355
+1034223136 -> 2091565686
+entry -> 2058272133
+1919512767 -> 468407430
+468407430 -> 74549913
+468407430 -> 1548551659
+74549913 -> 2091565686
+74549913 -> 1034223136
+2091565686 -> exit
+1548551659 -> 74549913
+2058272133 -> 1520855477
+}

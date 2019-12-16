@@ -1,0 +1,72 @@
+digraph getDb {
+node [shape=record];
+1970413740 [label="L2\lLINENUMBER 1540 L2\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/txn/HandleLocker I com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/DatabaseId] [java/lang/Throwable]\lASTORE 10\l"];
+457919289 [label="L19\lLINENUMBER 1532 L19\lFRAME APPEND [com/sleepycat/je/tree/NameLN]\lALOAD 9\lINVOKEVIRTUAL com/sleepycat/je/tree/NameLN.getId ()Lcom/sleepycat/je/dbi/DatabaseId;\lASTORE 6\lL20\lLINENUMBER 1535 L20\lALOAD 3\lIFNULL L1\l"];
+146791737 [label="L0\lLINENUMBER 1517 L0\lNEW com/sleepycat/je/dbi/CursorImpl\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.\<init\> (Lcom/sleepycat/je/dbi/DatabaseImpl;Lcom/sleepycat/je/txn/Locker;)V\lASTORE 5\lL10\lLINENUMBER 1518 L10\lNEW com/sleepycat/je/DatabaseEntry\lDUP\lALOAD 2\lL11\lLINENUMBER 1519 L11\lINVOKESTATIC com/sleepycat/utilint/StringUtils.toUTF8 (Ljava/lang/String;)[B\lINVOKESPECIAL com/sleepycat/je/DatabaseEntry.\<init\> ([B)V\lASTORE 7\lL12\lLINENUMBER 1522 L12\lILOAD 4\lIFEQ L13\l"];
+425007884 [label="L7\lLINENUMBER 1513 L7\lFRAME SAME\lACONST_NULL\lASTORE 5\lL9\lLINENUMBER 1514 L9\lACONST_NULL\lASTORE 6\l"];
+2065273672 [label="L25\lLINENUMBER 1544 L25\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/txn/HandleLocker I com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/DatabaseId T T T java/lang/Throwable] []\lALOAD 10\lATHROW\l"];
+1189601816 [label="ALOAD 9\lIFNONNULL L19\l"];
+638221342 [label="L28\lLINENUMBER 1552 L28\lFRAME SAME\lALOAD 0\lALOAD 6\lLDC -1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbTree.getDb (Lcom/sleepycat/je/dbi/DatabaseId;JLjava/lang/String;)Lcom/sleepycat/je/dbi/DatabaseImpl;\lARETURN\lL30\l"];
+674042159 [label="L23\lLINENUMBER 1541 L23\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL24\lLINENUMBER 1542 L24\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\lGOTO L22\l"];
+1726920089 [label="L29\lLINENUMBER 1550 L29\lACONST_NULL\lARETURN\l"];
+2140437360 [label="L17\lLINENUMBER 1529 L17\lALOAD 5\lICONST_1\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.getCurrentLN (ZZ)Lcom/sleepycat/je/tree/LN;\lCHECKCAST com/sleepycat/je/tree/NameLN\lASTORE 9\lL18\lLINENUMBER 1531 L18\lGETSTATIC com/sleepycat/je/dbi/DbTree.$assertionsDisabled : Z\lIFNE L19\l"];
+869985327 [label="L13\lLINENUMBER 1525 L13\lFRAME APPEND [com/sleepycat/je/dbi/CursorImpl N com/sleepycat/je/DatabaseEntry]\lALOAD 5\lALOAD 7\lGETSTATIC com/sleepycat/je/txn/LockType.READ : Lcom/sleepycat/je/txn/LockType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.searchExact (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/txn/LockType;)Z\lISTORE 8\l"];
+392778499 [label="L14\lLINENUMBER 1523 L14\lALOAD 5\lALOAD 7\lGETSTATIC com/sleepycat/je/txn/LockType.WRITE : Lcom/sleepycat/je/txn/LockType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.searchExact (Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/txn/LockType;)Z\lISTORE 8\lL15\lGOTO L16\l"];
+604985061 [label="L3\lALOAD 5\lIFNULL L25\l"];
+1763173723 [label="L26\lLINENUMBER 1541 L26\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.releaseBIN ()V\lL27\lLINENUMBER 1542 L27\lALOAD 5\lINVOKEVIRTUAL com/sleepycat/je/dbi/CursorImpl.close ()V\l"];
+284183957 [label="L21\lLINENUMBER 1536 L21\lALOAD 0\lALOAD 5\lALOAD 3\lINVOKESPECIAL com/sleepycat/je/dbi/DbTree.acquireHandleLock (Lcom/sleepycat/je/dbi/CursorImpl;Lcom/sleepycat/je/txn/HandleLocker;)V\l"];
+1387200840 [label="L6\lLINENUMBER 1505 L6\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.idDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lARETURN\l"];
+1003310131 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 1504 L4\lALOAD 2\lGETSTATIC com/sleepycat/je/dbi/DbType.ID : Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.getInternalName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L5\l"];
+2082585591 [label="L1\lLINENUMBER 1540 L1\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/txn/HandleLocker I com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/DatabaseId com/sleepycat/je/DatabaseEntry I] []\lALOAD 5\lIFNULL L22\l"];
+1194579313 [label="L8\lLINENUMBER 1507 L8\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DbTree.nameDatabase : Lcom/sleepycat/je/dbi/DatabaseImpl;\lARETURN\l"];
+1311282370 [label="L16\lLINENUMBER 1528 L16\lFRAME APPEND [I]\lILOAD 8\lIFEQ L1\l"];
+1290006658 [label="NEW java/lang/AssertionError\lDUP\lINVOKESPECIAL java/lang/AssertionError.\<init\> ()V\lATHROW\l"];
+597751529 [label="L5\lLINENUMBER 1506 L5\lFRAME SAME\lALOAD 2\lGETSTATIC com/sleepycat/je/dbi/DbType.NAME : Lcom/sleepycat/je/dbi/DbType;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbType.getInternalName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L7\l"];
+1361305137 [label="L22\lLINENUMBER 1549 L22\lFRAME FULL [com/sleepycat/je/dbi/DbTree com/sleepycat/je/txn/Locker java/lang/String com/sleepycat/je/txn/HandleLocker I com/sleepycat/je/dbi/CursorImpl com/sleepycat/je/dbi/DatabaseId com/sleepycat/je/DatabaseEntry I] []\lALOAD 6\lIFNONNULL L28\l"];
+entry;
+exit;
+1970413740 -> 604985061
+1970413740 -> 1970413740 [style=dashed, color=red]
+457919289 -> 284183957
+457919289 -> 1970413740 [style=dashed, color=red]
+457919289 -> 2082585591
+2065273672 -> exit
+674042159 -> 1361305137
+869985327 -> 1970413740 [style=dashed, color=red]
+869985327 -> 1311282370
+1387200840 -> exit
+1003310131 -> 1387200840
+1003310131 -> 597751529
+2082585591 -> 674042159
+2082585591 -> 1361305137
+146791737 -> 869985327
+146791737 -> 392778499
+146791737 -> 1970413740 [style=dashed, color=red]
+425007884 -> 146791737
+1189601816 -> 1970413740 [style=dashed, color=red]
+1189601816 -> 457919289
+1189601816 -> 1290006658
+638221342 -> exit
+1726920089 -> exit
+2140437360 -> 1970413740 [style=dashed, color=red]
+2140437360 -> 457919289
+2140437360 -> 1189601816
+392778499 -> 1970413740 [style=dashed, color=red]
+392778499 -> 1311282370
+entry -> 1003310131
+604985061 -> 1763173723
+604985061 -> 2065273672
+1763173723 -> 2065273672
+284183957 -> 1970413740 [style=dashed, color=red]
+284183957 -> 2082585591
+1194579313 -> exit
+1311282370 -> 1970413740 [style=dashed, color=red]
+1311282370 -> 2082585591
+1311282370 -> 2140437360
+1290006658 -> exit
+1290006658 -> 1970413740 [style=dashed, color=red]
+597751529 -> 425007884
+597751529 -> 1194579313
+1361305137 -> 638221342
+1361305137 -> 1726920089
+}

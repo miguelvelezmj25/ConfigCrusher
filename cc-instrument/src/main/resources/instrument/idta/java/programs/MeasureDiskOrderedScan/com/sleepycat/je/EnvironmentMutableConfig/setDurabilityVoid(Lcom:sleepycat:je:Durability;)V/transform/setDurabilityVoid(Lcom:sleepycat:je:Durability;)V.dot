@@ -1,0 +1,15 @@
+digraph setDurabilityVoid {
+node [shape=record];
+466047411 [label="L3\lLINENUMBER 272 L3\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.props : Ljava/util/Properties;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.JE_DURABILITY : Lcom/sleepycat/je/config/ConfigParam;\lALOAD 1\lL6\lLINENUMBER 273 L6\lINVOKEVIRTUAL com/sleepycat/je/Durability.toString ()Ljava/lang/String;\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.validateParams : Z\lL7\lLINENUMBER 272 L7\lINVOKESTATIC com/sleepycat/je/dbi/DbConfigManager.setVal (Ljava/util/Properties;Lcom/sleepycat/je/config/ConfigParam;Ljava/lang/String;Z)V\l"];
+912660767 [label="L4\lLINENUMBER 270 L4\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.props : Ljava/util/Properties;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.JE_DURABILITY : Lcom/sleepycat/je/config/ConfigParam;\lINVOKEVIRTUAL java/util/Properties.remove (Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lGOTO L5\l"];
+1303053707 [label="L0\lLINENUMBER 266 L0\lICONST_0\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.txnNoSync : Z\lALOAD 0\lGETFIELD com/sleepycat/je/EnvironmentMutableConfig.txnWriteNoSync : Z\lALOAD 1\lL1\lLINENUMBER 267 L1\lINVOKESTATIC com/sleepycat/je/TransactionConfig.checkMixedMode (ZZZLcom/sleepycat/je/Durability;)V\lL2\lLINENUMBER 269 L2\lALOAD 1\lIFNONNULL L3\l"];
+1211060329 [label="L5\lLINENUMBER 276 L5\lFRAME SAME\lRETURN\lL8\l"];
+entry;
+exit;
+466047411 -> 1211060329
+entry -> 1303053707
+912660767 -> 1211060329
+1303053707 -> 466047411
+1303053707 -> 912660767
+1211060329 -> exit
+}

@@ -1,0 +1,51 @@
+digraph envConfigUpdate {
+node [shape=record];
+247114228 [label="L17\lLINENUMBER 294 L17\lFRAME APPEND [I I java/lang/String]\lALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getEnvironmentHome ()Ljava/io/File;\lASTORE 6\lL19\lGOTO L0\l"];
+1899288614 [label="L23\lLINENUMBER 302 L23\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Specified statistic log directory \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 6\lL24\lLINENUMBER 304 L24\lINVOKEVIRTUAL java/io/File.getAbsolutePath ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" is not a directory.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2038405212 [label="ALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isMemOnly ()Z\lIFNE L5\l"];
+609656450 [label="L18\lLINENUMBER 296 L18\lFRAME SAME\lNEW java/io/File\lDUP\lALOAD 5\lINVOKESPECIAL java/io/File.\<init\> (Ljava/lang/String;)V\lASTORE 6\lL20\lLINENUMBER 298 L20\lALOAD 6\lINVOKEVIRTUAL java/io/File.exists ()Z\lIFNE L21\l"];
+705194315 [label="ALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.STATS_COLLECT : Lcom/sleepycat/je/config/BooleanConfigParam;\lL6\lLINENUMBER 275 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getBoolean (Lcom/sleepycat/je/config/BooleanConfigParam;)Z\lIFNE L7\l"];
+1687308392 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL3\lLINENUMBER 271 L3\lALOAD 0\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.STATS_COLLECT_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getDuration (Lcom/sleepycat/je/config/DurationConfigParam;)I\lI2L\lINVOKEVIRTUAL com/sleepycat/je/statcap/StatCapture.setWaitTime (J)V\lL4\lLINENUMBER 274 L4\lALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReadOnly ()Z\lIFNE L5\l"];
+668314169 [label="L0\lLINENUMBER 309 L0\lFRAME SAME\lALOAD 0\lNEW com/sleepycat/utilint/StatLogger\lDUP\lALOAD 6\lLDC \"je.stat\"\lLDC \"csv\"\lILOAD 3\lILOAD 4\lINVOKESPECIAL com/sleepycat/utilint/StatLogger.\<init\> (Ljava/io/File;Ljava/lang/String;Ljava/lang/String;II)V\lPUTFIELD com/sleepycat/je/statcap/StatCapture.stlog : Lcom/sleepycat/utilint/StatLogger;\l"];
+246229437 [label="ALOAD 5\lLDC \"\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L18\l"];
+89565619 [label="L2\lLINENUMBER 313 L2\lFRAME SAME1 java/io/IOException\lASTORE 7\lL26\lLINENUMBER 314 L26\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \" Error accessing statistics capture file je.stat.csv IO Exception: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 7\lL27\lLINENUMBER 317 L27\lINVOKEVIRTUAL java/io/IOException.getMessage ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1627847180 [label="L25\lLINENUMBER 319 L25\lFRAME SAME\lGOTO L28\l"];
+1655250717 [label="L14\lLINENUMBER 288 L14\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.STATS_FILE_DIRECTORY : Lcom/sleepycat/je/config/ConfigParam;\lL15\lLINENUMBER 289 L15\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.get (Lcom/sleepycat/je/config/ConfigParam;)Ljava/lang/String;\lASTORE 5\lL16\lLINENUMBER 293 L16\lALOAD 5\lIFNULL L17\l"];
+1240685298 [label="L1\lLINENUMBER 318 L1\lGOTO L25\l"];
+438523528 [label="L7\lLINENUMBER 280 L7\lFRAME SAME\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.STATS_MAX_FILES : Lcom/sleepycat/je/config/IntConfigParam;\lL9\lLINENUMBER 281 L9\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lISTORE 3\lL10\lLINENUMBER 283 L10\lALOAD 1\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.STATS_FILE_ROW_COUNT : Lcom/sleepycat/je/config/IntConfigParam;\lL11\lLINENUMBER 284 L11\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getInt (Lcom/sleepycat/je/config/IntConfigParam;)I\lISTORE 4\lL12\lLINENUMBER 286 L12\lALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.stlog : Lcom/sleepycat/utilint/StatLogger;\lIFNONNULL L13\l"];
+372501404 [label="L21\lLINENUMBER 301 L21\lFRAME APPEND [java/io/File]\lALOAD 6\lINVOKEVIRTUAL java/io/File.isDirectory ()Z\lIFNE L0\l"];
+1729218156 [label="L13\lLINENUMBER 320 L13\lFRAME CHOP 2\lALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.stlog : Lcom/sleepycat/utilint/StatLogger;\lILOAD 3\lINVOKEVIRTUAL com/sleepycat/utilint/StatLogger.setFileCount (I)V\lL29\lLINENUMBER 321 L29\lALOAD 0\lGETFIELD com/sleepycat/je/statcap/StatCapture.stlog : Lcom/sleepycat/utilint/StatLogger;\lILOAD 4\lINVOKEVIRTUAL com/sleepycat/utilint/StatLogger.setRowCount (I)V\l"];
+1293754050 [label="L22\lLINENUMBER 300 L22\lALOAD 6\lINVOKEVIRTUAL java/io/File.mkdirs ()Z\lPOP\lGOTO L0\l"];
+1145570272 [label="L28\lLINENUMBER 323 L28\lFRAME SAME\lRETURN\lL30\l"];
+1945198713 [label="L5\lLINENUMBER 276 L5\lFRAME SAME\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/statcap/StatCapture.stlog : Lcom/sleepycat/utilint/StatLogger;\lL8\lLINENUMBER 277 L8\lRETURN\l"];
+entry;
+exit;
+247114228 -> 668314169
+1899288614 -> exit
+2038405212 -> 705194315
+2038405212 -> 1945198713
+609656450 -> 372501404
+609656450 -> 1293754050
+705194315 -> 438523528
+705194315 -> 1945198713
+1687308392 -> 2038405212
+1687308392 -> 1945198713
+668314169 -> 1240685298
+668314169 -> 89565619 [style=dashed, color=red]
+246229437 -> 247114228
+246229437 -> 609656450
+89565619 -> exit
+1627847180 -> 1145570272
+1655250717 -> 247114228
+1655250717 -> 246229437
+entry -> 1687308392
+1240685298 -> 1627847180
+438523528 -> 1729218156
+438523528 -> 1655250717
+372501404 -> 1899288614
+372501404 -> 668314169
+1729218156 -> 1145570272
+1293754050 -> 668314169
+1145570272 -> exit
+1945198713 -> exit
+}

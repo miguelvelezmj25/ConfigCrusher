@@ -1,38 +1,38 @@
 digraph setConfigProperties {
 node [shape=record];
-1772519999 [label="GETSTATIC com/sleepycat/je/dbi/DatabaseImpl.forceKeyPrefixing : Z\lIFEQ L11\l"];
-1853954005 [label="L12\lLINENUMBER 314 L12\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTemporary ()Z\lIFEQ L13\l"];
-418740999 [label="L14\lLINENUMBER 315 L14\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.setTemporary ()V\l"];
-1075073140 [label="L8\lLINENUMBER 307 L8\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getKeyPrefixing ()Z\lIFNE L10\l"];
-924847071 [label="L16\lLINENUMBER 319 L16\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReplicated ()Z\lIFEQ L17\l"];
-521477978 [label="L0\lLINENUMBER 295 L0\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getBtreeComparator ()Ljava/util/Comparator;\lALOAD 3\lL1\lLINENUMBER 296 L1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getBtreeComparatorByClassName ()Z\lL2\lLINENUMBER 295 L2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setBtreeComparator (Ljava/util/Comparator;Z)Z\lPOP\lL3\lLINENUMBER 297 L3\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDuplicateComparator ()Ljava/util/Comparator;\lALOAD 3\lL4\lLINENUMBER 298 L4\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDuplicateComparatorByClassName ()Z\lL5\lLINENUMBER 297 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setDuplicateComparator (Ljava/util/Comparator;Z)Z\lPOP\lL6\lLINENUMBER 300 L6\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTriggers ()Ljava/util/List;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setTriggers (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Ljava/util/List;Z)Z\lPOP\lL7\lLINENUMBER 303 L7\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getSortedDuplicates ()Z\lIFEQ L8\l"];
-1375313233 [label="L15\lLINENUMBER 326 L15\lFRAME SAME\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTransactional ()Z\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.transactional : Z\lL19\lLINENUMBER 327 L19\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDeferredWrite ()Z\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.durableDeferredWrite : Z\lL20\lLINENUMBER 328 L20\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getNodeMaxEntries ()I\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.maxTreeEntriesPerNode : I\lL21\lLINENUMBER 329 L21\lRETURN\lL22\l"];
-1585359205 [label="L10\lLINENUMBER 309 L10\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setKeyPrefixing ()V\lGOTO L12\l"];
-217346511 [label="L11\lLINENUMBER 311 L11\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.clearKeyPrefixing ()V\l"];
-1159708385 [label="L13\lLINENUMBER 318 L13\lFRAME SAME\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L15\l"];
-406823181 [label="L9\lLINENUMBER 304 L9\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setSortedDuplicates ()V\l"];
-1772734777 [label="L18\lLINENUMBER 320 L18\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setIsReplicatedBit ()V\lGOTO L15\l"];
-1513601608 [label="L17\lLINENUMBER 322 L17\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.setNotReplicatedBit ()V\l"];
+1078820923 [label="GETSTATIC com/sleepycat/je/dbi/DatabaseImpl.forceKeyPrefixing : Z\lIFEQ L11\l"];
+643546744 [label="L0\lLINENUMBER 295 L0\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getBtreeComparator ()Ljava/util/Comparator;\lALOAD 3\lL1\lLINENUMBER 296 L1\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getBtreeComparatorByClassName ()Z\lL2\lLINENUMBER 295 L2\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setBtreeComparator (Ljava/util/Comparator;Z)Z\lPOP\lL3\lLINENUMBER 297 L3\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDuplicateComparator ()Ljava/util/Comparator;\lALOAD 3\lL4\lLINENUMBER 298 L4\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDuplicateComparatorByClassName ()Z\lL5\lLINENUMBER 297 L5\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setDuplicateComparator (Ljava/util/Comparator;Z)Z\lPOP\lL6\lLINENUMBER 300 L6\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTriggers ()Ljava/util/List;\lICONST_1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setTriggers (Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Ljava/util/List;Z)Z\lPOP\lL7\lLINENUMBER 303 L7\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getSortedDuplicates ()Z\lIFEQ L8\l"];
+991842654 [label="L10\lLINENUMBER 309 L10\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setKeyPrefixing ()V\lGOTO L12\l"];
+1242741917 [label="L9\lLINENUMBER 304 L9\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setSortedDuplicates ()V\l"];
+1312912595 [label="L8\lLINENUMBER 307 L8\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getKeyPrefixing ()Z\lIFNE L10\l"];
+1182077655 [label="L16\lLINENUMBER 319 L16\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getReplicated ()Z\lIFEQ L17\l"];
+760462857 [label="L15\lLINENUMBER 326 L15\lFRAME SAME\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTransactional ()Z\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.transactional : Z\lL19\lLINENUMBER 327 L19\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getDeferredWrite ()Z\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.durableDeferredWrite : Z\lL20\lLINENUMBER 328 L20\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getNodeMaxEntries ()I\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.maxTreeEntriesPerNode : I\lL21\lLINENUMBER 329 L21\lRETURN\lL22\l"];
+1514549609 [label="L12\lLINENUMBER 314 L12\lFRAME SAME\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/DatabaseConfig.getTemporary ()Z\lIFEQ L13\l"];
+91198221 [label="L11\lLINENUMBER 311 L11\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.clearKeyPrefixing ()V\l"];
+28303738 [label="L17\lLINENUMBER 322 L17\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.setNotReplicatedBit ()V\l"];
+1073416670 [label="L13\lLINENUMBER 318 L13\lFRAME SAME\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.isReplicated ()Z\lIFEQ L15\l"];
+1719513490 [label="L18\lLINENUMBER 320 L18\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.setIsReplicatedBit ()V\lGOTO L15\l"];
+320544734 [label="L14\lLINENUMBER 315 L14\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.setTemporary ()V\l"];
 entry;
 exit;
-1772519999 -> 217346511
-1772519999 -> 1585359205
-1853954005 -> 1159708385
-1853954005 -> 418740999
-418740999 -> 1159708385
-1075073140 -> 1585359205
-1075073140 -> 1772519999
-924847071 -> 1772734777
-924847071 -> 1513601608
-521477978 -> 1075073140
-521477978 -> 406823181
-1375313233 -> exit
-entry -> 521477978
-1585359205 -> 1853954005
-217346511 -> 1853954005
-1159708385 -> 1375313233
-1159708385 -> 924847071
-406823181 -> 1075073140
-1772734777 -> 1375313233
-1513601608 -> 1375313233
+1078820923 -> 991842654
+1078820923 -> 91198221
+643546744 -> 1242741917
+643546744 -> 1312912595
+991842654 -> 1514549609
+1242741917 -> 1312912595
+1312912595 -> 1078820923
+1312912595 -> 991842654
+1182077655 -> 28303738
+1182077655 -> 1719513490
+entry -> 643546744
+760462857 -> exit
+1514549609 -> 1073416670
+1514549609 -> 320544734
+91198221 -> 1514549609
+28303738 -> 760462857
+1073416670 -> 760462857
+1073416670 -> 1182077655
+1719513490 -> 760462857
+320544734 -> 1073416670
 }

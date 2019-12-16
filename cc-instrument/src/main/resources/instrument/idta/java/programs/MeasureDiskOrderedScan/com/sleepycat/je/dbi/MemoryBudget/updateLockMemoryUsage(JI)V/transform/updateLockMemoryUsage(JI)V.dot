@@ -1,34 +1,34 @@
 digraph updateLockMemoryUsage {
 node [shape=record];
-1809091679 [label="L0\lLINENUMBER 1070 L0\lLLOAD 1\lLCONST_0\lLCMP\lIFEQ L1\l"];
-2056387425 [label="L9\lLINENUMBER 1084 L9\lFRAME SAME\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"-------DEC=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" lock[\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"] \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL13\lLINENUMBER 1086 L13\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL14\lLINENUMBER 1084 L14\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-889723643 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lLCONST_0\lLCMP\lIFGE L4\l"];
-1797355990 [label="NEW java/lang/AssertionError\lDUP\lALOAD 0\lLDC \"lockMem\"\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL5\lLINENUMBER 1075 L5\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lLLOAD 1\lL6\lLINENUMBER 1074 L6\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.makeErrorMessage (Ljava/lang/String;JJ)Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
-2054281118 [label="L4\lLINENUMBER 1077 L4\lFRAME SAME\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_LOCK : Z\lIFEQ L7\l"];
-438230589 [label="L10\lLINENUMBER 1079 L10\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"INC-------- =\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" lock[\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"] \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL11\lLINENUMBER 1082 L11\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL12\lLINENUMBER 1079 L12\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L7\l"];
-1969268631 [label="L2\lLINENUMBER 1071 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lPOP2\lL3\lLINENUMBER 1073 L3\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.$assertionsDisabled : Z\lIFNE L4\l"];
-1634202126 [label="L1\lLINENUMBER 1094 L1\lFRAME SAME\lRETURN\lL16\l"];
-139962350 [label="L15\lLINENUMBER 1091 L15\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
-453850938 [label="L7\lLINENUMBER 1090 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L1\l"];
-1865735906 [label="L8\lLINENUMBER 1078 L8\lLLOAD 1\lLCONST_0\lLCMP\lIFLE L9\l"];
+1176939589 [label="L15\lLINENUMBER 1091 L15\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.alertEvictor ()V\l"];
+1221085852 [label="L1\lLINENUMBER 1094 L1\lFRAME SAME\lRETURN\lL16\l"];
+219699046 [label="L9\lLINENUMBER 1084 L9\lFRAME SAME\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"-------DEC=\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" lock[\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"] \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL13\lLINENUMBER 1086 L13\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL14\lLINENUMBER 1084 L14\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1033214712 [label="L7\lLINENUMBER 1090 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.totals : Lcom/sleepycat/je/dbi/MemoryBudget$Totals;\lLLOAD 1\lINVOKEVIRTUAL com/sleepycat/je/dbi/MemoryBudget$Totals.updateCacheUsage (J)Z\lIFEQ L1\l"];
+835972695 [label="L4\lLINENUMBER 1077 L4\lFRAME SAME\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.DEBUG_LOCK : Z\lIFEQ L7\l"];
+155664203 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lLCONST_0\lLCMP\lIFGE L4\l"];
+328888202 [label="L8\lLINENUMBER 1078 L8\lLLOAD 1\lLCONST_0\lLCMP\lIFLE L9\l"];
+100693296 [label="L10\lLINENUMBER 1079 L10\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"INC-------- =\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" lock[\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \"] \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL11\lLINENUMBER 1082 L11\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lL12\lLINENUMBER 1079 L12\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L7\l"];
+204903261 [label="L0\lLINENUMBER 1070 L0\lLLOAD 1\lLCONST_0\lLCMP\lIFEQ L1\l"];
+1879045273 [label="L2\lLINENUMBER 1071 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lLLOAD 1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.addAndGet (J)J\lPOP2\lL3\lLINENUMBER 1073 L3\lGETSTATIC com/sleepycat/je/dbi/MemoryBudget.$assertionsDisabled : Z\lIFNE L4\l"];
+64030805 [label="NEW java/lang/AssertionError\lDUP\lALOAD 0\lLDC \"lockMem\"\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/MemoryBudget.lockMemoryUsage : Ljava/util/concurrent/atomic/AtomicLong;\lL5\lLINENUMBER 1075 L5\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J\lLLOAD 1\lL6\lLINENUMBER 1074 L6\lINVOKESPECIAL com/sleepycat/je/dbi/MemoryBudget.makeErrorMessage (Ljava/lang/String;JJ)Ljava/lang/String;\lINVOKESPECIAL java/lang/AssertionError.\<init\> (Ljava/lang/Object;)V\lATHROW\l"];
 entry;
 exit;
-1809091679 -> 1969268631
-1809091679 -> 1634202126
-889723643 -> 1797355990
-889723643 -> 2054281118
-1797355990 -> exit
-2054281118 -> 453850938
-2054281118 -> 1865735906
-1634202126 -> exit
-453850938 -> 1634202126
-453850938 -> 139962350
-entry -> 1809091679
-2056387425 -> 453850938
-438230589 -> 453850938
-1969268631 -> 889723643
-1969268631 -> 2054281118
-139962350 -> 1634202126
-1865735906 -> 2056387425
-1865735906 -> 438230589
+1221085852 -> exit
+219699046 -> 1033214712
+155664203 -> 835972695
+155664203 -> 64030805
+328888202 -> 219699046
+328888202 -> 100693296
+100693296 -> 1033214712
+1879045273 -> 835972695
+1879045273 -> 155664203
+1176939589 -> 1221085852
+entry -> 204903261
+1033214712 -> 1176939589
+1033214712 -> 1221085852
+835972695 -> 1033214712
+835972695 -> 328888202
+204903261 -> 1221085852
+204903261 -> 1879045273
+64030805 -> exit
 }

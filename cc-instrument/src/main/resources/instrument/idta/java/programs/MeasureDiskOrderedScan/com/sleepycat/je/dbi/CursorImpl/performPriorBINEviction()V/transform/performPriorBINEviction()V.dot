@@ -1,0 +1,36 @@
+digraph performPriorBINEviction {
+node [shape=record];
+513548062 [label="L2\lLINENUMBER 705 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatchIfOwner ()V\lL12\lLINENUMBER 706 L12\lALOAD 2\lATHROW\l"];
+704044287 [label="L11\lLINENUMBER 707 L11\lFRAME SAME\lRETURN\lL13\l"];
+215638965 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.priorBIN : Lcom/sleepycat/je/tree/BIN;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.bin : Lcom/sleepycat/je/tree/BIN;\lIF_ACMPNE L5\l"];
+642418160 [label="L5\lLINENUMBER 691 L5\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.priorBIN : Lcom/sleepycat/je/tree/BIN;\lASTORE 1\lL6\lLINENUMBER 692 L6\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/dbi/CursorImpl.priorBIN : Lcom/sleepycat/je/tree/BIN;\lL7\lLINENUMBER 695 L7\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.DEFAULT : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L8\l"];
+1490033352 [label="L8\lLINENUMBER 698 L8\lFRAME APPEND [com/sleepycat/je/tree/BIN]\lRETURN\l"];
+1114162025 [label="L4\lLINENUMBER 684 L4\lFRAME SAME\lRETURN\l"];
+62914250 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.EVICT_LN : Lcom/sleepycat/je/CacheMode;\lIF_ACMPNE L9\l"];
+1898483272 [label="L9\lLINENUMBER 701 L9\lFRAME SAME\lALOAD 1\lGETSTATIC com/sleepycat/je/CacheMode.UNCHANGED : Lcom/sleepycat/je/CacheMode;\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.latch (Lcom/sleepycat/je/CacheMode;)V\l"];
+1546119472 [label="ALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.cacheMode : Lcom/sleepycat/je/CacheMode;\lGETSTATIC com/sleepycat/je/CacheMode.KEEP_HOT : Lcom/sleepycat/je/CacheMode;\lIF_ACMPEQ L8\l"];
+1330802515 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 683 L3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/CursorImpl.priorBIN : Lcom/sleepycat/je/tree/BIN;\lIFNULL L4\l"];
+471258515 [label="L1\lLINENUMBER 705 L1\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/BIN.releaseLatchIfOwner ()V\lL10\lLINENUMBER 706 L10\lGOTO L11\l"];
+429583573 [label="L0\lLINENUMBER 703 L0\lALOAD 0\lALOAD 1\lINVOKESPECIAL com/sleepycat/je/dbi/CursorImpl.performCacheModeBINEviction (Lcom/sleepycat/je/tree/BIN;)V\l"];
+entry;
+exit;
+513548062 -> exit
+215638965 -> 642418160
+215638965 -> 1114162025
+642418160 -> 1490033352
+642418160 -> 1546119472
+1490033352 -> exit
+62914250 -> 1490033352
+62914250 -> 1898483272
+1898483272 -> 429583573
+1546119472 -> 1490033352
+1546119472 -> 62914250
+entry -> 1330802515
+704044287 -> exit
+1114162025 -> exit
+1330802515 -> 215638965
+1330802515 -> 1114162025
+471258515 -> 704044287
+429583573 -> 513548062 [style=dashed, color=red]
+429583573 -> 471258515
+}

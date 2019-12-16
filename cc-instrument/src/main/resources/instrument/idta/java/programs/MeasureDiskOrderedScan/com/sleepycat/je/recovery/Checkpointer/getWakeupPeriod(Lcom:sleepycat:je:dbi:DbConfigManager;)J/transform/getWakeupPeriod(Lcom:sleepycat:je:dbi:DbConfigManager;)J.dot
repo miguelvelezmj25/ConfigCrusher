@@ -1,0 +1,21 @@
+digraph getWakeupPeriod {
+node [shape=record];
+511225453 [label="LLOAD 3\lLCONST_0\lLCMP\lIFNE L5\l"];
+1281379018 [label="L5\lLINENUMBER 502 L5\lFRAME APPEND [J J]\lLLOAD 3\lLCONST_0\lLCMP\lIFNE L9\l"];
+295650900 [label="L10\lLINENUMBER 503 L10\lLLOAD 1\lLRETURN\l"];
+1014465934 [label="L6\lLINENUMBER 492 L6\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL7\lLINENUMBER 493 L7\lINVOKEVIRTUAL com/sleepycat/je/config/LongConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" and \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL8\lLINENUMBER 495 L8\lINVOKEVIRTUAL com/sleepycat/je/config/DurationConfigParam.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" cannot both be 0. \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1255113382 [label="L9\lLINENUMBER 505 L9\lFRAME SAME\lLCONST_0\lLRETURN\lL11\l"];
+448630376 [label="L0\lLINENUMBER 485 L0\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_WAKEUP_INTERVAL : Lcom/sleepycat/je/config/DurationConfigParam;\lL1\lLINENUMBER 486 L1\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getDuration (Lcom/sleepycat/je/config/DurationConfigParam;)I\lI2L\lLSTORE 1\lL2\lLINENUMBER 487 L2\lALOAD 0\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.CHECKPOINTER_BYTES_INTERVAL : Lcom/sleepycat/je/config/LongConfigParam;\lL3\lLINENUMBER 488 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/DbConfigManager.getLong (Lcom/sleepycat/je/config/LongConfigParam;)J\lLSTORE 3\lL4\lLINENUMBER 491 L4\lLLOAD 1\lLCONST_0\lLCMP\lIFNE L5\l"];
+entry;
+exit;
+entry -> 448630376
+511225453 -> 1281379018
+511225453 -> 1014465934
+1281379018 -> 295650900
+1281379018 -> 1255113382
+295650900 -> exit
+1014465934 -> exit
+1255113382 -> exit
+448630376 -> 511225453
+448630376 -> 1281379018
+}

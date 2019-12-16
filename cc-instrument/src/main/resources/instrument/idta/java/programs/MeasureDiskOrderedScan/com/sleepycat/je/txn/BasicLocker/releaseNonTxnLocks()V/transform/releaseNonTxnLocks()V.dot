@@ -1,0 +1,33 @@
+digraph releaseNonTxnLocks {
+node [shape=record];
+1199614611 [label="L12\lLINENUMBER 222 L12\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.deleteInfo : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.values ()Ljava/util/Collection;\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.addToCompressorQueue (Ljava/util/Collection;)V\lL13\lLINENUMBER 223 L13\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.deleteInfo : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.clear ()V\l"];
+774484151 [label="L7\lLINENUMBER 216 L7\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.ownedLockSet : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.clear ()V\l"];
+389605852 [label="L0\lLINENUMBER 206 L0\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.ownedLock : Ljava/lang/Long;\lIFNULL L1\l"];
+1989101688 [label="L1\lLINENUMBER 210 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.ownedLockSet : Ljava/util/Set;\lIFNULL L4\l"];
+1295015142 [label="L2\lLINENUMBER 207 L2\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.lockManager : Lcom/sleepycat/je/txn/LockManager;\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.ownedLock : Ljava/lang/Long;\lINVOKEVIRTUAL java/lang/Long.longValue ()J\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.release (JLcom/sleepycat/je/txn/Locker;)Z\lPOP\lL3\lLINENUMBER 208 L3\lALOAD 0\lACONST_NULL\lPUTFIELD com/sleepycat/je/txn/BasicLocker.ownedLock : Ljava/lang/Long;\l"];
+1844530773 [label="L5\lLINENUMBER 211 L5\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.ownedLockSet : Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 1\l"];
+709604654 [label="ALOAD 1\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/lang/Long\lASTORE 2\lL8\lLINENUMBER 212 L8\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.lockManager : Lcom/sleepycat/je/txn/LockManager;\lALOAD 2\lINVOKEVIRTUAL java/lang/Long.longValue ()J\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/txn/LockManager.release (JLcom/sleepycat/je/txn/Locker;)Z\lPOP\lL9\lLINENUMBER 213 L9\lGOTO L6\l"];
+1029121578 [label="L4\lLINENUMBER 220 L4\lFRAME CHOP 1\lALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.deleteInfo : Ljava/util/Map;\lIFNULL L10\l"];
+617552565 [label="L10\lLINENUMBER 225 L10\lFRAME SAME\lRETURN\lL14\l"];
+1630603035 [label="L6\lFRAME APPEND [java/util/Iterator]\lALOAD 1\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L7\l"];
+1294976468 [label="ALOAD 0\lGETFIELD com/sleepycat/je/txn/BasicLocker.deleteInfo : Ljava/util/Map;\lL11\lLINENUMBER 221 L11\lINVOKEINTERFACE java/util/Map.size ()I\lIFLE L10\l"];
+entry;
+exit;
+1199614611 -> 617552565
+389605852 -> 1989101688
+389605852 -> 1295015142
+1989101688 -> 1844530773
+1989101688 -> 1029121578
+709604654 -> 1630603035
+617552565 -> exit
+1294976468 -> 1199614611
+1294976468 -> 617552565
+entry -> 389605852
+774484151 -> 1029121578
+1295015142 -> 1989101688
+1844530773 -> 1630603035
+1029121578 -> 617552565
+1029121578 -> 1294976468
+1630603035 -> 774484151
+1630603035 -> 709604654
+}

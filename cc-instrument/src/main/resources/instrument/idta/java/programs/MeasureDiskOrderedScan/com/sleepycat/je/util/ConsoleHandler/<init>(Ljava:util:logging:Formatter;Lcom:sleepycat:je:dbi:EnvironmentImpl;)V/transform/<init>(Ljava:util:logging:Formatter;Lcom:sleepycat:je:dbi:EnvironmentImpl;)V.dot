@@ -1,0 +1,20 @@
+digraph <init> {
+node [shape=record];
+346079558 [label="L11\lLINENUMBER 65 L11\lGETSTATIC java/util/logging/Level.OFF : Ljava/util/logging/Level;\lASTORE 3\lGOTO L8\l"];
+57851205 [label="L0\lLINENUMBER 48 L0\lALOAD 0\lINVOKESPECIAL java/util/logging/ConsoleHandler.\<init\> ()V\lL1\lLINENUMBER 51 L1\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/util/ConsoleHandler.setFormatter (Ljava/util/logging/Formatter;)V\lL2\lLINENUMBER 53 L2\lACONST_NULL\lASTORE 3\lL3\lLINENUMBER 54 L3\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lINVOKEVIRTUAL java/lang/Class.getName ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \".level\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lASTORE 4\lL4\lLINENUMBER 56 L4\lALOAD 2\lIFNULL L5\l"];
+97988432 [label="L5\lLINENUMBER 63 L5\lFRAME FULL [com/sleepycat/je/util/ConsoleHandler java/util/logging/Formatter com/sleepycat/je/dbi/EnvironmentImpl N java/lang/String] []\lALOAD 4\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.getLoggerProperty (Ljava/lang/String;)Ljava/lang/String;\lASTORE 5\lL9\lLINENUMBER 64 L9\lALOAD 5\lIFNONNULL L10\l"];
+679444712 [label="L8\lLINENUMBER 71 L8\lFRAME FULL [com/sleepycat/je/util/ConsoleHandler java/util/logging/Formatter com/sleepycat/je/dbi/EnvironmentImpl java/util/logging/Level java/lang/String] []\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL com/sleepycat/je/util/ConsoleHandler.setLevel (Ljava/util/logging/Level;)V\lL12\lLINENUMBER 72 L12\lRETURN\lL13\l"];
+358081946 [label="L6\lLINENUMBER 57 L6\lALOAD 2\lL7\lLINENUMBER 58 L7\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getConfigManager ()Lcom/sleepycat/je/dbi/DbConfigManager;\lGETSTATIC com/sleepycat/je/config/EnvironmentParams.JE_CONSOLE_LEVEL : Lcom/sleepycat/je/config/ConfigParam;\lALOAD 4\lINVOKESTATIC com/sleepycat/je/utilint/LoggerUtils.getHandlerLevel (Lcom/sleepycat/je/dbi/DbConfigManager;Lcom/sleepycat/je/config/ConfigParam;Ljava/lang/String;)Ljava/util/logging/Level;\lASTORE 3\lGOTO L8\l"];
+1056020535 [label="L10\lLINENUMBER 67 L10\lFRAME APPEND [java/lang/String]\lALOAD 5\lINVOKESTATIC java/util/logging/Level.parse (Ljava/lang/String;)Ljava/util/logging/Level;\lASTORE 3\l"];
+entry;
+exit;
+entry -> 57851205
+346079558 -> 679444712
+57851205 -> 97988432
+57851205 -> 358081946
+97988432 -> 346079558
+97988432 -> 1056020535
+679444712 -> exit
+358081946 -> 679444712
+1056020535 -> 679444712
+}

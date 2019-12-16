@@ -1,13 +1,13 @@
 digraph noteRepChange {
 node [shape=record];
-885595032 [label="L2\lLINENUMBER 150 L2\lRETURN\l"];
-1362056170 [label="L0\lLINENUMBER 148 L0\lALOAD 2\lIFNONNULL L1\l"];
-1306898009 [label="L1\lLINENUMBER 153 L1\lFRAME SAME\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lALOAD 0\lL3\lLINENUMBER 154 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lLSUB\lL4\lLINENUMBER 153 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL5\lLINENUMBER 155 L5\lALOAD 0\lICONST_0\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL6\lLINENUMBER 156 L6\lALOAD 1\lICONST_1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL7\lLINENUMBER 157 L7\lRETURN\lL8\l"];
+854653495 [label="L0\lLINENUMBER 148 L0\lALOAD 2\lIFNONNULL L1\l"];
+1986705827 [label="L2\lLINENUMBER 150 L2\lRETURN\l"];
+1883050389 [label="L1\lLINENUMBER 153 L1\lFRAME SAME\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lALOAD 0\lL3\lLINENUMBER 154 L3\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.calculateMemorySize ()J\lLSUB\lL4\lLINENUMBER 153 L4\lINVOKEVIRTUAL com/sleepycat/je/tree/IN.updateMemorySize (J)V\lL5\lLINENUMBER 155 L5\lALOAD 0\lICONST_0\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL6\lLINENUMBER 156 L6\lALOAD 1\lICONST_1\lALOAD 2\lINVOKEVIRTUAL com/sleepycat/je/tree/INArrayRep.updateCacheStats (ZLcom/sleepycat/je/tree/IN;)V\lL7\lLINENUMBER 157 L7\lRETURN\lL8\l"];
 entry;
 exit;
-entry -> 1362056170
-885595032 -> exit
-1362056170 -> 885595032
-1362056170 -> 1306898009
-1306898009 -> exit
+854653495 -> 1986705827
+854653495 -> 1883050389
+entry -> 854653495
+1986705827 -> exit
+1883050389 -> exit
 }

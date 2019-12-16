@@ -1,0 +1,18 @@
+digraph makeChecksum {
+node [shape=record];
+1526666967 [label="L2\lLINENUMBER 89 L2\lINVOKESTATIC com/sleepycat/je/dbi/EnvironmentImpl.getAdler32ChunkSize ()I\lISTORE 0\lL3\lLINENUMBER 90 L3\lILOAD 0\lIFLE L4\l"];
+1112410815 [label="L1\lLINENUMBER 96 L1\lFRAME CHOP 1\lNEW com/sleepycat/je/utilint/Adler32\lDUP\lINVOKESPECIAL com/sleepycat/je/utilint/Adler32.\<init\> ()V\lARETURN\l"];
+1051682017 [label="L5\lLINENUMBER 91 L5\lNEW com/sleepycat/je/utilint/Adler32$ChunkingAdler32\lDUP\lILOAD 0\lINVOKESPECIAL com/sleepycat/je/utilint/Adler32$ChunkingAdler32.\<init\> (I)V\lARETURN\l"];
+1185047639 [label="L4\lLINENUMBER 93 L4\lFRAME APPEND [I]\lNEW java/util/zip/Adler32\lDUP\lINVOKESPECIAL java/util/zip/Adler32.\<init\> ()V\lARETURN\l"];
+878286223 [label="L0\lLINENUMBER 88 L0\lGETSTATIC com/sleepycat/je/dbi/EnvironmentImpl.USE_JAVA5_ADLER32 : Z\lIFEQ L1\l"];
+entry;
+exit;
+1526666967 -> 1051682017
+1526666967 -> 1185047639
+entry -> 878286223
+1112410815 -> exit
+1051682017 -> exit
+1185047639 -> exit
+878286223 -> 1526666967
+878286223 -> 1112410815
+}

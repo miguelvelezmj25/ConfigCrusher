@@ -1,21 +1,21 @@
 digraph getEntryInMemorySize {
 node [shape=record];
-913086949 [label="L5\lLINENUMBER 4700 L5\lLLOAD 2\lALOAD 4\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 2\l"];
-295254402 [label="L0\lLINENUMBER 4686 L0\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 4692 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.accountsForKeyByteMemUsage ()Z\lIFNE L2\l"];
-723686645 [label="L2\lLINENUMBER 4704 L2\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Node\lASTORE 4\lL6\lLINENUMBER 4705 L6\lALOAD 4\lIFNULL L7\l"];
-434330304 [label="L3\lLINENUMBER 4698 L3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.get (I)Ljava/lang/Object;\lCHECKCAST [B\lASTORE 4\lL4\lLINENUMBER 4699 L4\lALOAD 4\lIFNULL L2\l"];
-1851908995 [label="L8\lLINENUMBER 4706 L8\lLLOAD 2\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Node.getMemorySizeIncludedByParent ()J\lLADD\lLSTORE 2\l"];
-1842840021 [label="L7\lLINENUMBER 4708 L7\lFRAME APPEND [com/sleepycat/je/tree/Node]\lLLOAD 2\lLRETURN\lL9\l"];
+702120772 [label="L0\lLINENUMBER 4686 L0\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 4692 L1\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.accountsForKeyByteMemUsage ()Z\lIFNE L2\l"];
+1958248468 [label="L2\lLINENUMBER 4704 L2\lFRAME APPEND [J]\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryTargets : Lcom/sleepycat/je/tree/INTargetRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INTargetRep.get (I)Ljava/lang/Object;\lCHECKCAST com/sleepycat/je/tree/Node\lASTORE 4\lL6\lLINENUMBER 4705 L6\lALOAD 4\lIFNULL L7\l"];
+1967697184 [label="L5\lLINENUMBER 4700 L5\lLLOAD 2\lALOAD 4\lARRAYLENGTH\lINVOKESTATIC com/sleepycat/je/dbi/MemoryBudget.byteArraySize (I)I\lI2L\lLADD\lLSTORE 2\l"];
+1428542263 [label="L3\lLINENUMBER 4698 L3\lALOAD 0\lGETFIELD com/sleepycat/je/tree/IN.entryKeys : Lcom/sleepycat/je/tree/INKeyRep;\lILOAD 1\lINVOKEVIRTUAL com/sleepycat/je/tree/INKeyRep.get (I)Ljava/lang/Object;\lCHECKCAST [B\lASTORE 4\lL4\lLINENUMBER 4699 L4\lALOAD 4\lIFNULL L2\l"];
+1797850687 [label="L7\lLINENUMBER 4708 L7\lFRAME APPEND [com/sleepycat/je/tree/Node]\lLLOAD 2\lLRETURN\lL9\l"];
+275694446 [label="L8\lLINENUMBER 4706 L8\lLLOAD 2\lALOAD 4\lINVOKEVIRTUAL com/sleepycat/je/tree/Node.getMemorySizeIncludedByParent ()J\lLADD\lLSTORE 2\l"];
 entry;
 exit;
-913086949 -> 723686645
-entry -> 295254402
-295254402 -> 723686645
-295254402 -> 434330304
-723686645 -> 1851908995
-723686645 -> 1842840021
-434330304 -> 913086949
-434330304 -> 723686645
-1851908995 -> 1842840021
-1842840021 -> exit
+entry -> 702120772
+702120772 -> 1958248468
+702120772 -> 1428542263
+1958248468 -> 1797850687
+1958248468 -> 275694446
+1967697184 -> 1958248468
+1428542263 -> 1958248468
+1428542263 -> 1967697184
+1797850687 -> exit
+275694446 -> 1797850687
 }

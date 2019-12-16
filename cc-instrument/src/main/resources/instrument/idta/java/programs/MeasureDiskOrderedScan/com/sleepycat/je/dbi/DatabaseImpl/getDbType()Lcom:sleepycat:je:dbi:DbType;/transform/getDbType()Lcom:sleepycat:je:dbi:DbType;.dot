@@ -1,13 +1,13 @@
 digraph getDbType {
 node [shape=record];
-746576483 [label="L0\lLINENUMBER 551 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lIFNULL L1\l"];
-340939984 [label="L2\lLINENUMBER 552 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lARETURN\l"];
-1134251087 [label="L1\lLINENUMBER 554 L1\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.resetDbType ()V\lL3\lLINENUMBER 555 L3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lARETURN\lL4\l"];
+875766773 [label="L1\lLINENUMBER 554 L1\lFRAME SAME\lALOAD 0\lINVOKESPECIAL com/sleepycat/je/dbi/DatabaseImpl.resetDbType ()V\lL3\lLINENUMBER 555 L3\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lARETURN\lL4\l"];
+421103427 [label="L2\lLINENUMBER 552 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lARETURN\l"];
+1077137598 [label="L0\lLINENUMBER 551 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.dbType : Lcom/sleepycat/je/dbi/DbType;\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 746576483
-746576483 -> 340939984
-746576483 -> 1134251087
-340939984 -> exit
-1134251087 -> exit
+entry -> 1077137598
+875766773 -> exit
+421103427 -> exit
+1077137598 -> 875766773
+1077137598 -> 421103427
 }

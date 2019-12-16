@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofile
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
-import edu.cmu.cs.mvelezce.java.processor.execution.instrumentation.idta.IDTAInstrumentExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta.IDTAJProfilerSamplingExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import org.junit.Test;
@@ -18,12 +17,11 @@ public class IDTAPerfAggregatorProcessorTest {
   public void trivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
-        new IDTAInstrumentExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
     Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
         processor.analyze(args);
-
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -43,7 +41,6 @@ public class IDTAPerfAggregatorProcessorTest {
     String[] args = new String[0];
     Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
         processor.analyze(args);
-
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 

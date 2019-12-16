@@ -102,6 +102,11 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
 
     for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
       SummaryStatistics stats = entry.getValue();
+
+      if (stats.getN() == 1) {
+        continue;
+      }
+
       TDistribution tDist = new TDistribution(stats.getN() - 1);
       double critVal = tDist.inverseCumulativeProbability(1.0 - (1 - 0.95) / 2);
       double ciValue = critVal * Math.sqrt(stats.getVariance()) / Math.sqrt(stats.getN());

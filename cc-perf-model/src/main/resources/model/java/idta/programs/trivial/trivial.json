@@ -1,0 +1,101 @@
+{
+  "localModels": [
+    {
+      "region": "f733287f-fd73-4a52-9c23-e9b6f0440ab8",
+      "model": {
+        "!def(A)": 0.0,
+        "def(A)": 1.004638E9
+      },
+      "modelToMin": {
+        "!def(A)": 0.0,
+        "def(A)": 1.004638E9
+      },
+      "modelToMax": {
+        "!def(A)": 0.0,
+        "def(A)": 1.004638E9
+      },
+      "modelToDiff": {
+        "!def(A)": 0.0,
+        "def(A)": 0.0
+      },
+      "modelToPerfHumanReadable": {
+        "!def(A)": "0.0000000",
+        "def(A)": "1.0046380"
+      },
+      "modelToMinHumanReadable": {
+        "!def(A)": "0.0000000",
+        "def(A)": "1.0046380"
+      },
+      "modelToMaxHumanReadable": {
+        "!def(A)": "0.0000000",
+        "def(A)": "1.0046380"
+      },
+      "modelToDiffHumanReadable": {
+        "!def(A)": "0.0000000",
+        "def(A)": "0.0000000"
+      }
+    },
+    {
+      "region": "00000000-0000-0000-0000-000000000000",
+      "model": {
+        "True": 1.50126E9
+      },
+      "modelToMin": {
+        "True": 1.50045E9
+      },
+      "modelToMax": {
+        "True": 1.502866E9
+      },
+      "modelToDiff": {
+        "True": 2416000.0
+      },
+      "modelToPerfHumanReadable": {
+        "True": "1.5012600"
+      },
+      "modelToMinHumanReadable": {
+        "True": "1.5004500"
+      },
+      "modelToMaxHumanReadable": {
+        "True": "1.5028660"
+      },
+      "modelToDiffHumanReadable": {
+        "True": "0.0024160"
+      }
+    },
+    {
+      "region": "2ec6df50-5b10-4995-b681-bfd598ece7c0",
+      "model": {
+        "!def(B)": 0.0,
+        "def(B)": 2.004478E9
+      },
+      "modelToMin": {
+        "!def(B)": 0.0,
+        "def(B)": 2.004478E9
+      },
+      "modelToMax": {
+        "!def(B)": 0.0,
+        "def(B)": 2.004478E9
+      },
+      "modelToDiff": {
+        "!def(B)": 0.0,
+        "def(B)": 0.0
+      },
+      "modelToPerfHumanReadable": {
+        "!def(B)": "0.0000000",
+        "def(B)": "2.0044780"
+      },
+      "modelToMinHumanReadable": {
+        "!def(B)": "0.0000000",
+        "def(B)": "2.0044780"
+      },
+      "modelToMaxHumanReadable": {
+        "!def(B)": "0.0000000",
+        "def(B)": "2.0044780"
+      },
+      "modelToDiffHumanReadable": {
+        "!def(B)": "0.0000000",
+        "def(B)": "0.0000000"
+      }
+    }
+  ]
+}

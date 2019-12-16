@@ -3,12 +3,14 @@ package edu.cmu.cs.mvelezce.builder.idta;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
+import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
+import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -30,6 +32,11 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
       Map<JavaRegion, Set<FeatureExpr>> regionsToData,
       Set<PerformanceEntry> performanceEntries) {
     super(programName, options, regionsToData, performanceEntries);
+
+    Set<FeatureExpr> baseConstraints = new HashSet<>();
+    baseConstraints.add(SATFeatureExprFactory.True());
+
+    regionsToData.put(RegionsManager.PROGRAM_REGION, baseConstraints);
   }
 
   @Override

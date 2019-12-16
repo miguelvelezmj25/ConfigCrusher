@@ -15,7 +15,6 @@ import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.builder.gt.GroundTruthExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.learning.builder.model.matlab.MatlabLinearLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -60,18 +59,20 @@ public class EvaluationTest {
   @Test
   public void berkeleyDB_IDTA_Data() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseCompression compression = new IDTANaiveCompression(programName);
+    BaseCompression idtaCompression = new IDTANaiveCompression(programName);
     String[] args = new String[0];
-    Set<Set<String>> executedConfigs = compression.analyze(args);
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
 
     BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
         new IDTAPerformanceModelBuilder(programName);
     args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
-    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Set<Set<String>> configsToPredict = ConfigHelper.getConfigurations(options);
+    BaseCompression gtCompression = new GTCompression(programName);
+    args = new String[0];
+    Set<Set<String>> configsToPredict = gtCompression.analyze(args);
 
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
     eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
   }

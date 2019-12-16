@@ -38,7 +38,8 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
     "TXN_SERIALIZABLE_ISOLATION",
     "JE_DURABILITY",
     "ADLER32_CHUNK_SIZE",
-    "CHECKPOINTER_BYTES_INTERVAL"
+    "CHECKPOINTER_BYTES_INTERVAL",
+    "LOCK_DEADLOCK_DETECT_DELAY"
   };
 
   public BaseMeasureDiskOrderedScanAdapter() {

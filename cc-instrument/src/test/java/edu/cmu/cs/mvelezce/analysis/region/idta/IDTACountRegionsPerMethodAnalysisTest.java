@@ -48,7 +48,6 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void expandedBerkeleyDB() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    String workloadSize = "small";
     BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
     Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
         instrumenter.getProcessedRegionsToData();

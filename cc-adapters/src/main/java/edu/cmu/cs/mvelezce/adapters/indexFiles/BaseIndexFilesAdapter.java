@@ -31,7 +31,11 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
     "COMMIT_ON_CLOSE",
     "CHECK_PENDING_FLUSH_UPDATE",
     "READER_POOLING",
-    "MAX_BUFFERED_DOCS"
+    "MAX_BUFFERED_DOCS",
+    "CODEC",
+    "USE_COMPOUND_FILE",
+    "INDEX_DELETION_POLICY",
+    "MAX_TOKEN_LENGTH"
   };
 
   public BaseIndexFilesAdapter() {

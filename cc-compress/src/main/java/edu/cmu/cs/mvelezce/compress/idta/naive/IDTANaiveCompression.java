@@ -46,6 +46,6 @@ public class IDTANaiveCompression extends IDTACompression {
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR + "/" + this.getProgramName();
   }
 }

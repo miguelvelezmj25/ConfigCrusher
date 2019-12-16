@@ -28,7 +28,7 @@ public class GTCompressionTest {
   public void lucene() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
-    BaseCompression compression = new GTCompression(programName, options);
+    BaseCompression compression = new GTCompression(programName, options, 100);
 
     String[] args = new String[2];
     args[0] = "-delres";

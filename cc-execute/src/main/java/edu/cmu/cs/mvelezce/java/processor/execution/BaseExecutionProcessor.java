@@ -14,6 +14,8 @@ import java.util.*;
 public abstract class BaseExecutionProcessor<T>
     implements Analysis<Map<Integer, Set<ProcessedPerfExecution>>> {
 
+  public static final String TRUE_REGION = "True";
+
   private final Map<Integer, Set<T>> itersToRawPerfExecutions;
   private final String outputDir;
 
@@ -24,8 +26,7 @@ public abstract class BaseExecutionProcessor<T>
   }
 
   @Override
-  public Map<Integer, Set<ProcessedPerfExecution>> analyze(String[] args)
-      throws IOException, InterruptedException {
+  public Map<Integer, Set<ProcessedPerfExecution>> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     File file = new File(this.outputDir);

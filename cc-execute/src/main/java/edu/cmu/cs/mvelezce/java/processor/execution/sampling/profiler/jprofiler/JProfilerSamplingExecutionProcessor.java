@@ -7,13 +7,14 @@ import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProf
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.JProfilerSnapshotEntry;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Node;
+import edu.cmu.cs.mvelezce.region.RegionsManager;
 
 import java.util.*;
 
 public abstract class JProfilerSamplingExecutionProcessor
     extends BaseExecutionProcessor<RawJProfilerSamplingPerfExecution> {
 
-//  private static final double J_PROFILER_OVERHEAD = 0.15;
+  //  private static final double J_PROFILER_OVERHEAD = 0.15;
   private static final double J_PROFILER_OVERHEAD = 0.0;
 
   private final Map<String, String> fullyQualifiedMethodsToRegionIds = new HashMap<>();
@@ -75,6 +76,9 @@ public abstract class JProfilerSamplingExecutionProcessor
               region.getRegionMethodSignature());
       this.fullyQualifiedMethodsToRegionIds.put(fullyQualifiedName, region.getId().toString());
     }
+
+    this.fullyQualifiedMethodsToRegionIds.put(
+        BaseExecutionProcessor.TRUE_REGION, RegionsManager.PROGRAM_REGION_ID.toString());
   }
 
   private String getRegionFullyQualifiedName(
@@ -106,11 +110,15 @@ public abstract class JProfilerSamplingExecutionProcessor
         String fullyQualifiedName = this.snapshotEntriesToFullyQualifiedMethods.get(entry);
         String region = this.fullyQualifiedMethodsToRegionIds.get(fullyQualifiedName);
 
-        if (region == null) {
+        if (region == null && !entry.getNodes().isEmpty()) {
           for (Node node : entry.getNodes()) {
             stack.push(node);
           }
         } else {
+          if (region == null) {
+            region = this.fullyQualifiedMethodsToRegionIds.get(BaseExecutionProcessor.TRUE_REGION);
+          }
+
           long currentTime = regionsToPerf.get(region);
           currentTime += (entry.getTime() * 1_000 * (1 - J_PROFILER_OVERHEAD));
           regionsToPerf.put(region, currentTime);

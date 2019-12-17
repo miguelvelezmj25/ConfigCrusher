@@ -28,6 +28,6 @@ public class PWCompression extends BaseCompression {
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR + "/" + this.getProgramName();
   }
 }

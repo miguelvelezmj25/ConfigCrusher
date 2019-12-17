@@ -39,6 +39,27 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
     regionsToData.put(RegionsManager.PROGRAM_REGION, baseConstraints);
   }
 
+  //  protected void validateOneConfigCoversOneConstraint(
+  //          MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+  //    for (PerformanceEntry entry : this.getPerformanceEntries()) {
+  //      FeatureExpr configConstraint = this.getPerfEntryToExecConstraint().get(entry);
+  //      Set<FeatureExpr> coveredConstraints = new HashSet<>();
+  //
+  //      for (FeatureExpr regionConstraint : localModel.getModel().keySet()) {
+  //        if (configConstraint.implies(regionConstraint).isTautology()) {
+  //          coveredConstraints.add(regionConstraint);
+  //        }
+  //      }
+  //
+  //      if (coveredConstraints.size() > 1) {
+  //        throw new RuntimeException(
+  //                "Expected that one executed configuration would cover at most one region
+  // constraint"
+  //                        + localModel.getRegion());
+  //      }
+  //    }
+  //  }
+
   @Override
   public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();

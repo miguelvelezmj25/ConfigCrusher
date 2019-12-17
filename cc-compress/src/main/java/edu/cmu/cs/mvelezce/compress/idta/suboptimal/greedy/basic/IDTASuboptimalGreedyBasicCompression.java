@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.compress.idta.naive;
+package edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.basic;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.compress.idta.IDTACompression;
@@ -8,16 +8,19 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.*;
 
-public class IDTANaiveCompression extends IDTACompression {
+/** Sub-optimal algorithm */
+public class IDTASuboptimalGreedyBasicCompression extends IDTACompression {
 
   private static final String OUTPUT_DIR =
-      "../cc-compress/" + Options.DIRECTORY + "/compression/java/programs/idta/naive";
+      "../cc-compress/"
+          + Options.DIRECTORY
+          + "/compression/java/programs/idta/suboptimal/greedy/basic";
 
-  public IDTANaiveCompression(String programName) {
+  public IDTASuboptimalGreedyBasicCompression(String programName) {
     this(programName, new ArrayList<>(), new HashSet<>());
   }
 
-  IDTANaiveCompression(
+  IDTASuboptimalGreedyBasicCompression(
       String programName, List<String> options, Collection<Set<FeatureExpr>> allConstraints) {
     super(programName, options, allConstraints);
   }

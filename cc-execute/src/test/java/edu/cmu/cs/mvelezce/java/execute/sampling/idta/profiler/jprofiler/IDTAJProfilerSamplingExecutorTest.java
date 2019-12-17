@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
-import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
+import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class IDTAJProfilerSamplingExecutorTest {
   @Test
   public void trivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    BaseCompression compression = new IDTANaiveCompression(programName);
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
@@ -33,7 +33,7 @@ public class IDTAJProfilerSamplingExecutorTest {
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseCompression compression = new IDTANaiveCompression(programName);
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
@@ -50,7 +50,7 @@ public class IDTAJProfilerSamplingExecutorTest {
   @Test
   public void lucene() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
-    BaseCompression compression = new IDTANaiveCompression(programName);
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 

@@ -10,7 +10,7 @@ import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
-import edu.cmu.cs.mvelezce.compress.idta.naive.IDTANaiveCompression;
+import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
 import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.builder.gt.GroundTruthExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.learning.builder.model.matlab.MatlabLinearLearnedModelBuilder;
@@ -59,7 +59,7 @@ public class EvaluationTest {
   @Test
   public void berkeleyDB_IDTA_Data() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseCompression idtaCompression = new IDTANaiveCompression(programName);
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
 

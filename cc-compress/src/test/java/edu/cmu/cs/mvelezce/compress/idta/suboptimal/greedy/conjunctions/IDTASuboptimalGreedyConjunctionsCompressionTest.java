@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.compress.idta.naive;
+package edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTANaiveCompressionTest {
+public class IDTASuboptimalGreedyConjunctionsCompressionTest {
 
   @Test
   public void trivial() throws IOException, InterruptedException {
@@ -27,7 +27,8 @@ public class IDTANaiveCompressionTest {
         new IDTAAnalysis(programName, workloadSize);
     Collection<Set<FeatureExpr>> allConstraints = analysis.analyze().values();
 
-    BaseCompression compression = new IDTANaiveCompression(programName, options, allConstraints);
+    BaseCompression compression =
+        new IDTASuboptimalGreedyConjunctionsCompression(programName, options, allConstraints);
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
@@ -46,7 +47,8 @@ public class IDTANaiveCompressionTest {
         new IDTAAnalysis(programName, workloadSize);
     Collection<Set<FeatureExpr>> allConstraints = analysis.analyze().values();
 
-    BaseCompression compression = new IDTANaiveCompression(programName, options, allConstraints);
+    BaseCompression compression =
+        new IDTASuboptimalGreedyConjunctionsCompression(programName, options, allConstraints);
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";

@@ -35,7 +35,13 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
     "CODEC",
     "USE_COMPOUND_FILE",
     "INDEX_DELETION_POLICY",
-    "MAX_TOKEN_LENGTH"
+    "MAX_TOKEN_LENGTH",
+    "MAX_CFS_SEGMENT_SIZE_MB",
+    "NO_CFS_RATIO",
+    "INDEX_COMMIT",
+    "MERGED_SEGMENT_WARMER",
+    "RAM_PER_THREAD_HARD_LIMIT",
+    "SIMILARITY"
   };
 
   public BaseIndexFilesAdapter() {

@@ -1,0 +1,57 @@
+{
+  "configuration": [
+    "CACHE_MODE",
+    "ENV_SHARED_CACHE",
+    "ENV_BACKGROUND_READ_LIMIT",
+    "MAX_MEMORY",
+    "LOCK_DEADLOCK_DETECT_DELAY",
+    "CHECKPOINTER_BYTES_INTERVAL",
+    "TXN_SERIALIZABLE_ISOLATION",
+    "REPLICATED",
+    "DUPLICATES",
+    "SEQUENTIAL",
+    "ENV_IS_LOCKING"
+  ],
+  "regionsToPerf": {
+    "00000000-0000-0000-0000-000000000000": 6.4707167524E9
+  },
+  "regionsToMin": {
+    "00000000-0000-0000-0000-000000000000": 6.401199052E9
+  },
+  "regionsToMax": {
+    "00000000-0000-0000-0000-000000000000": 6.567218237E9
+  },
+  "regionsToDiff": {
+    "00000000-0000-0000-0000-000000000000": 1.66019185E8
+  },
+  "regionsToSampleVariance": {
+    "00000000-0000-0000-0000-000000000000": 3.7625124534166095E15
+  },
+  "regionsToConfidenceInterval": {
+    "00000000-0000-0000-0000-000000000000": [
+      6.394553924299684E9,
+      6.546879580500316E9
+    ]
+  },
+  "regionsToPerfHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "6.4707168"
+  },
+  "regionsToMinHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "6.4011991"
+  },
+  "regionsToMaxHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "6.5672182"
+  },
+  "regionsToDiffHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "0.1660192"
+  },
+  "regionsToSampleVarianceHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "0.0037625"
+  },
+  "regionsToConfidenceIntervalsHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": [
+      "6.3945539",
+      "6.5468796"
+    ]
+  }
+}

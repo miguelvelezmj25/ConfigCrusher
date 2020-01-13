@@ -92,8 +92,21 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         this.toHumanReadable(regionsToMin),
         this.toHumanReadable(regionsToMax),
         this.toHumanReadable(regionsToDiff),
-        this.toHumanReadable(regionsToSampleVariance),
+        this.toHumanReadableSampleVariance(regionsToSampleVariance),
         this.toHumanReadableCI(regionsToConfidenceInterval));
+  }
+
+  private Map<UUID, String> toHumanReadableSampleVariance(
+      Map<UUID, Double> regionsToSampleVariance) {
+    Map<UUID, String> regionsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<UUID, Double> entry : regionsToSampleVariance.entrySet()) {
+      double data = entry.getValue();
+      data = data / 1E18;
+      regionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return regionsToHumanReadableData;
   }
 
   private Map<UUID, List<Double>> getRegionsToConfidenceInterval(

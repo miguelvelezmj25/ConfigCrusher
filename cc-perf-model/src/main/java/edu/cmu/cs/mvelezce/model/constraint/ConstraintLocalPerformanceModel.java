@@ -55,55 +55,53 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
 
   @Override
   public double evaluate(Set<String> config, List<String> options) {
-    throw new RuntimeException(
-        "Do not call this method since it is expensive to search for each entry doing implication");
-    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    //
-    //    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
-    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-    //        continue;
-    //      }
-    //
-    //      return entry.getValue();
-    //    }
-    //
-    //    throw new RuntimeException("The model appears to be empty");
+    System.err.println(
+        "Calling expensive evaluate to search for each entry doing equivalence check");
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+
+    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
+      if (!configAsConstraint.equiv(entry.getKey()).isTautology()) {
+        continue;
+      }
+
+      return entry.getValue();
+    }
+
+    throw new RuntimeException("The model appears to be empty");
   }
 
   @Override
   public double evaluateVariance(Set<String> config, List<String> options) {
-    throw new RuntimeException(
-        "Do not call this method since it is expensive to search for each entry doing implication");
+    System.err.println(
+        "Calling expensive evaluate to search for each entry doing equivalence check");
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
 
-    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    //
-    //    for (Map.Entry<FeatureExpr, Double> entry : this.getModelToSampleVariance().entrySet()) {
-    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-    //        continue;
-    //      }
-    //
-    //      return entry.getValue();
-    //    }
-    //
-    //    throw new RuntimeException("The model appears to be empty");
+    for (Map.Entry<FeatureExpr, Double> entry : this.getModelToSampleVariance().entrySet()) {
+      if (!configAsConstraint.equiv(entry.getKey()).isTautology()) {
+        continue;
+      }
+
+      return entry.getValue();
+    }
+
+    throw new RuntimeException("The model appears to be empty");
   }
 
   @Override
   public List<Double> evaluateConfidenceInterval(Set<String> config, List<String> options) {
-    throw new RuntimeException(
-        "Do not call this method since it is expensive to search for each entry doing implication");
+    System.err.println(
+        "Calling expensive evaluate to search for each entry doing equivalence check");
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
 
-    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    //
-    //    for (Map.Entry<FeatureExpr, List<Double>> entry :
-    //        this.getModelToConfidenceInterval().entrySet()) {
-    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-    //        continue;
-    //      }
-    //
-    //      return entry.getValue();
-    //    }
-    //
-    //    throw new RuntimeException("The model appears to be empty");
+    for (Map.Entry<FeatureExpr, List<Double>> entry :
+        this.getModelToConfidenceInterval().entrySet()) {
+      if (!configAsConstraint.equiv(entry.getKey()).isTautology()) {
+        continue;
+      }
+
+      return entry.getValue();
+    }
+
+    throw new RuntimeException("The model appears to be empty");
   }
 }

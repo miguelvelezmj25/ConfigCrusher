@@ -27,7 +27,6 @@ public class CSVDataGeneratorTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
-
     CSVDataGenerator generator =
         new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
     generator.generateCSVFile();
@@ -44,7 +43,6 @@ public class CSVDataGeneratorTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
-
     CSVDataGenerator generator =
         new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
     generator.generateCSVFile();

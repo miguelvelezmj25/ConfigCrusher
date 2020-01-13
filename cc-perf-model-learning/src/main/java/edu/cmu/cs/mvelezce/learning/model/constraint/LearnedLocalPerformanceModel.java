@@ -42,6 +42,17 @@ public class LearnedLocalPerformanceModel extends ConstraintLocalPerformanceMode
 
   @Override
   public double evaluate(Set<String> config, List<String> options) {
-    return Math.max(super.evaluate(config, options), 0.0);
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+    double time = 0;
+
+    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
+      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
+        continue;
+      }
+
+      time += entry.getValue();
+    }
+
+    return Math.max(time, 0.0);
   }
 }

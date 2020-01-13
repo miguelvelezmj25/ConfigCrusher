@@ -5,6 +5,9 @@ import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
+import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.learning.builder.generate.matlab.script.StepWiseLinearLearner;
+import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
@@ -37,55 +40,102 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
     E2EModelBuilder.REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, linearModelConstraints);
   }
 
-  //  @Override
-  //  protected void populateMultiEntryLocalModel(
-  //      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-  //    try {
-  //      String rootDir =
-  //          StepWiseLinearLearner.MATLAB_OUTPUT_DIR
-  //              + "/"
-  //              + this.getProgramName()
-  //              + "/"
-  //              + this.samplingApproach.getName()
-  //              + "/";
-  //      List<String> terms = this.parseFile(new File(rootDir + StepWiseLinearLearner.TERMS_FILE));
-  //      List<String> coefs = this.parseFile(new File(rootDir + StepWiseLinearLearner.COEFS_FILE));
-  //
-  //      if (terms.size() != coefs.size()) {
-  //        throw new RuntimeException("The terms and coefs files are not the same length");
-  //      }
-  //
-  //      List<String> pValues =
-  //          this.parseFile(new File(rootDir + StepWiseLinearLearner.P_VALUES_FILE));
-  //
-  //      if (terms.size() != pValues.size()) {
-  //        throw new RuntimeException("The terms and pValues files are not the same length");
-  //      }
-  //
-  //      List<Set<String>> parsedTerms = this.parseTerms(terms, this.getOptions());
-  //
-  //      for (int i = 0; i < terms.size(); i++) {
-  //        if (Double.parseDouble(pValues.get(i)) > 0.05) {
-  //          continue;
-  //        }
-  //
-  //        FeatureExpr constraint = this.getConstraint(parsedTerms.get(i));
-  //
-  //        for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
-  //            localModel.getModel().entrySet()) {
-  //          if (!constraint.equiv(constraintToTimes.getKey()).isTautology()) {
-  //            continue;
-  //          }
-  //
-  //          constraintToTimes.getValue().add(Double.parseDouble(coefs.get(i)) * 1E9);
-  //
-  //          break;
-  //        }
-  //      }
-  //    } catch (IOException ioe) {
-  //      throw new RuntimeException(ioe);
-  //    }
-  //  }
+  @Override
+  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
+    this.clearStats(localModel);
+
+    try {
+      String rootDir =
+          StepWiseLinearLearner.MATLAB_OUTPUT_DIR
+              + "/"
+              + this.getProgramName()
+              + "/"
+              + this.samplingApproach.getName()
+              + "/";
+      List<String> terms = this.parseFile(new File(rootDir + StepWiseLinearLearner.TERMS_FILE));
+      List<String> coefs = this.parseFile(new File(rootDir + StepWiseLinearLearner.COEFS_FILE));
+
+      if (terms.size() != coefs.size()) {
+        throw new RuntimeException("The terms and coefs files are not the same length");
+      }
+
+      List<String> pValues =
+          this.parseFile(new File(rootDir + StepWiseLinearLearner.P_VALUES_FILE));
+
+      if (terms.size() != pValues.size()) {
+        throw new RuntimeException("The terms and pValues files are not the same length");
+      }
+
+      List<Set<String>> parsedTerms = this.parseTerms(terms, this.getOptions());
+
+      for (int i = 0; i < terms.size(); i++) {
+        if (Double.parseDouble(pValues.get(i)) > 0.05) {
+          continue;
+        }
+
+        FeatureExpr constraint = this.getConstraint(parsedTerms.get(i));
+        Map<FeatureExpr, Double> perfModel = localModel.getModel();
+        Map<FeatureExpr, String> perfModelHuman = localModel.getModelToPerfHumanReadable();
+
+        for (FeatureExpr modelConstraint : perfModel.keySet()) {
+          if (!constraint.equiv(modelConstraint).isTautology()) {
+            continue;
+          }
+
+          perfModel.put(modelConstraint, Double.parseDouble(coefs.get(i)) * 1E9);
+          perfModelHuman.put(modelConstraint, coefs.get(i));
+
+          break;
+        }
+      }
+
+      this.removeInsignificantEntries(localModel.getModel());
+      this.removeInsignificantEntriesHuman(localModel.getModelToPerfHumanReadable());
+    } catch (IOException ioe) {
+      throw new RuntimeException(ioe);
+    }
+  }
+
+  private void removeInsignificantEntries(Map<FeatureExpr, Double> model) {
+    Set<FeatureExpr> entries = new HashSet<>();
+
+    for (Map.Entry<FeatureExpr, Double> entry : model.entrySet()) {
+      if (entry.getValue() == BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE) {
+        entries.add(entry.getKey());
+      }
+    }
+
+    for (FeatureExpr entry : entries) {
+      model.remove(entry);
+    }
+  }
+
+  private void removeInsignificantEntriesHuman(Map<FeatureExpr, String> model) {
+    Set<FeatureExpr> entries = new HashSet<>();
+
+    for (Map.Entry<FeatureExpr, String> entry : model.entrySet()) {
+      if (entry.getValue().isEmpty()) {
+        entries.add(entry.getKey());
+      }
+    }
+
+    for (FeatureExpr entry : entries) {
+      model.remove(entry);
+    }
+  }
+
+  private void clearStats(LocalPerformanceModel<FeatureExpr> localModel) {
+    localModel.getModelToMin().clear();
+    localModel.getModelToMax().clear();
+    localModel.getModelToDiff().clear();
+    localModel.getModelToSampleVariance().clear();
+    localModel.getModelToConfidenceInterval().clear();
+    localModel.getModelToMinHumanReadable().clear();
+    localModel.getModelToMaxHumanReadable().clear();
+    localModel.getModelToDiffHumanReadable().clear();
+    localModel.getModelToSampleVarianceHumanReadble().clear();
+    localModel.getModelToConfidenceIntervalHumanReadable().clear();
+  }
 
   private FeatureExpr getConstraint(Set<String> terms) {
     if (terms.isEmpty()) {

@@ -145,6 +145,9 @@ public class StepWiseLinearLearner {
             + "fprintf(fileID, \'%3.2f\\n\', pValues);"
             + "\n"
             + "fclose(fileID);"
+            + "\n"
+            + "\n"
+            + "model"
             + "\n";
 
     writer.write(result);

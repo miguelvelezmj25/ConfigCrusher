@@ -14,7 +14,7 @@ import java.util.*;
 public abstract class BaseConstraintPerformanceModelBuilder
     extends BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> {
 
-  public static final double EMPTY_DOUBLE = -1.0;
+  public static final double EMPTY_DOUBLE = 0.0;
   public static final String EMPTY_HUMAN = "";
 
   private static final Map<String, FeatureExpr> STRINGS_TO_CONSTRAINTS = new HashMap<>();

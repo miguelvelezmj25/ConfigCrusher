@@ -1,6 +1,6 @@
 train = readtable('../../../../../../data/java/programs/MeasureDiskOrderedScan/feature_wise/feature_wise.csv');
-x_train = table2array(train(:,1:15));
-y_train = table2array(train(:,16:16));
+x_train = table2array(train(:,1:16));
+y_train = table2array(train(:,17:17));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise');
@@ -19,3 +19,5 @@ pValues = model.Coefficients.pValue;
 fileID = fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise/pValues.txt', 'w');
 fprintf(fileID, '%3.2f\n', pValues);
 fclose(fileID);
+
+model

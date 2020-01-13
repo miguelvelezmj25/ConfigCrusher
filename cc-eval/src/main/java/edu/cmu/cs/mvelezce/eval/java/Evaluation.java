@@ -138,7 +138,7 @@ public abstract class Evaluation<T> {
     writer.close();
   }
 
-  void compareApproaches(String approach1, String approach2) throws IOException {
+  void compareApproaches(String approach1, String gt) throws IOException {
     File outputFile =
         new File(
             this.getOutputDir()
@@ -148,7 +148,7 @@ public abstract class Evaluation<T> {
                 + "/"
                 + approach1
                 + "_"
-                + approach2
+                + gt
                 + DOT_CSV);
 
     if (outputFile.exists()) {
@@ -158,12 +158,12 @@ public abstract class Evaluation<T> {
     File outputFile1 = this.getApproachOutputFile(approach1);
     Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
 
-    File outputFile2 = this.getApproachOutputFile(approach2);
-    Map<Set<String>, List<String>> data2 = this.getData(outputFile2);
+    File outputFileGT = this.getApproachOutputFile(gt);
+    Map<Set<String>, List<String>> dataGT = this.getData(outputFileGT);
 
-    if (data1.size() != data2.size()) {
+    if (data1.size() != dataGT.size()) {
       throw new RuntimeException(
-          "The data sizes for " + approach1 + " and " + approach2 + " are not the same");
+          "The data sizes for " + approach1 + " and " + gt + " are not the same");
     }
 
     Set<Set<String>> configurations = data1.keySet();
@@ -173,17 +173,20 @@ public abstract class Evaluation<T> {
         "configuration,measured,"
             + approach1
             + ","
-            + approach2
-            + ",absolute error,relative error,squared error");
+            + gt
+            + ",,minci,maxci,ciwindow,"
+            + approach1
+            + " in ci,,absolute error,relative error,squared error");
     result.append("\n");
 
+    int predsInCI = 0;
     Metric<Double> absoluteErrorMetric = new AbsoluteError();
     Metric<Double> relativeErrorMetric = new RelativeError();
     MeanSquaredError meanSquaredErrorMetric = new MeanSquaredError();
 
     for (Set<String> configuration : configurations) {
       List<String> entries1 = data1.get(configuration);
-      List<String> entries2 = data2.get(configuration);
+      List<String> entriesGT = dataGT.get(configuration);
 
       String measured = entries1.get(0);
 
@@ -199,17 +202,33 @@ public abstract class Evaluation<T> {
       double time1 = Double.parseDouble(entries1.get(1));
       result.append(time1);
       result.append(",");
-      //      result.append(entries1.get(2));
-      //      result.append(",");
-
-      double time2 = Double.parseDouble(entries2.get(1));
-      result.append(time2);
+      double timeGT = Double.parseDouble(entriesGT.get(1));
+      result.append(timeGT);
       result.append(",");
-      //      result.append(entries2.get(2));
-      //      result.append(",");
 
-      double absoluteError = Math.abs(time1 - time2);
-      double relativeError = absoluteError / time2;
+      result.append(",");
+      double minci = Double.parseDouble(entriesGT.get(3));
+      result.append(minci);
+      result.append(",");
+      double maxci = Double.parseDouble(entriesGT.get(4));
+      result.append(maxci);
+      result.append(",");
+      double ciwindow = Double.parseDouble(entriesGT.get(5));
+      result.append(ciwindow);
+      result.append(",");
+
+      boolean predInCI = time1 >= minci && time1 <= maxci;
+
+      if (predInCI) {
+        predsInCI++;
+      }
+
+      result.append(predInCI ? "*" : "");
+      result.append(",");
+      result.append(",");
+
+      double absoluteError = Math.abs(time1 - timeGT);
+      double relativeError = absoluteError / timeGT;
       double squaredError = Math.pow(absoluteError, 2);
 
       absoluteErrorMetric.getEntries().add(absoluteError);
@@ -221,6 +240,7 @@ public abstract class Evaluation<T> {
       result.append(DECIMAL_FORMAT.format(relativeError));
       result.append(",");
       result.append(DECIMAL_FORMAT.format(squaredError));
+
       result.append("\n");
     }
 
@@ -229,27 +249,35 @@ public abstract class Evaluation<T> {
     result.append(configurations.size());
     result.append("\n");
     result.append("\n");
-    result.append("Min AE: ");
+    result.append("Predictions within CI: ");
+    result.append(predsInCI);
+    result.append("\n");
+    result.append("Predictions within CI: ");
+    result.append((100.0 * predsInCI) / configurations.size());
+    result.append("%");
+    result.append("\n");
+    result.append("\n");
+    result.append("Min Absolute Error: ");
     result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()));
     result.append("\n");
-    result.append("Max AE: ");
+    result.append("Max Absolute Error: ");
     result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()));
     result.append("\n");
-    result.append("MAE: ");
+    result.append("Mean Absolute Error: ");
     result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
-    result.append("Min RE: ");
+    result.append("Min Relative Error: ");
     result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
     result.append("\n");
-    result.append("Max RE: ");
+    result.append("Max Relative Error: ");
     result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMax()));
     result.append("\n");
-    result.append("MRE: ");
+    result.append("Mean Relative Error: ");
     result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
-    result.append("MSE: ");
+    result.append("Mean Squared Error: ");
     result.append(DECIMAL_FORMAT.format(meanSquaredErrorMetric.getError()));
     //    result.append("\n");
     //    result.append("\n");
@@ -257,9 +285,10 @@ public abstract class Evaluation<T> {
     //    result.append(DECIMAL_FORMAT.format(Math.sqrt(mse)));
     result.append("\n");
     result.append("\n");
-    result.append("MAPE: ");
+    result.append("Mean Absolute Percentage Error: ");
     double mape = relativeErrorMetric.getArithmeticMean() * 100;
     result.append(DECIMAL_FORMAT.format(mape));
+    result.append("%");
     result.append("\n");
 
     outputFile.getParentFile().mkdirs();

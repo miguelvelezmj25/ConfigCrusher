@@ -6,13 +6,16 @@ import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.constraint.ConstraintMultiEntryLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
 
 import java.util.*;
 
 public abstract class BaseConstraintPerformanceModelBuilder
     extends BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> {
+
+  public static final double EMPTY_DOUBLE = -1.0;
+  public static final String EMPTY_HUMAN = "";
 
   private static final Map<String, FeatureExpr> STRINGS_TO_CONSTRAINTS = new HashMap<>();
 
@@ -38,10 +41,10 @@ public abstract class BaseConstraintPerformanceModelBuilder
   }
 
   @Override
-  protected Set<MultiEntryLocalPerformanceModel<FeatureExpr>> buildMultiEntryLocalModels() {
+  protected Set<LocalPerformanceModel<FeatureExpr>> buildLocalModels() {
     this.mapPerfEntryToExecConstraint();
 
-    return super.buildMultiEntryLocalModels();
+    return super.buildLocalModels();
   }
 
   private void mapPerfEntryToExecConstraint() {
@@ -54,71 +57,85 @@ public abstract class BaseConstraintPerformanceModelBuilder
   }
 
   @Override
-  protected void populateMultiEntryLocalModel(
-      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-    System.out.println("Only adding mean performance, not min, max, etc");
-    UUID region = localModel.getRegion();
-
-    for (PerformanceEntry entry : this.getPerformanceEntries()) {
-      FeatureExpr configConstraint = this.perfEntryToExecConstraint.get(entry);
-
-      for (Map.Entry<UUID, Double> regionToTime : entry.getRegionsToPerf().entrySet()) {
-        if (!region.equals(regionToTime.getKey())) {
-          continue;
-        }
-
-        for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
-            localModel.getModel().entrySet()) {
-          if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
-            continue;
-          }
-
-          constraintToTimes.getValue().add(regionToTime.getValue());
-          //          break;
-        }
-
-        //        break;
-      }
-    }
+  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
+    throw new UnsupportedOperationException("Implement");
   }
 
   @Override
-  protected MultiEntryLocalPerformanceModel<FeatureExpr> buildEmptyMultiEntryLocalModel(
+  protected LocalPerformanceModel<FeatureExpr> buildEmptyLocalModel(
       Map.Entry<JavaRegion, Set<FeatureExpr>> entry) {
-    Map<FeatureExpr, Set<Double>> model = this.addConstraintEntries(entry.getValue());
-    Map<FeatureExpr, Set<Double>> modelToMins = this.addConstraintEntries(entry.getValue());
-    Map<FeatureExpr, Set<Double>> modelToMaxs = this.addConstraintEntries(entry.getValue());
-    Map<FeatureExpr, Set<Double>> modelToDiffs = this.addConstraintEntries(entry.getValue());
-    Map<FeatureExpr, Set<Double>> modelToSampleVariances =
-        this.addConstraintEntries(entry.getValue());
-    Map<FeatureExpr, Set<List<Double>>> modelToConfidenceIntervals =
+    Map<FeatureExpr, Double> model = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Double> modelToMin = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Double> modelToMax = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Double> modelToDiff = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, Double> modelToSampleVariance = this.addConstraintEntries(entry.getValue());
+    Map<FeatureExpr, List<Double>> modelToConfidenceInterval =
         this.addConstraintEntriesCI(entry.getValue());
 
-    return new ConstraintMultiEntryLocalPerformanceModel(
+    Map<FeatureExpr, String> modelToPerfHumanReadable =
+        this.addConstraintEntriesHuman(entry.getValue());
+    Map<FeatureExpr, String> modelToMinHumanReadable =
+        this.addConstraintEntriesHuman(entry.getValue());
+    Map<FeatureExpr, String> modelToMaxHumanReadable =
+        this.addConstraintEntriesHuman(entry.getValue());
+    Map<FeatureExpr, String> modelToDiffHumanReadable =
+        this.addConstraintEntriesHuman(entry.getValue());
+    Map<FeatureExpr, String> modelToSampleVarianceHumanReadable =
+        this.addConstraintEntriesHuman(entry.getValue());
+    Map<FeatureExpr, List<String>> modelToConfidenceIntervalHumanReadable =
+        this.addConstraintEntriesCIHuman(entry.getValue());
+
+    return new ConstraintLocalPerformanceModel(
         entry.getKey().getId(),
         model,
-        modelToMins,
-        modelToMaxs,
-        modelToDiffs,
-        modelToSampleVariances,
-        modelToConfidenceIntervals);
+        modelToMin,
+        modelToMax,
+        modelToDiff,
+        modelToSampleVariance,
+        modelToConfidenceInterval,
+        modelToPerfHumanReadable,
+        modelToMinHumanReadable,
+        modelToMaxHumanReadable,
+        modelToDiffHumanReadable,
+        modelToSampleVarianceHumanReadable,
+        modelToConfidenceIntervalHumanReadable);
   }
 
-  private Map<FeatureExpr, Set<List<Double>>> addConstraintEntriesCI(Set<FeatureExpr> constraints) {
-    Map<FeatureExpr, Set<List<Double>>> model = new HashMap<>();
+  private Map<FeatureExpr, List<String>> addConstraintEntriesCIHuman(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, List<String>> model = new HashMap<>();
 
     for (FeatureExpr constraint : constraints) {
-      model.put(constraint, new HashSet<>());
+      model.put(constraint, new ArrayList<>());
     }
 
     return model;
   }
 
-  private Map<FeatureExpr, Set<Double>> addConstraintEntries(Set<FeatureExpr> constraints) {
-    Map<FeatureExpr, Set<Double>> model = new HashMap<>();
+  private Map<FeatureExpr, String> addConstraintEntriesHuman(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, String> model = new HashMap<>();
 
     for (FeatureExpr constraint : constraints) {
-      model.put(constraint, new HashSet<>());
+      model.put(constraint, EMPTY_HUMAN);
+    }
+
+    return model;
+  }
+
+  private Map<FeatureExpr, List<Double>> addConstraintEntriesCI(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, List<Double>> model = new HashMap<>();
+
+    for (FeatureExpr constraint : constraints) {
+      model.put(constraint, new ArrayList<>());
+    }
+
+    return model;
+  }
+
+  private Map<FeatureExpr, Double> addConstraintEntries(Set<FeatureExpr> constraints) {
+    Map<FeatureExpr, Double> model = new HashMap<>();
+
+    for (FeatureExpr constraint : constraints) {
+      model.put(constraint, EMPTY_DOUBLE);
     }
 
     return model;

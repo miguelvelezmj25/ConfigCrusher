@@ -7,7 +7,7 @@ import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 
 import java.util.*;
 
-public abstract class ConstraintLocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
+public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<FeatureExpr> {
 
   private static final Map<Set<String>, FeatureExpr> CONFIG_TO_CONSTRAINT = new HashMap<>();
 
@@ -17,20 +17,28 @@ public abstract class ConstraintLocalPerformanceModel extends LocalPerformanceMo
       Map<FeatureExpr, Double> modelToMin,
       Map<FeatureExpr, Double> modelToMax,
       Map<FeatureExpr, Double> modelToDiff,
+      Map<FeatureExpr, Double> modelToSampleVariance,
+      Map<FeatureExpr, List<Double>> modelToConfidenceInterval,
       Map<FeatureExpr, String> modelToPerfHumanReadable,
       Map<FeatureExpr, String> modelToMinHumanReadable,
       Map<FeatureExpr, String> modelToMaxHumanReadable,
-      Map<FeatureExpr, String> modelToDiffHumanReadable) {
+      Map<FeatureExpr, String> modelToDiffHumanReadable,
+      Map<FeatureExpr, String> modelToSampleVarianceHumanReadable,
+      Map<FeatureExpr, List<String>> modelToConfidenceIntervalHumanReadable) {
     super(
         region,
         model,
         modelToMin,
         modelToMax,
         modelToDiff,
+        modelToSampleVariance,
+        modelToConfidenceInterval,
         modelToPerfHumanReadable,
         modelToMinHumanReadable,
         modelToMaxHumanReadable,
-        modelToDiffHumanReadable);
+        modelToDiffHumanReadable,
+        modelToSampleVarianceHumanReadable,
+        modelToConfidenceIntervalHumanReadable);
   }
 
   protected static FeatureExpr getConfigAsConstraint(Set<String> config, List<String> options) {
@@ -43,5 +51,22 @@ public abstract class ConstraintLocalPerformanceModel extends LocalPerformanceMo
     }
 
     return configAsConstraint;
+  }
+
+  @Override
+  public double evaluate(Set<String> config, List<String> options) {
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+    double time = 0;
+
+    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
+      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
+        continue;
+      }
+
+      time += entry.getValue();
+      break;
+    }
+
+    return time;
   }
 }

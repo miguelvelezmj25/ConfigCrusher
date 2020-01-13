@@ -5,9 +5,7 @@ import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.model.aggregator.ExecAggregator;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -17,13 +15,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @param <D> The data that regions have (e.g., set of constraints)
+ * @param <RD> The data of each entry in a region (e.g., constraint)
+ */
 public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<PerformanceModel<RD>>
     implements PerformanceModelBuilder<PerformanceModel<RD>, D> {
 
   private final List<String> options;
   private final Map<JavaRegion, D> regionsToData;
   private final Set<PerformanceEntry> performanceEntries;
-  private final ExecAggregator<RD> execAggregator = new ExecAggregator<>();
 
   public BasePerformanceModelBuilder(
       String programName,
@@ -39,28 +40,22 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
   @Override
   public PerformanceModel<RD> analyze() {
-    Set<MultiEntryLocalPerformanceModel<RD>> multiEntryLocalPerformanceModels =
-        this.buildMultiEntryLocalModels();
-    Set<LocalPerformanceModel<RD>> localPerformanceModels =
-        this.execAggregator.process(multiEntryLocalPerformanceModels);
+    Set<LocalPerformanceModel<RD>> localPerformanceModels = this.buildLocalModels();
 
     return new PerformanceModel<>(localPerformanceModels);
   }
 
-  protected abstract void populateMultiEntryLocalModel(
-      MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel);
+  protected abstract void populateLocalModel(LocalPerformanceModel<RD> localModel);
 
-  protected abstract MultiEntryLocalPerformanceModel<RD> buildEmptyMultiEntryLocalModel(
-      Map.Entry<JavaRegion, D> entry);
+  protected abstract LocalPerformanceModel<RD> buildEmptyLocalModel(Map.Entry<JavaRegion, D> entry);
 
-  protected Set<MultiEntryLocalPerformanceModel<RD>> buildMultiEntryLocalModels() {
-    Set<MultiEntryLocalPerformanceModel<RD>> localModels = new HashSet<>();
+  protected Set<LocalPerformanceModel<RD>> buildLocalModels() {
+    Set<LocalPerformanceModel<RD>> localModels = new HashSet<>();
 
     for (Map.Entry<JavaRegion, D> entry : this.regionsToData.entrySet()) {
-      MultiEntryLocalPerformanceModel<RD> multiEntryLocalModel =
-          this.buildEmptyMultiEntryLocalModel(entry);
-      this.populateMultiEntryLocalModel(multiEntryLocalModel);
-      localModels.add(multiEntryLocalModel);
+      LocalPerformanceModel<RD> localModel = this.buildEmptyLocalModel(entry);
+      this.populateLocalModel(localModel);
+      localModels.add(localModel);
     }
 
     return localModels;

@@ -16,20 +16,28 @@ public class IDTALocalPerformanceModel extends ConstraintLocalPerformanceModel {
       Map<FeatureExpr, Double> modelToMin,
       Map<FeatureExpr, Double> modelToMax,
       Map<FeatureExpr, Double> modelToDiff,
+      Map<FeatureExpr, Double> modelToSampleVariance,
+      Map<FeatureExpr, List<Double>> modelToConfidenceInterval,
       Map<FeatureExpr, String> modelToPerfHumanReadable,
       Map<FeatureExpr, String> modelToMinHumanReadable,
       Map<FeatureExpr, String> modelToMaxHumanReadable,
-      Map<FeatureExpr, String> modelToDiffHumanReadable) {
+      Map<FeatureExpr, String> modelToDiffHumanReadable,
+      Map<FeatureExpr, String> modelToSampleVarianceHumanReadable,
+      Map<FeatureExpr, List<String>> modelToConfidenceIntervalHumanReadable) {
     super(
         region,
         model,
         modelToMin,
         modelToMax,
         modelToDiff,
+        modelToSampleVariance,
+        modelToConfidenceInterval,
         modelToPerfHumanReadable,
         modelToMinHumanReadable,
         modelToMaxHumanReadable,
-        modelToDiffHumanReadable);
+        modelToDiffHumanReadable,
+        modelToSampleVarianceHumanReadable,
+        modelToConfidenceIntervalHumanReadable);
   }
 
   @Override

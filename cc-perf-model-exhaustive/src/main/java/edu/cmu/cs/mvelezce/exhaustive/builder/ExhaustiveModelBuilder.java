@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
-import edu.cmu.cs.mvelezce.exhaustive.model.constraint.ExhaustiveLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
-import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 
 import java.io.File;
@@ -30,28 +29,36 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
     Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
-          new ExhaustiveLocalPerformanceModel(
-              readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()));
-      localModels.add(localModel);
+
+      throw new UnsupportedOperationException("implement");
+      //      LocalPerformanceModel<FeatureExpr> localModel =
+      //          new ExhaustiveLocalPerformanceModel(
+      //              readLocalModel.getRegion(),
+      //              this.parseConstraintsToData(readLocalModel.getModel()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMin()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMax()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
+      //              ,
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToPerfHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToDiffHumanReadable()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToSampleVarianceHumanReadble()),
+      //              );
+      //      localModels.add(localModel);
     }
 
     return new PerformanceModel<>(localModels);
   }
 
   @Override
-  protected void populateMultiEntryLocalModel(
-      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
     UUID programRegion = localModel.getRegion();
 
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
@@ -70,55 +77,99 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
         this.addEntry(
             localModel.getModel(), configConstraint, entry.getRegionsToPerf().get(regionUUID));
         this.addEntry(
-            localModel.getModelToMins(), configConstraint, entry.getRegionsToMin().get(regionUUID));
+            localModel.getModelToMin(), configConstraint, entry.getRegionsToMin().get(regionUUID));
         this.addEntry(
-            localModel.getModelToMaxs(), configConstraint, entry.getRegionsToMax().get(regionUUID));
+            localModel.getModelToMax(), configConstraint, entry.getRegionsToMax().get(regionUUID));
         this.addEntry(
-            localModel.getModelToDiffs(),
+            localModel.getModelToDiff(),
             configConstraint,
             entry.getRegionsToDiff().get(regionUUID));
         this.addEntry(
-            localModel.getModelToSampleVariances(),
+            localModel.getModelToSampleVariance(),
             configConstraint,
             entry.getRegionsToSampleVariance().get(regionUUID));
         this.addEntry(
-            localModel.getModelToConfidenceIntervals(),
+            localModel.getModelToConfidenceInterval(),
             configConstraint,
             entry.getRegionsToConfidenceInterval().get(regionUUID));
+
+        this.addEntry(
+            localModel.getModelToPerfHumanReadable(),
+            configConstraint,
+            entry.getRegionsToPerfHumanReadable().get(regionUUID));
+        this.addEntry(
+            localModel.getModelToMinHumanReadable(),
+            configConstraint,
+            entry.getRegionsToMinHumanReadable().get(regionUUID));
+        this.addEntry(
+            localModel.getModelToMaxHumanReadable(),
+            configConstraint,
+            entry.getRegionsToMaxHumanReadable().get(regionUUID));
+        this.addEntry(
+            localModel.getModelToDiffHumanReadable(),
+            configConstraint,
+            entry.getRegionsToDiffHumanReadable().get(regionUUID));
+        this.addEntry(
+            localModel.getModelToSampleVarianceHumanReadble(),
+            configConstraint,
+            entry.getRegionsToSampleVarianceHumanReadable().get(regionUUID));
+        this.addEntryHuman(
+            localModel.getModelToConfidenceIntervalHumanReadable(),
+            configConstraint,
+            entry.getRegionsToConfidenceIntervalsHumanReadable().get(regionUUID));
       }
     }
   }
 
   private void addEntry(
-      Map<FeatureExpr, Set<Double>> model, FeatureExpr configConstraint, double value) {
+      Map<FeatureExpr, String> model, FeatureExpr configConstraint, String value) {
     if (!model.containsKey(configConstraint)) {
       throw new RuntimeException("Could not find config constraint " + configConstraint);
     }
 
-    Set<Double> values = model.get(configConstraint);
-
-    if (!values.isEmpty()) {
+    if (!model.get(configConstraint).equals(BaseConstraintPerformanceModelBuilder.EMPTY_HUMAN)) {
       throw new RuntimeException(
           "Expected the entry of '"
               + configConstraint
-              + "' to be empty, but found "
-              + values
-              + " and was about to add "
+              + "' to be '"
+              + BaseConstraintPerformanceModelBuilder.EMPTY_HUMAN
+              + "', but was '"
+              + model.get(configConstraint)
+              + "' and was about to add "
               + value);
     }
 
-    values.add(value);
+    model.put(configConstraint, value);
   }
 
   private void addEntry(
-      Map<FeatureExpr, Set<List<Double>>> model,
-      FeatureExpr configConstraint,
-      List<Double> values) {
+      Map<FeatureExpr, Double> model, FeatureExpr configConstraint, double value) {
     if (!model.containsKey(configConstraint)) {
       throw new RuntimeException("Could not find config constraint " + configConstraint);
     }
 
-    Set<List<Double>> entries = model.get(configConstraint);
+    if (model.get(configConstraint) != BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE) {
+      throw new RuntimeException(
+          "Expected the entry of '"
+              + configConstraint
+              + "' to be '"
+              + BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE
+              + "', but was '"
+              + model.get(configConstraint)
+              + "' and was about to add "
+              + value);
+    }
+
+    model.put(configConstraint, value);
+  }
+
+  private void addEntry(
+      Map<FeatureExpr, List<Double>> model, FeatureExpr configConstraint, List<Double> values) {
+    if (!model.containsKey(configConstraint)) {
+      throw new RuntimeException("Could not find config constraint " + configConstraint);
+    }
+
+    List<Double> entries = model.get(configConstraint);
 
     if (!entries.isEmpty()) {
       throw new RuntimeException(
@@ -130,6 +181,27 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
               + values);
     }
 
-    entries.add(values);
+    model.put(configConstraint, values);
+  }
+
+  private void addEntryHuman(
+      Map<FeatureExpr, List<String>> model, FeatureExpr configConstraint, List<String> values) {
+    if (!model.containsKey(configConstraint)) {
+      throw new RuntimeException("Could not find config constraint " + configConstraint);
+    }
+
+    List<String> entries = model.get(configConstraint);
+
+    if (!entries.isEmpty()) {
+      throw new RuntimeException(
+          "Expected the entry of '"
+              + configConstraint
+              + "' to be empty, but found "
+              + entries
+              + " and was about to add "
+              + values);
+    }
+
+    model.put(configConstraint, values);
   }
 }

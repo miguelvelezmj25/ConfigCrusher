@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.learning.builder.BaseLinearLearnedModelBuilder;
-import edu.cmu.cs.mvelezce.learning.model.constraint.LearnedLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 
@@ -36,20 +35,23 @@ public class MatlabLinearLearnedModelBuilder extends BaseLinearLearnedModelBuild
     Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
-          new LearnedLocalPerformanceModel(
-              readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()));
-      localModels.add(localModel);
+      throw new UnsupportedOperationException("implement");
+      //      LocalPerformanceModel<FeatureExpr> localModel =
+      //          new LearnedLocalPerformanceModel(
+      //              readLocalModel.getRegion(),
+      //              this.parseConstraintsToData(readLocalModel.getModel()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMin()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMax()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToPerfHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToDiffHumanReadable()));
+      //      localModels.add(localModel);
     }
 
     return new PerformanceModel<>(localModels);

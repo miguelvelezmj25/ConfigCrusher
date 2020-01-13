@@ -51,16 +51,17 @@ public class ExecAggregator<T> {
     //    Map<T, List<Double>> modelToConfidenceInterval =
     // this.getModelToConfidenceInterval(localStats);
 
-    return new LocalPerformanceModel<T>(
-        multiEntryLocalPerformanceModels.getRegion(),
-        model,
-        modelToMin,
-        modelToMax,
-        modelToDiff,
-        this.toHumandReadable(model),
-        this.toHumandReadable(modelToMin),
-        this.toHumandReadable(modelToMax),
-        this.toHumandReadable(modelToDiff));
+    throw new UnsupportedOperationException("implement");
+    //    return new LocalPerformanceModel<T>(
+    //        multiEntryLocalPerformanceModels.getRegion(),
+    //        model,
+    //        modelToMin,
+    //        modelToMax,
+    //        modelToDiff,
+    //        this.toHumandReadable(model),
+    //        this.toHumandReadable(modelToMin),
+    //        this.toHumandReadable(modelToMax),
+    //        this.toHumandReadable(modelToDiff));
   }
 
   //  private Map<T, List<Double>> getModelToConfidenceInterval(Map<T, SummaryStatistics>

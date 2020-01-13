@@ -3,14 +3,11 @@ package edu.cmu.cs.mvelezce.builder.idta;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -33,10 +30,13 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
       Set<PerformanceEntry> performanceEntries) {
     super(programName, options, regionsToData, performanceEntries);
 
-    Set<FeatureExpr> baseConstraints = new HashSet<>();
-    baseConstraints.add(SATFeatureExprFactory.True());
+    throw new UnsupportedOperationException(
+        "We are going to need to change how we build the local models since there might be multiple entries for each constraint");
 
-    regionsToData.put(RegionsManager.PROGRAM_REGION, baseConstraints);
+    //    Set<FeatureExpr> baseConstraints = new HashSet<>();
+    //    baseConstraints.add(SATFeatureExprFactory.True());
+    //
+    //    regionsToData.put(RegionsManager.PROGRAM_REGION, baseConstraints);
   }
 
   //  protected void validateOneConfigCoversOneConstraint(
@@ -69,20 +69,23 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
     Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
-          new IDTALocalPerformanceModel(
-              readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()));
-      localModels.add(localModel);
+      throw new UnsupportedOperationException("Implement");
+      //      LocalPerformanceModel<FeatureExpr> localModel =
+      //          new IDTALocalPerformanceModel(
+      //              readLocalModel.getRegion(),
+      //              this.parseConstraintsToData(readLocalModel.getModel()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMin()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToMax()),
+      //              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToPerfHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+      //
+      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+      //              this.parseConstraintsToHumanReadableData(
+      //                  readLocalModel.getModelToDiffHumanReadable()));
+      //      localModels.add(localModel);
     }
 
     return new PerformanceModel<>(localModels);

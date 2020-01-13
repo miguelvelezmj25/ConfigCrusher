@@ -5,8 +5,6 @@ import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
-import edu.cmu.cs.mvelezce.learning.builder.generate.matlab.script.StepWiseLinearLearner;
-import edu.cmu.cs.mvelezce.model.MultiEntryLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
@@ -39,55 +37,55 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
     E2EModelBuilder.REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, linearModelConstraints);
   }
 
-  @Override
-  protected void populateMultiEntryLocalModel(
-      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-    try {
-      String rootDir =
-          StepWiseLinearLearner.MATLAB_OUTPUT_DIR
-              + "/"
-              + this.getProgramName()
-              + "/"
-              + this.samplingApproach.getName()
-              + "/";
-      List<String> terms = this.parseFile(new File(rootDir + StepWiseLinearLearner.TERMS_FILE));
-      List<String> coefs = this.parseFile(new File(rootDir + StepWiseLinearLearner.COEFS_FILE));
-
-      if (terms.size() != coefs.size()) {
-        throw new RuntimeException("The terms and coefs files are not the same length");
-      }
-
-      List<String> pValues =
-          this.parseFile(new File(rootDir + StepWiseLinearLearner.P_VALUES_FILE));
-
-      if (terms.size() != pValues.size()) {
-        throw new RuntimeException("The terms and pValues files are not the same length");
-      }
-
-      List<Set<String>> parsedTerms = this.parseTerms(terms, this.getOptions());
-
-      for (int i = 0; i < terms.size(); i++) {
-        if (Double.parseDouble(pValues.get(i)) > 0.05) {
-          continue;
-        }
-
-        FeatureExpr constraint = this.getConstraint(parsedTerms.get(i));
-
-        for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
-            localModel.getModel().entrySet()) {
-          if (!constraint.equiv(constraintToTimes.getKey()).isTautology()) {
-            continue;
-          }
-
-          constraintToTimes.getValue().add(Double.parseDouble(coefs.get(i)) * 1E9);
-
-          break;
-        }
-      }
-    } catch (IOException ioe) {
-      throw new RuntimeException(ioe);
-    }
-  }
+  //  @Override
+  //  protected void populateMultiEntryLocalModel(
+  //      MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
+  //    try {
+  //      String rootDir =
+  //          StepWiseLinearLearner.MATLAB_OUTPUT_DIR
+  //              + "/"
+  //              + this.getProgramName()
+  //              + "/"
+  //              + this.samplingApproach.getName()
+  //              + "/";
+  //      List<String> terms = this.parseFile(new File(rootDir + StepWiseLinearLearner.TERMS_FILE));
+  //      List<String> coefs = this.parseFile(new File(rootDir + StepWiseLinearLearner.COEFS_FILE));
+  //
+  //      if (terms.size() != coefs.size()) {
+  //        throw new RuntimeException("The terms and coefs files are not the same length");
+  //      }
+  //
+  //      List<String> pValues =
+  //          this.parseFile(new File(rootDir + StepWiseLinearLearner.P_VALUES_FILE));
+  //
+  //      if (terms.size() != pValues.size()) {
+  //        throw new RuntimeException("The terms and pValues files are not the same length");
+  //      }
+  //
+  //      List<Set<String>> parsedTerms = this.parseTerms(terms, this.getOptions());
+  //
+  //      for (int i = 0; i < terms.size(); i++) {
+  //        if (Double.parseDouble(pValues.get(i)) > 0.05) {
+  //          continue;
+  //        }
+  //
+  //        FeatureExpr constraint = this.getConstraint(parsedTerms.get(i));
+  //
+  //        for (Map.Entry<FeatureExpr, Set<Double>> constraintToTimes :
+  //            localModel.getModel().entrySet()) {
+  //          if (!constraint.equiv(constraintToTimes.getKey()).isTautology()) {
+  //            continue;
+  //          }
+  //
+  //          constraintToTimes.getValue().add(Double.parseDouble(coefs.get(i)) * 1E9);
+  //
+  //          break;
+  //        }
+  //      }
+  //    } catch (IOException ioe) {
+  //      throw new RuntimeException(ioe);
+  //    }
+  //  }
 
   private FeatureExpr getConstraint(Set<String> terms) {
     if (terms.isEmpty()) {

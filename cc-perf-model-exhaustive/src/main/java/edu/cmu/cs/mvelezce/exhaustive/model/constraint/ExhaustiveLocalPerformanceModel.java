@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class ExhaustiveLocalPerformanceModel extends ConstraintLocalPerformanceModel {
@@ -16,39 +15,30 @@ public class ExhaustiveLocalPerformanceModel extends ConstraintLocalPerformanceM
       Map<FeatureExpr, Double> modelToMin,
       Map<FeatureExpr, Double> modelToMax,
       Map<FeatureExpr, Double> modelToDiff,
+      Map<FeatureExpr, Double> modelToSampleVariance,
+      Map<FeatureExpr, List<Double>> modelToConfidenceInterval,
       Map<FeatureExpr, String> modelToPerfHumanReadable,
       Map<FeatureExpr, String> modelToMinHumanReadable,
       Map<FeatureExpr, String> modelToMaxHumanReadable,
-      Map<FeatureExpr, String> modelToDiffHumanReadable) {
+      Map<FeatureExpr, String> modelToDiffHumanReadable,
+      Map<FeatureExpr, String> modelToSampleVarianceHumanReadable,
+      Map<FeatureExpr, List<String>> modelToConfidenceIntervalHumanReadable) {
     super(
         region,
         model,
         modelToMin,
         modelToMax,
         modelToDiff,
+        modelToSampleVariance,
+        modelToConfidenceInterval,
         modelToPerfHumanReadable,
         modelToMinHumanReadable,
         modelToMaxHumanReadable,
-        modelToDiffHumanReadable);
+        modelToDiffHumanReadable,
+        modelToSampleVarianceHumanReadable,
+        modelToConfidenceIntervalHumanReadable);
 
     System.out.println(
-        "If this is an exhaustive model maybe I could check for equality and exclude featureExpr that have already been used");
-  }
-
-  @Override
-  public double evaluate(Set<String> config, List<String> options) {
-    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    double time = 0;
-
-    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
-      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-        continue;
-      }
-
-      time += entry.getValue();
-      break;
-    }
-
-    return time;
+        "If this is an exhaustive model maybe I could check for equality when evaluating a config and exclude featureExpr that have already been used");
   }
 }

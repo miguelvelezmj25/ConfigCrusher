@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
 import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.exhaustive.model.constraint.ExhaustiveLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
@@ -29,29 +30,26 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
     Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-
-      throw new UnsupportedOperationException("implement");
-      //      LocalPerformanceModel<FeatureExpr> localModel =
-      //          new ExhaustiveLocalPerformanceModel(
-      //              readLocalModel.getRegion(),
-      //              this.parseConstraintsToData(readLocalModel.getModel()),
-      //              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-      //              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-      //              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-      //              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
-      //              ,
-      //              this.parseConstraintsToHumanReadableData(
-      //                  readLocalModel.getModelToPerfHumanReadable()),
-      //
-      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-      //
-      // this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-      //              this.parseConstraintsToHumanReadableData(
-      //                  readLocalModel.getModelToDiffHumanReadable()),
-      //              this.parseConstraintsToHumanReadableData(
-      //                  readLocalModel.getModelToSampleVarianceHumanReadble()),
-      //              );
-      //      localModels.add(localModel);
+      LocalPerformanceModel<FeatureExpr> localModel =
+          new ExhaustiveLocalPerformanceModel(
+              readLocalModel.getRegion(),
+              this.parseConstraintsToData(readLocalModel.getModel()),
+              this.parseConstraintsToData(readLocalModel.getModelToMin()),
+              this.parseConstraintsToData(readLocalModel.getModelToMax()),
+              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
+              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
+              this.parseConstraintsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parseConstraintsToHumanReadableData(
+                  readLocalModel.getModelToPerfHumanReadable()),
+              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parseConstraintsToHumanReadableData(
+                  readLocalModel.getModelToDiffHumanReadable()),
+              this.parseConstraintsToHumanReadableData(
+                  readLocalModel.getModelToSampleVarianceHumanReadble()),
+              this.parseConstraintsToHumanReadableCI(
+                  readLocalModel.getModelToConfidenceIntervalHumanReadable()));
+      localModels.add(localModel);
     }
 
     return new PerformanceModel<>(localModels);

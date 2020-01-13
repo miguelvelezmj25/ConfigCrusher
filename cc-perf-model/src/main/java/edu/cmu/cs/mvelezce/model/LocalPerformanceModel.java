@@ -66,7 +66,17 @@ public class LocalPerformanceModel<T> {
 
   public double evaluate(Set<String> config, List<String> options) {
     throw new UnsupportedOperationException(
-        "Cannot call evaluate on this object since we do not know the type used for the regions");
+        "Cannot call evaluate on this object since we do not know the type used for the entries of the regions");
+  }
+
+  public double evaluateVariance(Set<String> config, List<String> options) {
+    throw new UnsupportedOperationException(
+        "Cannot call evaluate on this object since we do not know the type used for the entries of the regions");
+  }
+
+  public List<Double> evaluateConfidenceInterval(Set<String> config, List<String> options) {
+    throw new UnsupportedOperationException(
+        "Cannot call evaluate on this object since we do not know the type used for the entries of the regions");
   }
 
   public UUID getRegion() {

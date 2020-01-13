@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class ExhaustiveLocalPerformanceModel extends ConstraintLocalPerformanceModel {
@@ -38,7 +39,40 @@ public class ExhaustiveLocalPerformanceModel extends ConstraintLocalPerformanceM
         modelToSampleVarianceHumanReadable,
         modelToConfidenceIntervalHumanReadable);
 
-    System.out.println(
+    System.err.println(
         "If this is an exhaustive model maybe I could check for equality when evaluating a config and exclude featureExpr that have already been used");
+  }
+
+  @Override
+  public double evaluate(Set<String> config, List<String> options) {
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+
+    if (this.getModel().containsKey(configAsConstraint)) {
+      return this.getModel().get(configAsConstraint);
+    }
+
+    return super.evaluate(config, options);
+  }
+
+  @Override
+  public double evaluateVariance(Set<String> config, List<String> options) {
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+
+    if (this.getModel().containsKey(configAsConstraint)) {
+      return this.getModelToSampleVariance().get(configAsConstraint);
+    }
+
+    return super.evaluateVariance(config, options);
+  }
+
+  @Override
+  public List<Double> evaluateConfidenceInterval(Set<String> config, List<String> options) {
+    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+
+    if (this.getModel().containsKey(configAsConstraint)) {
+      return this.getModelToConfidenceInterval().get(configAsConstraint);
+    }
+
+    return super.evaluateConfidenceInterval(config, options);
   }
 }

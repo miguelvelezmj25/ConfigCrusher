@@ -153,10 +153,34 @@ public abstract class BaseConstraintPerformanceModelBuilder
     return constraintsToHumanReadableData;
   }
 
+  protected Map<FeatureExpr, List<String>> parseConstraintsToHumanReadableCI(
+      Map<String, List<String>> localHumanReadableData) {
+    Map<FeatureExpr, List<String>> constraintsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<String, List<String>> entry : localHumanReadableData.entrySet()) {
+      FeatureExpr constraint = getConstraint(entry.getKey());
+      constraintsToHumanReadableData.put(constraint, entry.getValue());
+    }
+
+    return constraintsToHumanReadableData;
+  }
+
   protected Map<FeatureExpr, Double> parseConstraintsToData(Map<String, Double> localModel) {
     Map<FeatureExpr, Double> constraintsToData = new HashMap<>();
 
     for (Map.Entry<String, Double> entry : localModel.entrySet()) {
+      FeatureExpr constraint = getConstraint(entry.getKey());
+      constraintsToData.put(constraint, entry.getValue());
+    }
+
+    return constraintsToData;
+  }
+
+  protected Map<FeatureExpr, List<Double>> parseConstraintsToCI(
+      Map<String, List<Double>> localModel) {
+    Map<FeatureExpr, List<Double>> constraintsToData = new HashMap<>();
+
+    for (Map.Entry<String, List<Double>> entry : localModel.entrySet()) {
       FeatureExpr constraint = getConstraint(entry.getKey());
       constraintsToData.put(constraint, entry.getValue());
     }

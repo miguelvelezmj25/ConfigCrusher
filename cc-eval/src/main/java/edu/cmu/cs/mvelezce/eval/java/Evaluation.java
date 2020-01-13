@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.eval.metrics.Metric;
 import edu.cmu.cs.mvelezce.eval.metrics.error.absolute.AbsoluteError;
 import edu.cmu.cs.mvelezce.eval.metrics.error.relative.RelativeError;
 import edu.cmu.cs.mvelezce.eval.metrics.error.squared.MeanSquaredError;
+import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
@@ -42,29 +43,47 @@ public abstract class Evaluation<T> {
     }
 
     Map<Set<String>, Long> configsToTime = this.getEmptyConfigsToTime(configs);
+    Map<Set<String>, Double> configsToVariance = this.getEmptyConfigsToVariance(configs);
+    Map<Set<String>, List<Double>> configsToCI = this.getEmptyConfigsToCI(configs);
 
     for (Set<String> config : configs) {
-      long currentTime = configsToTime.get(config);
-      currentTime += model.evaluate(config, this.options);
-      configsToTime.put(config, currentTime);
+      long time = model.evaluate(config, this.options);
+      configsToTime.put(config, time);
+
+      for (LocalPerformanceModel<T> localModel : model.getLocalModels()) {
+        double variance = localModel.evaluateVariance(config, this.options);
+        configsToVariance.put(config, variance);
+
+        List<Double> ci = localModel.evaluateConfidenceInterval(config, this.options);
+        configsToCI.put(config, ci);
+      }
     }
 
     StringBuilder result = new StringBuilder();
-    result.append("configuration,measured,performance,std,minci,maxci");
+    result.append("configuration,measured,performance,variance,minci,maxci,ciwindow");
     result.append("\n");
 
-    for (Map.Entry<Set<String>, Long> entry : configsToTime.entrySet()) {
+    for (Set<String> config : configsToTime.keySet()) {
       result.append('"');
-      result.append(entry.getKey());
+      result.append(config);
       result.append('"');
       result.append(",");
       result.append("true");
       result.append(",");
-      double performance = entry.getValue() / 1E9;
+      double performance = configsToTime.get(config) / 1E9;
       result.append(DECIMAL_FORMAT.format(performance));
       result.append(",");
+      double variance = configsToVariance.get(config) / 1E18;
+      result.append(DECIMAL_FORMAT.format(variance));
       result.append(",");
+      double minci = configsToCI.get(config).get(0) / 1E9;
+      result.append(DECIMAL_FORMAT.format(minci));
       result.append(",");
+      double maxci = configsToCI.get(config).get(1) / 1E9;
+      result.append(DECIMAL_FORMAT.format(maxci));
+      result.append(",");
+      double ciwindow = (maxci - minci);
+      result.append(DECIMAL_FORMAT.format(ciwindow));
       result.append("\n");
     }
 
@@ -248,6 +267,26 @@ public abstract class Evaluation<T> {
     writer.write(result.toString());
     writer.flush();
     writer.close();
+  }
+
+  private Map<Set<String>, List<Double>> getEmptyConfigsToCI(Set<Set<String>> configs) {
+    Map<Set<String>, List<Double>> configsToCI = new HashMap<>();
+
+    for (Set<String> config : configs) {
+      configsToCI.put(config, new ArrayList<>());
+    }
+
+    return configsToCI;
+  }
+
+  private Map<Set<String>, Double> getEmptyConfigsToVariance(Set<Set<String>> configs) {
+    Map<Set<String>, Double> configsToVariance = new HashMap<>();
+
+    for (Set<String> config : configs) {
+      configsToVariance.put(config, 0.0);
+    }
+
+    return configsToVariance;
   }
 
   private Map<Set<String>, Long> getEmptyConfigsToTime(Set<Set<String>> configs) {

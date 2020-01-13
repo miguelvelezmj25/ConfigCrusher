@@ -55,18 +55,55 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
 
   @Override
   public double evaluate(Set<String> config, List<String> options) {
-    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
-    double time = 0;
+    throw new RuntimeException(
+        "Do not call this method since it is expensive to search for each entry doing implication");
+    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+    //
+    //    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
+    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
+    //        continue;
+    //      }
+    //
+    //      return entry.getValue();
+    //    }
+    //
+    //    throw new RuntimeException("The model appears to be empty");
+  }
 
-    for (Map.Entry<FeatureExpr, Double> entry : this.getModel().entrySet()) {
-      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
-        continue;
-      }
+  @Override
+  public double evaluateVariance(Set<String> config, List<String> options) {
+    throw new RuntimeException(
+        "Do not call this method since it is expensive to search for each entry doing implication");
 
-      time += entry.getValue();
-      break;
-    }
+    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+    //
+    //    for (Map.Entry<FeatureExpr, Double> entry : this.getModelToSampleVariance().entrySet()) {
+    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
+    //        continue;
+    //      }
+    //
+    //      return entry.getValue();
+    //    }
+    //
+    //    throw new RuntimeException("The model appears to be empty");
+  }
 
-    return time;
+  @Override
+  public List<Double> evaluateConfidenceInterval(Set<String> config, List<String> options) {
+    throw new RuntimeException(
+        "Do not call this method since it is expensive to search for each entry doing implication");
+
+    //    FeatureExpr configAsConstraint = getConfigAsConstraint(config, options);
+    //
+    //    for (Map.Entry<FeatureExpr, List<Double>> entry :
+    //        this.getModelToConfidenceInterval().entrySet()) {
+    //      if (!configAsConstraint.implies(entry.getKey()).isTautology()) {
+    //        continue;
+    //      }
+    //
+    //      return entry.getValue();
+    //    }
+    //
+    //    throw new RuntimeException("The model appears to be empty");
   }
 }

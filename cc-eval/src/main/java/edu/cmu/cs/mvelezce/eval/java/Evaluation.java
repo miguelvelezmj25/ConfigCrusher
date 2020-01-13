@@ -7,6 +7,8 @@ import edu.cmu.cs.mvelezce.eval.metrics.error.squared.MeanSquaredError;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
+import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -179,6 +181,9 @@ public abstract class Evaluation<T> {
             + " in ci,,absolute error,relative error,squared error");
     result.append("\n");
 
+    int count = 0;
+    double[] times1 = new double[configurations.size()];
+    double[] timesGT = new double[configurations.size()];
     int predsInCI = 0;
     Metric<Double> absoluteErrorMetric = new AbsoluteError();
     Metric<Double> relativeErrorMetric = new RelativeError();
@@ -200,9 +205,11 @@ public abstract class Evaluation<T> {
       result.append(",");
 
       double time1 = Double.parseDouble(entries1.get(1));
+      times1[count] = time1;
       result.append(time1);
       result.append(",");
       double timeGT = Double.parseDouble(entriesGT.get(1));
+      timesGT[count] = timeGT;
       result.append(timeGT);
       result.append(",");
 
@@ -242,6 +249,7 @@ public abstract class Evaluation<T> {
       result.append(DECIMAL_FORMAT.format(squaredError));
 
       result.append("\n");
+      count++;
     }
 
     result.append("\n");
@@ -255,6 +263,13 @@ public abstract class Evaluation<T> {
     result.append("Predictions within CI: ");
     result.append((100.0 * predsInCI) / configurations.size());
     result.append("%");
+    result.append("\n");
+    result.append("\n");
+    result.append("Pearsons correlation: ");
+    result.append(DECIMAL_FORMAT.format(new PearsonsCorrelation().correlation(times1, timesGT)));
+    result.append("\n");
+    result.append("Spearmans correlation: ");
+    result.append(DECIMAL_FORMAT.format(new SpearmansCorrelation().correlation(times1, timesGT)));
     result.append("\n");
     result.append("\n");
     result.append("Min Absolute Error: ");

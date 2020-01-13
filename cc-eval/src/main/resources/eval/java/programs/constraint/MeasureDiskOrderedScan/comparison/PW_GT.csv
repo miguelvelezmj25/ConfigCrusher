@@ -2005,6 +2005,9 @@ Total: 2000
 Predictions within CI: 300
 Predictions within CI: 15.0%
 
+Pearsons correlation: 0.952
+Spearmans correlation: 0.917
+
 Min Absolute Error: 0
 Max Absolute Error: 11.182
 Mean Absolute Error: 2.696

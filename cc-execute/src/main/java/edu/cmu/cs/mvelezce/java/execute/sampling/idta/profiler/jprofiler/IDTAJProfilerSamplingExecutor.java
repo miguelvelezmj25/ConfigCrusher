@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.indexFiles.profiler.jprofiler.JProfilerSamplingIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.profiler.jprofiler.JProfilerSamplingMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.trivial.profiler.jprofiler.JProfilerSamplingTrivialExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJProfilerSamplingExecutionParser;
@@ -50,6 +51,9 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
         break;
       case JProfilerSamplingMeasureDiskOrderedScanAdapter.PROGRAM_NAME:
         adapter = new JProfilerSamplingMeasureDiskOrderedScanAdapter(this);
+        break;
+      case JProfilerSamplingIndexFilesAdapter.PROGRAM_NAME:
+        adapter = new JProfilerSamplingIndexFilesAdapter(this);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());

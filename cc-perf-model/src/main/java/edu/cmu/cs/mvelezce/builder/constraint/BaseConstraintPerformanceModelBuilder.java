@@ -57,11 +57,6 @@ public abstract class BaseConstraintPerformanceModelBuilder
   }
 
   @Override
-  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
-    throw new UnsupportedOperationException("Implement");
-  }
-
-  @Override
   protected LocalPerformanceModel<FeatureExpr> buildEmptyLocalModel(
       Map.Entry<JavaRegion, Set<FeatureExpr>> entry) {
     Map<FeatureExpr, Double> model = this.addConstraintEntries(entry.getValue());

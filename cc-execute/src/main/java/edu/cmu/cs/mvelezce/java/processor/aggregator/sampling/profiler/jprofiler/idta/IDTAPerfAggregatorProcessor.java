@@ -19,6 +19,8 @@ public class IDTAPerfAggregatorProcessor extends PerfAggregatorProcessor {
   IDTAPerfAggregatorProcessor(
       String programName, Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution) {
     super(programName, itersToProcessedPerfExecution);
+
+    System.err.println("Check the logic to catch undeterminism in the execution");
   }
 
   @Override

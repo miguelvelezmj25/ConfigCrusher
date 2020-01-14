@@ -14,10 +14,6 @@ public abstract class BaseCountRegionsPerMethodAnalysis<T> {
   }
 
   public Map<String, Integer> analyze() {
-    return this.getRegionCountsPerMethod();
-  }
-
-  private Map<String, Integer> getRegionCountsPerMethod() {
     Map<String, Integer> regionsToCount = new HashMap<>();
 
     for (JavaRegion region : this.regionsToData.keySet()) {
@@ -49,6 +45,18 @@ public abstract class BaseCountRegionsPerMethodAnalysis<T> {
       }
 
       System.out.println(entry.getKey() + " has " + regionsInMethod + " regions");
+
+      for (JavaRegion region : this.regionsToData.keySet()) {
+        String fullyQualifiedMethod = this.getFullyQualifiedMethod(region);
+
+        if (!entry.getKey().equals(fullyQualifiedMethod)) {
+          continue;
+        }
+
+        System.out.println(region.getId());
+      }
+
+      System.out.println();
     }
   }
 }

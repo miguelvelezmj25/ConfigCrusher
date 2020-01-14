@@ -14,7 +14,6 @@ import java.util.*;
 public abstract class JProfilerSamplingExecutionProcessor
     extends BaseExecutionProcessor<RawJProfilerSamplingPerfExecution> {
 
-  //  private static final double J_PROFILER_OVERHEAD = 0.15;
   private static final double J_PROFILER_OVERHEAD = 0.0;
 
   private final Map<String, String> fullyQualifiedMethodsToRegionIds = new HashMap<>();
@@ -68,6 +67,7 @@ public abstract class JProfilerSamplingExecutionProcessor
   }
 
   private void getFullyQualifiedMethodsToRegionIds(Set<JavaRegion> regions) {
+    System.err.println("Ignoring the fact that a method can have multiple regions");
     for (JavaRegion region : regions) {
       String fullyQualifiedName =
           this.getRegionFullyQualifiedName(

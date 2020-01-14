@@ -64,15 +64,15 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
                 this.getOptions(),
                 this.getRegionsToData(),
                 this.idtaMethodInstrumenter)
-            .setDebug(true)
+            .setDebug(false)
             .build();
     transformer.transformMethods();
   }
 
   @Override
   public void compile() throws IOException, InterruptedException {
-    System.err.println("Delete method once we are done with testing instrumenting");
-    super.compile();
+    //    System.err.println("Delete method once we are done with testing instrumenting");
+    //    super.compile();
   }
 
   @Override

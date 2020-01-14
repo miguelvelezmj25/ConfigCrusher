@@ -9,7 +9,6 @@ import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.idta.IDTAInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.utils.cg.SootCallGraphBuilder;
 import edu.cmu.cs.mvelezce.instrument.region.utils.data.propcessor.idta.GlobalConstraintImplicationCleaner;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.BaseInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.idta.BaseIDTAInterExpander;
@@ -49,8 +48,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
   private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
   private final BaseRemoveNestedRegionsInter<Set<FeatureExpr>> removeNestedRegionsInter;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
-  private final CallGraph callGraph;
-  private final SootAsmMethodMatcher sootAsmMethodMatcher;
+  private final CallGraph callGraph = null;
+  private final SootAsmMethodMatcher sootAsmMethodMatcher = null;
   private final GlobalConstraintImplicationCleaner globalConstraintImplicationCleaner;
 
   private IDTAMethodTransformer(Builder builder)
@@ -103,8 +102,8 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             idtaRemoveNestedRegionsIntra,
             this.baseIDTAExpander);
 
-    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
-    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
+    //    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
+    //    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
     BaseInterAnalysisUtils<Set<FeatureExpr>> baseInterAnalysisUtils =
         new IDTAInterAnalysisUtils(
             builder.programName,
@@ -156,6 +155,12 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     return DEBUG_DIR;
   }
 
+  /**
+   * Not instrumenting regions anymore
+   *
+   * @param methodNode
+   * @param classNode
+   */
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     //    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions =
@@ -163,33 +168,41 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     //    this.idtaMethodInstrumenter.instrument(methodNode, classNode, blocksToRegions);
   }
 
+  /**
+   * Only propagating regions intraprocedurally
+   *
+   * @param classNodes
+   */
   @Override
   protected void transformRegions(Set<ClassNode> classNodes) {
-    this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
+    //    this.sootAsmMethodMatcher.init(this.callGraph, classNodes);
+    //
+    //    boolean propagatedRegions = true;
+    //    boolean mustExitNextIter = false;
+    //    classNodes = this.sootAsmMethodMatcher.getClassNodesToConsider();
+    //
+    //    while (propagatedRegions) {
+    //      boolean propagatedIntra = this.propagateRegionsIntra(classNodes);
+    //      MemoryMonitor.printMemoryUsage("Memory:");
+    //      boolean propagatedInter = this.propagateRegionsInter(classNodes);
+    //      MemoryMonitor.printMemoryUsage("Memory:");
+    //      propagatedRegions = propagatedIntra | propagatedInter;
+    //
+    //      if (mustExitNextIter && (propagatedIntra || propagatedInter)) {
+    //        throw new RuntimeException(
+    //            "Expected to exit in the next iteration, since we did not propagate inter, but,
+    // somehow we propagated intra: "
+    //                + propagatedIntra
+    //                + " or propagated inter: "
+    //                + propagatedInter);
+    //      }
+    //
+    //      if (!propagatedIntra) {
+    //        mustExitNextIter = true;
+    //      }
+    //    }
 
-    boolean propagatedRegions = true;
-    boolean mustExitNextIter = false;
-    classNodes = this.sootAsmMethodMatcher.getClassNodesToConsider();
-
-    while (propagatedRegions) {
-      boolean propagatedIntra = this.propagateRegionsIntra(classNodes);
-      MemoryMonitor.printMemoryUsage("Memory:");
-      boolean propagatedInter = this.propagateRegionsInter(classNodes);
-      MemoryMonitor.printMemoryUsage("Memory:");
-      propagatedRegions = propagatedIntra | propagatedInter;
-
-      if (mustExitNextIter && (propagatedIntra || propagatedInter)) {
-        throw new RuntimeException(
-            "Expected to exit in the next iteration, since we did not propagate inter, but, somehow we propagated intra: "
-                + propagatedIntra
-                + " or propagated inter: "
-                + propagatedInter);
-      }
-
-      if (!propagatedIntra) {
-        mustExitNextIter = true;
-      }
-    }
+    this.propagateRegionsIntra(classNodes);
 
     try {
       GC.gc(5_000);
@@ -210,112 +223,114 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     MemoryMonitor.printMemoryUsage("Memory:");
 
     this.setStartAndEndBlocks(classNodes);
-    this.cleanImpliedConstraints(classNodes);
+    //    this.cleanImpliedConstraints(classNodes);
   }
 
-  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
-    int classNodesCount = classNodes.size();
-    int processedClassNodesCount = 0;
-
-    for (ClassNode classNode : classNodes) {
-      processedClassNodesCount++;
-      System.out.println(
-          "Class nodes still to clean implied constraints: "
-              + (classNodesCount - processedClassNodesCount));
-      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-
-      if (methodsToProcess.isEmpty()) {
-        continue;
-      }
-
-      for (MethodNode methodNode : methodsToProcess) {
-        System.out.println("Cleaning constraints " + classNode.name + " - " + methodNode.name);
-        long startTime = System.nanoTime();
-        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
-        long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-
-        if (this.debug()) {
-          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
-        }
-      }
-    }
-  }
-
-  private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
-    int classNodesCount = classNodes.size();
-    int processedClassNodesCount = 0;
-
-    for (ClassNode classNode : classNodes) {
-      processedClassNodesCount++;
-      System.out.println(
-          "Class nodes still to remove inter: " + (classNodesCount - processedClassNodesCount));
-
-      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-
-      if (methodsToProcess.isEmpty()) {
-        continue;
-      }
-
-      for (MethodNode methodNode : methodsToProcess) {
-        System.out.println(
-            "Removing nested regions inter " + classNode.name + " - " + methodNode.name);
-        long startTime = System.nanoTime();
-        this.removeNestedRegionsInter.processBlocks(methodNode, classNode);
-        long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-      }
-    }
-
-    if (!this.debug()) {
-      return;
-    }
-
-    for (ClassNode classNode : classNodes) {
-      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-
-      if (methodsToProcess.isEmpty()) {
-        continue;
-      }
-
-      for (MethodNode methodNode : methodsToProcess) {
-        this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
-      }
-    }
-  }
-
-  private boolean propagateRegionsInter(Set<ClassNode> classNodes) {
-    int classNodesCount = classNodes.size();
-    int processedClassNodesCount = 0;
-    boolean propagatedRegions = false;
-
-    //    for (ClassNode classNode : classNodes) {
-    //      processedClassNodesCount++;
-    //      System.out.println(
-    //          "Class nodes still to propagate inter: " + (classNodesCount -
-    // processedClassNodesCount));
-    //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-    //
-    //      if (methodsToProcess.isEmpty()) {
-    //        continue;
-    //      }
-    //
-    //      for (MethodNode methodNode : methodsToProcess) {
-    //        System.out.println("Processing inter " + classNode.name + " - " + methodNode.name);
-    //        long startTime = System.nanoTime();
-    //        propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode,
-    // classNode);
-    //        long endTime = System.nanoTime();
-    //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-    //      }
-    //    }
-
-    return propagatedRegions;
-  }
-
-  private boolean expandRegionsInter(MethodNode methodNode, ClassNode classNode) {
-    return this.interExpander.processBlocks(methodNode, classNode);
-  }
+  //  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
+  //    int classNodesCount = classNodes.size();
+  //    int processedClassNodesCount = 0;
+  //
+  //    for (ClassNode classNode : classNodes) {
+  //      processedClassNodesCount++;
+  //      System.out.println(
+  //          "Class nodes still to clean implied constraints: "
+  //              + (classNodesCount - processedClassNodesCount));
+  //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+  //
+  //      if (methodsToProcess.isEmpty()) {
+  //        continue;
+  //      }
+  //
+  //      for (MethodNode methodNode : methodsToProcess) {
+  //        System.out.println("Cleaning constraints " + classNode.name + " - " +
+  // methodNode.name);
+  //        long startTime = System.nanoTime();
+  //        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
+  //        long endTime = System.nanoTime();
+  //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+  //
+  //        if (this.debug()) {
+  //          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
+  //        }
+  //      }
+  //    }
+  //  }
+  //
+  //  private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
+  //    int classNodesCount = classNodes.size();
+  //    int processedClassNodesCount = 0;
+  //
+  //    for (ClassNode classNode : classNodes) {
+  //      processedClassNodesCount++;
+  //      System.out.println(
+  //          "Class nodes still to remove inter: " + (classNodesCount - processedClassNodesCount));
+  //
+  //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+  //
+  //      if (methodsToProcess.isEmpty()) {
+  //        continue;
+  //      }
+  //
+  //      for (MethodNode methodNode : methodsToProcess) {
+  //        System.out.println(
+  //            "Removing nested regions inter " + classNode.name + " - " + methodNode.name);
+  //        long startTime = System.nanoTime();
+  //        this.removeNestedRegionsInter.processBlocks(methodNode, classNode);
+  //        long endTime = System.nanoTime();
+  //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+  //      }
+  //    }
+  //
+  //    if (!this.debug()) {
+  //      return;
+  //    }
+  //
+  //    for (ClassNode classNode : classNodes) {
+  //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+  //
+  //      if (methodsToProcess.isEmpty()) {
+  //        continue;
+  //      }
+  //
+  //      for (MethodNode methodNode : methodsToProcess) {
+  //        this.removeNestedRegionsInter.debugBlockData(methodNode, classNode);
+  //      }
+  //    }
+  //  }
+  //
+  //  private boolean propagateRegionsInter(Set<ClassNode> classNodes) {
+  //    int classNodesCount = classNodes.size();
+  //    int processedClassNodesCount = 0;
+  //    boolean propagatedRegions = false;
+  //
+  //    //    for (ClassNode classNode : classNodes) {
+  //    //      processedClassNodesCount++;
+  //    //      System.out.println(
+  //    //          "Class nodes still to propagate inter: " + (classNodesCount -
+  //    // processedClassNodesCount));
+  //    //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+  //    //
+  //    //      if (methodsToProcess.isEmpty()) {
+  //    //        continue;
+  //    //      }
+  //    //
+  //    //      for (MethodNode methodNode : methodsToProcess) {
+  //    //        System.out.println("Processing inter " + classNode.name + " - " +
+  // methodNode.name);
+  //    //        long startTime = System.nanoTime();
+  //    //        propagatedRegions = propagatedRegions | this.expandRegionsInter(methodNode,
+  //    // classNode);
+  //    //        long endTime = System.nanoTime();
+  //    //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+  //    //      }
+  //    //    }
+  //
+  //    return propagatedRegions;
+  //  }
+  //
+  //  private boolean expandRegionsInter(MethodNode methodNode, ClassNode classNode) {
+  //    return this.interExpander.processBlocks(methodNode, classNode);
+  //  }
 
   private void setStartAndEndBlocks(Set<ClassNode> classNodes) {
     int classNodesCount = classNodes.size();

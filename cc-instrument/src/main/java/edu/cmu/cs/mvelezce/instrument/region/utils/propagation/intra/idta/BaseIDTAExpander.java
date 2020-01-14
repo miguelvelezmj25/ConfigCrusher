@@ -50,10 +50,6 @@ public final class BaseIDTAExpander {
   /** ∃ c ∈ GlobalConstraints . c ⟹ newConstraint */
   public boolean canMergeConstraints(
       Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> currentConstraints) {
-    if (expandingConstraints == null) {
-      throw new RuntimeException("Expanding constraints should never be null");
-    }
-
     if (expandingConstraints.isEmpty()) {
       throw new RuntimeException("Expanding constraints should never be empty");
     }
@@ -64,6 +60,11 @@ public final class BaseIDTAExpander {
 
     if (currentConstraints.isEmpty()) {
       throw new RuntimeException("How can that data be empty, but not null?");
+    }
+
+    // Shortcut
+    if (currentConstraints.equals(expandingConstraints)) {
+      return true;
     }
 
     Set<FeatureExpr> newConstraints = new HashSet<>();
@@ -80,6 +81,12 @@ public final class BaseIDTAExpander {
       }
     }
 
+    // Shortcut
+    if (newConstraints.equals(expandingConstraints)) {
+      return true;
+    }
+
+    // Logic
     for (FeatureExpr newConstraint : newConstraints) {
       boolean existsGlobalConstraint = false;
 

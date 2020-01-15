@@ -1,0 +1,41 @@
+{
+  "localModels": [
+    {
+      "region": "00000000-0000-0000-0000-000000000000",
+      "model": {
+        "True": 1.50083625E9
+      },
+      "modelToMin": {},
+      "modelToMax": {},
+      "modelToDiff": {},
+      "modelToSampleVariance": {},
+      "modelToConfidenceInterval": {},
+      "modelToPerfHumanReadable": {},
+      "modelToMinHumanReadable": {},
+      "modelToMaxHumanReadable": {},
+      "modelToDiffHumanReadable": {},
+      "modelToSampleVarianceHumanReadble": {},
+      "modelToConfidenceIntervalHumanReadable": {}
+    },
+    {
+      "region": "1b8cad2c-bd8e-489e-9ac3-8cea061f2473",
+      "model": {
+        "(def(A)&def(B))": 6391000.0,
+        "(!def(A)&!def(B))": 1.0942439E10,
+        "(def(A)&!def(B))": 5932000.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToMin": {},
+      "modelToMax": {},
+      "modelToDiff": {},
+      "modelToSampleVariance": {},
+      "modelToConfidenceInterval": {},
+      "modelToPerfHumanReadable": {},
+      "modelToMinHumanReadable": {},
+      "modelToMaxHumanReadable": {},
+      "modelToDiffHumanReadable": {},
+      "modelToSampleVarianceHumanReadble": {},
+      "modelToConfidenceIntervalHumanReadable": {}
+    }
+  ]
+}

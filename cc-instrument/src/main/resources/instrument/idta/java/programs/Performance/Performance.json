@@ -1,0 +1,20 @@
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Performance",
+    "methodSignature": "run([Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "(A && B)",
+      "(A && !B)",
+      "(!A && !B)",
+      "(!A && B)"
+    ],
+    "id": "1b8cad2c-bd8e-489e-9ac3-8cea061f2473",
+    "startBlock": "1622863652",
+    "endBlocks": [
+      "exit"
+    ]
+  }
+]

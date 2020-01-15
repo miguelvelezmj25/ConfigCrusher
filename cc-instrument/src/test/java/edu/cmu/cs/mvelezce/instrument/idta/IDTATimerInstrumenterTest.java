@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.methodCall.BaseMethodCallAdapter;
 import edu.cmu.cs.mvelezce.adapters.multipleReturns.BaseMultipleReturnsAdapter;
+import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.pngtastic.BasePngtasticAdapter;
 import edu.cmu.cs.mvelezce.adapters.staticMethodCall.BaseStaticMethodCallAdapter;
 import edu.cmu.cs.mvelezce.adapters.subtraces.BaseSubtracesAdapter;
@@ -497,6 +498,38 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseCleanConstraintsIssueAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = "../" + BaseCleanConstraintsIssueAdapter.INSTRUMENTED_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseCleanConstraintsIssueAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToConstraints,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void performance()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BasePerformanceAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
+
+    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
+        new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+
+    String mainClass = BasePerformanceAdapter.MAIN_CLASS;
+    String srcDir = "../" + BasePerformanceAdapter.ORIGINAL_DIR_PATH;
+    String classDir = "../" + BasePerformanceAdapter.ORIGINAL_CLASS_PATH;
+    Set<String> options = new HashSet<>(BasePerformanceAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

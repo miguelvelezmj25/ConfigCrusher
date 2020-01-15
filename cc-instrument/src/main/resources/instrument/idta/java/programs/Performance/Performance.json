@@ -11,8 +11,24 @@
       "(!A && !B)",
       "(!A && B)"
     ],
-    "id": "1b8cad2c-bd8e-489e-9ac3-8cea061f2473",
-    "startBlock": "1622863652",
+    "id": "7e453945-72d8-441d-ba71-480860543af6",
+    "startBlock": "1075803699",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Performance",
+    "methodSignature": "foo(Z)I",
+    "decisionIndex": 1,
+    "info": [],
+    "prettyConstraints": [
+      "!B",
+      "B"
+    ],
+    "id": "3b442461-89d8-4054-aae1-3b16168b42e1",
+    "startBlock": "1724457619",
     "endBlocks": [
       "exit"
     ]

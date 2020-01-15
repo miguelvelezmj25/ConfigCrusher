@@ -223,39 +223,38 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     MemoryMonitor.printMemoryUsage("Memory:");
 
     this.setStartAndEndBlocks(classNodes);
-    //    this.cleanImpliedConstraints(classNodes);
+    this.cleanImpliedConstraints(classNodes);
   }
 
-  //  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
-  //    int classNodesCount = classNodes.size();
-  //    int processedClassNodesCount = 0;
-  //
-  //    for (ClassNode classNode : classNodes) {
-  //      processedClassNodesCount++;
-  //      System.out.println(
-  //          "Class nodes still to clean implied constraints: "
-  //              + (classNodesCount - processedClassNodesCount));
-  //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-  //
-  //      if (methodsToProcess.isEmpty()) {
-  //        continue;
-  //      }
-  //
-  //      for (MethodNode methodNode : methodsToProcess) {
-  //        System.out.println("Cleaning constraints " + classNode.name + " - " +
-  // methodNode.name);
-  //        long startTime = System.nanoTime();
-  //        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
-  //        long endTime = System.nanoTime();
-  //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-  //
-  //        if (this.debug()) {
-  //          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
-  //        }
-  //      }
-  //    }
-  //  }
-  //
+  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
+    int classNodesCount = classNodes.size();
+    int processedClassNodesCount = 0;
+
+    for (ClassNode classNode : classNodes) {
+      processedClassNodesCount++;
+      System.out.println(
+          "Class nodes still to clean implied constraints: "
+              + (classNodesCount - processedClassNodesCount));
+      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+
+      if (methodsToProcess.isEmpty()) {
+        continue;
+      }
+
+      for (MethodNode methodNode : methodsToProcess) {
+        System.out.println("Cleaning constraints " + classNode.name + " - " + methodNode.name);
+        long startTime = System.nanoTime();
+        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+
+        if (this.debug()) {
+          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
+        }
+      }
+    }
+  }
+
   //  private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
   //    int classNodesCount = classNodes.size();
   //    int processedClassNodesCount = 0;

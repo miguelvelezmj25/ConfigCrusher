@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
@@ -44,6 +45,29 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   @Test
   public void berkeleyDB() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
+        new IDTAJProfilerSamplingExecutor(programName);
+    Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
+        executor.getRawExecutionParser().readResults();
+
+    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
+        instrumenter.getProcessedRegionsToData();
+
+    Analysis processor =
+        new IDTAJProfilerSamplingExecutionProcessor(
+            programName, itersToRawPerfExecs, regionsToConstraints.keySet());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    processor.analyze(args);
+  }
+
+  @Test
+  public void performance() throws IOException, InterruptedException {
+    String programName = BasePerformanceAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(programName);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =

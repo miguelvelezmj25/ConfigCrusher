@@ -1,0 +1,48 @@
+{
+  "configuration": [
+    "A",
+    "B"
+  ],
+  "regionsToPerf": {
+    "00000000-0000-0000-0000-000000000000": 1.49743E9,
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": 6391000.0
+  },
+  "regionsToMin": {
+    "00000000-0000-0000-0000-000000000000": 1.49743E9,
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": 6391000.0
+  },
+  "regionsToMax": {
+    "00000000-0000-0000-0000-000000000000": 1.49743E9,
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": 6391000.0
+  },
+  "regionsToDiff": {
+    "00000000-0000-0000-0000-000000000000": 0.0,
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": 0.0
+  },
+  "regionsToSampleVariance": {
+    "00000000-0000-0000-0000-000000000000": 0.0,
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": 0.0
+  },
+  "regionsToConfidenceInterval": {},
+  "regionsToPerfHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "1.4974300",
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": "0.0063910"
+  },
+  "regionsToMinHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "1.4974300",
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": "0.0063910"
+  },
+  "regionsToMaxHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "1.4974300",
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": "0.0063910"
+  },
+  "regionsToDiffHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "0.0000000",
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": "0.0000000"
+  },
+  "regionsToSampleVarianceHumanReadable": {
+    "00000000-0000-0000-0000-000000000000": "0.0000000",
+    "1b8cad2c-bd8e-489e-9ac3-8cea061f2473": "0.0000000"
+  },
+  "regionsToConfidenceIntervalsHumanReadable": {}
+}

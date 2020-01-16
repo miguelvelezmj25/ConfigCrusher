@@ -23,23 +23,20 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
   public static final String ORIGINAL_CLASS_PATH =
       "../performance-mapper-evaluation/original/berkeley-db/target/classes";
   private static final String HOME_DIR = "tmp";
-  private static final String[] OPTIONS = {
-    "DUPLICATES",
-    "SEQUENTIAL",
-    "MAX_MEMORY",
-    "ENV_SHARED_CACHE",
-    "REPLICATED",
-    "ENV_IS_LOCKING",
-    "CACHE_MODE",
-    "TEMPORARY",
-    "JE_FILE_LEVEL",
-    "ENV_BACKGROUND_READ_LIMIT",
-    "LOCK_DEADLOCK_DETECT",
-    "TXN_SERIALIZABLE_ISOLATION",
-    "JE_DURABILITY",
-    "ADLER32_CHUNK_SIZE",
-    "CHECKPOINTER_BYTES_INTERVAL",
-    "LOCK_DEADLOCK_DETECT_DELAY"
+  private static final String[] OPTIONS = {"DUPLICATES", "SEQUENTIAL", "MAX_MEMORY"
+    // ,    "ENV_SHARED_CACHE",
+    //    "REPLICATED",
+    //    "ENV_IS_LOCKING",
+    //    "CACHE_MODE",
+    //    "TEMPORARY",
+    //    "JE_FILE_LEVEL",
+    //    "ENV_BACKGROUND_READ_LIMIT",
+    //    "LOCK_DEADLOCK_DETECT",
+    //    "TXN_SERIALIZABLE_ISOLATION",
+    //    "JE_DURABILITY",
+    //    "ADLER32_CHUNK_SIZE",
+    //    "CHECKPOINTER_BYTES_INTERVAL",
+    //    "LOCK_DEADLOCK_DETECT_DELAY"
   };
 
   public BaseMeasureDiskOrderedScanAdapter() {

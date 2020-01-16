@@ -21,7 +21,8 @@ public class E2EMeasureDiskOrderedScanExecutorAdapter
   public void execute(Set<String> configuration) throws IOException, InterruptedException {
     this.preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
 
-    String[] configAsArgs = this.configurationAsMainArguments(configuration);
+    //    String[] configAsArgs = this.configurationAsMainArguments(configuration);
+    String[] configAsArgs = this.padOptions(configuration);
     this.executor.executeProgram(
         "../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_CLASS_PATH,
         ExecutorAdapter.EXECUTOR_MAIN_CLASS_PREFIX + BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME,

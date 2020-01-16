@@ -5,9 +5,6 @@ import edu.cmu.cs.mvelezce.java.execute.adapters.measureDiskOrderedScan.MeasureD
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 public class JProfilerSamplingMeasureDiskOrderedScanAdapter
@@ -28,23 +25,8 @@ public class JProfilerSamplingMeasureDiskOrderedScanAdapter
   public void execute(Set<String> configuration) throws IOException, InterruptedException {
     this.preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
 
-    String[] configAsArgs = this.configurationAsMainArguments(configuration);
-    List<String> tmp = new ArrayList<>();
-
-    for (int i = 0; i < 16; i++) {
-      if (i == 0) {
-        tmp.add(configAsArgs[0]);
-      } else if (i == 1) {
-        tmp.add(configAsArgs[1]);
-      } else if (i == 4) {
-        tmp.add(configAsArgs[2]);
-      } else {
-        tmp.add("false");
-      }
-    }
-
-    configAsArgs = tmp.toArray(new String[0]);
-
+    //    String[] configAsArgs = this.configurationAsMainArguments(configuration);
+    String[] configAsArgs = this.padOptions(configuration);
     this.executor.executeProgram(
         "../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_CLASS_PATH,
         BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS,

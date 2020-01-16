@@ -15,7 +15,7 @@ public class GTCompressionTest {
   public void berkeleyDb() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    BaseCompression compression = new GTCompression(programName, options, 2000);
+    BaseCompression compression = new GTCompression(programName, options);
 
     String[] args = new String[2];
     args[0] = "-delres";

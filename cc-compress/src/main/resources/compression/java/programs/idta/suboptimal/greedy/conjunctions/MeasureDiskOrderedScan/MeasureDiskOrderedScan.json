@@ -1,29 +1,29 @@
 [
+  [
+    "DUPLICATES",
+    "REPLICATED"
+  ],
   [],
   [
     "DUPLICATES",
     "SEQUENTIAL"
   ],
   [
-    "MAX_MEMORY",
-    "DUPLICATES"
-  ],
-  [
-    "MAX_MEMORY"
-  ],
-  [
-    "MAX_MEMORY",
     "DUPLICATES",
+    "REPLICATED",
+    "SEQUENTIAL"
+  ],
+  [
+    "REPLICATED",
     "SEQUENTIAL"
   ],
   [
     "DUPLICATES"
   ],
   [
-    "SEQUENTIAL"
+    "REPLICATED"
   ],
   [
-    "MAX_MEMORY",
     "SEQUENTIAL"
   ]
 ]

@@ -23,9 +23,12 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
   public static final String ORIGINAL_CLASS_PATH =
       "../performance-mapper-evaluation/original/berkeley-db/target/classes";
   private static final String HOME_DIR = "tmp";
-  private static final String[] OPTIONS = {"DUPLICATES", "SEQUENTIAL", "MAX_MEMORY"
+  private static final String[] OPTIONS = {
+    "DUPLICATES",
+    "SEQUENTIAL",
+    //          "MAX_MEMORY"
     // ,    "ENV_SHARED_CACHE",
-    //    "REPLICATED",
+    "REPLICATED",
     //    "ENV_IS_LOCKING",
     //    "CACHE_MODE",
     //    "TEMPORARY",

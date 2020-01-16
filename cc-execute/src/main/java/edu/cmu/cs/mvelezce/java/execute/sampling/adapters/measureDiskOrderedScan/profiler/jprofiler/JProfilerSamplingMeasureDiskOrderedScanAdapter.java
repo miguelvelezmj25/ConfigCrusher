@@ -29,10 +29,18 @@ public class JProfilerSamplingMeasureDiskOrderedScanAdapter
     this.preProcess("../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR);
 
     String[] configAsArgs = this.configurationAsMainArguments(configuration);
-    List<String> tmp = new ArrayList<>(Arrays.asList(configAsArgs));
+    List<String> tmp = new ArrayList<>();
 
-    for (int i = 0; i < 13; i++) {
-      tmp.add("false");
+    for (int i = 0; i < 16; i++) {
+      if (i == 0) {
+        tmp.add(configAsArgs[0]);
+      } else if (i == 1) {
+        tmp.add(configAsArgs[1]);
+      } else if (i == 4) {
+        tmp.add(configAsArgs[2]);
+      } else {
+        tmp.add("false");
+      }
     }
 
     configAsArgs = tmp.toArray(new String[0]);

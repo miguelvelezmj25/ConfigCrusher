@@ -1,41 +1,187 @@
 {
   "localModels": [
     {
+      "region": "7e453945-72d8-441d-ba71-480860543af6",
+      "model": {
+        "(def(A)&def(B))": 6391000.0,
+        "(!def(A)&!def(B))": 2.316143E9,
+        "(def(A)&!def(B))": 5932000.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToMin": {
+        "(def(A)&def(B))": 6391000.0,
+        "(!def(A)&!def(B))": 2.316143E9,
+        "(def(A)&!def(B))": 5932000.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToMax": {
+        "(def(A)&def(B))": 6391000.0,
+        "(!def(A)&!def(B))": 2.316143E9,
+        "(def(A)&!def(B))": 5932000.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToDiff": {
+        "(def(A)&def(B))": 0.0,
+        "(!def(A)&!def(B))": 0.0,
+        "(def(A)&!def(B))": 0.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToSampleVariance": {
+        "(def(A)&def(B))": 0.0,
+        "(!def(A)&!def(B))": 0.0,
+        "(def(A)&!def(B))": 0.0,
+        "(!def(A)&def(B))": 0.0
+      },
+      "modelToConfidenceInterval": {
+        "(def(A)&def(B))": [],
+        "(!def(A)&!def(B))": [],
+        "(def(A)&!def(B))": [],
+        "(!def(A)&def(B))": []
+      },
+      "modelToPerfHumanReadable": {
+        "(def(A)&def(B))": "0.0063910",
+        "(!def(A)&!def(B))": "2.3161430",
+        "(def(A)&!def(B))": "0.0059320",
+        "(!def(A)&def(B))": "0.0000000"
+      },
+      "modelToMinHumanReadable": {
+        "(def(A)&def(B))": "0.0063910",
+        "(!def(A)&!def(B))": "2.3161430",
+        "(def(A)&!def(B))": "0.0059320",
+        "(!def(A)&def(B))": "0.0000000"
+      },
+      "modelToMaxHumanReadable": {
+        "(def(A)&def(B))": "0.0063910",
+        "(!def(A)&!def(B))": "2.3161430",
+        "(def(A)&!def(B))": "0.0059320",
+        "(!def(A)&def(B))": "0.0000000"
+      },
+      "modelToDiffHumanReadable": {
+        "(def(A)&def(B))": "0.0000000",
+        "(!def(A)&!def(B))": "0.0000000",
+        "(def(A)&!def(B))": "0.0000000",
+        "(!def(A)&def(B))": "0.0000000"
+      },
+      "modelToSampleVarianceHumanReadble": {
+        "(def(A)&def(B))": "0.0000000",
+        "(!def(A)&!def(B))": "0.0000000",
+        "(def(A)&!def(B))": "0.0000000",
+        "(!def(A)&def(B))": "0.0000000"
+      },
+      "modelToConfidenceIntervalHumanReadable": {
+        "(def(A)&def(B))": [],
+        "(!def(A)&!def(B))": [],
+        "(def(A)&!def(B))": [],
+        "(!def(A)&def(B))": []
+      }
+    },
+    {
       "region": "00000000-0000-0000-0000-000000000000",
       "model": {
         "True": 1.50083625E9
       },
-      "modelToMin": {},
-      "modelToMax": {},
-      "modelToDiff": {},
-      "modelToSampleVariance": {},
-      "modelToConfidenceInterval": {},
-      "modelToPerfHumanReadable": {},
-      "modelToMinHumanReadable": {},
-      "modelToMaxHumanReadable": {},
-      "modelToDiffHumanReadable": {},
-      "modelToSampleVarianceHumanReadble": {},
-      "modelToConfidenceIntervalHumanReadable": {}
+      "modelToMin": {
+        "True": 1.49743E9
+      },
+      "modelToMax": {
+        "True": 1.503972E9
+      },
+      "modelToDiff": {
+        "True": 6542000.0
+      },
+      "modelToSampleVariance": {
+        "True": 9.308958916666846E12
+      },
+      "modelToConfidenceInterval": {
+        "True": [
+          1.4959813348286374E9,
+          1.5056911651713626E9
+        ]
+      },
+      "modelToPerfHumanReadable": {
+        "True": "1.5008363"
+      },
+      "modelToMinHumanReadable": {
+        "True": "1.4974300"
+      },
+      "modelToMaxHumanReadable": {
+        "True": "1.5039720"
+      },
+      "modelToDiffHumanReadable": {
+        "True": "0.0065420"
+      },
+      "modelToSampleVarianceHumanReadble": {
+        "True": "0.0000093"
+      },
+      "modelToConfidenceIntervalHumanReadable": {
+        "True": [
+          "1.4959813",
+          "1.5056912"
+        ]
+      }
     },
     {
-      "region": "1b8cad2c-bd8e-489e-9ac3-8cea061f2473",
+      "region": "3b442461-89d8-4054-aae1-3b16168b42e1",
       "model": {
-        "(def(A)&def(B))": 6391000.0,
-        "(!def(A)&!def(B))": 1.0942439E10,
-        "(def(A)&!def(B))": 5932000.0,
-        "(!def(A)&def(B))": 0.0
+        "def(B)": 0.0,
+        "!def(B)": 4.313148E9
       },
-      "modelToMin": {},
-      "modelToMax": {},
-      "modelToDiff": {},
-      "modelToSampleVariance": {},
-      "modelToConfidenceInterval": {},
-      "modelToPerfHumanReadable": {},
-      "modelToMinHumanReadable": {},
-      "modelToMaxHumanReadable": {},
-      "modelToDiffHumanReadable": {},
-      "modelToSampleVarianceHumanReadble": {},
-      "modelToConfidenceIntervalHumanReadable": {}
+      "modelToMin": {
+        "def(B)": 0.0,
+        "!def(B)": 0.0
+      },
+      "modelToMax": {
+        "def(B)": 0.0,
+        "!def(B)": 8.626296E9
+      },
+      "modelToDiff": {
+        "def(B)": 0.0,
+        "!def(B)": 8.626296E9
+      },
+      "modelToSampleVariance": {
+        "def(B)": 0.0,
+        "!def(B)": 3.7206491339808E19
+      },
+      "modelToConfidenceInterval": {
+        "def(B)": [
+          0.0,
+          0.0
+        ],
+        "!def(B)": [
+          0.0,
+          5.911688954542262E10
+        ]
+      },
+      "modelToPerfHumanReadable": {
+        "def(B)": "0.0000000",
+        "!def(B)": "4.3131480"
+      },
+      "modelToMinHumanReadable": {
+        "def(B)": "0.0000000",
+        "!def(B)": "0.0000000"
+      },
+      "modelToMaxHumanReadable": {
+        "def(B)": "0.0000000",
+        "!def(B)": "8.6262960"
+      },
+      "modelToDiffHumanReadable": {
+        "def(B)": "0.0000000",
+        "!def(B)": "8.6262960"
+      },
+      "modelToSampleVarianceHumanReadble": {
+        "def(B)": "0.0000000",
+        "!def(B)": "37.2064913"
+      },
+      "modelToConfidenceIntervalHumanReadable": {
+        "def(B)": [
+          "0.0000000",
+          "0.0000000"
+        ],
+        "!def(B)": [
+          "0.0000000",
+          "59.1168895"
+        ]
+      }
     }
   ]
 }

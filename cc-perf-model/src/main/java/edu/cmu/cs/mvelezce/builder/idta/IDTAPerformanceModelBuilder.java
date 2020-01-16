@@ -12,13 +12,16 @@ import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import edu.cmu.cs.mvelezce.utils.stats.SummaryStatisticsMap;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
 
+  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
   private static final String OUTPUT_DIR =
       "../cc-perf-model/" + Options.DIRECTORY + "/model/java/idta/programs";
 
@@ -41,9 +44,83 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
 
   @Override
   protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
-    Map<FeatureExpr, List<Double>> multiEntryModel =
-        this.getMultiEntryModel(localModel.getModel().keySet());
+    SummaryStatisticsMap<FeatureExpr> modelWithStats =
+        this.getModelWithStats(localModel.getModel().keySet());
+    this.addPerfEntries(localModel, modelWithStats);
 
+    localModel.getModel().putAll(modelWithStats.getEntriesToData());
+    Map<FeatureExpr, Double> regionsToMin = modelWithStats.getEntriesToMin();
+    localModel.getModelToMin().putAll(regionsToMin);
+    Map<FeatureExpr, Double> regionsToMax = modelWithStats.getEntriesToMax();
+    localModel.getModelToMax().putAll(regionsToMax);
+    localModel.getModelToDiff().putAll(modelWithStats.getEntriesToDiff(regionsToMin, regionsToMax));
+    localModel.getModelToSampleVariance().putAll(modelWithStats.getEntriesToSampleVariance());
+    localModel
+        .getModelToConfidenceInterval()
+        .putAll(modelWithStats.getEntriesToConfidenceInterval());
+
+    localModel.getModelToPerfHumanReadable().putAll(toHumanReadable(localModel.getModel()));
+    localModel.getModelToMinHumanReadable().putAll(toHumanReadable(localModel.getModelToMin()));
+    localModel.getModelToMaxHumanReadable().putAll(toHumanReadable(localModel.getModelToMax()));
+    localModel.getModelToDiffHumanReadable().putAll(toHumanReadable(localModel.getModelToDiff()));
+    localModel
+        .getModelToSampleVarianceHumanReadble()
+        .putAll(toHumanReadableSampleVariance(localModel.getModelToSampleVariance()));
+    localModel
+        .getModelToConfidenceIntervalHumanReadable()
+        .putAll(toHumanReadableCI(localModel.getModelToConfidenceInterval()));
+  }
+
+  private Map<FeatureExpr, String> toHumanReadableSampleVariance(
+      Map<FeatureExpr, Double> constraintsToSampleVariance) {
+    Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<FeatureExpr, Double> entry : constraintsToSampleVariance.entrySet()) {
+      double data = entry.getValue();
+      data = data / 1E18;
+      constraintsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return constraintsToHumanReadableData;
+  }
+
+  private Map<FeatureExpr, String> toHumanReadable(Map<FeatureExpr, Double> constraintsToData) {
+    Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<FeatureExpr, Double> entry : constraintsToData.entrySet()) {
+      double data = entry.getValue();
+      data = data / 1E9;
+      constraintsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return constraintsToHumanReadableData;
+  }
+
+  private Map<FeatureExpr, List<String>> toHumanReadableCI(
+      Map<FeatureExpr, List<Double>> constraintsToConfidenceIntervals) {
+    Map<FeatureExpr, List<String>> constraintsToHumanReadableCI = new HashMap<>();
+
+    for (Map.Entry<FeatureExpr, List<Double>> entry : constraintsToConfidenceIntervals.entrySet()) {
+      List<Double> confidenceInterval = entry.getValue();
+
+      if (confidenceInterval.isEmpty()) {
+        continue;
+      }
+
+      double lower = confidenceInterval.get(0) / 1E9;
+      double higher = confidenceInterval.get(1) / 1E9;
+      List<String> confidenceIntervalHumanReadable = new ArrayList<>();
+      confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(lower));
+      confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(higher));
+      constraintsToHumanReadableCI.put(entry.getKey(), confidenceIntervalHumanReadable);
+    }
+
+    return constraintsToHumanReadableCI;
+  }
+
+  private void addPerfEntries(
+      LocalPerformanceModel<FeatureExpr> localModel,
+      SummaryStatisticsMap<FeatureExpr> modelWithStats) {
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Map<UUID, Double> regionsToPerfs = entry.getRegionsToPerf();
       UUID region = localModel.getRegion();
@@ -65,65 +142,19 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
           continue;
         }
 
-        multiEntryModel.get(constraintToTimes.getKey()).add(time);
+        modelWithStats.get(constraintToTimes.getKey()).addValue(time);
       }
-    }
-
-    this.averageMultiEntryModel(localModel.getModel(), multiEntryModel);
-
-    //    Set<FeatureExpr> remove = new HashSet<>();
-    //    for (Map.Entry<FeatureExpr, Double> entry : localModel.getModel().entrySet()) {
-    //      if (entry.getValue() == 0.0) {
-    //        remove.add(entry.getKey());
-    //      }
-    //    }
-    //
-    //    for (FeatureExpr entry : remove) {
-    //      localModel.getModel().remove(entry);
-    //    }
-
-    localModel.getModelToMin().clear();
-    localModel.getModelToMax().clear();
-    localModel.getModelToDiff().clear();
-    localModel.getModelToSampleVariance().clear();
-    localModel.getModelToConfidenceInterval().clear();
-    localModel.getModelToPerfHumanReadable().clear();
-    localModel.getModelToMinHumanReadable().clear();
-    localModel.getModelToMaxHumanReadable().clear();
-    localModel.getModelToDiffHumanReadable().clear();
-    localModel.getModelToSampleVarianceHumanReadble().clear();
-    localModel.getModelToConfidenceIntervalHumanReadable().clear();
-  }
-
-  private void averageMultiEntryModel(
-      Map<FeatureExpr, Double> model, Map<FeatureExpr, List<Double>> multiEntryModel) {
-    for (Map.Entry<FeatureExpr, List<Double>> entry : multiEntryModel.entrySet()) {
-      List<Double> times = entry.getValue();
-
-      if (times.isEmpty()) {
-        continue;
-      }
-
-      double total = 0;
-
-      for (Double time : times) {
-        total += time;
-      }
-
-      total /= times.size();
-
-      model.put(entry.getKey(), total);
     }
   }
 
-  private Map<FeatureExpr, List<Double>> getMultiEntryModel(Set<FeatureExpr> constraints) {
-    Map<FeatureExpr, List<Double>> multiEntryModel = new HashMap<>();
+  private SummaryStatisticsMap<FeatureExpr> getModelWithStats(Set<FeatureExpr> constraints) {
+    SummaryStatisticsMap<FeatureExpr> modelWithStats = new SummaryStatisticsMap<>();
 
     for (FeatureExpr constraint : constraints) {
-      multiEntryModel.put(constraint, new ArrayList<>());
+      modelWithStats.putIfAbsent(constraint);
     }
 
-    return multiEntryModel;
+    return modelWithStats;
   }
 
   //  protected void validateOneConfigCoversOneConstraint(

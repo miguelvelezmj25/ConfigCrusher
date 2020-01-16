@@ -6,8 +6,8 @@ import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
+import edu.cmu.cs.mvelezce.utils.stats.SummaryStatisticsMap;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.io.File;
@@ -68,17 +68,16 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions =
         this.itersToProcessedPerfExecution.values();
 
-    Map<UUID, SummaryStatistics> regionsToStats =
-        this.addRegions(config, allProcessedPerfExecutions);
+    SummaryStatisticsMap<UUID> regionsToStats = this.addRegions(config, allProcessedPerfExecutions);
     this.addAllExecutions(regionsToStats, config, allProcessedPerfExecutions);
 
-    Map<UUID, Double> regionsToPerf = this.getRegionsToPerf(regionsToStats);
-    Map<UUID, Double> regionsToMin = this.getRegionsToMin(regionsToStats);
-    Map<UUID, Double> regionsToMax = this.getRegionsToMax(regionsToStats);
-    Map<UUID, Double> regionsToDiff = this.getRegionsToDiff(regionsToMin, regionsToMax);
-    Map<UUID, Double> regionsToSampleVariance = this.getRegionsToSampleVariance(regionsToStats);
+    Map<UUID, Double> regionsToPerf = regionsToStats.getEntriesToData();
+    Map<UUID, Double> regionsToMin = regionsToStats.getEntriesToMin();
+    Map<UUID, Double> regionsToMax = regionsToStats.getEntriesToMax();
+    Map<UUID, Double> regionsToDiff = regionsToStats.getEntriesToDiff(regionsToMin, regionsToMax);
+    Map<UUID, Double> regionsToSampleVariance = regionsToStats.getEntriesToSampleVariance();
     Map<UUID, List<Double>> regionsToConfidenceInterval =
-        this.getRegionsToConfidenceInterval(regionsToStats);
+        regionsToStats.getEntriesToConfidenceInterval();
 
     return new PerformanceEntry(
         config,
@@ -107,51 +106,6 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     }
 
     return regionsToHumanReadableData;
-  }
-
-  private Map<UUID, List<Double>> getRegionsToConfidenceInterval(
-      Map<UUID, SummaryStatistics> regionsToStats) {
-    Map<UUID, List<Double>> regionsToConfidenceInterval = new HashMap<>();
-
-    for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
-      SummaryStatistics stats = entry.getValue();
-
-      if (stats.getN() == 1) {
-        continue;
-      }
-
-      TDistribution tDist = new TDistribution(stats.getN() - 1);
-      double critVal = tDist.inverseCumulativeProbability(1.0 - (1 - 0.95) / 2);
-      double ciValue = critVal * Math.sqrt(stats.getVariance()) / Math.sqrt(stats.getN());
-      double lowerCI = Math.max(0, stats.getMean() - ciValue);
-      double higherCI = stats.getMean() + ciValue;
-
-      if ((higherCI - lowerCI) >= 1E9) {
-        System.err.println(
-            "The difference between the lower and higher confidence interval bounds of region "
-                + entry.getKey()
-                + " is greater than 1 sec. It is "
-                + ((higherCI - lowerCI) / 1E9));
-      }
-
-      List<Double> confidenceInterval = new ArrayList<>();
-      confidenceInterval.add(lowerCI);
-      confidenceInterval.add(higherCI);
-      regionsToConfidenceInterval.put(entry.getKey(), confidenceInterval);
-    }
-
-    return regionsToConfidenceInterval;
-  }
-
-  private Map<UUID, Double> getRegionsToSampleVariance(
-      Map<UUID, SummaryStatistics> regionsToStats) {
-    Map<UUID, Double> regionsToSampleVariance = new HashMap<>();
-
-    for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
-      regionsToSampleVariance.put(entry.getKey(), entry.getValue().getVariance());
-    }
-
-    return regionsToSampleVariance;
   }
 
   private Map<UUID, String> toHumanReadable(Map<UUID, Double> regionsToData) {
@@ -183,65 +137,8 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToHumanReadableCI;
   }
 
-  private Map<UUID, Double> getRegionsToPerf(Map<UUID, SummaryStatistics> regionsToStats) {
-    Map<UUID, Double> regionsToPerf = new HashMap<>();
-
-    for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
-      regionsToPerf.put(entry.getKey(), entry.getValue().getMean());
-    }
-
-    return regionsToPerf;
-  }
-
-  private Map<UUID, Double> getRegionsToMin(Map<UUID, SummaryStatistics> regionsToStats) {
-    Map<UUID, Double> regionsToMin = new HashMap<>();
-
-    for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
-      regionsToMin.put(entry.getKey(), entry.getValue().getMin());
-    }
-
-    return regionsToMin;
-  }
-
-  private Map<UUID, Double> getRegionsToMax(Map<UUID, SummaryStatistics> regionsToStats) {
-    Map<UUID, Double> regionsToMax = new HashMap<>();
-
-    for (Map.Entry<UUID, SummaryStatistics> entry : regionsToStats.entrySet()) {
-      regionsToMax.put(entry.getKey(), entry.getValue().getMax());
-    }
-
-    return regionsToMax;
-  }
-
-  private Map<UUID, Double> getRegionsToDiff(
-      Map<UUID, Double> regionsToMin, Map<UUID, Double> regionsToMax) {
-    Map<UUID, Double> regionsToDiff = new HashMap<>();
-
-    for (UUID region : regionsToMin.keySet()) {
-      regionsToDiff.put(region, 0.0);
-    }
-
-    for (UUID region : regionsToDiff.keySet()) {
-      double max = regionsToMax.get(region);
-      double min = regionsToMin.get(region);
-      double diff = max - min;
-
-      if (diff >= 1E9) {
-        System.err.println(
-            "The difference between the min and max executions of region "
-                + region
-                + " is greater than 1 sec. It is "
-                + (diff / 1E9));
-      }
-
-      regionsToDiff.put(region, diff);
-    }
-
-    return regionsToDiff;
-  }
-
   private void addAllExecutions(
-      Map<UUID, SummaryStatistics> regionsToStats,
+      SummaryStatisticsMap<UUID> regionsToStats,
       Set<String> config,
       Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
@@ -261,9 +158,9 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     }
   }
 
-  private Map<UUID, SummaryStatistics> addRegions(
+  private SummaryStatisticsMap<UUID> addRegions(
       Set<String> config, Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
-    Map<UUID, SummaryStatistics> regionsToPerf = new HashMap<>();
+    SummaryStatisticsMap<UUID> regionsToPerf = new SummaryStatisticsMap<>();
 
     for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
       for (ProcessedPerfExecution processedPerfExecution : processedPerfExecutions) {
@@ -272,7 +169,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         }
 
         for (String region : processedPerfExecution.getRegionsToPerf().keySet()) {
-          regionsToPerf.putIfAbsent(UUID.fromString(region), new SummaryStatistics());
+          regionsToPerf.putIfAbsent(UUID.fromString(region));
         }
 
         break;

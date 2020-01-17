@@ -1,12 +1,12 @@
 configuration,measured,IDTA,GT,,minci,maxci,ciwindow,IDTA in ci,,absolute error,relative error,squared error
-"[DUPLICATES, REPLICATED]","true",11.401,10.589,,10.277,10.902,0.625,,,0.812,0.077,0.659
-"[]","true",13.229,12.072,,11.67,12.474,0.804,,,1.157,0.096,1.339
-"[DUPLICATES, SEQUENTIAL]","true",5.458,4.905,,4.867,4.943,0.077,,,0.553,0.113,0.306
-"[DUPLICATES, REPLICATED, SEQUENTIAL]","true",5.469,4.912,,4.801,5.024,0.223,,,0.557,0.113,0.31
-"[REPLICATED, SEQUENTIAL]","true",6.924,6.373,,6.131,6.614,0.483,,,0.551,0.086,0.304
-"[DUPLICATES]","true",11.213,10.542,,10.213,10.871,0.658,,,0.671,0.064,0.45
-"[REPLICATED]","true",13.214,12.16,,12.046,12.275,0.229,,,1.054,0.087,1.111
-"[SEQUENTIAL]","true",6.681,6.399,,6.217,6.581,0.365,,,0.282,0.044,0.08
+"[DUPLICATES, REPLICATED]","true",11.878,10.589,,10.277,10.902,0.625,,,1.289,0.122,1.662
+"[]","true",13.743,12.072,,11.67,12.474,0.804,,,1.671,0.138,2.792
+"[DUPLICATES, SEQUENTIAL]","true",5.536,4.905,,4.867,4.943,0.077,,,0.631,0.129,0.398
+"[DUPLICATES, REPLICATED, SEQUENTIAL]","true",5.569,4.912,,4.801,5.024,0.223,,,0.657,0.134,0.432
+"[REPLICATED, SEQUENTIAL]","true",7.175,6.373,,6.131,6.614,0.483,,,0.802,0.126,0.643
+"[DUPLICATES]","true",11.658,10.542,,10.213,10.871,0.658,,,1.116,0.106,1.245
+"[REPLICATED]","true",13.623,12.16,,12.046,12.275,0.229,,,1.463,0.12,2.14
+"[SEQUENTIAL]","true",6.733,6.399,,6.217,6.581,0.365,,,0.334,0.052,0.112
 
 Total: 8
 
@@ -16,14 +16,14 @@ Predictions within CI: 0.0%
 Pearsons correlation: 0.999
 Spearmans correlation: 0.952
 
-Min Absolute Error: 0.282
-Max Absolute Error: 1.157
-Mean Absolute Error: 0.705
+Min Absolute Error: 0.334
+Max Absolute Error: 1.671
+Mean Absolute Error: 0.995
 
-Min Relative Error: 0.044
-Max Relative Error: 0.113
-Mean Relative Error: 0.085
+Min Relative Error: 0.052
+Max Relative Error: 0.138
+Mean Relative Error: 0.116
 
-Mean Squared Error: 0.57
+Mean Squared Error: 1.178
 
-Mean Absolute Percentage Error: 8.494%
+Mean Absolute Percentage Error: 11.585%

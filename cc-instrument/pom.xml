@@ -50,6 +50,13 @@
 
         <dependency>
             <groupId>edu.cmu.cs.mvelezce</groupId>
+            <artifactId>cc-compress</artifactId>
+            <version>0.2.0-SNAPSHOT</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.cmu.cs.mvelezce</groupId>
             <artifactId>java-bytecode-instrumenter</artifactId>
             <version>0.1.0-SNAPSHOT</version>
             <optional>true</optional>

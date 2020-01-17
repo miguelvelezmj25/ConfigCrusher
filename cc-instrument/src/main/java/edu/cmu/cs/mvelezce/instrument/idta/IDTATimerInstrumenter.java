@@ -1,24 +1,22 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time.IDTAExecutionTimeMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
-import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
+import edu.cmu.cs.mvelezce.utils.RegionsWithConstraintsUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExpr>> {
 
@@ -79,71 +77,12 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   protected void writeToFile(Map<JavaRegion, Set<FeatureExpr>> regionsToData) throws IOException {
     System.err.println(
         "The index of the regions might not be accurate. Not sure at the moment if we need the index for later analysis or understanding");
-    String outputFile = this.getOutputFile();
-    File file = new File(outputFile);
-    file.getParentFile().mkdirs();
-
-    Set<RegionConstraintPretty> regionsToPrettyConstraints = new HashSet<>();
-
-    for (Map.Entry<JavaRegion, Set<FeatureExpr>> entry : regionsToData.entrySet()) {
-      Set<String> prettyConstraints = new HashSet<>();
-      Set<FeatureExpr> constraints = entry.getValue();
-
-      for (FeatureExpr constraint : constraints) {
-        String prettyConstraint =
-            ConstraintUtils.prettyPrintFeatureExpr(constraint, this.getOptions());
-        prettyConstraints.add(prettyConstraint);
-      }
-
-      JavaRegion region = entry.getKey();
-      Set<String> endBlocks = new HashSet<>();
-
-      for (MethodBlock endBlock : region.getEndMethodBlocks()) {
-        endBlocks.add(endBlock.getID());
-      }
-
-      RegionConstraintPretty regionToPrettyConstraints =
-          new RegionConstraintPretty(
-              region.getRegionPackage(),
-              region.getRegionClass(),
-              region.getRegionMethodSignature(),
-              region.getStartIndex(),
-              prettyConstraints,
-              region.getId().toString(),
-              region.getStartMethodBlock().getID(),
-              endBlocks);
-
-      regionsToPrettyConstraints.add(regionToPrettyConstraints);
-    }
-
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(file, regionsToPrettyConstraints);
+    RegionsWithConstraintsUtils.writeToFile(regionsToData, this.getOutputFile(), this.getOptions());
   }
 
   @Override
   protected Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    Set<RegionConstraintPretty> regionsConstraintPretty =
-        mapper.readValue(file, new TypeReference<Set<RegionConstraintPretty>>() {});
-
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = new HashMap<>();
-
-    for (RegionConstraintPretty regionConstraintPretty : regionsConstraintPretty) {
-      JavaRegion region =
-          new JavaRegion.Builder(
-                  UUID.fromString(regionConstraintPretty.getId()),
-                  regionConstraintPretty.getPackageName(),
-                  regionConstraintPretty.getClassName(),
-                  regionConstraintPretty.getMethodSignature())
-              .build();
-
-      Set<FeatureExpr> constraints =
-          this.getConstraints(regionConstraintPretty.getPrettyConstraints());
-
-      regionsToConstraints.put(region, constraints);
-    }
-
-    return regionsToConstraints;
+    return RegionsWithConstraintsUtils.readFromFile(file);
   }
 
   @Override
@@ -156,17 +95,6 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
     }
 
     return this.readFromFile(outputFile);
-  }
-
-  private Set<FeatureExpr> getConstraints(Set<String> prettyConstraints) {
-    Set<FeatureExpr> constraints = new HashSet<>();
-
-    for (String prettyConstraint : prettyConstraints) {
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(prettyConstraint);
-      constraints.add(constraint);
-    }
-
-    return constraints;
   }
 
   private String getOutputFile() {

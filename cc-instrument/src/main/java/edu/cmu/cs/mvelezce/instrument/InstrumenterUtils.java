@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument;
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.utils.asm.ASMUtils;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootMethod;
@@ -14,8 +15,8 @@ public class InstrumenterUtils {
 
   public static Set<JavaRegion> getRegionsInClass(
       ClassNode classNode, Set<JavaRegion> javaRegions) {
-    String classPackage = getClassPackage(classNode);
-    String className = getClassName(classNode);
+    String classPackage = ASMUtils.getClassPackage(classNode);
+    String className = ASMUtils.getClassName(classNode);
 
     Set<JavaRegion> regionsInClass = new HashSet<>();
 
@@ -29,41 +30,11 @@ public class InstrumenterUtils {
     return regionsInClass;
   }
 
-  public static String getClassPackage(ClassNode classNode) {
-    return getClassNodePackage(classNode.name);
-  }
-
-  public static String getClassNodePackage(String classNodeName) {
-    if (classNodeName.equals("[B")) {
-      return classNodeName;
-    }
-
-    String classPackage = classNodeName.substring(0, classNodeName.lastIndexOf("/"));
-    classPackage = classPackage.replace("/", ".");
-
-    return classPackage;
-  }
-
-  public static String getClassNodeName(String classNodeName) {
-    return classNodeName.replace("/", ".");
-  }
-
-  public static String getClassName(ClassNode classNode) {
-    String className = classNode.name;
-    className = className.substring(className.lastIndexOf("/") + 1);
-
-    return className;
-  }
-
-  public static String getMethodSignature(MethodNode methodNode) {
-    return methodNode.name + methodNode.desc;
-  }
-
   public static Set<JavaRegion> getRegionsInMethod(
       MethodNode methodNode, ClassNode classNode, Set<JavaRegion> regions) {
-    String classPackage = getClassPackage(classNode);
-    String className = getClassName(classNode);
-    String methodSignature = getMethodSignature(methodNode);
+    String classPackage = ASMUtils.getClassPackage(classNode);
+    String className = ASMUtils.getClassName(classNode);
+    String methodSignature = ASMUtils.getMethodSignature(methodNode);
 
     Set<JavaRegion> regionsInMethod = new HashSet<>();
 

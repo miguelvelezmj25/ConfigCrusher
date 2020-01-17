@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher;
 
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
+import edu.cmu.cs.mvelezce.utils.asm.ASMUtils;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -197,7 +198,7 @@ public final class SootAsmMethodMatcher {
 
   private void calcApplicationPackages(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
-      String packageName = InstrumenterUtils.getClassPackage(classNode);
+      String packageName = ASMUtils.getClassPackage(classNode);
       this.applicationPackages.add(packageName);
     }
   }
@@ -206,11 +207,11 @@ public final class SootAsmMethodMatcher {
     Map<String, MethodNode> fullyQualifiedNamesToMethodNodes = new HashMap<>();
 
     for (ClassNode classNode : classNodes) {
-      String packageName = InstrumenterUtils.getClassPackage(classNode);
-      String className = InstrumenterUtils.getClassName(classNode);
+      String packageName = ASMUtils.getClassPackage(classNode);
+      String className = ASMUtils.getClassName(classNode);
 
       for (MethodNode methodNode : classNode.methods) {
-        String methodSignature = InstrumenterUtils.getMethodSignature(methodNode);
+        String methodSignature = ASMUtils.getMethodSignature(methodNode);
         fullyQualifiedNamesToMethodNodes.put(
             this.getFullyQualifiedName(packageName, className, methodSignature), methodNode);
       }

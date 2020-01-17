@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.comparator.edge.EdgeComparato
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import edu.cmu.cs.mvelezce.utils.asm.ASMUtils;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 import soot.SootClass;
@@ -85,15 +86,15 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
 
         if (insnNode instanceof MethodInsnNode) {
           MethodInsnNode methodInsnNode = ((MethodInsnNode) insnNode);
-          callingPackageName = InstrumenterUtils.getClassNodePackage(methodInsnNode.owner);
+          callingPackageName = ASMUtils.getClassNodePackage(methodInsnNode.owner);
         } else if (insnNode instanceof FieldInsnNode) {
           // Calling clinit
           FieldInsnNode fieldInsnNode = ((FieldInsnNode) insnNode);
-          callingPackageName = InstrumenterUtils.getClassNodePackage(fieldInsnNode.owner);
+          callingPackageName = ASMUtils.getClassNodePackage(fieldInsnNode.owner);
         } else if (insnNode instanceof TypeInsnNode) {
           // Calling clinit
           TypeInsnNode typeInsnNode = ((TypeInsnNode) insnNode);
-          callingPackageName = InstrumenterUtils.getClassNodePackage(typeInsnNode.desc);
+          callingPackageName = ASMUtils.getClassNodePackage(typeInsnNode.desc);
         } else {
           throw new RuntimeException(
               "This seems to be an invoke instruction that we needs to handle " + insnNode);
@@ -357,7 +358,6 @@ public abstract class BaseRemoveNestedRegionsInter<T> extends BlockRegionAnalyze
     }
 
     throw new RuntimeException(
-        "Could not find the index of the method call "
-            + InstrumenterUtils.getMethodSignature(methodNode));
+        "Could not find the index of the method call " + ASMUtils.getMethodSignature(methodNode));
   }
 }

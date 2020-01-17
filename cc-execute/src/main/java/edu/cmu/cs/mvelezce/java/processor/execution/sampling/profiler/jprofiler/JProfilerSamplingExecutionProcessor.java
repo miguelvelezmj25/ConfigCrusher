@@ -26,8 +26,8 @@ public abstract class JProfilerSamplingExecutionProcessor
       Set<JavaRegion> regions) {
     super(programName, itersToRawPerfExecutions);
 
-    this.getFullyQualifiedMethodsToRegionIds(regions);
-    this.getSnapshotEntriesToFullyQualifiedMethods();
+    this.populateSnapshotEntriesToFullyQualifiedMethods();
+    this.populateFullyQualifiedMethodsToRegionIds(regions);
   }
 
   @Override
@@ -39,7 +39,7 @@ public abstract class JProfilerSamplingExecutionProcessor
     return new ProcessedPerfExecution(config, regionToPerf);
   }
 
-  private void getSnapshotEntriesToFullyQualifiedMethods() {
+  private void populateSnapshotEntriesToFullyQualifiedMethods() {
     for (Map.Entry<Integer, Set<RawJProfilerSamplingPerfExecution>> entry :
         this.getItersToRawPerfExecutions().entrySet()) {
       for (RawJProfilerSamplingPerfExecution perfExec : entry.getValue()) {
@@ -54,6 +54,12 @@ public abstract class JProfilerSamplingExecutionProcessor
           while (!worklist.isEmpty()) {
             Node node = worklist.pop();
 
+            if (node.getClassName().isEmpty()
+                && node.getMethodName().isEmpty()
+                && node.getMethodSignature().isEmpty()) {
+              continue;
+            }
+
             fullyQualifiedName =
                 this.getHotspotFullyQualifiedName(
                     node.getClassName(), node.getMethodName(), node.getMethodSignature());
@@ -66,7 +72,7 @@ public abstract class JProfilerSamplingExecutionProcessor
     }
   }
 
-  private void getFullyQualifiedMethodsToRegionIds(Set<JavaRegion> regions) {
+  private void populateFullyQualifiedMethodsToRegionIds(Set<JavaRegion> regions) {
     System.err.println("Ignoring the fact that a method can have multiple regions");
     for (JavaRegion region : regions) {
       String fullyQualifiedName =

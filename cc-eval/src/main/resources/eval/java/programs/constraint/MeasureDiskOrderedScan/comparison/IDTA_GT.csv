@@ -1,29 +1,29 @@
 configuration,measured,IDTA,GT,,minci,maxci,ciwindow,IDTA in ci,,absolute error,relative error,squared error
-"[DUPLICATES, REPLICATED]","true",11.878,10.589,,10.277,10.902,0.625,,,1.289,0.122,1.662
-"[]","true",13.743,12.072,,11.67,12.474,0.804,,,1.671,0.138,2.792
-"[DUPLICATES, SEQUENTIAL]","true",5.536,4.905,,4.867,4.943,0.077,,,0.631,0.129,0.398
-"[DUPLICATES, REPLICATED, SEQUENTIAL]","true",5.569,4.912,,4.801,5.024,0.223,,,0.657,0.134,0.432
-"[REPLICATED, SEQUENTIAL]","true",7.175,6.373,,6.131,6.614,0.483,,,0.802,0.126,0.643
-"[DUPLICATES]","true",11.658,10.542,,10.213,10.871,0.658,,,1.116,0.106,1.245
-"[REPLICATED]","true",13.623,12.16,,12.046,12.275,0.229,,,1.463,0.12,2.14
-"[SEQUENTIAL]","true",6.733,6.399,,6.217,6.581,0.365,,,0.334,0.052,0.112
+"[DUPLICATES, REPLICATED]","true",10.925,10.589,,10.277,10.902,0.625,,,0.336,0.032,0.113
+"[]","true",12.715,12.072,,11.67,12.474,0.804,,,0.643,0.053,0.413
+"[DUPLICATES, SEQUENTIAL]","true",5.379,4.905,,4.867,4.943,0.077,,,0.474,0.097,0.225
+"[DUPLICATES, REPLICATED, SEQUENTIAL]","true",5.369,4.912,,4.801,5.024,0.223,,,0.457,0.093,0.209
+"[REPLICATED, SEQUENTIAL]","true",6.673,6.373,,6.131,6.614,0.483,,,0.3,0.047,0.09
+"[DUPLICATES]","true",10.769,10.542,,10.213,10.871,0.658,*,,0.227,0.022,0.052
+"[REPLICATED]","true",12.804,12.16,,12.046,12.275,0.229,,,0.644,0.053,0.415
+"[SEQUENTIAL]","true",6.629,6.399,,6.217,6.581,0.365,,,0.23,0.036,0.053
 
 Total: 8
 
-Predictions within CI: 0
-Predictions within CI: 0.0%
+Predictions within CI: 1
+Predictions within CI: 12.5%
 
 Pearsons correlation: 0.999
 Spearmans correlation: 0.952
 
-Min Absolute Error: 0.334
-Max Absolute Error: 1.671
-Mean Absolute Error: 0.995
+Min Absolute Error: 0.227
+Max Absolute Error: 0.644
+Mean Absolute Error: 0.414
 
-Min Relative Error: 0.052
-Max Relative Error: 0.138
-Mean Relative Error: 0.116
+Min Relative Error: 0.022
+Max Relative Error: 0.097
+Mean Relative Error: 0.054
 
-Mean Squared Error: 1.178
+Mean Squared Error: 0.196
 
-Mean Absolute Percentage Error: 11.585%
+Mean Absolute Percentage Error: 5.402%

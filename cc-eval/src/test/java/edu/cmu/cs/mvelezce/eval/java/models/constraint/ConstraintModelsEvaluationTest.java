@@ -20,7 +20,8 @@ public class ConstraintModelsEvaluationTest {
     Set<PerformanceModel<FeatureExpr>> models = reader.read();
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    ModelsEvaluation<FeatureExpr> eval = new ConstraintModelsEvaluation(programName, options, 0.1);
+    ModelsEvaluation<FeatureExpr> eval =
+        new ConstraintModelsEvaluation(programName, options, 0.1, 0.1);
     eval.compare(models);
   }
 }

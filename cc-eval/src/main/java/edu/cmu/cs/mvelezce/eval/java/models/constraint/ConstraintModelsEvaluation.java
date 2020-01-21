@@ -20,8 +20,11 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/models";
 
   public ConstraintModelsEvaluation(
-      String programName, Collection<String> options, double diffThreshold) {
-    super(programName, options, diffThreshold);
+      String programName,
+      Collection<String> options,
+      double diffThreshold,
+      double perfIntensiveThreshold) {
+    super(programName, options, diffThreshold, perfIntensiveThreshold);
   }
 
   @Override
@@ -57,6 +60,8 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
 
   private void checkForDifferentLocalModels(
       UUID region, Map<FeatureExpr, List<Double>> comparedModel) {
+    this.checkPerfIntensiveModels(region, comparedModel);
+
     boolean areModelsDifferent = false;
     StringBuilder message = new StringBuilder();
     message.append("The local models ");
@@ -68,7 +73,7 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
       List<Double> perfs = entry.getValue();
       double perfDiff = Math.abs(perfs.get(0) - perfs.get(1)) / 1E9;
 
-      if (perfDiff > this.getDiffThreshold()) {
+      if (perfDiff >= this.getDiffThreshold()) {
         areModelsDifferent = true;
         message.append("Diff of ");
         message.append(ModelsEvaluation.DECIMAL_FORMAT.format(perfDiff));
@@ -85,6 +90,24 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
 
     if (areModelsDifferent) {
       System.err.println(message);
+    }
+  }
+
+  private void checkPerfIntensiveModels(UUID region, Map<FeatureExpr, List<Double>> comparedModel) {
+    for (Map.Entry<FeatureExpr, List<Double>> entry : comparedModel.entrySet()) {
+      List<Double> perfs = entry.getValue();
+      double m1 = perfs.get(0) / 1E9;
+      double m2 = perfs.get(1) / 1E9;
+
+      if (m1 >= this.getPerfIntensiveThreshold() || m2 >= this.getPerfIntensiveThreshold()) {
+        System.out.println(
+            "There is at least one entry in the local model "
+                + region
+                + " that contributes at least "
+                + this.getPerfIntensiveThreshold()
+                + " to the performance of the system");
+        break;
+      }
     }
   }
 

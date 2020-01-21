@@ -16,11 +16,17 @@ public abstract class ModelsEvaluation<T> {
   private final String programName;
   private final Collection<String> options;
   private final double diffThreshold;
+  private final double perfIntensiveThreshold;
 
-  public ModelsEvaluation(String programName, Collection<String> options, double diffThreshold) {
+  public ModelsEvaluation(
+      String programName,
+      Collection<String> options,
+      double diffThreshold,
+      double perfIntensiveThreshold) {
     this.programName = programName;
     this.options = options;
     this.diffThreshold = diffThreshold;
+    this.perfIntensiveThreshold = perfIntensiveThreshold;
   }
 
   public void compare(Set<PerformanceModel<T>> models) throws IOException {
@@ -130,5 +136,9 @@ public abstract class ModelsEvaluation<T> {
 
   public double getDiffThreshold() {
     return diffThreshold;
+  }
+
+  public double getPerfIntensiveThreshold() {
+    return perfIntensiveThreshold;
   }
 }

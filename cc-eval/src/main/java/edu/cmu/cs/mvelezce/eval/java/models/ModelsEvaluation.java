@@ -3,25 +3,39 @@ package edu.cmu.cs.mvelezce.eval.java.models;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public abstract class ModelsEvaluation<T> {
 
-  private final String programName;
+  protected static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.###");
+  protected static final String DOT_CSV = ".csv";
+  protected static final String COMPARISON_ROOT = "comparison";
 
-  public ModelsEvaluation(String programName) {
+  private final String programName;
+  private final Collection<String> options;
+  private final double diffThreshold;
+
+  public ModelsEvaluation(String programName, Collection<String> options, double diffThreshold) {
     this.programName = programName;
+    this.options = options;
+    this.diffThreshold = diffThreshold;
   }
 
-  public void compare(Set<PerformanceModel<T>> models) {
+  public void compare(Set<PerformanceModel<T>> models) throws IOException {
+    System.err.println(
+        "We are always comparing 2 models. Change the parameters to take the two models");
     Set<Map<UUID, Map<T, Double>>> regionsToPerfModels = this.getRegionsToPerfModels(models);
     Set<UUID> regions = this.getRegions(regionsToPerfModels);
     Map<UUID, Set<T>> allModelEntries = this.getAllModelEntries(regions, regionsToPerfModels);
     Map<UUID, Map<T, List<Double>>> comparedModels =
         this.comparePerfs(allModelEntries, regionsToPerfModels);
-
-    throw new UnsupportedOperationException("implement");
+    this.saveComparedModels(comparedModels);
   }
+
+  protected abstract void saveComparedModels(Map<UUID, Map<T, List<Double>>> comparedModels)
+      throws IOException;
 
   private Map<UUID, Map<T, List<Double>>> comparePerfs(
       Map<UUID, Set<T>> allModelEntries, Set<Map<UUID, Map<T, Double>>> regionsToPerfModels) {
@@ -104,5 +118,17 @@ public abstract class ModelsEvaluation<T> {
     }
 
     return regionsToPerfModels;
+  }
+
+  public Collection<String> getOptions() {
+    return options;
+  }
+
+  public String getProgramName() {
+    return programName;
+  }
+
+  public double getDiffThreshold() {
+    return diffThreshold;
   }
 }

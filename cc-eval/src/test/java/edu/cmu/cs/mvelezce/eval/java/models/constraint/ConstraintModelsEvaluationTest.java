@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public class ConstraintModelsEvaluationTest {
@@ -18,7 +19,8 @@ public class ConstraintModelsEvaluationTest {
     ConstraintPerformanceModelsReader reader = new ConstraintPerformanceModelsReader(programName);
     Set<PerformanceModel<FeatureExpr>> models = reader.read();
 
-    ModelsEvaluation<FeatureExpr> eval = new ConstraintModelsEvaluation(programName);
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    ModelsEvaluation<FeatureExpr> eval = new ConstraintModelsEvaluation(programName, options, 0.1);
     eval.compare(models);
   }
 }

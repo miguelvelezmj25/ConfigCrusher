@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.eval.java;
+package edu.cmu.cs.mvelezce.eval.java.accuracy.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
@@ -11,7 +11,7 @@ import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
 import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
-import edu.cmu.cs.mvelezce.eval.java.constraint.ConstraintEvaluation;
+import edu.cmu.cs.mvelezce.eval.java.accuracy.AccuracyEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.builder.bf.BruteForceExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.exhaustive.builder.gt.GroundTruthExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.learning.builder.model.matlab.MatlabLinearLearnedModelBuilder;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public class EvaluationTest {
+public class AccuracyConstraintEvaluationTest {
 
   @Test
   public void berkeleyDB_GT_Data() throws IOException, InterruptedException {
@@ -37,8 +37,8 @@ public class EvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.GT, configs, model);
   }
 
   @Test
@@ -54,8 +54,8 @@ public class EvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.BF, configs, model);
   }
 
   @Test
@@ -75,8 +75,9 @@ public class EvaluationTest {
     Set<Set<String>> configsToPredict = gtCompression.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        AccuracyEvaluation.IDTA, executedConfigs, configsToPredict, model);
   }
 
   @Test
@@ -95,8 +96,8 @@ public class EvaluationTest {
     args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(Evaluation.FW, executedConfigs, configsToPredict, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(AccuracyEvaluation.FW, executedConfigs, configsToPredict, model);
   }
 
   @Test
@@ -115,36 +116,36 @@ public class EvaluationTest {
     args = new String[0];
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(AccuracyEvaluation.PW, executedConfigs, configsToPredict, model);
   }
 
   @Test
   public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
-    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.IDTA, AccuracyEvaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_BF_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
-    eval.compareApproaches(Evaluation.BF, Evaluation.GT);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.BF, AccuracyEvaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_FW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
-    eval.compareApproaches(Evaluation.FW, Evaluation.GT);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.FW, AccuracyEvaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_PW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName);
-    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.PW, AccuracyEvaluation.GT);
   }
 
   @Test
@@ -160,7 +161,7 @@ public class EvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
-    Evaluation<FeatureExpr> eval = new ConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.GT, configs, model);
   }
 }

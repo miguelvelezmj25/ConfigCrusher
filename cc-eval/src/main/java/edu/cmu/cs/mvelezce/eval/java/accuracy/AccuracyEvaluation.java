@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.eval.java;
+package edu.cmu.cs.mvelezce.eval.java.accuracy;
 
 import edu.cmu.cs.mvelezce.eval.metrics.Metric;
 import edu.cmu.cs.mvelezce.eval.metrics.error.absolute.AbsoluteError;
@@ -14,7 +14,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public abstract class Evaluation<T> {
+public abstract class AccuracyEvaluation<T> {
 
   public static final String FULL_DIR = "/full";
   public static final String COMPARISON_DIR = "/comparison";
@@ -31,12 +31,12 @@ public abstract class Evaluation<T> {
   private final String programName;
   private final List<String> options;
 
-  public Evaluation(String programName, List<String> options) {
+  public AccuracyEvaluation(String programName, List<String> options) {
     this.programName = programName;
     this.options = options;
   }
 
-  void saveConfigsToPerformanceExhaustive(
+  public void saveConfigsToPerformanceExhaustive(
       String approach, Set<Set<String>> configs, PerformanceModel<T> model) throws IOException {
     File outputFile = this.getApproachOutputFile(approach);
 
@@ -96,7 +96,7 @@ public abstract class Evaluation<T> {
     writer.close();
   }
 
-  void saveConfigsToPerformance(
+  public void saveConfigsToPerformance(
       String approach,
       Set<Set<String>> executedConfigs,
       Set<Set<String>> configsToPredict,
@@ -140,7 +140,7 @@ public abstract class Evaluation<T> {
     writer.close();
   }
 
-  void compareApproaches(String approach1, String gt) throws IOException {
+  public void compareApproaches(String approach1, String gt) throws IOException {
     File outputFile =
         new File(
             this.getOutputDir()

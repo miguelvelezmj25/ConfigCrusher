@@ -39,7 +39,7 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
                   idtaResult.getMethodSignature())
               .startIndex(idtaResult.getDecisionIndex())
               .build();
-      Set<FeatureExpr> constraints = this.getConstraints(idtaResult.getPrettyConstraints());
+      Set<FeatureExpr> constraints = this.getConstraints(idtaResult.getInfo());
       results.put(javaRegion, constraints);
     }
 
@@ -66,7 +66,7 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
                 + this.getProgramName()
                 + "/cc/"
                 + this.workloadSize
-                + "/dataFlowConstraints/"
+                + "/partitions/"
                 + this.getProgramName()
                 + ".json");
 

@@ -10,7 +10,6 @@ public class IDTAResult {
   private final String methodSignature;
   private final int decisionIndex;
   private final Set<String> info;
-  private final Set<String> prettyConstraints;
 
   private IDTAResult() {
     this.packageName = "";
@@ -18,7 +17,6 @@ public class IDTAResult {
     this.methodSignature = "";
     this.decisionIndex = -1;
     this.info = new HashSet<>();
-    this.prettyConstraints = new HashSet<>();
   }
 
   public String getPackageName() {
@@ -39,9 +37,5 @@ public class IDTAResult {
 
   public Set<String> getInfo() {
     return info;
-  }
-
-  public Set<String> getPrettyConstraints() {
-    return prettyConstraints;
   }
 }

@@ -1,11 +1,11 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.results;
 
-import edu.cmu.cs.mvelezce.explorer.idta.results.statement.info.ControlFlowStatementConstraintsPretty;
+import edu.cmu.cs.mvelezce.explorer.idta.results.statement.info.ControlFlowStmtPartitioningPretty;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class RegionConstraintPretty extends ControlFlowStatementConstraintsPretty {
+public class RegionConstraintPretty extends ControlFlowStmtPartitioningPretty {
 
   private final String id;
   private final String startBlock;

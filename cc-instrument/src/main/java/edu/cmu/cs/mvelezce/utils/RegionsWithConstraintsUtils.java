@@ -77,7 +77,7 @@ public final class RegionsWithConstraintsUtils {
                   regionConstraintPretty.getMethodSignature())
               .build();
 
-      Set<FeatureExpr> constraints = getConstraints(regionConstraintPretty.getPrettyConstraints());
+      Set<FeatureExpr> constraints = getConstraints(regionConstraintPretty.getInfo());
 
       regionsToConstraints.put(region, constraints);
     }

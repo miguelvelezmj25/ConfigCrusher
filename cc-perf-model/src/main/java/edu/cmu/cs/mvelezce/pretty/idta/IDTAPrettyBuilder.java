@@ -11,10 +11,12 @@ import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import scala.collection.JavaConverters;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
 
+  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.000");
   private static final String OUTPUT_DIR =
       "../cc-perf-model/" + Options.DIRECTORY + "/model/java/pretty/idta/programs";
 
@@ -49,7 +51,21 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
       }
     }
 
-    return new LocalPerformanceInfluenceModel(localModel.getRegion(), influenceModel);
+    return new LocalPerformanceInfluenceModel(
+        localModel.getRegion(), influenceModel, this.toHumanReadable(influenceModel));
+  }
+
+  private LinkedHashMap<Set<String>, String> toHumanReadable(
+      LinkedHashMap<Set<String>, Double> influenceModel) {
+    LinkedHashMap<Set<String>, String> influenceToHumanReadableData = new LinkedHashMap<>();
+
+    for (Map.Entry<Set<String>, Double> entry : influenceModel.entrySet()) {
+      double data = entry.getValue();
+      data = data / 1E9;
+      influenceToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return influenceToHumanReadableData;
   }
 
   private Set<Set<String>> getTermsOfSize(Set<Set<String>> terms, int size) {

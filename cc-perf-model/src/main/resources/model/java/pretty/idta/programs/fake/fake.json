@@ -1,0 +1,28 @@
+{
+  "localModels": [
+    {
+      "region": "770efcb1-5196-487b-8256-7c2d8f77c895",
+      "model": {
+        "[]": 1.0,
+        "[A]": 2.0,
+        "[B]": 3.0,
+        "[C]": 4.0,
+        "[A, B]": 6.0,
+        "[A, C]": 7.0,
+        "[B, C]": 10.0,
+        "[A, B, C]": 6.0
+      },
+      "modelToMin": {},
+      "modelToMax": {},
+      "modelToDiff": {},
+      "modelToSampleVariance": {},
+      "modelToConfidenceInterval": {},
+      "modelToPerfHumanReadable": {},
+      "modelToMinHumanReadable": {},
+      "modelToMaxHumanReadable": {},
+      "modelToDiffHumanReadable": {},
+      "modelToSampleVarianceHumanReadble": {},
+      "modelToConfidenceIntervalHumanReadable": {}
+    }
+  ]
+}

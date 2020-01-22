@@ -26,6 +26,10 @@ public class IDTAPrettyBuilderTest {
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     BasePrettyBuilder<FeatureExpr> analysis = new IDTAPrettyBuilder(programName, options, model);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
     analysis.analyze(args);
   }
 

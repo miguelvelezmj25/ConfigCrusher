@@ -33,6 +33,14 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
     Set<Set<String>> terms = ConfigHelper.getConfigurations(features);
     LinkedHashMap<Set<String>, Double> influenceModel = new LinkedHashMap<>();
 
+    // Base time
+    if (perfModel.size() == 1) {
+      influenceModel.put(new HashSet<>(), perfModel.entrySet().iterator().next().getValue());
+
+      return new LocalPerformanceInfluenceModel(
+          localModel.getRegion(), influenceModel, toHumanReadable(influenceModel));
+    }
+
     for (int termSize = 0; termSize <= features.size(); termSize++) {
       Set<Set<String>> termsOfSize = this.getTermsOfSize(terms, termSize);
 

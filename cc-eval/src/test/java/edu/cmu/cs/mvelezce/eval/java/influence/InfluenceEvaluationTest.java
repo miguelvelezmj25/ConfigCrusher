@@ -17,9 +17,8 @@ public class InfluenceEvaluationTest {
     InfluencePerformanceModelsReader reader = new InfluencePerformanceModelsReader(programName);
     List<PerformanceModel<Set<String>>> models = reader.read();
 
-    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     InfluenceEvaluation eval =
-        new InfluenceEvaluation(programName, options, models.get(0), models.get(1), 0.1, 0.1);
+        new InfluenceEvaluation(programName, models.get(0), models.get(1), 0.1, 0.1);
     eval.compare();
   }
 }

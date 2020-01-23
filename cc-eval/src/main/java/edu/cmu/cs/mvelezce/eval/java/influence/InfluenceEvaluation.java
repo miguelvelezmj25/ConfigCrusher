@@ -118,12 +118,12 @@ public class InfluenceEvaluation {
 
   protected void saveComparedModels(Map<UUID, Map<Set<String>, List<Double>>> comparedModels)
       throws IOException {
+    this.getComparedModelsStats(comparedModels);
+
     File rootFile = new File(OUTPUT_DIR + "/" + this.programName + "/" + COMPARISON_ROOT);
     FileUtils.cleanDirectory(rootFile);
 
     for (Map.Entry<UUID, Map<Set<String>, List<Double>>> entry : comparedModels.entrySet()) {
-      this.checkForDifferentLocalModels(entry.getKey(), entry.getValue());
-
       String result = "term,m1,m2,diff\n";
       result += this.parseComparedModel(entry.getValue());
 
@@ -145,10 +145,33 @@ public class InfluenceEvaluation {
     }
   }
 
+  private void getComparedModelsStats(Map<UUID, Map<Set<String>, List<Double>>> comparedModels) {
+    System.out.println("# of total local models: " + comparedModels.size());
+    System.out.println();
+    this.countPerfIntensiveModels(comparedModels);
+
+    //    for (Map.Entry<UUID, Map<Set<String>, List<Double>>> entry : comparedModels.entrySet()) {
+    //      this.checkForDifferentLocalModels(entry.getKey(), entry.getValue());
+    //    }
+  }
+
+  private void countPerfIntensiveModels(Map<UUID, Map<Set<String>, List<Double>>> comparedModels) {
+    int perfIntensiveModels = 0;
+
+    for (Map.Entry<UUID, Map<Set<String>, List<Double>>> entry : comparedModels.entrySet()) {
+      if (this.isPerfIntensiveModel(entry.getKey(), entry.getValue())) {
+        perfIntensiveModels++;
+      }
+    }
+
+    System.out.println();
+    System.out.println(
+        "# of local models with performance intensive terms: " + perfIntensiveModels);
+    System.out.println();
+  }
+
   private void checkForDifferentLocalModels(
       UUID region, Map<Set<String>, List<Double>> comparedModel) {
-    this.checkPerfIntensiveModels(region, comparedModel);
-
     boolean areModelsDifferent = false;
     StringBuilder message = new StringBuilder();
     message.append("The local models ");
@@ -180,7 +203,7 @@ public class InfluenceEvaluation {
     }
   }
 
-  private void checkPerfIntensiveModels(UUID region, Map<Set<String>, List<Double>> comparedModel) {
+  private boolean isPerfIntensiveModel(UUID region, Map<Set<String>, List<Double>> comparedModel) {
     for (Map.Entry<Set<String>, List<Double>> entry : comparedModel.entrySet()) {
       List<Double> perfs = entry.getValue();
       double m1 = Math.abs(perfs.get(0)) / 1E9;
@@ -193,9 +216,12 @@ public class InfluenceEvaluation {
                 + " that contributes at least "
                 + this.perfIntensiveThreshold
                 + " to the performance of the system");
-        break;
+
+        return true;
       }
     }
+
+    return false;
   }
 
   private String parseComparedModel(Map<Set<String>, List<Double>> comparedModel) {

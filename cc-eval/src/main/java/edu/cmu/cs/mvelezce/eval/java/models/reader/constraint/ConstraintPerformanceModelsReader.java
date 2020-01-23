@@ -25,6 +25,8 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
   }
 
   public Set<PerformanceModel<FeatureExpr>> read() throws IOException {
+    System.err.println(
+        "This code is very similar to comparing local performance models. Abstract!");
     String modelsDir = MODELS_ROT + "/" + this.getProgramName() + "/" + PROGRAM_MODELS_DIR;
     File modelsDirFile = new File(modelsDir);
 

@@ -63,7 +63,7 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
         localModel.getRegion(), influenceModel, this.toHumanReadable(influenceModel));
   }
 
-  private LinkedHashMap<Set<String>, String> toHumanReadable(
+  protected LinkedHashMap<Set<String>, String> toHumanReadable(
       LinkedHashMap<Set<String>, Double> influenceModel) {
     LinkedHashMap<Set<String>, String> influenceToHumanReadableData = new LinkedHashMap<>();
 

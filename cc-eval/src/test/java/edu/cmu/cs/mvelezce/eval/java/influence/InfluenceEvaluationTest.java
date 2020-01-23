@@ -18,7 +18,7 @@ public class InfluenceEvaluationTest {
     List<PerformanceModel<Set<String>>> models = reader.read();
 
     InfluenceEvaluation eval =
-        new InfluenceEvaluation(programName, models.get(0), models.get(1), 0.1, 0.1);
+        new InfluenceEvaluation(programName, models.get(0), models.get(1), 0.1, 0.1, 0.1);
     eval.compare();
   }
 }

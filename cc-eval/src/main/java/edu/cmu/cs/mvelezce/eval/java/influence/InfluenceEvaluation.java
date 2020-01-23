@@ -24,18 +24,21 @@ public class InfluenceEvaluation {
   private final PerformanceModel<Set<String>> model2;
   private final double diffThreshold;
   private final double perfIntensiveThreshold;
+  private final double coeffThreshold;
 
   public InfluenceEvaluation(
       String programName,
       PerformanceModel<Set<String>> model1,
       PerformanceModel<Set<String>> model2,
       double diffThreshold,
-      double perfIntensiveThreshold) {
+      double perfIntensiveThreshold,
+      double coeffThreshold) {
     this.programName = programName;
     this.model1 = model1;
     this.model2 = model2;
     this.diffThreshold = diffThreshold;
     this.perfIntensiveThreshold = perfIntensiveThreshold;
+    this.coeffThreshold = coeffThreshold;
   }
 
   public void compare() throws IOException {
@@ -50,6 +53,9 @@ public class InfluenceEvaluation {
         this.getAllModelEntries(regions, regionsToModels1, regionsToModels2);
     Map<UUID, Map<Set<String>, List<Double>>> comparedModels =
         this.compareInfluences(allModelEntries, regionsToModels1, regionsToModels2);
+
+    this.getComparedModelsStats(comparedModels);
+
     this.saveComparedModels(comparedModels);
   }
 
@@ -118,8 +124,6 @@ public class InfluenceEvaluation {
 
   protected void saveComparedModels(Map<UUID, Map<Set<String>, List<Double>>> comparedModels)
       throws IOException {
-    this.getComparedModelsStats(comparedModels);
-
     File rootFile = new File(OUTPUT_DIR + "/" + this.programName + "/" + COMPARISON_ROOT);
     FileUtils.cleanDirectory(rootFile);
 
@@ -149,10 +153,73 @@ public class InfluenceEvaluation {
     System.out.println("# of total local models: " + comparedModels.size());
     System.out.println();
     this.countPerfIntensiveModels(comparedModels);
+    this.compareDiffTerms(comparedModels);
 
     //    for (Map.Entry<UUID, Map<Set<String>, List<Double>>> entry : comparedModels.entrySet()) {
     //      this.checkForDifferentLocalModels(entry.getKey(), entry.getValue());
     //    }
+  }
+
+  private void compareDiffTerms(Map<UUID, Map<Set<String>, List<Double>>> comparedModels) {
+    for (Map.Entry<UUID, Map<Set<String>, List<Double>>> entry : comparedModels.entrySet()) {
+      StringBuilder result = new StringBuilder();
+      boolean diffModels = false;
+
+      for (Map.Entry<Set<String>, List<Double>> comparedModel : entry.getValue().entrySet()) {
+        List<Double> perfs = comparedModel.getValue();
+        double m1 = perfs.get(0) / 1E9;
+        boolean includeM1 = Math.abs(m1) >= this.coeffThreshold;
+        double m2 = perfs.get(1) / 1E9;
+        boolean includeM2 = Math.abs(m2) >= this.coeffThreshold;
+
+        if (!includeM1 && !includeM2) {
+          continue;
+        }
+
+        result.append("\"");
+        result.append(comparedModel.getKey());
+        result.append("\"");
+        result.append(",");
+
+        if (includeM1) {
+          result.append(DECIMAL_FORMAT.format(m1));
+        } else {
+          result.append("(");
+          result.append(DECIMAL_FORMAT.format(m1));
+          result.append(")");
+        }
+
+        result.append(",");
+
+        if (includeM2) {
+          result.append(DECIMAL_FORMAT.format(m2));
+        } else {
+          result.append("(");
+          result.append(DECIMAL_FORMAT.format(m2));
+          result.append(")");
+        }
+
+        result.append(",");
+        double perfDiff = Math.abs(m1 - m2);
+        result.append(DECIMAL_FORMAT.format(perfDiff));
+        result.append("\n");
+
+        if (!(includeM1 && includeM2)) {
+          diffModels = true;
+        }
+      }
+
+      if (diffModels) {
+        System.err.println();
+        System.err.println(
+            "We would build different models for "
+                + entry.getKey()
+                + " with a coefficient threshold of "
+                + this.coeffThreshold);
+        System.err.println(result);
+        System.err.println();
+      }
+    }
   }
 
   private void countPerfIntensiveModels(Map<UUID, Map<Set<String>, List<Double>>> comparedModels) {

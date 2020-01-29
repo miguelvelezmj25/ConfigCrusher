@@ -183,9 +183,63 @@ public class AccuracyConstraintEvaluationTest {
   }
 
   @Test
+  public void lucene_FW_Data() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(AccuracyEvaluation.FW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void lucene_PW_Data() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformance(AccuracyEvaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void lucene_Compare_BF_GT() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
     eval.compareApproaches(AccuracyEvaluation.BF, AccuracyEvaluation.GT);
+  }
+
+  @Test
+  public void lucene_Compare_FW_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.FW, AccuracyEvaluation.GT);
+  }
+
+  @Test
+  public void lucene_Compare_PW_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.PW, AccuracyEvaluation.GT);
   }
 }

@@ -1,10 +1,11 @@
 package edu.cmu.cs.mvelezce.pretty.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.pretty.BasePrettyBuilder;
@@ -35,14 +36,14 @@ public class IDTAPrettyBuilderTest {
 
   @Test
   public void test1() throws IOException, InterruptedException {
-    FeatureExpr constraint1 = MinConfigsGenerator.parseAsFeatureExpr("!A && !B && !C");
-    FeatureExpr constraint2 = MinConfigsGenerator.parseAsFeatureExpr("A && !B && !C");
-    FeatureExpr constraint3 = MinConfigsGenerator.parseAsFeatureExpr("!A && B && !C");
-    FeatureExpr constraint4 = MinConfigsGenerator.parseAsFeatureExpr("!A && !B && C");
-    FeatureExpr constraint5 = MinConfigsGenerator.parseAsFeatureExpr("A && B && !C");
-    FeatureExpr constraint6 = MinConfigsGenerator.parseAsFeatureExpr("A && !B && C");
-    FeatureExpr constraint7 = MinConfigsGenerator.parseAsFeatureExpr("!A && B && C");
-    FeatureExpr constraint8 = MinConfigsGenerator.parseAsFeatureExpr("A && B && C");
+    FeatureExpr constraint1 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "!A && !B && !C");
+    FeatureExpr constraint2 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "A && !B && !C");
+    FeatureExpr constraint3 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "!A && B && !C");
+    FeatureExpr constraint4 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "!A && !B && C");
+    FeatureExpr constraint5 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "A && B && !C");
+    FeatureExpr constraint6 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "A && !B && C");
+    FeatureExpr constraint7 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "!A && B && C");
+    FeatureExpr constraint8 = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, "A && B && C");
 
     Set<String> config1 = new HashSet<>();
     Set<String> config2 = new HashSet<>();

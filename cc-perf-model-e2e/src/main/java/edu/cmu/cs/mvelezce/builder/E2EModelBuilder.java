@@ -1,10 +1,11 @@
 package edu.cmu.cs.mvelezce.builder;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 
@@ -28,7 +29,7 @@ public abstract class E2EModelBuilder extends BaseConstraintPerformanceModelBuil
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Set<String> config = entry.getConfiguration();
       String configConstraint = ConstraintUtils.parseAsConstraint(config, options);
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(configConstraint);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, configConstraint);
       constraints.add(constraint);
     }
 

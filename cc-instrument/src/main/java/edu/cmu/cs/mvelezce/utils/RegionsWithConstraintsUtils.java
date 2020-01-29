@@ -3,9 +3,10 @@ package edu.cmu.cs.mvelezce.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.results.RegionConstraintPretty;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 
@@ -89,7 +90,7 @@ public final class RegionsWithConstraintsUtils {
     Set<FeatureExpr> constraints = new HashSet<>();
 
     for (String prettyConstraint : prettyConstraints) {
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(prettyConstraint);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, prettyConstraint);
       constraints.add(constraint);
     }
 

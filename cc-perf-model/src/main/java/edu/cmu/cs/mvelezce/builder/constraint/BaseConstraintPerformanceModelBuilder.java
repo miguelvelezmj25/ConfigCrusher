@@ -1,10 +1,11 @@
 package edu.cmu.cs.mvelezce.builder.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
@@ -33,7 +34,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
     FeatureExpr constraint = STRINGS_TO_CONSTRAINTS.get(string);
 
     if (constraint == null) {
-      constraint = MinConfigsGenerator.parseAsFeatureExpr(string);
+      constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, string);
       STRINGS_TO_CONSTRAINTS.put(string, constraint);
     }
 
@@ -51,7 +52,7 @@ public abstract class BaseConstraintPerformanceModelBuilder
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Set<String> config = entry.getConfiguration();
       String configConstraint = ConstraintUtils.parseAsConstraint(config, this.getOptions());
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(configConstraint);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, configConstraint);
       this.perfEntryToExecConstraint.put(entry, constraint);
     }
   }

@@ -1,8 +1,9 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.pw;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import org.apache.commons.math3.util.Combinations;
 
 import java.util.*;
@@ -45,7 +46,7 @@ public final class PairWiseSampling implements SamplingApproach {
     }
 
     for (String option : options) {
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option);
       constraints.add(constraint);
     }
 
@@ -64,7 +65,8 @@ public final class PairWiseSampling implements SamplingApproach {
         }
       }
 
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(stringBuilder.toString());
+      FeatureExpr constraint =
+          FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString());
       constraints.add(constraint);
     }
 

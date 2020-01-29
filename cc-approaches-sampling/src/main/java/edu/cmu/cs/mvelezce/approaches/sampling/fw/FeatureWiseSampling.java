@@ -1,8 +1,9 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.fw;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +30,7 @@ public final class FeatureWiseSampling implements SamplingApproach {
     Set<FeatureExpr> configsAsConstraints = new HashSet<>();
 
     for (String option : options) {
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option);
       configsAsConstraints.add(constraint);
     }
 

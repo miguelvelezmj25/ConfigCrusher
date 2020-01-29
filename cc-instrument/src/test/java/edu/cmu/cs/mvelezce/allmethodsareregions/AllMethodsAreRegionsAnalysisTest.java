@@ -1,13 +1,14 @@
 package edu.cmu.cs.mvelezce.allmethodsareregions;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class AllMethodsAreRegionsAnalysisTest {
 
     for (Set<String> config : configs) {
       String stringConstraint = ConstraintUtils.parseAsConstraint(config, options);
-      constraints.add(MinConfigsGenerator.parseAsFeatureExpr(stringConstraint));
+      constraints.add(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringConstraint));
     }
 
     return constraints;

@@ -1,8 +1,9 @@
 package edu.cmu.cs.mvelezce.model.constraint;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 
 import java.util.*;
@@ -46,7 +47,7 @@ public class ConstraintLocalPerformanceModel extends LocalPerformanceModel<Featu
 
     if (configAsConstraint == null) {
       String stringConstraint = ConstraintUtils.parseAsConstraint(config, options);
-      configAsConstraint = MinConfigsGenerator.parseAsFeatureExpr(stringConstraint);
+      configAsConstraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringConstraint);
       CONFIG_TO_CONSTRAINT.put(config, configAsConstraint);
     }
 

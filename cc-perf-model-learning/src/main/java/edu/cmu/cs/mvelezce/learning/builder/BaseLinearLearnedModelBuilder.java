@@ -2,10 +2,11 @@ package edu.cmu.cs.mvelezce.learning.builder;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
 import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.learning.builder.generate.matlab.script.StepWiseLinearLearner;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
@@ -156,7 +157,7 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
 
     stringBuilder.append(")");
 
-    return MinConfigsGenerator.parseAsFeatureExpr(stringBuilder.toString());
+    return FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString());
   }
 
   private List<Set<String>> parseTerms(List<String> rawTerms, List<String> options) {

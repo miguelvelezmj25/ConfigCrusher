@@ -1,9 +1,10 @@
 package edu.cmu.cs.mvelezce.compress.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -24,7 +25,8 @@ public abstract class IDTACompression extends BaseCompression {
   protected Set<FeatureExpr> getCoveredConstraints(
       Set<String> config, Set<FeatureExpr> constraints) {
     String configStringConstraint = ConstraintUtils.parseAsConstraint(config, this.getOptions());
-    FeatureExpr configConstraint = MinConfigsGenerator.parseAsFeatureExpr(configStringConstraint);
+    FeatureExpr configConstraint =
+        FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, configStringConstraint);
 
     Set<FeatureExpr> coveredConstraints = new HashSet<>();
 

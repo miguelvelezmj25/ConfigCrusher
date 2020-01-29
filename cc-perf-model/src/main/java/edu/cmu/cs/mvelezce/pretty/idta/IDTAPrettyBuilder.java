@@ -1,8 +1,9 @@
 package edu.cmu.cs.mvelezce.pretty.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.influence.LocalPerformanceInfluenceModel;
@@ -46,7 +47,8 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
 
       for (Set<String> termOfSize : termsOfSize) {
         String stringConstraint = ConstraintUtils.parseAsConstraint(termOfSize, this.getOptions());
-        FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(stringConstraint);
+        FeatureExpr constraint =
+            FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringConstraint);
         double influence = perfModel.get(constraint);
 
         for (Map.Entry<Set<String>, Double> influenceModelEntry : influenceModel.entrySet()) {

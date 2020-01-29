@@ -164,4 +164,28 @@ public class AccuracyConstraintEvaluationTest {
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
     eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.GT, configs, model);
   }
+
+  @Test
+  public void lucene_BF_Data() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new BruteForceExhaustiveModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.BF, configs, model);
+  }
+
+  @Test
+  public void lucene_Compare_BF_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(AccuracyEvaluation.BF, AccuracyEvaluation.GT);
+  }
 }

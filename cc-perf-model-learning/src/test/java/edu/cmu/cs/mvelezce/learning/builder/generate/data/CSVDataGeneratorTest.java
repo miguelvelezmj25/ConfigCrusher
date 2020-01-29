@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.learning.builder.generate.data;
 
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
@@ -36,6 +37,38 @@ public class CSVDataGeneratorTest {
   public void berkeleyDB_PW() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new PairWisePerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    CSVDataGenerator generator =
+        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void lucene_FW() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new FeatureWisePerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
+    CSVDataGenerator generator =
+        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void lucene_PW() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new PairWisePerfAggregatorProcessor(programName);

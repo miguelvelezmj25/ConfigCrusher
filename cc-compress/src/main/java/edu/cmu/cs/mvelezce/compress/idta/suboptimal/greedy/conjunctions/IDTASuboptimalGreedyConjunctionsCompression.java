@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.compress.idta.IDTACompression;
-import edu.cmu.cs.mvelezce.compress.idta.utils.simplify.ImpliedConstraintsRemover;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.*;
@@ -30,31 +30,30 @@ public class IDTASuboptimalGreedyConjunctionsCompression extends IDTACompression
   public Set<Set<String>> analyze() {
     Set<Set<String>> configs = new HashSet<>();
     Set<FeatureExpr> constraints = this.expandAllConstraints();
-    ImpliedConstraintsRemover.removeImpliedConstraints(constraints);
+    //    ImpliedConstraintsRemover.removeImpliedConstraints(constraints);
 
     Set<FeatureExpr> coveredConstraints = new HashSet<>();
 
     while (coveredConstraints.size() != constraints.size()) {
-      FeatureExpr newConstraint = SATFeatureExprFactory.True();
-      Set<FeatureExpr> constraintsUsed = new HashSet<>();
+      FeatureExpr newConstraint = FeatureExprUtils.getTrue(IDTA.USE_BDD);
 
       for (FeatureExpr constraint : constraints) {
         if (coveredConstraints.contains(constraint)) {
           continue;
         }
 
-        if (newConstraint.mex(constraint).isTautology()) {
+        FeatureExpr andedFormula = newConstraint.and(constraint);
+
+        if (andedFormula.isContradiction()) {
           continue;
         }
 
-        newConstraint = newConstraint.and(constraint);
-        constraintsUsed.add(constraint);
+        newConstraint = andedFormula;
+        coveredConstraints.add(constraint);
       }
 
       Set<String> config = ConstraintUtils.toConfig(newConstraint, this.getOptions());
       configs.add(config);
-
-      coveredConstraints.addAll(constraintsUsed);
     }
 
     return configs;

@@ -4,9 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
     Set<FeatureExpr> constraints = new HashSet<>();
 
     for (String prettyConstraint : prettyConstraints) {
-      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(prettyConstraint);
+      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, prettyConstraint);
       constraints.add(constraint);
     }
 

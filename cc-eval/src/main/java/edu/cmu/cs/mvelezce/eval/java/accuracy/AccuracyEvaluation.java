@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.eval.java.accuracy;
 
+import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.eval.metrics.Metric;
 import edu.cmu.cs.mvelezce.eval.metrics.error.absolute.AbsoluteError;
 import edu.cmu.cs.mvelezce.eval.metrics.error.relative.RelativeError;
@@ -11,23 +12,12 @@ import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
 
 import java.io.*;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public abstract class AccuracyEvaluation<T> {
 
   public static final String FULL_DIR = "/full";
   public static final String COMPARISON_DIR = "/comparison";
-  public static final String DOT_CSV = ".csv";
-  public static final String CC = "CC";
-  public static final String IDTA = "IDTA";
-  public static final String GT = "GT";
-  public static final String FW = "FW";
-  public static final String PW = "PW";
-  public static final String SPLATD = "SPLATD";
-  public static final String FAM = "FAM";
-  public static final String BF = "BF";
-  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.###");
   private final String programName;
   private final List<String> options;
 
@@ -73,19 +63,19 @@ public abstract class AccuracyEvaluation<T> {
       result.append("true");
       result.append(",");
       double performance = configsToTime.get(config) / 1E9;
-      result.append(DECIMAL_FORMAT.format(performance));
+      result.append(Evaluation.DECIMAL_FORMAT.format(performance));
       result.append(",");
       double variance = configsToVariance.get(config) / 1E18;
-      result.append(DECIMAL_FORMAT.format(variance));
+      result.append(Evaluation.DECIMAL_FORMAT.format(variance));
       result.append(",");
       double minci = configsToCI.get(config).get(0) / 1E9;
-      result.append(DECIMAL_FORMAT.format(minci));
+      result.append(Evaluation.DECIMAL_FORMAT.format(minci));
       result.append(",");
       double maxci = configsToCI.get(config).get(1) / 1E9;
-      result.append(DECIMAL_FORMAT.format(maxci));
+      result.append(Evaluation.DECIMAL_FORMAT.format(maxci));
       result.append(",");
       double ciwindow = (maxci - minci);
-      result.append(DECIMAL_FORMAT.format(ciwindow));
+      result.append(Evaluation.DECIMAL_FORMAT.format(ciwindow));
       result.append("\n");
     }
 
@@ -129,7 +119,7 @@ public abstract class AccuracyEvaluation<T> {
       result.append(executedConfigs.contains(config));
       result.append(",");
       double performance = entry.getValue() / 1E9;
-      result.append(DECIMAL_FORMAT.format(performance));
+      result.append(Evaluation.DECIMAL_FORMAT.format(performance));
       result.append("\n");
     }
 
@@ -151,7 +141,7 @@ public abstract class AccuracyEvaluation<T> {
                 + approach1
                 + "_"
                 + gt
-                + DOT_CSV);
+                + Evaluation.DOT_CSV);
 
     if (outputFile.exists()) {
       FileUtils.forceDelete(outputFile);
@@ -242,11 +232,11 @@ public abstract class AccuracyEvaluation<T> {
       relativeErrorMetric.getEntries().add(relativeError);
       meanSquaredErrorMetric.getEntries().add(absoluteError);
 
-      result.append(DECIMAL_FORMAT.format(absoluteError));
+      result.append(Evaluation.DECIMAL_FORMAT.format(absoluteError));
       result.append(",");
-      result.append(DECIMAL_FORMAT.format(relativeError));
+      result.append(Evaluation.DECIMAL_FORMAT.format(relativeError));
       result.append(",");
-      result.append(DECIMAL_FORMAT.format(squaredError));
+      result.append(Evaluation.DECIMAL_FORMAT.format(squaredError));
 
       result.append("\n");
       count++;
@@ -266,43 +256,45 @@ public abstract class AccuracyEvaluation<T> {
     result.append("\n");
     result.append("\n");
     result.append("Pearsons correlation: ");
-    result.append(DECIMAL_FORMAT.format(new PearsonsCorrelation().correlation(times1, timesGT)));
+    result.append(
+        Evaluation.DECIMAL_FORMAT.format(new PearsonsCorrelation().correlation(times1, timesGT)));
     result.append("\n");
     result.append("Spearmans correlation: ");
-    result.append(DECIMAL_FORMAT.format(new SpearmansCorrelation().correlation(times1, timesGT)));
+    result.append(
+        Evaluation.DECIMAL_FORMAT.format(new SpearmansCorrelation().correlation(times1, timesGT)));
     result.append("\n");
     result.append("\n");
     result.append("Min Absolute Error: ");
-    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()));
     result.append("\n");
     result.append("Max Absolute Error: ");
-    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()));
     result.append("\n");
     result.append("Mean Absolute Error: ");
-    result.append(DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
     result.append("Min Relative Error: ");
-    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
     result.append("\n");
     result.append("Max Relative Error: ");
-    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getMax()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMax()));
     result.append("\n");
     result.append("Mean Relative Error: ");
-    result.append(DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
     result.append("\n");
     result.append("\n");
     result.append("Mean Squared Error: ");
-    result.append(DECIMAL_FORMAT.format(meanSquaredErrorMetric.getError()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(meanSquaredErrorMetric.getError()));
     //    result.append("\n");
     //    result.append("\n");
     //    result.append("RMSE: ");
-    //    result.append(DECIMAL_FORMAT.format(Math.sqrt(mse)));
+    //    result.append(Evaluation.DECIMAL_FORMAT.format(Math.sqrt(mse)));
     result.append("\n");
     result.append("\n");
     result.append("Mean Absolute Percentage Error: ");
     double mape = relativeErrorMetric.getArithmeticMean() * 100;
-    result.append(DECIMAL_FORMAT.format(mape));
+    result.append(Evaluation.DECIMAL_FORMAT.format(mape));
     result.append("%");
     result.append("\n");
 
@@ -386,7 +378,13 @@ public abstract class AccuracyEvaluation<T> {
 
   private File getApproachOutputFile(String approach) {
     return new File(
-        this.getOutputDir() + "/" + this.programName + FULL_DIR + "/" + approach + DOT_CSV);
+        this.getOutputDir()
+            + "/"
+            + this.programName
+            + FULL_DIR
+            + "/"
+            + approach
+            + Evaluation.DOT_CSV);
   }
 
   protected abstract String getOutputDir();

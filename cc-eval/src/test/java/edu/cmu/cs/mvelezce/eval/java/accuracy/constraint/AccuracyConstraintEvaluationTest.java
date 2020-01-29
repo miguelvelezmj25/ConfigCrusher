@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
 import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
+import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.eval.java.accuracy.AccuracyEvaluation;
 import edu.cmu.cs.mvelezce.exhaustive.builder.bf.BruteForceExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.exhaustive.builder.gt.GroundTruthExhaustiveModelBuilder;
@@ -38,7 +39,7 @@ public class AccuracyConstraintEvaluationTest {
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.GT, configs, model);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }
 
   @Test
@@ -55,7 +56,7 @@ public class AccuracyConstraintEvaluationTest {
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.BF, configs, model);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
   }
 
   @Test
@@ -76,8 +77,7 @@ public class AccuracyConstraintEvaluationTest {
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(
-        AccuracyEvaluation.IDTA, executedConfigs, configsToPredict, model);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
   }
 
   @Test
@@ -97,7 +97,7 @@ public class AccuracyConstraintEvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(AccuracyEvaluation.FW, executedConfigs, configsToPredict, model);
+    eval.saveConfigsToPerformance(Evaluation.FW, executedConfigs, configsToPredict, model);
   }
 
   @Test
@@ -117,35 +117,35 @@ public class AccuracyConstraintEvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(AccuracyEvaluation.PW, executedConfigs, configsToPredict, model);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
   }
 
   @Test
   public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.IDTA, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_BF_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.BF, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.BF, Evaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_FW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.FW, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.FW, Evaluation.GT);
   }
 
   @Test
   public void berkeleyDB_Compare_PW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.PW, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
   }
 
   @Test
@@ -162,7 +162,7 @@ public class AccuracyConstraintEvaluationTest {
 
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.GT, configs, model);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }
 
   @Test
@@ -179,7 +179,7 @@ public class AccuracyConstraintEvaluationTest {
 
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformanceExhaustive(AccuracyEvaluation.BF, configs, model);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, configs, model);
   }
 
   @Test
@@ -199,7 +199,7 @@ public class AccuracyConstraintEvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(AccuracyEvaluation.FW, executedConfigs, configsToPredict, model);
+    eval.saveConfigsToPerformance(Evaluation.FW, executedConfigs, configsToPredict, model);
   }
 
   @Test
@@ -219,27 +219,27 @@ public class AccuracyConstraintEvaluationTest {
     PerformanceModel<FeatureExpr> model = builder.analyze(args);
 
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName, options);
-    eval.saveConfigsToPerformance(AccuracyEvaluation.PW, executedConfigs, configsToPredict, model);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
   }
 
   @Test
   public void lucene_Compare_BF_GT() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.BF, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.BF, Evaluation.GT);
   }
 
   @Test
   public void lucene_Compare_FW_GT() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.FW, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.FW, Evaluation.GT);
   }
 
   @Test
   public void lucene_Compare_PW_GT() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
-    eval.compareApproaches(AccuracyEvaluation.PW, AccuracyEvaluation.GT);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
   }
 }

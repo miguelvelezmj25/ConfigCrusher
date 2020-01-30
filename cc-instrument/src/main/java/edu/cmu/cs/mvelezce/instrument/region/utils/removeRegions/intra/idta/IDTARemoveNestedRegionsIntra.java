@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.BaseRemoveNestedRegionsIntra;
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTARemoveNestedRegionsIntra extends BaseRemoveNestedRegionsIntra<Set<FeatureExpr>> {
+public class IDTARemoveNestedRegionsIntra extends BaseRemoveNestedRegionsIntra<Partitioning> {
 
   private final BaseIDTAExpander baseIDTAExpander;
 
@@ -19,7 +19,7 @@ public class IDTARemoveNestedRegionsIntra extends BaseRemoveNestedRegionsIntra<S
       String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
-      Map<JavaRegion, Set<FeatureExpr>> regionsToData,
+      Map<JavaRegion, Partitioning> regionsToData,
       BaseIDTAExpander baseIDTAExpander) {
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
 
@@ -28,7 +28,7 @@ public class IDTARemoveNestedRegionsIntra extends BaseRemoveNestedRegionsIntra<S
 
   @Override
   protected boolean coversAll(
-      Set<FeatureExpr> callerConstraints, @Nullable Set<FeatureExpr> calleeConstraints) {
-    return this.baseIDTAExpander.impliesAll(callerConstraints, calleeConstraints);
+      Partitioning callerPartitioning, @Nullable Partitioning calleePartitioning) {
+    return this.baseIDTAExpander.impliesAll(callerPartitioning, calleePartitioning);
   }
 }

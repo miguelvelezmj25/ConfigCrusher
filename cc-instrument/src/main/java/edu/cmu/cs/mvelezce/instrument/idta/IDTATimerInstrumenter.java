@@ -1,13 +1,13 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time.IDTAExecutionTimeMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.MethodTransformer;
-import edu.cmu.cs.mvelezce.utils.RegionsWithConstraintsUtils;
+import edu.cmu.cs.mvelezce.utils.RegionsWithPartitionsUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExpr>> {
+public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Partitioning> {
 
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
 
@@ -39,9 +39,9 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
       String srcDir,
       String classDir,
       Set<String> options,
-      Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints,
+      Map<JavaRegion, Partitioning> regionsToPartitions,
       IDTAMethodInstrumenter idtaMethodInstrumenter) {
-    super(programName, mainClass, srcDir, classDir, options, regionsToConstraints);
+    super(programName, mainClass, srcDir, classDir, options, regionsToPartitions);
     System.err.println(
         "Remember that we are instrumenting blocks. Therefore, we might not need to know the start index of a region; only the start and end blocks");
     System.err.println("We are not deleting the .dot and .pdf files");
@@ -74,19 +74,19 @@ public class IDTATimerInstrumenter extends BaseRegionInstrumenter<Set<FeatureExp
   }
 
   @Override
-  protected void writeToFile(Map<JavaRegion, Set<FeatureExpr>> regionsToData) throws IOException {
+  protected void writeToFile(Map<JavaRegion, Partitioning> regionsToData) throws IOException {
     System.err.println(
         "The index of the regions might not be accurate. Not sure at the moment if we need the index for later analysis or understanding");
-    RegionsWithConstraintsUtils.writeToFile(regionsToData, this.getOutputFile(), this.getOptions());
+    RegionsWithPartitionsUtils.writeToFile(regionsToData, this.getOutputFile(), this.getOptions());
   }
 
   @Override
-  protected Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) throws IOException {
-    return RegionsWithConstraintsUtils.readFromFile(file);
+  protected Map<JavaRegion, Partitioning> readFromFile(File file) throws IOException {
+    return RegionsWithPartitionsUtils.readFromFile(file);
   }
 
   @Override
-  public Map<JavaRegion, Set<FeatureExpr>> getProcessedRegionsToData() throws IOException {
+  public Map<JavaRegion, Partitioning> getProcessedRegionsToData() throws IOException {
     String outputDir = this.getOutputFile();
     File outputFile = new File(outputDir);
 

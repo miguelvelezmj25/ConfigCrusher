@@ -2,14 +2,13 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform;
 
 import com.mijecu25.meme.utils.gc.GC;
 import com.mijecu25.meme.utils.monitor.memory.MemoryMonitor;
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.idta.IDTAInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic.DynamicInstructionRegionMatcher;
-import edu.cmu.cs.mvelezce.instrument.region.utils.data.propcessor.idta.GlobalConstraintImplicationCleaner;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.BaseInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.inter.idta.BaseIDTAInterExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
@@ -36,21 +35,21 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
+public class IDTAMethodTransformer extends RegionTransformer<Partitioning> {
 
   public static final String DEBUG_DIR =
       "../cc-instrument/" + Options.DIRECTORY + "/instrument/idta/java/programs";
 
   private final BaseIDTAExpander baseIDTAExpander;
-  private final BaseUpIntraExpander<Set<FeatureExpr>> upIntraExpander;
-  private final BaseDownIntraExpander<Set<FeatureExpr>> downIntraExpander;
-  private final BaseInterExpander<Set<FeatureExpr>> interExpander;
-  private final BaseStartEndRegionBlocksSetter<Set<FeatureExpr>> startEndRegionBlocksSetter;
-  private final BaseRemoveNestedRegionsInter<Set<FeatureExpr>> removeNestedRegionsInter;
+  private final BaseUpIntraExpander<Partitioning> upIntraExpander;
+  private final BaseDownIntraExpander<Partitioning> downIntraExpander;
+  private final BaseInterExpander<Partitioning> interExpander;
+  private final BaseStartEndRegionBlocksSetter<Partitioning> startEndRegionBlocksSetter;
+  private final BaseRemoveNestedRegionsInter<Partitioning> removeNestedRegionsInter;
   private final IDTAMethodInstrumenter idtaMethodInstrumenter;
   private final CallGraph callGraph = null;
   private final SootAsmMethodMatcher sootAsmMethodMatcher = null;
-  private final GlobalConstraintImplicationCleaner globalConstraintImplicationCleaner;
+  //  private final GlobalPartitionsImplicationCleaner globalPartitionsImplicationCleaner;
 
   private IDTAMethodTransformer(Builder builder)
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
@@ -59,7 +58,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         new DefaultClassTransformer(builder.classDir),
         builder.mainClass,
         builder.debug,
-        builder.regionsToConstraints,
+        builder.regionsToPartitions,
         new DynamicInstructionRegionMatcher());
 
     Options.checkIfDeleteResult(new File(DEBUG_DIR + "/" + builder.programName));
@@ -84,7 +83,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
             this.getRegionsToData(),
             this.baseIDTAExpander);
 
-    BaseRemoveNestedRegionsIntra<Set<FeatureExpr>> idtaRemoveNestedRegionsIntra =
+    BaseRemoveNestedRegionsIntra<Partitioning> idtaRemoveNestedRegionsIntra =
         new IDTARemoveNestedRegionsIntra(
             builder.programName,
             DEBUG_DIR,
@@ -104,7 +103,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     //    this.sootAsmMethodMatcher = SootAsmMethodMatcher.getInstance();
     //    this.callGraph = SootCallGraphBuilder.buildCallGraph(builder.mainClass, builder.classDir);
-    BaseInterAnalysisUtils<Set<FeatureExpr>> baseInterAnalysisUtils =
+    BaseInterAnalysisUtils<Partitioning> baseInterAnalysisUtils =
         new IDTAInterAnalysisUtils(
             builder.programName,
             DEBUG_DIR,
@@ -140,14 +139,14 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
 
     this.idtaMethodInstrumenter = builder.idtaMethodInstrumenter;
 
-    this.globalConstraintImplicationCleaner =
-        new GlobalConstraintImplicationCleaner(
-            builder.programName,
-            DEBUG_DIR,
-            builder.options,
-            this.getBlockRegionMatcher(),
-            this.getRegionsToData(),
-            this.baseIDTAExpander);
+    //    this.globalPartitionsImplicationCleaner =
+    //        new GlobalPartitionsImplicationCleaner(
+    //            builder.programName,
+    //            DEBUG_DIR,
+    //            builder.options,
+    //            this.getBlockRegionMatcher(),
+    //            this.getRegionsToData(),
+    //            this.baseIDTAExpander);
   }
 
   @Override
@@ -223,37 +222,37 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     MemoryMonitor.printMemoryUsage("Memory:");
 
     this.setStartAndEndBlocks(classNodes);
-    this.cleanImpliedConstraints(classNodes);
+    //    this.cleanImpliedPartitions(classNodes);
   }
 
-  private void cleanImpliedConstraints(Set<ClassNode> classNodes) {
-    int classNodesCount = classNodes.size();
-    int processedClassNodesCount = 0;
-
-    for (ClassNode classNode : classNodes) {
-      processedClassNodesCount++;
-      System.out.println(
-          "Class nodes still to clean implied constraints: "
-              + (classNodesCount - processedClassNodesCount));
-      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
-
-      if (methodsToProcess.isEmpty()) {
-        continue;
-      }
-
-      for (MethodNode methodNode : methodsToProcess) {
-        System.out.println("Cleaning constraints " + classNode.name + " - " + methodNode.name);
-        long startTime = System.nanoTime();
-        this.globalConstraintImplicationCleaner.processBlocks(methodNode, classNode);
-        long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
-
-        if (this.debug()) {
-          this.globalConstraintImplicationCleaner.debugBlockData(methodNode, classNode);
-        }
-      }
-    }
-  }
+  //  private void cleanImpliedPartitions(Set<ClassNode> classNodes) {
+  //    int classNodesCount = classNodes.size();
+  //    int processedClassNodesCount = 0;
+  //
+  //    for (ClassNode classNode : classNodes) {
+  //      processedClassNodesCount++;
+  //      System.out.println(
+  //          "Class nodes still to clean implied partitions: "
+  //              + (classNodesCount - processedClassNodesCount));
+  //      Set<MethodNode> methodsToProcess = this.getMethodsToInstrument(classNode);
+  //
+  //      if (methodsToProcess.isEmpty()) {
+  //        continue;
+  //      }
+  //
+  //      for (MethodNode methodNode : methodsToProcess) {
+  //        System.out.println("Cleaning partitions " + classNode.name + " - " + methodNode.name);
+  //        long startTime = System.nanoTime();
+  //        this.globalPartitionsImplicationCleaner.processBlocks(methodNode, classNode);
+  //        long endTime = System.nanoTime();
+  //        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+  //
+  //        if (this.debug()) {
+  //          this.globalPartitionsImplicationCleaner.debugBlockData(methodNode, classNode);
+  //        }
+  //      }
+  //    }
+  //  }
 
   //  private void removeNestedRegionsInter(Set<ClassNode> classNodes) {
   //    int classNodesCount = classNodes.size();
@@ -414,7 +413,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
     private final String programName;
     private final String mainClass;
     private final String classDir;
-    private final Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints;
+    private final Map<JavaRegion, Partitioning> regionsToPartitions;
     private final Set<String> options;
     private final IDTAMethodInstrumenter idtaMethodInstrumenter;
 
@@ -425,12 +424,12 @@ public class IDTAMethodTransformer extends RegionTransformer<Set<FeatureExpr>> {
         String mainClass,
         String classDir,
         Set<String> options,
-        Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints,
+        Map<JavaRegion, Partitioning> regionsToPartitions,
         IDTAMethodInstrumenter idtaMethodInstrumenter) {
       this.programName = programName;
       this.mainClass = mainClass;
       this.classDir = classDir;
-      this.regionsToConstraints = regionsToConstraints;
+      this.regionsToPartitions = regionsToPartitions;
       this.options = options;
       this.idtaMethodInstrumenter = idtaMethodInstrumenter;
     }

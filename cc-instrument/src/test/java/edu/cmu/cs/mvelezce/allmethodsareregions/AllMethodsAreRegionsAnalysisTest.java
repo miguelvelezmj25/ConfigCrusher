@@ -1,12 +1,14 @@
 package edu.cmu.cs.mvelezce.allmethodsareregions;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import org.junit.Test;
@@ -20,15 +22,16 @@ import java.util.Set;
 
 public class AllMethodsAreRegionsAnalysisTest {
 
-  private Set<FeatureExpr> getConstraints(Set<Set<String>> configs, List<String> options) {
-    Set<FeatureExpr> constraints = new HashSet<>();
+  private Partitioning getPartitioning(Set<Set<String>> configs, List<String> options) {
+    Set<Partition> partitions = new HashSet<>();
 
     for (Set<String> config : configs) {
-      String stringConstraint = ConstraintUtils.parseAsConstraint(config, options);
-      constraints.add(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringConstraint));
+      String stringPartition = ConstraintUtils.parseAsConstraint(config, options);
+      partitions.add(
+          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringPartition)));
     }
 
-    return constraints;
+    return new TotalPartition(partitions);
   }
 
   @Test
@@ -41,13 +44,13 @@ public class AllMethodsAreRegionsAnalysisTest {
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Set<FeatureExpr> constraints = this.getConstraints(configs, options);
+    Partitioning partitioning = this.getPartitioning(configs, options);
 
     String mainClass = BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS;
     String classDir = "../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_CLASS_PATH;
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new AllMethodsAreRegionsAnalysis(programName, options, mainClass, classDir, constraints);
+    Analysis<Map<JavaRegion, Partitioning>> analysis =
+        new AllMethodsAreRegionsAnalysis(programName, options, mainClass, classDir, partitioning);
 
     args = new String[2];
     args[0] = "-delres";

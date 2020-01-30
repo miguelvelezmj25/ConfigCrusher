@@ -1,16 +1,15 @@
 package edu.cmu.cs.mvelezce.analysis.region.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.BaseCountRegionsPerMethodAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 
 import java.util.Map;
-import java.util.Set;
 
 public class IDTACountRegionsPerMethodAnalysis
-    extends BaseCountRegionsPerMethodAnalysis<Set<FeatureExpr>> {
+    extends BaseCountRegionsPerMethodAnalysis<Partitioning> {
 
-  public IDTACountRegionsPerMethodAnalysis(Map<JavaRegion, Set<FeatureExpr>> regionsToData) {
+  public IDTACountRegionsPerMethodAnalysis(Map<JavaRegion, Partitioning> regionsToData) {
     super(regionsToData);
   }
 }

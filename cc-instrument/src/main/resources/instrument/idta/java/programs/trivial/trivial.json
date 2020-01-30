@@ -1,1 +1,32 @@
-[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"Trivial","methodSignature":"bar(Z)V","decisionIndex":1,"info":[],"prettyConstraints":["!B","B"],"id":"2ec6df50-5b10-4995-b681-bfd598ece7c0","startBlock":"7140904","endBlocks":["exit"]},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"Trivial","methodSignature":"foo(Z)V","decisionIndex":1,"info":[],"prettyConstraints":["!A","A"],"id":"f733287f-fd73-4a52-9c23-e9b6f0440ab8","startBlock":"1831372142","endBlocks":["exit"]}]
+[
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Trivial",
+    "methodSignature": "foo(Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "!A",
+      "A"
+    ],
+    "id": "45accf2c-0e4e-4304-b527-1775749c6ad5",
+    "startBlock": "908139452",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "edu.cmu.cs.mvelezce.analysis",
+    "className": "Trivial",
+    "methodSignature": "bar(Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "!B",
+      "B"
+    ],
+    "id": "d99e9ec3-d8e2-4b62-b519-e63701ec1cbc",
+    "startBlock": "1698322791",
+    "endBlocks": [
+      "exit"
+    ]
+  }
+]

@@ -1,11 +1,11 @@
 package edu.cmu.cs.mvelezce.allmethodsareregions;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
-import edu.cmu.cs.mvelezce.utils.RegionsWithConstraintsUtils;
+import edu.cmu.cs.mvelezce.utils.RegionsWithPartitionsUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;
@@ -14,12 +14,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class AllMethodsAreRegionsAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>> {
+public class AllMethodsAreRegionsAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
 
   private final AllMethodsRegionCreator allMethodsRegionCreator;
-  private final Set<FeatureExpr> constraints;
+  private final Partitioning partitioning;
   private final List<String> options;
 
   public AllMethodsAreRegionsAnalysis(
@@ -27,7 +26,7 @@ public class AllMethodsAreRegionsAnalysis extends BaseAnalysis<Map<JavaRegion, S
       List<String> options,
       String mainClass,
       String classDir,
-      Set<FeatureExpr> constraints)
+      Partitioning partitioning)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException,
           InvocationTargetException {
     super(programName);
@@ -36,12 +35,12 @@ public class AllMethodsAreRegionsAnalysis extends BaseAnalysis<Map<JavaRegion, S
     this.allMethodsRegionCreator =
         new AllMethodsRegionCreator(
             programName, new DefaultClassTransformer(classDir), mainClass, false);
-    this.constraints = constraints;
+    this.partitioning = partitioning;
   }
 
   @Override
-  public Map<JavaRegion, Set<FeatureExpr>> analyze() throws IOException {
-    return this.allMethodsRegionCreator.createRegions(this.constraints);
+  public Map<JavaRegion, Partitioning> analyze() throws IOException {
+    return this.allMethodsRegionCreator.createRegions(this.partitioning);
   }
 
   @Override
@@ -55,12 +54,12 @@ public class AllMethodsAreRegionsAnalysis extends BaseAnalysis<Map<JavaRegion, S
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<FeatureExpr>> results) throws IOException {
-    RegionsWithConstraintsUtils.writeToFile(results, this.outputDir(), this.options);
+  public void writeToFile(Map<JavaRegion, Partitioning> results) throws IOException {
+    RegionsWithPartitionsUtils.writeToFile(results, this.outputDir(), this.options);
   }
 
   @Override
-  public Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) throws IOException {
-    return RegionsWithConstraintsUtils.readFromFile(file);
+  public Map<JavaRegion, Partitioning> readFromFile(File file) throws IOException {
+    return RegionsWithPartitionsUtils.readFromFile(file);
   }
 }

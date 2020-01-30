@@ -2,6 +2,9 @@ package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta;
 
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 
 import javax.annotation.Nullable;
@@ -13,7 +16,7 @@ public final class BaseIDTAExpander {
 
   private static final FeatureExpr FALSE = SATFeatureExprFactory.False();
   private static final BaseIDTAExpander INSTANCE = new BaseIDTAExpander();
-  private final Set<FeatureExpr> globalConstraints = new HashSet<>();
+  private final Set<Partition> globalPartitions = new HashSet<>();
 
   private BaseIDTAExpander() {}
 
@@ -21,103 +24,99 @@ public final class BaseIDTAExpander {
     return INSTANCE;
   }
 
-  public String prettyPrintConstraints(
-      @Nullable Set<FeatureExpr> constraints, Set<String> options) {
-    Set<String> prettyConstraints = new HashSet<>();
+  public String prettyPrintPartitions(@Nullable Partitioning partitioning, Set<String> options) {
+    Set<String> prettyPartitions = new HashSet<>();
 
-    if (constraints == null) {
-      throw new RuntimeException("The constraints cannot be null");
+    if (partitioning == null) {
+      throw new RuntimeException("The partitions cannot be null");
     }
 
-    for (FeatureExpr constraint : constraints) {
-      String prettyConstraint = ConstraintUtils.prettyPrintFeatureExpr(constraint, options);
-      prettyConstraints.add(prettyConstraint);
+    for (Partition partition : partitioning.getPartitions()) {
+      String prettyPartition =
+          ConstraintUtils.prettyPrintFeatureExpr(partition.getFeatureExpr(), options);
+      prettyPartitions.add(prettyPartition);
     }
 
-    return prettyConstraints.toString();
+    return prettyPartitions.toString();
   }
 
-  public void init(Collection<Set<FeatureExpr>> setOfConstraints) {
-    if (!this.globalConstraints.isEmpty()) {
+  public void init(Collection<Partitioning> partitionings) {
+    if (!this.globalPartitions.isEmpty()) {
       return;
     }
 
-    for (Set<FeatureExpr> constraints : setOfConstraints) {
-      this.globalConstraints.addAll(constraints);
+    for (Partitioning partitioning : partitionings) {
+      this.globalPartitions.addAll(partitioning.getPartitions());
     }
   }
 
-  /** ∃ c ∈ GlobalConstraints . c ⟹ newConstraint */
-  public boolean canMergeConstraints(
-      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> currentConstraints) {
-    if (expandingConstraints.isEmpty()) {
-      throw new RuntimeException("Expanding constraints should never be empty");
+  /** ∃ c ∈ GlobalPartitions . c ⟹ newPartition */
+  public boolean canMergePartitionings(
+      Partitioning expandingPartitioning, @Nullable Partitioning currentPartitioning) {
+    if (expandingPartitioning.getPartitions().isEmpty()) {
+      throw new RuntimeException("Expanding partitions should never be empty");
     }
 
-    if (currentConstraints == null) {
+    if (currentPartitioning == null) {
       return true;
     }
 
-    if (currentConstraints.isEmpty()) {
+    if (currentPartitioning.getPartitions().isEmpty()) {
       throw new RuntimeException("How can that data be empty, but not null?");
     }
 
     // Shortcut
-    if (currentConstraints.equals(expandingConstraints)) {
+    if (currentPartitioning.equals(expandingPartitioning)) {
       return true;
     }
 
-    Set<FeatureExpr> newConstraints = new HashSet<>();
-
-    for (FeatureExpr expandingConstraint : expandingConstraints) {
-      for (FeatureExpr currentConstraint : currentConstraints) {
-        FeatureExpr newConstraint = expandingConstraint.and(currentConstraint);
-
-        if (newConstraint.isContradiction()) {
-          continue;
-        }
-
-        newConstraints.add(newConstraint);
-      }
-    }
+    TotalPartition newPartitioning = expandingPartitioning.merge(currentPartitioning);
 
     // Shortcut
-    if (newConstraints.equals(expandingConstraints)) {
+    if (newPartitioning.equals(expandingPartitioning)) {
       return true;
     }
 
     // Logic
-    for (FeatureExpr newConstraint : newConstraints) {
-      boolean existsGlobalConstraint = false;
+    for (Partition newPartition : newPartitioning.getPartitions()) {
+      boolean existsGlobalPartition = false;
 
-      for (FeatureExpr globalConstraint : this.globalConstraints) {
-        if (globalConstraint.implies(newConstraint).isTautology()) {
-          existsGlobalConstraint = true;
+      for (Partition globalPartition : this.globalPartitions) {
+        if (globalPartition.getFeatureExpr().implies(newPartition.getFeatureExpr()).isTautology()) {
+          existsGlobalPartition = true;
           break;
         }
       }
 
-      if (!existsGlobalConstraint) {
+      if (!existsGlobalPartition) {
         return false;
       }
     }
 
     return true;
-    //    return this.impliesAll(this.globalConstraints, newConstraints);
+
+    //    return this.impliesAll(this.globalPartitions, newPartitions);
   }
 
-  /** ∀ dc ∈ ImpliedConstraints . ∃ gc ∈ ImplyingConstraints . gc ⟹ dc */
+  /** ∀ dc ∈ ImpliedPartitions . ∃ gc ∈ ImplyingPartitions . gc ⟹ dc */
   public boolean impliesAll(
-      @Nullable Set<FeatureExpr> implyingConstraints, Set<FeatureExpr> impliedConstraints) {
-    if (implyingConstraints == null) {
+      @Nullable Partitioning implyingPartitioning, @Nullable Partitioning impliedPartitioning) {
+    if (implyingPartitioning == null) {
       return false;
     }
 
-    for (FeatureExpr impliedConstraint : impliedConstraints) {
+    if (impliedPartitioning == null) {
+      throw new RuntimeException("What is this case?");
+    }
+
+    for (Partition impliedPartition : impliedPartitioning.getPartitions()) {
       boolean exists = false;
 
-      for (FeatureExpr implyingConstraint : implyingConstraints) {
-        if (implyingConstraint.implies(impliedConstraint).isTautology()) {
+      for (Partition implyingPartition : implyingPartitioning.getPartitions()) {
+        if (implyingPartition
+            .getFeatureExpr()
+            .implies(impliedPartition.getFeatureExpr())
+            .isTautology()) {
           exists = true;
           break;
         }
@@ -131,65 +130,16 @@ public final class BaseIDTAExpander {
     return true;
   }
 
-  public Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> thisConstraints, @Nullable Set<FeatureExpr> thatConstraints) {
-    Set<FeatureExpr> newConstraints = new HashSet<>(thisConstraints);
-
-    if (thatConstraints == null) {
-      return newConstraints;
+  public Partitioning mergeData(
+      Partitioning thisPartitioning, @Nullable Partitioning thatPartitioning) {
+    if (thatPartitioning == null) {
+      return thisPartitioning;
     }
 
-    newConstraints.addAll(thatConstraints);
-
-    return newConstraints;
+    return thisPartitioning.merge(thatPartitioning);
   }
 
-  //  private boolean containsAll(
-  //      Set<FeatureExpr> currentConstraints, Set<FeatureExpr> expandingConstraints) {
-  //    if (currentConstraints == null || expandingConstraints == null) {
-  //      return false;
-  //    }
-  //
-  //    return currentConstraints.containsAll(expandingConstraints);
-  //  }
-  //  /**
-  //   * The disjunction of all implying constraints implies the disjunction of all implied
-  // constraints
-  //   */
-  //  public boolean completelyImplies(
-  //      Set<FeatureExpr> implyingConstraints, @Nullable Set<FeatureExpr> impliedConstraints) {
-  //    if (impliedConstraints == null) {
-  //      return true;
-  //    }
-  //
-  //    boolean containsAll = this.containsAll(implyingConstraints, impliedConstraints);
-  //
-  //    FeatureExpr implyingConstraintsDisjunction = this.getDisjunction(implyingConstraints);
-  //    FeatureExpr impliedConstraintsDisjunction = this.getDisjunction(impliedConstraints);
-  //
-  //    //    boolean completelyImply =
-  //    //
-  // impliedConstraintsDisjunction.implies(implyingConstraintsDisjunction).isTautology();
-  //    //
-  //    //    if (containsAll != completelyImply) {
-  //    //      throw new RuntimeException("The contains all and implies all results do not match");
-  //    //    }
-  //    //
-  //    //    return completelyImply;
-  //    return containsAll;
-  //  }
-  //
-  //  private FeatureExpr getDisjunction(Set<FeatureExpr> constraints) {
-  //    FeatureExpr disjunction = FALSE;
-  //
-  //    for (FeatureExpr constraint : constraints) {
-  //      disjunction = disjunction.or(constraint);
-  //    }
-  //
-  //    return disjunction;
-  //  }
-
-  public Set<FeatureExpr> getGlobalConstraints() {
-    return globalConstraints;
+  public Set<Partition> getGlobalPartitions() {
+    return globalPartitions;
   }
 }

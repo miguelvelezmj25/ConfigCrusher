@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.instrument.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.canExpandConstraintsDown.BaseCanExpandConstraintsDownAdapter;
 import edu.cmu.cs.mvelezce.adapters.canRemoveNestedConstraintsMultipleCallSites.BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter;
 import edu.cmu.cs.mvelezce.adapters.cannotExpandConstraintsDown.BaseCannotExpandConstraintsDownAdapter;
@@ -20,6 +19,7 @@ import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.time.IDTAExecutionTimeMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrumenter.instrument.Instrumenter;
 import org.junit.Test;
@@ -39,9 +39,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseTrivialAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseTrivialAdapter.INSTRUMENTED_DIR_PATH;
@@ -54,7 +53,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -71,9 +70,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseStaticMethodCallAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseStaticMethodCallAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseStaticMethodCallAdapter.INSTRUMENTED_DIR_PATH;
@@ -86,7 +84,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -103,9 +101,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCannotRemoveNestedRegionsAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCannotRemoveNestedRegionsAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseCannotRemoveNestedRegionsAdapter.INSTRUMENTED_DIR_PATH;
@@ -118,7 +115,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -135,9 +132,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseMethodCallAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseMethodCallAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseMethodCallAdapter.INSTRUMENTED_DIR_PATH;
@@ -150,7 +146,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -167,9 +163,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseSubtracesAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseSubtracesAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseSubtracesAdapter.INSTRUMENTED_DIR_PATH;
@@ -182,7 +177,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -199,9 +194,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCanRemoveNestedConstraintsMultipleCallSitesAdapter.MAIN_CLASS;
     String srcDir =
@@ -217,7 +211,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -234,9 +228,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseIGenAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseIGenAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseIGenAdapter.INSTRUMENTED_DIR_PATH;
@@ -249,7 +242,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -266,13 +259,12 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseMeasureDiskOrderedScanAdapter.MAIN_CLASS;
-    String srcDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
-    String classDir = "../" + BaseMeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
+    String srcDir = "../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_ROOT_DIR;
+    String classDir = "../" + BaseMeasureDiskOrderedScanAdapter.ORIGINAL_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseMeasureDiskOrderedScanAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
@@ -281,7 +273,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -298,9 +290,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseIndexFilesAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseIndexFilesAdapter.INSTRUMENTED_DIR_PATH;
@@ -313,7 +304,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -330,9 +321,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BasePngtasticAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BasePngtasticAdapter.MAIN_CLASS;
     String srcDir = "../" + BasePngtasticAdapter.INSTRUMENTED_DIR_PATH;
@@ -345,7 +335,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -362,9 +352,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCannotExpandConstraintsDownAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCannotExpandConstraintsDownAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseCannotExpandConstraintsDownAdapter.INSTRUMENTED_DIR_PATH;
@@ -377,7 +366,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -394,9 +383,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCanExpandConstraintsDownAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCanExpandConstraintsDownAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseCanExpandConstraintsDownAdapter.INSTRUMENTED_DIR_PATH;
@@ -409,7 +397,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -426,9 +414,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseMultipleReturnsAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseMultipleReturnsAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseMultipleReturnsAdapter.INSTRUMENTED_DIR_PATH;
@@ -441,7 +428,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -458,9 +445,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCleanConstraintsAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCleanConstraintsAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseCleanConstraintsAdapter.INSTRUMENTED_DIR_PATH;
@@ -473,7 +459,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -490,9 +476,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BaseCleanConstraintsIssueAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseCleanConstraintsIssueAdapter.MAIN_CLASS;
     String srcDir = "../" + BaseCleanConstraintsIssueAdapter.INSTRUMENTED_DIR_PATH;
@@ -505,7 +490,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];
@@ -522,9 +507,8 @@ public class IDTATimerInstrumenterTest {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 
-    Analysis<Map<JavaRegion, Set<FeatureExpr>>> analysis =
-        new IDTAAnalysis(programName, workloadSize);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = analysis.analyze();
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BasePerformanceAdapter.MAIN_CLASS;
     String srcDir = "../" + BasePerformanceAdapter.ORIGINAL_DIR_PATH;
@@ -537,7 +521,7 @@ public class IDTATimerInstrumenterTest {
             srcDir,
             classDir,
             options,
-            regionsToConstraints,
+            regionsToPartitions,
             new IDTAExecutionTimeMethodInstrumenter());
 
     String[] args = new String[2];

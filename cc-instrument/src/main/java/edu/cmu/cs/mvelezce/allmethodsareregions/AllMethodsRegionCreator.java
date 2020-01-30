@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.allmethodsareregions;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.instrumenter.transform.methodnode.BaseMethodTransformer;
@@ -19,8 +19,8 @@ public class AllMethodsRegionCreator extends BaseMethodTransformer {
     super(programName, classTransformer, mainClass, debug);
   }
 
-  Map<JavaRegion, Set<FeatureExpr>> createRegions(Set<FeatureExpr> constraints) throws IOException {
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints = new HashMap<>();
+  Map<JavaRegion, Partitioning> createRegions(Partitioning partitioning) throws IOException {
+    Map<JavaRegion, Partitioning> regionsToPartitions = new HashMap<>();
     Set<ClassNode> classes = this.getClassTransformer().readClasses();
 
     for (ClassNode classNode : classes) {
@@ -37,11 +37,11 @@ public class AllMethodsRegionCreator extends BaseMethodTransformer {
                 .endMethodBlocks(new HashSet<>())
                 .build();
 
-        regionsToConstraints.put(region, constraints);
+        regionsToPartitions.put(region, partitioning);
       }
     }
 
-    return regionsToConstraints;
+    return regionsToPartitions;
   }
 
   @Override

@@ -86,7 +86,7 @@ public abstract class BaseUpIntraExpander<T> extends BaseIntraExpander<T> {
 
       if (!this.canExpandDataUp(regionData, predData)) {
         System.err.println(
-            "Might not be able to merge all constraints (e.g., up = {A}, {!A}; down = {A}, {B}; can only merge up {A}, not {B})");
+            "Might not be able to merge all partitions (e.g., up = {A}, {!A}; down = {A}, {B}; can only merge up {A}, not {B})");
         //        if (predBlock.isCatchWithImplicitThrow()) {
         //          throw new RuntimeException("Why do we check this?");
         //        }

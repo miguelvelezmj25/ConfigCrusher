@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down.BaseDownIntraExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTADownIntraExpander extends BaseDownIntraExpander<Set<FeatureExpr>> {
+public class IDTADownIntraExpander extends BaseDownIntraExpander<Partitioning> {
 
   private final BaseIDTAExpander baseIDTAExpander;
 
@@ -19,7 +19,7 @@ public class IDTADownIntraExpander extends BaseDownIntraExpander<Set<FeatureExpr
       String debugDir,
       Set<String> options,
       BlockRegionMatcher blockRegionMatcher,
-      Map<JavaRegion, Set<FeatureExpr>> regionsToData,
+      Map<JavaRegion, Partitioning> regionsToData,
       BaseIDTAExpander baseIDTAExpander) {
     super(programName, debugDir, options, blockRegionMatcher, regionsToData);
 
@@ -27,22 +27,22 @@ public class IDTADownIntraExpander extends BaseDownIntraExpander<Set<FeatureExpr
   }
 
   @Override
-  protected Set<FeatureExpr> mergeData(
-      Set<FeatureExpr> regionConstraints, @Nullable Set<FeatureExpr> downConstraints) {
-    return this.baseIDTAExpander.mergeData(regionConstraints, downConstraints);
+  protected Partitioning mergeData(
+      Partitioning regionPartitioning, @Nullable Partitioning downPartitioning) {
+    return this.baseIDTAExpander.mergeData(regionPartitioning, downPartitioning);
   }
 
   @Override
   protected boolean canExpandDataDown(
-      Set<FeatureExpr> expandingConstraints, @Nullable Set<FeatureExpr> downConstraints) {
-    return this.baseIDTAExpander.canMergeConstraints(expandingConstraints, downConstraints);
+      Partitioning expandingPartitioning, @Nullable Partitioning downPartitioning) {
+    return this.baseIDTAExpander.canMergePartitionings(expandingPartitioning, downPartitioning);
   }
 
   @Override
   protected String getPrettyData(@Nullable JavaRegion region) {
-    Set<FeatureExpr> constraints = this.getData(region);
+    Partitioning partitioning = this.getData(region);
     Set<String> options = this.getOptions();
 
-    return this.baseIDTAExpander.prettyPrintConstraints(constraints, options);
+    return this.baseIDTAExpander.prettyPrintPartitions(partitioning, options);
   }
 }

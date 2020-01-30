@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.compress.idta;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
@@ -13,39 +15,38 @@ import java.util.Set;
 
 public abstract class IDTACompression extends BaseCompression {
 
-  private final Collection<Set<FeatureExpr>> allConstraints;
+  private final Collection<Partitioning> allPartitions;
 
   protected IDTACompression(
-      String programName, List<String> options, Collection<Set<FeatureExpr>> allConstraints) {
+      String programName, List<String> options, Collection<Partitioning> allPartitions) {
     super(programName, options);
 
-    this.allConstraints = allConstraints;
+    this.allPartitions = allPartitions;
   }
 
-  protected Set<FeatureExpr> getCoveredConstraints(
-      Set<String> config, Set<FeatureExpr> constraints) {
-    String configStringConstraint = ConstraintUtils.parseAsConstraint(config, this.getOptions());
-    FeatureExpr configConstraint =
-        FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, configStringConstraint);
+  protected Set<Partition> getCoveredPartitions(Set<String> config, Set<Partition> partitions) {
+    String configStringPartition = ConstraintUtils.parseAsConstraint(config, this.getOptions());
+    FeatureExpr configPartition =
+        FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, configStringPartition);
 
-    Set<FeatureExpr> coveredConstraints = new HashSet<>();
+    Set<Partition> coveredPartitions = new HashSet<>();
 
-    for (FeatureExpr constraint : constraints) {
-      if (configConstraint.implies(constraint).isTautology()) {
-        coveredConstraints.add(constraint);
+    for (Partition partition : partitions) {
+      if (configPartition.implies(partition.getFeatureExpr()).isTautology()) {
+        coveredPartitions.add(partition);
       }
     }
 
-    return coveredConstraints;
+    return coveredPartitions;
   }
 
-  protected Set<FeatureExpr> expandAllConstraints() {
-    Set<FeatureExpr> expandedConstraints = new HashSet<>();
+  protected Set<Partition> expandAllPartitions() {
+    Set<Partition> expandedPartitions = new HashSet<>();
 
-    for (Set<FeatureExpr> constraints : this.allConstraints) {
-      expandedConstraints.addAll(constraints);
+    for (Partitioning partitioning : this.allPartitions) {
+      expandedPartitions.addAll(partitioning.getPartitions());
     }
 
-    return expandedConstraints;
+    return expandedPartitions;
   }
 }

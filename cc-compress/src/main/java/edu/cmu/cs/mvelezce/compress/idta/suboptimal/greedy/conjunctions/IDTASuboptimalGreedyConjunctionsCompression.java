@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions;
 import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.compress.idta.IDTACompression;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -22,37 +24,36 @@ public class IDTASuboptimalGreedyConjunctionsCompression extends IDTACompression
   }
 
   IDTASuboptimalGreedyConjunctionsCompression(
-      String programName, List<String> options, Collection<Set<FeatureExpr>> allConstraints) {
-    super(programName, options, allConstraints);
+      String programName, List<String> options, Collection<Partitioning> allPartitions) {
+    super(programName, options, allPartitions);
   }
 
   @Override
   public Set<Set<String>> analyze() {
     Set<Set<String>> configs = new HashSet<>();
-    Set<FeatureExpr> constraints = this.expandAllConstraints();
-    //    ImpliedConstraintsRemover.removeImpliedConstraints(constraints);
+    Set<Partition> partitions = this.expandAllPartitions();
 
-    Set<FeatureExpr> coveredConstraints = new HashSet<>();
+    Set<Partition> coveredPartitions = new HashSet<>();
 
-    while (coveredConstraints.size() != constraints.size()) {
-      FeatureExpr newConstraint = FeatureExprUtils.getTrue(IDTA.USE_BDD);
+    while (coveredPartitions.size() != partitions.size()) {
+      FeatureExpr newPartition = FeatureExprUtils.getTrue(IDTA.USE_BDD);
 
-      for (FeatureExpr constraint : constraints) {
-        if (coveredConstraints.contains(constraint)) {
+      for (Partition partition : partitions) {
+        if (coveredPartitions.contains(partition)) {
           continue;
         }
 
-        FeatureExpr andedFormula = newConstraint.and(constraint);
+        FeatureExpr andedFormula = newPartition.and(partition.getFeatureExpr());
 
         if (andedFormula.isContradiction()) {
           continue;
         }
 
-        newConstraint = andedFormula;
-        coveredConstraints.add(constraint);
+        newPartition = andedFormula;
+        coveredPartitions.add(partition);
       }
 
-      Set<String> config = ConstraintUtils.toConfig(newConstraint, this.getOptions());
+      Set<String> config = ConstraintUtils.toConfig(newPartition, this.getOptions());
       configs.add(config);
     }
 

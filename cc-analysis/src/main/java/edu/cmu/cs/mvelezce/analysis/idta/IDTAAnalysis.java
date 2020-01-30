@@ -3,17 +3,19 @@ package edu.cmu.cs.mvelezce.analysis.idta;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mijecu25.meme.utils.execute.Executor;
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>> {
+public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
 
   private static final String IDTA_OUTPUT_DIR =
       Executor.USER_HOME
@@ -28,8 +30,8 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
   }
 
   @Override
-  public Map<JavaRegion, Set<FeatureExpr>> analyze() throws IOException {
-    Map<JavaRegion, Set<FeatureExpr>> results = new HashMap<>();
+  public Map<JavaRegion, Partitioning> analyze() throws IOException {
+    Map<JavaRegion, Partitioning> results = new HashMap<>();
     List<IDTAResult> idtaResults = this.parseIDTAResults();
 
     for (IDTAResult idtaResult : idtaResults) {
@@ -40,22 +42,23 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
                   idtaResult.getMethodSignature())
               .startIndex(idtaResult.getDecisionIndex())
               .build();
-      Set<FeatureExpr> constraints = this.getConstraints(idtaResult.getInfo());
-      results.put(javaRegion, constraints);
+      Partitioning partitioning = this.getPartitioning(idtaResult.getInfo());
+      results.put(javaRegion, partitioning);
     }
 
     return results;
   }
 
-  private Set<FeatureExpr> getConstraints(Set<String> prettyConstraints) {
-    Set<FeatureExpr> constraints = new HashSet<>();
+  private Partitioning getPartitioning(Set<String> prettyPartitions) {
+    Set<Partition> partitions = new HashSet<>();
 
-    for (String prettyConstraint : prettyConstraints) {
-      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, prettyConstraint);
-      constraints.add(constraint);
+    for (String prettyPartition : prettyPartitions) {
+      Partition partition =
+          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, prettyPartition));
+      partitions.add(partition);
     }
 
-    return constraints;
+    return new TotalPartition(partitions);
   }
 
   private List<IDTAResult> parseIDTAResults() throws IOException {
@@ -75,20 +78,20 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Set<FeatureExpr>>
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<FeatureExpr>> results) {
+  public void writeToFile(Map<JavaRegion, Partitioning> results) {
     throw new UnsupportedOperationException(
-        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to constraints");
+        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to partitionings");
   }
 
   @Override
-  public Map<JavaRegion, Set<FeatureExpr>> readFromFile(File file) {
+  public Map<JavaRegion, Partitioning> readFromFile(File file) {
     throw new UnsupportedOperationException(
-        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to constraints");
+        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to partitionings");
   }
 
   @Override
   public String outputDir() {
     throw new UnsupportedOperationException(
-        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to constraints");
+        "Should not be called since we already have the control flow statement data in the IDTA results. This class only create Java Regions to partitionings");
   }
 }

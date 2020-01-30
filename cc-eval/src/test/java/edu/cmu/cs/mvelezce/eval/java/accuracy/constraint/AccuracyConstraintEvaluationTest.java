@@ -315,6 +315,118 @@ public class AccuracyConstraintEvaluationTest {
   }
 
   @Test
+  public void berkeleyDB_PW0_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 0);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (FeatureExpr entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry, options);
+      configsToPredict.add(config);
+    }
+
+    builder = new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval =
+        new AccuracyConstraintEvaluation(programName + 0, options);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_PW1_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 1);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (FeatureExpr entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry, options);
+      configsToPredict.add(config);
+    }
+
+    builder = new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval =
+        new AccuracyConstraintEvaluation(programName + 1, options);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_PW2_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 2);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (FeatureExpr entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry, options);
+      configsToPredict.add(config);
+    }
+
+    builder = new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval =
+        new AccuracyConstraintEvaluation(programName + 2, options);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_PW3_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    Set<Set<String>> executedConfigs = samplingApproach.getConfigs(options);
+
+    BaseAnalysis<PerformanceModel<FeatureExpr>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 3);
+    String[] args = new String[0];
+    PerformanceModel<FeatureExpr> model = builder.analyze(args);
+
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (FeatureExpr entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry, options);
+      configsToPredict.add(config);
+    }
+
+    builder = new MatlabLinearLearnedModelBuilder(programName, samplingApproach);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<FeatureExpr> eval =
+        new AccuracyConstraintEvaluation(programName + 3, options);
+    eval.saveConfigsToPerformance(Evaluation.PW, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
@@ -366,6 +478,34 @@ public class AccuracyConstraintEvaluationTest {
   @Test
   public void berkeleyDB_Compare_PW_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_PW_GT0() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 0;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_PW_GT1() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 1;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_PW_GT2() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 2;
+    AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
+    eval.compareApproaches(Evaluation.PW, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_PW_GT3() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 3;
     AccuracyEvaluation<FeatureExpr> eval = new AccuracyConstraintEvaluation(programName);
     eval.compareApproaches(Evaluation.PW, Evaluation.GT);
   }

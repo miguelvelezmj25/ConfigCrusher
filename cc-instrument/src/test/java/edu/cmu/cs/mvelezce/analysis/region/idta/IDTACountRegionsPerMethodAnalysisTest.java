@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.region.idta;
 
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -45,6 +46,18 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void expandedBerkeleyDB() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    BaseCountRegionsPerMethodAnalysis<Partitioning> counter =
+        new IDTACountRegionsPerMethodAnalysis(regionsToPartitions);
+    Map<String, Integer> methodsToRegionCounts = counter.analyze();
+    counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
+  }
+
+  @Test
+  public void expandedLucene() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
     Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 

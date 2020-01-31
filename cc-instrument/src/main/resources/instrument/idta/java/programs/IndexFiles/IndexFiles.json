@@ -1,0 +1,773 @@
+[
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "LiveIndexWriterConfig",
+    "methodSignature": "setRAMBufferSizeMB(D)Lorg/apache/lucene/core/index/LiveIndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "47040d80-de1e-4107-a170-1bdac1d10402",
+    "startBlock": "1455449031",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterStallControl",
+    "methodSignature": "updateStalled(Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "361e32e6-9928-48c1-aa8e-2291c410d820",
+    "startBlock": "1253965940",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "checkFooter(Lorg/apache/lucene/core/store/ChecksumIndexInput;)J",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "447f7579-271c-4ce9-b478-2470bccaee15",
+    "startBlock": "1405089332",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterFlushControl",
+    "methodSignature": "doAfterDocument(Lorg/apache/lucene/core/index/DocumentsWriterPerThreadPool$ThreadState;Z)Lorg/apache/lucene/core/index/DocumentsWriterPerThread;",
+    "decisionIndex": -1,
+    "info": [
+      "RAM_PER_THREAD_HARD_LIMIT",
+      "!RAM_PER_THREAD_HARD_LIMIT"
+    ],
+    "id": "23dffdb2-a32c-4842-962c-3fa82ab68ac8",
+    "startBlock": "682533875",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "IndexInput",
+    "methodSignature": "<init>(Ljava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "2e152f3f-a5f7-4fee-a002-130f444bc775",
+    "startBlock": "1745135221",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "ByteBufferIndexInput",
+    "methodSignature": "close()V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "14b68011-ffa8-4ae9-8e06-bd4a8da3bcb7",
+    "startBlock": "181199237",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "FlushByRamOrCountsPolicy",
+    "methodSignature": "flushOnRAM()Z",
+    "decisionIndex": 1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "8f1ce6df-8d6d-4860-8329-f63ccede475e",
+    "startBlock": "41763690",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "readCRC(Lorg/apache/lucene/core/store/IndexInput;)J",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "8e341095-9672-4573-ba83-115f3ac685e1",
+    "startBlock": "175978993",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriter",
+    "methodSignature": "<init>(Lorg/apache/lucene/core/store/Directory;Lorg/apache/lucene/core/index/IndexWriterConfig;)V",
+    "decisionIndex": -1,
+    "info": [
+      "READER_POOLING",
+      "!READER_POOLING"
+    ],
+    "id": "e7a360c0-6503-462e-8379-f2a94cbbdb7b",
+    "startBlock": "1388365204",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriterConfig",
+    "methodSignature": "setCodec(Lorg/apache/lucene/core/codecs/Codec;)Lorg/apache/lucene/core/index/IndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "!CODEC",
+      "CODEC"
+    ],
+    "id": "cffedd73-7ec3-4594-9ace-f51946081799",
+    "startBlock": "511460982",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriter",
+    "methodSignature": "doFlush(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;)Z",
+    "decisionIndex": -1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "09577f87-b2de-464f-813a-aa93db6aff24",
+    "startBlock": "1140511537",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriterConfig",
+    "methodSignature": "setSimilarity(Lorg/apache/lucene/core/search/similarities/Similarity;)Lorg/apache/lucene/core/index/IndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "SIMILARITY",
+      "!SIMILARITY"
+    ],
+    "id": "12233a1c-30d4-49f2-a26b-24095d8cc3ac",
+    "startBlock": "387418656",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriterConfig",
+    "methodSignature": "setMergeScheduler(Lorg/apache/lucene/core/index/MergeScheduler;)Lorg/apache/lucene/core/index/IndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "MERGE_SCHEDULER",
+      "!MERGE_SCHEDULER"
+    ],
+    "id": "46f8d5e5-5820-418d-a5f1-ed78037c4d0c",
+    "startBlock": "1148310121",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "DataOutput",
+    "methodSignature": "writeVInt(I)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "953ba6fb-b5a1-4285-9188-b1ef1027b9cc",
+    "startBlock": "1403202951",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs.lucene70",
+    "className": "Lucene70SegmentInfoFormat",
+    "methodSignature": "write(Lorg/apache/lucene/core/store/Directory;Lorg/apache/lucene/core/index/SegmentInfo;Lorg/apache/lucene/core/store/IOContext;)V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "79e57c69-956c-4760-a300-118509ad6996",
+    "startBlock": "1549037544",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "writeHeader(Lorg/apache/lucene/core/store/DataOutput;Ljava/lang/String;I)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "11c0b3c7-8022-4b39-99b8-54d0ee4c33b2",
+    "startBlock": "262673975",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.util",
+    "className": "UnicodeUtil",
+    "methodSignature": "UTF16toUTF8(Ljava/lang/CharSequence;II[BI)I",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "d22fbbf4-5a60-4bc1-a15a-1b3f6f5536ad",
+    "startBlock": "1131206898",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "BufferedChecksum",
+    "methodSignature": "update(I)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "2c978bd4-bcab-4756-954b-b50c44445a9b",
+    "startBlock": "1987457217",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "FlushByRamOrCountsPolicy",
+    "methodSignature": "onInsert(Lorg/apache/lucene/core/index/DocumentsWriterFlushControl;Lorg/apache/lucene/core/index/DocumentsWriterPerThreadPool$ThreadState;)V",
+    "decisionIndex": -1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "a1e346f3-1d43-4015-aa16-9f1c72f9d7e6",
+    "startBlock": "1872118346",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "LiveIndexWriterConfig",
+    "methodSignature": "setMergePolicy(Lorg/apache/lucene/core/index/MergePolicy;)Lorg/apache/lucene/core/index/LiveIndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "(!NO_CFS_RATIO && !MAX_CFS_SEGMENT_SIZE_MB && !MERGE_POLICY)",
+      "(NO_CFS_RATIO && !MAX_CFS_SEGMENT_SIZE_MB && !MERGE_POLICY)",
+      "(!NO_CFS_RATIO && MAX_CFS_SEGMENT_SIZE_MB && MERGE_POLICY)",
+      "(NO_CFS_RATIO && MAX_CFS_SEGMENT_SIZE_MB && !MERGE_POLICY)",
+      "(NO_CFS_RATIO && MAX_CFS_SEGMENT_SIZE_MB && MERGE_POLICY)",
+      "(NO_CFS_RATIO && !MAX_CFS_SEGMENT_SIZE_MB && MERGE_POLICY)",
+      "(!NO_CFS_RATIO && MAX_CFS_SEGMENT_SIZE_MB && !MERGE_POLICY)",
+      "(!NO_CFS_RATIO && !MAX_CFS_SEGMENT_SIZE_MB && MERGE_POLICY)"
+    ],
+    "id": "4fc8b5e5-5993-4e2d-914e-f83e75bcc781",
+    "startBlock": "901942409",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterFlushControl",
+    "methodSignature": "updateStallState()Z",
+    "decisionIndex": -1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "15626c23-32c3-4abd-985a-e475089960c7",
+    "startBlock": "225851564",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriterConfig",
+    "methodSignature": "setIndexDeletionPolicy(Lorg/apache/lucene/core/index/IndexDeletionPolicy;)Lorg/apache/lucene/core/index/IndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "INDEX_DELETION_POLICY",
+      "!INDEX_DELETION_POLICY"
+    ],
+    "id": "3b395af1-3124-4499-bb86-3e2500e7c00e",
+    "startBlock": "528977871",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs.lucene50",
+    "className": "Lucene50CompoundFormat",
+    "methodSignature": "write(Lorg/apache/lucene/core/store/Directory;Lorg/apache/lucene/core/index/SegmentInfo;Lorg/apache/lucene/core/store/IOContext;)V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "1c474dff-ef3a-42ed-a7e1-97ef144fee57",
+    "startBlock": "279963418",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "DataInput",
+    "methodSignature": "readVInt()I",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "9ed2b9e8-6700-4b8a-8631-dfd07c9e59f9",
+    "startBlock": "1668579534",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "MergePolicy",
+    "methodSignature": "setNoCFSRatio(D)V",
+    "decisionIndex": 1,
+    "info": [
+      "!NO_CFS_RATIO",
+      "NO_CFS_RATIO"
+    ],
+    "id": "42a61e47-7d0e-4d87-9fb3-6f34403373cb",
+    "startBlock": "239903457",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "BufferedChecksum",
+    "methodSignature": "update([BII)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "85878a1c-890b-4eee-9eb1-bc5683c85c70",
+    "startBlock": "1991606803",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexFileNames",
+    "methodSignature": "stripSegmentName(Ljava/lang/String;)Ljava/lang/String;",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "2a724703-fbfb-403c-86d8-90fc7d985431",
+    "startBlock": "2135943716",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "MMapDirectory",
+    "methodSignature": "map(Ljava/lang/String;Ljava/nio/channels/FileChannel;JJ)[Ljava/nio/ByteBuffer;",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "02b18647-da2c-4080-97e3-e8acd8314c09",
+    "startBlock": "68260884",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "ByteBufferGuard",
+    "methodSignature": "invalidateAndUnmap([Ljava/nio/ByteBuffer;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "7f230b44-4041-43ad-b88f-f51f14bd70bd",
+    "startBlock": "602439069",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexFileNames",
+    "methodSignature": "indexOfSegmentName(Ljava/lang/String;)I",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "53422610-1357-4dad-bc5c-36f45c87d8c5",
+    "startBlock": "1218740341",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriter",
+    "methodSignature": "createCompoundFile(Lorg/apache/lucene/core/util/InfoStream;Lorg/apache/lucene/core/store/TrackingDirectoryWrapper;Lorg/apache/lucene/core/index/SegmentInfo;Lorg/apache/lucene/core/store/IOContext;Lorg/apache/lucene/core/util/IOUtils$IOConsumer;)V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "b583536a-e40f-48be-8051-6204d51d99a7",
+    "startBlock": "1436014246",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "FSDirectory$FSIndexOutput$1",
+    "methodSignature": "write([BII)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "2128f4d5-824d-4cc4-b4f4-fa0a14a2c193",
+    "startBlock": "1723623020",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "ByteBufferGuard",
+    "methodSignature": "ensureValid()V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "7f38a25f-a0f9-4b6c-bb50-874d9d90743d",
+    "startBlock": "1697421181",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "validateFooter(Lorg/apache/lucene/core/store/IndexInput;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "e3166a44-015e-4cf5-9338-a75ecfa1e510",
+    "startBlock": "1428493852",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "BufferedChecksum",
+    "methodSignature": "flush()V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "92a4d851-44e5-4f89-ae92-9a65b91f4442",
+    "startBlock": "692886143",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterFlushControl",
+    "methodSignature": "stallLimitBytes()J",
+    "decisionIndex": 1,
+    "info": [
+      "RAM_BUFFER_SIZE_MB",
+      "!RAM_BUFFER_SIZE_MB"
+    ],
+    "id": "6f82489e-5a2f-4ae2-afb1-2c785fa0f54f",
+    "startBlock": "2079175568",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterFlushControl",
+    "methodSignature": "nextPendingFlush()Lorg/apache/lucene/core/index/DocumentsWriterPerThread;",
+    "decisionIndex": -1,
+    "info": [
+      "CHECK_PENDING_FLUSH_UPDATE",
+      "!CHECK_PENDING_FLUSH_UPDATE"
+    ],
+    "id": "40c7a4a4-a03a-4d17-aab0-29aebc701443",
+    "startBlock": "1799899640",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriter",
+    "methodSignature": "validate(Lorg/apache/lucene/core/index/SegmentCommitInfo;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "a2830bc6-0f2f-4d20-89c1-22b20833427e",
+    "startBlock": "2043140442",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "writeCRC(Lorg/apache/lucene/core/store/IndexOutput;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "76ca5761-2835-4f91-bad4-576a175e061c",
+    "startBlock": "1397731159",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriterPerThread",
+    "methodSignature": "sealFlushedSegment(Lorg/apache/lucene/core/index/DocumentsWriterPerThread$FlushedSegment;Lorg/apache/lucene/core/index/Sorter$DocMap;Lorg/apache/lucene/core/index/DocumentsWriter$FlushNotifications;)V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "3b5becf1-2bf1-4811-a7fa-75723bfdf1b3",
+    "startBlock": "1315303164",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "OutputStreamIndexOutput",
+    "methodSignature": "close()V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "773d8de1-47b0-41c5-9abf-35280d5d424d",
+    "startBlock": "721674500",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "DataOutput",
+    "methodSignature": "copyBytes(Lorg/apache/lucene/core/store/DataInput;J)V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "88f75b0e-7b38-4158-b577-a7bbcc0f25c4",
+    "startBlock": "618212142",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "DocumentsWriter",
+    "methodSignature": "postUpdate(Lorg/apache/lucene/core/index/DocumentsWriterPerThread;Z)Z",
+    "decisionIndex": -1,
+    "info": [
+      "CHECK_PENDING_FLUSH_UPDATE",
+      "!CHECK_PENDING_FLUSH_UPDATE"
+    ],
+    "id": "1a4c02f8-e26a-49d9-b475-a89067850114",
+    "startBlock": "1298652898",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "ByteBufferIndexInput",
+    "methodSignature": "newInstance(Ljava/lang/String;[Ljava/nio/ByteBuffer;JILorg/apache/lucene/core/store/ByteBufferGuard;)Lorg/apache/lucene/core/store/ByteBufferIndexInput;",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "080fbc21-e4d2-47e1-9067-af7d2a831dff",
+    "startBlock": "230949947",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "writeIndexHeader(Lorg/apache/lucene/core/store/DataOutput;Ljava/lang/String;I[BLjava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "168b786c-05ac-43b1-ada5-8ad4ff60f1be",
+    "startBlock": "522947471",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "IndexWriterConfig",
+    "methodSignature": "setRAMPerThreadHardLimitMB(I)Lorg/apache/lucene/core/index/IndexWriterConfig;",
+    "decisionIndex": 1,
+    "info": [
+      "RAM_PER_THREAD_HARD_LIMIT",
+      "!RAM_PER_THREAD_HARD_LIMIT"
+    ],
+    "id": "c6b6ed12-a87a-4624-8ebe-da9a8da6b869",
+    "startBlock": "1732593591",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "SegmentInfo",
+    "methodSignature": "files()Ljava/util/Set;",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "cc9426e7-bfc9-4417-9816-e245f47c07bf",
+    "startBlock": "1858311753",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "MMapDirectory",
+    "methodSignature": "openInput(Ljava/lang/String;Lorg/apache/lucene/core/store/IOContext;)Lorg/apache/lucene/core/store/IndexInput;",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "9900844a-0ec7-41bd-a0b9-9de01f7719d3",
+    "startBlock": "1397498900",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.codecs",
+    "className": "CodecUtil",
+    "methodSignature": "verifyAndCopyIndexHeader(Lorg/apache/lucene/core/store/IndexInput;Lorg/apache/lucene/core/store/DataOutput;[B)V",
+    "decisionIndex": 1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "ee2df14d-03ce-432d-af09-4420a499e970",
+    "startBlock": "768074612",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.store",
+    "className": "NativeFSLockFactory$NativeFSLock",
+    "methodSignature": "ensureValid()V",
+    "decisionIndex": -1,
+    "info": [
+      "USE_COMPOUND_FILE",
+      "!USE_COMPOUND_FILE"
+    ],
+    "id": "5b0e26b7-236d-4f2e-a19f-ec9335d5c0be",
+    "startBlock": "1373160617",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "org.apache.lucene.core.index",
+    "className": "MergePolicy",
+    "methodSignature": "setMaxCFSSegmentSizeMB(D)V",
+    "decisionIndex": 1,
+    "info": [
+      "!MAX_CFS_SEGMENT_SIZE_MB",
+      "MAX_CFS_SEGMENT_SIZE_MB"
+    ],
+    "id": "5076b6e9-92f5-4648-84a5-d0983bf207b7",
+    "startBlock": "1248441787",
+    "endBlocks": [
+      "exit"
+    ]
+  }
+]

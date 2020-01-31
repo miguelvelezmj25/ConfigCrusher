@@ -294,8 +294,8 @@ public class IDTATimerInstrumenterTest {
     Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
 
     String mainClass = BaseIndexFilesAdapter.MAIN_CLASS;
-    String srcDir = "../" + BaseIndexFilesAdapter.INSTRUMENTED_DIR_PATH;
-    String classDir = "../" + BaseIndexFilesAdapter.INSTRUMENTED_CLASS_PATH;
+    String srcDir = "../" + BaseIndexFilesAdapter.ORIGINAL_ROOT_DIR;
+    String classDir = "../" + BaseIndexFilesAdapter.ORIGINAL_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseIndexFilesAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(

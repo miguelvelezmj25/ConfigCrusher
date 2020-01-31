@@ -42,6 +42,7 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
 
   @Override
   protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
+    System.out.println(localModel.getRegion());
     SummaryStatisticsMap<Partition> modelWithStats =
         this.getModelWithStats(localModel.getModel().keySet());
     this.addPerfEntries(localModel, modelWithStats);

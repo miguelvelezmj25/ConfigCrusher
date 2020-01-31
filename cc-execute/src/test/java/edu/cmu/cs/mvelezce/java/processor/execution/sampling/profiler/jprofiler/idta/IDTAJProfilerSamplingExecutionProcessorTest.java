@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta;
 
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
@@ -44,6 +45,28 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   @Test
   public void berkeleyDB() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
+        new IDTAJProfilerSamplingExecutor(programName);
+    Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
+        executor.getRawExecutionParser().readResults();
+
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    Analysis processor =
+        new IDTAJProfilerSamplingExecutionProcessor(
+            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    processor.analyze(args);
+  }
+
+  @Test
+  public void lucene() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(programName);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =

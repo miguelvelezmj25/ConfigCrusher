@@ -718,10 +718,38 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void lucene_IDTA_Data() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    BaseCompression gtCompression = new GTCompression(programName);
+    args = new String[0];
+    Set<Set<String>> configsToPredict = gtCompression.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void lucene_Compare_BF_GT() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.BF, Evaluation.GT);
+  }
+
+  @Test
+  public void lucene_Compare_IDTA_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
   }
 
   @Test

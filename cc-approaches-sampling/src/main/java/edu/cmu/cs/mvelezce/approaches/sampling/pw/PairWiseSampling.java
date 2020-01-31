@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.pw;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import org.apache.commons.math3.util.Combinations;
 
@@ -25,29 +25,30 @@ public final class PairWiseSampling implements SamplingApproach {
   }
 
   @Override
-  public Set<FeatureExpr> getConfigsAsConstraints(List<String> options) {
+  public Set<Partition> getConfigsAsPartitions(List<String> options) {
     throw new UnsupportedOperationException("implement");
-    //    Set<FeatureExpr> configsAsConstraints = new HashSet<>();
+    //    Set<FeatureExpr> configsAsPartitions = new HashSet<>();
     //
     //    for (String option : options) {
-    //      FeatureExpr constraint = MinConfigsGenerator.parseAsFeatureExpr(option);
-    //      configsAsConstraints.add(constraint);
+    //      FeatureExpr partition = MinConfigsGenerator.parseAsFeatureExpr(option);
+    //      configsAsPartitions.add(partition);
     //    }
     //
-    //    return configsAsConstraints;
+    //    return configsAsPartitions;
   }
 
   @Override
-  public Set<FeatureExpr> getLinearModelConstraints(List<String> options) {
-    Set<FeatureExpr> constraints = new HashSet<>();
+  public Set<Partition> getLinearModelPartitions(List<String> options) {
+    Set<Partition> partitions = new HashSet<>();
 
     if (options.isEmpty()) {
-      return constraints;
+      return partitions;
     }
 
     for (String option : options) {
-      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option);
-      constraints.add(constraint);
+      Partition partition =
+          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option));
+      partitions.add(partition);
     }
 
     Set<List<String>> pairs = this.getPairs(options);
@@ -65,12 +66,13 @@ public final class PairWiseSampling implements SamplingApproach {
         }
       }
 
-      FeatureExpr constraint =
-          FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString());
-      constraints.add(constraint);
+      Partition partition =
+          new Partition(
+              FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString()));
+      partitions.add(partition);
     }
 
-    return constraints;
+    return partitions;
   }
 
   @Override

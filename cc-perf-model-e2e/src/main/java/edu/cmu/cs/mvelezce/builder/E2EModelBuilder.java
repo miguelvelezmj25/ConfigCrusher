@@ -20,11 +20,9 @@ public abstract class E2EModelBuilder extends BasePartitionPerformanceModelBuild
   public E2EModelBuilder(
       String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
     super(programName, options, REGIONS_TO_DATA, performanceEntries);
-
-    this.addProgramRegionToData();
   }
 
-  private void addProgramRegionToData() {
+  protected void addProgramRegionToData() {
     Set<Partition> partitions = new HashSet<>();
     List<String> options = this.getOptions();
 

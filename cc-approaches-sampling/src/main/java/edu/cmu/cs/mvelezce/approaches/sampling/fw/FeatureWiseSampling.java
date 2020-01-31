@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.fw;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.util.HashSet;
@@ -26,20 +26,21 @@ public final class FeatureWiseSampling implements SamplingApproach {
   }
 
   @Override
-  public Set<FeatureExpr> getConfigsAsConstraints(List<String> options) {
-    Set<FeatureExpr> configsAsConstraints = new HashSet<>();
+  public Set<Partition> getConfigsAsPartitions(List<String> options) {
+    Set<Partition> configsAsPartitions = new HashSet<>();
 
     for (String option : options) {
-      FeatureExpr constraint = FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option);
-      configsAsConstraints.add(constraint);
+      Partition partition =
+          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option));
+      configsAsPartitions.add(partition);
     }
 
-    return configsAsConstraints;
+    return configsAsPartitions;
   }
 
   @Override
-  public Set<FeatureExpr> getLinearModelConstraints(List<String> options) {
-    return this.getConfigsAsConstraints(options);
+  public Set<Partition> getLinearModelPartitions(List<String> options) {
+    return this.getConfigsAsPartitions(options);
   }
 
   @Override

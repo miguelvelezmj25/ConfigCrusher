@@ -1,11 +1,11 @@
 package edu.cmu.cs.mvelezce.learning.builder;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
-import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
-import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.PartialPartition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.learning.builder.generate.matlab.script.StepWiseLinearLearner;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
@@ -34,15 +34,17 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
     this.addProgramRegionToData();
   }
 
-  private void addProgramRegionToData() {
-    Set<FeatureExpr> linearModelConstraints =
-        this.samplingApproach.getLinearModelConstraints(this.getOptions());
-    linearModelConstraints.add(SATFeatureExprFactory.True());
-    E2EModelBuilder.REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, linearModelConstraints);
+  @Override
+  protected void addProgramRegionToData() {
+    Set<Partition> linearModelPartitions =
+        this.samplingApproach.getLinearModelPartitions(this.getOptions());
+    linearModelPartitions.add(new Partition(FeatureExprUtils.getTrue(IDTA.USE_BDD)));
+    E2EModelBuilder.REGIONS_TO_DATA.put(
+        RegionsManager.PROGRAM_REGION, new PartialPartition(linearModelPartitions));
   }
 
   @Override
-  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
+  protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
     this.clearStats(localModel);
 
     try {
@@ -74,17 +76,17 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
           continue;
         }
 
-        FeatureExpr constraint = this.getConstraint(parsedTerms.get(i));
-        Map<FeatureExpr, Double> perfModel = localModel.getModel();
-        Map<FeatureExpr, String> perfModelHuman = localModel.getModelToPerfHumanReadable();
+        Partition partition = this.getPartition(parsedTerms.get(i));
+        Map<Partition, Double> perfModel = localModel.getModel();
+        Map<Partition, String> perfModelHuman = localModel.getModelToPerfHumanReadable();
 
-        for (FeatureExpr modelConstraint : perfModel.keySet()) {
-          if (!constraint.equiv(modelConstraint).isTautology()) {
+        for (Partition modelPartition : perfModel.keySet()) {
+          if (!partition.getFeatureExpr().equiv(modelPartition.getFeatureExpr()).isTautology()) {
             continue;
           }
 
-          perfModel.put(modelConstraint, Double.parseDouble(coefs.get(i)) * 1E9);
-          perfModelHuman.put(modelConstraint, coefs.get(i));
+          perfModel.put(modelPartition, Double.parseDouble(coefs.get(i)) * 1E9);
+          perfModelHuman.put(modelPartition, coefs.get(i));
 
           break;
         }
@@ -97,35 +99,35 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
     }
   }
 
-  private void removeInsignificantEntries(Map<FeatureExpr, Double> model) {
-    Set<FeatureExpr> entries = new HashSet<>();
+  private void removeInsignificantEntries(Map<Partition, Double> model) {
+    Set<Partition> entries = new HashSet<>();
 
-    for (Map.Entry<FeatureExpr, Double> entry : model.entrySet()) {
-      if (entry.getValue() == BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE) {
+    for (Map.Entry<Partition, Double> entry : model.entrySet()) {
+      if (entry.getValue() == BasePartitionPerformanceModelBuilder.EMPTY_DOUBLE) {
         entries.add(entry.getKey());
       }
     }
 
-    for (FeatureExpr entry : entries) {
+    for (Partition entry : entries) {
       model.remove(entry);
     }
   }
 
-  private void removeInsignificantEntriesHuman(Map<FeatureExpr, String> model) {
-    Set<FeatureExpr> entries = new HashSet<>();
+  private void removeInsignificantEntriesHuman(Map<Partition, String> model) {
+    Set<Partition> entries = new HashSet<>();
 
-    for (Map.Entry<FeatureExpr, String> entry : model.entrySet()) {
+    for (Map.Entry<Partition, String> entry : model.entrySet()) {
       if (entry.getValue().isEmpty()) {
         entries.add(entry.getKey());
       }
     }
 
-    for (FeatureExpr entry : entries) {
+    for (Partition entry : entries) {
       model.remove(entry);
     }
   }
 
-  private void clearStats(LocalPerformanceModel<FeatureExpr> localModel) {
+  private void clearStats(LocalPerformanceModel<Partition> localModel) {
     localModel.getModelToMin().clear();
     localModel.getModelToMax().clear();
     localModel.getModelToDiff().clear();
@@ -138,9 +140,9 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
     localModel.getModelToConfidenceIntervalHumanReadable().clear();
   }
 
-  private FeatureExpr getConstraint(Set<String> terms) {
+  private Partition getPartition(Set<String> terms) {
     if (terms.isEmpty()) {
-      return SATFeatureExprFactory.True();
+      return new Partition(FeatureExprUtils.getTrue(IDTA.USE_BDD));
     }
 
     StringBuilder stringBuilder = new StringBuilder("(");
@@ -157,7 +159,8 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
 
     stringBuilder.append(")");
 
-    return FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString());
+    return new Partition(
+        FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString()));
   }
 
   private List<Set<String>> parseTerms(List<String> rawTerms, List<String> options) {

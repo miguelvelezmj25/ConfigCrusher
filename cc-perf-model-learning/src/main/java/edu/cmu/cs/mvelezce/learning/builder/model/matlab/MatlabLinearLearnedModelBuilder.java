@@ -2,10 +2,10 @@ package edu.cmu.cs.mvelezce.learning.builder.model.matlab;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.learning.builder.BaseLinearLearnedModelBuilder;
-import edu.cmu.cs.mvelezce.learning.model.constraint.LearnedLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.learning.model.partition.LearnedLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 
@@ -28,32 +28,30 @@ public class MatlabLinearLearnedModelBuilder extends BaseLinearLearnedModelBuild
   }
 
   @Override
-  public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
+  public PerformanceModel<Partition> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     PerformanceModel<String> readModel =
         mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
-    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+    Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
+      LocalPerformanceModel<Partition> localModel =
           new LearnedLocalPerformanceModel(
               readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
-              this.parseConstraintsToCI(readLocalModel.getModelToConfidenceInterval()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToData(readLocalModel.getModel()),
+              this.parsePartitionsToData(readLocalModel.getModelToMin()),
+              this.parsePartitionsToData(readLocalModel.getModelToMax()),
+              this.parsePartitionsToData(readLocalModel.getModelToDiff()),
+              this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
+              this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToDiffHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
-              this.parseConstraintsToHumanReadableCI(
+              this.parsePartitionsToHumanReadableCI(
                   readLocalModel.getModelToConfidenceIntervalHumanReadable()));
       localModels.add(localModel);
     }

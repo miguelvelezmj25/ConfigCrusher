@@ -10,9 +10,9 @@ import java.util.Set;
 public class JProfilerSamplingIndexFilesAdapter extends IndexFilesExecutorAdapter {
 
   private static final String J_PROFILER_AGENT_PATH_UBUNTU =
-      "-agentpath:/home/miguel/jprofiler10/bin/linux-x64/libjprofilerti.so=port=8849,offline,id=TODO,config=/home/miguel/.jprofiler10/config.xml";
+      "-agentpath:/home/miguel/jprofiler10/bin/linux-x64/libjprofilerti.so=port=8849,offline,id=106,config=/home/miguel/.jprofiler10/config.xml";
   private static final String J_PROFILER_AGENT_PATH_OSX =
-      "-agentpath:/Applications/JProfiler 10.app/Contents/Resources/app/bin/macos/libjprofilerti.jnilib=port=8849,offline,id=TODO,config=/Users/mvelezce/.jprofiler10/config.xml";
+      "-agentpath:/Applications/JProfiler 10.app/Contents/Resources/app/bin/macos/libjprofilerti.jnilib=port=8849,offline,id=128,config=/Users/mvelezce/.jprofiler10/config.xml";
 
   private final IDTAJProfilerSamplingExecutor executor;
 

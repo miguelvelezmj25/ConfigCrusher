@@ -62,21 +62,21 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
       LocalPerformanceModel<FeatureExpr> localModel =
           new ConstraintLocalPerformanceModel(
               readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
-              this.parseConstraintsToCI(readLocalModel.getModelToConfidenceInterval()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToData(readLocalModel.getModel()),
+              this.parsePartitionsToData(readLocalModel.getModelToMin()),
+              this.parsePartitionsToData(readLocalModel.getModelToMax()),
+              this.parsePartitionsToData(readLocalModel.getModelToDiff()),
+              this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
+              this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToDiffHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
-              this.parseConstraintsToHumanReadableCI(
+              this.parsePartitionsToHumanReadableCI(
                   readLocalModel.getModelToConfidenceIntervalHumanReadable()));
       localModels.add(localModel);
     }

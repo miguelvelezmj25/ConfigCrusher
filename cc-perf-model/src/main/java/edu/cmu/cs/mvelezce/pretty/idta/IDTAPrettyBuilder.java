@@ -1,13 +1,13 @@
 package edu.cmu.cs.mvelezce.pretty.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.influence.LocalPerformanceInfluenceModel;
-import edu.cmu.cs.mvelezce.pretty.constraint.BaseConstraintPrettyBuilder;
+import edu.cmu.cs.mvelezce.pretty.partition.BasePartitionPrettyBuilder;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.configurations.ConfigHelper;
 import scala.collection.JavaConverters;
@@ -15,21 +15,21 @@ import scala.collection.JavaConverters;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
+public class IDTAPrettyBuilder extends BasePartitionPrettyBuilder {
 
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.000");
   private static final String OUTPUT_DIR =
       "../cc-perf-model/" + Options.DIRECTORY + "/model/java/pretty/idta/programs";
 
   public IDTAPrettyBuilder(
-      String programName, Collection<String> options, PerformanceModel<FeatureExpr> model) {
+      String programName, Collection<String> options, PerformanceModel<Partition> model) {
     super(programName, options, model);
   }
 
   @Override
   protected LocalPerformanceInfluenceModel buildInfluenceLocalModel(
-      LocalPerformanceModel<FeatureExpr> localModel) {
-    Map<FeatureExpr, Double> perfModel = localModel.getModel();
+      LocalPerformanceModel<Partition> localModel) {
+    Map<Partition, Double> perfModel = localModel.getModel();
     List<String> features = this.getSingleFeatures(perfModel);
     Set<Set<String>> terms = ConfigHelper.getConfigurations(features);
     LinkedHashMap<Set<String>, Double> influenceModel = new LinkedHashMap<>();
@@ -46,10 +46,10 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
       Set<Set<String>> termsOfSize = this.getTermsOfSize(terms, termSize);
 
       for (Set<String> termOfSize : termsOfSize) {
-        String stringConstraint = ConstraintUtils.parseAsConstraint(termOfSize, this.getOptions());
-        FeatureExpr constraint =
-            FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringConstraint);
-        double influence = perfModel.get(constraint);
+        String stringPartition = ConstraintUtils.parseAsConstraint(termOfSize, this.getOptions());
+        Partition partition =
+            new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringPartition));
+        double influence = perfModel.get(partition);
 
         for (Map.Entry<Set<String>, Double> influenceModelEntry : influenceModel.entrySet()) {
           if (termOfSize.containsAll(influenceModelEntry.getKey())) {
@@ -90,11 +90,12 @@ public class IDTAPrettyBuilder extends BaseConstraintPrettyBuilder {
     return termsOfSize;
   }
 
-  private List<String> getSingleFeatures(Map<FeatureExpr, Double> perfModel) {
+  private List<String> getSingleFeatures(Map<Partition, Double> perfModel) {
     Set<String> features = new HashSet<>();
 
-    for (FeatureExpr key : perfModel.keySet()) {
-      features.addAll(JavaConverters.asJavaCollection(key.collectDistinctFeatures()));
+    for (Partition key : perfModel.keySet()) {
+      features.addAll(
+          JavaConverters.asJavaCollection(key.getFeatureExpr().collectDistinctFeatures()));
     }
 
     return new ArrayList<>(features);

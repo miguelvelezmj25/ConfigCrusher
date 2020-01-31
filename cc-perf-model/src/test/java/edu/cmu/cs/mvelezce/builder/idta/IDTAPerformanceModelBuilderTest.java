@@ -1,12 +1,13 @@
 package edu.cmu.cs.mvelezce.builder.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.IDTATimerInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta.IDTAPerfAggregatorProcessor;
@@ -23,9 +24,8 @@ public class IDTAPerformanceModelBuilderTest {
   @Test
   public void trivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName);
@@ -34,9 +34,9 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseTrivialAdapter.getListOfOptions();
-    BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> builder =
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
-            programName, options, regionsToConstraints, performanceEntries);
+            programName, options, regionsToPartitions, performanceEntries);
 
     args = new String[2];
     args[0] = "-delres";
@@ -47,9 +47,8 @@ public class IDTAPerformanceModelBuilderTest {
   @Test
   public void berkeleyDB() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName);
@@ -57,9 +56,9 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
-    BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> builder =
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
-            programName, options, regionsToConstraints, performanceEntries);
+            programName, options, regionsToPartitions, performanceEntries);
 
     args = new String[2];
     args[0] = "-delres";
@@ -70,9 +69,8 @@ public class IDTAPerformanceModelBuilderTest {
   @Test
   public void performance() throws IOException, InterruptedException {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName);
@@ -80,9 +78,9 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BasePerformanceAdapter.getListOfOptions();
-    BasePerformanceModelBuilder<Set<FeatureExpr>, FeatureExpr> builder =
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
-            programName, options, regionsToConstraints, performanceEntries);
+            programName, options, regionsToPartitions, performanceEntries);
 
     args = new String[2];
     args[0] = "-delres";

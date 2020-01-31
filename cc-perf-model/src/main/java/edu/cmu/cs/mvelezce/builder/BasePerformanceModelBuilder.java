@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @param <D> The data that regions have (e.g., set of constraints)
- * @param <RD> The data of each entry in a region (e.g., constraint)
+ * @param <D> The data that regions have (e.g., partitions)
+ * @param <RD> The data of each entry in a region (e.g., partition)
  */
 public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<PerformanceModel<RD>>
     implements PerformanceModelBuilder<PerformanceModel<RD>, D> {

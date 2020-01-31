@@ -2,10 +2,11 @@ package edu.cmu.cs.mvelezce.builder.idta;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fosd.typechef.featureexpr.FeatureExpr;
-import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelBuilder {
+public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBuilder {
 
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
   private static final String OUTPUT_DIR =
@@ -32,26 +33,23 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
   IDTAPerformanceModelBuilder(
       String programName,
       List<String> options,
-      Map<JavaRegion, Set<FeatureExpr>> regionsToData,
+      Map<JavaRegion, Partitioning> regionsToData,
       Set<PerformanceEntry> performanceEntries) {
     super(programName, options, regionsToData, performanceEntries);
 
-    Set<FeatureExpr> baseConstraints = new HashSet<>();
-    baseConstraints.add(SATFeatureExprFactory.True());
-
-    regionsToData.put(RegionsManager.PROGRAM_REGION, baseConstraints);
+    regionsToData.put(RegionsManager.PROGRAM_REGION, new TotalPartition());
   }
 
   @Override
-  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
-    SummaryStatisticsMap<FeatureExpr> modelWithStats =
+  protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
+    SummaryStatisticsMap<Partition> modelWithStats =
         this.getModelWithStats(localModel.getModel().keySet());
     this.addPerfEntries(localModel, modelWithStats);
 
     localModel.getModel().putAll(modelWithStats.getEntriesToData());
-    Map<FeatureExpr, Double> regionsToMin = modelWithStats.getEntriesToMin();
+    Map<Partition, Double> regionsToMin = modelWithStats.getEntriesToMin();
     localModel.getModelToMin().putAll(regionsToMin);
-    Map<FeatureExpr, Double> regionsToMax = modelWithStats.getEntriesToMax();
+    Map<Partition, Double> regionsToMax = modelWithStats.getEntriesToMax();
     localModel.getModelToMax().putAll(regionsToMax);
     localModel.getModelToDiff().putAll(modelWithStats.getEntriesToDiff(regionsToMin, regionsToMax));
     localModel.getModelToSampleVariance().putAll(modelWithStats.getEntriesToSampleVariance());
@@ -71,36 +69,36 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
         .putAll(toHumanReadableCI(localModel.getModelToConfidenceInterval()));
   }
 
-  private Map<FeatureExpr, String> toHumanReadableSampleVariance(
-      Map<FeatureExpr, Double> constraintsToSampleVariance) {
-    Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
+  private Map<Partition, String> toHumanReadableSampleVariance(
+      Map<Partition, Double> PartitionsToSampleVariance) {
+    Map<Partition, String> PartitionsToHumanReadableData = new HashMap<>();
 
-    for (Map.Entry<FeatureExpr, Double> entry : constraintsToSampleVariance.entrySet()) {
+    for (Map.Entry<Partition, Double> entry : PartitionsToSampleVariance.entrySet()) {
       double data = entry.getValue();
       data = data / 1E18;
-      constraintsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+      PartitionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
     }
 
-    return constraintsToHumanReadableData;
+    return PartitionsToHumanReadableData;
   }
 
-  private Map<FeatureExpr, String> toHumanReadable(Map<FeatureExpr, Double> constraintsToData) {
-    Map<FeatureExpr, String> constraintsToHumanReadableData = new HashMap<>();
+  private Map<Partition, String> toHumanReadable(Map<Partition, Double> partitionsToData) {
+    Map<Partition, String> PartitionsToHumanReadableData = new HashMap<>();
 
-    for (Map.Entry<FeatureExpr, Double> entry : constraintsToData.entrySet()) {
+    for (Map.Entry<Partition, Double> entry : partitionsToData.entrySet()) {
       double data = entry.getValue();
       data = data / 1E9;
-      constraintsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+      PartitionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
     }
 
-    return constraintsToHumanReadableData;
+    return PartitionsToHumanReadableData;
   }
 
-  private Map<FeatureExpr, List<String>> toHumanReadableCI(
-      Map<FeatureExpr, List<Double>> constraintsToConfidenceIntervals) {
-    Map<FeatureExpr, List<String>> constraintsToHumanReadableCI = new HashMap<>();
+  private Map<Partition, List<String>> toHumanReadableCI(
+      Map<Partition, List<Double>> partitionsToConfidenceIntervals) {
+    Map<Partition, List<String>> PartitionsToHumanReadableCI = new HashMap<>();
 
-    for (Map.Entry<FeatureExpr, List<Double>> entry : constraintsToConfidenceIntervals.entrySet()) {
+    for (Map.Entry<Partition, List<Double>> entry : partitionsToConfidenceIntervals.entrySet()) {
       List<Double> confidenceInterval = entry.getValue();
 
       if (confidenceInterval.isEmpty()) {
@@ -112,15 +110,14 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
       List<String> confidenceIntervalHumanReadable = new ArrayList<>();
       confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(lower));
       confidenceIntervalHumanReadable.add(DECIMAL_FORMAT.format(higher));
-      constraintsToHumanReadableCI.put(entry.getKey(), confidenceIntervalHumanReadable);
+      PartitionsToHumanReadableCI.put(entry.getKey(), confidenceIntervalHumanReadable);
     }
 
-    return constraintsToHumanReadableCI;
+    return PartitionsToHumanReadableCI;
   }
 
   private void addPerfEntries(
-      LocalPerformanceModel<FeatureExpr> localModel,
-      SummaryStatisticsMap<FeatureExpr> modelWithStats) {
+      LocalPerformanceModel<Partition> localModel, SummaryStatisticsMap<Partition> modelWithStats) {
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Map<UUID, Double> regionsToPerfs = entry.getRegionsToPerf();
       UUID region = localModel.getRegion();
@@ -135,76 +132,56 @@ public class IDTAPerformanceModelBuilder extends BaseConstraintPerformanceModelB
       }
 
       double time = regionsToPerfs.get(region);
-      FeatureExpr configConstraint = this.getPerfEntryToExecConstraint().get(entry);
+      Partition configPartition = this.getPerfEntryToExecConfigPartition().get(entry);
 
-      for (Map.Entry<FeatureExpr, Double> constraintToTimes : localModel.getModel().entrySet()) {
-        if (!configConstraint.implies(constraintToTimes.getKey()).isTautology()) {
+      for (Map.Entry<Partition, Double> partitionToTime : localModel.getModel().entrySet()) {
+        if (!configPartition
+            .getFeatureExpr()
+            .implies(partitionToTime.getKey().getFeatureExpr())
+            .isTautology()) {
           continue;
         }
 
-        modelWithStats.get(constraintToTimes.getKey()).addValue(time);
+        modelWithStats.get(partitionToTime.getKey()).addValue(time);
       }
     }
   }
 
-  private SummaryStatisticsMap<FeatureExpr> getModelWithStats(Set<FeatureExpr> constraints) {
-    SummaryStatisticsMap<FeatureExpr> modelWithStats = new SummaryStatisticsMap<>();
+  private SummaryStatisticsMap<Partition> getModelWithStats(Set<Partition> partitions) {
+    SummaryStatisticsMap<Partition> modelWithStats = new SummaryStatisticsMap<>();
 
-    for (FeatureExpr constraint : constraints) {
-      modelWithStats.putIfAbsent(constraint);
+    for (Partition partition : partitions) {
+      modelWithStats.putIfAbsent(partition);
     }
 
     return modelWithStats;
   }
 
-  //  protected void validateOneConfigCoversOneConstraint(
-  //          MultiEntryLocalPerformanceModel<FeatureExpr> localModel) {
-  //    for (PerformanceEntry entry : this.getPerformanceEntries()) {
-  //      FeatureExpr configConstraint = this.getPerfEntryToExecConstraint().get(entry);
-  //      Set<FeatureExpr> coveredConstraints = new HashSet<>();
-  //
-  //      for (FeatureExpr regionConstraint : localModel.getModel().keySet()) {
-  //        if (configConstraint.implies(regionConstraint).isTautology()) {
-  //          coveredConstraints.add(regionConstraint);
-  //        }
-  //      }
-  //
-  //      if (coveredConstraints.size() > 1) {
-  //        throw new RuntimeException(
-  //                "Expected that one executed configuration would cover at most one region
-  // constraint"
-  //                        + localModel.getRegion());
-  //      }
-  //    }
-  //  }
-
   @Override
-  public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
+  public PerformanceModel<Partition> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     PerformanceModel<String> readModel =
         mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
-    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+    Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
+      LocalPerformanceModel<Partition> localModel =
           new IDTALocalPerformanceModel(
               readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
-              this.parseConstraintsToCI(readLocalModel.getModelToConfidenceInterval()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToData(readLocalModel.getModel()),
+              this.parsePartitionsToData(readLocalModel.getModelToMin()),
+              this.parsePartitionsToData(readLocalModel.getModelToMax()),
+              this.parsePartitionsToData(readLocalModel.getModelToDiff()),
+              this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
+              this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToDiffHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
-              this.parseConstraintsToHumanReadableCI(
+              this.parsePartitionsToHumanReadableCI(
                   readLocalModel.getModelToConfidenceIntervalHumanReadable()));
       localModels.add(localModel);
     }

@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.exhaustive.builder.gt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.exhaustive.builder.ExhaustiveModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -40,7 +40,7 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
   }
 
   @Override
-  public void writeToFile(PerformanceModel<FeatureExpr> results) throws IOException {
+  public void writeToFile(PerformanceModel<Partition> results) throws IOException {
     if (this.id < 0) {
       super.writeToFile(results);
     } else {

@@ -2,10 +2,10 @@ package edu.cmu.cs.mvelezce.exhaustive.builder;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.builder.E2EModelBuilder;
-import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.exhaustive.model.constraint.ExhaustiveLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.exhaustive.model.partition.ExhaustiveLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
@@ -19,35 +19,35 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
   public ExhaustiveModelBuilder(
       String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
     super(programName, options, performanceEntries);
+
+    this.addProgramRegionToData();
   }
 
   @Override
-  public PerformanceModel<FeatureExpr> readFromFile(File file) throws IOException {
+  public PerformanceModel<Partition> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     PerformanceModel<String> readModel =
         mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
-    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+    Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
+      LocalPerformanceModel<Partition> localModel =
           new ExhaustiveLocalPerformanceModel(
               readLocalModel.getRegion(),
-              this.parseConstraintsToData(readLocalModel.getModel()),
-              this.parseConstraintsToData(readLocalModel.getModelToMin()),
-              this.parseConstraintsToData(readLocalModel.getModelToMax()),
-              this.parseConstraintsToData(readLocalModel.getModelToDiff()),
-              this.parseConstraintsToData(readLocalModel.getModelToSampleVariance()),
-              this.parseConstraintsToCI(readLocalModel.getModelToConfidenceInterval()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
-              this.parseConstraintsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()),
-              this.parseConstraintsToHumanReadableData(
+              this.parsePartitionsToData(readLocalModel.getModel()),
+              this.parsePartitionsToData(readLocalModel.getModelToMin()),
+              this.parsePartitionsToData(readLocalModel.getModelToMax()),
+              this.parsePartitionsToData(readLocalModel.getModelToDiff()),
+              this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
+              this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToDiffHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
-              this.parseConstraintsToHumanReadableCI(
+              this.parsePartitionsToHumanReadableCI(
                   readLocalModel.getModelToConfidenceIntervalHumanReadable()));
       localModels.add(localModel);
     }
@@ -56,11 +56,11 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
   }
 
   @Override
-  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
+  protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
     UUID programRegion = localModel.getRegion();
 
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
-      FeatureExpr configConstraint = this.getPerfEntryToExecConstraint().get(entry);
+      Partition configPartition = this.getPerfEntryToExecConfigPartition().get(entry);
 
       for (UUID regionUUID : entry.getRegionsToPerf().keySet()) {
         if (!programRegion.equals(regionUUID)) {
@@ -73,133 +73,129 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
         }
 
         this.addEntry(
-            localModel.getModel(), configConstraint, entry.getRegionsToPerf().get(regionUUID));
+            localModel.getModel(), configPartition, entry.getRegionsToPerf().get(regionUUID));
         this.addEntry(
-            localModel.getModelToMin(), configConstraint, entry.getRegionsToMin().get(regionUUID));
+            localModel.getModelToMin(), configPartition, entry.getRegionsToMin().get(regionUUID));
         this.addEntry(
-            localModel.getModelToMax(), configConstraint, entry.getRegionsToMax().get(regionUUID));
+            localModel.getModelToMax(), configPartition, entry.getRegionsToMax().get(regionUUID));
         this.addEntry(
-            localModel.getModelToDiff(),
-            configConstraint,
-            entry.getRegionsToDiff().get(regionUUID));
+            localModel.getModelToDiff(), configPartition, entry.getRegionsToDiff().get(regionUUID));
         this.addEntry(
             localModel.getModelToSampleVariance(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToSampleVariance().get(regionUUID));
         this.addEntry(
             localModel.getModelToConfidenceInterval(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToConfidenceInterval().get(regionUUID));
 
         this.addEntry(
             localModel.getModelToPerfHumanReadable(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToPerfHumanReadable().get(regionUUID));
         this.addEntry(
             localModel.getModelToMinHumanReadable(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToMinHumanReadable().get(regionUUID));
         this.addEntry(
             localModel.getModelToMaxHumanReadable(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToMaxHumanReadable().get(regionUUID));
         this.addEntry(
             localModel.getModelToDiffHumanReadable(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToDiffHumanReadable().get(regionUUID));
         this.addEntry(
             localModel.getModelToSampleVarianceHumanReadble(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToSampleVarianceHumanReadable().get(regionUUID));
         this.addEntryHuman(
             localModel.getModelToConfidenceIntervalHumanReadable(),
-            configConstraint,
+            configPartition,
             entry.getRegionsToConfidenceIntervalsHumanReadable().get(regionUUID));
       }
     }
   }
 
-  private void addEntry(
-      Map<FeatureExpr, String> model, FeatureExpr configConstraint, String value) {
-    if (!model.containsKey(configConstraint)) {
-      throw new RuntimeException("Could not find config constraint " + configConstraint);
+  private void addEntry(Map<Partition, String> model, Partition configPartition, String value) {
+    if (!model.containsKey(configPartition)) {
+      throw new RuntimeException("Could not find config partition " + configPartition);
     }
 
-    if (!model.get(configConstraint).equals(BaseConstraintPerformanceModelBuilder.EMPTY_HUMAN)) {
+    if (!model.get(configPartition).equals(BasePartitionPerformanceModelBuilder.EMPTY_HUMAN)) {
       throw new RuntimeException(
           "Expected the entry of '"
-              + configConstraint
+              + configPartition
               + "' to be '"
-              + BaseConstraintPerformanceModelBuilder.EMPTY_HUMAN
+              + BasePartitionPerformanceModelBuilder.EMPTY_HUMAN
               + "', but was '"
-              + model.get(configConstraint)
+              + model.get(configPartition)
               + "' and was about to add "
               + value);
     }
 
-    model.put(configConstraint, value);
+    model.put(configPartition, value);
   }
 
-  private void addEntry(
-      Map<FeatureExpr, Double> model, FeatureExpr configConstraint, double value) {
-    if (!model.containsKey(configConstraint)) {
-      throw new RuntimeException("Could not find config constraint " + configConstraint);
+  private void addEntry(Map<Partition, Double> model, Partition configPartition, double value) {
+    if (!model.containsKey(configPartition)) {
+      throw new RuntimeException("Could not find config partition " + configPartition);
     }
 
-    if (model.get(configConstraint) != BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE) {
+    if (model.get(configPartition) != BasePartitionPerformanceModelBuilder.EMPTY_DOUBLE) {
       throw new RuntimeException(
           "Expected the entry of '"
-              + configConstraint
+              + configPartition
               + "' to be '"
-              + BaseConstraintPerformanceModelBuilder.EMPTY_DOUBLE
+              + BasePartitionPerformanceModelBuilder.EMPTY_DOUBLE
               + "', but was '"
-              + model.get(configConstraint)
+              + model.get(configPartition)
               + "' and was about to add "
               + value);
     }
 
-    model.put(configConstraint, value);
+    model.put(configPartition, value);
   }
 
   private void addEntry(
-      Map<FeatureExpr, List<Double>> model, FeatureExpr configConstraint, List<Double> values) {
-    if (!model.containsKey(configConstraint)) {
-      throw new RuntimeException("Could not find config constraint " + configConstraint);
+      Map<Partition, List<Double>> model, Partition configPartition, List<Double> values) {
+    if (!model.containsKey(configPartition)) {
+      throw new RuntimeException("Could not find config partition " + configPartition);
     }
 
-    List<Double> entries = model.get(configConstraint);
+    List<Double> entries = model.get(configPartition);
 
     if (!entries.isEmpty()) {
       throw new RuntimeException(
           "Expected the entry of '"
-              + configConstraint
+              + configPartition
               + "' to be empty, but found "
               + entries
               + " and was about to add "
               + values);
     }
 
-    model.put(configConstraint, values);
+    model.put(configPartition, values);
   }
 
   private void addEntryHuman(
-      Map<FeatureExpr, List<String>> model, FeatureExpr configConstraint, List<String> values) {
-    if (!model.containsKey(configConstraint)) {
-      throw new RuntimeException("Could not find config constraint " + configConstraint);
+      Map<Partition, List<String>> model, Partition configPartition, List<String> values) {
+    if (!model.containsKey(configPartition)) {
+      throw new RuntimeException("Could not find config partition " + configPartition);
     }
 
-    List<String> entries = model.get(configConstraint);
+    List<String> entries = model.get(configPartition);
 
     if (!entries.isEmpty()) {
       throw new RuntimeException(
           "Expected the entry of '"
-              + configConstraint
+              + configPartition
               + "' to be empty, but found "
               + entries
               + " and was about to add "
               + values);
     }
 
-    model.put(configConstraint, values);
+    model.put(configPartition, values);
   }
 }

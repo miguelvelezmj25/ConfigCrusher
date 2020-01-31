@@ -3,9 +3,9 @@ package edu.cmu.cs.mvelezce.builder;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.PartialPartition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
-import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
@@ -34,6 +34,6 @@ public abstract class E2EModelBuilder extends BasePartitionPerformanceModelBuild
       partitions.add(partition);
     }
 
-    REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, new TotalPartition(partitions));
+    REGIONS_TO_DATA.put(RegionsManager.PROGRAM_REGION, new PartialPartition(partitions));
   }
 }

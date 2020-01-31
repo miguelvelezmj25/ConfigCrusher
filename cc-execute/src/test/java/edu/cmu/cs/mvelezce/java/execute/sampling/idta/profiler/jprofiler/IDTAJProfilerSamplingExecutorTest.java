@@ -39,9 +39,144 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
     configurations.clear();
+
     Set<String> config = new HashSet<>();
     config.add("CACHE_MODE");
     config.add("MAX_MEMORY");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ADLER32_CHUNK_SIZE");
+    config.add("ENV_BACKGROUND_READ_LIMIT");
+    config.add("MAX_MEMORY");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("TEMPORARY");
+    config.add("DUPLICATES");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("TEMPORARY");
+    config.add("ENV_IS_LOCKING");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("TEMPORARY");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("CACHE_MODE");
+    config.add("TEMPORARY");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_BACKGROUND_READ_LIMIT");
+    config.add("ENV_SHARED_CACHE");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("ENV_IS_LOCKING");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("LOCK_DEADLOCK_DETECT_DELAY");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("JE_FILE_LEVEL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ADLER32_CHUNK_SIZE");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    config.add("JE_FILE_LEVEL");
+    config.add("ENV_IS_LOCKING");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("MAX_MEMORY");
+    config.add("SEQUENTIAL");
+    config.add("JE_FILE_LEVEL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ADLER32_CHUNK_SIZE");
+    config.add("MAX_MEMORY");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    config.add("SEQUENTIAL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("CACHE_MODE");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ADLER32_CHUNK_SIZE");
+    config.add("CACHE_MODE");
+    config.add("ENV_SHARED_CACHE");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("SEQUENTIAL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("CACHE_MODE");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("CACHE_MODE");
+    config.add("LOCK_DEADLOCK_DETECT_DELAY");
+    config.add("DUPLICATES");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("DUPLICATES");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("SEQUENTIAL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("MAX_MEMORY");
+    config.add("DUPLICATES");
+    config.add("TXN_SERIALIZABLE_ISOLATION");
+    config.add("SEQUENTIAL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("SEQUENTIAL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("ENV_SHARED_CACHE");
+    config.add("ENV_BACKGROUND_READ_LIMIT");
+    config.add("MAX_MEMORY");
+    config.add("TEMPORARY");
+    config.add("DUPLICATES");
+    config.add("SEQUENTIAL");
+    config.add("JE_FILE_LEVEL");
+    configurations.add(config);
+
+    config = new HashSet<>();
+    config.add("MAX_MEMORY");
+    config.add("TEMPORARY");
+    config.add("CHECKPOINTER_BYTES_INTERVAL");
+    config.add("DUPLICATES");
+    config.add("SEQUENTIAL");
     configurations.add(config);
 
     Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);

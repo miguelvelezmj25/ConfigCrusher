@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAJProfilerSamplingExecutorTest {
@@ -37,13 +38,18 @@ public class IDTAJProfilerSamplingExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
+    configurations.clear();
+    Set<String> config = new HashSet<>();
+    config.add("CACHE_MODE");
+    config.add("MAX_MEMORY");
+    configurations.add(config);
 
     Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i5";
+    args[2] = "-i1";
 
     executor.execute(args);
   }

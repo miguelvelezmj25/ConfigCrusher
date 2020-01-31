@@ -1,7 +1,5 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
-import de.fosd.typechef.featureexpr.sat.SATFeatureExprFactory;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
@@ -14,7 +12,6 @@ import java.util.Set;
 
 public final class BaseIDTAExpander {
 
-  private static final FeatureExpr FALSE = SATFeatureExprFactory.False();
   private static final BaseIDTAExpander INSTANCE = new BaseIDTAExpander();
   private final Set<Partition> globalPartitions = new HashSet<>();
 

@@ -1,12 +1,12 @@
-package edu.cmu.cs.mvelezce.eval.java.models.reader.constraint;
+package edu.cmu.cs.mvelezce.eval.java.models.reader.partition;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fosd.typechef.featureexpr.FeatureExpr;
-import edu.cmu.cs.mvelezce.builder.constraint.BaseConstraintPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.model.constraint.ConstraintLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.model.partition.PartitionLocalPerformanceModel;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -14,17 +14,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class ConstraintPerformanceModelsReader extends BaseConstraintPerformanceModelBuilder {
+public class PartitionPerformanceModelsReader extends BasePartitionPerformanceModelBuilder {
 
   private static final String MODELS_ROT =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/models";
   private static final String PROGRAM_MODELS_DIR = "models";
 
-  public ConstraintPerformanceModelsReader(String programName) {
+  public PartitionPerformanceModelsReader(String programName) {
     super(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>());
   }
 
-  public Set<PerformanceModel<FeatureExpr>> read() throws IOException {
+  public Set<PerformanceModel<Partition>> read() throws IOException {
     System.err.println(
         "This code is very similar to comparing local performance models. Abstract!");
     String modelsDir = MODELS_ROT + "/" + this.getProgramName() + "/" + PROGRAM_MODELS_DIR;
@@ -41,26 +41,26 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
           "We expected to find at least 2 models to compare in " + modelsDir);
     }
 
-    Set<PerformanceModel<FeatureExpr>> models = new HashSet<>();
+    Set<PerformanceModel<Partition>> models = new HashSet<>();
 
     for (File file : files) {
-      PerformanceModel<FeatureExpr> model = this.readModel(file);
+      PerformanceModel<Partition> model = this.readModel(file);
       models.add(model);
     }
 
     return models;
   }
 
-  private PerformanceModel<FeatureExpr> readModel(File file) throws IOException {
+  private PerformanceModel<Partition> readModel(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     PerformanceModel<String> readModel =
         mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
-    Set<LocalPerformanceModel<FeatureExpr>> localModels = new HashSet<>();
+    Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();
 
     for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
-      LocalPerformanceModel<FeatureExpr> localModel =
-          new ConstraintLocalPerformanceModel(
+      LocalPerformanceModel<Partition> localModel =
+          new PartitionLocalPerformanceModel(
               readLocalModel.getRegion(),
               this.parsePartitionsToData(readLocalModel.getModel()),
               this.parsePartitionsToData(readLocalModel.getModelToMin()),
@@ -68,12 +68,10 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
               this.parsePartitionsToData(readLocalModel.getModelToDiff()),
               this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
               this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
-              this.parsePartitionsToHumanReadableData(
-                  readLocalModel.getModelToPerfHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
-              this.parsePartitionsToHumanReadableData(
-                  readLocalModel.getModelToDiffHumanReadable()),
+              this.parsePartitionsToHumanReadableData(readLocalModel.getModelToDiffHumanReadable()),
               this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
               this.parsePartitionsToHumanReadableCI(
@@ -85,7 +83,7 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
   }
 
   @Override
-  public PerformanceModel<FeatureExpr> readFromFile(File file) {
+  public PerformanceModel<Partition> readFromFile(File file) {
     throw new UnsupportedOperationException("Method should not be called");
   }
 
@@ -95,7 +93,7 @@ public class ConstraintPerformanceModelsReader extends BaseConstraintPerformance
   }
 
   @Override
-  protected void populateLocalModel(LocalPerformanceModel<FeatureExpr> localModel) {
+  protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
     throw new UnsupportedOperationException("Method should not be called");
   }
 }

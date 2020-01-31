@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.eval.java.models.constraint;
+package edu.cmu.cs.mvelezce.eval.java.models.partition;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.eval.java.models.ModelsEvaluation;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
+public class PartitionModelsEvaluation extends ModelsEvaluation<Partition> {
 
   private static final String OUTPUT_DIR =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/models";
 
-  public ConstraintModelsEvaluation(
+  public PartitionModelsEvaluation(
       String programName,
       Collection<String> options,
       double diffThreshold,
@@ -28,13 +28,13 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
   }
 
   @Override
-  protected void saveComparedModels(Map<UUID, Map<FeatureExpr, List<Double>>> comparedModels)
+  protected void saveComparedModels(Map<UUID, Map<Partition, List<Double>>> comparedModels)
       throws IOException {
     File rootFile =
         new File(OUTPUT_DIR + "/" + this.getProgramName() + "/" + ModelsEvaluation.COMPARISON_ROOT);
     FileUtils.cleanDirectory(rootFile);
 
-    for (Map.Entry<UUID, Map<FeatureExpr, List<Double>>> entry : comparedModels.entrySet()) {
+    for (Map.Entry<UUID, Map<Partition, List<Double>>> entry : comparedModels.entrySet()) {
       this.checkForDifferentLocalModels(entry.getKey(), entry.getValue());
 
       String result = "constraint,m1,m2,diff\n";
@@ -59,7 +59,7 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
   }
 
   private void checkForDifferentLocalModels(
-      UUID region, Map<FeatureExpr, List<Double>> comparedModel) {
+      UUID region, Map<Partition, List<Double>> comparedModel) {
     this.checkPerfIntensiveModels(region, comparedModel);
 
     boolean areModelsDifferent = false;
@@ -69,7 +69,7 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
     message.append(" are different");
     message.append("\n");
 
-    for (Map.Entry<FeatureExpr, List<Double>> entry : comparedModel.entrySet()) {
+    for (Map.Entry<Partition, List<Double>> entry : comparedModel.entrySet()) {
       List<Double> perfs = entry.getValue();
       double perfDiff = Math.abs(perfs.get(0) - perfs.get(1)) / 1E9;
 
@@ -93,8 +93,8 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
     }
   }
 
-  private void checkPerfIntensiveModels(UUID region, Map<FeatureExpr, List<Double>> comparedModel) {
-    for (Map.Entry<FeatureExpr, List<Double>> entry : comparedModel.entrySet()) {
+  private void checkPerfIntensiveModels(UUID region, Map<Partition, List<Double>> comparedModel) {
+    for (Map.Entry<Partition, List<Double>> entry : comparedModel.entrySet()) {
       List<Double> perfs = entry.getValue();
       double m1 = perfs.get(0) / 1E9;
       double m2 = perfs.get(1) / 1E9;
@@ -111,12 +111,14 @@ public class ConstraintModelsEvaluation extends ModelsEvaluation<FeatureExpr> {
     }
   }
 
-  private String parseComparedModel(Map<FeatureExpr, List<Double>> comparedModel) {
+  private String parseComparedModel(Map<Partition, List<Double>> comparedModel) {
     StringBuilder result = new StringBuilder();
 
-    for (Map.Entry<FeatureExpr, List<Double>> entry : comparedModel.entrySet()) {
-      String constraint = ConstraintUtils.prettyPrintFeatureExpr(entry.getKey(), this.getOptions());
-      result.append(constraint);
+    for (Map.Entry<Partition, List<Double>> entry : comparedModel.entrySet()) {
+      String partition =
+          ConstraintUtils.prettyPrintFeatureExpr(
+              entry.getKey().getFeatureExpr(), this.getOptions());
+      result.append(partition);
       result.append(",");
 
       List<Double> perfs = entry.getValue();

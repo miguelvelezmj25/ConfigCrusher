@@ -1,22 +1,22 @@
-package edu.cmu.cs.mvelezce.eval.java.accuracy.constraint;
+package edu.cmu.cs.mvelezce.eval.java.accuracy.partition;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.eval.java.accuracy.AccuracyEvaluation;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccuracyConstraintEvaluation extends AccuracyEvaluation<FeatureExpr> {
+public class AccuracyPartitionEvaluation extends AccuracyEvaluation<Partition> {
 
   private static final String OUTPUT_DIR =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/constraint";
 
-  public AccuracyConstraintEvaluation(String programName) {
+  public AccuracyPartitionEvaluation(String programName) {
     this(programName, new ArrayList<>());
   }
 
-  public AccuracyConstraintEvaluation(String programName, List<String> options) {
+  public AccuracyPartitionEvaluation(String programName, List<String> options) {
     super(programName, options);
   }
 

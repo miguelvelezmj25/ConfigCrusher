@@ -1,11 +1,11 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta;
 
-import de.fosd.typechef.featureexpr.FeatureExpr;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.IDTATimerInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
@@ -27,13 +27,12 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToConstraints.keySet());
+            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -50,13 +49,12 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToConstraints.keySet());
+            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -73,13 +71,12 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
-    BaseRegionInstrumenter<Set<FeatureExpr>> instrumenter = new IDTATimerInstrumenter(programName);
-    Map<JavaRegion, Set<FeatureExpr>> regionsToConstraints =
-        instrumenter.getProcessedRegionsToData();
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToConstraints.keySet());
+            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
 
     String[] args = new String[2];
     args[0] = "-delres";

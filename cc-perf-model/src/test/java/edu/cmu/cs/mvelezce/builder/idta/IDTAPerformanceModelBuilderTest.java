@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.builder.idta;
 
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
@@ -56,6 +57,28 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
+        new IDTAPerformanceModelBuilder(
+            programName, options, regionsToPartitions, performanceEntries);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void lucene() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
     BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
             programName, options, regionsToPartitions, performanceEntries);

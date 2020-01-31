@@ -10,7 +10,7 @@ import java.util.List;
 public class AccuracyPartitionEvaluation extends AccuracyEvaluation<Partition> {
 
   private static final String OUTPUT_DIR =
-      "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/constraint";
+      "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/partition";
 
   public AccuracyPartitionEvaluation(String programName) {
     this(programName, new ArrayList<>());

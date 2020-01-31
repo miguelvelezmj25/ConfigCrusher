@@ -37,7 +37,7 @@ public class PartitionModelsEvaluation extends ModelsEvaluation<Partition> {
     for (Map.Entry<UUID, Map<Partition, List<Double>>> entry : comparedModels.entrySet()) {
       this.checkForDifferentLocalModels(entry.getKey(), entry.getValue());
 
-      String result = "constraint,m1,m2,diff\n";
+      String result = "partition,m1,m2,diff\n";
       result += this.parseComparedModel(entry.getValue());
 
       File outputFile =

@@ -73,19 +73,6 @@ public class BaseIndexFilesAdapter extends BaseAdapter {
     commandList.add("-rf");
     commandList.add(INDEX_DIR);
 
-    runCommand(commandList);
-  }
-
-  private void runCommand(List<String> commandList) throws IOException, InterruptedException {
-    System.err.println("Maybe can reuse this logic to run a command");
-    ProcessBuilder builder = new ProcessBuilder();
-    builder.command(commandList);
-
-    Process process = builder.start();
-
-    Executor.processOutput(process);
-    Executor.processError(process);
-
-    process.waitFor();
+    Executor.executeCommand(commandList);
   }
 }

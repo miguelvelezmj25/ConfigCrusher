@@ -15,8 +15,9 @@ public abstract class BaseInstrumentExecutor<T> extends BaseExecutor<T> {
   public BaseInstrumentExecutor(
       String programName,
       Set<Set<String>> configurations,
-      BaseRawExecutionParser<T> rawExecutionParser) {
-    super(programName, configurations, rawExecutionParser);
+      BaseRawExecutionParser<T> rawExecutionParser,
+      int waitAfterExecution) {
+    super(programName, configurations, rawExecutionParser, waitAfterExecution);
   }
 
   public void executeProgram(String programClassPath, String mainClass, String[] configArgs)

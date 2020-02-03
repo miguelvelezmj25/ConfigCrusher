@@ -14,14 +14,17 @@ public abstract class BaseExecutor<T> implements Executor {
   private final String programName;
   private final Set<Set<String>> configurations;
   private final BaseRawExecutionParser<T> rawExecutionParser;
+  private final int waitAfterExecution;
 
   public BaseExecutor(
       String programName,
       Set<Set<String>> configurations,
-      BaseRawExecutionParser<T> rawExecutionParser) {
+      BaseRawExecutionParser<T> rawExecutionParser,
+      int waitAfterExecution) {
     this.programName = programName;
     this.configurations = configurations;
     this.rawExecutionParser = rawExecutionParser;
+    this.waitAfterExecution = waitAfterExecution;
   }
 
   @Override
@@ -57,7 +60,7 @@ public abstract class BaseExecutor<T> implements Executor {
       adapter.execute(configuration);
       this.rawExecutionParser.logExecution(configuration, iteration);
 
-      GC.gc(30000);
+      GC.gc(this.waitAfterExecution);
     }
   }
 

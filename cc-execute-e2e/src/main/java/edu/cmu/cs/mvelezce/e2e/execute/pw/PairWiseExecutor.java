@@ -13,11 +13,15 @@ public class PairWiseExecutor extends E2EExecutor {
       "../cc-execute-e2e/" + Options.DIRECTORY + "/execute/java/programs/pw";
 
   public PairWiseExecutor(String programName) {
-    this(programName, new HashSet<>());
+    this(programName, new HashSet<>(), -1);
   }
 
-  PairWiseExecutor(String programName, Set<Set<String>> configurations) {
-    super(programName, configurations, new E2EExecutionParser(programName, OUTPUT_DIR));
+  PairWiseExecutor(String programName, Set<Set<String>> configurations, int waitAfterExecution) {
+    super(
+        programName,
+        configurations,
+        new E2EExecutionParser(programName, OUTPUT_DIR),
+        waitAfterExecution);
   }
 
   @Override

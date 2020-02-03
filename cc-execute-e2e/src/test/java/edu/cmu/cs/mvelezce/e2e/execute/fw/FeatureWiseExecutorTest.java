@@ -18,7 +18,7 @@ public class FeatureWiseExecutorTest {
     BaseCompression compression = new FWCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new FeatureWiseExecutor(programName, configs);
+    Executor executor = new FeatureWiseExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -33,7 +33,7 @@ public class FeatureWiseExecutorTest {
     BaseCompression compression = new FWCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new FeatureWiseExecutor(programName, configs);
+    Executor executor = new FeatureWiseExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";

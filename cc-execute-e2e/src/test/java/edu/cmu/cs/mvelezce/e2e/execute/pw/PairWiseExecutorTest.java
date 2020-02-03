@@ -18,7 +18,7 @@ public class PairWiseExecutorTest {
     BaseCompression compression = new PWCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new PairWiseExecutor(programName, configs);
+    Executor executor = new PairWiseExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -33,7 +33,7 @@ public class PairWiseExecutorTest {
     BaseCompression compression = new PWCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new PairWiseExecutor(programName, configs);
+    Executor executor = new PairWiseExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";

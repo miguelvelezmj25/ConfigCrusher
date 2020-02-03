@@ -13,11 +13,15 @@ public class BruteForceExecutor extends E2EExecutor {
       "../cc-execute-e2e/" + Options.DIRECTORY + "/execute/java/programs/bf";
 
   public BruteForceExecutor(String programName) {
-    this(programName, new HashSet<>());
+    this(programName, new HashSet<>(), -1);
   }
 
-  BruteForceExecutor(String programName, Set<Set<String>> configurations) {
-    super(programName, configurations, new E2EExecutionParser(programName, OUTPUT_DIR));
+  BruteForceExecutor(String programName, Set<Set<String>> configurations, int waitAfterExecution) {
+    super(
+        programName,
+        configurations,
+        new E2EExecutionParser(programName, OUTPUT_DIR),
+        waitAfterExecution);
   }
 
   @Override

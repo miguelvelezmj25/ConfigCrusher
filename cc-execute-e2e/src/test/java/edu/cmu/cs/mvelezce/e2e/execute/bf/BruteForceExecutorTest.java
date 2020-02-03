@@ -18,7 +18,7 @@ public class BruteForceExecutorTest {
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new BruteForceExecutor(programName, configs);
+    Executor executor = new BruteForceExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -34,7 +34,7 @@ public class BruteForceExecutorTest {
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new BruteForceExecutor(programName, configs);
+    Executor executor = new BruteForceExecutor(programName, configs, 3000);
 
     args = new String[3];
     args[0] = "-delres";

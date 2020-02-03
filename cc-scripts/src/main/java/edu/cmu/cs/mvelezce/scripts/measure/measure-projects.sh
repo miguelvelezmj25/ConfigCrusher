@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NULL="null"
-PROGRAMS="berkeleyDb lucene"
+PROGRAMS="berkeleyDb lucene density"
 GT="gt"
 BF="bf"
 FW="fw"

@@ -21,7 +21,7 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
-    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);
+    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 0);
 
     args = new String[3];
     args[0] = "-delres";
@@ -38,7 +38,7 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
-    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);
+    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 30000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -55,7 +55,7 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
-    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);
+    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 30000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -72,7 +72,7 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
-    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations);
+    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 0);
 
     args = new String[3];
     args[0] = "-delres";

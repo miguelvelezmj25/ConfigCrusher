@@ -23,14 +23,16 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
       "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/sampling/jprofiler";
 
   public IDTAJProfilerSamplingExecutor(String programName) {
-    this(programName, new HashSet<>());
+    this(programName, new HashSet<>(), 0);
   }
 
-  IDTAJProfilerSamplingExecutor(String programName, Set<Set<String>> configurations) {
+  IDTAJProfilerSamplingExecutor(
+      String programName, Set<Set<String>> configurations, int waitAfterExecution) {
     super(
         programName,
         configurations,
-        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR));
+        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR),
+        waitAfterExecution);
   }
 
   public static String getOS() {

@@ -19,7 +19,7 @@ public class IDTAInstrumentExecutorTest {
     List<String> options = BaseTrivialAdapter.getListOfOptions();
     Set<Set<String>> configurations = ConfigHelper.getConfigurations(options);
 
-    Executor executor = new IDTAInstrumentExecutor(programName, configurations);
+    Executor executor = new IDTAInstrumentExecutor(programName, configurations, 0);
 
     String[] args = new String[3];
     args[0] = "-delres";
@@ -37,7 +37,7 @@ public class IDTAInstrumentExecutorTest {
     configurations.clear();
     configurations.add(new HashSet<>());
 
-    Executor executor = new IDTAInstrumentExecutor(programName, configurations);
+    Executor executor = new IDTAInstrumentExecutor(programName, configurations, 30000);
 
     String[] args = new String[3];
     args[0] = "-delres";

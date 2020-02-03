@@ -86,7 +86,7 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
     commandList.add("mkdir");
     commandList.add(HOME_DIR);
 
-    runCommand(commandList);
+    Executor.executeCommand(commandList);
   }
 
   private void removeDir() throws IOException, InterruptedException {
@@ -95,18 +95,6 @@ public class BaseMeasureDiskOrderedScanAdapter extends BaseAdapter {
     commandList.add("-rf");
     commandList.add(HOME_DIR);
 
-    runCommand(commandList);
-  }
-
-  private void runCommand(List<String> commandList) throws IOException, InterruptedException {
-    ProcessBuilder builder = new ProcessBuilder();
-    builder.command(commandList);
-
-    Process process = builder.start();
-
-    Executor.processOutput(process);
-    Executor.processError(process);
-
-    process.waitFor();
+    Executor.executeCommand(commandList);
   }
 }

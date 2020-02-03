@@ -18,11 +18,16 @@ public class IDTAInstrumentExecutor extends BaseInstrumentExecutor<RawInstrument
       "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/instrumentation";
 
   public IDTAInstrumentExecutor(String programName) {
-    this(programName, new HashSet<>());
+    this(programName, new HashSet<>(), -1);
   }
 
-  IDTAInstrumentExecutor(String programName, Set<Set<String>> configurations) {
-    super(programName, configurations, new RawInstrumentExecutionParser(programName, OUTPUT_DIR));
+  IDTAInstrumentExecutor(
+      String programName, Set<Set<String>> configurations, int waitAfterExecution) {
+    super(
+        programName,
+        configurations,
+        new RawInstrumentExecutionParser(programName, OUTPUT_DIR),
+        waitAfterExecution);
   }
 
   @Override

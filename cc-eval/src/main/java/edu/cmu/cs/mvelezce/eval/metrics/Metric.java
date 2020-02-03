@@ -4,16 +4,17 @@ import java.util.List;
 
 public interface Metric<T> {
 
-    List<T> getEntries();
+  List<T> getEntries();
 
-    double getMin();
+  double getMin();
 
-    double getMax();
+  double getMax();
 
-    double getSum();
+  double getSum();
 
-    double getArithmeticMean();
+  double getMedian();
 
-    double getGeometricMean();
+  double getArithmeticMean();
 
+  double getGeometricMean();
 }

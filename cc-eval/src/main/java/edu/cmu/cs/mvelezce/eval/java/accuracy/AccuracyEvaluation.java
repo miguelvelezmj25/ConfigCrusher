@@ -273,6 +273,9 @@ public abstract class AccuracyEvaluation<T> {
     result.append("Mean Absolute Error: ");
     result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
     result.append("\n");
+    result.append("Median Absolute Error: ");
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMedian()));
+    result.append("\n");
     result.append("\n");
     result.append("Min Relative Error: ");
     result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
@@ -282,6 +285,9 @@ public abstract class AccuracyEvaluation<T> {
     result.append("\n");
     result.append("Mean Relative Error: ");
     result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
+    result.append("\n");
+    result.append("Median Relative Error: ");
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMedian()));
     result.append("\n");
     result.append("\n");
     result.append("Mean Squared Error: ");

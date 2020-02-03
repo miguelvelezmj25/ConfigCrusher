@@ -1,38 +1,117 @@
 {
   "localModels": [
     {
-      "region": "f733287f-fd73-4a52-9c23-e9b6f0440ab8",
+      "region": "2ec6df50-5b10-4995-b681-bfd598ece7c0",
       "model": {
-        "!def(A)": 0.0,
-        "def(A)": 1.004638E9
+        "B": 2.004478E9,
+        "!B": 0.0
       },
       "modelToMin": {
-        "!def(A)": 0.0,
-        "def(A)": 1.004638E9
+        "B": 2.004478E9,
+        "!B": 0.0
       },
       "modelToMax": {
-        "!def(A)": 0.0,
-        "def(A)": 1.004638E9
+        "B": 2.004478E9,
+        "!B": 0.0
       },
       "modelToDiff": {
-        "!def(A)": 0.0,
-        "def(A)": 0.0
+        "B": 0.0,
+        "!B": 0.0
+      },
+      "modelToSampleVariance": {
+        "B": 0.0,
+        "!B": 0.0
+      },
+      "modelToConfidenceInterval": {
+        "B": [],
+        "!B": [
+          0.0,
+          0.0
+        ]
       },
       "modelToPerfHumanReadable": {
-        "!def(A)": "0.0000000",
-        "def(A)": "1.0046380"
+        "B": "2.0044780",
+        "!B": "0.0000000"
       },
       "modelToMinHumanReadable": {
-        "!def(A)": "0.0000000",
-        "def(A)": "1.0046380"
+        "B": "2.0044780",
+        "!B": "0.0000000"
       },
       "modelToMaxHumanReadable": {
-        "!def(A)": "0.0000000",
-        "def(A)": "1.0046380"
+        "B": "2.0044780",
+        "!B": "0.0000000"
       },
       "modelToDiffHumanReadable": {
-        "!def(A)": "0.0000000",
-        "def(A)": "0.0000000"
+        "B": "0.0000000",
+        "!B": "0.0000000"
+      },
+      "modelToSampleVarianceHumanReadble": {
+        "B": "0.0000000",
+        "!B": "0.0000000"
+      },
+      "modelToConfidenceIntervalHumanReadable": {
+        "B": [],
+        "!B": [
+          "0.0000000",
+          "0.0000000"
+        ]
+      }
+    },
+    {
+      "region": "f733287f-fd73-4a52-9c23-e9b6f0440ab8",
+      "model": {
+        "A": 1.004638E9,
+        "!A": 0.0
+      },
+      "modelToMin": {
+        "A": 1.004638E9,
+        "!A": 0.0
+      },
+      "modelToMax": {
+        "A": 1.004638E9,
+        "!A": 0.0
+      },
+      "modelToDiff": {
+        "A": 0.0,
+        "!A": 0.0
+      },
+      "modelToSampleVariance": {
+        "A": 0.0,
+        "!A": 0.0
+      },
+      "modelToConfidenceInterval": {
+        "A": [],
+        "!A": [
+          0.0,
+          0.0
+        ]
+      },
+      "modelToPerfHumanReadable": {
+        "A": "1.0046380",
+        "!A": "0.0000000"
+      },
+      "modelToMinHumanReadable": {
+        "A": "1.0046380",
+        "!A": "0.0000000"
+      },
+      "modelToMaxHumanReadable": {
+        "A": "1.0046380",
+        "!A": "0.0000000"
+      },
+      "modelToDiffHumanReadable": {
+        "A": "0.0000000",
+        "!A": "0.0000000"
+      },
+      "modelToSampleVarianceHumanReadble": {
+        "A": "0.0000000",
+        "!A": "0.0000000"
+      },
+      "modelToConfidenceIntervalHumanReadable": {
+        "A": [],
+        "!A": [
+          "0.0000000",
+          "0.0000000"
+        ]
       }
     },
     {
@@ -49,6 +128,15 @@
       "modelToDiff": {
         "True": 2416000.0
       },
+      "modelToSampleVariance": {
+        "True": 1.934476E12
+      },
+      "modelToConfidenceInterval": {
+        "True": [
+          1.4978049260995116E9,
+          1.5047150739004884E9
+        ]
+      },
       "modelToPerfHumanReadable": {
         "True": "1.5012600"
       },
@@ -60,41 +148,15 @@
       },
       "modelToDiffHumanReadable": {
         "True": "0.0024160"
-      }
-    },
-    {
-      "region": "2ec6df50-5b10-4995-b681-bfd598ece7c0",
-      "model": {
-        "!def(B)": 0.0,
-        "def(B)": 2.004478E9
       },
-      "modelToMin": {
-        "!def(B)": 0.0,
-        "def(B)": 2.004478E9
+      "modelToSampleVarianceHumanReadble": {
+        "True": "0.0000019"
       },
-      "modelToMax": {
-        "!def(B)": 0.0,
-        "def(B)": 2.004478E9
-      },
-      "modelToDiff": {
-        "!def(B)": 0.0,
-        "def(B)": 0.0
-      },
-      "modelToPerfHumanReadable": {
-        "!def(B)": "0.0000000",
-        "def(B)": "2.0044780"
-      },
-      "modelToMinHumanReadable": {
-        "!def(B)": "0.0000000",
-        "def(B)": "2.0044780"
-      },
-      "modelToMaxHumanReadable": {
-        "!def(B)": "0.0000000",
-        "def(B)": "2.0044780"
-      },
-      "modelToDiffHumanReadable": {
-        "!def(B)": "0.0000000",
-        "def(B)": "0.0000000"
+      "modelToConfidenceIntervalHumanReadable": {
+        "True": [
+          "1.4978049",
+          "1.5047151"
+        ]
       }
     }
   ]

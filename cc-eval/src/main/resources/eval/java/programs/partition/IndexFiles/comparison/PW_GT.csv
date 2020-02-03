@@ -2011,10 +2011,12 @@ Spearmans correlation: 0.331
 Min Absolute Error: 0
 Max Absolute Error: 16.015
 Mean Absolute Error: 3.755
+Median Absolute Error: 2.853
 
 Min Relative Error: 0
 Max Relative Error: 0.512
 Mean Relative Error: 0.116
+Median Relative Error: 0.088
 
 Mean Squared Error: 26.052
 

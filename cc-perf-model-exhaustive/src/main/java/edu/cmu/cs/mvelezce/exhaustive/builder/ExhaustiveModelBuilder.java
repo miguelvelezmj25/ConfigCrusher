@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,14 +25,14 @@ public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
   }
 
   @Override
-  public PerformanceModel<Partition> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-
-    PerformanceModel<String> readModel =
-        mapper.readValue(file, new TypeReference<PerformanceModel<String>>() {});
+  public PerformanceModel<Partition> readFromFile(File dir) throws IOException {
+    Collection<File> files = FileUtils.listFiles(dir, new String[] {"json"}, false);
     Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();
 
-    for (LocalPerformanceModel<String> readLocalModel : readModel.getLocalModels()) {
+    for (File file : files) {
+      ObjectMapper mapper = new ObjectMapper();
+      LocalPerformanceModel<String> readLocalModel =
+          mapper.readValue(file, new TypeReference<LocalPerformanceModel<String>>() {});
       LocalPerformanceModel<Partition> localModel =
           new ExhaustiveLocalPerformanceModel(
               readLocalModel.getRegion(),

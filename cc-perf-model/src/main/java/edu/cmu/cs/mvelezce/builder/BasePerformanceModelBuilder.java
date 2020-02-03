@@ -45,6 +45,27 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
     return new PerformanceModel<>(localPerformanceModels);
   }
 
+  @Override
+  public PerformanceModel<RD> analyze(String[] args) throws IOException {
+    Options.getCommandLine(args);
+
+    File file = new File(this.outputDir());
+
+    Options.checkIfDeleteResult(file);
+
+    if (file.exists()) {
+      return this.readFromFile(file);
+    }
+
+    PerformanceModel<RD> perfModel = this.analyze();
+
+    if (Options.checkIfSave()) {
+      this.writeToFile(perfModel);
+    }
+
+    return perfModel;
+  }
+
   protected abstract void populateLocalModel(LocalPerformanceModel<RD> localModel);
 
   protected abstract LocalPerformanceModel<RD> buildEmptyLocalModel(Map.Entry<JavaRegion, D> entry);

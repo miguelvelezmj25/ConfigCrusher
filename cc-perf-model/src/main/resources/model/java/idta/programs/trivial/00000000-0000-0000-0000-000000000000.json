@@ -1,0 +1,45 @@
+{
+  "region": "00000000-0000-0000-0000-000000000000",
+  "model": {
+    "True": 1.50126E9
+  },
+  "modelToMin": {
+    "True": 1.50045E9
+  },
+  "modelToMax": {
+    "True": 1.502866E9
+  },
+  "modelToDiff": {
+    "True": 2416000.0
+  },
+  "modelToSampleVariance": {
+    "True": 1.934476E12
+  },
+  "modelToConfidenceInterval": {
+    "True": [
+      1.4978049260995116E9,
+      1.5047150739004884E9
+    ]
+  },
+  "modelToPerfHumanReadable": {
+    "True": "1.5012600"
+  },
+  "modelToMinHumanReadable": {
+    "True": "1.5004500"
+  },
+  "modelToMaxHumanReadable": {
+    "True": "1.5028660"
+  },
+  "modelToDiffHumanReadable": {
+    "True": "0.0024160"
+  },
+  "modelToSampleVarianceHumanReadble": {
+    "True": "0.0000019"
+  },
+  "modelToConfidenceIntervalHumanReadable": {
+    "True": [
+      "1.4978049",
+      "1.5047151"
+    ]
+  }
+}

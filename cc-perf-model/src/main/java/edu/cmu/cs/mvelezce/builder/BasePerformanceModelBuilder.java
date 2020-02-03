@@ -63,12 +63,14 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
   @Override
   public void writeToFile(PerformanceModel<RD> results) throws IOException {
-    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
-    File file = new File(outputFile);
-    file.getParentFile().mkdirs();
+    for (LocalPerformanceModel<RD> localModel : results.getLocalModels()) {
+      String outputFile = this.outputDir() + "/" + localModel.getRegion() + Options.DOT_JSON;
+      File file = new File(outputFile);
+      file.getParentFile().mkdirs();
 
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(file, results);
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.writeValue(file, localModel);
+    }
   }
 
   protected List<String> getOptions() {

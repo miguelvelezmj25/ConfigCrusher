@@ -92,7 +92,7 @@ public class SummaryStatisticsMap<T> {
       double lowerCI = Math.max(0, stats.getMean() - ciValue);
       double higherCI = stats.getMean() + ciValue;
 
-      if ((higherCI - lowerCI) >= 1E9) {
+      if ((higherCI - lowerCI) >= 1E9 & stats.getN() >= 3) {
         System.err.println(
             "The difference between the lower and higher confidence interval bounds of region "
                 + entry.getKey()

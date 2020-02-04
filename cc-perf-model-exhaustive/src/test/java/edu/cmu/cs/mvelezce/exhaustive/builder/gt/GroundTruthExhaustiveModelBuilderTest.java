@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.exhaustive.builder.gt;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -73,6 +74,25 @@ public class GroundTruthExhaustiveModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    BasePerformanceModelBuilder builder =
+        new GroundTruthExhaustiveModelBuilder(programName, options, performanceEntries);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void density() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new GroundTruthPerfAggregatorProcessor(programName);
+
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseConvertAdapter.getListOfOptions();
     BasePerformanceModelBuilder builder =
         new GroundTruthExhaustiveModelBuilder(programName, options, performanceEntries);
 

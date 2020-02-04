@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.eval.java.time;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -102,5 +103,16 @@ public class TimeEvaluationTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     TimeEvaluation.getE2EMeasuredTime(Evaluation.PW, performanceEntries);
+  }
+
+  @Test
+  public void density_GT_MeasuredTime() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new GroundTruthPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.GT, performanceEntries);
   }
 }

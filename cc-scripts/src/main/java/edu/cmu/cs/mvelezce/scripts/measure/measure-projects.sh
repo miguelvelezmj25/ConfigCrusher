@@ -7,6 +7,7 @@ BF="bf"
 FW="fw"
 PW="pw"
 IDTA="idta"
+IDTAE2E="idtae2e"
 SPLAT="splat"
 BASE=$(pwd)
 
@@ -38,6 +39,9 @@ run() {
   elif [ "$approach" == $IDTA ]; then
     cd ./cc-execute/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutorTest#"$program"
+  elif [ "$approach" == $IDTAE2E ]; then
+    cd ./cc-execute-e2e/ || exit
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.idta.IDTAExecutorTest#"$program"
   elif [ "$approach" == $SPLAT ]; then
     echo "Need to implement SPLAT"
   fi
@@ -72,7 +76,7 @@ for entry in "$@"; do
     continue
   fi
 
-  if [ "$approach" != $GT ] && [ "$approach" != $BF ] && [ "$approach" != $FW ] && [ "$approach" != $PW ] && [ "$approach" != $IDTA ] && [ "$approach" != $SPLAT ]; then
+  if [ "$approach" != $GT ] && [ "$approach" != $BF ] && [ "$approach" != $FW ] && [ "$approach" != $PW ] && [ "$approach" != $IDTA ] && [ "$approach" != $IDTAE2E ] && [ "$approach" != $SPLAT ]; then
     echo "Could not find approach" "$approach"
     program=$NULL
     approach=$NULL

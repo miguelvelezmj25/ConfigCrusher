@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.e2e.processor.aggregator.fw.FeatureWisePerfAggregator
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.gt.GroundTruthPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.pw.PairWisePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.eval.java.Evaluation;
+import edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta.IDTAPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -59,6 +60,17 @@ public class TimeEvaluationTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     TimeEvaluation.getE2EMeasuredTime(Evaluation.PW, performanceEntries);
+  }
+
+  @Test
+  public void berkeleyDB_IDTA_MeasuredTime() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getMeasuredTime(Evaluation.IDTA, performanceEntries);
   }
 
   @Test

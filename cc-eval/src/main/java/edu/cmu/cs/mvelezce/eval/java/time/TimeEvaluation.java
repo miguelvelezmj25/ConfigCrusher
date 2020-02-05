@@ -11,6 +11,26 @@ public final class TimeEvaluation {
 
   private TimeEvaluation() {}
 
+  static void getMeasuredTime(String approach, Set<PerformanceEntry> performanceEntries) {
+    double totalTime = 0.0;
+
+    for (PerformanceEntry entry : performanceEntries) {
+      Map<UUID, Double> regionsToPerf = entry.getRegionsToPerf();
+
+      for (double time : regionsToPerf.values()) {
+        totalTime += time;
+      }
+    }
+
+    System.out.println(
+        "It took "
+            + Evaluation.DECIMAL_FORMAT.format(totalTime / 1E9)
+            + " secs. to measure "
+            + performanceEntries.size()
+            + " configs with "
+            + approach);
+  }
+
   static void getE2EMeasuredTime(String approach, Set<PerformanceEntry> performanceEntries) {
     double totalTime = 0.0;
 

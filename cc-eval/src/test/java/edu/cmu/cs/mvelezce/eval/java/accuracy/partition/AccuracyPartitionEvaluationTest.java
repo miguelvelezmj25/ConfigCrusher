@@ -164,6 +164,118 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void berkeleyDB_IDTA0_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 0);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (Partition entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry.getFeatureExpr(), options);
+      configsToPredict.add(config);
+    }
+
+    builder = new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName + 0, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_IDTA1_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 1);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (Partition entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry.getFeatureExpr(), options);
+      configsToPredict.add(config);
+    }
+
+    builder = new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName + 1, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_IDTA2_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 2);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (Partition entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry.getFeatureExpr(), options);
+      configsToPredict.add(config);
+    }
+
+    builder = new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName + 2, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_IDTA3_Data() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName + 3);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<Set<String>> configsToPredict = new HashSet<>();
+
+    for (Partition entry : model.getLocalModels().iterator().next().getModel().keySet()) {
+      Set<String> config = ConstraintUtils.toConfig(entry.getFeatureExpr(), options);
+      configsToPredict.add(config);
+    }
+
+    builder = new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    model = builder.analyze(args);
+
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName + 3, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void berkeleyDB_FW0_Data() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
@@ -422,6 +534,34 @@ public class AccuracyPartitionEvaluationTest {
   @Test
   public void berkeleyDB_Compare_IDTA_GT() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_GT0() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 0;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_GT1() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 1;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_GT2() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 2;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_IDTA_GT3() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 3;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
   }

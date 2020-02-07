@@ -70,19 +70,16 @@ public class ConfigHelper {
   public static Set<Set<String>> getRandomConfigs(
       List<String> options, int size, Set<Set<String>> excludeConfigs) {
     Set<Set<String>> configs = new HashSet<>(size);
-    int length = options.size();
 
-    Random numOfOpts = new Random();
+    Random includeOpt = new Random();
 
     while (configs.size() < size) {
-      int num = numOfOpts.nextInt(length + 1);
-      Set<String> config = new HashSet<>(num);
-      Random opts = new Random();
+      Set<String> config = new HashSet<>();
 
-      while (config.size() < num) {
-        int index = opts.nextInt(length);
-        String opt = options.get(index);
-        config.add(opt);
+      for (String option : options) {
+        if (includeOpt.nextBoolean()) {
+          config.add(option);
+        }
       }
 
       if (!configs.contains(config) && !excludeConfigs.contains(config)) {

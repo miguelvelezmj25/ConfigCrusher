@@ -20,7 +20,28 @@ public class BaseConvertAdapter extends BaseAdapter {
   private static final String OUTPUT_DIR = "output";
 
   private static final String[] OPTIONS = {
-    "GUI", "SCALE", "SCALE_IS_HEIGHT_DP", "COMPRESSION_QUALITY", "OUT_COMPRESSION", "PLATFORM",
+    "SCALE",
+    "SCALE_IS_HEIGHT_DP",
+    "COMPRESSION_QUALITY",
+    "OUT_COMPRESSION",
+    "PLATFORM",
+    "UPSCALING_ALGO",
+    "DOWNSCALING_ALGO",
+    "ROUNDING_MODE",
+    "SKIP_UPSCALING",
+    "SKIP_EXISTING",
+    "ANDROID_INCLUDE_LDPI_TVDPI",
+    "VERBOSE",
+    "ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE",
+    "ANTI_ALIASING",
+    "POST_PROCESSOR_PNG_CRUSH",
+    "POST_PROCESSOR_WEBP",
+    "DRY_RUN",
+    "POST_PROCESSOR_MOZ_JPEG",
+    "KEEP_ORIGINAL_POST_PROCESSED_FILES",
+    "IOS_CREATE_IMAGESET_FOLDERS",
+    "CLEAN",
+    "HALT_ON_ERROR",
   };
 
   public BaseConvertAdapter() {

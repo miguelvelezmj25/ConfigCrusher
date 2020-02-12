@@ -231,3 +231,4 @@ vignettes/*.pdf
 */*.jps
 /cc-execute/snapshot.xml
 /cc-execute-e2e/index/
+/cc-execute/index/

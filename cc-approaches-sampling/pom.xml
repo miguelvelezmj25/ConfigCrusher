@@ -64,6 +64,12 @@
                 ${project.basedir}/../lib/min-configs-0.2.0-SNAPSHOT-jar-with-dependencies.jar
             </systemPath>
             <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.mijecu25</groupId>
+                    <artifactId>meme</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

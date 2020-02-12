@@ -31,14 +31,6 @@
             <groupId>edu.cmu.cs.mvelezce</groupId>
             <artifactId>cc-utils</artifactId>
             <version>0.2.0-SNAPSHOT</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mijecu25</groupId>
-            <artifactId>meme</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

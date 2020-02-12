@@ -15,13 +15,23 @@ public final class TimeEvaluation {
     double totalTime = 0.0;
 
     for (PerformanceEntry entry : performanceEntries) {
+      double entryTime = 0.0;
       Map<UUID, Double> regionsToPerf = entry.getRegionsToPerf();
 
       for (double time : regionsToPerf.values()) {
-        totalTime += time;
+        entryTime += time;
       }
+
+      System.out.println(
+          "It took "
+              + Evaluation.DECIMAL_FORMAT.format(entryTime / 1E9)
+              + " secs. to measure "
+              + entry.getConfiguration());
+
+      totalTime += entryTime;
     }
 
+    System.out.println();
     System.out.println(
         "It took "
             + Evaluation.DECIMAL_FORMAT.format(totalTime / 1E9)

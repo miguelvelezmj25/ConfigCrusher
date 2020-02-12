@@ -127,4 +127,15 @@ public class TimeEvaluationTest {
 
     TimeEvaluation.getE2EMeasuredTime(Evaluation.GT, performanceEntries);
   }
+
+  @Test
+  public void lucene_IDTA_MeasuredTime() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getMeasuredTime(Evaluation.IDTA, performanceEntries);
+  }
 }

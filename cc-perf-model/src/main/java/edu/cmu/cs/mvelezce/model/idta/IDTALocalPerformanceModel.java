@@ -44,9 +44,6 @@ public class IDTALocalPerformanceModel extends PartitionLocalPerformanceModel {
   public double evaluate(Set<String> config, List<String> options) {
     Partition configAsPartition =
         PartitionLocalPerformanceModel.getConfigAsPartition(config, options);
-    double time = 0;
-    int entriesCovered = 0;
-
     for (Map.Entry<Partition, Double> entry : this.getModel().entrySet()) {
       if (!configAsPartition
           .getFeatureExpr()
@@ -55,14 +52,10 @@ public class IDTALocalPerformanceModel extends PartitionLocalPerformanceModel {
         continue;
       }
 
-      time += entry.getValue();
-      entriesCovered++;
+      return entry.getValue();
     }
 
-    if (entriesCovered == 0) {
-      return time;
-    }
-
-    return time / entriesCovered;
+    throw new RuntimeException(
+        "Could not find a suitable entry for config " + config + " in model " + this.getRegion());
   }
 }

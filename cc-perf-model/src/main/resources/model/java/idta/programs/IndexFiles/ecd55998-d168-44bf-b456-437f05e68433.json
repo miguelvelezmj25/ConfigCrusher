@@ -1,0 +1,81 @@
+{
+  "region": "ecd55998-d168-44bf-b456-437f05e68433",
+  "model": {
+    "!COMMIT_ON_CLOSE": 1.08829925E9,
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": 2.196276375E9,
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": 1.966374E9
+  },
+  "modelToMin": {
+    "!COMMIT_ON_CLOSE": 0.0,
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": 2.19130125E9,
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": 1.962884E9
+  },
+  "modelToMax": {
+    "!COMMIT_ON_CLOSE": 2.1765985E9,
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": 2.2012515E9,
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": 1.969864E9
+  },
+  "modelToDiff": {
+    "!COMMIT_ON_CLOSE": 2.1765985E9,
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": 9950250.0,
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": 6980000.0
+  },
+  "modelToSampleVariance": {
+    "!COMMIT_ON_CLOSE": 2.3687905151011251E18,
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": 4.950373753125E13,
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": 2.43602E13
+  },
+  "modelToConfidenceInterval": {
+    "!COMMIT_ON_CLOSE": [
+      0.0,
+      1.4916452334725422E10
+    ],
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": [
+      2.1330614181619387E9,
+      2.2594913318380613E9
+    ],
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": [
+      1.92202934547075E9,
+      2.01071865452925E9
+    ]
+  },
+  "modelToPerfHumanReadable": {
+    "!COMMIT_ON_CLOSE": "1.0882992",
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": "2.1962764",
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": "1.9663740"
+  },
+  "modelToMinHumanReadable": {
+    "!COMMIT_ON_CLOSE": "0.0000000",
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": "2.1913012",
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": "1.9628840"
+  },
+  "modelToMaxHumanReadable": {
+    "!COMMIT_ON_CLOSE": "2.1765985",
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": "2.2012515",
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": "1.9698640"
+  },
+  "modelToDiffHumanReadable": {
+    "!COMMIT_ON_CLOSE": "2.1765985",
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": "0.0099503",
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": "0.0069800"
+  },
+  "modelToSampleVarianceHumanReadble": {
+    "!COMMIT_ON_CLOSE": "2.3687905",
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": "0.0000495",
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": "0.0000244"
+  },
+  "modelToConfidenceIntervalHumanReadable": {
+    "!COMMIT_ON_CLOSE": [
+      "0.0000000",
+      "14.9164523"
+    ],
+    "(COMMIT_ON_CLOSE && MAX_TOKEN_LENGTH)": [
+      "2.1330614",
+      "2.2594913"
+    ],
+    "(COMMIT_ON_CLOSE && !MAX_TOKEN_LENGTH)": [
+      "1.9220293",
+      "2.0107187"
+    ]
+  }
+}

@@ -30,12 +30,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.12.8</version>
-        </dependency>
-
         <!--        <dependency>-->
         <!--            <groupId>edu.cmu.cs.mvelezce</groupId>-->
         <!--            <artifactId>cc-utils</artifactId>-->

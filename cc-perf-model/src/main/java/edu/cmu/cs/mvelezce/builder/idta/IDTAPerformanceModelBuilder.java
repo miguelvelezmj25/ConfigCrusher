@@ -13,7 +13,7 @@ import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
-import edu.cmu.cs.mvelezce.utils.stats.SummaryStatisticsMap;
+import edu.cmu.cs.mvelezce.utils.stats.DescriptiveStatisticsMap;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -44,7 +44,7 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
   @Override
   protected void populateLocalModel(LocalPerformanceModel<Partition> localModel) {
     System.out.println(localModel.getRegion());
-    SummaryStatisticsMap<Partition> modelWithStats =
+    DescriptiveStatisticsMap<Partition> modelWithStats =
         this.getModelWithStats(localModel.getModel().keySet());
     this.addPerfEntries(localModel, modelWithStats);
 
@@ -119,7 +119,8 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
   }
 
   private void addPerfEntries(
-      LocalPerformanceModel<Partition> localModel, SummaryStatisticsMap<Partition> modelWithStats) {
+      LocalPerformanceModel<Partition> localModel,
+      DescriptiveStatisticsMap<Partition> modelWithStats) {
     for (PerformanceEntry entry : this.getPerformanceEntries()) {
       Map<UUID, Double> regionsToPerfs = entry.getRegionsToPerf();
       UUID region = localModel.getRegion();
@@ -149,8 +150,8 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
     }
   }
 
-  private SummaryStatisticsMap<Partition> getModelWithStats(Set<Partition> partitions) {
-    SummaryStatisticsMap<Partition> modelWithStats = new SummaryStatisticsMap<>();
+  private DescriptiveStatisticsMap<Partition> getModelWithStats(Set<Partition> partitions) {
+    DescriptiveStatisticsMap<Partition> modelWithStats = new DescriptiveStatisticsMap<>();
 
     for (Partition partition : partitions) {
       modelWithStats.putIfAbsent(partition);

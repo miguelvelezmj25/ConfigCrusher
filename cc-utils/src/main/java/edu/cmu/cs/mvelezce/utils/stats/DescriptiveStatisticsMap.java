@@ -1,29 +1,29 @@
 package edu.cmu.cs.mvelezce.utils.stats;
 
 import org.apache.commons.math3.distribution.TDistribution;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SummaryStatisticsMap<T> {
+public class DescriptiveStatisticsMap<T> {
 
-  private final Map<T, SummaryStatistics> map = new HashMap<>();
+  private final Map<T, DescriptiveStatistics> map = new HashMap<>();
 
   public void putIfAbsent(T entry) {
-    this.map.putIfAbsent(entry, new SummaryStatistics());
+    this.map.putIfAbsent(entry, new DescriptiveStatistics());
   }
 
-  public SummaryStatistics get(T region) {
+  public DescriptiveStatistics get(T region) {
     return this.map.get(region);
   }
 
   public Map<T, Double> getEntriesToData() {
     Map<T, Double> regionsToData = new HashMap<>();
 
-    for (Map.Entry<T, SummaryStatistics> entry : this.map.entrySet()) {
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
       regionsToData.put(entry.getKey(), entry.getValue().getMean());
     }
 
@@ -33,7 +33,7 @@ public class SummaryStatisticsMap<T> {
   public Map<T, Double> getEntriesToMin() {
     Map<T, Double> regionsToMin = new HashMap<>();
 
-    for (Map.Entry<T, SummaryStatistics> entry : this.map.entrySet()) {
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
       regionsToMin.put(entry.getKey(), entry.getValue().getMin());
     }
 
@@ -43,7 +43,7 @@ public class SummaryStatisticsMap<T> {
   public Map<T, Double> getEntriesToMax() {
     Map<T, Double> regionsToMax = new HashMap<>();
 
-    for (Map.Entry<T, SummaryStatistics> entry : this.map.entrySet()) {
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
       regionsToMax.put(entry.getKey(), entry.getValue().getMax());
     }
 
@@ -79,8 +79,8 @@ public class SummaryStatisticsMap<T> {
   public Map<T, List<Double>> getEntriesToConfidenceInterval() {
     Map<T, List<Double>> entriesToConfidenceInterval = new HashMap<>();
 
-    for (Map.Entry<T, SummaryStatistics> entry : this.map.entrySet()) {
-      SummaryStatistics stats = entry.getValue();
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
+      DescriptiveStatistics stats = entry.getValue();
 
       if (stats.getN() == 1) {
         continue;
@@ -112,7 +112,7 @@ public class SummaryStatisticsMap<T> {
   public Map<T, Double> getEntriesToSampleVariance() {
     Map<T, Double> entriesToSampleVariance = new HashMap<>();
 
-    for (Map.Entry<T, SummaryStatistics> entry : this.map.entrySet()) {
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
       entriesToSampleVariance.put(entry.getKey(), entry.getValue().getVariance());
     }
 

@@ -10,7 +10,6 @@ import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAJProfilerSamplingExecutorTest {
@@ -51,26 +50,21 @@ public class IDTAJProfilerSamplingExecutorTest {
 
   @Test
   public void lucene() throws IOException, InterruptedException {
+    System.err.println(
+        "Ignoring hotspot 'org.apache.lucene.core.util.BytesRefHash.add(org.apache.lucene.core.util.BytesRef)' "
+            + "since it was taking different amounts of time in config "
+            + "[MAX_BUFFERED_DOCS,USE_COMPOUND_FILE,CHECK_PENDING_FLUSH_UPDATE,MAX_TOKEN_LENGTH,COMMIT_ON_CLOSE]");
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
-    configurations.clear();
 
-    Set<String> config = new HashSet<>();
-    config.add("MAX_BUFFERED_DOCS");
-    config.add("USE_COMPOUND_FILE");
-    config.add("CHECK_PENDING_FLUSH_UPDATE");
-    config.add("MAX_TOKEN_LENGTH");
-    config.add("COMMIT_ON_CLOSE");
-    configurations.add(config);
-
-    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 0);
+    Executor executor = new IDTAJProfilerSamplingExecutor(programName, configurations, 30000);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i1";
+    args[2] = "-i5";
 
     executor.execute(args);
   }

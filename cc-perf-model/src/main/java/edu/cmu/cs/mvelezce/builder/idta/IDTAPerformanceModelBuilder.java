@@ -15,6 +15,7 @@ import edu.cmu.cs.mvelezce.region.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.stats.DescriptiveStatisticsMap;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import java.io.File;
 import java.io.IOException;
@@ -126,6 +127,11 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
       UUID region = localModel.getRegion();
 
       if (!regionsToPerfs.containsKey(region)) {
+        for (Map.Entry<Partition, DescriptiveStatistics> problemEntry :
+            modelWithStats.getMap().entrySet()) {
+          problemEntry.getValue().addValue(0.0);
+        }
+
         System.err.println(
             "There might be multiple regions in a method. The region "
                 + region

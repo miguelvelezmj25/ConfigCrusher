@@ -20,6 +20,10 @@ public class DescriptiveStatisticsMap<T> {
     return this.map.get(region);
   }
 
+  public Map<T, DescriptiveStatistics> getMap() {
+    return map;
+  }
+
   public Map<T, Double> getEntriesToData() {
     Map<T, Double> regionsToData = new HashMap<>();
 

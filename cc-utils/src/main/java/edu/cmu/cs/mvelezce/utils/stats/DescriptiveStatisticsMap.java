@@ -24,7 +24,7 @@ public class DescriptiveStatisticsMap<T> {
     Map<T, Double> regionsToData = new HashMap<>();
 
     for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
-      regionsToData.put(entry.getKey(), entry.getValue().getMean());
+      regionsToData.put(entry.getKey(), entry.getValue().getPercentile(50.0));
     }
 
     return regionsToData;
@@ -67,7 +67,12 @@ public class DescriptiveStatisticsMap<T> {
             "The difference between the min and max executions of entry "
                 + entry
                 + " is greater than 1 sec. It is "
-                + (diff / 1E9));
+                + (diff / 1E9)
+                + " in ["
+                + (min / 1E9)
+                + " - "
+                + (max / 1E9)
+                + "]");
       }
 
       entriesToDiff.put(entry, diff);
@@ -97,7 +102,12 @@ public class DescriptiveStatisticsMap<T> {
             "The difference between the lower and higher confidence interval bounds of region "
                 + entry.getKey()
                 + " is greater than 1 sec. It is "
-                + ((higherCI - lowerCI) / 1E9));
+                + ((higherCI - lowerCI) / 1E9)
+                + " in ["
+                + (stats.getMin() / 1E9)
+                + " - "
+                + (stats.getMax() / 1E9)
+                + "]");
       }
 
       List<Double> confidenceInterval = new ArrayList<>();

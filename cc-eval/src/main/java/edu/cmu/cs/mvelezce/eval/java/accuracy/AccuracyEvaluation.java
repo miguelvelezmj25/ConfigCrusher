@@ -168,7 +168,7 @@ public abstract class AccuracyEvaluation<T> {
             + gt
             + ",,minci,maxci,ciwindow,"
             + approach1
-            + " in ci,,absolute error,relative error,squared error");
+            + " in ci,,absolute error,relative percent error,squared error");
     result.append("\n");
 
     int count = 0;
@@ -234,7 +234,7 @@ public abstract class AccuracyEvaluation<T> {
 
       result.append(Evaluation.DECIMAL_FORMAT.format(absoluteError));
       result.append(",");
-      result.append(Evaluation.DECIMAL_FORMAT.format(relativeError));
+      result.append(Evaluation.DECIMAL_FORMAT.format(relativeError * 100));
       result.append(",");
       result.append(Evaluation.DECIMAL_FORMAT.format(squaredError));
 
@@ -265,29 +265,31 @@ public abstract class AccuracyEvaluation<T> {
     result.append("\n");
     result.append("\n");
     result.append("Min Absolute Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMin()) + " secs.");
     result.append("\n");
     result.append("Max Absolute Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMax()) + " secs.");
     result.append("\n");
     result.append("Mean Absolute Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()));
+    result.append(
+        Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getArithmeticMean()) + " secs.");
     result.append("\n");
     result.append("Median Absolute Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMedian()));
+    result.append(Evaluation.DECIMAL_FORMAT.format(absoluteErrorMetric.getMedian()) + " secs.");
     result.append("\n");
     result.append("\n");
-    result.append("Min Relative Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMin()));
+    result.append("Min Relative Percent Error: ");
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMin() * 100) + "%");
     result.append("\n");
-    result.append("Max Relative Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMax()));
+    result.append("Max Relative Percent Error: ");
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMax() * 100) + "%");
     result.append("\n");
-    result.append("Mean Relative Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean()));
+    result.append("Mean Relative Percent Error: ");
+    result.append(
+        Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getArithmeticMean() * 100) + "%");
     result.append("\n");
-    result.append("Median Relative Error: ");
-    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMedian()));
+    result.append("Median Relative Percent Error: ");
+    result.append(Evaluation.DECIMAL_FORMAT.format(relativeErrorMetric.getMedian() * 100) + "%");
     result.append("\n");
     result.append("\n");
     result.append("Mean Squared Error: ");

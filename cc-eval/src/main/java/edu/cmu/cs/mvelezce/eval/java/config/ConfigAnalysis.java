@@ -21,6 +21,10 @@ public final class ConfigAnalysis {
   private final String programName;
   private final List<String> options;
 
+  public ConfigAnalysis(String programName) {
+    this(programName, new ArrayList<>());
+  }
+
   public ConfigAnalysis(String programName, List<String> options) {
     this.programName = programName;
     this.options = options;
@@ -68,7 +72,7 @@ public final class ConfigAnalysis {
     File outputFile =
         new File(
             OUTPUT_DIR
-                + "/"
+                + "/compare/"
                 + this.programName
                 + "/"
                 + approach
@@ -112,5 +116,49 @@ public final class ConfigAnalysis {
     }
 
     return measuredTimes;
+  }
+
+  public void some(String approach, Set<PerformanceEntry> performanceEntries, Set<String> config)
+      throws IOException {
+    for (PerformanceEntry perfEntry : performanceEntries) {
+      if (!perfEntry.getConfiguration().equals(config)) {
+        continue;
+      }
+
+      StringBuilder result = new StringBuilder();
+      result.append("region,measured");
+      result.append("\n");
+
+      for (Map.Entry<UUID, Double> entry : perfEntry.getRegionsToPerf().entrySet()) {
+        result.append(entry.getKey());
+        result.append(",");
+        result.append(Evaluation.DECIMAL_FORMAT.format(entry.getValue() / 1E9));
+        result.append("\n");
+      }
+
+      File outputFile =
+          new File(
+              OUTPUT_DIR
+                  + "/measured/"
+                  + approach
+                  + "/"
+                  + this.programName
+                  + "/"
+                  + config
+                  + Evaluation.DOT_CSV);
+
+      outputFile.getParentFile().mkdirs();
+
+      if (outputFile.exists()) {
+        FileUtils.forceDelete(outputFile);
+      }
+
+      PrintWriter writer = new PrintWriter(outputFile);
+      writer.write(result.toString());
+      writer.flush();
+      writer.close();
+
+      return;
+    }
   }
 }

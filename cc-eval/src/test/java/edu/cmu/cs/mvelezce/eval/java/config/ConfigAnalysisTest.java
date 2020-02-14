@@ -19,6 +19,22 @@ import java.util.Set;
 public class ConfigAnalysisTest {
 
   @Test
+  public void measured_idta_0() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+            new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    Set<String> config = new HashSet<>();
+    config.add("RAM_BUFFER_SIZE_MB");
+
+    ConfigAnalysis configAnalysis = new ConfigAnalysis(programName);
+    configAnalysis.some(
+            Evaluation.IDTA, performanceEntries, config);
+  }
+
+  @Test
   public void compare_idta_model_lucene_0() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =

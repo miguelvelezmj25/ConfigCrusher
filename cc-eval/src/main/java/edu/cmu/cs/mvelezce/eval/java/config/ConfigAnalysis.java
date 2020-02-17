@@ -59,6 +59,7 @@ public final class ConfigAnalysis {
       predictedTotalTime += predictedTime;
     }
 
+    boolean highRelevanceMetric = false;
     StringBuilder result = new StringBuilder();
     result.append(
         "region,measured,predicted,relative % error,predict exec contribution %,relevance of relative error");
@@ -88,9 +89,18 @@ public final class ConfigAnalysis {
       result.append(",");
       result.append(Evaluation.DECIMAL_FORMAT.format(predictedTime / predictedTotalTime * 100));
       result.append(",");
-      result.append(
-          Evaluation.DECIMAL_FORMAT.format(relativeError * predictedTime / predictedTotalTime));
+      double relevanceMetric = relativeError * predictedTime / predictedTotalTime;
+
+      if (Math.abs(relevanceMetric) >= 2.0) {
+        highRelevanceMetric = true;
+      }
+
+      result.append(Evaluation.DECIMAL_FORMAT.format(relevanceMetric));
       result.append("\n");
+    }
+
+    if (highRelevanceMetric) {
+      System.out.println(config + " has a high absolute value");
     }
 
     File outputFile =

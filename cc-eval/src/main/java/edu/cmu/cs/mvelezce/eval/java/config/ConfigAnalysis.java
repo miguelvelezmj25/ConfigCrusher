@@ -45,8 +45,23 @@ public final class ConfigAnalysis {
     }
 
     double thresholdToPrint = 1E6;
+    double predictedTotalTime = 0.0;
+
+    for (UUID region : predictedTimes.keySet()) {
+      double measuredTime = measuredTimes.get(region);
+      double predictedTime = predictedTimes.get(region);
+
+      if (measuredTime < thresholdToPrint && predictedTime < thresholdToPrint) {
+        continue;
+      }
+
+      predictedTime = Math.max(predictedTime, 1E6);
+      predictedTotalTime += predictedTime;
+    }
+
     StringBuilder result = new StringBuilder();
-    result.append("region,measured,predicted,relative percent error");
+    result.append(
+        "region,measured,predicted,relative % error,predict exec contribution %,relevance of relative error");
     result.append("\n");
 
     for (UUID region : measuredTimes.keySet()) {
@@ -60,7 +75,7 @@ public final class ConfigAnalysis {
       measuredTime = Math.max(measuredTime, 1E6);
       predictedTime = Math.max(predictedTime, 1E6);
 
-      double absoluteError = Math.abs(predictedTime - measuredTime);
+      double absoluteError = predictedTime - measuredTime;
       double relativeError = absoluteError / measuredTime;
 
       result.append(region);
@@ -70,6 +85,11 @@ public final class ConfigAnalysis {
       result.append(Evaluation.DECIMAL_FORMAT.format(predictedTime / 1E9));
       result.append(",");
       result.append(Evaluation.DECIMAL_FORMAT.format(relativeError * 100));
+      result.append(",");
+      result.append(Evaluation.DECIMAL_FORMAT.format(predictedTime / predictedTotalTime * 100));
+      result.append(",");
+      result.append(
+          Evaluation.DECIMAL_FORMAT.format(relativeError * predictedTime / predictedTotalTime));
       result.append("\n");
     }
 

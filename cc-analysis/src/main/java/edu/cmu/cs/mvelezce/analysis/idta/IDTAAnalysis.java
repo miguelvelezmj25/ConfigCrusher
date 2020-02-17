@@ -5,15 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mijecu25.meme.utils.execute.Executor;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
-import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
-import edu.cmu.cs.mvelezce.explorer.idta.partition.TotalPartition;
-import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
 
@@ -42,23 +41,12 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
                   idtaResult.getMethodSignature())
               .startIndex(idtaResult.getDecisionIndex())
               .build();
-      Partitioning partitioning = this.getPartitioning(idtaResult.getInfo());
+      Partitioning partitioning =
+          Partitioning.getPartitioning(Partition.getPartitions(idtaResult.getInfo()));
       results.put(javaRegion, partitioning);
     }
 
     return results;
-  }
-
-  private Partitioning getPartitioning(Set<String> prettyPartitions) {
-    Set<Partition> partitions = new HashSet<>();
-
-    for (String prettyPartition : prettyPartitions) {
-      Partition partition =
-          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, prettyPartition));
-      partitions.add(partition);
-    }
-
-    return new TotalPartition(partitions);
   }
 
   private List<IDTAResult> parseIDTAResults() throws IOException {

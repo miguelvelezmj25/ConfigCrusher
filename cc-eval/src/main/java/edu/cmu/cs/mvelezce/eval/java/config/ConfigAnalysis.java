@@ -46,7 +46,7 @@ public final class ConfigAnalysis {
 
     double thresholdToPrint = 1E6;
     StringBuilder result = new StringBuilder();
-    result.append("region,measured,predicted,diff");
+    result.append("region,measured,predicted,relative percent error");
     result.append("\n");
 
     for (UUID region : measuredTimes.keySet()) {
@@ -57,7 +57,11 @@ public final class ConfigAnalysis {
         continue;
       }
 
-      double diff = Math.abs(predictedTime - measuredTime);
+      measuredTime = Math.max(measuredTime, 1E6);
+      predictedTime = Math.max(predictedTime, 1E6);
+
+      double absoluteError = Math.abs(predictedTime - measuredTime);
+      double relativeError = absoluteError / measuredTime;
 
       result.append(region);
       result.append(",");
@@ -65,7 +69,7 @@ public final class ConfigAnalysis {
       result.append(",");
       result.append(Evaluation.DECIMAL_FORMAT.format(predictedTime / 1E9));
       result.append(",");
-      result.append(Evaluation.DECIMAL_FORMAT.format(diff / 1E9));
+      result.append(Evaluation.DECIMAL_FORMAT.format(relativeError * 100));
       result.append("\n");
     }
 

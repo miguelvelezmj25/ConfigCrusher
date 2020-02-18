@@ -3,12 +3,12 @@ package edu.cmu.cs.mvelezce.utils.stats;
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class DescriptiveStatisticsMap<T> {
+
+  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.000");
 
   private final Map<T, DescriptiveStatistics> map = new HashMap<>();
 
@@ -66,18 +66,18 @@ public class DescriptiveStatisticsMap<T> {
       double min = entriesToMin.get(entry);
       double diff = max - min;
 
-      if (diff >= 1E9) {
-        System.err.println(
-            "The difference between the min and max executions of entry "
-                + entry
-                + " is greater than 1 sec. It is "
-                + (diff / 1E9)
-                + " in ["
-                + (min / 1E9)
-                + " - "
-                + (max / 1E9)
-                + "]");
-      }
+      //      if (diff >= 1E9) {
+      //        System.err.println(
+      //            "The difference between the min and max executions of entry "
+      //                + entry
+      //                + " is greater than 1 sec. It is "
+      //                + (diff / 1E9)
+      //                + " in ["
+      //                + (min / 1E9)
+      //                + " - "
+      //                + (max / 1E9)
+      //                + "]");
+      //      }
 
       entriesToDiff.put(entry, diff);
     }
@@ -101,18 +101,19 @@ public class DescriptiveStatisticsMap<T> {
       double lowerCI = Math.max(0, stats.getMean() - ciValue);
       double higherCI = stats.getMean() + ciValue;
 
-      if ((higherCI - lowerCI) >= 1E9 & stats.getN() >= 3) {
-        System.err.println(
-            "The difference between the lower and higher confidence interval bounds of region "
-                + entry.getKey()
-                + " is greater than 1 sec. It is "
-                + ((higherCI - lowerCI) / 1E9)
-                + " in ["
-                + (stats.getMin() / 1E9)
-                + " - "
-                + (stats.getMax() / 1E9)
-                + "]");
-      }
+      //      if ((higherCI - lowerCI) >= 1E9 & stats.getN() >= 3) {
+      //        System.err.println(
+      //            "The difference between the lower and higher confidence interval bounds of
+      // region "
+      //                + entry.getKey()
+      //                + " is greater than 1 sec. It is "
+      //                + ((higherCI - lowerCI) / 1E9)
+      //                + " in ["
+      //                + (stats.getMin() / 1E9)
+      //                + " - "
+      //                + (stats.getMax() / 1E9)
+      //                + "]");
+      //      }
 
       List<Double> confidenceInterval = new ArrayList<>();
       confidenceInterval.add(lowerCI);
@@ -131,5 +132,44 @@ public class DescriptiveStatisticsMap<T> {
     }
 
     return entriesToSampleVariance;
+  }
+
+  public Map<T, Double> getCoefficientsOfVariation() {
+    Map<T, Double> regionsToCoefficientsOfVariation = new HashMap<>();
+
+    for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
+      DescriptiveStatistics descriptiveStats = entry.getValue();
+      double mean = descriptiveStats.getMean();
+      double coefficient = 0.0;
+
+      if (mean >= 1E7) {
+        double standardDeviation = descriptiveStats.getStandardDeviation();
+        coefficient = Math.max(standardDeviation / mean, 0.0) * 1.05;
+      }
+
+      if (coefficient > 1.0) {
+        double[] sortedValues = descriptiveStats.getSortedValues();
+
+        if (sortedValues[sortedValues.length - 1] > 1E8) {
+          String[] prettySortedValues = new String[sortedValues.length];
+
+          for (int i = 0; i < sortedValues.length; i++) {
+            prettySortedValues[i] = DECIMAL_FORMAT.format(sortedValues[i] / 1E9);
+          }
+
+          System.err.println(
+              "The coefficient of variation of "
+                  + entry.getKey()
+                  + " is "
+                  + DECIMAL_FORMAT.format(coefficient)
+                  + ". Values"
+                  + Arrays.toString(prettySortedValues));
+        }
+      }
+
+      regionsToCoefficientsOfVariation.put(entry.getKey(), coefficient);
+    }
+
+    return regionsToCoefficientsOfVariation;
   }
 }

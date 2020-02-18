@@ -79,6 +79,8 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     Map<UUID, Double> regionsToSampleVariance = regionsToStats.getEntriesToSampleVariance();
     Map<UUID, List<Double>> regionsToConfidenceInterval =
         regionsToStats.getEntriesToConfidenceInterval();
+    Map<UUID, Double> regionsToCoefficientsOfVariation =
+        regionsToStats.getCoefficientsOfVariation();
 
     return new PerformanceEntry(
         config,
@@ -88,12 +90,26 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         regionsToDiff,
         regionsToSampleVariance,
         regionsToConfidenceInterval,
+        regionsToCoefficientsOfVariation,
         this.toHumanReadable(regionsToPerf),
         this.toHumanReadable(regionsToMin),
         this.toHumanReadable(regionsToMax),
         this.toHumanReadable(regionsToDiff),
         this.toHumanReadableSampleVariance(regionsToSampleVariance),
-        this.toHumanReadableCI(regionsToConfidenceInterval));
+        this.toHumanReadableCI(regionsToConfidenceInterval),
+        this.toHumanReadableCoefficientOfVariation(regionsToCoefficientsOfVariation));
+  }
+
+  private Map<UUID, String> toHumanReadableCoefficientOfVariation(
+      Map<UUID, Double> regionsToCoefficientsOfVariation) {
+    Map<UUID, String> regionsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<UUID, Double> entry : regionsToCoefficientsOfVariation.entrySet()) {
+      double data = entry.getValue();
+      regionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return regionsToHumanReadableData;
   }
 
   private Map<UUID, String> toHumanReadableSampleVariance(

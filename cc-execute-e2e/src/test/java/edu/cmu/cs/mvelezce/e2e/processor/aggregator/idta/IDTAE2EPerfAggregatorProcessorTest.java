@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.e2e.processor.aggregator.idta;
 
+import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.execute.idta.IDTAExecutor;
@@ -19,7 +20,23 @@ public class IDTAE2EPerfAggregatorProcessorTest {
     BaseExecutor<ProcessedPerfExecution> executor = new IDTAExecutor(programName);
     Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
-    Analysis perfAggregatorProcessor = new IDTAE2EPerfAggregatorProcessor(programName, itersToResults);
+    Analysis perfAggregatorProcessor =
+        new IDTAE2EPerfAggregatorProcessor(programName, itersToResults);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
+
+  @Test
+  public void lucene() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseExecutor<ProcessedPerfExecution> executor = new IDTAExecutor(programName);
+    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new IDTAE2EPerfAggregatorProcessor(programName, itersToResults);
 
     String[] args = new String[2];
     args[0] = "-delres";

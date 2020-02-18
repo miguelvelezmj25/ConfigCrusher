@@ -100,7 +100,7 @@ public final class ConfigAnalysis {
     }
 
     if (highRelevanceMetric) {
-      System.out.println(config + " has a high absolute value");
+      System.out.println(config + " has a high (absolute) relevance metric");
     }
 
     File outputFile =

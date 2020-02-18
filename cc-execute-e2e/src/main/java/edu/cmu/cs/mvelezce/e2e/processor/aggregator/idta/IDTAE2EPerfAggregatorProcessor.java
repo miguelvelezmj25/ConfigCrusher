@@ -8,15 +8,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTAPerfAggregatorProcessor extends PerfAggregatorProcessor {
+public class IDTAE2EPerfAggregatorProcessor extends PerfAggregatorProcessor {
 
   private static final String OUTPUT_DIR = IDTAExecutor.OUTPUT_DIR;
 
-  public IDTAPerfAggregatorProcessor(String programName) {
+  public IDTAE2EPerfAggregatorProcessor(String programName) {
     this(programName, new HashMap<>());
   }
 
-  IDTAPerfAggregatorProcessor(
+  IDTAE2EPerfAggregatorProcessor(
       String programName, Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution) {
     super(programName, itersToProcessedPerfExecution);
   }

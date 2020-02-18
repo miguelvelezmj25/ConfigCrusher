@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-public class IDTAPerfAggregatorProcessorTest {
+public class IDTAE2EPerfAggregatorProcessorTest {
 
   @Test
   public void berkeleyDB() throws IOException, InterruptedException {
@@ -19,7 +19,7 @@ public class IDTAPerfAggregatorProcessorTest {
     BaseExecutor<ProcessedPerfExecution> executor = new IDTAExecutor(programName);
     Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
-    Analysis perfAggregatorProcessor = new IDTAPerfAggregatorProcessor(programName, itersToResults);
+    Analysis perfAggregatorProcessor = new IDTAE2EPerfAggregatorProcessor(programName, itersToResults);
 
     String[] args = new String[2];
     args[0] = "-delres";

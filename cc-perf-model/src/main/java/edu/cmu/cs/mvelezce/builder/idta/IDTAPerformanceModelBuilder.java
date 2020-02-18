@@ -59,6 +59,9 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
     localModel
         .getModelToConfidenceInterval()
         .putAll(modelWithStats.getEntriesToConfidenceInterval());
+    localModel
+        .getModelToCoefficientOfVariation()
+        .putAll(modelWithStats.getCoefficientsOfVariation());
 
     localModel.getModelToPerfHumanReadable().putAll(toHumanReadable(localModel.getModel()));
     localModel.getModelToMinHumanReadable().putAll(toHumanReadable(localModel.getModelToMin()));
@@ -70,6 +73,10 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
     localModel
         .getModelToConfidenceIntervalHumanReadable()
         .putAll(toHumanReadableCI(localModel.getModelToConfidenceInterval()));
+    localModel
+        .getModelToCoefficientOfVariationHumanReadable()
+        .putAll(
+            toHumanReadableCoefficientsOfVariation(localModel.getModelToCoefficientOfVariation()));
   }
 
   private Map<Partition, String> toHumanReadableSampleVariance(
@@ -79,6 +86,19 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
     for (Map.Entry<Partition, Double> entry : PartitionsToSampleVariance.entrySet()) {
       double data = entry.getValue();
       data = data / 1E18;
+      PartitionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
+    }
+
+    return PartitionsToHumanReadableData;
+  }
+
+  private Map<Partition, String> toHumanReadableCoefficientsOfVariation(
+      Map<Partition, Double> partitionsToData) {
+    Map<Partition, String> PartitionsToHumanReadableData = new HashMap<>();
+
+    for (Map.Entry<Partition, Double> entry : partitionsToData.entrySet()) {
+      double data = entry.getValue();
+      data = data;
       PartitionsToHumanReadableData.put(entry.getKey(), DECIMAL_FORMAT.format(data));
     }
 
@@ -184,6 +204,7 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
               this.parsePartitionsToData(readLocalModel.getModelToDiff()),
               this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
               this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToData(readLocalModel.getModelToCoefficientOfVariation()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
@@ -191,7 +212,9 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
               this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
               this.parsePartitionsToHumanReadableCI(
-                  readLocalModel.getModelToConfidenceIntervalHumanReadable()));
+                  readLocalModel.getModelToConfidenceIntervalHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
+                  readLocalModel.getModelToCoefficientOfVariationHumanReadable()));
       localModels.add(localModel);
     }
 

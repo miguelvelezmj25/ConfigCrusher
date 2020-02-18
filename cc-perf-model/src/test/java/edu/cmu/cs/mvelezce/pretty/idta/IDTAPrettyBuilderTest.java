@@ -108,6 +108,8 @@ public class IDTAPrettyBuilderTest {
             new HashMap<>(),
             new HashMap<>(),
             new HashMap<>(),
+            new HashMap<>(),
+            new HashMap<>(),
             new HashMap<>());
 
     Set<LocalPerformanceModel<Partition>> localModels = new HashSet<>();

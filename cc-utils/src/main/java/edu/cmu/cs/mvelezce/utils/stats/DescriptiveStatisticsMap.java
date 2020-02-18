@@ -144,7 +144,8 @@ public class DescriptiveStatisticsMap<T> {
 
       if (mean >= 1E7) {
         double standardDeviation = descriptiveStats.getStandardDeviation();
-        coefficient = Math.max(standardDeviation / mean, 0.0) * 1.05;
+        coefficient =
+            Math.max(standardDeviation / mean, 0.0) * (1 + (1.0 / (4.0 * descriptiveStats.getN())));
       }
 
       if (coefficient > 1.0) {

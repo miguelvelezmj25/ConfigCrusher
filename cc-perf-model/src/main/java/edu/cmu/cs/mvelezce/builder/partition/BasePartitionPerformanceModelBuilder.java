@@ -69,6 +69,8 @@ public abstract class BasePartitionPerformanceModelBuilder
     Map<Partition, Double> modelToSampleVariance = this.addPartitionEntries(entry.getValue());
     Map<Partition, List<Double>> modelToConfidenceInterval =
         this.addPartitionEntriesCI(entry.getValue());
+    Map<Partition, Double> modelToCoefficientOfVariation =
+        this.addPartitionEntries(entry.getValue());
 
     Map<Partition, String> modelToPerfHumanReadable =
         this.addPartitionEntriesHuman(entry.getValue());
@@ -82,6 +84,8 @@ public abstract class BasePartitionPerformanceModelBuilder
         this.addPartitionEntriesHuman(entry.getValue());
     Map<Partition, List<String>> modelToConfidenceIntervalHumanReadable =
         this.addPartitionEntriesCIHuman(entry.getValue());
+    Map<Partition, String> modelToCoefficientOfVariationHumanReadable =
+        this.addPartitionEntriesHuman(entry.getValue());
 
     return new PartitionLocalPerformanceModel(
         entry.getKey().getId(),
@@ -91,12 +95,14 @@ public abstract class BasePartitionPerformanceModelBuilder
         modelToDiff,
         modelToSampleVariance,
         modelToConfidenceInterval,
+        modelToCoefficientOfVariation,
         modelToPerfHumanReadable,
         modelToMinHumanReadable,
         modelToMaxHumanReadable,
         modelToDiffHumanReadable,
         modelToSampleVarianceHumanReadable,
-        modelToConfidenceIntervalHumanReadable);
+        modelToConfidenceIntervalHumanReadable,
+        modelToCoefficientOfVariationHumanReadable);
   }
 
   private Map<Partition, List<String>> addPartitionEntriesCIHuman(Partitioning partitioning) {

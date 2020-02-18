@@ -18,12 +18,14 @@ public class IDTALocalPerformanceModel extends PartitionLocalPerformanceModel {
       Map<Partition, Double> modelToDiff,
       Map<Partition, Double> modelToSampleVariance,
       Map<Partition, List<Double>> modelToConfidenceInterval,
+      Map<Partition, Double> modelToCoefficientOfVariation,
       Map<Partition, String> modelToPerfHumanReadable,
       Map<Partition, String> modelToMinHumanReadable,
       Map<Partition, String> modelToMaxHumanReadable,
       Map<Partition, String> modelToDiffHumanReadable,
       Map<Partition, String> modelToSampleVarianceHumanReadable,
-      Map<Partition, List<String>> modelToConfidenceIntervalHumanReadable) {
+      Map<Partition, List<String>> modelToConfidenceIntervalHumanReadable,
+      Map<Partition, String> modelToCoefficientOfVariationHumanReadable) {
     super(
         region,
         model,
@@ -32,12 +34,14 @@ public class IDTALocalPerformanceModel extends PartitionLocalPerformanceModel {
         modelToDiff,
         modelToSampleVariance,
         modelToConfidenceInterval,
+        modelToCoefficientOfVariation,
         modelToPerfHumanReadable,
         modelToMinHumanReadable,
         modelToMaxHumanReadable,
         modelToDiffHumanReadable,
         modelToSampleVarianceHumanReadable,
-        modelToConfidenceIntervalHumanReadable);
+        modelToConfidenceIntervalHumanReadable,
+        modelToCoefficientOfVariationHumanReadable);
   }
 
   @Override

@@ -68,6 +68,7 @@ public class PartitionPerformanceModelsReader extends BasePartitionPerformanceMo
               this.parsePartitionsToData(readLocalModel.getModelToDiff()),
               this.parsePartitionsToData(readLocalModel.getModelToSampleVariance()),
               this.parsePartitionsToCI(readLocalModel.getModelToConfidenceInterval()),
+              this.parsePartitionsToData(readLocalModel.getModelToCoefficientOfVariation()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToPerfHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMinHumanReadable()),
               this.parsePartitionsToHumanReadableData(readLocalModel.getModelToMaxHumanReadable()),
@@ -75,7 +76,9 @@ public class PartitionPerformanceModelsReader extends BasePartitionPerformanceMo
               this.parsePartitionsToHumanReadableData(
                   readLocalModel.getModelToSampleVarianceHumanReadble()),
               this.parsePartitionsToHumanReadableCI(
-                  readLocalModel.getModelToConfidenceIntervalHumanReadable()));
+                  readLocalModel.getModelToConfidenceIntervalHumanReadable()),
+              this.parsePartitionsToHumanReadableData(
+                  readLocalModel.getModelToCoefficientOfVariationHumanReadable()));
       localModels.add(localModel);
     }
 

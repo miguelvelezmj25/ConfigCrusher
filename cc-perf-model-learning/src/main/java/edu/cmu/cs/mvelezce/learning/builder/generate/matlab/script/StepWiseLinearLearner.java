@@ -39,7 +39,7 @@ public class StepWiseLinearLearner {
   public static final String P_VALUES_FILE = "pValues.txt";
   public static final String TERMS_FILE = "terms.txt";
 
-  private static final String DOT_M = ".m";
+  public static final String DOT_M = ".m";
 
   private final String programName;
   private final List<String> options;

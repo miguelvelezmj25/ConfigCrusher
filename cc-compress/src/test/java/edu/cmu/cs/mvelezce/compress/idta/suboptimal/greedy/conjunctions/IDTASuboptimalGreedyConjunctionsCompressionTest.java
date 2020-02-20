@@ -77,6 +77,25 @@ public class IDTASuboptimalGreedyConjunctionsCompressionTest {
   }
 
   @Test
+  public void lucene_large() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+
+    String workloadSize = "large";
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Collection<Partitioning> allPartitions = analysis.analyze().values();
+
+    BaseCompression compression =
+        new IDTASuboptimalGreedyConjunctionsCompression(programName, options, allPartitions);
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<Set<String>> configs = compression.analyze(args);
+
+    System.out.println(configs.size() + " to sample");
+  }
+
+  @Test
   public void performance() throws IOException, InterruptedException {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
     List<String> options = BasePerformanceAdapter.getListOfOptions();

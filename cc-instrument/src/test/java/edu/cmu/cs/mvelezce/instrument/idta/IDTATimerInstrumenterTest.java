@@ -315,6 +315,37 @@ public class IDTATimerInstrumenterTest {
   }
 
   @Test
+  public void lucene_large()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    String workloadSize = "large";
+
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
+
+    String mainClass = BaseIndexFilesAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseIndexFilesAdapter.ORIGINAL_ROOT_DIR;
+    String classDir = "../" + BaseIndexFilesAdapter.ORIGINAL_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseIndexFilesAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToPartitions,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
   public void pngtasticCounter()
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {

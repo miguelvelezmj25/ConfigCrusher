@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.compress.gt;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import org.junit.Test;
 
@@ -42,6 +43,19 @@ public class GTCompressionTest {
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
+    BaseCompression compression = new GTCompression(programName, options);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<Set<String>> configs = compression.analyze(args);
+    System.out.println("Configs " + configs.size());
+  }
+
+  @Test
+  public void multithread() throws IOException, InterruptedException {
+    String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    List<String> options = BaseMultithreadAdapter.getListOfOptions();
     BaseCompression compression = new GTCompression(programName, options);
 
     String[] args = new String[2];

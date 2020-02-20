@@ -1,7 +1,8 @@
 package edu.cmu.cs.mvelezce.e2e.execute.adapters.indexFiles;
 
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
-import edu.cmu.cs.mvelezce.e2e.execute.E2EExecutor;
+import edu.cmu.cs.mvelezce.e2e.execute.executor.E2EExecutor;
+import edu.cmu.cs.mvelezce.e2e.execute.instrument.E2EInstrumentExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.indexFiles.IndexFilesExecutorAdapter;
 

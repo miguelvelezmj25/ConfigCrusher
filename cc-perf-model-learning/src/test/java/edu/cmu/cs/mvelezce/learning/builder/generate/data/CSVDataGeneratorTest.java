@@ -6,8 +6,8 @@ import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.fw.FeatureWisePerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.pw.PairWisePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.fw.FeatureWiseInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.pw.PairWiseInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -18,12 +18,12 @@ import java.util.Set;
 public class CSVDataGeneratorTest {
 
   @Test
-  public void berkeleyDB_FW() throws IOException, InterruptedException {
+  public void berkeleyDB_FW_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new FeatureWisePerfAggregatorProcessor(programName);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -34,12 +34,12 @@ public class CSVDataGeneratorTest {
   }
 
   @Test
-  public void berkeleyDB_PW() throws IOException, InterruptedException {
+  public void berkeleyDB_PW_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new PairWisePerfAggregatorProcessor(programName);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -50,12 +50,12 @@ public class CSVDataGeneratorTest {
   }
 
   @Test
-  public void lucene_FW() throws IOException, InterruptedException {
+  public void lucene_FW_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new FeatureWisePerfAggregatorProcessor(programName);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -66,12 +66,12 @@ public class CSVDataGeneratorTest {
   }
 
   @Test
-  public void lucene_PW() throws IOException, InterruptedException {
+  public void lucene_PW_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new PairWisePerfAggregatorProcessor(programName);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 

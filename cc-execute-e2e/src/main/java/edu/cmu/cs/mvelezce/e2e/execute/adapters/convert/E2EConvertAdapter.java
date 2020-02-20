@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.e2e.execute.adapters.convert;
 
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
-import edu.cmu.cs.mvelezce.e2e.execute.E2EExecutor;
+import edu.cmu.cs.mvelezce.e2e.execute.executor.E2EExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.convert.ConvertExecutorAdapter;
 

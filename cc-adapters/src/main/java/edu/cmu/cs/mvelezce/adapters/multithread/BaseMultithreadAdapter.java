@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BaseMultithreadAdapter extends BaseAdapter {
 
-  public static final String PROGRAM_NAME = "multithread";
+  public static final String PROGRAM_NAME = "Multithread";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.Multithread";
   public static final String ROOT_PACKAGE = "edu.cmu.cs.mvelezce";
   public static final String ORIGINAL_CLASS_PATH =

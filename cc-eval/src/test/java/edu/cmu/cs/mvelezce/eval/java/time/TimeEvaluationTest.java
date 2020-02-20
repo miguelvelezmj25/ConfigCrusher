@@ -4,10 +4,10 @@ import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.bf.BruteForcePerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.fw.FeatureWisePerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.gt.GroundTruthPerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.pw.PairWisePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.bf.BruteForceInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.fw.FeatureWiseInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.gt.GroundTruthInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.pw.PairWiseInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta.IDTAPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
@@ -19,10 +19,10 @@ import java.util.Set;
 public class TimeEvaluationTest {
 
   @Test
-  public void berkeleyDB_GT_MeasuredTime() throws IOException, InterruptedException {
+  public void berkeleyDB_GT_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -30,10 +30,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void berkeleyDB_BF_MeasuredTime() throws IOException, InterruptedException {
+  public void berkeleyDB_BF_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new BruteForcePerfAggregatorProcessor(programName);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -41,10 +41,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void berkeleyDB_FW_MeasuredTime() throws IOException, InterruptedException {
+  public void berkeleyDB_FW_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new FeatureWisePerfAggregatorProcessor(programName);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -52,10 +52,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void berkeleyDB_PW_MeasuredTime() throws IOException, InterruptedException {
+  public void berkeleyDB_PW_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new PairWisePerfAggregatorProcessor(programName);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -74,10 +74,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void lucene_GT_MeasuredTime() throws IOException, InterruptedException {
+  public void lucene_GT_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -85,10 +85,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void lucene_BF_MeasuredTime() throws IOException, InterruptedException {
+  public void lucene_BF_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new BruteForcePerfAggregatorProcessor(programName);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -96,10 +96,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void lucene_FW_MeasuredTime() throws IOException, InterruptedException {
+  public void lucene_FW_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new FeatureWisePerfAggregatorProcessor(programName);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -107,10 +107,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void lucene_PW_MeasuredTime() throws IOException, InterruptedException {
+  public void lucene_PW_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new PairWisePerfAggregatorProcessor(programName);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
@@ -118,10 +118,10 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void density_GT_MeasuredTime() throws IOException, InterruptedException {
+  public void density_GT_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 

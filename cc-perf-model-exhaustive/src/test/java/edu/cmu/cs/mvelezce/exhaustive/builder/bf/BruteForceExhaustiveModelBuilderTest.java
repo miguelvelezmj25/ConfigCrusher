@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.bf.BruteForcePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.bf.BruteForceInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -15,10 +15,10 @@ import java.util.Set;
 public class BruteForceExhaustiveModelBuilderTest {
 
   @Test
-  public void berkeleyDB() throws IOException, InterruptedException {
+  public void berkeleyDB_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new BruteForcePerfAggregatorProcessor(programName);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
@@ -34,10 +34,10 @@ public class BruteForceExhaustiveModelBuilderTest {
   }
 
   @Test
-  public void lucene() throws IOException, InterruptedException {
+  public void lucene_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new BruteForcePerfAggregatorProcessor(programName);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);

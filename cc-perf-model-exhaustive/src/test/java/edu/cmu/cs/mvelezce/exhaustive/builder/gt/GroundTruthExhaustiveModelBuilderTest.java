@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.e2e.processor.aggregator.gt.GroundTruthPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.gt.GroundTruthInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -18,10 +18,10 @@ import java.util.Set;
 public class GroundTruthExhaustiveModelBuilderTest {
 
   @Test
-  public void berkeleyDB() throws IOException, InterruptedException {
+  public void berkeleyDB_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
@@ -37,10 +37,10 @@ public class GroundTruthExhaustiveModelBuilderTest {
   }
 
   @Test
-  public void berkeleyDB_diffGT() throws IOException, InterruptedException {
+  public void berkeleyDB_diffGT_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
@@ -65,10 +65,10 @@ public class GroundTruthExhaustiveModelBuilderTest {
   }
 
   @Test
-  public void lucene() throws IOException, InterruptedException {
+  public void lucene_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
@@ -84,10 +84,10 @@ public class GroundTruthExhaustiveModelBuilderTest {
   }
 
   @Test
-  public void density() throws IOException, InterruptedException {
+  public void density_instrument() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthPerfAggregatorProcessor(programName);
+        new GroundTruthInstrumentPerfAggregatorProcessor(programName);
 
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);

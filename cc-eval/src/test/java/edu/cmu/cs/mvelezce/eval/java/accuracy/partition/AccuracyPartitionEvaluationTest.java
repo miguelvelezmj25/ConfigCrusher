@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.eval.java.accuracy.partition;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
@@ -783,6 +784,23 @@ public class AccuracyPartitionEvaluationTest {
     PerformanceModel<Partition> model = builder.analyze(args);
 
     List<String> options = BaseConvertAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
+  }
+
+  @Test
+  public void multithread_GT_Data() throws IOException, InterruptedException {
+    String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMultithreadAdapter.getListOfOptions();
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
     eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }

@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.methodCall.BaseMethodCallAdapter;
 import edu.cmu.cs.mvelezce.adapters.multipleReturns.BaseMultipleReturnsAdapter;
+import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.pngtastic.BasePngtasticAdapter;
 import edu.cmu.cs.mvelezce.adapters.staticMethodCall.BaseStaticMethodCallAdapter;
@@ -545,6 +546,37 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BasePerformanceAdapter.ORIGINAL_DIR_PATH;
     String classDir = "../" + BasePerformanceAdapter.ORIGINAL_CLASS_PATH;
     Set<String> options = new HashSet<>(BasePerformanceAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToPartitions,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void multithread()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
+
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
+
+    String mainClass = BaseMultithreadAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseMultithreadAdapter.ORIGINAL_DIR_PATH;
+    String classDir = "../" + BaseMultithreadAdapter.ORIGINAL_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseMultithreadAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

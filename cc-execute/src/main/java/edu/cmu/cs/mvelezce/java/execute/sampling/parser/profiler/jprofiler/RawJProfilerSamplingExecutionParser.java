@@ -18,6 +18,9 @@ import java.util.*;
 public class RawJProfilerSamplingExecutionParser
     extends BaseRawExecutionParser<RawJProfilerSamplingPerfExecution> {
 
+  public static final String ALL_THREAD_STATUS = "all";
+  public static final String RUNNABLE_THREAD_STATUS = "running";
+
   private static final String JPROFILER_EXPORT_CMD_UBUNTU = "/home/miguel/jprofiler10/bin/jpexport";
   private static final String JPROFILER_EXPORT_CMD_OSX =
       "/Applications/JProfiler 10.app/Contents/Resources/app/bin/jpexport";
@@ -31,8 +34,13 @@ public class RawJProfilerSamplingExecutionParser
   private static final String CLOSE_HOTSPOT = "</hotspot>";
   private static final String CLOSE_TAG = "/>";
 
-  public RawJProfilerSamplingExecutionParser(String programName, String outputDir) {
+  private final String threadStatus;
+
+  public RawJProfilerSamplingExecutionParser(
+      String programName, String outputDir, String threadStatus) {
     super(programName, outputDir);
+
+    this.threadStatus = threadStatus;
   }
 
   public void logExecution(Set<String> configuration, int iter)
@@ -168,7 +176,8 @@ public class RawJProfilerSamplingExecutionParser
     commandList.add(JPROFILER_SNAPSHOT_FILE);
     commandList.add("HotSpots");
     commandList.add("-expandbacktraces=true");
-    commandList.add("-threadstatus=all");
+    commandList.add("-threadstatus=" + this.threadStatus);
+    commandList.add("-valuesummation=self");
     commandList.add(JPROFILER_SNAPSHOT_NAME + ".xml");
 
     return commandList;

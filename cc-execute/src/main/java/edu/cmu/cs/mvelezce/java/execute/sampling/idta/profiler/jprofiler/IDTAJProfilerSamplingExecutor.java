@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.indexFiles.profiler.jprofiler.JProfilerSamplingIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.profiler.jprofiler.JProfilerSamplingMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.multithread.profiler.jprofiler.JProfilerSamplingMultithreadExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.performance.profiler.jprofiler.JProfilerSamplingPerformanceExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.trivial.profiler.jprofiler.JProfilerSamplingTrivialExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJProfilerSamplingExecutionParser;
@@ -23,15 +24,18 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
       "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/sampling/jprofiler";
 
   public IDTAJProfilerSamplingExecutor(String programName) {
-    this(programName, new HashSet<>(), 0);
+    this(programName, new HashSet<>(), 0, "");
   }
 
   IDTAJProfilerSamplingExecutor(
-      String programName, Set<Set<String>> configurations, int waitAfterExecution) {
+      String programName,
+      Set<Set<String>> configurations,
+      int waitAfterExecution,
+      String threadStatus) {
     super(
         programName,
         configurations,
-        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR),
+        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR, threadStatus),
         waitAfterExecution);
   }
 
@@ -60,6 +64,9 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
         break;
       case JProfilerSamplingPerformanceExecutorAdapter.PROGRAM_NAME:
         adapter = new JProfilerSamplingPerformanceExecutorAdapter(this);
+        break;
+      case JProfilerSamplingMultithreadExecutorAdapter.PROGRAM_NAME:
+        adapter = new JProfilerSamplingMultithreadExecutorAdapter(this);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());

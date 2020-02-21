@@ -1,0 +1,31 @@
+configuration,measured,IDTA,GT,,minci,maxci,ciwindow,IDTA in ci,,absolute error,relative percent error,squared error
+"[]","true",20.86,21.88,,21.855,21.917,0.062,,,1.02,4.662,1.04
+"[A]","true",59.344,60.36,,60.347,60.385,0.038,,,1.016,1.683,1.032
+"[B]","true",59.267,60.37,,60.344,60.436,0.091,,,1.103,1.827,1.217
+"[C]","true",59.306,60.45,,60.379,60.473,0.094,,,1.144,1.892,1.309
+"[A, B]","true",100.673,101.15,,100.891,101.261,0.37,,,0.477,0.472,0.228
+"[A, C]","true",101.17,101.19,,101.11,101.258,0.149,*,,0.02,0.02,0
+"[B, C]","true",101.388,101.16,,100.965,101.283,0.318,,,0.228,0.225,0.052
+"[A, B, C]","true",146.929,143.7,,143.468,143.976,0.508,,,3.229,2.247,10.426
+
+Total: 8
+
+Predictions within CI: 1
+Predictions within CI: 12.5%
+
+Pearsons correlation: 1
+Spearmans correlation: 0.905
+
+Min Absolute Error: 0.02 secs.
+Max Absolute Error: 3.229 secs.
+Mean Absolute Error: 1.03 secs.
+Median Absolute Error: 1.018 secs.
+
+Min Relative Percent Error: 0.02%
+Max Relative Percent Error: 4.662%
+Mean Relative Percent Error: 1.629%
+Median Relative Percent Error: 1.755%
+
+Mean Squared Error: 1.913
+
+Mean Absolute Percentage Error: 1.629%

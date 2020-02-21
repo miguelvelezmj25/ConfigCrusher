@@ -1,0 +1,9 @@
+configuration,measured,performance
+"[]",true,20.86
+"[A]",true,59.344
+"[B]",true,59.267
+"[C]",true,59.306
+"[A, B]",true,100.673
+"[A, C]",true,101.17
+"[B, C]",true,101.388
+"[A, B, C]",true,146.929

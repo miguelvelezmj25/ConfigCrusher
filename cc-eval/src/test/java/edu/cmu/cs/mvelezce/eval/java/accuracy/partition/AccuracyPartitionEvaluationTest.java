@@ -804,4 +804,33 @@ public class AccuracyPartitionEvaluationTest {
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
     eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }
+
+  @Test
+  public void multithread_IDTA_Data() throws IOException, InterruptedException {
+    String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+    model = LuceneIDTAPerformanceModel.toLuceneIDTAPerformanceModel(model);
+
+    BaseCompression gtCompression = new GTCompression(programName);
+    args = new String[0];
+    Set<Set<String>> configsToPredict = gtCompression.analyze(args);
+
+    List<String> options = BaseMultithreadAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(Evaluation.IDTA, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
+  public void multithread_Compare_IDTA_GT() throws IOException {
+    String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
 }

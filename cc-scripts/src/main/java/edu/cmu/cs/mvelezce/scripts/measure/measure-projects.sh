@@ -46,13 +46,13 @@ run() {
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthTimeExecutorTest#"$program"
   elif [ "$approach" == $BFTime ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.bf.BruteForceExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.bf.BruteForceTimeExecutorTest#"$program"
   elif [ "$approach" == $FWTime ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.fw.FeatureWiseExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.fw.FeatureWiseTimeExecutorTest#"$program"
   elif [ "$approach" == $PWTime ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.pw.PairWiseExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.pw.PairWiseTimeExecutorTest#"$program"
   elif [ "$approach" == $IDTA ]; then
     cd ./cc-execute/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutorTest#"$program"

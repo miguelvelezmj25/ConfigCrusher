@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.e2e.execute.executor.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
@@ -45,5 +46,12 @@ public abstract class BaseE2EExecutionParser
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.writeValue(file, e2eResult);
+  }
+
+  @Override
+  protected ProcessedPerfExecution readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<ProcessedPerfExecution>() {});
   }
 }

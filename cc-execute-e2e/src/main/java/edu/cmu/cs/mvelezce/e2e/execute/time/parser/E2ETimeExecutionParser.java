@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.e2e.execute.time.parser;
 
 import edu.cmu.cs.mvelezce.e2e.execute.executor.parser.BaseE2EExecutionParser;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -77,13 +76,5 @@ public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
     }
 
     return entries;
-  }
-
-  @Override
-  protected ProcessedPerfExecution readFromFile(File file) throws IOException {
-    throw new UnsupportedOperationException("implement");
-    //    ObjectMapper mapper = new ObjectMapper();
-    //
-    //    return mapper.readValue(file, new TypeReference<ProcessedPerfExecution>() {});
   }
 }

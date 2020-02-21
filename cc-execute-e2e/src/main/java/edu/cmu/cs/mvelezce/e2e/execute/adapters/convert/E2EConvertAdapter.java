@@ -27,7 +27,7 @@ public class E2EConvertAdapter extends ConvertExecutorAdapter {
             + ExecutorAdapter.PATH_SEPARATOR
             + ExecutorAdapter.USER_HOME
             + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar",
-        ExecutorAdapter.EXECUTOR_MAIN_CLASS_PREFIX + BaseConvertAdapter.PROGRAM_NAME,
+        BaseConvertAdapter.MAIN_CLASS,
         configAsArgs);
   }
 }

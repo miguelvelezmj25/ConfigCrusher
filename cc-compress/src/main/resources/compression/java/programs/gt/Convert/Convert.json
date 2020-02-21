@@ -1,39 +1,23 @@
 [
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI"
-  ],
   [],
   [
     "SCALE_IS_HEIGHT_DP"
   ],
   [
-    "PLATFORM",
+    "OUT_COMPRESSION"
+  ],
+  [
     "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
     "OUT_COMPRESSION",
-    "GUI"
+    "SCALE"
   ],
   [
     "PLATFORM",
     "SCALE"
   ],
   [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
     "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
+    "OUT_COMPRESSION"
   ],
   [
     "PLATFORM"
@@ -54,49 +38,45 @@
   [
     "PLATFORM",
     "OUT_COMPRESSION",
-    "GUI"
-  ],
-  [
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI",
     "SCALE"
-  ],
-  [
-    "GUI"
-  ],
-  [
-    "SCALE"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "SCALE"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "GUI"
   ],
   [
     "SCALE_IS_HEIGHT_DP",
     "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI",
+    "OUT_COMPRESSION"
+  ],
+  [
     "SCALE"
+  ],
+  [
+    "SCALE_IS_HEIGHT_DP",
+    "SCALE"
+  ],
+  [
+    "COMPRESSION_QUALITY",
+    "OUT_COMPRESSION"
   ],
   [
     "PLATFORM",
     "SCALE_IS_HEIGHT_DP",
     "OUT_COMPRESSION",
-    "GUI"
+    "SCALE"
   ],
   [
+    "PLATFORM",
+    "COMPRESSION_QUALITY",
+    "OUT_COMPRESSION",
+    "SCALE"
+  ],
+  [
+    "PLATFORM",
+    "COMPRESSION_QUALITY",
+    "SCALE"
+  ],
+  [
+    "PLATFORM",
     "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION",
-    "GUI"
-  ],
-  [
-    "OUT_COMPRESSION",
-    "GUI"
+    "COMPRESSION_QUALITY"
   ],
   [
     "PLATFORM",
@@ -104,26 +84,21 @@
     "OUT_COMPRESSION"
   ],
   [
+    "PLATFORM",
     "SCALE_IS_HEIGHT_DP",
     "COMPRESSION_QUALITY",
-    "GUI",
+    "OUT_COMPRESSION",
     "SCALE"
   ],
   [
     "PLATFORM",
     "SCALE_IS_HEIGHT_DP",
-    "GUI",
+    "COMPRESSION_QUALITY",
     "SCALE"
   ],
   [
     "PLATFORM",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "COMPRESSION_QUALITY",
-    "GUI",
-    "SCALE"
+    "COMPRESSION_QUALITY"
   ],
   [
     "SCALE_IS_HEIGHT_DP",
@@ -151,171 +126,20 @@
     "OUT_COMPRESSION"
   ],
   [
+    "PLATFORM",
+    "SCALE_IS_HEIGHT_DP",
+    "OUT_COMPRESSION"
+  ],
+  [
+    "OUT_COMPRESSION",
+    "SCALE"
+  ],
+  [
+    "PLATFORM",
+    "OUT_COMPRESSION"
+  ],
+  [
     "SCALE_IS_HEIGHT_DP",
     "COMPRESSION_QUALITY"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "GUI"
-  ],
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "GUI"
-  ],
-  [
-    "OUT_COMPRESSION"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "GUI"
-  ],
-  [
-    "PLATFORM",
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "COMPRESSION_QUALITY",
-    "GUI"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION"
-  ],
-  [
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "GUI"
-  ],
-  [
-    "PLATFORM",
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY"
-  ],
-  [
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "COMPRESSION_QUALITY",
-    "OUT_COMPRESSION",
-    "GUI"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "GUI"
-  ],
-  [
-    "PLATFORM",
-    "COMPRESSION_QUALITY",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "SCALE_IS_HEIGHT_DP",
-    "GUI",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "SCALE_IS_HEIGHT_DP",
-    "OUT_COMPRESSION"
-  ],
-  [
-    "OUT_COMPRESSION",
-    "SCALE"
-  ],
-  [
-    "PLATFORM",
-    "OUT_COMPRESSION"
   ]
 ]

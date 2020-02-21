@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NULL="null"
-PROGRAMS="berkeleyDb lucene density multithread"
+PROGRAMS="berkeleyDb lucene convert multithread"
 GTInst="gtinst"
 BFInst="bfinst"
 FWInst="fwinst"

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
@@ -119,6 +120,25 @@ public class IDTASuboptimalGreedyConjunctionsCompressionTest {
   public void multithread() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
     List<String> options = BaseMultithreadAdapter.getListOfOptions();
+
+    String workloadSize = "small";
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Collection<Partitioning> allPartitions = analysis.analyze().values();
+
+    BaseCompression compression =
+        new IDTASuboptimalGreedyConjunctionsCompression(programName, options, allPartitions);
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<Set<String>> configs = compression.analyze(args);
+
+    System.out.println(configs.size() + " to sample");
+  }
+
+  @Test
+  public void convert() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    List<String> options = BaseConvertAdapter.getListOfOptions();
 
     String workloadSize = "small";
     Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);

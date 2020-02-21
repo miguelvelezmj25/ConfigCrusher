@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.e2e.execute.time;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.executor.E2EExecutor;
 import edu.cmu.cs.mvelezce.e2e.execute.time.parser.E2ETimeExecutionParser;
@@ -32,6 +33,9 @@ public abstract class E2ETimeExecutor extends E2EExecutor {
     switch (this.getProgramName()) {
       case BaseMultithreadAdapter.PROGRAM_NAME:
         commandList.add(SCRIPTS_DIR + "multithread.sh");
+        break;
+      case BaseConvertAdapter.PROGRAM_NAME:
+        commandList.add(SCRIPTS_DIR + "convert.sh");
         break;
       default:
         throw new RuntimeException("Could not find a script for " + this.getProgramName());

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.compress.fw;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
@@ -28,6 +29,19 @@ public class FWCompressionTest {
   public void lucene() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    BaseCompression compression = new FWCompression(programName, options);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    Set<Set<String>> configs = compression.analyze(args);
+    System.out.println("Configs " + configs.size());
+  }
+
+  @Test
+  public void convert() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    List<String> options = BaseConvertAdapter.getListOfOptions();
     BaseCompression compression = new FWCompression(programName, options);
 
     String[] args = new String[2];

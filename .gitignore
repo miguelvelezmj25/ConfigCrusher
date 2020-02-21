@@ -232,3 +232,5 @@ vignettes/*.pdf
 /cc-execute/snapshot.xml
 /cc-execute-e2e/index/
 /cc-execute/index/
+/cc-execute-e2e/output/
+/cc-execute/output/

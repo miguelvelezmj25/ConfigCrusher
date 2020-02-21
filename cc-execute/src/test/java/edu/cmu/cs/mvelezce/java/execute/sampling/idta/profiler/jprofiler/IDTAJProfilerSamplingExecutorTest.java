@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
@@ -105,6 +106,28 @@ public class IDTAJProfilerSamplingExecutorTest {
   @Test
   public void multithread() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configurations = compression.analyze(args);
+
+    Executor executor =
+        new IDTAJProfilerSamplingExecutor(
+            programName,
+            configurations,
+            30000,
+            RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
+
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i5";
+
+    executor.execute(args);
+  }
+
+  @Test
+  public void convert() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);

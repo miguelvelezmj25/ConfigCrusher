@@ -45,7 +45,7 @@ public class GroundTruthInstrumentExecutorTest {
   }
 
   @Test
-  public void density() throws IOException, InterruptedException {
+  public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];

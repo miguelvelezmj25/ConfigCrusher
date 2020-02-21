@@ -47,7 +47,7 @@ public class GroundTruthInstrumentPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void density() throws IOException, InterruptedException {
+  public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthInstrumentExecutor(programName);
     Map<Integer, Set<ProcessedPerfExecution>> itersToResults =

@@ -351,7 +351,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Partitioning> {
         long startTime = System.nanoTime();
         this.startEndRegionBlocksSetter.processBlocks(methodNode, classNode);
         long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6) + " ms");
 
         if (this.debug()) {
           this.startEndRegionBlocksSetter.debugBlockData(methodNode, classNode);
@@ -380,7 +380,7 @@ public class IDTAMethodTransformer extends RegionTransformer<Partitioning> {
         long startTime = System.nanoTime();
         propagatedRegions = propagatedRegions | this.expandRegionsIntra(methodNode, classNode);
         long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((endTime - startTime) / 1E6));
+        System.out.println("Time taken: " + ((endTime - startTime) / 1E6) + " ms");
       }
     }
 

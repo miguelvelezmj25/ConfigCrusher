@@ -12,10 +12,8 @@ public class BaseMultithreadAdapter extends BaseAdapter {
   public static final String ROOT_PACKAGE = "edu.cmu.cs.mvelezce";
   public static final String ORIGINAL_CLASS_PATH =
       "../performance-mapper-evaluation/original/multithread-taint/target/classes";
-  public static final String INSTRUMENTED_DIR_PATH =
-      "../performance-mapper-evaluation/instrumented/multithread-taint";
-  public static final String INSTRUMENTED_CLASS_PATH =
-      "../performance-mapper-evaluation/instrumented/multithread-taint/target/classes";
+  public static final String ORIGINAL_DIR_PATH =
+      "../performance-mapper-evaluation/original/multithread-taint";
 
   private static final String[] OPTIONS = {"A", "B", "C"};
 

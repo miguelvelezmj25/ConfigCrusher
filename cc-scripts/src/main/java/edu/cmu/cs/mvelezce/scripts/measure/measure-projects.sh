@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NULL="null"
-PROGRAMS="berkeleyDb lucene density"
+PROGRAMS="berkeleyDb lucene density multithread"
 GTInst="gtinst"
 BFInst="bfinst"
 FWInst="fwinst"
@@ -31,19 +31,19 @@ run() {
 
   if [ "$approach" == $GTInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.gt.GroundTruthExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.gt.GroundTruthInstrumentExecutorTest#"$program"
   elif [ "$approach" == $BFInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.bf.BruteForceExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.bf.BruteForceInstrumentExecutorTest#"$program"
   elif [ "$approach" == $FWInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.fw.FeatureWiseExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.fw.FeatureWiseInstrumentExecutorTest#"$program"
   elif [ "$approach" == $PWInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.pw.PairWiseExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.pw.PairWiseInstrumentExecutorTest#"$program"
   elif [ "$approach" == $GTTime ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthTimeExecutorTest#"$program"
   elif [ "$approach" == $BFTime ]; then
     cd ./cc-execute-e2e/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.bf.BruteForceExecutorTest#"$program"
@@ -58,7 +58,7 @@ run() {
     mvn test -Dtest=edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutorTest#"$program"
   elif [ "$approach" == $IDTAE2EInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAInstrumentExecutorTest#"$program"
   elif [ "$approach" == $SPLAT ]; then
     echo "Need to implement SPLAT"
   fi
@@ -93,7 +93,7 @@ for entry in "$@"; do
     continue
   fi
 
-  if [ "$approach" != $GTInst ] && [ "$approach" != $BFInst ] && [ "$approach" != $FWInst ] && [ "$approach" != $PWInst ] && [ "$approach" != $IDTA ] && [ "$approach" != $IDTAE2EInst ] && [ "$approach" != $SPLAT ]; then
+  if [ "$approach" != $GTInst ] && [ "$approach" != $BFInst ] && [ "$approach" != $FWInst ] && [ "$approach" != $PWInst ] && [ "$approach" != $IDTA ] && [ "$approach" != $IDTAE2EInst ] && [ "$approach" != $IDTAE2ETime ] && [ "$approach" != $GTTime ] && [ "$approach" != $BFTime ] && [ "$approach" != $FWTime ] && [ "$approach" != $PWTime ] && [ "$approach" != $SPLAT ]; then
     echo "Could not find approach" "$approach"
     program=$NULL
     approach=$NULL

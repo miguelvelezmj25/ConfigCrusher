@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class GroundTruthExecutorTest {
+public class GroundTruthInstrumentExecutorTest {
 
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {

@@ -55,7 +55,7 @@ public final class ConfigAnalysis {
         continue;
       }
 
-      predictedTime = Math.max(predictedTime, 1E6);
+      predictedTime = Math.max(predictedTime, thresholdToPrint);
       predictedTotalTime += predictedTime;
     }
 
@@ -73,8 +73,8 @@ public final class ConfigAnalysis {
         continue;
       }
 
-      measuredTime = Math.max(measuredTime, 1E6);
-      predictedTime = Math.max(predictedTime, 1E6);
+      measuredTime = Math.max(measuredTime, thresholdToPrint);
+      predictedTime = Math.max(predictedTime, thresholdToPrint);
 
       double absoluteError = predictedTime - measuredTime;
       double relativeError = absoluteError / measuredTime;
@@ -152,7 +152,8 @@ public final class ConfigAnalysis {
     return measuredTimes;
   }
 
-  public void some(String approach, Set<PerformanceEntry> performanceEntries, Set<String> config)
+  public void analyzeRegionsExecTime(
+      String approach, Set<PerformanceEntry> performanceEntries, Set<String> config)
       throws IOException {
     for (PerformanceEntry perfEntry : performanceEntries) {
       if (!perfEntry.getConfiguration().equals(config)) {

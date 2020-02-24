@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.eval.java.config;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
@@ -33,7 +34,7 @@ public class ConfigAnalysisTest {
     config.add("RAM_BUFFER_SIZE_MB");
 
     ConfigAnalysis configAnalysis = new ConfigAnalysis(programName);
-    configAnalysis.some(Evaluation.IDTA, performanceEntries, config);
+    configAnalysis.analyzeRegionsExecTime(Evaluation.IDTA, performanceEntries, config);
   }
 
   @Test
@@ -98,6 +99,32 @@ public class ConfigAnalysisTest {
     PerformanceModel<Partition> model = builder.analyze(args);
 
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    ConfigAnalysis configAnalysis = new ConfigAnalysis(programName, options);
+
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    args = new String[0];
+    Set<Set<String>> executedConfigs = compression.analyze(args);
+
+    for (Set<String> config : executedConfigs) {
+      configAnalysis.compareMeasurementAndPrediction(
+          Evaluation.IDTA, performanceEntries, model, config);
+    }
+  }
+
+  @Test
+  public void compare_idta_model_convert_all() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new IDTAPerformanceModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseConvertAdapter.getListOfOptions();
     ConfigAnalysis configAnalysis = new ConfigAnalysis(programName, options);
 
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);

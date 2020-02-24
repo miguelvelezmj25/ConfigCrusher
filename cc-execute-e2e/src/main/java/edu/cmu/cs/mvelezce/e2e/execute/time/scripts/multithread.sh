@@ -5,7 +5,10 @@ MAIN_CLASS=${2}
 ARG0=${3}
 ARG1=${4}
 ARG2=${5}
-OUTPUT_FILE=data.ser
+IDTA_OUTPUT_FILE=data.ser
+OUTPUT_DIR=output
 
-rm -rf $OUTPUT_FILE
-(/usr/bin/time -p java -Xmx12g -Xms12g -cp $PROGRAM_CLASS_PATH $MAIN_CLASS $ARG0 $ARG1 $ARG2) 2>$OUTPUT_FILE
+rm -rf $IDTA_OUTPUT_FILE
+rm -rf $OUTPUT_DIR
+mkdir $OUTPUT_DIR
+(/usr/bin/time -p java -Xmx12g -Xms12g -cp $PROGRAM_CLASS_PATH $MAIN_CLASS $ARG0 $ARG1 $ARG2) 2>IDTA_OUTPUT_FILE

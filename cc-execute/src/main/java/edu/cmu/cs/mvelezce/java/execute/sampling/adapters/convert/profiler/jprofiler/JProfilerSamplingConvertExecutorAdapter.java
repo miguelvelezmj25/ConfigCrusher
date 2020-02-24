@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.sampling.adapters.convert.profiler.jprofiler;
 
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
-import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.convert.ConvertExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 
@@ -27,11 +26,7 @@ public class JProfilerSamplingConvertExecutorAdapter extends ConvertExecutorAdap
 
     String[] configAsArgs = this.configurationAsMainArguments(configuration);
     this.executor.executeProgram(
-        "../"
-            + BaseConvertAdapter.ORIGINAL_CLASS_PATH
-            + ExecutorAdapter.PATH_SEPARATOR
-            + ExecutorAdapter.USER_HOME
-            + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar",
+        "../" + BaseConvertAdapter.ORIGINAL_CLASS_PATH,
         BaseConvertAdapter.MAIN_CLASS,
         this.getAgentPath(),
         configAsArgs);

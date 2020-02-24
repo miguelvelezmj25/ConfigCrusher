@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.e2e.execute.adapters.convert;
 
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.executor.E2EExecutor;
-import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.adapters.convert.ConvertExecutorAdapter;
 
 import java.io.IOException;
@@ -22,11 +21,7 @@ public class E2EConvertAdapter extends ConvertExecutorAdapter {
 
     String[] configAsArgs = this.configurationAsMainArguments(configuration);
     this.executor.executeProgram(
-        "../"
-            + BaseConvertAdapter.ORIGINAL_CLASS_PATH
-            + ExecutorAdapter.PATH_SEPARATOR
-            + ExecutorAdapter.USER_HOME
-            + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar",
+        "../" + BaseConvertAdapter.ORIGINAL_CLASS_PATH,
         BaseConvertAdapter.MAIN_CLASS,
         configAsArgs);
   }

@@ -2,20 +2,20 @@ package edu.cmu.cs.mvelezce.e2e.execute.instrument.idta;
 
 import edu.cmu.cs.mvelezce.e2e.execute.instrument.E2EInstrumentExecutor;
 import edu.cmu.cs.mvelezce.e2e.execute.instrument.parser.E2EInstrumentExecutionParser;
-import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class IDTAInstrumentExecutor extends E2EInstrumentExecutor {
+public class IDTAE2EInstrumentExecutor extends E2EInstrumentExecutor {
 
   public static final String OUTPUT_DIR = E2EInstrumentExecutor.OUTPUT_DIR + "/java/programs/idta";
 
-  public IDTAInstrumentExecutor(String programName) {
+  public IDTAE2EInstrumentExecutor(String programName) {
     this(programName, new HashSet<>(), -1);
   }
 
-  IDTAInstrumentExecutor(String programName, Set<Set<String>> configurations, int waitAfterExecution) {
+  IDTAE2EInstrumentExecutor(
+      String programName, Set<Set<String>> configurations, int waitAfterExecution) {
     super(
         programName,
         configurations,

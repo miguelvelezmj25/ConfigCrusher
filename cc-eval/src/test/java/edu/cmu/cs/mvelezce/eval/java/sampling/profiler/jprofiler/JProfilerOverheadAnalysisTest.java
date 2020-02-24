@@ -1,9 +1,11 @@
 package edu.cmu.cs.mvelezce.eval.java.sampling.profiler.jprofiler;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.idta.IDTAE2EInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.idta.IDTAE2ETimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta.IDTAPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
@@ -38,6 +40,22 @@ public class JProfilerOverheadAnalysisTest {
     Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
 
     perfAggregatorProcessor = new IDTAE2EInstrumentPerfAggregatorProcessor(programName);
+    args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis = new JProfilerOverheadAnalysis(programName);
+    analysis.analyze(idtaPerfEntries, e2ePerfEntries);
+  }
+
+  @Test
+  public void convert_time() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
+
+    perfAggregatorProcessor = new IDTAE2ETimePerfAggregatorProcessor(programName);
     args = new String[0];
     Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
 

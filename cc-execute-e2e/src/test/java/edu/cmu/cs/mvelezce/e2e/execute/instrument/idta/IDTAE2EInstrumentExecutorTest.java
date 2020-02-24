@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class IDTAInstrumentExecutorTest {
+public class IDTAE2EInstrumentExecutorTest {
 
   @Test
   public void berkeleyDb() throws IOException, InterruptedException {
@@ -18,7 +18,7 @@ public class IDTAInstrumentExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new IDTAInstrumentExecutor(programName, configs, 10000);
+    Executor executor = new IDTAE2EInstrumentExecutor(programName, configs, 10000);
 
     args = new String[3];
     args[0] = "-delres";
@@ -33,7 +33,7 @@ public class IDTAInstrumentExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new IDTAInstrumentExecutor(programName, configs, 10000);
+    Executor executor = new IDTAE2EInstrumentExecutor(programName, configs, 10000);
 
     args = new String[3];
     args[0] = "-delres";

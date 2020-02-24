@@ -58,7 +58,7 @@ run() {
     mvn test -Dtest=edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutorTest#"$program"
   elif [ "$approach" == $IDTAE2EInst ]; then
     cd ./cc-execute-e2e/ || exit
-    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAInstrumentExecutorTest#"$program"
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAE2EInstrumentExecutorTest#"$program"
   elif [ "$approach" == $SPLAT ]; then
     echo "Need to implement SPLAT"
   fi

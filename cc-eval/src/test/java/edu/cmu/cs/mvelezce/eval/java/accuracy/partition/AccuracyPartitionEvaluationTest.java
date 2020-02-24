@@ -21,6 +21,7 @@ import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.learning.builder.model.matlab.MatlabLinearLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.models.idta.BerkeleyIDTAPerformanceModel;
+import edu.cmu.cs.mvelezce.models.idta.ConvertIDTAPerformanceModel;
 import edu.cmu.cs.mvelezce.models.idta.LuceneIDTAPerformanceModel;
 import org.junit.Test;
 
@@ -919,7 +920,7 @@ public class AccuracyPartitionEvaluationTest {
         new IDTAPerformanceModelBuilder(programName);
     args = new String[0];
     PerformanceModel<Partition> model = builder.analyze(args);
-    model = LuceneIDTAPerformanceModel.toLuceneIDTAPerformanceModel(model);
+    model = ConvertIDTAPerformanceModel.toConvertIDTAPerformanceModel(model);
 
     BaseCompression gtCompression = new GTCompression(programName);
     args = new String[0];

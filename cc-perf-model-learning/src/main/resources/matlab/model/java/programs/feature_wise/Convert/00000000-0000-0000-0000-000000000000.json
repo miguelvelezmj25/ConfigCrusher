@@ -1,0 +1,37 @@
+{
+  "region": "00000000-0000-0000-0000-000000000000",
+  "model": {
+    "True": 1.666E10,
+    "SCALE": 1.1154E11
+  },
+  "modelToMin": {},
+  "modelToMax": {},
+  "modelToDiff": {},
+  "modelToSampleVariance": {},
+  "modelToConfidenceInterval": {},
+  "modelToCoefficientOfVariation": {
+    "True": 0.0,
+    "SCALE": 0.0,
+    "SCALE_IS_HEIGHT_DP": 0.0,
+    "COMPRESSION_QUALITY": 0.0,
+    "OUT_COMPRESSION": 0.0,
+    "PLATFORM": 0.0
+  },
+  "modelToPerfHumanReadable": {
+    "True": "16.66",
+    "SCALE": "111.54"
+  },
+  "modelToMinHumanReadable": {},
+  "modelToMaxHumanReadable": {},
+  "modelToDiffHumanReadable": {},
+  "modelToSampleVarianceHumanReadble": {},
+  "modelToConfidenceIntervalHumanReadable": {},
+  "modelToCoefficientOfVariationHumanReadable": {
+    "True": "",
+    "SCALE": "",
+    "SCALE_IS_HEIGHT_DP": "",
+    "COMPRESSION_QUALITY": "",
+    "OUT_COMPRESSION": "",
+    "PLATFORM": ""
+  }
+}

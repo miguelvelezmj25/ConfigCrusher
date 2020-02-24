@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.builder.idta;
 
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
@@ -124,6 +125,28 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseMultithreadAdapter.getListOfOptions();
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
+        new IDTAPerformanceModelBuilder(
+            programName, options, regionsToPartitions, performanceEntries);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void convert() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseConvertAdapter.getListOfOptions();
     BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
             programName, options, regionsToPartitions, performanceEntries);

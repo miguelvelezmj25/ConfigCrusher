@@ -1,0 +1,873 @@
+[
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "APlatformConverter",
+    "methodSignature": "convert(Ljava/io/File;Lat/favre/tools/dconvert/arg/Arguments;)Lat/favre/tools/dconvert/converters/Result;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "d0cf16ac-f2d2-44ca-9523-585abe89b6f2",
+    "startBlock": "1125697213",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "isRequested(Lcom/twelvemonkeys/imageio/metadata/jpeg/JPEGSegment;Ljava/util/Map;)Z",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "18b2af18-30f6-4007-9315-185f16c1747a",
+    "startBlock": "953489823",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "DConvert",
+    "methodSignature": "execute(Lat/favre/tools/dconvert/arg/Arguments;ZLat/favre/tools/dconvert/DConvert$HandlerCallback;)V",
+    "decisionIndex": -1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "07c574ed-c818-4b0d-b1c0-f0137e8d846f",
+    "startBlock": "2144338659",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ResampleAlgorithm$LanczosFilter",
+    "methodSignature": "apply(F)F",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "9335b197-702f-4e30-918e-5214b1ce9ada",
+    "startBlock": "1560921027",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "AdvancedResizeOp",
+    "methodSignature": "fireProgressChanged(F)V",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "2bc497f0-c092-4444-92b0-fda8a8c1b757",
+    "startBlock": "994345714",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "MiscUtil",
+    "methodSignature": "getFileExtension(Ljava/io/File;)Ljava/lang/String;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "608ee64a-3357-418d-87ad-9b883819fd19",
+    "startBlock": "1967667267",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "isImageDone(Lcom/twelvemonkeys/imageio/metadata/jpeg/JPEGSegment;)Z",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "21fb8306-20de-4012-a243-e7cdcadf2a48",
+    "startBlock": "2104304479",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.arg",
+    "className": "Arguments",
+    "methodSignature": "getOutCompressionForType(Lat/favre/tools/dconvert/arg/EOutputCompressionMode;Lat/favre/tools/dconvert/arg/ImageType;)Ljava/util/List;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "d1cccf12-f4f5-4ae1-b73d-635cb9e87933",
+    "startBlock": "1551061851",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.lang",
+    "className": "Validate",
+    "methodSignature": "notNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "ad2368f2-38b7-4bea-8669-19eb2fe5a8c9",
+    "startBlock": "1512728076",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "Convert",
+    "methodSignature": "getPlatform(Ljava/lang/String;)Ljava/util/Set;",
+    "decisionIndex": -1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "88b34ebe-a6ec-40ff-ae02-0cc454b9b101",
+    "startBlock": "1663044812",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "AdvancedResizeOp",
+    "methodSignature": "filter(Ljava/awt/image/BufferedImage;Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "583d36e1-78c4-4480-bcc2-6748e727f832",
+    "startBlock": "273803614",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "IOSConverter",
+    "methodSignature": "onPreExecute(Ljava/io/File;Ljava/lang/String;Ljava/util/List;Lat/favre/tools/dconvert/arg/ImageType;Lat/favre/tools/dconvert/arg/Arguments;)V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "df274a98-6f05-4213-b00d-859aa72a49f3",
+    "startBlock": "1307277565",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "DConvert",
+    "methodSignature": "informFinished(ILjava/util/List;Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "5947900a-7959-470f-b971-932b145e0717",
+    "startBlock": "1607585960",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "MiscUtil",
+    "methodSignature": "getFileNameWithoutExtension(Ljava/io/File;)Ljava/lang/String;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "0384861b-70bd-42f2-b0f4-983f3d5ba415",
+    "startBlock": "463690173",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "readSegment(Ljavax/imageio/stream/ImageInputStream;Ljava/util/Map;)Lcom/twelvemonkeys/imageio/metadata/jpeg/JPEGSegment;",
+    "decisionIndex": -1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "d925ffc8-4eae-4a38-8038-b75e7bf4a5bf",
+    "startBlock": "985128744",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "doFilter(Ljava/awt/image/BufferedImage;Ljava/awt/image/BufferedImage;II)Ljava/awt/image/BufferedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "4154fb53-bede-414a-a798-02ab2f6eda60",
+    "startBlock": "1725475321",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ImageUtils",
+    "methodSignature": "nrChannels(Ljava/awt/image/BufferedImage;)I",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "4c0adb01-25d9-4505-9924-3d777070acf0",
+    "startBlock": "156465666",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "Convert",
+    "methodSignature": "getOutCompression(Ljava/lang/String;)Lat/favre/tools/dconvert/arg/EOutputCompressionMode;",
+    "decisionIndex": -1,
+    "info": [
+      "OUT_COMPRESSION",
+      "!OUT_COMPRESSION"
+    ],
+    "id": "01937aca-b76f-4811-8f2d-7e30818a1b7e",
+    "startBlock": "975476843",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "DensityBucketUtil",
+    "methodSignature": "lambda$getDensityBucketsWithFactorScale$4(FLat/favre/tools/dconvert/arg/Arguments;Lat/favre/tools/dconvert/converters/descriptors/DensityDescriptor;)Z",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "1da622bf-bfdb-4cbe-ac56-b6f7ec16087b",
+    "startBlock": "72107875",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "AndroidConverter",
+    "methodSignature": "createMainSubFolder(Ljava/io/File;Ljava/lang/String;Lat/favre/tools/dconvert/arg/Arguments;)Ljava/io/File;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "c35affac-ed06-45eb-9ee2-5d3265080c11",
+    "startBlock": "16097936",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "DConvert$1",
+    "methodSignature": "onFinished(ILjava/util/List;Ljava/lang/StringBuilder;Ljava/util/List;Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "d5ac13db-71fc-4106-8bed-8569c8ae1a50",
+    "startBlock": "1891186040",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "ImageUtil",
+    "methodSignature": "read(Ljavax/imageio/stream/ImageInputStream;Lat/favre/tools/dconvert/arg/ImageType;)Lat/favre/tools/dconvert/util/LoadedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "24364ed9-69fb-44f3-8bb9-0176427b198d",
+    "startBlock": "969013879",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "MiscUtil",
+    "methodSignature": "getCmdProgressBar(F)Ljava/lang/String;",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "c74fa15d-e553-45b4-a9d1-43a89e6f119b",
+    "startBlock": "641980258",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "getResultBufferedImageType(Ljava/awt/image/BufferedImage;)I",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "86fcebd9-f584-4219-a6aa-7084e89a25bd",
+    "startBlock": "1407314326",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "horizontallyFromSrcToWork(Ljava/awt/image/BufferedImage;[[BII)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "f61f1ed5-f3c4-476a-aa44-aab119c8e05b",
+    "startBlock": "580151467",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "IOSConverter",
+    "methodSignature": "createMainSubFolder(Ljava/io/File;Ljava/lang/String;Lat/favre/tools/dconvert/arg/Arguments;)Ljava/io/File;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "3dd556e7-1a69-4b99-a282-532d305d8334",
+    "startBlock": "1888296222",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "WorkerHandler$InternalCallback",
+    "methodSignature": "onJobFinished(Lat/favre/tools/dconvert/converters/Result;)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "68632744-f379-43d1-8a18-0311259fed14",
+    "startBlock": "301171289",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ImageHandler",
+    "methodSignature": "getScalingAlgorithm(Lat/favre/tools/dconvert/arg/EScalingAlgorithm$Type;)Lat/favre/tools/dconvert/arg/EScalingAlgorithm;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "5492a1fd-4cd3-40ff-9aad-4c4d2a26d192",
+    "startBlock": "2032444243",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ImageHandler",
+    "methodSignature": "getScalingType(Lat/favre/tools/dconvert/util/LoadedImage;Ljava/awt/Dimension;)Lat/favre/tools/dconvert/arg/EScalingAlgorithm$Type;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "01944a93-4936-4884-a824-7f90e7c44486",
+    "startBlock": "1378618407",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "readSOI(Ljavax/imageio/stream/ImageInputStream;)V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "d5c98cfc-065a-499e-ab58-1c18a6f1b8b5",
+    "startBlock": "1257784110",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "toByte(F)B",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "772fa3a9-3e1f-4165-9194-dd931d436a0e",
+    "startBlock": "1799563860",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "MiscUtil",
+    "methodSignature": "createAndCheckFolder(Ljava/lang/String;Z)Ljava/io/File;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "(!PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "6cf92dd3-e862-40a4-a602-536972db5b6a",
+    "startBlock": "1071933072",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ImageHandler",
+    "methodSignature": "scale(Lat/favre/tools/dconvert/converters/scaling/ScaleAlgorithm;Ljava/awt/image/BufferedImage;IILat/favre/tools/dconvert/arg/ImageType$ECompression;Ljava/awt/Color;)Ljava/awt/image/BufferedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "32ee09f0-0019-4749-84fe-8c7c9fc26eac",
+    "startBlock": "883334144",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "readSegments(Ljavax/imageio/stream/ImageInputStream;Ljava/util/Map;)Ljava/util/List;",
+    "decisionIndex": -1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "010241ee-2e62-4b79-8e54-9c014f81e54b",
+    "startBlock": "42622051",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ImageUtils",
+    "methodSignature": "setBGRPixels([BLjava/awt/image/BufferedImage;IIII)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "6a8d106d-620c-4705-afd5-bdfb11aa88e5",
+    "startBlock": "320231124",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "WorkerHandler",
+    "methodSignature": "start(Ljava/util/List;)V",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "6a2afffa-cb62-4a79-9309-e62fcd5666ef",
+    "startBlock": "549276978",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "DimensionConstrain",
+    "methodSignature": "createAbsolutionDimension(II)Lcom/mortennobel/imagescaling/DimensionConstrain;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "6a2bb226-b3b6-4677-8f3f-a4a1d72b6468",
+    "startBlock": "1053230923",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "verticalFromWorkToDst([[B[BII)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "1942a678-9a95-4250-baac-4ce4343b03a6",
+    "startBlock": "458049469",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "WorkerHandler$Worker",
+    "methodSignature": "run()V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "dce5ae22-2d0f-4e6f-8cfc-ed6f04a82a18",
+    "startBlock": "2022406351",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegment",
+    "methodSignature": "isAppSegmentMarker(I)Z",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "07ce98d5-4e8d-4ac0-bb76-e62a131ba06b",
+    "startBlock": "374607909",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "createSubSampling(Lcom/mortennobel/imagescaling/ResampleFilter;II)Lcom/mortennobel/imagescaling/ResampleOp$SubSamplingData;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "55b31717-07ad-41ab-a83e-ddc3ff78f55b",
+    "startBlock": "1921074704",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "ImageUtil",
+    "methodSignature": "readExif(Ljava/io/File;)Lcom/twelvemonkeys/imageio/metadata/CompoundDirectory;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "3546e1b1-784e-4ff7-a167-5166f9645cd5",
+    "startBlock": "1662595528",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ImageUtils",
+    "methodSignature": "getPixelsBGR(Ljava/awt/image/BufferedImage;II[B[I)[B",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "a80a22d1-4153-4fc2-9874-2920232584af",
+    "startBlock": "793850902",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ImageHandler",
+    "methodSignature": "saveToFile(Ljava/io/File;Lat/favre/tools/dconvert/util/LoadedImage;Ljava/awt/Dimension;Z)Ljava/util/List;",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "91aabf09-3fef-4003-8ef9-9175339d202a",
+    "startBlock": "1047914491",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "readSegments(Ljavax/imageio/stream/ImageInputStream;ILjava/lang/String;)Ljava/util/List;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "812487f3-71e6-4835-aa1a-f6983e150173",
+    "startBlock": "157862953",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters.scaling",
+    "className": "ImageHandler",
+    "methodSignature": "compressJpeg(Ljava/awt/image/BufferedImage;Lcom/twelvemonkeys/imageio/metadata/CompoundDirectory;FLjava/io/File;)V",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "277a68e1-9a0f-4eb7-8626-e4ce6568178d",
+    "startBlock": "2002953789",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "AndroidConverter",
+    "methodSignature": "getAndroidDensityDescriptors(Lat/favre/tools/dconvert/arg/Arguments;)Ljava/util/List;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "826a7d27-eceb-4800-8ea8-4c84bb317915",
+    "startBlock": "1857420529",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "isKnownJPEGMarker(I)Z",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "cc46a349-098e-4af6-93bc-3c35db20c8fe",
+    "startBlock": "1653235612",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.arg",
+    "className": "RoundingHandler",
+    "methodSignature": "round(D)J",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "6091b88b-12a0-4fca-ba03-9a627bd7ff5b",
+    "startBlock": "1962346540",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.arg",
+    "className": "Arguments",
+    "methodSignature": "getImageType(Ljava/io/File;)Lat/favre/tools/dconvert/arg/ImageType;",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "e2ae0ed4-294e-4b6e-8a0f-b32f8b7f79ae",
+    "startBlock": "1065069215",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "ImageUtil",
+    "methodSignature": "loadImage(Ljava/io/File;)Lat/favre/tools/dconvert/util/LoadedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "e5d51c45-a735-49cd-a9c0-89df99a6050a",
+    "startBlock": "1077150078",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "Convert$1",
+    "methodSignature": "onFinished(ILjava/util/List;JZLjava/lang/String;)V",
+    "decisionIndex": 1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "66f36f78-d95e-4031-9533-e8bb253d6469",
+    "startBlock": "1939740811",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "DensityBucketUtil",
+    "methodSignature": "getDensityBuckets(Ljava/util/List;Ljava/awt/Dimension;Lat/favre/tools/dconvert/arg/Arguments;FZ)Ljava/util/Map;",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "91b966f2-8c29-4378-a9df-2a6bafa0cc1b",
+    "startBlock": "487770189",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "waitForAllThreads([Ljava/lang/Thread;)V",
+    "decisionIndex": -1,
+    "info": [
+      "(PLATFORM && !SCALE)",
+      "(!PLATFORM && SCALE)",
+      "(PLATFORM && SCALE)",
+      "(!PLATFORM && !SCALE)"
+    ],
+    "id": "efcfaaab-0e11-470c-8da8-2470a898d36b",
+    "startBlock": "1733900487",
+    "endBlocks": [
+      "exit"
+    ]
+  }
+]

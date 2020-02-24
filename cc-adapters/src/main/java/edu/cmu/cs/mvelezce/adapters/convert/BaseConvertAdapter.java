@@ -13,7 +13,7 @@ public class BaseConvertAdapter extends BaseAdapter {
   public static final String PROGRAM_NAME = "Convert";
   public static final String MAIN_CLASS = "at.favre.tools.dconvert.Convert";
   public static final String ROOT_PACKAGE = "at.favre.tools.dconvert";
-  public static final String ORIGINAL_ROOT_DIR =
+  public static final String ORIGINAL_DIR_PATH =
       "../performance-mapper-evaluation/original/density-converter";
   public static final String ORIGINAL_CLASS_PATH =
       "../performance-mapper-evaluation/original/density-converter/target/classes";

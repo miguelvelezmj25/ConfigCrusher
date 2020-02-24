@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.adapters.cannotExpandConstraintsDown.BaseCannotExpand
 import edu.cmu.cs.mvelezce.adapters.cannotRemoveNestedRegions.BaseCannotRemoveNestedRegionsAdapter;
 import edu.cmu.cs.mvelezce.adapters.cleanConstraints.BaseCleanConstraintsAdapter;
 import edu.cmu.cs.mvelezce.adapters.cleanConstraintsIssue.BaseCleanConstraintsIssueAdapter;
+import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.iGen.BaseIGenAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
@@ -577,6 +578,37 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseMultithreadAdapter.ORIGINAL_DIR_PATH;
     String classDir = "../" + BaseMultithreadAdapter.ORIGINAL_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseMultithreadAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToPartitions,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void convert()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
+
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
+
+    String mainClass = BaseConvertAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseConvertAdapter.ORIGINAL_DIR_PATH;
+    String classDir = "../" + BaseConvertAdapter.ORIGINAL_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseConvertAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

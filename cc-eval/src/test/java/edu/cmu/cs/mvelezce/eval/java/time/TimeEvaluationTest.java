@@ -187,4 +187,15 @@ public class TimeEvaluationTest {
 
     TimeEvaluation.getMeasuredTime(Evaluation.IDTA, performanceEntries);
   }
+
+  @Test
+  public void convert_GT_MeasuredTime_time() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new GroundTruthTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.GT, performanceEntries);
+  }
 }

@@ -234,3 +234,5 @@ vignettes/*.pdf
 /cc-execute/index/
 /cc-execute-e2e/output/
 /cc-execute/output/
+/cc-execute/data/
+/cc-execute-e2e/data/

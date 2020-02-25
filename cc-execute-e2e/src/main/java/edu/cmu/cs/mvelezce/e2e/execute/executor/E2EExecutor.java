@@ -5,10 +5,12 @@ import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.adapters.convert.E2EConvertAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.adapters.indexFiles.E2EIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.adapters.measureDiskOrderedScan.E2EMeasureDiskOrderedScanExecutorAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.adapters.multithread.E2EMultithreadAdapter;
+import edu.cmu.cs.mvelezce.e2e.execute.adapters.runBenchC.E2ERunBenchCAdapter;
 import edu.cmu.cs.mvelezce.e2e.execute.executor.parser.BaseE2EExecutionParser;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
@@ -50,6 +52,9 @@ public abstract class E2EExecutor extends BaseExecutor<ProcessedPerfExecution> {
         break;
       case BaseMultithreadAdapter.PROGRAM_NAME:
         adapter = new E2EMultithreadAdapter(this);
+        break;
+      case BaseRunBenchCAdapter.PROGRAM_NAME:
+        adapter = new E2ERunBenchCAdapter(this);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());

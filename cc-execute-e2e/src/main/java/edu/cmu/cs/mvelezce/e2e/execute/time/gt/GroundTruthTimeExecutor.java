@@ -23,6 +23,18 @@ public class GroundTruthTimeExecutor extends E2ETimeExecutor {
         waitAfterExecution);
   }
 
+  GroundTruthTimeExecutor(
+      String programName,
+      Set<Set<String>> configurations,
+      int waitAfterExecution,
+      String inputToParse) {
+    super(
+        programName,
+        configurations,
+        new E2ETimeExecutionParser(programName, OUTPUT_DIR, inputToParse),
+        waitAfterExecution);
+  }
+
   @Override
   public String outputDir() {
     return OUTPUT_DIR;

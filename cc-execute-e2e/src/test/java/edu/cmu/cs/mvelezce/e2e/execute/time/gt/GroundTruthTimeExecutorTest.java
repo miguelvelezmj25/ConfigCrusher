@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
+import edu.cmu.cs.mvelezce.e2e.execute.time.parser.E2ETimeExecutionParser;
 import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
@@ -49,7 +50,8 @@ public class GroundTruthTimeExecutorTest {
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new GroundTruthTimeExecutor(programName, configs, 30000);
+    Executor executor =
+        new GroundTruthTimeExecutor(programName, configs, 30000, E2ETimeExecutionParser.REAL);
 
     args = new String[3];
     args[0] = "-delres";

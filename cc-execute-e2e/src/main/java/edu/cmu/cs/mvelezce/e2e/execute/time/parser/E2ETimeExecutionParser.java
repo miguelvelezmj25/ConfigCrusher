@@ -11,8 +11,19 @@ import java.util.List;
 
 public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
 
+  public static final String USER = "user";
+  public static final String REAL = "real";
+
+  private final String inputToParse;
+
   public E2ETimeExecutionParser(String programName, String outputDir) {
+    this(programName, outputDir, USER);
+  }
+
+  public E2ETimeExecutionParser(String programName, String outputDir, String inputToParse) {
     super(programName, outputDir);
+
+    this.inputToParse = inputToParse;
   }
 
   @Override
@@ -23,7 +34,7 @@ public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
     long userTime = -1;
 
     for (int i = 0; i < entries.size(); i++) {
-      if (!entries.get(i).equals("user")) {
+      if (!entries.get(i).equals(this.inputToParse)) {
         continue;
       }
 

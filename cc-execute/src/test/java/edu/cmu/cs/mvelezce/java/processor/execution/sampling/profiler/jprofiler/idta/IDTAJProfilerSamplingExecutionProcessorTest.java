@@ -68,6 +68,9 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
   @Test
   public void lucene() throws IOException, InterruptedException {
+    System.err.println(
+        "Regions a2500b3a-d6e0-45dd-bc6f-dcca4ea72038 and 83847d46-8d61-4ecf-8b7d-6eaca01d469e are in the same method. "
+            + "We manually removed one of them. Check if this method is relevant for performance");
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(programName);

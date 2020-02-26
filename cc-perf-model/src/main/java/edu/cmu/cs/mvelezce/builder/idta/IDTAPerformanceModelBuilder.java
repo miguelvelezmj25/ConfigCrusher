@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.builder.idta;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
@@ -11,7 +10,8 @@ import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.model.idta.IDTALocalPerformanceModel;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.stats.DescriptiveStatisticsMap;
 import org.apache.commons.io.FileUtils;

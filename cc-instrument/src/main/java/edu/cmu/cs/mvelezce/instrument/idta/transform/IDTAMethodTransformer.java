@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.instrument.idta.transform;
 
 import com.mijecu25.meme.utils.gc.GC;
 import com.mijecu25.meme.utils.monitor.memory.MemoryMonitor;
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.instrumentation.IDTAMethodInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.transformer.RegionTransformer;
@@ -24,6 +23,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmM
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.BaseStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrument.region.utils.startEndBlocksSetter.idta.IDTAStartEndRegionBlocksSetter;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;

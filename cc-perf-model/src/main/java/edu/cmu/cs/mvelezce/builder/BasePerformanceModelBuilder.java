@@ -2,10 +2,10 @@ package edu.cmu.cs.mvelezce.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.File;

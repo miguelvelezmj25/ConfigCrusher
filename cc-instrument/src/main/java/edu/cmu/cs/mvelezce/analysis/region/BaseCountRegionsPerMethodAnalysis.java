@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.region;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import java.util.HashMap;
 import java.util.Map;

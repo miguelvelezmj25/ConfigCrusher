@@ -1,7 +1,7 @@
-package edu.cmu.cs.mvelezce.analysis.region.java;
+package edu.cmu.cs.mvelezce.region.java;
 
-import edu.cmu.cs.mvelezce.analysis.region.Region;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import edu.cmu.cs.mvelezce.region.Region;
 
 import java.util.HashSet;
 import java.util.Set;

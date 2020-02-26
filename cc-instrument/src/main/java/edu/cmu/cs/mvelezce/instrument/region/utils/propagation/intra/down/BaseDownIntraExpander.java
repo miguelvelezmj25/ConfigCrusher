@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.down;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.BaseIntraExpander;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import javax.annotation.Nullable;
 import java.util.*;

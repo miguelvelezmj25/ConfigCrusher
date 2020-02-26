@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.java.processor.execution.instrumentation;
 import edu.cmu.cs.mvelezce.java.processor.execution.BaseExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawInstrumentPerfExecution;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 
 import java.util.*;
 

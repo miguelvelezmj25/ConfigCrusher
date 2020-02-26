@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.data.propcessor.idta;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
@@ -8,6 +7,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegio
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;

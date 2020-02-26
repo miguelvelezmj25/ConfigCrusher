@@ -79,14 +79,14 @@ public class StepWiseLinearLearner {
             + "/"
             + this.samplingApproach.getName();
     String result =
-        "train = readtable(\'../../../../../../data/java/programs/"
+            "train = readtable('../../../../../../data/java/programs/"
             + this.programName
             + "/"
             + this.samplingApproach.getName()
             + "/"
             + this.samplingApproach.getName()
             + Options.DOT_CSV
-            + "\');"
+            + "');"
             + "\n"
             + "x_train = table2array(train(:,1:"
             + this.options.size()
@@ -103,46 +103,46 @@ public class StepWiseLinearLearner {
             + "');"
             + "\n"
             + "\n"
-            + "mkdir(\'"
+            + "mkdir('"
             + matlabOutput
-            + "\');"
+            + "');"
             + "\n"
             + "\n"
             + "terms = model.Coefficients.Row;"
             + "\n"
-            + "fileID = fopen(\'"
+            + "fileID = fopen('"
             + matlabOutput
             + "/"
             + TERMS_FILE
-            + "\', \'w\');"
+            + "', 'w');"
             + "\n"
-            + "fprintf(fileID, \'%s\\n\', terms{:});"
+            + "fprintf(fileID, '%s\\n', terms{:});"
             + "\n"
             + "fclose(fileID);"
             + "\n"
             + "\n"
             + "coefs = model.Coefficients.Estimate;"
             + "\n"
-            + "fileID = fopen(\'"
+            + "fileID = fopen('"
             + matlabOutput
             + "/"
             + COEFS_FILE
-            + "\', \'w\');"
+            + "', 'w');"
             + "\n"
-            + "fprintf(fileID, \'%10.2f\\n\', coefs);"
+            + "fprintf(fileID, '%10.2f\\n', coefs);"
             + "\n"
             + "fclose(fileID);"
             + "\n"
             + "\n"
             + "pValues = model.Coefficients.pValue;"
             + "\n"
-            + "fileID = fopen(\'"
+            + "fileID = fopen('"
             + matlabOutput
             + "/"
             + P_VALUES_FILE
-            + "\', \'w\');"
+            + "', 'w');"
             + "\n"
-            + "fprintf(fileID, \'%3.2f\\n\', pValues);"
+            + "fprintf(fileID, '%3.2f\\n', pValues);"
             + "\n"
             + "fclose(fileID);"
             + "\n"

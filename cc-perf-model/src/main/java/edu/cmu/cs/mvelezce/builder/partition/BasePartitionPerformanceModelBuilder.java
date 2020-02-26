@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.builder.partition;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
@@ -10,6 +9,7 @@ import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
 import edu.cmu.cs.mvelezce.model.partition.PartitionLocalPerformanceModel;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import java.util.*;
 

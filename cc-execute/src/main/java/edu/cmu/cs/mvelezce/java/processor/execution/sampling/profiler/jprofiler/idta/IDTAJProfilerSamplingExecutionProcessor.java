@@ -1,9 +1,9 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 import edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.JProfilerSamplingExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import java.util.HashMap;
 import java.util.HashSet;

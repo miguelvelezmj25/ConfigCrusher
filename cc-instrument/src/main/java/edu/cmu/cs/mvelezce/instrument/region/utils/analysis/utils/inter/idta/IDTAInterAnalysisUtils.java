@@ -1,11 +1,11 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.idta;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter.BaseInterAnalysisUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import soot.jimple.toolkits.callgraph.CallGraph;
 
 import javax.annotation.Nullable;

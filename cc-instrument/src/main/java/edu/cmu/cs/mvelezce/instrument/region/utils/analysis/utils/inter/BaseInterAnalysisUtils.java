@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.analysis.utils.inter;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.InstrumenterUtils;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionAnalyzer.BlockRegionAnalyzer;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
@@ -8,6 +7,7 @@ import edu.cmu.cs.mvelezce.instrument.region.utils.comparator.edge.EdgeComparato
 import edu.cmu.cs.mvelezce.instrument.region.utils.sootAsmMethodMatcher.SootAsmMethodMatcher;
 import edu.cmu.cs.mvelezce.instrumenter.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.instrumenter.graph.block.MethodBlock;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.*;
 import soot.*;
 import soot.jimple.FieldRef;

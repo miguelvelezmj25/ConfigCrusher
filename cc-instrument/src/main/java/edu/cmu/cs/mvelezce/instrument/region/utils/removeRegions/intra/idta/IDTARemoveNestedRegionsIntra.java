@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.idta;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.BlockRegionMatcher;
 import edu.cmu.cs.mvelezce.instrument.region.utils.propagation.intra.idta.BaseIDTAExpander;
 import edu.cmu.cs.mvelezce.instrument.region.utils.removeRegions.intra.BaseRemoveNestedRegionsIntra;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 
 import javax.annotation.Nullable;
 import java.util.Map;

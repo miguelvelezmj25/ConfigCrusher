@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.region;
+package edu.cmu.cs.mvelezce.region;
 
 import java.util.UUID;
 

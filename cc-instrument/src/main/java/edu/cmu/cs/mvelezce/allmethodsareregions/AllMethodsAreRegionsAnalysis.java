@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.allmethodsareregions;
 
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.instrument.idta.transform.IDTAMethodTransformer;
 import edu.cmu.cs.mvelezce.instrumenter.transform.classnode.DefaultClassTransformer;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.utils.RegionsWithPartitionsUtils;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 

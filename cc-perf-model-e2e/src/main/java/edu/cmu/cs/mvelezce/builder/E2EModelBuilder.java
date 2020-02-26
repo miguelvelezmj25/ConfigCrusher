@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.builder;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.builder.partition.BasePartitionPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.IDTA;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.PartialPartition;
@@ -9,7 +8,8 @@ import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.explorer.utils.ConstraintUtils;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 
 import java.util.*;
 

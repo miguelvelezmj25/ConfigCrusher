@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.dynamic;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.InstructionRegionMatcher;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.util.HashMap;

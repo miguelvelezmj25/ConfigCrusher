@@ -1,13 +1,13 @@
 package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler;
 
-import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.processor.execution.BaseExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.JProfilerSnapshotEntry;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Node;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.java.JavaRegion;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 
 import java.util.*;
 

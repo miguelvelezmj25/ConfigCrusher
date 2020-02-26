@@ -9,7 +9,7 @@ import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.utils.FeatureExprUtils;
 import edu.cmu.cs.mvelezce.learning.builder.generate.matlab.script.StepWiseLinearLearner;
 import edu.cmu.cs.mvelezce.model.LocalPerformanceModel;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 
 import java.io.BufferedReader;

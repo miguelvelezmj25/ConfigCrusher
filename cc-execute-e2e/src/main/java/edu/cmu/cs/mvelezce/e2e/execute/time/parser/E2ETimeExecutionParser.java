@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.e2e.execute.time.parser;
 import edu.cmu.cs.mvelezce.e2e.execute.executor.parser.BaseE2EExecutionParser;
 import edu.cmu.cs.mvelezce.e2e.execute.time.parser.results.E2ETimePerfExecution;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
-import edu.cmu.cs.mvelezce.region.RegionsManager;
+import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 
 import java.io.BufferedReader;
 import java.io.File;

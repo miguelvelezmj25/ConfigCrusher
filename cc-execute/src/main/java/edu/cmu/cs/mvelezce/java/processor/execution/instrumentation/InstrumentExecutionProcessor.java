@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.processor.execution.instrumentation;
 
 import edu.cmu.cs.mvelezce.java.processor.execution.BaseExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawInstrumentPerfExecution;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.region.RegionsManager;
 
 import java.util.*;
@@ -16,12 +16,12 @@ public abstract class InstrumentExecutionProcessor
   }
 
   @Override
-  protected ProcessedPerfExecution getProcessedPerfExec(
+  protected PerfExecution getProcessedPerfExec(
       RawInstrumentPerfExecution rawInstrumentPerfExecution) {
     Map<String, Long> regionToPerf = this.process(rawInstrumentPerfExecution.getTrace());
     Set<String> config = rawInstrumentPerfExecution.getConfiguration();
 
-    return new ProcessedPerfExecution(config, regionToPerf);
+    return new PerfExecution(config, regionToPerf);
   }
 
   private Map<String, Long> process(List<String> trace) {

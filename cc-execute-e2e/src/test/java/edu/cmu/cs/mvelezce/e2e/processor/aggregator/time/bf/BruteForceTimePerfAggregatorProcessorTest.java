@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.execute.time.bf.BruteForceTimeExecutor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class BruteForceTimePerfAggregatorProcessorTest {
   @Test
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new BruteForceTimeExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new BruteForceTimeExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new BruteForceTimePerfAggregatorProcessor(programName, itersToResults);

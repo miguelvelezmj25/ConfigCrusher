@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler
 
 import edu.cmu.cs.mvelezce.analysis.region.java.JavaRegion;
 import edu.cmu.cs.mvelezce.java.processor.execution.BaseExecutionProcessor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.Hotspot;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.snapshot.JProfilerSnapshotEntry;
@@ -31,12 +31,12 @@ public abstract class JProfilerSamplingExecutionProcessor
   }
 
   @Override
-  protected ProcessedPerfExecution getProcessedPerfExec(
+  protected PerfExecution getProcessedPerfExec(
       RawJProfilerSamplingPerfExecution rawJProfilerSamplingPerfExecution) {
     Map<String, Long> regionToPerf = this.process(rawJProfilerSamplingPerfExecution.getHotspots());
     Set<String> config = rawJProfilerSamplingPerfExecution.getConfiguration();
 
-    return new ProcessedPerfExecution(config, regionToPerf);
+    return new PerfExecution(config, regionToPerf);
   }
 
   private void populateSnapshotEntriesToFullyQualifiedMethods() {

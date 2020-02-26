@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.fw;
 
 import edu.cmu.cs.mvelezce.e2e.execute.time.fw.FeatureWiseTimeExecutor;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class FeatureWiseTimePerfAggregatorProcessor extends PerfAggregatorProces
   }
 
   FeatureWiseTimePerfAggregatorProcessor(
-      String programName, Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution) {
+      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
     super(programName, itersToProcessedPerfExecution);
   }
 

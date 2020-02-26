@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofile
 
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +17,8 @@ public class IDTAPerfAggregatorProcessor extends PerfAggregatorProcessor {
   }
 
   IDTAPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution) {
+      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
     super(programName, itersToProcessedPerfExecution);
-
-    System.err.println("Check the logic to catch undeterminism in the execution");
   }
 
   @Override

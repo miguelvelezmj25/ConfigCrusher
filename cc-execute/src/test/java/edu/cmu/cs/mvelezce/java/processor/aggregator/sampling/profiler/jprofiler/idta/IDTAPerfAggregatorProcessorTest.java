@@ -8,7 +8,7 @@ import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta.IDTAJProfilerSamplingExecutionProcessor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -20,12 +20,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void trivial() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -39,12 +38,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void berkeley() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -58,12 +56,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void lucene() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -77,12 +74,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void performance() throws IOException, InterruptedException {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -96,12 +92,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void multithread() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 
@@ -115,12 +110,11 @@ public class IDTAPerfAggregatorProcessorTest {
   @Test
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
-    Analysis<Map<Integer, Set<ProcessedPerfExecution>>> processor =
+    Analysis<Map<Integer, Set<PerfExecution>>> processor =
         new IDTAJProfilerSamplingExecutionProcessor(programName);
 
     String[] args = new String[0];
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution =
-        processor.analyze(args);
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
 

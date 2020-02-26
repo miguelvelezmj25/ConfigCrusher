@@ -5,18 +5,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ProcessedPerfExecution {
+/** A single execution of a configuration with perf times of each region */
+public class PerfExecution {
 
   private final Set<String> configuration;
   private final Map<String, Long> regionsToPerf;
 
   // Dummy constructor for jackson xml
-  private ProcessedPerfExecution() {
+  private PerfExecution() {
     this.configuration = new HashSet<>();
     this.regionsToPerf = new HashMap<>();
   }
 
-  public ProcessedPerfExecution(Set<String> configuration, Map<String, Long> regionsToPerf) {
+  public PerfExecution(Set<String> configuration, Map<String, Long> regionsToPerf) {
     this.configuration = configuration;
     this.regionsToPerf = regionsToPerf;
   }

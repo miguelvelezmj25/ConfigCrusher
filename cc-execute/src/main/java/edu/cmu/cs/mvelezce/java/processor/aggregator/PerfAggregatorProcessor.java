@@ -3,8 +3,8 @@ package edu.cmu.cs.mvelezce.java.processor.aggregator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import edu.cmu.cs.mvelezce.utils.stats.DescriptiveStatisticsMap;
 import org.apache.commons.io.FileUtils;
@@ -19,11 +19,11 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
 
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
 
-  private final Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution;
+  private final Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution;
   private final String outputDir;
 
   public PerfAggregatorProcessor(
-      String programName, Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecution) {
+      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
     this.itersToProcessedPerfExecution = itersToProcessedPerfExecution;
 
     this.outputDir = this.outputDir() + "/" + programName + "/execution/averaged";
@@ -65,7 +65,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   }
 
   private PerformanceEntry averageExecs(Set<String> config) {
-    Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions =
+    Collection<Set<PerfExecution>> allProcessedPerfExecutions =
         this.itersToProcessedPerfExecution.values();
 
     DescriptiveStatisticsMap<UUID> regionsToStats =
@@ -157,14 +157,14 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   private void addAllExecutions(
       DescriptiveStatisticsMap<UUID> regionsToStats,
       Set<String> config,
-      Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
-    for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
-      for (ProcessedPerfExecution processedPerfExecution : processedPerfExecutions) {
-        if (!processedPerfExecution.getConfiguration().equals(config)) {
+      Collection<Set<PerfExecution>> allProcessedPerfExecutions) {
+    for (Set<PerfExecution> perfExecutions : allProcessedPerfExecutions) {
+      for (PerfExecution perfExecution : perfExecutions) {
+        if (!perfExecution.getConfiguration().equals(config)) {
           continue;
         }
 
-        for (Map.Entry<String, Long> entry : processedPerfExecution.getRegionsToPerf().entrySet()) {
+        for (Map.Entry<String, Long> entry : perfExecution.getRegionsToPerf().entrySet()) {
           UUID region = UUID.fromString(entry.getKey());
           DescriptiveStatistics stats = regionsToStats.get(region);
           stats.addValue(entry.getValue());
@@ -176,16 +176,16 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   }
 
   private DescriptiveStatisticsMap<UUID> addRegions(
-      Set<String> config, Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions) {
+      Set<String> config, Collection<Set<PerfExecution>> allProcessedPerfExecutions) {
     DescriptiveStatisticsMap<UUID> regionsToPerf = new DescriptiveStatisticsMap<>();
 
-    for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
-      for (ProcessedPerfExecution processedPerfExecution : processedPerfExecutions) {
-        if (!processedPerfExecution.getConfiguration().equals(config)) {
+    for (Set<PerfExecution> perfExecutions : allProcessedPerfExecutions) {
+      for (PerfExecution perfExecution : perfExecutions) {
+        if (!perfExecution.getConfiguration().equals(config)) {
           continue;
         }
 
-        for (String region : processedPerfExecution.getRegionsToPerf().keySet()) {
+        for (String region : perfExecution.getRegionsToPerf().keySet()) {
           regionsToPerf.putIfAbsent(UUID.fromString(region));
         }
 
@@ -198,13 +198,13 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
 
   private Set<Set<String>> getConfigs() {
     Set<Set<String>> configs = new HashSet<>();
-    Collection<Set<ProcessedPerfExecution>> allProcessedPerfExecutions =
+    Collection<Set<PerfExecution>> allProcessedPerfExecutions =
         this.itersToProcessedPerfExecution.values();
 
-    for (Set<ProcessedPerfExecution> processedPerfExecutions : allProcessedPerfExecutions) {
+    for (Set<PerfExecution> perfExecutions : allProcessedPerfExecutions) {
 
-      for (ProcessedPerfExecution processedPerfExecution : processedPerfExecutions) {
-        configs.add(processedPerfExecution.getConfiguration());
+      for (PerfExecution perfExecution : perfExecutions) {
+        configs.add(perfExecution.getConfiguration());
       }
     }
 

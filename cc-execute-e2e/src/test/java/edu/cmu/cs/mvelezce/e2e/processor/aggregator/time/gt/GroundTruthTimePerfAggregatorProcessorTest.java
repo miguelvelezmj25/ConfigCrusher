@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthTimeExecutor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -18,8 +18,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
   @Test
   public void multithread() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthTimeExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new GroundTruthTimeExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults);
@@ -33,8 +33,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
   @Test
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthTimeExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new GroundTruthTimeExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults);
@@ -48,8 +48,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
   @Test
   public void runBenchC() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthTimeExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new GroundTruthTimeExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults);

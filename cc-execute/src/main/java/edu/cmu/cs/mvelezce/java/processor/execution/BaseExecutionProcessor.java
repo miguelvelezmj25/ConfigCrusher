@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.java.processor.execution;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
 import org.apache.commons.io.FileUtils;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 public abstract class BaseExecutionProcessor<T>
-    implements Analysis<Map<Integer, Set<ProcessedPerfExecution>>> {
+    implements Analysis<Map<Integer, Set<PerfExecution>>> {
 
   public static final String TRUE_REGION = "True";
 
@@ -26,7 +26,7 @@ public abstract class BaseExecutionProcessor<T>
   }
 
   @Override
-  public Map<Integer, Set<ProcessedPerfExecution>> analyze(String[] args) throws IOException {
+  public Map<Integer, Set<PerfExecution>> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     File file = new File(this.outputDir);
@@ -37,7 +37,7 @@ public abstract class BaseExecutionProcessor<T>
       return this.readFromFile(file);
     }
 
-    Map<Integer, Set<ProcessedPerfExecution>> results = this.analyze();
+    Map<Integer, Set<PerfExecution>> results = this.analyze();
 
     if (Options.checkIfSave()) {
       this.writeToFile(results);
@@ -47,15 +47,15 @@ public abstract class BaseExecutionProcessor<T>
   }
 
   @Override
-  public Map<Integer, Set<ProcessedPerfExecution>> analyze() {
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerf = new HashMap<>();
+  public Map<Integer, Set<PerfExecution>> analyze() {
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerf = new HashMap<>();
 
     for (Map.Entry<Integer, Set<T>> entry : this.getItersToRawPerfExecutions().entrySet()) {
-      Set<ProcessedPerfExecution> processedPerfExecs = new HashSet<>();
+      Set<PerfExecution> processedPerfExecs = new HashSet<>();
 
       for (T rawPerfExecution : entry.getValue()) {
-        ProcessedPerfExecution processedPerfExecution = this.getProcessedPerfExec(rawPerfExecution);
-        processedPerfExecs.add(processedPerfExecution);
+        PerfExecution perfExecution = this.getProcessedPerfExec(rawPerfExecution);
+        processedPerfExecs.add(perfExecution);
       }
 
       itersToProcessedPerf.put(entry.getKey(), processedPerfExecs);
@@ -64,45 +64,45 @@ public abstract class BaseExecutionProcessor<T>
     return itersToProcessedPerf;
   }
 
-  protected abstract ProcessedPerfExecution getProcessedPerfExec(T rawPerfExecution);
+  protected abstract PerfExecution getProcessedPerfExec(T rawPerfExecution);
 
   @Override
-  public void writeToFile(Map<Integer, Set<ProcessedPerfExecution>> results) throws IOException {
-    for (Map.Entry<Integer, Set<ProcessedPerfExecution>> entry : results.entrySet()) {
+  public void writeToFile(Map<Integer, Set<PerfExecution>> results) throws IOException {
+    for (Map.Entry<Integer, Set<PerfExecution>> entry : results.entrySet()) {
       int iter = entry.getKey();
 
-      for (ProcessedPerfExecution processedPerfExecution : entry.getValue()) {
+      for (PerfExecution perfExecution : entry.getValue()) {
         String outputFile =
             this.getOutputDir() + "/" + iter + "/" + UUID.randomUUID() + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
 
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(file, processedPerfExecution);
+        mapper.writeValue(file, perfExecution);
       }
     }
   }
 
   @Override
-  public Map<Integer, Set<ProcessedPerfExecution>> readFromFile(File file) throws IOException {
+  public Map<Integer, Set<PerfExecution>> readFromFile(File file) throws IOException {
     File[] dirs = file.listFiles();
 
     if (dirs == null) {
       throw new RuntimeException("Could not find any directories in " + file);
     }
 
-    Map<Integer, Set<ProcessedPerfExecution>> itersToProcessedPerfExecutions = new HashMap<>();
+    Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecutions = new HashMap<>();
 
     for (File dir : dirs) {
-      Set<ProcessedPerfExecution> perfExecutions = new HashSet<>();
+      Set<PerfExecution> perfExecutions = new HashSet<>();
 
       Collection<File> files = FileUtils.listFiles(dir, new String[] {"json"}, false);
 
       for (File dataFile : files) {
         ObjectMapper mapper = new ObjectMapper();
-        ProcessedPerfExecution processedPerfExecution =
-            mapper.readValue(dataFile, new TypeReference<ProcessedPerfExecution>() {});
-        perfExecutions.add(processedPerfExecution);
+        PerfExecution perfExecution =
+            mapper.readValue(dataFile, new TypeReference<PerfExecution>() {});
+        perfExecutions.add(perfExecution);
       }
 
       itersToProcessedPerfExecutions.put(Integer.parseInt(dir.getName()), perfExecutions);

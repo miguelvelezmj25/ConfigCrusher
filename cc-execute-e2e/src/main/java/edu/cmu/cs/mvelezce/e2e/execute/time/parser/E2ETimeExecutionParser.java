@@ -1,52 +1,59 @@
 package edu.cmu.cs.mvelezce.e2e.execute.time.parser;
 
 import edu.cmu.cs.mvelezce.e2e.execute.executor.parser.BaseE2EExecutionParser;
+import edu.cmu.cs.mvelezce.e2e.execute.time.parser.results.E2ETimePerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
+import edu.cmu.cs.mvelezce.region.RegionsManager;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
 
   public static final String USER = "user";
   public static final String REAL = "real";
 
-  private final String inputToParse;
-
   public E2ETimeExecutionParser(String programName, String outputDir) {
-    this(programName, outputDir, USER);
-  }
-
-  public E2ETimeExecutionParser(String programName, String outputDir, String inputToParse) {
     super(programName, outputDir);
-
-    this.inputToParse = inputToParse;
   }
 
   @Override
-  protected long getExecutionTime(File file) throws IOException {
+  protected PerfExecution getPerfExecution(Set<String> configuration, File file)
+      throws IOException {
     List<String> results = this.deserialize(file);
     List<String> entries = this.getEntries(results);
 
-    long userTime = -1;
+    long realTime = this.getTime(entries, REAL);
+    Map<String, Long> regionsToTimes = new HashMap<>();
+    regionsToTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), realTime);
+
+    long userTime = this.getTime(entries, USER);
+    Map<String, Long> regionsToUserTimes = new HashMap<>();
+    regionsToUserTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), userTime);
+
+    return new E2ETimePerfExecution(configuration, regionsToTimes, regionsToUserTimes);
+  }
+
+  private long getTime(List<String> entries, String entryToFind) {
+    long time = -1;
 
     for (int i = 0; i < entries.size(); i++) {
-      if (!entries.get(i).equals(this.inputToParse)) {
+      if (!entries.get(i).equals(entryToFind)) {
         continue;
       }
 
-      userTime = (long) (Double.parseDouble(entries.get(i + 1)) * 1E9);
+      time = (long) (Double.parseDouble(entries.get(i + 1)) * 1E9);
       break;
     }
 
-    if (userTime < 0) {
-      throw new RuntimeException("Did not find user time");
+    if (time < 0) {
+      throw new RuntimeException("Did not find " + entryToFind + " time");
     }
 
-    return userTime;
+    return time;
   }
 
   private List<String> deserialize(File file) throws IOException {

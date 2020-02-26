@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.java.results.processed;
 
 import java.util.*;
 
+/** Processed perf entry of several executions of the same config */
 public class PerformanceEntry {
 
   private final Set<String> configuration;

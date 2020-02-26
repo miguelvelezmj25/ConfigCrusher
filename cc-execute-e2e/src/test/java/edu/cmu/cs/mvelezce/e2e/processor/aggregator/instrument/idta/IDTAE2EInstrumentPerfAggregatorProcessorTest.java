@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrdere
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAE2EInstrumentExecutor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
-import edu.cmu.cs.mvelezce.java.results.processed.ProcessedPerfExecution;
+import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -17,8 +17,8 @@ public class IDTAE2EInstrumentPerfAggregatorProcessorTest {
   @Test
   public void berkeleyDB() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new IDTAE2EInstrumentExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new IDTAE2EInstrumentExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new IDTAE2EInstrumentPerfAggregatorProcessor(programName, itersToResults);
@@ -32,8 +32,8 @@ public class IDTAE2EInstrumentPerfAggregatorProcessorTest {
   @Test
   public void lucene() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
-    BaseExecutor<ProcessedPerfExecution> executor = new IDTAE2EInstrumentExecutor(programName);
-    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+    BaseExecutor<PerfExecution> executor = new IDTAE2EInstrumentExecutor(programName);
+    Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
         new IDTAE2EInstrumentPerfAggregatorProcessor(programName, itersToResults);

@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.gt;
 
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthTimeExecutor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
@@ -32,6 +33,21 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
   @Test
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthTimeExecutor(programName);
+    Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
+
+  @Test
+  public void runBenchC() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseExecutor<ProcessedPerfExecution> executor = new GroundTruthTimeExecutor(programName);
     Map<Integer, Set<ProcessedPerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();

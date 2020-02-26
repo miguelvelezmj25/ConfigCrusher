@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
@@ -957,5 +958,22 @@ public class AccuracyPartitionEvaluationTest {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.IDTA, Evaluation.GT);
+  }
+
+  @Test
+  public void runBenchC_GT_Data() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, configs, model);
   }
 }

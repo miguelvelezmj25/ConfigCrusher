@@ -24,6 +24,7 @@
         <module>cc-approaches-sampling</module>
         <module>cc-perf-model-e2e</module>
         <module>cc-scripts</module>
+        <module>cc-analysis-partition</module>
     </modules>
     <packaging>pom</packaging>
     <name>ConfigCrusher</name>

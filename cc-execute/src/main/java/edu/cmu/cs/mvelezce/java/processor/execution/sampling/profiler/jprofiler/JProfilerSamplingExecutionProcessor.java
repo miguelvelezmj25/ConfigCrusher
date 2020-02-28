@@ -23,8 +23,9 @@ public abstract class JProfilerSamplingExecutionProcessor
   public JProfilerSamplingExecutionProcessor(
       String programName,
       Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecutions,
-      Set<JavaRegion> regions) {
-    super(programName, itersToRawPerfExecutions);
+      Set<JavaRegion> regions,
+      String measuredTime) {
+    super(programName, itersToRawPerfExecutions, measuredTime);
 
     this.populateSnapshotEntriesToFullyQualifiedMethods();
     this.populateFullyQualifiedMethodsToRegionIds(regions);

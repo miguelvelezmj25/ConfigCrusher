@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.fw.FeatureWiseIns
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.pw.PairWiseInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.fw.FeatureWiseTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.pw.PairWiseTimePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
 
@@ -32,7 +33,8 @@ public class CSVDataGeneratorTest {
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
     generator.generateCSVFile();
   }
 
@@ -48,7 +50,8 @@ public class CSVDataGeneratorTest {
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
     generator.generateCSVFile();
   }
 
@@ -64,7 +67,8 @@ public class CSVDataGeneratorTest {
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
     generator.generateCSVFile();
   }
 
@@ -80,39 +84,42 @@ public class CSVDataGeneratorTest {
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
     generator.generateCSVFile();
   }
 
   @Test
-  public void convert_FW_time() throws IOException, InterruptedException {
+  public void convert_FW_time_user() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new FeatureWiseTimePerfAggregatorProcessor(programName);
+        new FeatureWiseTimePerfAggregatorProcessor(programName, BaseExecutor.USER);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.USER);
     generator.generateCSVFile();
   }
 
   @Test
-  public void convert_PW_time() throws IOException, InterruptedException {
+  public void convert_PW_time_user() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
 
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new PairWiseTimePerfAggregatorProcessor(programName);
+        new PairWiseTimePerfAggregatorProcessor(programName, BaseExecutor.USER);
     String[] args = new String[0];
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
     CSVDataGenerator generator =
-        new CSVDataGenerator(programName, options, performanceEntries, samplingApproach);
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.USER);
     generator.generateCSVFile();
   }
 }

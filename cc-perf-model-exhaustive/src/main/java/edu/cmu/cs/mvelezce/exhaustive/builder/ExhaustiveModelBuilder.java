@@ -18,8 +18,11 @@ import java.util.*;
 public abstract class ExhaustiveModelBuilder extends E2EModelBuilder {
 
   public ExhaustiveModelBuilder(
-      String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, performanceEntries);
+      String programName,
+      List<String> options,
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, performanceEntries, measuredTime);
 
     this.addProgramRegionToData();
   }

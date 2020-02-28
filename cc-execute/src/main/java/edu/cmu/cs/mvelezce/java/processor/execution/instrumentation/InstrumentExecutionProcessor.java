@@ -12,7 +12,8 @@ public abstract class InstrumentExecutionProcessor
 
   public InstrumentExecutionProcessor(
       String programName, Map<Integer, Set<RawInstrumentPerfExecution>> itersToRawPerfExecutions) {
-    super(programName, itersToRawPerfExecutions);
+    super(programName, itersToRawPerfExecutions, null);
+    throw new RuntimeException("implement");
   }
 
   @Override

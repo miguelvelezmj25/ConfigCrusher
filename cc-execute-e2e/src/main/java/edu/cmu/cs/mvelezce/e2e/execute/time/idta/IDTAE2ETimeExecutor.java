@@ -10,8 +10,8 @@ public class IDTAE2ETimeExecutor extends E2ETimeExecutor {
 
   public static final String OUTPUT_DIR = E2ETimeExecutor.OUTPUT_DIR + "/java/programs/idta";
 
-  public IDTAE2ETimeExecutor(String programName) {
-    this(programName, new HashSet<>(), -1);
+  public IDTAE2ETimeExecutor(String programName, E2ETimeExecutionParser e2ETimeExecutionParser) {
+    super(programName, new HashSet<>(), e2ETimeExecutionParser, -1);
   }
 
   IDTAE2ETimeExecutor(String programName, Set<Set<String>> configurations, int waitAfterExecution) {

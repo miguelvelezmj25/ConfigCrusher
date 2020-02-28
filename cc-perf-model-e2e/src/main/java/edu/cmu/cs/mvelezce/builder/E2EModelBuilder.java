@@ -18,8 +18,11 @@ public abstract class E2EModelBuilder extends BasePartitionPerformanceModelBuild
   protected static final Map<JavaRegion, Partitioning> REGIONS_TO_DATA = new HashMap<>();
 
   public E2EModelBuilder(
-      String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, REGIONS_TO_DATA, performanceEntries);
+      String programName,
+      List<String> options,
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, REGIONS_TO_DATA, performanceEntries, measuredTime);
   }
 
   protected void addProgramRegionToData() {

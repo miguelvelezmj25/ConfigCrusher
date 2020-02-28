@@ -11,6 +11,9 @@ import java.util.Set;
 
 public abstract class BaseExecutor<T> implements Executor {
 
+  public static final String USER = "user";
+  public static final String REAL = "real";
+
   private final String programName;
   private final Set<Set<String>> configurations;
   private final BaseRawExecutionParser<T> rawExecutionParser;

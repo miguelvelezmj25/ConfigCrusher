@@ -10,8 +10,8 @@ public class PairWiseTimeExecutor extends E2ETimeExecutor {
 
   public static final String OUTPUT_DIR = E2ETimeExecutor.OUTPUT_DIR + "/java/programs/pw";
 
-  public PairWiseTimeExecutor(String programName) {
-    this(programName, new HashSet<>(), -1);
+  public PairWiseTimeExecutor(String programName, E2ETimeExecutionParser e2ETimeExecutionParser) {
+    super(programName, new HashSet<>(), e2ETimeExecutionParser, -1);
   }
 
   PairWiseTimeExecutor(

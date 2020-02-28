@@ -25,17 +25,20 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
   private final List<String> options;
   private final Map<JavaRegion, D> regionsToData;
   private final Set<PerformanceEntry> performanceEntries;
+  private final String measuredTime;
 
   public BasePerformanceModelBuilder(
       String programName,
       List<String> options,
       Map<JavaRegion, D> regionsToData,
-      Set<PerformanceEntry> performanceEntries) {
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
     super(programName);
 
     this.options = options;
     this.regionsToData = regionsToData;
     this.performanceEntries = performanceEntries;
+    this.measuredTime = measuredTime;
   }
 
   @Override
@@ -100,5 +103,9 @@ public abstract class BasePerformanceModelBuilder<D, RD> extends BaseAnalysis<Pe
 
   protected Set<PerformanceEntry> getPerformanceEntries() {
     return performanceEntries;
+  }
+
+  protected String getMeasuredTime() {
+    return measuredTime;
   }
 }

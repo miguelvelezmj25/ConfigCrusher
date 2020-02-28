@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.exhaustive.builder.gt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.exhaustive.builder.ExhaustiveModelBuilder;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -21,20 +22,23 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
 
   private final int id;
 
-  public GroundTruthExhaustiveModelBuilder(String programName) {
-    this(programName, new ArrayList<>(), new HashSet<>());
+  public GroundTruthExhaustiveModelBuilder(String programName, String measuredTime) {
+    this(programName, new ArrayList<>(), new HashSet<>(), measuredTime);
   }
 
   GroundTruthExhaustiveModelBuilder(
       String programName, List<String> options, Set<PerformanceEntry> performanceEntries, int id) {
-    super(programName, options, performanceEntries);
+    super(programName, options, performanceEntries, BaseExecutor.REAL);
 
     this.id = id;
   }
 
   GroundTruthExhaustiveModelBuilder(
-      String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, performanceEntries);
+      String programName,
+      List<String> options,
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, performanceEntries, measuredTime);
 
     this.id = -1;
   }
@@ -56,6 +60,6 @@ public class GroundTruthExhaustiveModelBuilder extends ExhaustiveModelBuilder {
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR + "/" + this.getProgramName();
+    return OUTPUT_DIR + "/" + this.getProgramName() + "/" + this.getMeasuredTime();
   }
 }

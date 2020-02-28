@@ -27,8 +27,11 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
   private final SamplingApproach samplingApproach;
 
   public BaseLinearLearnedModelBuilder(
-      String programName, List<String> options, SamplingApproach samplingApproach) {
-    super(programName, options, new HashSet<>());
+      String programName,
+      List<String> options,
+      SamplingApproach samplingApproach,
+      String measuredTime) {
+    super(programName, options, new HashSet<>(), measuredTime);
 
     this.samplingApproach = samplingApproach;
     this.addProgramRegionToData();
@@ -52,6 +55,8 @@ public abstract class BaseLinearLearnedModelBuilder extends E2EModelBuilder {
           StepWiseLinearLearner.MATLAB_OUTPUT_DIR
               + "/"
               + this.getProgramName()
+              + "/"
+              + this.getMeasuredTime()
               + "/"
               + this.samplingApproach.getName()
               + "/";

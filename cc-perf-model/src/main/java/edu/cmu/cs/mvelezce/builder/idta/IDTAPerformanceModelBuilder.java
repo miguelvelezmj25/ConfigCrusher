@@ -28,16 +28,17 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
   private static final String OUTPUT_DIR =
       "../cc-perf-model/" + Options.DIRECTORY + "/model/java/idta/programs";
 
-  public IDTAPerformanceModelBuilder(String programName) {
-    this(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>());
+  public IDTAPerformanceModelBuilder(String programName, String measuredTime) {
+    this(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>(), measuredTime);
   }
 
   IDTAPerformanceModelBuilder(
       String programName,
       List<String> options,
       Map<JavaRegion, Partitioning> regionsToData,
-      Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, regionsToData, performanceEntries);
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, regionsToData, performanceEntries, measuredTime);
 
     regionsToData.put(RegionsManager.PROGRAM_REGION, new TotalPartition());
   }
@@ -223,6 +224,6 @@ public class IDTAPerformanceModelBuilder extends BasePartitionPerformanceModelBu
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR + "/" + this.getProgramName();
+    return OUTPUT_DIR + "/" + this.getProgramName() + "/" + this.getMeasuredTime();
   }
 }

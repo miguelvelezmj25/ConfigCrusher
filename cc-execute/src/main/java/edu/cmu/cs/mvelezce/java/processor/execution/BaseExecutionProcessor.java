@@ -19,10 +19,12 @@ public abstract class BaseExecutionProcessor<T>
   private final Map<Integer, Set<T>> itersToRawPerfExecutions;
   private final String outputDir;
 
-  public BaseExecutionProcessor(String programName, Map<Integer, Set<T>> itersToRawPerfExecutions) {
+  public BaseExecutionProcessor(
+      String programName, Map<Integer, Set<T>> itersToRawPerfExecutions, String measuredTime) {
     this.itersToRawPerfExecutions = itersToRawPerfExecutions;
 
-    this.outputDir = this.outputDir() + "/" + programName + "/execution/processed";
+    this.outputDir =
+        this.outputDir() + "/" + measuredTime + "/" + programName + "/execution/processed";
   }
 
   @Override

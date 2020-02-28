@@ -36,16 +36,20 @@ public class LinearRegressionAnalysis {
 
   private final String programName;
   private final int executedConfigs;
+  private final String measuredTime;
 
-  public LinearRegressionAnalysis(String programName, int executedConfigs) {
+  public LinearRegressionAnalysis(String programName, int executedConfigs, String measuredTime) {
     this.programName = programName;
     this.executedConfigs = executedConfigs;
+    this.measuredTime = measuredTime;
   }
 
   void generateLinearRegressionScript() throws IOException {
     String script =
         "filename = '/Users/mvelezce/Documents/programming/java/projects/ConfigCrusher/cc-eval/src/main/resources/eval/java/programs/sampling/profiler/jprofiler/"
             + this.programName
+            + "/"
+            + this.measuredTime
             + "/"
             + this.programName
             + ".csv';\n"
@@ -77,6 +81,8 @@ public class LinearRegressionAnalysis {
         OUTPUT_DIR
             + "/linear/regression/matlab/script/java/programs/"
             + this.programName
+            + "/"
+            + this.measuredTime
             + "/"
             + this.programName
             + StepWiseLinearLearner.DOT_M;

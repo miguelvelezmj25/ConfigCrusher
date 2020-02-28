@@ -27,8 +27,9 @@ public abstract class AccuracyEvaluation<T> {
   }
 
   public void saveConfigsToPerformanceExhaustive(
-      String approach, Set<Set<String>> configs, PerformanceModel<T> model) throws IOException {
-    File outputFile = this.getApproachOutputFile(approach);
+      String approach, String measuredTime, Set<Set<String>> configs, PerformanceModel<T> model)
+      throws IOException {
+    File outputFile = this.getApproachOutputFile(approach, measuredTime);
 
     if (outputFile.exists()) {
       FileUtils.forceDelete(outputFile);
@@ -88,11 +89,12 @@ public abstract class AccuracyEvaluation<T> {
 
   public void saveConfigsToPerformance(
       String approach,
+      String measuredTime,
       Set<Set<String>> executedConfigs,
       Set<Set<String>> configsToPredict,
       PerformanceModel<T> model)
       throws IOException {
-    File outputFile = this.getApproachOutputFile(approach);
+    File outputFile = this.getApproachOutputFile(approach, measuredTime);
 
     if (outputFile.exists()) {
       FileUtils.forceDelete(outputFile);
@@ -130,12 +132,16 @@ public abstract class AccuracyEvaluation<T> {
     writer.close();
   }
 
-  public void compareApproaches(String approach1, String gt) throws IOException {
+  public void compareApproaches(String approach1, String gt, String measuredTime)
+      throws IOException {
     File outputFile =
         new File(
             this.getOutputDir()
                 + "/"
                 + this.programName
+                + "/"
+                + measuredTime
+                + "/"
                 + COMPARISON_DIR
                 + "/"
                 + approach1
@@ -147,10 +153,10 @@ public abstract class AccuracyEvaluation<T> {
       FileUtils.forceDelete(outputFile);
     }
 
-    File outputFile1 = this.getApproachOutputFile(approach1);
+    File outputFile1 = this.getApproachOutputFile(approach1, measuredTime);
     Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
 
-    File outputFileGT = this.getApproachOutputFile(gt);
+    File outputFileGT = this.getApproachOutputFile(gt, measuredTime);
     Map<Set<String>, List<String>> dataGT = this.getData(outputFileGT);
 
     if (data1.size() != dataGT.size()) {
@@ -384,11 +390,14 @@ public abstract class AccuracyEvaluation<T> {
     return conf;
   }
 
-  private File getApproachOutputFile(String approach) {
+  private File getApproachOutputFile(String approach, String measuredTime) {
     return new File(
         this.getOutputDir()
             + "/"
             + this.programName
+            + "/"
+            + measuredTime
+            + "/"
             + FULL_DIR
             + "/"
             + approach

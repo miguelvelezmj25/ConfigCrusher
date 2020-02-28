@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -15,13 +16,14 @@ import java.util.List;
 public class MatlabLinearLearnedModelBuilderTest {
 
   @Test
-  public void berkeleyDB_FW() throws IOException {
+  public void berkeleyDB_FW_instrument() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.REAL);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -30,13 +32,14 @@ public class MatlabLinearLearnedModelBuilderTest {
   }
 
   @Test
-  public void berkeleyDB_PW() throws IOException {
+  public void berkeleyDB_PW_instrument() throws IOException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.REAL);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -45,13 +48,14 @@ public class MatlabLinearLearnedModelBuilderTest {
   }
 
   @Test
-  public void lucene_FW() throws IOException {
+  public void lucene_FW_instrument() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.REAL);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -60,13 +64,14 @@ public class MatlabLinearLearnedModelBuilderTest {
   }
 
   @Test
-  public void lucene_PW() throws IOException {
+  public void lucene_PW_instrument() throws IOException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.REAL);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -75,13 +80,14 @@ public class MatlabLinearLearnedModelBuilderTest {
   }
 
   @Test
-  public void convert_FW() throws IOException {
+  public void convert_FW_time_user() throws IOException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.USER);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -90,13 +96,14 @@ public class MatlabLinearLearnedModelBuilderTest {
   }
 
   @Test
-  public void convert_PW() throws IOException {
+  public void convert_PW_time_user() throws IOException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
 
     BasePerformanceModelBuilder builder =
-        new MatlabLinearLearnedModelBuilder(programName, options, samplingApproach);
+        new MatlabLinearLearnedModelBuilder(
+            programName, options, samplingApproach, BaseExecutor.USER);
 
     String[] args = new String[2];
     args[0] = "-delres";

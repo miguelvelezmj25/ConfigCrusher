@@ -14,22 +14,22 @@ public class StepWiseLinearLearner {
 
   /*
    train =
-   readtable('../../../../../../data/java/programs/MeasureDiskOrderedScan/feature_wise/feature_wise.csv');
+   readtable('../../../../../../data/java/programs/MeasureDiskOrderedScan/real/feature_wise/feature_wise.csv');
    x_train = table2array(train(:,1:5)); y_train = table2array(train(:,6:6)); model =
    stepwiselm(x_train, y_train, 'linear');
 
-   <p>mkdir('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise');
+   <p>mkdir('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/real/feature_wise');
 
    <p>terms = model.Coefficients.Row; fileID =
-   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise/terms.txt',
+   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/real/feature_wise/terms.txt',
    'w'); fprintf(fileID, '%s\n', terms{:}); fclose(fileID);
 
    <p>coefs = model.Coefficients.Estimate; fileID =
-   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise/coefs.txt',
+   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/real/feature_wise/coefs.txt',
    'w'); fprintf(fileID, '%10.2f\n', coefs); fclose(fileID);
 
    <p>pValues = model.Coefficients.pValue; fileID =
-   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/feature_wise/pValues.txt',
+   fopen('../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/MeasureDiskOrderedScan/real/feature_wise/pValues.txt',
    'w'); fprintf(fileID, '%3.2f\n', pValues); fclose(fileID);
   */
 
@@ -44,12 +44,17 @@ public class StepWiseLinearLearner {
   private final String programName;
   private final List<String> options;
   private final SamplingApproach samplingApproach;
+  private final String measuredTime;
 
   StepWiseLinearLearner(
-      String programName, List<String> options, SamplingApproach samplingApproach) {
+      String programName,
+      List<String> options,
+      SamplingApproach samplingApproach,
+      String measuredTime) {
     this.programName = programName;
     this.options = options;
     this.samplingApproach = samplingApproach;
+    this.measuredTime = measuredTime;
   }
 
   void generateLearningScript() throws IOException {
@@ -57,6 +62,8 @@ public class StepWiseLinearLearner {
         BaseLinearLearnedModelBuilder.OUTPUT_DIR
             + "/matlab/script/java/programs/"
             + this.programName
+            + "/"
+            + this.measuredTime
             + "/"
             + this.samplingApproach.getName()
             + "/"
@@ -72,15 +79,19 @@ public class StepWiseLinearLearner {
     PrintWriter writer = new PrintWriter(outputFile);
 
     String matlabOutput =
-        "../../../../../../../../../"
+        "../../../../../../../../../../"
             + MATLAB_OUTPUT_DIR
             + "/"
             + this.programName
             + "/"
+            + this.measuredTime
+            + "/"
             + this.samplingApproach.getName();
     String result =
-            "train = readtable('../../../../../../data/java/programs/"
+        "train = readtable('../../../../../../../data/java/programs/"
             + this.programName
+            + "/"
+            + this.measuredTime
             + "/"
             + this.samplingApproach.getName()
             + "/"

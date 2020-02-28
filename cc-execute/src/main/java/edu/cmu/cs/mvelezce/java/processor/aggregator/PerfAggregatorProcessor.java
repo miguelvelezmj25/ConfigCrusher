@@ -17,23 +17,28 @@ import java.util.*;
 
 public abstract class PerfAggregatorProcessor implements Analysis<Set<PerformanceEntry>> {
 
+  public static final String OUTPUT_DIR = "/execution/averaged";
+
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
 
   private final Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution;
-  private final String outputDir;
+  private final String programName;
+  private final String measuredTime;
 
   public PerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      String measuredTime) {
+    this.programName = programName;
     this.itersToProcessedPerfExecution = itersToProcessedPerfExecution;
-
-    this.outputDir = this.outputDir() + "/" + programName + "/execution/averaged";
+    this.measuredTime = measuredTime;
   }
 
   @Override
   public Set<PerformanceEntry> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
-    File file = new File(this.outputDir);
+    File file = new File(this.outputDir());
 
     Options.checkIfDeleteResult(file);
 
@@ -214,7 +219,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   @Override
   public void writeToFile(Set<PerformanceEntry> results) throws IOException {
     for (PerformanceEntry performanceEntry : results) {
-      String outputFile = this.outputDir + "/" + UUID.randomUUID() + Options.DOT_JSON;
+      String outputFile = this.outputDir() + "/" + UUID.randomUUID() + Options.DOT_JSON;
       File file = new File(outputFile);
       file.getParentFile().mkdirs();
 
@@ -236,5 +241,13 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     }
 
     return entries;
+  }
+
+  public String getProgramName() {
+    return programName;
+  }
+
+  public String getMeasuredTime() {
+    return measuredTime;
   }
 }

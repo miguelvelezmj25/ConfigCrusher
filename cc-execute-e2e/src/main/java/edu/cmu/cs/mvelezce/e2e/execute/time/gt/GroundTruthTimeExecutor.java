@@ -10,8 +10,9 @@ public class GroundTruthTimeExecutor extends E2ETimeExecutor {
 
   public static final String OUTPUT_DIR = E2ETimeExecutor.OUTPUT_DIR + "/java/programs/gt";
 
-  public GroundTruthTimeExecutor(String programName) {
-    this(programName, new HashSet<>(), -1);
+  public GroundTruthTimeExecutor(
+      String programName, E2ETimeExecutionParser e2ETimeExecutionParser) {
+    super(programName, new HashSet<>(), e2ETimeExecutionParser, -1);
   }
 
   GroundTruthTimeExecutor(

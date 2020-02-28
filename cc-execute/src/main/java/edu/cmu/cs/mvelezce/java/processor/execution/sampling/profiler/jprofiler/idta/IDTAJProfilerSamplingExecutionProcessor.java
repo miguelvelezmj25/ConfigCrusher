@@ -14,15 +14,16 @@ public class IDTAJProfilerSamplingExecutionProcessor extends JProfilerSamplingEx
 
   private static final String OUTPUT_DIR = IDTAJProfilerSamplingExecutor.OUTPUT_DIR;
 
-  public IDTAJProfilerSamplingExecutionProcessor(String programName) {
-    this(programName, new HashMap<>(), new HashSet<>());
+  public IDTAJProfilerSamplingExecutionProcessor(String programName, String measuredTime) {
+    this(programName, new HashMap<>(), new HashSet<>(), measuredTime);
   }
 
   IDTAJProfilerSamplingExecutionProcessor(
       String programName,
       Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs,
-      Set<JavaRegion> regions) {
-    super(programName, itersToRawPerfExecs, regions);
+      Set<JavaRegion> regions,
+      String measuredTime) {
+    super(programName, itersToRawPerfExecs, regions, measuredTime);
   }
 
   @Override

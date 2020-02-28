@@ -20,14 +20,16 @@ public final class ConfigAnalysis {
 
   private final String programName;
   private final List<String> options;
+  private final String measuredTime;
 
-  public ConfigAnalysis(String programName) {
-    this(programName, new ArrayList<>());
+  public ConfigAnalysis(String programName, String measuredTime) {
+    this(programName, new ArrayList<>(), measuredTime);
   }
 
-  public ConfigAnalysis(String programName, List<String> options) {
+  public ConfigAnalysis(String programName, List<String> options, String measuredTime) {
     this.programName = programName;
     this.options = options;
+    this.measuredTime = measuredTime;
   }
 
   public void compareMeasurementAndPrediction(
@@ -111,6 +113,8 @@ public final class ConfigAnalysis {
                 + "/"
                 + approach
                 + "/"
+                + this.measuredTime
+                + "/"
                 + config
                 + Evaluation.DOT_CSV);
 
@@ -178,6 +182,8 @@ public final class ConfigAnalysis {
                   + approach
                   + "/"
                   + this.programName
+                  + "/"
+                  + this.measuredTime
                   + "/"
                   + config
                   + Evaluation.DOT_CSV);

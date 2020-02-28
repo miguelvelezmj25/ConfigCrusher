@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.instrument.idta.IDTATimerInstrumenter;
 import edu.cmu.cs.mvelezce.instrument.region.instrumenter.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJProfilerSamplingExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
 import edu.cmu.cs.mvelezce.region.java.JavaRegion;
 import org.junit.Test;
@@ -23,10 +24,11 @@ import java.util.Set;
 public class IDTAJProfilerSamplingExecutionProcessorTest {
 
   @Test
-  public void trivial() throws IOException, InterruptedException {
+  public void trivial_real() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -35,7 +37,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -45,10 +51,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   }
 
   @Test
-  public void berkeleyDB() throws IOException, InterruptedException {
+  public void berkeleyDB_real() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -57,7 +64,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -67,13 +78,14 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   }
 
   @Test
-  public void lucene() throws IOException, InterruptedException {
+  public void lucene_real() throws IOException, InterruptedException {
     System.err.println(
         "Regions a2500b3a-d6e0-45dd-bc6f-dcca4ea72038 and 83847d46-8d61-4ecf-8b7d-6eaca01d469e are in the same method. "
-            + "We manually removed one of them. Check if this method is relevant for performance");
+            + "We manually removed one of them. Check if this method is relevant for   performance");
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -82,7 +94,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -92,10 +108,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   }
 
   @Test
-  public void performance() throws IOException, InterruptedException {
+  public void performance_real() throws IOException, InterruptedException {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -104,7 +121,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -114,10 +135,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   }
 
   @Test
-  public void multithread() throws IOException, InterruptedException {
+  public void multithread_user() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -126,7 +148,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -136,10 +162,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   }
 
   @Test
-  public void convert() throws IOException, InterruptedException {
+  public void convert_user() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
-        new IDTAJProfilerSamplingExecutor(programName);
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
     Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
         executor.getRawExecutionParser().readResults();
 
@@ -148,7 +175,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
     Analysis processor =
         new IDTAJProfilerSamplingExecutionProcessor(
-            programName, itersToRawPerfExecs, regionsToPartitions.keySet());
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS));
 
     String[] args = new String[2];
     args[0] = "-delres";

@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta.IDTAJProfilerSamplingExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
@@ -18,15 +19,16 @@ import java.util.Set;
 public class IDTAPerfAggregatorProcessorTest {
 
   @Test
-  public void trivial() throws IOException, InterruptedException {
+  public void trivial_real() throws IOException, InterruptedException {
     String programName = BaseTrivialAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.REAL);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
 
     args = new String[2];
     args[0] = "-delres";
@@ -36,15 +38,16 @@ public class IDTAPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void berkeley() throws IOException, InterruptedException {
+  public void berkeley_real() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.REAL);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
 
     args = new String[2];
     args[0] = "-delres";
@@ -54,15 +57,16 @@ public class IDTAPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void lucene() throws IOException, InterruptedException {
+  public void lucene_real() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.REAL);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
 
     args = new String[2];
     args[0] = "-delres";
@@ -72,15 +76,16 @@ public class IDTAPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void performance() throws IOException, InterruptedException {
+  public void performance_real() throws IOException, InterruptedException {
     String programName = BasePerformanceAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.REAL);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
 
     args = new String[2];
     args[0] = "-delres";
@@ -90,15 +95,16 @@ public class IDTAPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void multithread() throws IOException, InterruptedException {
+  public void multithread_user() throws IOException, InterruptedException {
     String programName = BaseMultithreadAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.USER);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.USER);
 
     args = new String[2];
     args[0] = "-delres";
@@ -108,15 +114,16 @@ public class IDTAPerfAggregatorProcessorTest {
   }
 
   @Test
-  public void convert() throws IOException, InterruptedException {
+  public void convert_user() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     Analysis<Map<Integer, Set<PerfExecution>>> processor =
-        new IDTAJProfilerSamplingExecutionProcessor(programName);
+        new IDTAJProfilerSamplingExecutionProcessor(programName, BaseExecutor.USER);
 
     String[] args = new String[0];
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, itersToProcessedPerfExecution);
+        new IDTAPerfAggregatorProcessor(
+            programName, itersToProcessedPerfExecution, BaseExecutor.USER);
 
     args = new String[2];
     args[0] = "-delres";

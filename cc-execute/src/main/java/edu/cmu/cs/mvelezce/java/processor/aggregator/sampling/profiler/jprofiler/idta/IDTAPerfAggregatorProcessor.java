@@ -12,17 +12,24 @@ public class IDTAPerfAggregatorProcessor extends PerfAggregatorProcessor {
 
   private static final String OUTPUT_DIR = IDTAJProfilerSamplingExecutor.OUTPUT_DIR;
 
-  public IDTAPerfAggregatorProcessor(String programName) {
-    this(programName, new HashMap<>());
+  public IDTAPerfAggregatorProcessor(String programName, String measuredTime) {
+    this(programName, new HashMap<>(), measuredTime);
   }
 
   IDTAPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
-    super(programName, itersToProcessedPerfExecution);
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      String measuredTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime);
   }
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR
+        + "/"
+        + this.getMeasuredTime()
+        + "/"
+        + this.getProgramName()
+        + PerfAggregatorProcessor.OUTPUT_DIR;
   }
 }

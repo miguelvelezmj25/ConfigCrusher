@@ -19,19 +19,31 @@ public class PartitionModelsEvaluation extends ModelsEvaluation<Partition> {
   private static final String OUTPUT_DIR =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/models";
 
+  private final String measuredTime;
+
   public PartitionModelsEvaluation(
       String programName,
       Collection<String> options,
+      String measuredTime,
       double diffThreshold,
       double perfIntensiveThreshold) {
     super(programName, options, diffThreshold, perfIntensiveThreshold);
+
+    this.measuredTime = measuredTime;
   }
 
   @Override
   protected void saveComparedModels(Map<UUID, Map<Partition, List<Double>>> comparedModels)
       throws IOException {
     File rootFile =
-        new File(OUTPUT_DIR + "/" + this.getProgramName() + "/" + ModelsEvaluation.COMPARISON_ROOT);
+        new File(
+            OUTPUT_DIR
+                + "/"
+                + this.getProgramName()
+                + "/"
+                + this.measuredTime
+                + "/"
+                + ModelsEvaluation.COMPARISON_ROOT);
     FileUtils.cleanDirectory(rootFile);
 
     for (Map.Entry<UUID, Map<Partition, List<Double>>> entry : comparedModels.entrySet()) {
@@ -45,6 +57,8 @@ public class PartitionModelsEvaluation extends ModelsEvaluation<Partition> {
               OUTPUT_DIR
                   + "/"
                   + this.getProgramName()
+                  + "/"
+                  + this.measuredTime
                   + "/"
                   + ModelsEvaluation.COMPARISON_ROOT
                   + "/"

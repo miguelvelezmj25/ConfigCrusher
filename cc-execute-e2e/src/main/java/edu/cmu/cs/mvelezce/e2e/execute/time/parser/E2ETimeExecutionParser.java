@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.e2e.execute.time.parser;
 
 import edu.cmu.cs.mvelezce.e2e.execute.executor.parser.BaseE2EExecutionParser;
 import edu.cmu.cs.mvelezce.e2e.execute.time.parser.results.E2ETimePerfExecution;
+import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.region.manager.RegionsManager;
 
@@ -13,9 +14,6 @@ import java.util.*;
 
 public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
 
-  public static final String USER = "user";
-  public static final String REAL = "real";
-
   public E2ETimeExecutionParser(String programName, String outputDir) {
     super(programName, outputDir);
   }
@@ -26,11 +24,11 @@ public class E2ETimeExecutionParser extends BaseE2EExecutionParser {
     List<String> results = this.deserialize(file);
     List<String> entries = this.getEntries(results);
 
-    long realTime = this.getTime(entries, REAL);
+    long realTime = this.getTime(entries, BaseExecutor.REAL);
     Map<String, Long> regionsToTimes = new HashMap<>();
     regionsToTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), realTime);
 
-    long userTime = this.getTime(entries, USER);
+    long userTime = this.getTime(entries, BaseExecutor.USER);
     Map<String, Long> regionsToUserTimes = new HashMap<>();
     regionsToUserTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), userTime);
 

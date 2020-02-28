@@ -16,13 +16,17 @@ import java.util.*;
 
 public class MatlabLinearLearnedModelBuilder extends BaseLinearLearnedModelBuilder {
 
-  public MatlabLinearLearnedModelBuilder(String programName, SamplingApproach samplingApproach) {
-    this(programName, new ArrayList<>(), samplingApproach);
+  public MatlabLinearLearnedModelBuilder(
+      String programName, SamplingApproach samplingApproach, String measuredTime) {
+    this(programName, new ArrayList<>(), samplingApproach, measuredTime);
   }
 
   MatlabLinearLearnedModelBuilder(
-      String programName, List<String> options, SamplingApproach samplingApproach) {
-    super(programName, options, samplingApproach);
+      String programName,
+      List<String> options,
+      SamplingApproach samplingApproach,
+      String measuredTime) {
+    super(programName, options, samplingApproach, measuredTime);
   }
 
   @Override
@@ -66,6 +70,8 @@ public class MatlabLinearLearnedModelBuilder extends BaseLinearLearnedModelBuild
         + "/matlab/model/java/programs/"
         + this.getSamplingApproach().getName()
         + "/"
-        + this.getProgramName();
+        + this.getProgramName()
+        + "/"
+        + this.getMeasuredTime();
   }
 }

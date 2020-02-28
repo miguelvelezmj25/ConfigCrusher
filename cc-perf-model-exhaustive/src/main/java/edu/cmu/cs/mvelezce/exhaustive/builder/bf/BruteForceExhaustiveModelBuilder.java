@@ -14,17 +14,20 @@ public class BruteForceExhaustiveModelBuilder extends ExhaustiveModelBuilder {
   private static final String OUTPUT_DIR =
       "../cc-perf-model-exhaustive/" + Options.DIRECTORY + "/model/java/programs/bf";
 
-  public BruteForceExhaustiveModelBuilder(String programName) {
-    this(programName, new ArrayList<>(), new HashSet<>());
+  public BruteForceExhaustiveModelBuilder(String programName, String measuredTime) {
+    this(programName, new ArrayList<>(), new HashSet<>(), measuredTime);
   }
 
   BruteForceExhaustiveModelBuilder(
-      String programName, List<String> options, Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, performanceEntries);
+      String programName,
+      List<String> options,
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, performanceEntries, measuredTime);
   }
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR + "/" + this.getProgramName();
+    return OUTPUT_DIR + "/" + this.getProgramName() + "/" + this.getMeasuredTime();
   }
 }

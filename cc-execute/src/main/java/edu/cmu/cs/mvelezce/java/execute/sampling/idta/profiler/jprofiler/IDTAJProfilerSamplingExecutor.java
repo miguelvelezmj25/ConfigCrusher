@@ -24,8 +24,10 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
   public static final String OUTPUT_DIR =
       "../cc-execute/" + Options.DIRECTORY + "/executor/java/idta/programs/sampling/jprofiler";
 
-  public IDTAJProfilerSamplingExecutor(String programName) {
-    this(programName, new HashSet<>(), 0, "");
+  private final String threadStatus;
+
+  public IDTAJProfilerSamplingExecutor(String programName, String threadStatus) {
+    this(programName, new HashSet<>(), 0, threadStatus);
   }
 
   IDTAJProfilerSamplingExecutor(
@@ -36,8 +38,25 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
     super(
         programName,
         configurations,
-        new RawJProfilerSamplingExecutionParser(programName, OUTPUT_DIR, threadStatus),
+        new RawJProfilerSamplingExecutionParser(
+            programName,
+            OUTPUT_DIR + "/" + getMeasuredTimeFromThreadStatus(threadStatus),
+            threadStatus),
         waitAfterExecution);
+
+    this.threadStatus = threadStatus;
+  }
+
+  public static String getMeasuredTimeFromThreadStatus(String threadStatus) {
+    if (threadStatus.equals(RawJProfilerSamplingExecutionParser.ALL_THREAD_STATUS)) {
+      return BaseExecutor.REAL;
+    }
+
+    if (threadStatus.equals(RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS)) {
+      return BaseExecutor.USER;
+    }
+
+    throw new RuntimeException("Do not recognize thread status " + threadStatus);
   }
 
   public static String getOS() {
@@ -46,7 +65,7 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
 
   @Override
   public String outputDir() {
-    return OUTPUT_DIR;
+    return OUTPUT_DIR + "/" + getMeasuredTimeFromThreadStatus(this.threadStatus);
   }
 
   @Override

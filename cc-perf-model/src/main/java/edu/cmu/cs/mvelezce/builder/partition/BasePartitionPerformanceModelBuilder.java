@@ -27,8 +27,9 @@ public abstract class BasePartitionPerformanceModelBuilder
       String programName,
       List<String> options,
       Map<JavaRegion, Partitioning> regionsToData,
-      Set<PerformanceEntry> performanceEntries) {
-    super(programName, options, regionsToData, performanceEntries);
+      Set<PerformanceEntry> performanceEntries,
+      String measuredTime) {
+    super(programName, options, regionsToData, performanceEntries, measuredTime);
   }
 
   private static Partition getPartition(String string) {

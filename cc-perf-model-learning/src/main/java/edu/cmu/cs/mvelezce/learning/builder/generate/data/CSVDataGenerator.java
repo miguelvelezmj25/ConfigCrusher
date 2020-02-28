@@ -19,16 +19,19 @@ class CSVDataGenerator {
   private final List<String> options;
   private final Set<PerformanceEntry> performanceEntries;
   private final SamplingApproach samplingApproach;
+  private final String measuredTime;
 
   CSVDataGenerator(
       String programName,
       List<String> options,
       Set<PerformanceEntry> performanceEntries,
-      SamplingApproach samplingApproach) {
+      SamplingApproach samplingApproach,
+      String measuredTime) {
     this.programName = programName;
     this.options = options;
     this.performanceEntries = performanceEntries;
     this.samplingApproach = samplingApproach;
+    this.measuredTime = measuredTime;
   }
 
   void generateCSVFile() throws IOException {
@@ -67,6 +70,8 @@ class CSVDataGenerator {
         BaseLinearLearnedModelBuilder.OUTPUT_DIR
             + "/data/java/programs/"
             + this.programName
+            + "/"
+            + this.measuredTime
             + "/"
             + this.samplingApproach.getName()
             + "/"

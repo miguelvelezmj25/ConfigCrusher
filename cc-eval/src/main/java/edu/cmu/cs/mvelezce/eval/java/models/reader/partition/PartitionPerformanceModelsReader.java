@@ -16,18 +16,25 @@ import java.util.*;
 
 public class PartitionPerformanceModelsReader extends BasePartitionPerformanceModelBuilder {
 
-  private static final String MODELS_ROT =
+  private static final String MODELS_ROOT =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/models";
   private static final String PROGRAM_MODELS_DIR = "models";
 
-  public PartitionPerformanceModelsReader(String programName) {
-    super(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>());
+  public PartitionPerformanceModelsReader(String programName, String measuredTime) {
+    super(programName, new ArrayList<>(), new HashMap<>(), new HashSet<>(), measuredTime);
   }
 
   public Set<PerformanceModel<Partition>> read() throws IOException {
     System.err.println(
         "This code is very similar to comparing local performance models. Abstract!");
-    String modelsDir = MODELS_ROT + "/" + this.getProgramName() + "/" + PROGRAM_MODELS_DIR;
+    String modelsDir =
+        MODELS_ROOT
+            + "/"
+            + this.getProgramName()
+            + "/"
+            + this.getMeasuredTime()
+            + "/"
+            + PROGRAM_MODELS_DIR;
     File modelsDirFile = new File(modelsDir);
 
     if (!modelsDirFile.exists()) {

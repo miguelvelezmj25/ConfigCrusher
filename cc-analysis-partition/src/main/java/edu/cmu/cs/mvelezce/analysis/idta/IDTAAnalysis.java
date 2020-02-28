@@ -7,12 +7,11 @@ import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
 import edu.cmu.cs.mvelezce.region.java.JavaRegion;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
 
@@ -51,18 +50,31 @@ public class IDTAAnalysis extends BaseAnalysis<Map<JavaRegion, Partitioning>> {
 
   private List<IDTAResult> parseIDTAResults() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    File inputFile =
+
+    File resultsDir =
         new File(
             IDTAAnalysis.IDTA_OUTPUT_DIR
                 + "/"
                 + this.getProgramName()
                 + "/cc/"
                 + this.workloadSize
-                + "/partitions/"
-                + this.getProgramName()
-                + ".json");
+                + "/partitions/");
 
-    return mapper.readValue(inputFile, new TypeReference<List<IDTAResult>>() {});
+    Collection<File> results = FileUtils.listFiles(resultsDir, new String[] {"json"}, false);
+
+    if (results.isEmpty()) {
+      throw new RuntimeException("There are no idta results for " + this.getProgramName());
+    }
+
+    List<IDTAResult> idtaResults = new ArrayList<>();
+
+    for (File file : results) {
+      List<IDTAResult> idtaResult =
+          mapper.readValue(file, new TypeReference<List<IDTAResult>>() {});
+      idtaResults.addAll(idtaResult);
+    }
+
+    return idtaResults;
   }
 
   @Override

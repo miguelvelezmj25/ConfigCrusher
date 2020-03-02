@@ -13,14 +13,15 @@ public class BruteForceTimePerfAggregatorProcessor extends E2EPerfAggregatorProc
   private static final String OUTPUT_DIR = BruteForceTimeExecutor.OUTPUT_DIR;
 
   public BruteForceTimePerfAggregatorProcessor(String programName, String measuredTime) {
-    this(programName, new HashMap<>(), measuredTime);
+    this(programName, new HashMap<>(), measuredTime, 0);
   }
 
   BruteForceTimePerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

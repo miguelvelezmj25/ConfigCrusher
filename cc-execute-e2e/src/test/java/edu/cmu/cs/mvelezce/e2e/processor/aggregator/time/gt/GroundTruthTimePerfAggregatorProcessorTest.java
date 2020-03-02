@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.e2e.execute.time.parser.E2ERealTimeExecutionParser;
 import edu.cmu.cs.mvelezce.e2e.execute.time.parser.E2ETimeExecutionParser;
 import edu.cmu.cs.mvelezce.e2e.execute.time.parser.E2EUserTimeExecutionParser;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
+import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
 
@@ -28,7 +29,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults, BaseExecutor.REAL);
+        new GroundTruthTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -46,7 +48,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults, BaseExecutor.USER);
+        new GroundTruthTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.USER, PerfAggregatorProcessor.ADDED_TIME);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -64,7 +67,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults, BaseExecutor.USER);
+        new GroundTruthTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.USER, PerfAggregatorProcessor.ADDED_TIME);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -82,7 +86,8 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new GroundTruthTimePerfAggregatorProcessor(programName, itersToResults, BaseExecutor.REAL);
+        new GroundTruthTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
 
     String[] args = new String[2];
     args[0] = "-delres";

@@ -8,9 +8,14 @@ import java.util.Set;
 
 public class ConvertIDTAPerformanceModel<T> extends IDTAPerformanceModel<T> {
 
-  private static final double INTERCEPT = 1.9437;
-  private static final double SLOPE = 1.2649;
-  private static final double R_SQUARED = 0.9976;
+  // Numbers when we analyzed the program with a small number of configs
+  //  private static final double INTERCEPT = 1.9437;
+  //  private static final double SLOPE = 1.2649;
+  //  private static final double R_SQUARED = 0.9976;
+
+  private static final double INTERCEPT = 0;
+  private static final double SLOPE = 1;
+  private static final double R_SQUARED = 0;
 
   public ConvertIDTAPerformanceModel(Set<LocalPerformanceModel<T>> localModels) {
     super(localModels, INTERCEPT, SLOPE);

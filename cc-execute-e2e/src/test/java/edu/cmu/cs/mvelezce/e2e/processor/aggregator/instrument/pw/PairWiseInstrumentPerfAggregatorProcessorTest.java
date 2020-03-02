@@ -21,7 +21,7 @@ public class PairWiseInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new PairWiseInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -36,7 +36,7 @@ public class PairWiseInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new PairWiseInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new PairWiseInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";

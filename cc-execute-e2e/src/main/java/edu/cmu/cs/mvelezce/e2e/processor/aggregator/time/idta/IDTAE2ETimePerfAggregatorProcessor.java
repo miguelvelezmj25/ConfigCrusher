@@ -13,14 +13,15 @@ public class IDTAE2ETimePerfAggregatorProcessor extends E2EPerfAggregatorProcess
   private static final String OUTPUT_DIR = IDTAE2ETimeExecutor.OUTPUT_DIR;
 
   public IDTAE2ETimePerfAggregatorProcessor(String programName, String measuredTime) {
-    this(programName, new HashMap<>(), measuredTime);
+    this(programName, new HashMap<>(), measuredTime, 0);
   }
 
   IDTAE2ETimePerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

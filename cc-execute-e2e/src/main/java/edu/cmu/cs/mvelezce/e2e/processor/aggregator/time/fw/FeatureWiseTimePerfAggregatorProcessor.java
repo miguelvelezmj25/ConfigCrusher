@@ -13,14 +13,15 @@ public class FeatureWiseTimePerfAggregatorProcessor extends E2EPerfAggregatorPro
   private static final String OUTPUT_DIR = FeatureWiseTimeExecutor.OUTPUT_DIR;
 
   public FeatureWiseTimePerfAggregatorProcessor(String programName, String measuredTime) {
-    this(programName, new HashMap<>(), measuredTime);
+    this(programName, new HashMap<>(), measuredTime, 0);
   }
 
   FeatureWiseTimePerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

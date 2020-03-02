@@ -13,14 +13,15 @@ public class GroundTruthTimePerfAggregatorProcessor extends E2EPerfAggregatorPro
   private static final String OUTPUT_DIR = GroundTruthTimeExecutor.OUTPUT_DIR;
 
   public GroundTruthTimePerfAggregatorProcessor(String programName, String measuredTime) {
-    this(programName, new HashMap<>(), measuredTime);
+    this(programName, new HashMap<>(), measuredTime, 0);
   }
 
   GroundTruthTimePerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

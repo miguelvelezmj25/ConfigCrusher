@@ -14,12 +14,14 @@ public class PairWiseInstrumentPerfAggregatorProcessor extends E2EPerfAggregator
   private static final String OUTPUT_DIR = PairWiseInstrumentExecutor.OUTPUT_DIR;
 
   public PairWiseInstrumentPerfAggregatorProcessor(String programName) {
-    this(programName, new HashMap<>());
+    this(programName, new HashMap<>(), 0);
   }
 
   PairWiseInstrumentPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
-    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL, addedTime);
   }
 
   @Override

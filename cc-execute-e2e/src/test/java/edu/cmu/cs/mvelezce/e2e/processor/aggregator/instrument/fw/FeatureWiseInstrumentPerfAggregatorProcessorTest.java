@@ -21,7 +21,7 @@ public class FeatureWiseInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new FeatureWiseInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -36,7 +36,7 @@ public class FeatureWiseInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new FeatureWiseInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new FeatureWiseInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";

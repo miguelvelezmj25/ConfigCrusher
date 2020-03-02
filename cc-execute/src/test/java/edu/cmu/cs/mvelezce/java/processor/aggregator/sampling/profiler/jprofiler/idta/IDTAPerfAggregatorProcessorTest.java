@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
+import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.processor.execution.sampling.profiler.jprofiler.idta.IDTAJProfilerSamplingExecutionProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL, 0);
 
     args = new String[2];
     args[0] = "-delres";
@@ -47,7 +48,7 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL, 0);
 
     args = new String[2];
     args[0] = "-delres";
@@ -66,7 +67,7 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL, 0);
 
     args = new String[2];
     args[0] = "-delres";
@@ -85,7 +86,7 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+            programName, itersToProcessedPerfExecution, BaseExecutor.REAL, 0);
 
     args = new String[2];
     args[0] = "-delres";
@@ -104,7 +105,10 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.USER);
+            programName,
+            itersToProcessedPerfExecution,
+            BaseExecutor.USER,
+            PerfAggregatorProcessor.ADDED_TIME);
 
     args = new String[2];
     args[0] = "-delres";
@@ -123,7 +127,10 @@ public class IDTAPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution = processor.analyze(args);
     Analysis perfAggregatorProcessor =
         new IDTAPerfAggregatorProcessor(
-            programName, itersToProcessedPerfExecution, BaseExecutor.USER);
+            programName,
+            itersToProcessedPerfExecution,
+            BaseExecutor.USER,
+            PerfAggregatorProcessor.ADDED_TIME);
 
     args = new String[2];
     args[0] = "-delres";

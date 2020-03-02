@@ -17,6 +17,9 @@ import java.util.*;
 
 public abstract class PerfAggregatorProcessor implements Analysis<Set<PerformanceEntry>> {
 
+  // Time added to each execution to avoid diving by numbers close to 0 when analyzing results and
+  // calculating error
+  public static final long ADDED_TIME = 1_500_000_000;
   public static final String OUTPUT_DIR = "/execution/averaged";
 
   private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000000");
@@ -24,14 +27,17 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
   private final Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution;
   private final String programName;
   private final String measuredTime;
+  private final long addedTime;
 
   public PerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
+      String measuredTime,
+      long addedTime) {
     this.programName = programName;
     this.itersToProcessedPerfExecution = itersToProcessedPerfExecution;
     this.measuredTime = measuredTime;
+    this.addedTime = addedTime;
   }
 
   @Override
@@ -159,7 +165,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
     return regionsToHumanReadableCI;
   }
 
-  private void addAllExecutions(
+  protected void addAllExecutions(
       DescriptiveStatisticsMap<UUID> regionsToStats,
       Set<String> config,
       Collection<Set<PerfExecution>> allProcessedPerfExecutions) {
@@ -172,7 +178,7 @@ public abstract class PerfAggregatorProcessor implements Analysis<Set<Performanc
         for (Map.Entry<String, Long> entry : perfExecution.getRegionsToPerf().entrySet()) {
           UUID region = UUID.fromString(entry.getKey());
           DescriptiveStatistics stats = regionsToStats.get(region);
-          stats.addValue(entry.getValue());
+          stats.addValue(entry.getValue() + this.addedTime);
         }
 
         break;

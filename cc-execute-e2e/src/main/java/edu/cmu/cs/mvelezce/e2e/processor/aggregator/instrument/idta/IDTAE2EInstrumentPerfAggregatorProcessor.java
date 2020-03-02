@@ -14,12 +14,14 @@ public class IDTAE2EInstrumentPerfAggregatorProcessor extends E2EPerfAggregatorP
   private static final String OUTPUT_DIR = IDTAE2EInstrumentExecutor.OUTPUT_DIR;
 
   public IDTAE2EInstrumentPerfAggregatorProcessor(String programName) {
-    this(programName, new HashMap<>());
+    this(programName, new HashMap<>(), 0);
   }
 
   IDTAE2EInstrumentPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
-    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL, addedTime);
   }
 
   @Override

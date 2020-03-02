@@ -21,7 +21,7 @@ public class BruteForceInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new BruteForceInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";
@@ -36,7 +36,7 @@ public class BruteForceInstrumentPerfAggregatorProcessorTest {
     Map<Integer, Set<PerfExecution>> itersToResults =
         executor.getRawExecutionParser().readResults();
     Analysis perfAggregatorProcessor =
-        new BruteForceInstrumentPerfAggregatorProcessor(programName, itersToResults);
+        new BruteForceInstrumentPerfAggregatorProcessor(programName, itersToResults, 0);
 
     String[] args = new String[2];
     args[0] = "-delres";

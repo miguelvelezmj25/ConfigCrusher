@@ -14,12 +14,14 @@ public class FeatureWiseInstrumentPerfAggregatorProcessor extends E2EPerfAggrega
   private static final String OUTPUT_DIR = FeatureWiseInstrumentExecutor.OUTPUT_DIR;
 
   public FeatureWiseInstrumentPerfAggregatorProcessor(String programName) {
-    this(programName, new HashMap<>());
+    this(programName, new HashMap<>(), 0);
   }
 
   FeatureWiseInstrumentPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
-    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL, addedTime);
   }
 
   @Override

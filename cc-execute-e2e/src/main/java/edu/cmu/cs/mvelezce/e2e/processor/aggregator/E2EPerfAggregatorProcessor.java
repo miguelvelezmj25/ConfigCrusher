@@ -11,8 +11,9 @@ public abstract class E2EPerfAggregatorProcessor extends PerfAggregatorProcessor
   public E2EPerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

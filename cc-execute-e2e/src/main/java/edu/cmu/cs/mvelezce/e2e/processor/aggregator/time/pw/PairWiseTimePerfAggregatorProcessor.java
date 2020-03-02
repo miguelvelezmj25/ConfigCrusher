@@ -13,14 +13,15 @@ public class PairWiseTimePerfAggregatorProcessor extends E2EPerfAggregatorProces
   private static final String OUTPUT_DIR = PairWiseTimeExecutor.OUTPUT_DIR;
 
   public PairWiseTimePerfAggregatorProcessor(String programName, String measuredTime) {
-    super(programName, new HashMap<>(), measuredTime);
+    super(programName, new HashMap<>(), measuredTime, 0);
   }
 
   PairWiseTimePerfAggregatorProcessor(
       String programName,
       Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
-      String measuredTime) {
-    super(programName, itersToProcessedPerfExecution, measuredTime);
+      String measuredTime,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, measuredTime, addedTime);
   }
 
   @Override

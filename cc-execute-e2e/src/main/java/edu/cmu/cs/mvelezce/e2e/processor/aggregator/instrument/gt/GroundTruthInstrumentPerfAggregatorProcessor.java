@@ -14,12 +14,14 @@ public class GroundTruthInstrumentPerfAggregatorProcessor extends E2EPerfAggrega
   private static final String OUTPUT_DIR = GroundTruthInstrumentExecutor.OUTPUT_DIR;
 
   public GroundTruthInstrumentPerfAggregatorProcessor(String programName) {
-    this(programName, new HashMap<>());
+    this(programName, new HashMap<>(), 0);
   }
 
   GroundTruthInstrumentPerfAggregatorProcessor(
-      String programName, Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution) {
-    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL);
+      String programName,
+      Map<Integer, Set<PerfExecution>> itersToProcessedPerfExecution,
+      long addedTime) {
+    super(programName, itersToProcessedPerfExecution, BaseExecutor.REAL, addedTime);
   }
 
   @Override

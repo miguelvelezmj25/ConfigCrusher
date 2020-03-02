@@ -16,6 +16,10 @@ public class DescriptiveStatisticsMap<T> {
     this.map.putIfAbsent(entry, new DescriptiveStatistics());
   }
 
+  public void put(T entry, DescriptiveStatistics descriptiveStats) {
+    this.map.put(entry, descriptiveStats);
+  }
+
   public DescriptiveStatistics get(T region) {
     return this.map.get(region);
   }

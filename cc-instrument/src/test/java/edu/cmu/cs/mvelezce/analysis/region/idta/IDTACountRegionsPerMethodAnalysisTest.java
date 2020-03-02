@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.analysis.region.idta;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.idta.IDTAAnalysis;
@@ -71,6 +72,18 @@ public class IDTACountRegionsPerMethodAnalysisTest {
   @Test
   public void expandedConvert() throws IOException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    BaseCountRegionsPerMethodAnalysis<Partitioning> counter =
+        new IDTACountRegionsPerMethodAnalysis(regionsToPartitions);
+    Map<String, Integer> methodsToRegionCounts = counter.analyze();
+    counter.listMethodsWithMultipleRegions(methodsToRegionCounts);
+  }
+
+  @Test
+  public void expandedRunBenchC() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
     Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
 

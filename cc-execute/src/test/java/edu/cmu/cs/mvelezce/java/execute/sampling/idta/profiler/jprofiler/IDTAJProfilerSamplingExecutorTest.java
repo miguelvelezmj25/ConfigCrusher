@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
@@ -143,6 +144,28 @@ public class IDTAJProfilerSamplingExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
     args[2] = "-i3";
+
+    executor.execute(args);
+  }
+
+  @Test
+  public void runBenchC() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configurations = compression.analyze(args);
+
+    Executor executor =
+        new IDTAJProfilerSamplingExecutor(
+            programName,
+            configurations,
+            30000,
+            RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
+
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i5";
 
     executor.execute(args);
   }

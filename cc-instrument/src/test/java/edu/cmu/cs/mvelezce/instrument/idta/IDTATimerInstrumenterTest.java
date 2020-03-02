@@ -15,6 +15,7 @@ import edu.cmu.cs.mvelezce.adapters.multipleReturns.BaseMultipleReturnsAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
 import edu.cmu.cs.mvelezce.adapters.pngtastic.BasePngtasticAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.adapters.staticMethodCall.BaseStaticMethodCallAdapter;
 import edu.cmu.cs.mvelezce.adapters.subtraces.BaseSubtracesAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
@@ -609,6 +610,37 @@ public class IDTATimerInstrumenterTest {
     String srcDir = "../" + BaseConvertAdapter.ORIGINAL_DIR_PATH;
     String classDir = "../" + BaseConvertAdapter.ORIGINAL_CLASS_PATH;
     Set<String> options = new HashSet<>(BaseConvertAdapter.getListOfOptions());
+    Instrumenter instrumenter =
+        new IDTATimerInstrumenter(
+            programName,
+            mainClass,
+            srcDir,
+            classDir,
+            options,
+            regionsToPartitions,
+            new IDTAExecutionTimeMethodInstrumenter());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void runBenchC()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
+          InvocationTargetException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    String workloadSize = "small";
+
+    Analysis<Map<JavaRegion, Partitioning>> analysis = new IDTAAnalysis(programName, workloadSize);
+    Map<JavaRegion, Partitioning> regionsToPartitions = analysis.analyze();
+
+    String mainClass = BaseRunBenchCAdapter.MAIN_CLASS;
+    String srcDir = "../" + BaseRunBenchCAdapter.ORIGINAL_DIR_PATH;
+    String classDir = "../" + BaseRunBenchCAdapter.ORIGINAL_CLASS_PATH;
+    Set<String> options = new HashSet<>(BaseRunBenchCAdapter.getListOfOptions());
     Instrumenter instrumenter =
         new IDTATimerInstrumenter(
             programName,

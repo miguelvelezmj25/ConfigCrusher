@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partitioning;
@@ -169,6 +170,33 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
             + "We manually removed one of them. Check if these methods are relevant for performance.");
 
     String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
+    Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
+        executor.getRawExecutionParser().readResults();
+
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    Analysis processor =
+        new IDTAJProfilerSamplingExecutionProcessor(
+            programName,
+            itersToRawPerfExecs,
+            regionsToPartitions.keySet(),
+            IDTAJProfilerSamplingExecutor.getMeasuredTimeFromThreadStatus(
+                RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS));
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    processor.analyze(args);
+  }
+
+  @Test
+  public void runBenchC_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(
             programName, RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);

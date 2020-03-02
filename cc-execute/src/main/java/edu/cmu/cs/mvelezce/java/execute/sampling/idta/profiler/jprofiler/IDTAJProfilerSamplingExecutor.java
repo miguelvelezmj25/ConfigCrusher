@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.indexFiles.profiler.jp
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.measureDiskOrderedScan.profiler.jprofiler.JProfilerSamplingMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.multithread.profiler.jprofiler.JProfilerSamplingMultithreadExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.performance.profiler.jprofiler.JProfilerSamplingPerformanceExecutorAdapter;
+import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.runBenchC.profiler.jprofiler.JProfilerSamplingRunBenchCExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.adapters.trivial.profiler.jprofiler.JProfilerSamplingTrivialExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJProfilerSamplingExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
@@ -90,6 +91,9 @@ public class IDTAJProfilerSamplingExecutor extends BaseExecutor<RawJProfilerSamp
         break;
       case JProfilerSamplingConvertExecutorAdapter.PROGRAM_NAME:
         adapter = new JProfilerSamplingConvertExecutorAdapter(this);
+        break;
+      case JProfilerSamplingRunBenchCExecutorAdapter.PROGRAM_NAME:
+        adapter = new JProfilerSamplingRunBenchCExecutorAdapter(this);
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + this.getProgramName());

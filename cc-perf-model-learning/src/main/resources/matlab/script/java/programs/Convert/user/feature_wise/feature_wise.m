@@ -1,6 +1,6 @@
 train = readtable('../../../../../../../data/java/programs/Convert/user/feature_wise/feature_wise.csv');
-x_train = table2array(train(:,1:5));
-y_train = table2array(train(:,6:6));
+x_train = table2array(train(:,1:22));
+y_train = table2array(train(:,23:23));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../../../../cc-perf-model-learning/src/main/resources/matlab/model/raw/java/programs/Convert/user/feature_wise');

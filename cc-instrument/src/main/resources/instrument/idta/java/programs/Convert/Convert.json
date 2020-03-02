@@ -25,32 +25,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "14f67232-4953-4caa-9eb2-e2d39d6ec229",
-    "startBlock": "1352037686",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert.util",
-    "className": "DensityBucketUtil",
-    "methodSignature": "lambda$getDensityBucketsWithFactorScale$4(FLat/favre/tools/dconvert/arg/Arguments;Lat/favre/tools/dconvert/converters/descriptors/DensityDescriptor;)Z",
-    "decisionIndex": 1,
-    "info": [
-      "(SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
-      "(SCALE && PLATFORM && !SKIP_UPSCALING)",
-      "(!SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
-      "(SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
-      "(!SCALE && PLATFORM)",
-      "(SCALE && PLATFORM && SKIP_UPSCALING)",
-      "(SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
-      "(!SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
-      "(!SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
-      "(!SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
-      "(SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)"
-    ],
-    "id": "953a9eac-7d2e-443d-81dd-329265d52e65",
-    "startBlock": "1983020117",
+    "id": "0e953a06-815e-4056-9389-a1fe02b65f4a",
+    "startBlock": "1040475566",
     "endBlocks": [
       "exit"
     ]
@@ -81,8 +57,32 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "60f4fe70-97bf-4a80-82e2-33eebfe45bc3",
-    "startBlock": "1735168079",
+    "id": "fd7ab6b4-a5db-4fa4-8b51-74268e7408f7",
+    "startBlock": "1602611177",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.util",
+    "className": "DensityBucketUtil",
+    "methodSignature": "lambda$getDensityBucketsWithFactorScale$4(FLat/favre/tools/dconvert/arg/Arguments;Lat/favre/tools/dconvert/converters/descriptors/DensityDescriptor;)Z",
+    "decisionIndex": 1,
+    "info": [
+      "(SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
+      "(SCALE && PLATFORM && !SKIP_UPSCALING)",
+      "(!SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
+      "(SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
+      "(!SCALE && PLATFORM)",
+      "(SCALE && PLATFORM && SKIP_UPSCALING)",
+      "(SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
+      "(!SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)",
+      "(!SCALE && !PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
+      "(!SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
+      "(SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)"
+    ],
+    "id": "9fbfca03-0c39-40d1-8ff1-405188253406",
+    "startBlock": "998538545",
     "endBlocks": [
       "exit"
     ]
@@ -96,8 +96,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "7a1e915b-c694-4a0b-b73c-2e7e33c37eef",
-    "startBlock": "1218632562",
+    "id": "fd63c2fe-5c16-4df3-8348-900bd67529b5",
+    "startBlock": "389703445",
     "endBlocks": [
       "exit"
     ]
@@ -197,8 +197,8 @@
       "(!VERBOSE && PLATFORM && DRY_RUN && !SCALE && IOS_CREATE_IMAGESET_FOLDERS)",
       "(VERBOSE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)"
     ],
-    "id": "edab4978-c90d-4dad-83ae-107927a09cbe",
-    "startBlock": "782651548",
+    "id": "14a7a7ba-fb75-477c-b1c7-e261f64112b2",
+    "startBlock": "1284306856",
     "endBlocks": [
       "exit"
     ]
@@ -212,8 +212,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "a0b27b3b-8c07-46dd-89b0-a8568e888e87",
-    "startBlock": "1607277663",
+    "id": "a900d343-423d-4931-8a1e-741bc61b9149",
+    "startBlock": "1198795462",
     "endBlocks": [
       "exit"
     ]
@@ -248,8 +248,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "9361d3c5-f327-4a68-bda9-9822beaa367f",
-    "startBlock": "833217602",
+    "id": "3a692387-61e1-4ade-b1b0-9653d315692e",
+    "startBlock": "1191487692",
     "endBlocks": [
       "exit"
     ]
@@ -263,8 +263,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "54880266-5651-4709-aa50-36c4057b5d87",
-    "startBlock": "510452891",
+    "id": "7125f797-3d07-4541-a010-d11be81e45c7",
+    "startBlock": "1237165315",
     "endBlocks": [
       "exit"
     ]
@@ -295,8 +295,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "e2b73567-7f14-4dac-a2e7-ede3d34cd5f2",
-    "startBlock": "681678917",
+    "id": "02d2c344-4d95-4e03-9c0e-5a983d368378",
+    "startBlock": "2062303145",
     "endBlocks": [
       "exit"
     ]
@@ -310,8 +310,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "abaf5e85-a6e6-404a-9323-e9bad18eeae4",
-    "startBlock": "977509852",
+    "id": "5cdb5a99-e89c-4019-a0e6-b00f01dc7705",
+    "startBlock": "1472738298",
     "endBlocks": [
       "exit"
     ]
@@ -342,8 +342,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "0f6036b0-2413-4efb-b98e-bfb77894d177",
-    "startBlock": "582836377",
+    "id": "d94c3725-d5a3-4b0e-aa83-e362adc66923",
+    "startBlock": "70876845",
     "endBlocks": [
       "exit"
     ]
@@ -378,8 +378,26 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "95a3007e-140a-4c0a-977a-6a2031ff619b",
-    "startBlock": "1188092245",
+    "id": "503df0f1-6424-4dd7-8bc9-65a7e34e4aa9",
+    "startBlock": "2099432698",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "AndroidConverter",
+    "methodSignature": "getAndroidDensityDescriptors(Lat/favre/tools/dconvert/arg/Arguments;)Ljava/util/List;",
+    "decisionIndex": 2,
+    "info": [
+      "PLATFORM",
+      "(!PLATFORM && !CLEAN && ANDROID_INCLUDE_LDPI_TVDPI)",
+      "(!PLATFORM && !CLEAN && !ANDROID_INCLUDE_LDPI_TVDPI)",
+      "(!PLATFORM && CLEAN && ANDROID_INCLUDE_LDPI_TVDPI)",
+      "(!PLATFORM && CLEAN && !ANDROID_INCLUDE_LDPI_TVDPI)"
+    ],
+    "id": "1e205cdb-0daa-40a9-9598-d381a8b293fc",
+    "startBlock": "570522918",
     "endBlocks": [
       "exit"
     ]
@@ -410,40 +428,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "c5584b0c-ced1-4144-88b3-14ab774f774e",
-    "startBlock": "49227646",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.mortennobel.imagescaling",
-    "className": "AdvancedResizeOp",
-    "methodSignature": "filter(Ljava/awt/image/BufferedImage;Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;",
-    "decisionIndex": 1,
-    "info": [
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(SCALE && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(!DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(!IOS_CREATE_IMAGESET_FOLDERS && SCALE && PLATFORM && !DRY_RUN && !SKIP_UPSCALING)",
-      "(SKIP_UPSCALING && !DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
-      "(!DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
-      "((SKIP_UPSCALING && ((SCALE && PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI) || (!ANDROID_INCLUDE_LDPI_TVDPI && SCALE) || DRY_RUN)) || (!SKIP_UPSCALING && DRY_RUN))",
-      "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
-    ],
-    "id": "d9ce2eac-a237-4fcf-9fcd-1c8606a69748",
-    "startBlock": "554598475",
+    "id": "e2efc427-995d-4449-871c-7e6d27ff0da6",
+    "startBlock": "704317024",
     "endBlocks": [
       "exit"
     ]
@@ -499,8 +485,40 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "659cce41-26da-4dd3-bb15-a3a16c2964ea",
-    "startBlock": "1152749040",
+    "id": "32536ecd-8762-4fef-9cec-6b39d2174cbe",
+    "startBlock": "1088858410",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "AdvancedResizeOp",
+    "methodSignature": "filter(Ljava/awt/image/BufferedImage;Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;",
+    "decisionIndex": 1,
+    "info": [
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(SCALE && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(!DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(!IOS_CREATE_IMAGESET_FOLDERS && SCALE && PLATFORM && !DRY_RUN && !SKIP_UPSCALING)",
+      "(SKIP_UPSCALING && !DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
+      "(!DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
+      "((SKIP_UPSCALING && ((SCALE && PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI) || (!ANDROID_INCLUDE_LDPI_TVDPI && SCALE) || DRY_RUN)) || (!SKIP_UPSCALING && DRY_RUN))",
+      "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
+    ],
+    "id": "6e28709f-66bb-419f-b1bb-3fb3722410c6",
+    "startBlock": "71209097",
     "endBlocks": [
       "exit"
     ]
@@ -531,8 +549,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "84b99676-d83d-4eff-93cd-3d533c35ef8e",
-    "startBlock": "1268483427",
+    "id": "a5a0b4ab-9979-46e3-aebe-b571473102ba",
+    "startBlock": "1328159779",
     "endBlocks": [
       "exit"
     ]
@@ -546,8 +564,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "9c11ca79-4e96-4a3b-aabc-fc5dd5a428e8",
-    "startBlock": "876695548",
+    "id": "9f7ea9fe-0f5a-4d4b-99a3-f089c13bf2e5",
+    "startBlock": "328834440",
     "endBlocks": [
       "exit"
     ]
@@ -603,8 +621,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "81c76897-01ee-425a-bc97-036c60ad314a",
-    "startBlock": "849922566",
+    "id": "86a18239-f4be-4ae0-84a0-aeaa7e7c89a2",
+    "startBlock": "1780122920",
     "endBlocks": [
       "exit"
     ]
@@ -640,8 +658,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "42d09aba-015a-4036-9b41-1dcdb385d5aa",
-    "startBlock": "829801462",
+    "id": "e41e978f-ea6d-4891-9040-72f49ba659e7",
+    "startBlock": "1075455138",
     "endBlocks": [
       "exit"
     ]
@@ -688,8 +706,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "8a874249-17c5-4f2f-9dc1-ea632ecad066",
-    "startBlock": "65838989",
+    "id": "d11832e8-9326-44c3-b941-c1178958d548",
+    "startBlock": "1093683035",
     "endBlocks": [
       "exit"
     ]
@@ -703,8 +721,8 @@
       "OUT_COMPRESSION",
       "!OUT_COMPRESSION"
     ],
-    "id": "26605e71-30d9-4e08-840c-39e694e64932",
-    "startBlock": "572323554",
+    "id": "1817ce56-10b4-4ed4-9568-4e73b748a3f4",
+    "startBlock": "1861601271",
     "endBlocks": [
       "exit"
     ]
@@ -739,8 +757,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "843859ed-79be-437f-8197-83b6fadf4ee3",
-    "startBlock": "1728044258",
+    "id": "5dedadbb-5df6-4e12-b71f-efe486c56d0e",
+    "startBlock": "1229400250",
     "endBlocks": [
       "exit"
     ]
@@ -759,8 +777,8 @@
       "(!PLATFORM && CLEAN && !ANDROID_INCLUDE_LDPI_TVDPI && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)",
       "(!PLATFORM && CLEAN && ANDROID_INCLUDE_LDPI_TVDPI && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)"
     ],
-    "id": "0078b482-592f-4d5a-b34f-ab700e4f1406",
-    "startBlock": "2011857007",
+    "id": "b7f66ace-8094-403b-b3f2-ed18593a647a",
+    "startBlock": "216266222",
     "endBlocks": [
       "exit"
     ]
@@ -774,8 +792,8 @@
       "(!PLATFORM || !IOS_CREATE_IMAGESET_FOLDERS || DRY_RUN)",
       "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !DRY_RUN)"
     ],
-    "id": "b798782b-9d81-4ad8-abc4-a5edf42c8568",
-    "startBlock": "1158648824",
+    "id": "e78ae3fa-a2d5-48f5-8b16-b9b7685506a9",
+    "startBlock": "442275193",
     "endBlocks": [
       "exit"
     ]
@@ -789,23 +807,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "f3b491a5-24cb-4008-b5b9-c9972cd21fd3",
-    "startBlock": "17524345",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert",
-    "className": "DConvert$1",
-    "methodSignature": "onFinished(ILjava/util/List;Ljava/lang/StringBuilder;Ljava/util/List;Z)V",
-    "decisionIndex": 1,
-    "info": [
-      "PLATFORM",
-      "!PLATFORM"
-    ],
-    "id": "5ba61420-92cd-4764-bd96-04cd3723da5c",
-    "startBlock": "667633611",
+    "id": "9d6e2bee-bbec-4ac4-825a-df74038163e0",
+    "startBlock": "43579673",
     "endBlocks": [
       "exit"
     ]
@@ -865,8 +868,23 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "983e4045-ea93-4ed4-89b3-1442fc63ee10",
-    "startBlock": "1293637063",
+    "id": "bccfeba3-daaf-47ec-8d30-e5d183d77a6e",
+    "startBlock": "958622905",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "DConvert$1",
+    "methodSignature": "onFinished(ILjava/util/List;Ljava/lang/StringBuilder;Ljava/util/List;Z)V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "a6123fbb-d33c-42de-b3ab-f459c898d04b",
+    "startBlock": "1091989209",
     "endBlocks": [
       "exit"
     ]
@@ -880,8 +898,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "f631927f-c34b-45f3-955a-7c6ce2fb60a0",
-    "startBlock": "74952633",
+    "id": "3ad5f7f9-9558-4f02-b4a5-964c55b6cd5c",
+    "startBlock": "1552954796",
     "endBlocks": [
       "exit"
     ]
@@ -896,8 +914,8 @@
       "!PLATFORM",
       "(PLATFORM && (!IOS_CREATE_IMAGESET_FOLDERS || !CLEAN))"
     ],
-    "id": "801f70ba-5843-408f-b95d-9ffb3ed6451e",
-    "startBlock": "1101098675",
+    "id": "3afec363-f624-46a5-96c3-56bce33a3844",
+    "startBlock": "806088360",
     "endBlocks": [
       "exit"
     ]
@@ -928,8 +946,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "f8e16a12-4cbf-4e25-82f0-77206d3e469e",
-    "startBlock": "1478117007",
+    "id": "a4667855-8b55-4152-899c-93878f84ba5c",
+    "startBlock": "508064904",
     "endBlocks": [
       "exit"
     ]
@@ -944,8 +962,8 @@
       "(!PLATFORM || !CLEAN)",
       "(!IOS_CREATE_IMAGESET_FOLDERS && CLEAN && PLATFORM)"
     ],
-    "id": "846172f0-7414-4469-b9b0-65a393ce47d7",
-    "startBlock": "893227921",
+    "id": "069200ae-3279-49d4-a429-2eb346206770",
+    "startBlock": "1673799710",
     "endBlocks": [
       "exit"
     ]
@@ -961,8 +979,8 @@
       "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS && !DRY_RUN)",
       "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !DRY_RUN)"
     ],
-    "id": "faef3e3a-5794-4ec0-ba1b-ef1e5a1d4f4f",
-    "startBlock": "2129974673",
+    "id": "92093c1d-9978-44c0-b92c-65c096d6f4e3",
+    "startBlock": "755976640",
     "endBlocks": [
       "exit"
     ]
@@ -997,8 +1015,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "1cbf48d7-25bd-4912-a0ee-c2cce0d6b995",
-    "startBlock": "1724279417",
+    "id": "1eb74d8e-225c-4f17-bc69-cf7f7abcb06d",
+    "startBlock": "367942863",
     "endBlocks": [
       "exit"
     ]
@@ -1007,16 +1025,16 @@
     "packageName": "at.favre.tools.dconvert",
     "className": "DConvert",
     "methodSignature": "execute(Lat/favre/tools/dconvert/arg/Arguments;ZLat/favre/tools/dconvert/DConvert$HandlerCallback;)V",
-    "decisionIndex": -1,
+    "decisionIndex": 3,
     "info": [
       "(PLATFORM && CLEAN)",
       "!CLEAN",
       "(!PLATFORM && CLEAN)"
     ],
-    "id": "1110106f-b3c8-41f4-8eb6-df13adcda21f",
-    "startBlock": "960718811",
+    "id": "73ba70ff-f285-4706-ae9e-23b2c93bc6df",
+    "startBlock": "2085856833",
     "endBlocks": [
-      "exit"
+      "1736691155"
     ]
   },
   {
@@ -1045,8 +1063,23 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "ee3a5a13-477f-40dd-93a9-9d842d119ce8",
-    "startBlock": "1032011902",
+    "id": "06b88092-4ab1-4e19-bd19-b25d4e930ce3",
+    "startBlock": "849970708",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "readSOI(Ljavax/imageio/stream/ImageInputStream;)V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "797c7f3d-a2e1-41bd-9020-4feecba3820b",
+    "startBlock": "1132420169",
     "endBlocks": [
       "exit"
     ]
@@ -1077,23 +1110,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "c24a1b49-bcd8-45ff-8dbb-a0566dec23fa",
-    "startBlock": "1841226228",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
-    "className": "JPEGSegmentUtil",
-    "methodSignature": "readSOI(Ljavax/imageio/stream/ImageInputStream;)V",
-    "decisionIndex": 1,
-    "info": [
-      "PLATFORM",
-      "!PLATFORM"
-    ],
-    "id": "5ed2afe9-592b-46ea-9b75-fd62f68eafac",
-    "startBlock": "1089407736",
+    "id": "d143292b-1896-407f-8b73-22df368f52c6",
+    "startBlock": "1482301740",
     "endBlocks": [
       "exit"
     ]
@@ -1150,8 +1168,8 @@
       "(SCALE && PLATFORM && !ANTI_ALIASING && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)",
       "(SCALE && PLATFORM && SKIP_UPSCALING && !ANTI_ALIASING && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS)"
     ],
-    "id": "a446fa33-2ce4-44e2-9db8-90e72c8dca3b",
-    "startBlock": "52715542",
+    "id": "b8bd8e58-f287-4f45-8ebb-ccf2ff695ecc",
+    "startBlock": "168627680",
     "endBlocks": [
       "exit"
     ]
@@ -1166,8 +1184,8 @@
       "(!PLATFORM && CLEAN && ANDROID_INCLUDE_LDPI_TVDPI)",
       "(!PLATFORM && CLEAN && !ANDROID_INCLUDE_LDPI_TVDPI)"
     ],
-    "id": "0f442a77-f508-4e8d-9e8c-2db6bb24b188",
-    "startBlock": "320404933",
+    "id": "3664321a-89c8-4622-ba5f-7be159f0499a",
+    "startBlock": "1209953760",
     "endBlocks": [
       "exit"
     ]
@@ -1181,8 +1199,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "e157897d-4448-4c98-b0bc-b9d0d0afdfc7",
-    "startBlock": "1103934393",
+    "id": "852ac3a1-2ed7-445e-acb4-7e73e8bd14a2",
+    "startBlock": "1422030906",
     "endBlocks": [
       "exit"
     ]
@@ -1196,26 +1214,8 @@
       "ROUNDING_MODE",
       "!ROUNDING_MODE"
     ],
-    "id": "b8c4989f-1a90-4f61-b894-81d52c232d9c",
-    "startBlock": "1346058751",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert.converters",
-    "className": "AndroidConverter",
-    "methodSignature": "getAndroidDensityDescriptors(Lat/favre/tools/dconvert/arg/Arguments;)Ljava/util/List;",
-    "decisionIndex": 1,
-    "info": [
-      "PLATFORM",
-      "(!PLATFORM && CLEAN && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)",
-      "(!PLATFORM && CLEAN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)",
-      "(!PLATFORM && !CLEAN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)",
-      "(!PLATFORM && !CLEAN && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE)"
-    ],
-    "id": "b875addf-6835-4d17-8fe8-a3108decedcc",
-    "startBlock": "214206026",
+    "id": "def8a285-0191-4c58-84a4-6a623c9b9aed",
+    "startBlock": "2043435371",
     "endBlocks": [
       "exit"
     ]
@@ -1238,8 +1238,8 @@
       "(!SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && SKIP_UPSCALING)",
       "(SCALE && !PLATFORM && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING)"
     ],
-    "id": "54f9fc14-d7e1-43fd-8c7c-5ef309df2410",
-    "startBlock": "709726214",
+    "id": "f6a17e2e-4c5c-4541-b37e-fd55c7d44c03",
+    "startBlock": "280177865",
     "endBlocks": [
       "exit"
     ]
@@ -1274,8 +1274,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "381c4142-3cf4-4bbc-a4c4-ba0f2b6f1b28",
-    "startBlock": "1067413548",
+    "id": "ea3b65b7-edb9-4491-b0e9-e5c2ce7610e0",
+    "startBlock": "1711116375",
     "endBlocks": [
       "exit"
     ]
@@ -1289,8 +1289,88 @@
       "(!PLATFORM || !IOS_CREATE_IMAGESET_FOLDERS || DRY_RUN)",
       "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !DRY_RUN)"
     ],
-    "id": "3fc51752-01ac-4a9f-8aa7-d47c604cc733",
-    "startBlock": "1359978165",
+    "id": "9b6057b9-64fb-4a37-aa9b-e261fd6edb46",
+    "startBlock": "1921120239",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert",
+    "className": "WorkerHandler$Worker",
+    "methodSignature": "run()V",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "60a2cdd0-55de-4629-bbef-c71973af6d91",
+    "startBlock": "1424357287",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.arg",
+    "className": "EScalingAlgorithm",
+    "methodSignature": "getByName(Ljava/lang/String;)Lat/favre/tools/dconvert/arg/EScalingAlgorithm;",
+    "decisionIndex": -1,
+    "info": [
+      "(!DOWNSCALING_ALGO && !UPSCALING_ALGO)",
+      "(DOWNSCALING_ALGO && !UPSCALING_ALGO)",
+      "(DOWNSCALING_ALGO && UPSCALING_ALGO)",
+      "(!DOWNSCALING_ALGO && UPSCALING_ALGO)"
+    ],
+    "id": "86440de6-36cf-4de7-a92b-70b850c99e15",
+    "startBlock": "1482109455",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "at.favre.tools.dconvert.converters",
+    "className": "IOSConverter",
+    "methodSignature": "createMainSubFolder(Ljava/io/File;Ljava/lang/String;Lat/favre/tools/dconvert/arg/Arguments;)Ljava/io/File;",
+    "decisionIndex": 1,
+    "info": [
+      "!PLATFORM",
+      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS)",
+      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS)"
+    ],
+    "id": "620882ba-e7b9-46d4-a46d-0393a54851d7",
+    "startBlock": "691405309",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.mortennobel.imagescaling",
+    "className": "ResampleOp",
+    "methodSignature": "toByte(F)B",
+    "decisionIndex": 1,
+    "info": [
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(SCALE && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(!DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(!IOS_CREATE_IMAGESET_FOLDERS && SCALE && PLATFORM && !DRY_RUN && !SKIP_UPSCALING)",
+      "(SKIP_UPSCALING && !DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
+      "(!DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
+      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
+      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
+      "((SKIP_UPSCALING && ((SCALE && PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI) || (!ANDROID_INCLUDE_LDPI_TVDPI && SCALE) || DRY_RUN)) || (!SKIP_UPSCALING && DRY_RUN))",
+      "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
+      "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
+    ],
+    "id": "b4da086b-235c-4c0f-a982-5c7c18c72871",
+    "startBlock": "527110666",
     "endBlocks": [
       "exit"
     ]
@@ -1326,88 +1406,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "be16f063-5b9a-432e-b9c4-b063ad22506b",
-    "startBlock": "251755984",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.mortennobel.imagescaling",
-    "className": "ResampleOp",
-    "methodSignature": "toByte(F)B",
-    "decisionIndex": 1,
-    "info": [
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(SCALE && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(SKIP_UPSCALING && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(!DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && SKIP_UPSCALING && !DRY_RUN && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(!IOS_CREATE_IMAGESET_FOLDERS && SCALE && PLATFORM && !DRY_RUN && !SKIP_UPSCALING)",
-      "(SKIP_UPSCALING && !DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
-      "(!DRY_RUN && !SCALE && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && SKIP_UPSCALING && !DRY_RUN && ANDROID_INCLUDE_LDPI_TVDPI && !PLATFORM)",
-      "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !DRY_RUN && !SCALE && ANDROID_INCLUDE_LDPI_TVDPI && !SKIP_UPSCALING && !PLATFORM)",
-      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS && !SCALE && !DRY_RUN)",
-      "((SKIP_UPSCALING && ((SCALE && PLATFORM && ANDROID_INCLUDE_LDPI_TVDPI) || (!ANDROID_INCLUDE_LDPI_TVDPI && SCALE) || DRY_RUN)) || (!SKIP_UPSCALING && DRY_RUN))",
-      "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
-      "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
-    ],
-    "id": "4557bca1-e128-4cf2-ab36-dc1278e45bf9",
-    "startBlock": "971068306",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert",
-    "className": "WorkerHandler$Worker",
-    "methodSignature": "run()V",
-    "decisionIndex": 1,
-    "info": [
-      "PLATFORM",
-      "!PLATFORM"
-    ],
-    "id": "6e8a7672-3835-4440-9f11-9dbfad312734",
-    "startBlock": "436443791",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert.converters",
-    "className": "IOSConverter",
-    "methodSignature": "createMainSubFolder(Ljava/io/File;Ljava/lang/String;Lat/favre/tools/dconvert/arg/Arguments;)Ljava/io/File;",
-    "decisionIndex": 1,
-    "info": [
-      "!PLATFORM",
-      "(PLATFORM && IOS_CREATE_IMAGESET_FOLDERS)",
-      "(PLATFORM && !IOS_CREATE_IMAGESET_FOLDERS)"
-    ],
-    "id": "e5e2c645-1f66-41bf-b89d-26e48f2dc482",
-    "startBlock": "2014188354",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "at.favre.tools.dconvert.arg",
-    "className": "EScalingAlgorithm",
-    "methodSignature": "getByName(Ljava/lang/String;)Lat/favre/tools/dconvert/arg/EScalingAlgorithm;",
-    "decisionIndex": -1,
-    "info": [
-      "(!DOWNSCALING_ALGO && !UPSCALING_ALGO)",
-      "(DOWNSCALING_ALGO && !UPSCALING_ALGO)",
-      "(DOWNSCALING_ALGO && UPSCALING_ALGO)",
-      "(!DOWNSCALING_ALGO && UPSCALING_ALGO)"
-    ],
-    "id": "fd98d8aa-d529-4ff5-a769-0c631a0a5d54",
-    "startBlock": "1011861843",
+    "id": "96e7a270-7195-4afc-9cb0-e453e19a9b66",
+    "startBlock": "48017987",
     "endBlocks": [
       "exit"
     ]
@@ -1421,8 +1421,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "c4bb5fca-d000-42f4-85e7-444ada1bf4a7",
-    "startBlock": "1040476448",
+    "id": "e55bea60-8543-4304-8fae-598783ed941a",
+    "startBlock": "218688965",
     "endBlocks": [
       "exit"
     ]
@@ -1436,8 +1436,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "7252b1fd-34c1-44d8-b974-e00340e58583",
-    "startBlock": "1693409169",
+    "id": "5cb9b150-2fea-4609-8916-7d2f455f97ce",
+    "startBlock": "1170850473",
     "endBlocks": [
       "exit"
     ]
@@ -1468,8 +1468,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "0ab02be2-1d9b-4648-ba09-234583f55300",
-    "startBlock": "587923971",
+    "id": "7e17bb13-fa99-4244-bb1a-83f643a5b676",
+    "startBlock": "1721371793",
     "endBlocks": [
       "exit"
     ]
@@ -1483,8 +1483,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "91c492b3-122f-4a64-aa5a-b0c13909e32a",
-    "startBlock": "1067588937",
+    "id": "29f71da7-c477-488a-b12f-b9ffc029a485",
+    "startBlock": "937508986",
     "endBlocks": [
       "exit"
     ]
@@ -1515,8 +1515,23 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "1ad2dc85-ae07-49fe-b307-f0f4b18c1008",
-    "startBlock": "434574979",
+    "id": "3a0d7063-f9b5-4fee-8881-5f546c0e45ae",
+    "startBlock": "1687702287",
+    "endBlocks": [
+      "exit"
+    ]
+  },
+  {
+    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
+    "className": "JPEGSegmentUtil",
+    "methodSignature": "isKnownJPEGMarker(I)Z",
+    "decisionIndex": 1,
+    "info": [
+      "PLATFORM",
+      "!PLATFORM"
+    ],
+    "id": "b8ed95a6-e536-4723-9803-21f8d42a0ac5",
+    "startBlock": "1428582584",
     "endBlocks": [
       "exit"
     ]
@@ -1576,23 +1591,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "ba4ef582-7548-49ba-a822-a1e46cf3bd31",
-    "startBlock": "1049255477",
-    "endBlocks": [
-      "exit"
-    ]
-  },
-  {
-    "packageName": "com.twelvemonkeys.imageio.metadata.jpeg",
-    "className": "JPEGSegmentUtil",
-    "methodSignature": "isKnownJPEGMarker(I)Z",
-    "decisionIndex": 1,
-    "info": [
-      "PLATFORM",
-      "!PLATFORM"
-    ],
-    "id": "137a5018-86a8-4af2-acc9-d3103b2168cd",
-    "startBlock": "2138697198",
+    "id": "809bbfa8-ab61-4811-8bf8-ceee34f9c278",
+    "startBlock": "1625909881",
     "endBlocks": [
       "exit"
     ]
@@ -1606,8 +1606,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "584d8b80-f0e9-4865-b257-3645992b4be9",
-    "startBlock": "1310425688",
+    "id": "4eac40f1-e41b-45ae-b02c-1f652e427e0a",
+    "startBlock": "1903302784",
     "endBlocks": [
       "exit"
     ]
@@ -1638,8 +1638,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(SCALE && PLATFORM && !DRY_RUN && IOS_CREATE_IMAGESET_FOLDERS && !SKIP_UPSCALING)"
     ],
-    "id": "269735f2-9ac5-4ea1-b330-3d056b7bd3c5",
-    "startBlock": "927537517",
+    "id": "2a5b688c-d559-44d5-9ac1-54e5e16aa60a",
+    "startBlock": "1194612328",
     "endBlocks": [
       "exit"
     ]
@@ -1653,8 +1653,8 @@
       "PLATFORM",
       "!PLATFORM"
     ],
-    "id": "1fb9f6bb-e5c4-4533-a50c-11b45ee8ae0f",
-    "startBlock": "1954566516",
+    "id": "d2bcda05-ca92-4bb7-84c2-4f55ce6a4d9f",
+    "startBlock": "349631887",
     "endBlocks": [
       "exit"
     ]
@@ -1714,8 +1714,8 @@
       "(SCALE && !DRY_RUN && !ANDROID_INCLUDE_LDPI_TVDPI && !ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && !SKIP_UPSCALING && !PLATFORM)",
       "(ANDROID_MIPMAP_INSTEAD_OF_DRAWABLE && DRY_RUN && SKIP_UPSCALING && !ANDROID_INCLUDE_LDPI_TVDPI && !SCALE && !PLATFORM)"
     ],
-    "id": "65897c50-9513-4218-ae4c-1a1d96553762",
-    "startBlock": "123162528",
+    "id": "e044c30d-0c01-469f-bf0f-32a4df24f97f",
+    "startBlock": "508548659",
     "endBlocks": [
       "exit"
     ]

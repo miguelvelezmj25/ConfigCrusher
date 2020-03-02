@@ -81,7 +81,7 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
   public void lucene_real() throws IOException, InterruptedException {
     System.err.println(
         "Regions a2500b3a-d6e0-45dd-bc6f-dcca4ea72038 and 83847d46-8d61-4ecf-8b7d-6eaca01d469e are in the same method. "
-            + "We manually removed one of them. Check if this method is relevant for   performance");
+            + "We manually removed one of them. Check if this method is relevant for performance");
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(
@@ -163,6 +163,11 @@ public class IDTAJProfilerSamplingExecutionProcessorTest {
 
   @Test
   public void convert_user() throws IOException, InterruptedException {
+    System.err.println(
+        "Regions 6a33e604-871b-4824-842d-51974725f7df and 73ba70ff-f285-4706-ae9e-23b2c93bc6df are in the same method. "
+            + "Regions 1e205cdb-0daa-40a9-9598-d381a8b293fc and c5f3564f-f58e-4e36-8def-8ebb220873be are in the same method. "
+            + "We manually removed one of them. Check if these methods are relevant for performance.");
+
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
         new IDTAJProfilerSamplingExecutor(

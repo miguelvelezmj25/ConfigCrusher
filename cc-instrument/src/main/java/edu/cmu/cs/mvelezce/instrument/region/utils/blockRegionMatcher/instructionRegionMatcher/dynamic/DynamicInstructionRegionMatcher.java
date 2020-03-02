@@ -2,7 +2,10 @@ package edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructi
 
 import edu.cmu.cs.mvelezce.instrument.region.utils.blockRegionMatcher.instructionRegionMatcher.InstructionRegionMatcher;
 import edu.cmu.cs.mvelezce.region.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.*;
+import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.Opcodes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +33,7 @@ public class DynamicInstructionRegionMatcher implements InstructionRegionMatcher
     while (insnListIter.hasNext()) {
       AbstractInsnNode insnNode = insnListIter.next();
 
-      if (!this.isCFD(insnNode)) {
+      if (!this.isCFD(insnNode.getOpcode())) {
         continue;
       }
 
@@ -51,9 +54,29 @@ public class DynamicInstructionRegionMatcher implements InstructionRegionMatcher
     return instructionsToRegion;
   }
 
-  private boolean isCFD(AbstractInsnNode insnNode) {
-    return (insnNode instanceof JumpInsnNode)
-        || (insnNode instanceof TableSwitchInsnNode)
-        || (insnNode instanceof LookupSwitchInsnNode);
+  private boolean isCFD(int opcode) {
+    switch (opcode) {
+      case Opcodes.IFEQ:
+      case Opcodes.IFNE:
+      case Opcodes.IFLT:
+      case Opcodes.IFGE:
+      case Opcodes.IFGT:
+      case Opcodes.IFLE:
+      case Opcodes.IFNULL:
+      case Opcodes.IFNONNULL:
+      case Opcodes.IF_ICMPEQ:
+      case Opcodes.IF_ICMPNE:
+      case Opcodes.IF_ICMPLT:
+      case Opcodes.IF_ICMPGE:
+      case Opcodes.IF_ICMPGT:
+      case Opcodes.IF_ICMPLE:
+      case Opcodes.IF_ACMPNE:
+      case Opcodes.IF_ACMPEQ:
+      case Opcodes.TABLESWITCH:
+      case Opcodes.LOOKUPSWITCH:
+        return true;
+    }
+
+    return false;
   }
 }

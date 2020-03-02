@@ -1,0 +1,20 @@
+[
+  [
+    "CIPHER"
+  ],
+  [
+    "CACHE_SIZE"
+  ],
+  [
+    "AUTOCOMMIT"
+  ],
+  [
+    "FILE_LOCK"
+  ],
+  [
+    "ACCESS_MODE_DATA"
+  ],
+  [
+    "CACHE_TYPE"
+  ]
+]

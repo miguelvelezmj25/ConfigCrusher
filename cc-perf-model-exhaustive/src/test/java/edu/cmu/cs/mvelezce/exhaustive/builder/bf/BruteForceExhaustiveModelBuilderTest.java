@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.exhaustive.builder.bf;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.bf.BruteForceInstrumentPerfAggregatorProcessor;
@@ -67,6 +68,46 @@ public class BruteForceExhaustiveModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseConvertAdapter.getListOfOptions();
+    BasePerformanceModelBuilder builder =
+        new BruteForceExhaustiveModelBuilder(
+            programName, options, performanceEntries, BaseExecutor.USER);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void runBenchC_time_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new BruteForceTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    BasePerformanceModelBuilder builder =
+        new BruteForceExhaustiveModelBuilder(
+            programName, options, performanceEntries, BaseExecutor.REAL);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void runBenchC_time_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new BruteForceTimePerfAggregatorProcessor(programName, BaseExecutor.USER);
+
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
     BasePerformanceModelBuilder builder =
         new BruteForceExhaustiveModelBuilder(
             programName, options, performanceEntries, BaseExecutor.USER);

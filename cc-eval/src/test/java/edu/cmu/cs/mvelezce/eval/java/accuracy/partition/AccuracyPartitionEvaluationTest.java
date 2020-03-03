@@ -1017,4 +1017,69 @@ public class AccuracyPartitionEvaluationTest {
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
     eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, BaseExecutor.REAL, configs, model);
   }
+
+  @Test
+  public void runBenchC_BF_Data_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new BruteForceExhaustiveModelBuilder(programName, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, BaseExecutor.REAL, configs, model);
+  }
+
+  @Test
+  public void runBenchC_GT_Data_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new GroundTruthExhaustiveModelBuilder(programName, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.GT, BaseExecutor.USER, configs, model);
+  }
+
+  @Test
+  public void runBenchC_BF_Data_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configs = compression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new BruteForceExhaustiveModelBuilder(programName, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformanceExhaustive(Evaluation.BF, BaseExecutor.USER, configs, model);
+  }
+
+  @Test
+  public void runBenchC_Compare_BF_GT_real() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.BF, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void runBenchC_Compare_BF_GT_user() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.BF, Evaluation.GT, BaseExecutor.USER);
+  }
 }

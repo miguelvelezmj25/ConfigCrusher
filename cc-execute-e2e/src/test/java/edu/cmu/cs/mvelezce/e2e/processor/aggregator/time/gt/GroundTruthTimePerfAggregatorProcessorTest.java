@@ -94,4 +94,23 @@ public class GroundTruthTimePerfAggregatorProcessorTest {
     args[1] = "-saveres";
     perfAggregatorProcessor.analyze(args);
   }
+
+  @Test
+  public void runBenchC_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    E2ETimeExecutionParser e2eUserTimeExecutionParser =
+        new E2EUserTimeExecutionParser(programName, GroundTruthTimeExecutor.OUTPUT_DIR);
+    BaseExecutor<PerfExecution> executor =
+        new GroundTruthTimeExecutor(programName, e2eUserTimeExecutionParser);
+    Map<Integer, Set<PerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new GroundTruthTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.USER, PerfAggregatorProcessor.ADDED_TIME);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
 }

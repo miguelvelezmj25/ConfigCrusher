@@ -14,7 +14,6 @@ import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJP
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAJProfilerSamplingExecutorTest {
@@ -151,15 +150,13 @@ public class IDTAJProfilerSamplingExecutorTest {
 
   @Test
   public void runBenchC() throws IOException, InterruptedException {
+    System.err.println(
+        "Ignoring hotspot 'org.h2.util.MathUtils$1.run()' since it was executing for the majority of the time in "
+            + "most configurations. This time was being attributed to the base time, which was wrong");
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
-    configurations.clear();
-    Set<String> config = new HashSet<>();
-    config.add("CACHE_SIZE");
-    config.add("FILE_LOCK");
-    configurations.add(config);
 
     Executor executor =
         new IDTAJProfilerSamplingExecutor(

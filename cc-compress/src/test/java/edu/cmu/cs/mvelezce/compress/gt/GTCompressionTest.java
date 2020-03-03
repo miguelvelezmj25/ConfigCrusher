@@ -44,7 +44,7 @@ public class GTCompressionTest {
   public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     List<String> options = BaseConvertAdapter.getListOfOptions();
-    BaseCompression compression = new GTCompression(programName, options, 1000);
+    BaseCompression compression = new GTCompression(programName, options, 2000);
 
     String[] args = new String[2];
     args[0] = "-delres";

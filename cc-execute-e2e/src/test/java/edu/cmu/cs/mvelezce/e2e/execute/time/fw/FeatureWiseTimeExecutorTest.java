@@ -40,7 +40,7 @@ public class FeatureWiseTimeExecutorTest {
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i3";
+    args[2] = "-i2";
     executor.execute(args);
   }
 
@@ -56,7 +56,7 @@ public class FeatureWiseTimeExecutorTest {
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i3";
+    args[2] = "-i5";
     executor.execute(args);
   }
 }

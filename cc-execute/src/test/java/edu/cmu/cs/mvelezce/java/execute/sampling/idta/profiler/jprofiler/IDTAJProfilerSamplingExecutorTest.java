@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJP
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAJProfilerSamplingExecutorTest {
@@ -154,6 +155,11 @@ public class IDTAJProfilerSamplingExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
+    configurations.clear();
+    Set<String> config = new HashSet<>();
+    config.add("CACHE_SIZE");
+    config.add("FILE_LOCK");
+    configurations.add(config);
 
     Executor executor =
         new IDTAJProfilerSamplingExecutor(

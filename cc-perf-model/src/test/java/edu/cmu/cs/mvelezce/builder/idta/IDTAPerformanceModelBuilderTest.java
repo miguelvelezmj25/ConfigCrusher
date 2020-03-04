@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.adapters.multithread.BaseMultithreadAdapter;
 import edu.cmu.cs.mvelezce.adapters.performance.BasePerformanceAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.adapters.trivial.BaseTrivialAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.builder.BasePerformanceModelBuilder;
@@ -148,6 +149,28 @@ public class IDTAPerformanceModelBuilderTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     List<String> options = BaseConvertAdapter.getListOfOptions();
+    BasePerformanceModelBuilder<Partitioning, Partition> builder =
+        new IDTAPerformanceModelBuilder(
+            programName, options, regionsToPartitions, performanceEntries, BaseExecutor.USER);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    builder.analyze(args);
+  }
+
+  @Test
+  public void runBenchC_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseRegionInstrumenter<Partitioning> instrumenter = new IDTATimerInstrumenter(programName);
+    Map<JavaRegion, Partitioning> regionsToPartitions = instrumenter.getProcessedRegionsToData();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
     BasePerformanceModelBuilder<Partitioning, Partition> builder =
         new IDTAPerformanceModelBuilder(
             programName, options, regionsToPartitions, performanceEntries, BaseExecutor.USER);

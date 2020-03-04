@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.eval.java.config;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
@@ -127,6 +128,33 @@ public class ConfigAnalysisTest {
     PerformanceModel<Partition> model = builder.analyze(args);
 
     List<String> options = BaseConvertAdapter.getListOfOptions();
+    ConfigAnalysis configAnalysis = new ConfigAnalysis(programName, options, BaseExecutor.USER);
+
+    BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    args = new String[0];
+    Set<Set<String>> executedConfigs = compression.analyze(args);
+
+    for (Set<String> config : executedConfigs) {
+      configAnalysis.compareMeasurementAndPrediction(
+          Evaluation.IDTA, performanceEntries, model, config);
+    }
+  }
+
+  @Test
+  public void compare_idta_model_runBenchC_instrument_all()
+      throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new IDTAPerformanceModelBuilder(programName, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
     ConfigAnalysis configAnalysis = new ConfigAnalysis(programName, options, BaseExecutor.USER);
 
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);

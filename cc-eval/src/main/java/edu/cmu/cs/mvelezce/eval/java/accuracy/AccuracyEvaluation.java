@@ -134,13 +134,19 @@ public abstract class AccuracyEvaluation<T> {
 
   public void compareApproaches(String approach1, String gt, String measuredTime)
       throws IOException {
+    this.compareApproaches(approach1, measuredTime, gt, measuredTime);
+  }
+
+  public void compareApproaches(
+      String approach1, String approach1MeasuredTime, String gt, String gtMeasuredTime)
+      throws IOException {
     File outputFile =
         new File(
             this.getOutputDir()
                 + "/"
                 + this.programName
                 + "/"
-                + measuredTime
+                + approach1MeasuredTime
                 + "/"
                 + COMPARISON_DIR
                 + "/"
@@ -153,10 +159,10 @@ public abstract class AccuracyEvaluation<T> {
       FileUtils.forceDelete(outputFile);
     }
 
-    File outputFile1 = this.getApproachOutputFile(approach1, measuredTime);
+    File outputFile1 = this.getApproachOutputFile(approach1, approach1MeasuredTime);
     Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
 
-    File outputFileGT = this.getApproachOutputFile(gt, measuredTime);
+    File outputFileGT = this.getApproachOutputFile(gt, gtMeasuredTime);
     Map<Set<String>, List<String>> dataGT = this.getData(outputFileGT);
 
     if (data1.size() != dataGT.size()) {

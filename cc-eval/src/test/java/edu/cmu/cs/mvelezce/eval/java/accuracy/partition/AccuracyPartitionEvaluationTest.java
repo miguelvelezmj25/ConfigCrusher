@@ -23,6 +23,7 @@ import edu.cmu.cs.mvelezce.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.models.idta.BerkeleyIDTAPerformanceModel;
 import edu.cmu.cs.mvelezce.models.idta.ConvertIDTAPerformanceModel;
 import edu.cmu.cs.mvelezce.models.idta.LuceneIDTAPerformanceModel;
+import edu.cmu.cs.mvelezce.models.idta.RunBenchCIDTAPerformanceModel;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -1070,6 +1071,29 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void runBench_IDTA_Data_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> executedConfigs = idtaCompression.analyze(args);
+
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new IDTAPerformanceModelBuilder(programName, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+    model = RunBenchCIDTAPerformanceModel.toRunBenchCIDTAPerformanceModel(model);
+
+    BaseCompression gtCompression = new GTCompression(programName);
+    args = new String[0];
+    Set<Set<String>> configsToPredict = gtCompression.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.IDTA, BaseExecutor.USER, executedConfigs, configsToPredict, model);
+  }
+
+  @Test
   public void runBenchC_Compare_BF_GT_real() throws IOException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
@@ -1081,5 +1105,12 @@ public class AccuracyPartitionEvaluationTest {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.BF, Evaluation.GT, BaseExecutor.USER);
+  }
+
+  @Test
+  public void runBenchC_Compare_IDTA_GT_user_real() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.IDTA, BaseExecutor.USER, Evaluation.GT, BaseExecutor.REAL);
   }
 }

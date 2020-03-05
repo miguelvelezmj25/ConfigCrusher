@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.java.execute.parser;
 
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -16,7 +17,8 @@ public abstract class BaseRawExecutionParser<T> {
     this.outputDir = outputDir;
   }
 
-  public abstract void logExecution(Set<String> configuration, int iter)
+  public abstract void logExecution(
+      Set<String> configuration, int iter, ExecutorAdapter executorAdapter)
       throws IOException, InterruptedException;
 
   public Map<Integer, Set<T>> readResults() throws IOException {

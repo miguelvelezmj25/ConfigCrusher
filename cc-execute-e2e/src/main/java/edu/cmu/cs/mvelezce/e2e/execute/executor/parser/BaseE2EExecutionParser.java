@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.e2e.execute.executor.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.processed.PerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -20,7 +21,8 @@ public abstract class BaseE2EExecutionParser extends BaseRawExecutionParser<Perf
   }
 
   @Override
-  public void logExecution(Set<String> configuration, int iter) throws IOException {
+  public void logExecution(Set<String> configuration, int iter, ExecutorAdapter executorAdapter)
+      throws IOException {
     File dirFile = new File(".");
     Collection<File> serializedFiles = FileUtils.listFiles(dirFile, new String[] {"ser"}, false);
 

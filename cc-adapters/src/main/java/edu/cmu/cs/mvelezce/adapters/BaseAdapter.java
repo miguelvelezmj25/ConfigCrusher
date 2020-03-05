@@ -7,12 +7,12 @@ import java.util.Set;
 public abstract class BaseAdapter implements Adapter {
 
   private String programName;
-  private String directory;
+  private String mainClass;
   private List<String> options;
 
-  public BaseAdapter(String programName, String directory, List<String> options) {
+  public BaseAdapter(String programName, String mainClass, List<String> options) {
     this.programName = programName;
-    this.directory = directory;
+    this.mainClass = mainClass;
     this.options = options;
   }
 
@@ -48,8 +48,8 @@ public abstract class BaseAdapter implements Adapter {
     return programName;
   }
 
-  public String getDirectory() {
-    return directory;
+  public String getMainClass() {
+    return mainClass;
   }
 
   public List<String> getOptions() {

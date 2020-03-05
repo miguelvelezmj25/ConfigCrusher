@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.java.execute.instrumentation.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.java.execute.adapters.ExecutorAdapter;
 import edu.cmu.cs.mvelezce.java.execute.parser.BaseRawExecutionParser;
 import edu.cmu.cs.mvelezce.java.results.instrumentation.raw.RawInstrumentPerfExecution;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -20,7 +21,8 @@ public class RawInstrumentExecutionParser
     super(programName, outputDir);
   }
 
-  public void logExecution(Set<String> configuration, int iter) throws IOException {
+  public void logExecution(Set<String> configuration, int iter, ExecutorAdapter executorAdapter)
+      throws IOException {
     List<String> trace = this.parseTrace();
     RawInstrumentPerfExecution rawInstrumentPerfExecution =
         new RawInstrumentPerfExecution(configuration, trace);

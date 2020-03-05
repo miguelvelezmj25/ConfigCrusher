@@ -236,3 +236,4 @@ vignettes/*.pdf
 /cc-execute/output/
 /cc-execute/data/
 /cc-execute-e2e/data/
+/cc-execute/callTree.xml

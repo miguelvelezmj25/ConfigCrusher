@@ -61,7 +61,7 @@ public abstract class BaseExecutor<T> implements Executor {
 
     for (Set<String> configuration : this.configurations) {
       adapter.execute(configuration);
-      this.rawExecutionParser.logExecution(configuration, iteration);
+      this.rawExecutionParser.logExecution(configuration, iteration, adapter);
 
       GC.gc(this.waitAfterExecution);
     }

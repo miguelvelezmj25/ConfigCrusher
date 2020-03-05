@@ -26,12 +26,12 @@ public class BaseRunBenchCAdapter extends BaseAdapter {
     "CIPHER",
     "CACHE_TYPE",
     "CACHE_SIZE",
-    "IGNORE_UNKNOWN_SETTINGS",
+    "MV_STORE",
+    "ANALYZE_AUTO",
+    "DEFRAG_ALWAYS",
     "IFEXISTS",
-    "INIT",
     "FORBID_CREATION",
-    "RECOVER",
-    "RECOVER_TEST",
+    "IGNORE_UNKNOWN_SETTINGS",
   };
 
   public BaseRunBenchCAdapter() {

@@ -20,7 +20,18 @@ public class BaseRunBenchCAdapter extends BaseAdapter {
   private static final String DATA_DIR = "data";
 
   private static final String[] OPTIONS = {
-    "FILE_LOCK", "AUTOCOMMIT", "ACCESS_MODE_DATA", "CIPHER", "CACHE_TYPE", "CACHE_SIZE",
+    "FILE_LOCK",
+    "AUTOCOMMIT",
+    "ACCESS_MODE_DATA",
+    "CIPHER",
+    "CACHE_TYPE",
+    "CACHE_SIZE",
+    "IGNORE_UNKNOWN_SETTINGS",
+    "IFEXISTS",
+    "INIT",
+    "FORBID_CREATION",
+    "RECOVER",
+    "RECOVER_TEST",
   };
 
   public BaseRunBenchCAdapter() {

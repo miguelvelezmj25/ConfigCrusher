@@ -59,6 +59,9 @@ run() {
   elif [ "$approach" == $IDTAE2EInst ]; then
     cd ./cc-execute-e2e/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.idta.IDTAE2EInstrumentExecutorTest#"$program"
+  elif [ "$approach" == $IDTAE2ETime ]; then
+    cd ./cc-execute-e2e/ || exit
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.idta.IDTAE2ETimeExecutorTest#"$program"
   elif [ "$approach" == $SPLAT ]; then
     echo "Need to implement SPLAT"
   fi

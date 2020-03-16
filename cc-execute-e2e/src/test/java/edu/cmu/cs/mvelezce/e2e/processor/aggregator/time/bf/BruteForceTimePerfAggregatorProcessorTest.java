@@ -38,6 +38,25 @@ public class BruteForceTimePerfAggregatorProcessorTest {
   }
 
   @Test
+  public void convert_real() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    E2ETimeExecutionParser e2eUserTimeExecutionParser =
+        new E2EUserTimeExecutionParser(programName, BruteForceTimeExecutor.OUTPUT_DIR);
+    BaseExecutor<PerfExecution> executor =
+        new BruteForceTimeExecutor(programName, e2eUserTimeExecutionParser);
+    Map<Integer, Set<PerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new BruteForceTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
+
+  @Test
   public void runBenchC_real() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     E2ETimeExecutionParser e2eRealTimeExecutionParser =

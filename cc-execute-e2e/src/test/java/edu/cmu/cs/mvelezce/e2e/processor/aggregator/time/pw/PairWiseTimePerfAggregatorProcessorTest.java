@@ -34,4 +34,23 @@ public class PairWiseTimePerfAggregatorProcessorTest {
     args[1] = "-saveres";
     perfAggregatorProcessor.analyze(args);
   }
+
+  @Test
+  public void convert_real() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    E2ETimeExecutionParser e2eUserTimeExecutionParser =
+        new E2EUserTimeExecutionParser(programName, PairWiseTimeExecutor.OUTPUT_DIR);
+    BaseExecutor<PerfExecution> executor =
+        new PairWiseTimeExecutor(programName, e2eUserTimeExecutionParser);
+    Map<Integer, Set<PerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new PairWiseTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
 }

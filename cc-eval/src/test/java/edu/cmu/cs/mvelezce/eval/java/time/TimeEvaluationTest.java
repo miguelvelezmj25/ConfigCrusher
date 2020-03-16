@@ -14,11 +14,16 @@ import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.gt.GroundTruthTimePerfA
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.pw.PairWiseTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
+import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJProfilerSamplingExecutionParser;
+import edu.cmu.cs.mvelezce.java.processor.aggregator.PerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.processor.aggregator.sampling.profiler.jprofiler.idta.IDTAPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 public class TimeEvaluationTest {
@@ -134,17 +139,6 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void convert_GT_MeasuredTime_time_real() throws IOException, InterruptedException {
-    String programName = BaseConvertAdapter.PROGRAM_NAME;
-    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new GroundTruthTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
-    String[] args = new String[0];
-    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
-
-    TimeEvaluation.getE2EMeasuredTime(Evaluation.GT, performanceEntries);
-  }
-
-  @Test
   public void convert_BF_MeasuredTime_time_real() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
@@ -178,18 +172,19 @@ public class TimeEvaluationTest {
   }
 
   @Test
-  public void convert_IDTA_MeasuredTime_user() throws IOException, InterruptedException {
+  public void convert_IDTA_MeasuredTime() throws IOException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
-    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
-        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.REAL);
-    String[] args = new String[0];
-    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+    BaseExecutor<RawJProfilerSamplingPerfExecution> executor =
+        new IDTAJProfilerSamplingExecutor(
+            programName, RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
+    Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs =
+        executor.getRawExecutionParser().readResults();
 
-    TimeEvaluation.getMeasuredTime(Evaluation.IDTA, performanceEntries);
+    TimeEvaluation.getIDTAMeasuredTime(itersToRawPerfExecs, PerfAggregatorProcessor.ADDED_TIME);
   }
 
   @Test
-  public void convert_GT_MeasuredTime_time() throws IOException, InterruptedException {
+  public void convert_GT_MeasuredTime_time_real() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
         new GroundTruthTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);

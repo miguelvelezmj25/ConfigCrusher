@@ -20,8 +20,8 @@ public class DescriptiveStatisticsMap<T> {
     this.map.put(entry, descriptiveStats);
   }
 
-  public DescriptiveStatistics get(T region) {
-    return this.map.get(region);
+  public DescriptiveStatistics get(T type) {
+    return this.map.get(type);
   }
 
   public Map<T, DescriptiveStatistics> getMap() {
@@ -29,33 +29,33 @@ public class DescriptiveStatisticsMap<T> {
   }
 
   public Map<T, Double> getEntriesToData() {
-    Map<T, Double> regionsToData = new HashMap<>();
+    Map<T, Double> typesToData = new HashMap<>();
 
     for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
-      regionsToData.put(entry.getKey(), entry.getValue().getPercentile(50.0));
+      typesToData.put(entry.getKey(), entry.getValue().getPercentile(50.0));
     }
 
-    return regionsToData;
+    return typesToData;
   }
 
   public Map<T, Double> getEntriesToMin() {
-    Map<T, Double> regionsToMin = new HashMap<>();
+    Map<T, Double> typesToMin = new HashMap<>();
 
     for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
-      regionsToMin.put(entry.getKey(), entry.getValue().getMin());
+      typesToMin.put(entry.getKey(), entry.getValue().getMin());
     }
 
-    return regionsToMin;
+    return typesToMin;
   }
 
   public Map<T, Double> getEntriesToMax() {
-    Map<T, Double> regionsToMax = new HashMap<>();
+    Map<T, Double> typesToMax = new HashMap<>();
 
     for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
-      regionsToMax.put(entry.getKey(), entry.getValue().getMax());
+      typesToMax.put(entry.getKey(), entry.getValue().getMax());
     }
 
-    return regionsToMax;
+    return typesToMax;
   }
 
   public Map<T, Double> getEntriesToDiff(Map<T, Double> entriesToMin, Map<T, Double> entriesToMax) {
@@ -105,20 +105,6 @@ public class DescriptiveStatisticsMap<T> {
       double lowerCI = Math.max(0, stats.getMean() - ciValue);
       double higherCI = stats.getMean() + ciValue;
 
-      //      if ((higherCI - lowerCI) >= 1E9 & stats.getN() >= 3) {
-      //        System.err.println(
-      //            "The difference between the lower and higher confidence interval bounds of
-      // region "
-      //                + entry.getKey()
-      //                + " is greater than 1 sec. It is "
-      //                + ((higherCI - lowerCI) / 1E9)
-      //                + " in ["
-      //                + (stats.getMin() / 1E9)
-      //                + " - "
-      //                + (stats.getMax() / 1E9)
-      //                + "]");
-      //      }
-
       List<Double> confidenceInterval = new ArrayList<>();
       confidenceInterval.add(lowerCI);
       confidenceInterval.add(higherCI);
@@ -139,7 +125,7 @@ public class DescriptiveStatisticsMap<T> {
   }
 
   public Map<T, Double> getCoefficientsOfVariation() {
-    Map<T, Double> regionsToCoefficientsOfVariation = new HashMap<>();
+    Map<T, Double> typesToCoefficientsOfVariation = new HashMap<>();
 
     for (Map.Entry<T, DescriptiveStatistics> entry : this.map.entrySet()) {
       DescriptiveStatistics descriptiveStats = entry.getValue();
@@ -172,9 +158,9 @@ public class DescriptiveStatisticsMap<T> {
         }
       }
 
-      regionsToCoefficientsOfVariation.put(entry.getKey(), coefficient);
+      typesToCoefficientsOfVariation.put(entry.getKey(), coefficient);
     }
 
-    return regionsToCoefficientsOfVariation;
+    return typesToCoefficientsOfVariation;
   }
 }

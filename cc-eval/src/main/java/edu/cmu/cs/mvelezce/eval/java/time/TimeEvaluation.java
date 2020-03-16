@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.eval.java.time;
 
 import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
+import edu.cmu.cs.mvelezce.java.results.sampling.raw.profiler.jprofiler.RawJProfilerSamplingPerfExecution;
+import edu.cmu.cs.mvelezce.utils.stats.DescriptiveStatisticsMap;
 
 import java.util.Map;
 import java.util.Set;
@@ -61,5 +63,38 @@ public final class TimeEvaluation {
             + performanceEntries.size()
             + " configs with "
             + approach);
+  }
+
+  public static void getIDTAMeasuredTime(
+      Map<Integer, Set<RawJProfilerSamplingPerfExecution>> itersToRawPerfExecs,
+      long addedBaseTime) {
+    DescriptiveStatisticsMap<Set<String>> configsToStats = new DescriptiveStatisticsMap<>();
+
+    for (Set<RawJProfilerSamplingPerfExecution> executions : itersToRawPerfExecs.values()) {
+      for (RawJProfilerSamplingPerfExecution execution : executions) {
+        configsToStats.putIfAbsent(execution.getConfiguration());
+      }
+    }
+
+    for (Set<RawJProfilerSamplingPerfExecution> executions : itersToRawPerfExecs.values()) {
+      for (RawJProfilerSamplingPerfExecution execution : executions) {
+        configsToStats
+            .get(execution.getConfiguration())
+            .addValue((execution.getRealTime() * 1_000) + addedBaseTime);
+      }
+    }
+
+    double totalTime = 0.0;
+
+    for (double time : configsToStats.getEntriesToData().values()) {
+      totalTime += time;
+    }
+
+    System.out.println(
+        "It took "
+            + Evaluation.DECIMAL_FORMAT.format(totalTime / 1E9)
+            + " secs. to measure "
+            + configsToStats.getMap().size()
+            + " configs with IDTA");
   }
 }

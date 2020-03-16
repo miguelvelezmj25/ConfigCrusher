@@ -34,4 +34,23 @@ public class FeatureWiseTimePerfAggregatorProcessorTest {
     args[1] = "-saveres";
     perfAggregatorProcessor.analyze(args);
   }
+
+  @Test
+  public void convert_real() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    E2ETimeExecutionParser e2eUserTimeExecutionParser =
+        new E2EUserTimeExecutionParser(programName, FeatureWiseTimeExecutor.OUTPUT_DIR);
+    BaseExecutor<PerfExecution> executor =
+        new FeatureWiseTimeExecutor(programName, e2eUserTimeExecutionParser);
+    Map<Integer, Set<PerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new FeatureWiseTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
 }

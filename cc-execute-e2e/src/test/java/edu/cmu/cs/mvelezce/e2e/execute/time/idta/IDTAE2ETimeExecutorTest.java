@@ -17,7 +17,7 @@ public class IDTAE2ETimeExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 10000);
+    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";

@@ -13,6 +13,11 @@ public class ConvertIDTAPerformanceModel<T> extends IDTAPerformanceModel<T> {
   //  private static final double SLOPE = 1.2649;
   //  private static final double R_SQUARED = 0.9976;
 
+  // Numbers when we analyzed the program with all configs, but the errors increase
+  //  private static final double INTERCEPT = 0.4086;
+  //  private static final double SLOPE = 1.2177;
+  //  private static final double R_SQUARED = 0.9920;
+
   private static final double INTERCEPT = 0;
   private static final double SLOPE = 1;
   private static final double R_SQUARED = 0;

@@ -1,13 +1,13 @@
 filename = '/Users/mvelezce/Documents/programming/java/projects/ConfigCrusher/cc-eval/src/main/resources/eval/java/programs/sampling/profiler/jprofiler/Convert/user/Convert.csv';
 delimiter = ',';
 startRow = 2;
-endRow = 5;
+endRow = 89;
 formatSpec = '%*q%f%f%*s%*s%[^\n\r]';
 
 fileID = fopen(filename,'r');
 textscan(fileID, '%[^\n\r]', startRow-1, 'WhiteSpace', '', 'ReturnOnError', false);
 dataArray = textscan(fileID, formatSpec, endRow-startRow+1, 'Delimiter', delimiter, 'TextType', 'string', 'ReturnOnError', false, 'EndOfLine', '\r\n');
-fclose(fileID);
+fclose(fileID);7
 
 y = dataArray{:, 1};
 x = dataArray{:, 2};

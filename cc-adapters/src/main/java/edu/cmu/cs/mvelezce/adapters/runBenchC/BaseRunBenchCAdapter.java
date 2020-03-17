@@ -32,6 +32,10 @@ public class BaseRunBenchCAdapter extends BaseAdapter {
     "IFEXISTS",
     "FORBID_CREATION",
     "IGNORE_UNKNOWN_SETTINGS",
+    "PAGE_SIZE",
+    "ANALYZE_SAMPLE",
+    "COMPRESS",
+    "OPTIMIZE_DISTINCT",
   };
 
   public BaseRunBenchCAdapter() {

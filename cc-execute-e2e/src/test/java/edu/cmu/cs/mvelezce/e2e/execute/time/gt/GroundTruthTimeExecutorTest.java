@@ -9,7 +9,6 @@ import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class GroundTruthTimeExecutorTest {
@@ -50,24 +49,12 @@ public class GroundTruthTimeExecutorTest {
     BaseCompression compression = new GTCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    configs.clear();
-
-    Set<String> c = new HashSet<>();
-    c.add("ANALYZE_SAMPLE");
-    c.add("CIPHER");
-    c.add("CACHE_SIZE");
-    c.add("PAGE_SIZE");
-    c.add("ACCESS_MODE_DATA");
-    c.add("COMPRESS");
-
-    configs.add(c);
-
-    Executor executor = new GroundTruthTimeExecutor(programName, configs, 0);
+    Executor executor = new GroundTruthTimeExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i1";
+    args[2] = "-i3";
     executor.execute(args);
   }
 }

@@ -631,6 +631,8 @@ public class IDTATimerInstrumenterTest {
   public void runBenchC()
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException,
           InvocationTargetException {
+    System.err.println("Have to delete the META-INF dir in the h2 ./target dir");
+
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     String workloadSize = "small";
 

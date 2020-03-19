@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.java.execute.sampling.parser.profiler.jprofiler.RawJP
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAJProfilerSamplingExecutorTest {
@@ -158,17 +159,29 @@ public class IDTAJProfilerSamplingExecutorTest {
     String[] args = new String[0];
     Set<Set<String>> configurations = compression.analyze(args);
 
+    configurations.clear();
+
+    Set<String> c = new HashSet<>();
+    c.add("ANALYZE_SAMPLE");
+    c.add("CIPHER");
+    c.add("CACHE_SIZE");
+    c.add("PAGE_SIZE");
+    c.add("ACCESS_MODE_DATA");
+    c.add("COMPRESS");
+
+    configurations.add(c);
+
     Executor executor =
         new IDTAJProfilerSamplingExecutor(
             programName,
             configurations,
-            30000,
+            0,
             RawJProfilerSamplingExecutionParser.RUNNABLE_THREAD_STATUS);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i5";
+    args[2] = "-i1";
 
     executor.execute(args);
   }

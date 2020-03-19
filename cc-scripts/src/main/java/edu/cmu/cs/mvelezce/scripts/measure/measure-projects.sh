@@ -69,7 +69,7 @@ run() {
   echo ""
   echo "Done with" "$program" "$approach"
   echo ""
-  sleep 60s
+  sleep 10s
 
   cd .. || exit
 }

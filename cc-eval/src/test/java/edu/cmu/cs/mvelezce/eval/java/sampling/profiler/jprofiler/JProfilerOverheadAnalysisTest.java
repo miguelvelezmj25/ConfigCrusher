@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.eval.java.sampling.profiler.jprofiler;
 import edu.cmu.cs.mvelezce.adapters.convert.BaseConvertAdapter;
 import edu.cmu.cs.mvelezce.adapters.indexFiles.BaseIndexFilesAdapter;
 import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrderedScanAdapter;
+import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.idta.IDTAE2EInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.idta.IDTAE2ETimePerfAggregatorProcessor;
@@ -66,5 +67,19 @@ public class JProfilerOverheadAnalysisTest {
     JProfilerOverheadAnalysis analysis =
         new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
     analysis.analyze(idtaPerfEntries, e2ePerfEntries);
+  }
+
+  @Test
+  public void runBenchC_time_user() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAE2ETimePerfAggregatorProcessor(programName, BaseExecutor.USER);
+
+    String[] args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
+    analysis.analyze(e2ePerfEntries, e2ePerfEntries);
   }
 }

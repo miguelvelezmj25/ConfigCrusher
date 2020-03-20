@@ -34,22 +34,12 @@ public class IDTAE2ETimeExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    configs.clear();
-
-    Set<String> c = new HashSet<>();
-//    c.add("CACHE_SIZE");
-    c.add("PAGE_SIZE");
-    c.add("DEFRAG_ALWAYS");
-//    c.add("OPTIMIZE_DISTINCT");
-
-    configs.add(c);
-
-    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 0);
+    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 30000);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i1";
+    args[2] = "-i3";
     executor.execute(args);
   }
 }

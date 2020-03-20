@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAE2ETimeExecutorTest {
@@ -33,12 +34,22 @@ public class IDTAE2ETimeExecutorTest {
     BaseCompression compression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];
     Set<Set<String>> configs = compression.analyze(args);
-    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 30000);
+    configs.clear();
+
+    Set<String> c = new HashSet<>();
+//    c.add("CACHE_SIZE");
+    c.add("PAGE_SIZE");
+    c.add("DEFRAG_ALWAYS");
+//    c.add("OPTIMIZE_DISTINCT");
+
+    configs.add(c);
+
+    Executor executor = new IDTAE2ETimeExecutor(programName, configs, 0);
 
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i3";
+    args[2] = "-i1";
     executor.execute(args);
   }
 }

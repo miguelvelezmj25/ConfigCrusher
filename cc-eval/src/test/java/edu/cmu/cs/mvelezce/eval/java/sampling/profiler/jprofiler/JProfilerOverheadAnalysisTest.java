@@ -70,6 +70,23 @@ public class JProfilerOverheadAnalysisTest {
   }
 
   @Test
+  public void runBenchC_time_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAE2ETimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+
+    String[] args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.REAL);
+    analysis.analyze(e2ePerfEntries, e2ePerfEntries);
+
+    throw new UnsupportedOperationException(
+        "We are using the same entries since we wanted to check all the h2 execution times");
+  }
+
+  @Test
   public void runBenchC_time_user() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
@@ -81,5 +98,8 @@ public class JProfilerOverheadAnalysisTest {
     JProfilerOverheadAnalysis analysis =
         new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
     analysis.analyze(e2ePerfEntries, e2ePerfEntries);
+
+    throw new UnsupportedOperationException(
+        "We are using the same entries since we wanted to check all the h2 execution times");
   }
 }

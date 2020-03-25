@@ -8,7 +8,6 @@ import edu.cmu.cs.mvelezce.java.execute.Executor;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class IDTAE2ETimeExecutorTest {
@@ -39,7 +38,7 @@ public class IDTAE2ETimeExecutorTest {
     args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i3";
+    args[2] = "-i5";
     executor.execute(args);
   }
 }

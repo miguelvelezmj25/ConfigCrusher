@@ -70,7 +70,7 @@ public class GTCompressionTest {
   public void runBenchC() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     List<String> options = BaseRunBenchCAdapter.getListOfOptions();
-    BaseCompression compression = new GTCompression(programName, options, 500);
+    BaseCompression compression = new GTCompression(programName, options, 2000);
 
     String[] args = new String[2];
     args[0] = "-delres";

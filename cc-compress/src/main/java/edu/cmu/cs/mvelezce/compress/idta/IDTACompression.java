@@ -49,4 +49,8 @@ public abstract class IDTACompression extends BaseCompression {
 
     return expandedPartitions;
   }
+
+  protected Collection<Partitioning> getAllPartitions() {
+    return allPartitions;
+  }
 }

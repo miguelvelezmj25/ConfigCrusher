@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.compress.random.from.other;
+package edu.cmu.cs.mvelezce.compress.random.from;
 
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.utils.config.Options;

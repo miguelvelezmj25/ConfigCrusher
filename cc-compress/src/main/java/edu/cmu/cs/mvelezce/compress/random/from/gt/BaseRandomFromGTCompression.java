@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.compress.random.from.gt;
 
-import edu.cmu.cs.mvelezce.compress.random.from.other.BaseRandomFromOtherCompression;
+import edu.cmu.cs.mvelezce.compress.random.from.BaseRandomFromOtherCompression;
 
 import java.util.List;
 import java.util.Set;

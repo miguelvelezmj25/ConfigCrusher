@@ -32,7 +32,7 @@ public class RandomTimeExecutorTest {
   }
 
   @Test
-  public void convert_200() throws IOException, InterruptedException {
+  public void convert() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseCompression compression = new NumberRandomExcludeCompression(programName);
     String[] args = new String[0];
@@ -49,7 +49,7 @@ public class RandomTimeExecutorTest {
   }
 
   @Test
-  public void runBenchC_200() throws IOException, InterruptedException {
+  public void runBenchC() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseCompression compression = new NumberRandomExcludeCompression(programName);
     String[] args = new String[0];

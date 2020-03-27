@@ -6,10 +6,12 @@ GTInst="gtinst"
 BFInst="bfinst"
 FWInst="fwinst"
 PWInst="pwinst"
+RDInst="rdinst"
 GTTime="gttime"
 BFTime="bftime"
 FWTime="fwtime"
 PWTime="pwtime"
+RDTime="rdtime"
 IDTA="idta"
 IDTAE2EInst="idtae2einst"
 IDTAE2ETime="idtae2etime"
@@ -41,6 +43,9 @@ run() {
   elif [ "$approach" == $PWInst ]; then
     cd ./cc-execute-e2e/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.pw.PairWiseInstrumentExecutorTest#"$program"
+  elif [ "$approach" == $RDInst ]; then
+    cd ./cc-execute-e2e/ || exit
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.instrument.random.RandomInstrumentExecutorTest#"$program"
   elif [ "$approach" == $GTTime ]; then
     cd ./cc-execute-e2e/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.gt.GroundTruthTimeExecutorTest#"$program"
@@ -53,6 +58,9 @@ run() {
   elif [ "$approach" == $PWTime ]; then
     cd ./cc-execute-e2e/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.pw.PairWiseTimeExecutorTest#"$program"
+  elif [ "$approach" == $RDTime ]; then
+    cd ./cc-execute-e2e/ || exit
+    mvn test -Dtest=edu.cmu.cs.mvelezce.e2e.execute.time.random.RandomTimeExecutorTest#"$program"
   elif [ "$approach" == $IDTA ]; then
     cd ./cc-execute/ || exit
     mvn test -Dtest=edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutorTest#"$program"
@@ -96,7 +104,20 @@ for entry in "$@"; do
     continue
   fi
 
-  if [ "$approach" != $GTInst ] && [ "$approach" != $BFInst ] && [ "$approach" != $FWInst ] && [ "$approach" != $PWInst ] && [ "$approach" != $IDTA ] && [ "$approach" != $IDTAE2EInst ] && [ "$approach" != $IDTAE2ETime ] && [ "$approach" != $GTTime ] && [ "$approach" != $BFTime ] && [ "$approach" != $FWTime ] && [ "$approach" != $PWTime ] && [ "$approach" != $SPLAT ]; then
+  if [ "$approach" != $GTInst ] &&
+    [ "$approach" != $BFInst ] &&
+    [ "$approach" != $FWInst ] &&
+    [ "$approach" != $PWInst ] &&
+    [ "$approach" != $RDInst ] &&
+    [ "$approach" != $IDTA ] &&
+    [ "$approach" != $IDTAE2EInst ] &&
+    [ "$approach" != $IDTAE2ETime ] &&
+    [ "$approach" != $GTTime ] &&
+    [ "$approach" != $BFTime ] &&
+    [ "$approach" != $FWTime ] &&
+    [ "$approach" != $PWTime ] &&
+    [ "$approach" != $RDTime ] &&
+    [ "$approach" != $SPLAT ]; then
     echo "Could not find approach" "$approach"
     program=$NULL
     approach=$NULL

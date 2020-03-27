@@ -22,15 +22,16 @@ public class E2EInstrumentExecutionParser extends BaseE2EExecutionParser {
   protected PerfExecution getPerfExecution(Set<String> configuration, File file)
       throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(file));
-    String line = reader.readLine();
+    String timeAsString = "";
+    String line;
 
-    while (line != null) {
-      line = reader.readLine();
+    while ((line = reader.readLine()) != null) {
+      timeAsString = line;
     }
 
     reader.close();
 
-    long time = Long.parseLong(line);
+    long time = Long.parseLong(timeAsString);
     Map<String, Long> regionsToTimes = new HashMap<>();
     regionsToTimes.put(RegionsManager.PROGRAM_REGION_ID.toString(), time);
 

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class RandomTimeExecutorTest {
 
-  private static Set<Set<String>> getNumberOfConfigs(
+  public static Set<Set<String>> getNumberOfConfigs(
       Set<Set<String>> allConfigs, int numberOfConfigs) {
     if (allConfigs.size() < numberOfConfigs) {
       throw new RuntimeException(

@@ -1,7 +1,7 @@
-filename = '/Users/mvelezce/Documents/programming/java/projects/ConfigCrusher/cc-eval/src/main/resources/eval/java/programs/sampling/profiler/jprofiler/Convert/user/Convert.csv';
+filename = '/Users/mvelezce/Documents/programming/java/projects/ConfigCrusher/cc-eval/src/main/resources/eval/java/programs/sampling/profiler/jprofiler/RunBenchC/user/RunBenchC.csv';
 delimiter = ',';
 startRow = 2;
-endRow = 89;
+endRow = 65;
 formatSpec = '%*q%f%f%*s%*s%[^\n\r]';
 
 fileID = fopen(filename,'r');

@@ -8,9 +8,13 @@ import java.util.Set;
 
 public class RunBenchCIDTAPerformanceModel<T> extends IDTAPerformanceModel<T> {
 
-  private static final double INTERCEPT = 0;
-  private static final double SLOPE = 1;
-  private static final double R_SQUARED = 0;
+  //  private static final double INTERCEPT = 0;
+  //  private static final double SLOPE = 1;
+  //  private static final double R_SQUARED = 0;
+
+  private static final double INTERCEPT = -0.3903;
+  private static final double SLOPE = 0.9944;
+  private static final double R_SQUARED = 0.9999;
 
   public RunBenchCIDTAPerformanceModel(Set<LocalPerformanceModel<T>> localModels) {
     super(localModels, INTERCEPT, SLOPE);

@@ -196,6 +196,17 @@ public class TimeEvaluationTest {
   }
 
   @Test
+  public void runBenchC_GT_MeasuredTime_time_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new GroundTruthTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.GT, performanceEntries);
+  }
+
+  @Test
   public void runBenchC_FW_MeasuredTime_time_real() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =

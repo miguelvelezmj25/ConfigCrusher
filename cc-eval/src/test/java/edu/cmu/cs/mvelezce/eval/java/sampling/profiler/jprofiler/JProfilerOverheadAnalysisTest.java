@@ -17,6 +17,8 @@ import java.util.Set;
 
 public class JProfilerOverheadAnalysisTest {
 
+  public static final int NUM_CONFIGS_TO_CONSIDER = 5;
+
   @Test
   public void berkeleyDB_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
@@ -85,5 +87,76 @@ public class JProfilerOverheadAnalysisTest {
     JProfilerOverheadAnalysis analysis =
         new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
     analysis.analyze(idtaPerfEntries, e2ePerfEntries);
+  }
+
+  @Test
+  public void berkeleyDB_instrument_consider_configs() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
+
+    perfAggregatorProcessor = new IDTAE2EInstrumentPerfAggregatorProcessor(programName);
+    args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.REAL);
+    analysis.analyze(idtaPerfEntries, e2ePerfEntries, NUM_CONFIGS_TO_CONSIDER);
+  }
+
+  @Test
+  public void lucene_instrument_consider_configs() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
+
+    perfAggregatorProcessor = new IDTAE2EInstrumentPerfAggregatorProcessor(programName);
+    args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.REAL);
+    analysis.analyze(idtaPerfEntries, e2ePerfEntries, NUM_CONFIGS_TO_CONSIDER);
+  }
+
+  @Test
+  public void convert_time_user_consider_configs() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
+
+    perfAggregatorProcessor =
+        new IDTAE2ETimePerfAggregatorProcessor(programName, BaseExecutor.USER);
+    args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
+    analysis.analyze(idtaPerfEntries, e2ePerfEntries, NUM_CONFIGS_TO_CONSIDER);
+  }
+
+  @Test
+  public void runBenchC_time_IDTA_user_E2E_real_consider_configs()
+      throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new IDTAPerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> idtaPerfEntries = perfAggregatorProcessor.analyze(args);
+
+    perfAggregatorProcessor =
+        new IDTAE2ETimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    args = new String[0];
+    Set<PerformanceEntry> e2ePerfEntries = perfAggregatorProcessor.analyze(args);
+
+    JProfilerOverheadAnalysis analysis =
+        new JProfilerOverheadAnalysis(programName, BaseExecutor.USER);
+    analysis.analyze(idtaPerfEntries, e2ePerfEntries, NUM_CONFIGS_TO_CONSIDER);
   }
 }

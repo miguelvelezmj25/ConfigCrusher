@@ -13,13 +13,13 @@ import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public final class JProfilerOverheadAnalysis {
 
   private static final String OUTPUT_DIR =
       "../cc-eval/" + Options.DIRECTORY + "/eval/java/programs/sampling/profiler/jprofiler";
+  private static final int CONSIDER_ALL_CONFIGS = -1;
 
   private final String programName;
   private final String measuredTime;
@@ -31,6 +31,14 @@ public final class JProfilerOverheadAnalysis {
 
   public void analyze(Set<PerformanceEntry> idtaPerfEntries, Set<PerformanceEntry> e2ePerfEntries)
       throws IOException {
+    this.analyze(idtaPerfEntries, e2ePerfEntries, CONSIDER_ALL_CONFIGS);
+  }
+
+  public void analyze(
+      Set<PerformanceEntry> idtaPerfEntries,
+      Set<PerformanceEntry> e2ePerfEntries,
+      int numConfigsToConsider)
+      throws IOException {
     if (idtaPerfEntries.size() != e2ePerfEntries.size()) {
       throw new RuntimeException(
           "The perf entries lengths do not match: "
@@ -40,6 +48,7 @@ public final class JProfilerOverheadAnalysis {
     }
 
     Set<Set<String>> configs = this.getConfigs(idtaPerfEntries);
+    configs = this.getRandomConfigs(configs, numConfigsToConsider);
     this.checkHasConfigs(configs, idtaPerfEntries);
     this.checkHasConfigs(configs, e2ePerfEntries);
 
@@ -66,6 +75,23 @@ public final class JProfilerOverheadAnalysis {
     writer.write(analysisResults);
     writer.flush();
     writer.close();
+  }
+
+  private Set<Set<String>> getRandomConfigs(Set<Set<String>> configs, int configsToSelect) {
+    if (configsToSelect == CONSIDER_ALL_CONFIGS || configsToSelect == configs.size()) {
+      return configs;
+    }
+
+    Set<Set<String>> configsToConsider = new HashSet<>();
+    Random random = new Random();
+    List<Set<String>> configsList = new ArrayList<>(configs);
+
+    while (configsToConsider.size() != configsToSelect) {
+      Set<String> config = configsList.get(random.nextInt(configs.size()));
+      configsToConsider.add(config);
+    }
+
+    return configsToConsider;
   }
 
   private String getAnalysisResults(
@@ -187,10 +213,18 @@ public final class JProfilerOverheadAnalysis {
   }
 
   private void checkHasConfigs(Set<Set<String>> configs, Set<PerformanceEntry> idtaPerfEntries) {
-    for (PerformanceEntry entry : idtaPerfEntries) {
-      if (!configs.contains(entry.getConfiguration())) {
-        throw new RuntimeException(
-            "The performance entries do no have the config " + entry.getConfiguration());
+    for (Set<String> config : configs) {
+      boolean hasConfig = false;
+
+      for (PerformanceEntry entry : idtaPerfEntries) {
+        if (entry.getConfiguration().equals(config)) {
+          hasConfig = true;
+          break;
+        }
+      }
+
+      if (!hasConfig) {
+        throw new RuntimeException("The performance entries do no have the config " + config);
       }
     }
   }

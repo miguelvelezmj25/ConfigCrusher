@@ -1,7 +1,7 @@
 filename = '/Users/mvelezce/Documents/programming/java/projects/ConfigCrusher/cc-eval/src/main/resources/eval/java/programs/sampling/profiler/jprofiler/IndexFiles/real/IndexFiles.csv';
 delimiter = ',';
 startRow = 2;
-endRow = 27;
+endRow = 6;
 formatSpec = '%*q%f%f%*s%*s%[^\n\r]';
 
 fileID = fopen(filename,'r');

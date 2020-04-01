@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.adapters.measureDiskOrderedScan.BaseMeasureDiskOrdere
 import edu.cmu.cs.mvelezce.adapters.runBenchC.BaseRunBenchCAdapter;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.idta.suboptimal.greedy.conjunctions.IDTASuboptimalGreedyConjunctionsCompression;
+import edu.cmu.cs.mvelezce.eval.java.sampling.profiler.jprofiler.JProfilerOverheadAnalysisTest;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import org.junit.Test;
 
@@ -59,6 +60,42 @@ public class LinearRegressionAnalysisTest {
 
     LinearRegressionAnalysis analysis =
         new LinearRegressionAnalysis(programName, executedConfigs.size(), BaseExecutor.USER);
+    analysis.generateLinearRegressionScript();
+  }
+
+  @Test
+  public void berkeleyDB_instrument_consider_configs() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    LinearRegressionAnalysis analysis =
+        new LinearRegressionAnalysis(
+            programName, JProfilerOverheadAnalysisTest.NUM_CONFIGS_TO_CONSIDER, BaseExecutor.REAL);
+    analysis.generateLinearRegressionScript();
+  }
+
+  @Test
+  public void lucene_instrument_consider_configs() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    LinearRegressionAnalysis analysis =
+        new LinearRegressionAnalysis(
+            programName, JProfilerOverheadAnalysisTest.NUM_CONFIGS_TO_CONSIDER, BaseExecutor.REAL);
+    analysis.generateLinearRegressionScript();
+  }
+
+  @Test
+  public void convert_time_user_consider_configs() throws IOException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    LinearRegressionAnalysis analysis =
+        new LinearRegressionAnalysis(
+            programName, JProfilerOverheadAnalysisTest.NUM_CONFIGS_TO_CONSIDER, BaseExecutor.USER);
+    analysis.generateLinearRegressionScript();
+  }
+
+  @Test
+  public void runBenchC_time_user_consider_configs() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    LinearRegressionAnalysis analysis =
+        new LinearRegressionAnalysis(
+            programName, JProfilerOverheadAnalysisTest.NUM_CONFIGS_TO_CONSIDER, BaseExecutor.USER);
     analysis.generateLinearRegressionScript();
   }
 }

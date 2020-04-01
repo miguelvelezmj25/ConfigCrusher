@@ -1037,7 +1037,7 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
-  public void runBench_FW_Data_real() throws IOException, InterruptedException {
+  public void runBenchC_FW_Data_real() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     List<String> options = BaseRunBenchCAdapter.getListOfOptions();
     SamplingApproach samplingApproach = FeatureWiseSampling.getInstance();
@@ -1113,7 +1113,7 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
-  public void runBench_IDTA_Data_user() throws IOException, InterruptedException {
+  public void runBenchC_IDTA_Data_user() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
     String[] args = new String[0];

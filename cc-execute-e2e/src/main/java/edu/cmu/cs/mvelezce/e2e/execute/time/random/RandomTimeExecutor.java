@@ -12,7 +12,6 @@ public class RandomTimeExecutor extends E2ETimeExecutor {
 
   public RandomTimeExecutor(String programName, E2ETimeExecutionParser e2ETimeExecutionParser) {
     super(programName, new HashSet<>(), e2ETimeExecutionParser, -1);
-    throw new UnsupportedOperationException("implement");
   }
 
   RandomTimeExecutor(String programName, Set<Set<String>> configurations, int waitAfterExecution) {

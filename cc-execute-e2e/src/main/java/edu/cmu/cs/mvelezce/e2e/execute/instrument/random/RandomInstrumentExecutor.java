@@ -13,7 +13,6 @@ public class RandomInstrumentExecutor extends E2EInstrumentExecutor {
 
   public RandomInstrumentExecutor(String programName) {
     this(programName, new HashSet<>(), -1);
-    throw new UnsupportedOperationException("implement");
   }
 
   RandomInstrumentExecutor(

@@ -12,6 +12,7 @@ public final class Evaluation {
   public static final String SPLATD = "SPLATD";
   public static final String FAM = "FAM";
   public static final String BF = "BF";
+  public static final String RANDOM = "RANDOM";
   public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.###");
 
   private Evaluation() {}

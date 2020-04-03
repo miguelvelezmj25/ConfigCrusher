@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.analysis.BaseAnalysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
+import edu.cmu.cs.mvelezce.approaches.sampling.random.RandomSampling;
 import edu.cmu.cs.mvelezce.builder.idta.IDTAPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.compress.BaseCompression;
 import edu.cmu.cs.mvelezce.compress.gt.GTCompression;
@@ -27,6 +28,7 @@ import edu.cmu.cs.mvelezce.models.idta.RunBenchCIDTAPerformanceModel;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -463,6 +465,44 @@ public class AccuracyPartitionEvaluationTest {
         Evaluation.PW, BaseExecutor.REAL, executedConfigs, configsToPredict, model);
   }
 
+  @Test
+  public void berkeleyDB_Random200_Data_real() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 200, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
+  public void berkeleyDB_Random50_Data_real() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 50, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
   //  @Test
   //  public void berkeleyDB_PW0_Data_real() throws IOException, InterruptedException {
   //    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
@@ -671,6 +711,20 @@ public class AccuracyPartitionEvaluationTest {
     eval.compareApproaches(Evaluation.PW, Evaluation.GT, BaseExecutor.REAL);
   }
 
+  @Test
+  public void berkeleyDB_Compare_RANDOM200_GT() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 200, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void berkeleyDB_Compare_RANDOM50_GT() throws IOException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 50, Evaluation.GT, BaseExecutor.REAL);
+  }
+
   //  @Test
   //  public void berkeleyDB_Compare_PW_GT0() throws IOException {
   //    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME + 0;
@@ -776,6 +830,44 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void lucene_Random200_Data_real() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 200, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
+  public void lucene_Random50_Data_real() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 50, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
   public void lucene_IDTA_Data_real() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
@@ -824,6 +916,20 @@ public class AccuracyPartitionEvaluationTest {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.PW, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void lucene_Compare_Random200_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 200, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void lucene_Compare_Random50_GT() throws IOException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 50, Evaluation.GT, BaseExecutor.REAL);
   }
 
   //  @Test
@@ -952,6 +1058,44 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void convert_Random200_Data_user() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseConvertAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 200, BaseExecutor.USER, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
+  public void convert_Random50_Data_user() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.USER);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseConvertAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 50, BaseExecutor.USER, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
   public void convert_IDTA_Data_user() throws IOException, InterruptedException {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     BaseCompression idtaCompression = new IDTASuboptimalGreedyConjunctionsCompression(programName);
@@ -993,6 +1137,20 @@ public class AccuracyPartitionEvaluationTest {
     String programName = BaseConvertAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.PW, Evaluation.GT, BaseExecutor.USER);
+  }
+
+  @Test
+  public void convert_Compare_Random200_GT() throws IOException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 200, Evaluation.GT, BaseExecutor.USER);
+  }
+
+  @Test
+  public void convert_Compare_Random50_GT() throws IOException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 50, Evaluation.GT, BaseExecutor.USER);
   }
 
   @Test
@@ -1079,6 +1237,44 @@ public class AccuracyPartitionEvaluationTest {
   }
 
   @Test
+  public void runBenchC_Random200_Data_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 200, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
+  public void runBenchC_Random50_Data_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    BaseCompression compression = new GTCompression(programName);
+    String[] args = new String[0];
+    Set<Set<String>> configsToPredict = compression.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    BaseAnalysis<PerformanceModel<Partition>> builder =
+        new MatlabLinearLearnedModelBuilder(programName, samplingApproach, BaseExecutor.REAL);
+    args = new String[0];
+    PerformanceModel<Partition> model = builder.analyze(args);
+
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName, options);
+    eval.saveConfigsToPerformance(
+        Evaluation.RANDOM + 50, BaseExecutor.REAL, new HashSet<>(), configsToPredict, model);
+  }
+
+  @Test
   public void runBenchC_GT_Data_user() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     BaseCompression compression = new GTCompression(programName);
@@ -1154,6 +1350,20 @@ public class AccuracyPartitionEvaluationTest {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
     eval.compareApproaches(Evaluation.PW, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void runBenchC_Compare_Random200_GT_real() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 200, Evaluation.GT, BaseExecutor.REAL);
+  }
+
+  @Test
+  public void runBenchC_Compare_Random50_GT_real() throws IOException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    AccuracyEvaluation<Partition> eval = new AccuracyPartitionEvaluation(programName);
+    eval.compareApproaches(Evaluation.RANDOM + 50, Evaluation.GT, BaseExecutor.REAL);
   }
 
   @Test

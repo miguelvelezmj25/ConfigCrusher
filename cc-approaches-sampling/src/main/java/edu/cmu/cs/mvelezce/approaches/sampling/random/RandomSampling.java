@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.approaches.sampling.random;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
 import edu.cmu.cs.mvelezce.explorer.idta.partition.Partition;
 import org.apache.commons.math3.util.Combinations;
 
@@ -52,41 +53,7 @@ public final class RandomSampling implements SamplingApproach {
 
   @Override
   public Set<Partition> getLinearModelPartitions(List<String> options) {
-    throw new UnsupportedOperationException("implemente");
-    //    Set<Partition> partitions = new HashSet<>();
-    //
-    //    if (options.isEmpty()) {
-    //      return partitions;
-    //    }
-    //
-    //    for (String option : options) {
-    //      Partition partition =
-    //          new Partition(FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, option));
-    //      partitions.add(partition);
-    //    }
-    //
-    //    Set<List<String>> pairs = this.getPairs(options);
-    //
-    //    for (List<String> pair : pairs) {
-    //      Iterator<String> pairIter = pair.iterator();
-    //      StringBuilder stringBuilder = new StringBuilder();
-    //
-    //      while (pairIter.hasNext()) {
-    //        String term = pairIter.next();
-    //        stringBuilder.append(term);
-    //
-    //        if (pairIter.hasNext()) {
-    //          stringBuilder.append(" && ");
-    //        }
-    //      }
-    //
-    //      Partition partition =
-    //          new Partition(
-    //              FeatureExprUtils.parseAsFeatureExpr(IDTA.USE_BDD, stringBuilder.toString()));
-    //      partitions.add(partition);
-    //    }
-    //
-    //    return partitions;
+    return PairWiseSampling.getInstance().getLinearModelPartitions(options);
   }
 
   @Override

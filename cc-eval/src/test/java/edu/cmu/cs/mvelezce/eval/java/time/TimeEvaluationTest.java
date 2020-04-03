@@ -9,10 +9,12 @@ import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.bf.BruteForceInst
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.fw.FeatureWiseInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.gt.GroundTruthInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.pw.PairWiseInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.random.RandomInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.bf.BruteForceTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.fw.FeatureWiseTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.gt.GroundTruthTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.pw.PairWiseTimePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.random.RandomTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.eval.java.Evaluation;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.execute.sampling.idta.profiler.jprofiler.IDTAJProfilerSamplingExecutor;
@@ -74,6 +76,18 @@ public class TimeEvaluationTest {
   }
 
   @Test
+  public void berkeleyDB_Random200_MeasuredTime_instrument()
+      throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.RANDOM + 200, performanceEntries);
+  }
+
+  @Test
   public void berkeleyDB_IDTA_MeasuredTime_instrument() throws IOException, InterruptedException {
     String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
@@ -129,6 +143,17 @@ public class TimeEvaluationTest {
   }
 
   @Test
+  public void lucene_Random200_MeasuredTime_instrument() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.RANDOM + 200, performanceEntries);
+  }
+
+  @Test
   public void lucene_IDTA_MeasuredTime() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
@@ -170,6 +195,17 @@ public class TimeEvaluationTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     TimeEvaluation.getE2EMeasuredTime(Evaluation.PW, performanceEntries);
+  }
+
+  @Test
+  public void convert_Random200_MeasuredTime_time_real() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.RANDOM + 200, performanceEntries);
   }
 
   @Test
@@ -226,6 +262,18 @@ public class TimeEvaluationTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     TimeEvaluation.getE2EMeasuredTime(Evaluation.PW, performanceEntries);
+  }
+
+  @Test
+  public void runBenchC_Random200_MeasuredTime_time_real()
+      throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    TimeEvaluation.getE2EMeasuredTime(Evaluation.RANDOM + 200, performanceEntries);
   }
 
   @Test

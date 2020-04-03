@@ -38,6 +38,25 @@ public class RandomTimePerfAggregatorProcessorTest {
   }
 
   @Test
+  public void convert_real() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    E2ETimeExecutionParser e2eRealTimeExecutionParser =
+        new E2ERealTimeExecutionParser(programName, RandomTimeExecutor.OUTPUT_DIR);
+    BaseExecutor<PerfExecution> executor =
+        new RandomTimeExecutor(programName, e2eRealTimeExecutionParser);
+    Map<Integer, Set<PerfExecution>> itersToResults =
+        executor.getRawExecutionParser().readResults();
+    Analysis perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(
+            programName, itersToResults, BaseExecutor.REAL, PerfAggregatorProcessor.ADDED_TIME);
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    perfAggregatorProcessor.analyze(args);
+  }
+
+  @Test
   public void runBenchC_real() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     E2ETimeExecutionParser e2eRealTimeExecutionParser =

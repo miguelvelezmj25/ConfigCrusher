@@ -8,10 +8,13 @@ import edu.cmu.cs.mvelezce.analysis.Analysis;
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
 import edu.cmu.cs.mvelezce.approaches.sampling.fw.FeatureWiseSampling;
 import edu.cmu.cs.mvelezce.approaches.sampling.pw.PairWiseSampling;
+import edu.cmu.cs.mvelezce.approaches.sampling.random.RandomSampling;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.fw.FeatureWiseInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.pw.PairWiseInstrumentPerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.instrument.random.RandomInstrumentPerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.fw.FeatureWiseTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.pw.PairWiseTimePerfAggregatorProcessor;
+import edu.cmu.cs.mvelezce.e2e.processor.aggregator.time.random.RandomTimePerfAggregatorProcessor;
 import edu.cmu.cs.mvelezce.java.execute.BaseExecutor;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import org.junit.Test;
@@ -57,6 +60,40 @@ public class CSVDataGeneratorTest {
   }
 
   @Test
+  public void berkeleyDB_Random200_instrument() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void berkeleyDB_Random50_instrument() throws IOException, InterruptedException {
+    String programName = BaseMeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = BaseMeasureDiskOrderedScanAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
   public void lucene_FW_instrument() throws IOException, InterruptedException {
     String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
     List<String> options = BaseIndexFilesAdapter.getListOfOptions();
@@ -84,6 +121,40 @@ public class CSVDataGeneratorTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void lucene_Random200_instrument() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void lucene_Random50_instrument() throws IOException, InterruptedException {
+    String programName = BaseIndexFilesAdapter.PROGRAM_NAME;
+    List<String> options = BaseIndexFilesAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomInstrumentPerfAggregatorProcessor(programName);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
     CSVDataGenerator generator =
         new CSVDataGenerator(
             programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
@@ -125,6 +196,40 @@ public class CSVDataGeneratorTest {
   }
 
   @Test
+  public void convert_Random200_time_user() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    List<String> options = BaseConvertAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.USER);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void convert_Random50_time_user() throws IOException, InterruptedException {
+    String programName = BaseConvertAdapter.PROGRAM_NAME;
+    List<String> options = BaseConvertAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.USER);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.USER);
+    generator.generateCSVFile();
+  }
+
+  @Test
   public void runBenchC_FW_time_real() throws IOException, InterruptedException {
     String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
     List<String> options = BaseRunBenchCAdapter.getListOfOptions();
@@ -152,6 +257,40 @@ public class CSVDataGeneratorTest {
     Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
 
     SamplingApproach samplingApproach = PairWiseSampling.getInstance();
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void runBenchC_Random200_time_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(200);
+    CSVDataGenerator generator =
+        new CSVDataGenerator(
+            programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);
+    generator.generateCSVFile();
+  }
+
+  @Test
+  public void runBenchC_Random50_time_real() throws IOException, InterruptedException {
+    String programName = BaseRunBenchCAdapter.PROGRAM_NAME;
+    List<String> options = BaseRunBenchCAdapter.getListOfOptions();
+
+    Analysis<Set<PerformanceEntry>> perfAggregatorProcessor =
+        new RandomTimePerfAggregatorProcessor(programName, BaseExecutor.REAL);
+    String[] args = new String[0];
+    Set<PerformanceEntry> performanceEntries = perfAggregatorProcessor.analyze(args);
+
+    SamplingApproach samplingApproach = RandomSampling.getInstance(50);
     CSVDataGenerator generator =
         new CSVDataGenerator(
             programName, options, performanceEntries, samplingApproach, BaseExecutor.REAL);

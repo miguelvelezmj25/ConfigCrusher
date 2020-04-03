@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.learning.builder.generate.data;
 
 import edu.cmu.cs.mvelezce.approaches.sampling.SamplingApproach;
+import edu.cmu.cs.mvelezce.approaches.sampling.random.RandomSampling;
 import edu.cmu.cs.mvelezce.java.results.processed.PerformanceEntry;
 import edu.cmu.cs.mvelezce.learning.builder.BaseLinearLearnedModelBuilder;
 import edu.cmu.cs.mvelezce.utils.config.Options;
@@ -15,11 +16,14 @@ import java.util.Set;
 
 class CSVDataGenerator {
 
+  private static final int NOT_RANDOM_SAMPLING_COUNT = -1;
+
   private final String programName;
   private final List<String> options;
   private final Set<PerformanceEntry> performanceEntries;
   private final SamplingApproach samplingApproach;
   private final String measuredTime;
+  private final int randomSamplingCount;
 
   CSVDataGenerator(
       String programName,
@@ -32,6 +36,12 @@ class CSVDataGenerator {
     this.performanceEntries = performanceEntries;
     this.samplingApproach = samplingApproach;
     this.measuredTime = measuredTime;
+
+    if (samplingApproach instanceof RandomSampling) {
+      this.randomSamplingCount = ((RandomSampling) samplingApproach).getNumExecConfigs();
+    } else {
+      this.randomSamplingCount = NOT_RANDOM_SAMPLING_COUNT;
+    }
   }
 
   void generateCSVFile() throws IOException {
@@ -46,9 +56,15 @@ class CSVDataGenerator {
     result.append("\n");
 
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
+    int configs = 0;
 
     for (PerformanceEntry entry : this.performanceEntries) {
+      if (this.addedRandomSamplingConfigCount(configs)) {
+        break;
+      }
+
       Set<String> configuration = entry.getConfiguration();
+      configs++;
 
       for (String option : options) {
         if (configuration.contains(option)) {
@@ -88,5 +104,13 @@ class CSVDataGenerator {
     writer.write(result.toString());
     writer.flush();
     writer.close();
+  }
+
+  private boolean addedRandomSamplingConfigCount(int configs) {
+    if (this.randomSamplingCount == NOT_RANDOM_SAMPLING_COUNT) {
+      return false;
+    }
+
+    return this.randomSamplingCount == configs;
   }
 }

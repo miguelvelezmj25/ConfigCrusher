@@ -8,6 +8,10 @@ import java.util.Set;
 
 public class BerkeleyIDTAPerformanceModel<T> extends IDTAPerformanceModel<T> {
 
+  private static final double INTERCEPT = 0;
+  private static final double SLOPE = 1;
+  private static final double R_SQUARED = 0;
+
   // all configs
   //  private static final double INTERCEPT = -0.0983;
   //  private static final double SLOPE = 1.0677;
@@ -30,9 +34,9 @@ public class BerkeleyIDTAPerformanceModel<T> extends IDTAPerformanceModel<T> {
   //      private static final double SLOPE = 1.0642;
   //      private static final double R_SQUARED = 0.9991;
 
-  private static final double INTERCEPT = 0.1364;
-  private static final double SLOPE = 1.0311;
-  private static final double R_SQUARED = 0.9994;
+  //  private static final double INTERCEPT = 0.1364;
+  //  private static final double SLOPE = 1.0311;
+  //  private static final double R_SQUARED = 0.9994;
 
   public BerkeleyIDTAPerformanceModel(Set<LocalPerformanceModel<T>> localModels) {
     super(localModels, INTERCEPT, SLOPE);

@@ -13,10 +13,6 @@ This paper proposes ConfigCrusher, a white-box performance analysis that inspect
 ConfigCrusher employs a static data-flow analysis to identify how configuration options may influence control-flow decisions and instruments code regions corresponding to these decisions to dynamically analyze the influence of configuration options on the regions' performance.
 Our evaluation shows the feasibility of our white-box approach to more efficiently build performance models that are similar to or more accurate than current state-of-the-art approaches on 10 configurable systems.
 Overall, we showcase the benefits of white-box performance analyses and their potential to outperform black-box approaches and provide additional information for analyzing configurable systems.
- 
-## Supplementary material
-
-[Link](https://github.com/miguelvelezmj25/ConfigCrusher/blob/supplementary/src/main/resources/supplementary)
 
 ## License
 
